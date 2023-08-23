@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 
 import isOrphan from "../../../../src/enrich/derive/orphan/is-orphan.mjs";
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
@@ -6,14 +6,14 @@ import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 
 describe("[U] enrich/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {
-    strictEqual(
+    equal(
       isOrphan({ source: "./lonely.js", dependencies: [] }, ONE_MODULE_FIXTURE),
       true,
     );
   });
 
   it("dismisses modules with at least one dependency", () => {
-    strictEqual(
+    equal(
       isOrphan(
         {
           source: "./snok.js",
@@ -37,7 +37,7 @@ describe("[U] enrich/derive/orphan/isOrphan", () => {
   });
 
   it("dismisses modules with at least one dependent", () => {
-    strictEqual(
+    equal(
       isOrphan(
         {
           source: "snak.js",

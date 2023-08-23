@@ -1,10 +1,10 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
 describe("[U] ast-extractors/extract-swc - type imports", () => {
   // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
   // it("extracts type imports in const declarations", () => {
-  //   deepStrictEqual(
+  //   deepEqual(
   //     extractWithSwc("const tiepetjes: import('./types').T;"),
   //   [
   //     {
@@ -18,7 +18,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
 
   // swc barfs with: Error: internal error: entered unreachable code: parse_lit should not be called
   // it("extracts type imports in const declarations (template literal argument)", () => {
-  //   deepStrictEqual(
+  //   deepEqual(
   //     extractWithSwc("const tiepetjes: import(`./types`).T;"),
   //   [
   //     {
@@ -32,7 +32,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
 
   // normal fail, but pNode in Visitor.visitTsTypeAnnotation(pNode) equals null
   // it("extracts type imports in parameter declarations", () => {
-  //   deepStrictEqual(
+  //   deepEqual(
   //     extractWithSwc(
   //       "function f(snort: import('./vypes').T){console.log(snort.bla)}"
   //     ),
@@ -47,7 +47,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
   // });
 
   it("extracts type imports in class members", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}",
       ),
@@ -64,7 +64,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
 
   // swc fails with: "Error: internal error: entered unreachable code: parse_lit should not be called"
   // it("leaves type imports with template literals with placeholders alone", () => {
-  //   deepStrictEqual(
+  //   deepEqual(
   //     // typescript/lib/protocol.d.ts has this thing
   //     // eslint-disable-next-line no-template-curly-in-string
   //     extractWithSwc("const tiepetjes: import(`./types/${lalala()}`).T;")
@@ -72,7 +72,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
   // });
 
   it("leaves 'import equals' of variables alone", () => {
-    deepStrictEqual(
+    deepEqual(
       // typescript/lib/protocol.d.ts has this thing
       extractWithSwc("import protocol = ts.server.protocol"),
       [],
@@ -80,16 +80,13 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
   });
 
   it("extracts type imports (typescript 3.8+)", () => {
-    deepStrictEqual(
-      extractWithSwc("import type { SomeType } from './some-module'"),
-      [
-        {
-          module: "./some-module",
-          moduleSystem: "es6",
-          dynamic: false,
-          exoticallyRequired: false,
-        },
-      ],
-    );
+    deepEqual(extractWithSwc("import type { SomeType } from './some-module'"), [
+      {
+        module: "./some-module",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
   });
 });

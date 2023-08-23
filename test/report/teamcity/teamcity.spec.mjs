@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import render from "../../../src/report/teamcity.mjs";
@@ -28,27 +28,27 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(okdeps);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("renders module only transgressions", () => {
     const lFixture = readFixture("__mocks__/module-errors-teamcity-format.txt");
     const lResult = render(moduleErrs);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders 'required' violations", () => {
@@ -57,48 +57,48 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(requiredErrs);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders circular transgressions", () => {
     const lFixture = readFixture("__mocks__/circular-deps-teamcity-format.txt");
     const lResult = render(circulars);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 3);
+    equal(lResult.exitCode, 3);
   });
 
   it("renders via transgressions", () => {
     const lFixture = readFixture("__mocks__/via-deps-teamcity-format.txt");
     const lResult = render(vias);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 4);
+    equal(lResult.exitCode, 4);
   });
 
   it("renders instability transgressions", () => {
     const lFixture = readFixture("__mocks__/instabilities-teamcity-format.txt");
     const lResult = render(instabilities);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
@@ -107,12 +107,12 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(unsupportedErrorLevels);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders known errors in a single warning", () => {
@@ -121,10 +121,10 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(knownViolations);
 
-    strictEqual(
+    equal(
       removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 });

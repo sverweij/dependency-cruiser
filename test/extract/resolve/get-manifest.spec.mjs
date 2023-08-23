@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { parse, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { deepStrictEqual, strictEqual, throws } from "node:assert";
+import { deepEqual, equal, throws } from "node:assert/strict";
 import { getManifest } from "../../../src/extract/resolve/get-manifest.mjs";
 
 const rootPackageJson = JSON.parse(
@@ -21,26 +21,26 @@ describe("[I] extract/resolve/get-manifest - classic strategy", () => {
 
   it("returns 'null' if the package.json does not exist over there", () => {
     process.chdir("test/extract/resolve/__fixtures__/no-package-json-here");
-    strictEqual(getManifest(parse(process.cwd()).root), null);
+    equal(getManifest(parse(process.cwd()).root), null);
   });
 
   it("returns 'null' if the package.json is invalid", () => {
-    strictEqual(getManifest(join(FIXTUREDIR, "invalid-package-json")), null);
+    equal(getManifest(join(FIXTUREDIR, "invalid-package-json")), null);
   });
 
   it("returns '{}' if the package.json is empty (which is - strictly speaking - not allowed", () => {
-    deepStrictEqual(getManifest(join(FIXTUREDIR, "empty-package-json")), {});
+    deepEqual(getManifest(join(FIXTUREDIR, "empty-package-json")), {});
   });
 
   it("returns an object with the package.json", () => {
-    deepStrictEqual(getManifest(join(FIXTUREDIR, "minimal-package-json")), {
+    deepEqual(getManifest(join(FIXTUREDIR, "minimal-package-json")), {
       name: "the-absolute-bare-minimum-package-json",
       version: "481.0.0",
     });
   });
 
   it("looks up the closest package.json", () => {
-    deepStrictEqual(
+    deepEqual(
       getManifest(join(FIXTUREDIR, "no-package-json")),
       rootPackageJson,
     );
@@ -54,11 +54,11 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("returns 'null' if the package.json does not exist over there", () => {
     process.chdir("test/extract/resolve/__fixtures__/no-package-json-here");
-    strictEqual(getManifest(process.cwd(), process.cwd(), true), null);
+    equal(getManifest(process.cwd(), process.cwd(), true), null);
   });
 
   it("returns 'null' if the package.json is invalid", () => {
-    strictEqual(
+    equal(
       getManifest(
         join(FIXTUREDIR, "invalid-package-json"),
         join(FIXTUREDIR),
@@ -70,7 +70,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("returns the deps if the package.json exists in the baseDir", () => {
     process.chdir("test/extract/resolve/__fixtures__/package-json-in-here");
-    deepStrictEqual(getManifest(process.cwd(), process.cwd(), true), {
+    deepEqual(getManifest(process.cwd(), process.cwd(), true), {
       dependencies: {
         modash: "11.11.11",
       },
@@ -79,7 +79,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("returns the combined deps if there's a package.json in both base and sub package", () => {
     process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
-    deepStrictEqual(
+    deepEqual(
       getManifest(
         join(process.cwd(), "packages", "subthing"),
         process.cwd(),
@@ -106,7 +106,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("returns the combined deps if there's a package.json in both base and sub package - subdir of sub", () => {
     process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
-    deepStrictEqual(
+    deepEqual(
       getManifest(
         join(process.cwd(), "packages", "subthing", "src", "somefunctionality"),
         process.cwd(),

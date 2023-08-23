@@ -1,4 +1,4 @@
-import { throws, strictEqual } from "node:assert";
+import { throws, equal } from "node:assert/strict";
 import { isRelativeModuleName } from "../../../src/extract/resolve/module-classifiers.mjs";
 
 describe("[U] extract/resolve/module-classifiers - isRelativeModuleName", () => {
@@ -15,30 +15,30 @@ describe("[U] extract/resolve/module-classifiers - isRelativeModuleName", () => 
   });
 
   it("returns false when passed an empty string", () => {
-    strictEqual(isRelativeModuleName(""), false);
+    equal(isRelativeModuleName(""), false);
   });
 
   it("returns false when passed an external module", () => {
-    strictEqual(isRelativeModuleName("externaldash"), false);
+    equal(isRelativeModuleName("externaldash"), false);
   });
 
   it("returns false when passed an external module name that starts with a dot", () => {
-    strictEqual(isRelativeModuleName(".external-starts-with-a-dot"), false);
+    equal(isRelativeModuleName(".external-starts-with-a-dot"), false);
   });
 
   it("returns true when passed a local module in the same folder", () => {
-    strictEqual(isRelativeModuleName("./path"), true);
+    equal(isRelativeModuleName("./path"), true);
   });
 
   it("returns true when passed a local module in a sub folder", () => {
-    strictEqual(isRelativeModuleName("../../halikidee"), true);
+    equal(isRelativeModuleName("../../halikidee"), true);
   });
 
   it("returns true when passed the current folder", () => {
-    strictEqual(isRelativeModuleName("."), true);
+    equal(isRelativeModuleName("."), true);
   });
 
   it("returns true when passed the parent folder", () => {
-    strictEqual(isRelativeModuleName(".."), true);
+    equal(isRelativeModuleName(".."), true);
   });
 });

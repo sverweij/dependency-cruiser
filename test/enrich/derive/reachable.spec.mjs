@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import normalize from "../../../src/main/rule-set/normalize.mjs";
 import addReachability from "../../../src/enrich/derive/reachable.mjs";
 import clearExtractCaches from "../../../src/extract/clear-caches.mjs";
@@ -106,11 +106,11 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     clearExtractCaches();
   });
   it("does not explode when passed an empty graph & an empty rule set", () => {
-    deepStrictEqual(addReachability([], normalize({})), []);
+    deepEqual(addReachability([], normalize({})), []);
   });
 
   it("returns the input graph when passed an empty rule set", () => {
-    deepStrictEqual(addReachability(GRAPH, normalize({})), GRAPH);
+    deepEqual(addReachability(GRAPH, normalize({})), GRAPH);
   });
 
   it('returns the reachability annotated graph when a rule set with forbidden "reachable" in it', () => {
@@ -123,7 +123,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       ],
     };
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       ANNOTATED_GRAPH_FOR_HAJOO,
     );
@@ -196,7 +196,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lAnnotatedGraphForHajooAllowed,
     );
@@ -269,7 +269,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lAnnotatedGraphForHajooAllowed,
     );
@@ -368,7 +368,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lAnnotatedGraphForHajooAllowed,
     );
@@ -384,7 +384,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       ],
     };
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       ANNOTATED_GRAPH_FOR_HAJOO,
     );
@@ -432,7 +432,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lAnnotatedGraphForHajooNoIntermediate,
     );
@@ -480,7 +480,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lAnnotatedGraphForHajooNoIntermediate,
     );
@@ -605,7 +605,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(lSourceGraph, normalize(lPoorMansTestCoverageRule)),
       lResultGraph,
     );
@@ -745,7 +745,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
       lResultGraph,
     );
@@ -844,7 +844,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         dependencies: [{ resolved: "./src/index.js" }],
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
       lResultGraph,
     );
@@ -1039,7 +1039,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         dependencies: [],
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       addReachability(lDependencyGraph, normalize(lRuleSetWithCaptureGroup)),
       lExpectedGraph,
     );

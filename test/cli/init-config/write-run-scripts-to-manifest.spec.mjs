@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import {
   addRunScriptsToManifest,
   compileRunScripts,
@@ -6,24 +6,23 @@ import {
 
 describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {
-    deepStrictEqual(addRunScriptsToManifest(), { scripts: {} });
+    deepEqual(addRunScriptsToManifest(), { scripts: {} });
   });
 
   it("empty manifest and empty scripts object retain the empty manifest with a scripts section", () => {
-    deepStrictEqual(addRunScriptsToManifest({}, {}), {
+    deepEqual(addRunScriptsToManifest({}, {}), {
       scripts: {},
     });
   });
 
   it("manifest with scripts and empty script object retain the original manifest", () => {
-    deepStrictEqual(
-      addRunScriptsToManifest({ scripts: { test: "jest" } }, {}),
-      { scripts: { test: "jest" } },
-    );
+    deepEqual(addRunScriptsToManifest({ scripts: { test: "jest" } }, {}), {
+      scripts: { test: "jest" },
+    });
   });
 
   it("manifest with scripts and a new script appears in the new manifest", () => {
-    deepStrictEqual(
+    deepEqual(
       addRunScriptsToManifest(
         { scripts: { test: "jest" } },
         { depcruise: "depcruise src -v" },
@@ -35,7 +34,7 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
   });
 
   it("manifest with scripts and a update script doesn't overwrite in the manifest", () => {
-    deepStrictEqual(
+    deepEqual(
       addRunScriptsToManifest(
         {
           scripts: {
@@ -59,14 +58,14 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
 
 describe("[U] cli/init-config/write-run-scripts-to-manifest - compile run script", () => {
   it("no sourcelocation no extra scripts (no init options object)", () => {
-    deepStrictEqual(compileRunScripts(), {});
+    deepEqual(compileRunScripts(), {});
   });
   it("no sourcelocation no extra scripts (empty init options object)", () => {
-    deepStrictEqual(compileRunScripts({}, []), {});
+    deepEqual(compileRunScripts({}, []), {});
   });
   it("sourcelocation => bunch of extra scripts (empty init options object)", () => {
     const lRunScripts = compileRunScripts({ sourceLocation: ["src"] });
-    deepStrictEqual(Object.keys(lRunScripts), [
+    deepEqual(Object.keys(lRunScripts), [
       "depcruise",
       "depcruise:graph",
       "depcruise:graph:dev",

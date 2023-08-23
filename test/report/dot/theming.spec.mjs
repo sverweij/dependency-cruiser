@@ -1,17 +1,17 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import _cloneDeep from "lodash/cloneDeep.js";
 import theming from "../../../src/report/dot/theming.mjs";
 
 describe("[U] report/dot/theming - determineModuleColors - default theme", () => {
   it("empty module => no colors", () => {
-    deepStrictEqual(
+    deepEqual(
       theming.determineAttributes({}, theming.normalizeTheme({}).module),
       {},
     );
   });
 
   it("core module => grey", () => {
-    deepStrictEqual(
+    deepEqual(
       theming.determineAttributes(
         { coreModule: true },
         theming.normalizeTheme({}).modules,
@@ -21,7 +21,7 @@ describe("[U] report/dot/theming - determineModuleColors - default theme", () =>
   });
 
   it("couldNotResolve => red", () => {
-    deepStrictEqual(
+    deepEqual(
       theming.determineAttributes(
         { couldNotResolve: true },
         theming.normalizeTheme({}).modules,
@@ -31,7 +31,7 @@ describe("[U] report/dot/theming - determineModuleColors - default theme", () =>
   });
 
   it("json => darker yellowish fillcolor", () => {
-    deepStrictEqual(
+    deepEqual(
       theming.determineAttributes(
         { source: "package.json" },
         theming.normalizeTheme({}).modules,
@@ -44,6 +44,6 @@ describe("[U] report/dot/theming - determineModuleColors - default theme", () =>
     const lOriginalDefaultTheme = _cloneDeep(theming.normalizeTheme());
 
     theming.normalizeTheme({ graph: { someAttribute: 1234 } });
-    deepStrictEqual(theming.normalizeTheme(), lOriginalDefaultTheme);
+    deepEqual(theming.normalizeTheme(), lOriginalDefaultTheme);
   });
 });

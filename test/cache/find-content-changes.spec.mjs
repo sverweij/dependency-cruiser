@@ -1,9 +1,9 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import findContentChanges from "../../src/cache/find-content-changes.mjs";
 
 describe("[U] cache/find-content-changes - cached vs new", () => {
   it("returns files not in directory but in cache as 'ignored' when they're not interesting for diffing", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         {
@@ -55,7 +55,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
   });
 
   it("returns files not in directory but in cache as 'deleted'", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [{ source: "only-in-cache-ends-up-as-deleted.js" }] },
@@ -76,7 +76,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
   });
 
   it("returns files that have been earmarked as not followable as 'ignored'", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         {
@@ -105,7 +105,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
   });
 
   it("returns files both in directory and in cache that are different as 'modified'", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         {
@@ -142,7 +142,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
   });
 
   it("returns files both in directory and in cache that are the same as 'unmodified'", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         {
@@ -173,7 +173,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
 
 describe("[U] cache/find-content-changes - new vs cached", () => {
   it("returns an empty set when the directory and modules are empty", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -189,7 +189,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
   });
 
   it("returns changes when there's file in the directory and modules is empty (extensions only)", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -211,7 +211,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
   });
 
   it("returns changes when there's file in the directory and modules is empty (missing includeOnly filter)", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -232,7 +232,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
   });
 
   it("returns changes when there's file in the directory and modules is empty (exclude filter)", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -254,7 +254,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
   });
 
   it("returns changes when there's file in the directory and modules is empty (includeOnly filter)", () => {
-    deepStrictEqual(
+    deepEqual(
       findContentChanges(
         ".",
         { modules: [] },

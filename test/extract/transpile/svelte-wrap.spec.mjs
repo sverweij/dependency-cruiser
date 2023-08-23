@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.mjs";
 import normalizeSource from "../normalize-source.utl.mjs";
@@ -8,7 +8,7 @@ const wrap = svelteWrap(typescriptWrap(true));
 
 describe("[I] svelte transpiler", () => {
   it("tells the svelte transpiler is available", () => {
-    strictEqual(wrap.isAvailable(), true);
+    equal(wrap.isAvailable(), true);
   });
   [
     ["ts", (pSource) => pSource],
@@ -36,7 +36,7 @@ describe("[I] svelte transpiler", () => {
         ),
       );
 
-      strictEqual(lObserved, lExpected);
+      equal(lObserved, lExpected);
     });
   });
 });

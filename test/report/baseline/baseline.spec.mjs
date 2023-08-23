@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import Ajv from "ajv";
 import baseline from "../../../src/report/baseline.mjs";
 import { createRequireJSON } from "../../backwards.utl.mjs";
@@ -13,8 +13,8 @@ describe("[I] report/baseline", () => {
     const lExpected = [];
     const lResult = baseline(lInput);
 
-    deepStrictEqual(JSON.parse(lResult.output), lExpected);
-    strictEqual(lResult.exitCode, 0);
+    deepEqual(JSON.parse(lResult.output), lExpected);
+    equal(lResult.exitCode, 0);
     ajv.validate(baselineSchema, JSON.parse(lResult.output));
   });
 
@@ -23,8 +23,8 @@ describe("[I] report/baseline", () => {
     const lExpected = requireJSON("./__fixtures__/baseline-result.json");
     const lResult = baseline(lInput);
 
-    deepStrictEqual(JSON.parse(lResult.output), lExpected);
-    strictEqual(lResult.exitCode, 0);
+    deepEqual(JSON.parse(lResult.output), lExpected);
+    equal(lResult.exitCode, 0);
     ajv.validate(baselineSchema, JSON.parse(lResult.output));
   });
 });

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -54,7 +54,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("not to core - ok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
@@ -65,7 +65,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("not to core - violation", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
@@ -79,7 +79,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("not to core fs os - ok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
@@ -90,7 +90,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("not to core fs os - violation", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
@@ -115,7 +115,7 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -139,7 +139,7 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
 
@@ -164,7 +164,7 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -194,7 +194,7 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -208,7 +208,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("only to core - via 'forbidden' - ok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },
@@ -219,7 +219,7 @@ describe("[I] validate/index - core", () => {
   });
 
   it("only to core - via 'forbidden' - violation", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -14,7 +14,7 @@ describe("[I] validate/index - license", () => {
   });
 
   it("Skips dependencies that have no license attached", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
@@ -25,7 +25,7 @@ describe("[I] validate/index - license", () => {
   });
 
   it("does not flag dependencies that do not match the license expression", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
@@ -39,7 +39,7 @@ describe("[I] validate/index - license", () => {
   });
 
   it("flags dependencies that match the license expression", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
@@ -68,7 +68,7 @@ describe("[I] validate/index - licenseNot", () => {
   });
 
   it("Skips dependencies that have no license attached", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
@@ -79,7 +79,7 @@ describe("[I] validate/index - licenseNot", () => {
   });
 
   it("does not flag dependencies that do match the license expression", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
@@ -93,7 +93,7 @@ describe("[I] validate/index - licenseNot", () => {
   });
 
   it("flags dependencies that do not match the license expression", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },

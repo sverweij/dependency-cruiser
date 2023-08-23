@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import normalizeCliOptions, {
   determineRulesFileName,
 } from "../../src/cli/normalize-cli-options.mjs";
@@ -13,7 +13,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("normalizes empty options to no exclude, stdout, json and 'cjs, amd, es6'", async () => {
-    deepStrictEqual(await normalizeCliOptions({}), {
+    deepEqual(await normalizeCliOptions({}), {
       outputTo: "-",
       outputType: "err",
       validate: false,
@@ -21,7 +21,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("normalizes --module-systems cjs,es6 to [cjs, es6]", async () => {
-    deepStrictEqual(await normalizeCliOptions({ moduleSystems: "cjs,es6" }), {
+    deepEqual(await normalizeCliOptions({ moduleSystems: "cjs,es6" }), {
       outputTo: "-",
       outputType: "err",
       moduleSystems: ["cjs", "es6"],
@@ -33,12 +33,12 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     const lNormalizedCliOptions = await normalizeCliOptions({
       moduleSystems: " amd,cjs ,  es6 ",
     });
-    deepStrictEqual(lNormalizedCliOptions.moduleSystems, ["amd", "cjs", "es6"]);
+    deepEqual(lNormalizedCliOptions.moduleSystems, ["amd", "cjs", "es6"]);
   });
 
   it("-c / --config without params gets translated to -v/ --validate.", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    deepStrictEqual(await normalizeCliOptions({ config: true }), {
+    deepEqual(await normalizeCliOptions({ config: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -50,7 +50,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-c / --config with something gets translated to -v/ --validate.", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({ config: ".dependency-cruiser.json" }),
       {
         outputTo: "-",
@@ -68,13 +68,13 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     try {
       await normalizeCliOptions({ validate: true });
     } catch (pError) {
-      strictEqual(pError.message.includes(".dependency-cruiser.(c)js"), true);
+      equal(pError.message.includes(".dependency-cruiser.(c)js"), true);
     }
   });
 
   it("-v finds .dependency-cruiser.js when no parameters to it are passed and it exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/js-only");
-    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
+    deepEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.js",
@@ -85,7 +85,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and it exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
+    deepEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -96,7 +96,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and also the .js variant exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/both-js-and-json");
-    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
+    deepEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -111,15 +111,12 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
         validate: "./non-existing-config-file-name",
       });
     } catch (pError) {
-      strictEqual(
-        pError.message.includes("non-existing-config-file-name"),
-        true,
-      );
+      equal(pError.message.includes("non-existing-config-file-name"), true);
     }
   });
 
   it("-v with parameter uses that parameter as rules file", async () => {
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.empty.json",
       }),
@@ -134,7 +131,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("a rules file with comments gets the comments stripped out & parsed", async () => {
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.json",
       }),
@@ -160,7 +157,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("accepts and interprets a javascript rule file (relative path)", async () => {
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.js",
       }),
@@ -190,7 +187,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       new URL("__fixtures__/rules.withcomments.js", import.meta.url),
     );
 
-    deepStrictEqual(await normalizeCliOptions({ validate: lRulesFileName }), {
+    deepEqual(await normalizeCliOptions({ validate: lRulesFileName }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: lRulesFileName,
@@ -211,7 +208,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", async () => {
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
       }),
@@ -232,7 +229,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", async () => {
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
       }),
@@ -254,47 +251,47 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("progress without parameter defaults to cli-feedback", async () => {
     const lResult = await normalizeCliOptions({ progress: true });
-    strictEqual(lResult.progress, "cli-feedback");
+    equal(lResult.progress, "cli-feedback");
   });
 
   it("progress with parameter none ends up as progress: none", async () => {
     const lResult = await normalizeCliOptions({ progress: "none" });
-    strictEqual(lResult.progress, "none");
+    equal(lResult.progress, "none");
   });
 
   it("cache with value true translates to {}", async () => {
     const lResult = await normalizeCliOptions({ cache: true });
-    deepStrictEqual(lResult.cache, {});
+    deepEqual(lResult.cache, {});
   });
 
   it("cache with a string value translates to the folder name in the cache option", async () => {
     const lResult = await normalizeCliOptions({ cache: "some-string" });
-    deepStrictEqual(lResult.cache, { folder: "some-string" });
+    deepEqual(lResult.cache, { folder: "some-string" });
   });
 
   it("cache with an numerical value (which is invalid) translates to explicitly false cache option", async () => {
     const lResult = await normalizeCliOptions({ cache: 481 });
-    strictEqual(lResult.cache, false);
+    equal(lResult.cache, false);
   });
 
   it("cache with value false translates explicitly false cache option", async () => {
     const lResult = await normalizeCliOptions({ cache: false });
-    strictEqual(lResult.cache, false);
+    equal(lResult.cache, false);
   });
 
   it("no cache option translates to still not having a cache option", async () => {
     const lResult = await normalizeCliOptions({ "not-a-cache-option": true });
-    strictEqual(lResult.hasOwnProperty("cache"), false);
+    equal(lResult.hasOwnProperty("cache"), false);
   });
 
   it("cache-strategy with a string value == 'content' translates to the strategy 'content' in the cache option", async () => {
     const lResult = await normalizeCliOptions({ cacheStrategy: "content" });
-    deepStrictEqual(lResult.cache, { strategy: "content" });
+    deepEqual(lResult.cache, { strategy: "content" });
   });
 
   it("cache-strategy with a string value !== 'content' translates to the strategy 'metadata' in the cache option", async () => {
     const lResult = await normalizeCliOptions({ cacheStrategy: "some-string" });
-    deepStrictEqual(lResult.cache, { strategy: "metadata" });
+    deepEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a string value & cache-strategy with a string value translates both present in the cache option", async () => {
@@ -302,7 +299,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cache: "somewhere",
       cacheStrategy: "some-string",
     });
-    deepStrictEqual(lResult.cache, {
+    deepEqual(lResult.cache, {
       folder: "somewhere",
       strategy: "metadata",
     });
@@ -313,7 +310,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cache: true,
       cacheStrategy: "metadata",
     });
-    deepStrictEqual(lResult.cache, { strategy: "metadata" });
+    deepEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a value of false & cache-strategy with a string value translates to a cache option with that strategy", async () => {
@@ -321,7 +318,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cache: false,
       cacheStrategy: "metadata",
     });
-    deepStrictEqual(lResult.cache, { strategy: "metadata" });
+    deepEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy x", async () => {
@@ -329,7 +326,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cache: true,
       cacheStrategy: "content",
     });
-    deepStrictEqual(lResult.cache, { strategy: "content" });
+    deepEqual(lResult.cache, { strategy: "content" });
   });
 });
 
@@ -342,7 +339,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
 
   it("--ignore-known without params gets the default known-violations json", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
-    deepStrictEqual(await normalizeCliOptions({ ignoreKnown: true }), {
+    deepEqual(await normalizeCliOptions({ ignoreKnown: true }), {
       outputTo: "-",
       outputType: "err",
       knownViolationsFile: ".dependency-cruiser-known-violations.json",
@@ -353,7 +350,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
 
   it("--ignore-known with params gets the mentioned known-violations", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
-    deepStrictEqual(
+    deepEqual(
       await normalizeCliOptions({
         ignoreKnown: "custom-known-violations.json",
       }),
@@ -378,7 +375,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
     } catch (pError) {
       lError = pError.toString();
     }
-    strictEqual(
+    equal(
       lError.includes(
         `Can't open 'this-file-does-not-exist' for reading. Does it exist?`,
       ),
@@ -389,14 +386,14 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
 
 describe("[U] cli/determineRulesFileName", () => {
   it("returns '.dependency-cruiser.json' when no file name is passed", () => {
-    strictEqual(determineRulesFileName(), ".dependency-cruiser.json");
+    equal(determineRulesFileName(), ".dependency-cruiser.json");
   });
 
   it("returns '.dependency-cruiser.json' when a non-string is passed", () => {
-    strictEqual(determineRulesFileName(true), ".dependency-cruiser.json");
+    equal(determineRulesFileName(true), ".dependency-cruiser.json");
   });
 
   it("returns string passed when a string is passed", () => {
-    strictEqual(determineRulesFileName("a string"), "a string");
+    equal(determineRulesFileName("a string"), "a string");
   });
 });

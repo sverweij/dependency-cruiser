@@ -1,5 +1,5 @@
 /* eslint-disable prefer-regex-literals */
-import { match, doesNotMatch, strictEqual } from "node:assert";
+import { match, doesNotMatch, equal } from "node:assert/strict";
 import markdown from "../../../src/report/markdown.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
@@ -19,7 +19,7 @@ describe("[I] report/markdown", () => {
     match(lResult.output, new RegExp(lDefaultSummaryHeader));
     match(lResult.output, new RegExp(lOkeliDokelyKey));
     match(lResult.output, new RegExp(lOkeliDokelyHeader));
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("happy day no errors - custom options", () => {
@@ -34,7 +34,7 @@ describe("[I] report/markdown", () => {
     match(lResult.output, new RegExp(lCustomSummaryHeader));
     match(lResult.output, new RegExp(lOkeliDokelyKey));
     match(lResult.output, new RegExp(lOkeliDokelyHeader));
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with errors", () => {
@@ -50,7 +50,7 @@ describe("[I] report/markdown", () => {
     match(lResult.output, /\*\*1\*\* warnings/);
     match(lResult.output, /\*\*2\*\* informational/);
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with errors - custom options", () => {
@@ -68,7 +68,7 @@ describe("[I] report/markdown", () => {
     match(lResult.output, /\*\*1\*\* warnings/);
     match(lResult.output, /\*\*2\*\* informational/);
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with violations and ignored violations", () => {
@@ -90,7 +90,7 @@ describe("[I] report/markdown", () => {
     match(lResult.output, /:see_no_evil:&nbsp;_cli-to-main-only-warn_/);
     match(lResult.output, /src\/cli\/compileConfig\/index\.js/);
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with violations and ignored violations hidden", () => {
@@ -118,7 +118,7 @@ describe("[I] report/markdown", () => {
     );
     doesNotMatch(lResult.output, new RegExp("src/cli/compileConfig/index.js"));
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report nicely on orphans, cycles and metric rules", () => {

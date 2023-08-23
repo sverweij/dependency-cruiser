@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
@@ -28,7 +28,7 @@ describe("[E] main.cruise - reachable integration", () => {
       }),
     );
     const lResult = JSON.parse(lCruiseResult.output);
-    deepStrictEqual(lResult.summary.violations, [
+    deepEqual(lResult.summary.violations, [
       {
         type: "reachability",
         from: "src/schema-declarations/naughty.info.js",
@@ -76,7 +76,7 @@ describe("[E] main.cruise - reachable integration", () => {
     );
     const lResult = JSON.parse(lCruiseResult.output);
 
-    deepStrictEqual(lResult.summary.violations, [
+    deepEqual(lResult.summary.violations, [
       {
         type: "module",
         from: "src/utilities/insula.js",
@@ -111,7 +111,7 @@ describe("[E] main.cruise - reachable integration", () => {
 
     const lResult = JSON.parse(lCruiseResult.output);
 
-    deepStrictEqual(lResult.summary.violations, [
+    deepEqual(lResult.summary.violations, [
       {
         type: "module",
         from: "src/db/admin.js",

@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { deepStrictEqual, ok, strictEqual } from "node:assert";
+import { deepEqual, ok, equal } from "node:assert/strict";
 import format from "../../src/main/format.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
@@ -79,7 +79,7 @@ describe("[E] main.format - format", () => {
 
   it("returns an json reporter formatted report when presented with a legal result", async () => {
     const lResult = await format(MINIMAL_RESULT, { outputType: "json" });
-    deepStrictEqual(JSON.parse(lResult.output), MINIMAL_RESULT);
+    deepEqual(JSON.parse(lResult.output), MINIMAL_RESULT);
   });
 
   it("returns a collapsed version of the report when passed a collapse option", async () => {
@@ -88,7 +88,7 @@ describe("[E] main.format - format", () => {
     });
     const lCollapsedResult = lResult.output;
 
-    deepStrictEqual(lCollapsedResult.summary.violations, [
+    deepEqual(lCollapsedResult.summary.violations, [
       {
         type: "dependency",
         from: "src/cli/",
@@ -99,8 +99,8 @@ describe("[E] main.format - format", () => {
         },
       },
     ]);
-    strictEqual(lCollapsedResult.summary.totalCruised, 19);
-    strictEqual(lCollapsedResult.summary.totalDependenciesCruised, 18);
+    equal(lCollapsedResult.summary.totalCruised, 19);
+    equal(lCollapsedResult.summary.totalDependenciesCruised, 18);
   });
 
   it("returns string with error explanations when asked for the err-long report", async () => {
@@ -133,10 +133,10 @@ describe("[E] main.format - format", () => {
       includeOnly: "^src/",
     });
     const lJSONResult = JSON.parse(lResult.output);
-    strictEqual(Object.keys(lJSONResult.summary.optionsUsed).length, 16);
-    strictEqual(lJSONResult.summary.optionsUsed.outputType, "anon");
-    strictEqual(lJSONResult.summary.optionsUsed.includeOnly, "^src/");
+    equal(Object.keys(lJSONResult.summary.optionsUsed).length, 16);
+    equal(lJSONResult.summary.optionsUsed.outputType, "anon");
+    equal(lJSONResult.summary.optionsUsed.includeOnly, "^src/");
     // without includeOnly it'd be 53
-    strictEqual(lJSONResult.modules.length, 33);
+    equal(lJSONResult.modules.length, 33);
   });
 });

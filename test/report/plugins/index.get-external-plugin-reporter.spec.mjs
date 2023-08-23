@@ -1,4 +1,4 @@
-import { match, strictEqual } from "node:assert";
+import { match, equal } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getExternalPluginReporter } from "../../../src/report/plugins.mjs";
@@ -19,7 +19,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    strictEqual(
+    equal(
       lErrorMessage.includes(`${lNoExitCodePlugin} is not a valid plugin`),
       true,
     );
@@ -37,7 +37,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    strictEqual(
+    equal(
       lErrorMessage.includes(`${lNoOutputPlugin} is not a valid plugin`),
       true,
     );
@@ -58,11 +58,8 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
   });
 
   it("returns false when it's not a plugin", async () => {
-    strictEqual(
-      await getExternalPluginReporter(`whatever-just-not-a-plugin`),
-      false,
-    );
-    strictEqual(getExternalPluginReporter(), false);
+    equal(await getExternalPluginReporter(`whatever-just-not-a-plugin`), false);
+    equal(getExternalPluginReporter(), false);
   });
 
   it("throws when the plugin:reporter is not a valid plugin (package ref)", async () => {
@@ -85,8 +82,8 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       summary: { totalCruised: 0 },
     });
 
-    strictEqual(hasOwnProperty.call(lResults, "output"), true);
-    strictEqual(hasOwnProperty.call(lResults, "exitCode"), true);
-    strictEqual(lResults.exitCode, 0);
+    equal(hasOwnProperty.call(lResults, "output"), true);
+    equal(hasOwnProperty.call(lResults, "exitCode"), true);
+    equal(lResults.exitCode, 0);
   });
 });

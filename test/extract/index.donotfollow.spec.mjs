@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extract from "../../src/extract/index.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
@@ -25,7 +25,7 @@ describe("[I] extract/index - do not follow", () => {
       lResolveOptions,
     );
 
-    deepStrictEqual(lResult, requireJSON("./__fixtures__/donotfollow.json"));
+    deepEqual(lResult, requireJSON("./__fixtures__/donotfollow.json"));
   });
 
   it("do not follow - doNotFollow.dependencyTypes", async () => {
@@ -46,7 +46,7 @@ describe("[I] extract/index - do not follow", () => {
       lResolveOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       lResult,
       requireJSON("./__fixtures__/donotfollow-dependency-types.json"),
     );

@@ -1,7 +1,7 @@
 import { readFileSync, unlinkSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { doesNotThrow, strictEqual, throws } from "node:assert";
+import { doesNotThrow, equal, throws } from "node:assert/strict";
 import { join, posix as path } from "node:path";
 import chalk from "chalk";
 import intercept from "intercept-stdout";
@@ -183,7 +183,7 @@ function runFileBasedTests(pModuleType) {
     it(pPair.description, async () => {
       const lExitCode = await cli([pPair.dirOrFile], pPair.options);
 
-      strictEqual(lExitCode, pPair.expectExitCode);
+      equal(lExitCode, pPair.expectExitCode);
       if (pPair.options.outputType === "json") {
         assertJSONFileEqual(
           pPair.options.outputTo,
@@ -232,7 +232,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      strictEqual(lExitCode, 0);
+      equal(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
 
@@ -246,7 +246,7 @@ describe("[E] cli/index", () => {
       });
       const lExpectedTransgressions = 0;
 
-      strictEqual(lExitCode, lExpectedTransgressions);
+      equal(lExitCode, lExpectedTransgressions);
     });
 
     it("returns the number of transgressions if outputType === 'error' ", async () => {
@@ -259,7 +259,7 @@ describe("[E] cli/index", () => {
       });
       const lExpectedTransgressions = 3;
 
-      strictEqual(lExitCode, lExpectedTransgressions);
+      equal(lExitCode, lExpectedTransgressions);
     });
 
     it("dependency-cruise -i shows meta info about the current environment", async () => {
@@ -271,8 +271,8 @@ describe("[E] cli/index", () => {
 
       unhookIntercept();
 
-      strictEqual(lExitCode, 0);
-      strictEqual(
+      equal(lExitCode, 0);
+      equal(
         lCapturedStdout.includes(
           "If you need a supported, but not enabled transpiler",
         ),
@@ -295,8 +295,8 @@ describe("[E] cli/index", () => {
       unhookInterceptStdOut();
       unhookInterceptStdError();
 
-      strictEqual(lExitCode, 1);
-      strictEqual(
+      equal(lExitCode, 1);
+      equal(
         lCapturedStderr.includes(
           "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n",
         ),
@@ -322,8 +322,8 @@ describe("[E] cli/index", () => {
         lCapturedStderr += pText;
       })();
 
-      strictEqual(lExitCode, 1);
-      strictEqual(
+      equal(lExitCode, 1);
+      equal(
         lCapturedStderr.includes(
           "didn't work. Error: ENOENT: no such file or directory, open",
         ),
@@ -347,11 +347,8 @@ describe("[E] cli/index", () => {
         lCapturedStderr += pText;
       })();
 
-      strictEqual(lExitCode, 0);
-      strictEqual(
-        lCapturedStderr.includes("no dependency violations found"),
-        true,
-      );
+      equal(lExitCode, 0);
+      equal(lCapturedStderr.includes("no dependency violations found"), true);
     });
 
     it("dependency-cruise --init will generate a rules file and tells that back on stdout", async () => {
@@ -375,8 +372,8 @@ describe("[E] cli/index", () => {
         lCapturedStdout += pText;
       })();
 
-      strictEqual(lExitCode, 0);
-      strictEqual(
+      equal(lExitCode, 0);
+      equal(
         lCapturedStdout.includes(
           `Successfully created '${lValidationFileName}'`,
         ),
@@ -398,7 +395,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      strictEqual(lExitCode, 0);
+      equal(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
 
@@ -415,7 +412,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      strictEqual(lExitCode, 0);
+      equal(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
   });
@@ -435,7 +432,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -454,7 +451,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -474,7 +471,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -490,7 +487,7 @@ describe("[E] cli/index", () => {
         "test/cli/__fixtures__/babel/es6/webpack-cache-bust.config.js",
     });
 
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     assertJSONFileEqual(
       lOutputTo,
       path.join(FIX_DIR, "babel", lOutputFileName),
@@ -509,7 +506,7 @@ describe("[E] cli/index", () => {
         "test/cli/__fixtures__/babel/ts/webpack-cache-bust.config.js",
     });
 
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     assertJSONFileEqual(
       lOutputTo,
       path.join(FIX_DIR, "babel", lOutputFileName),
@@ -530,7 +527,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, lExpectedAmountOfErrors);
+    equal(lExitCode, lExpectedAmountOfErrors);
 
     // assertJSONFileEqual(
     //   lOutputTo,
@@ -554,17 +551,17 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, lExpectedAmountOfErrors);
+    equal(lExitCode, lExpectedAmountOfErrors);
     doesNotThrow(() => {
       lResult = readFileSync(lOutputTo, { encoding: "utf8" });
     });
-    strictEqual(
+    equal(
       lResult.includes(
         "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised",
       ),
       true,
     );
-    strictEqual(lResult.includes("1 known violations ignored"), true);
+    equal(lResult.includes("1 known violations ignored"), true);
   });
 
   it("will barf when the known violations file is invalid", async () => {
@@ -583,7 +580,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    strictEqual(lExitCode, lExpectedAmountOfErrors);
+    equal(lExitCode, lExpectedAmountOfErrors);
     throws(() => {
       readFileSync(lOutputTo, { encoding: "utf8" });
     });

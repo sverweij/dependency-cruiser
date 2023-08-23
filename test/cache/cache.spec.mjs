@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import { rmSync } from "node:fs";
 import { join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
@@ -10,7 +10,7 @@ const OUTPUTS_FOLDER = "test/cache/__outputs__/";
 describe("[I] cache/cache - readCache", () => {
   it("returns an empty cache when trying to read from a non-existing one", async () => {
     const lCache = new Cache();
-    deepStrictEqual(await lCache.read("this/folder/does/not-exist"), {
+    deepEqual(await lCache.read("this/folder/does/not-exist"), {
       modules: [],
       summary: {},
     });
@@ -18,18 +18,15 @@ describe("[I] cache/cache - readCache", () => {
 
   it("returns an empty cache when trying to read from a file that is invalid JSON", async () => {
     const lCache = new Cache();
-    deepStrictEqual(
-      await lCache.read("test/cache/__mocks__/cache/invalid-json"),
-      {
-        modules: [],
-        summary: {},
-      },
-    );
+    deepEqual(await lCache.read("test/cache/__mocks__/cache/invalid-json"), {
+      modules: [],
+      summary: {},
+    });
   });
 
   it("returns the contents of the cache when trying to read from an existing, valid json", async () => {
     const lCache = new Cache();
-    deepStrictEqual(
+    deepEqual(
       await lCache.read("test/cache/__mocks__/cache/valid-minimal-cache"),
       {
         modules: [],
@@ -57,7 +54,7 @@ describe("[I] cache/cache - writeCache", () => {
     const lCache = new Cache();
 
     await lCache.write(lCacheFolder, lDummyCacheContents);
-    deepStrictEqual(await lCache.read(lCacheFolder), lDummyCacheContents);
+    deepEqual(await lCache.read(lCacheFolder), lDummyCacheContents);
   });
 
   it("writes the passed cruise options to the cache folder (folder already exists -> overwrite)", async () => {
@@ -72,7 +69,7 @@ describe("[I] cache/cache - writeCache", () => {
 
     await lCache.write(lCacheFolder, lDummyCacheContents);
     await lCache.write(lCacheFolder, lSecondDummyCacheContents);
-    deepStrictEqual(await lCache.read(lCacheFolder), lSecondDummyCacheContents);
+    deepEqual(await lCache.read(lCacheFolder), lSecondDummyCacheContents);
   });
 
   it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet) - content based cached strategy", async () => {
@@ -124,7 +121,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
         changes: [],
       },
     );
-    strictEqual(lResult, false);
+    equal(lResult, false);
   });
 
   it("returns false when the base SHA differs", async () => {
@@ -142,7 +139,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
       },
     );
 
-    strictEqual(lFound, false);
+    equal(lFound, false);
   });
 
   it("returns false when a file was added", async () => {
@@ -166,7 +163,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
       },
     );
 
-    strictEqual(lFound, false);
+    equal(lFound, false);
   });
 
   it("returns false when cache written & revision data equal & options incompatible", async () => {
@@ -184,7 +181,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
       { SHA1: "dummy-sha", changes: [] },
     );
 
-    strictEqual(lFound, false);
+    equal(lFound, false);
   });
 
   it("returns true when cache written & revision data equal & options compatible", async () => {
@@ -198,6 +195,6 @@ describe("[I] cache/cache - canServeFromCache", () => {
       { SHA1: "dummy-sha", changes: [] },
     );
 
-    strictEqual(lFound, true);
+    equal(lFound, true);
   });
 });

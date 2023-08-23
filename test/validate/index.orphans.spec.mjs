@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -14,13 +14,13 @@ describe("[I] validate/index - orphans", () => {
   });
 
   it("Skips modules that have no orphan attribute", () => {
-    deepStrictEqual(validate.module(lOrphanRuleSet, { source: "something" }), {
+    deepEqual(validate.module(lOrphanRuleSet, { source: "something" }), {
       valid: true,
     });
   });
 
   it("Flags modules that are orphans", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphanRuleSet, {
         source: "something",
         orphan: true,
@@ -48,7 +48,7 @@ describe("[I] validate/index - orphans in 'allowed' rules", () => {
   });
 
   it("Flags modules that are orphans if they're in the 'allowed' section", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: true,
@@ -66,7 +66,7 @@ describe("[I] validate/index - orphans in 'allowed' rules", () => {
   });
 
   it("Leaves modules alone that aren't orphans if there's a rule in the 'allowed' section forbidding them", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: false,
@@ -97,7 +97,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
     ],
   });
   it("Leaves modules that are orphans, but that don't match the rule path", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphanPathRuleSet, {
         source: "something",
         orphan: true,
@@ -107,7 +107,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
   });
 
   it("Flags modules that are orphans and that match the rule's path", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphanPathRuleSet, {
         source: "noorphansallowedhere/blah/something.ts",
         orphan: true,
@@ -125,7 +125,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
   });
 
   it("Leaves modules that are orphans, but that do match the rule's pathNot", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphanPathNotRuleSet, {
         source: "orphansallowedhere/something",
         orphan: true,
@@ -135,7 +135,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
   });
 
   it("Flags modules that are orphans, but that do not match the rule's pathNot", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lOrphanPathNotRuleSet, {
         source: "blah/something.ts",
         orphan: true,
@@ -153,7 +153,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
   });
 
   it("The 'dependency' validation leaves the module only orphan rule alone", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lOrphanPathRuleSet,
         {

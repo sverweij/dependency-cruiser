@@ -1,5 +1,5 @@
 /* eslint-disable no-undefined  */
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import {
   findRuleByName,
   ruleSetHasLicenseRule,
@@ -12,22 +12,22 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
   };
 
   it("returns undefined for null rule set/ null rule name", () => {
-    strictEqual(findRuleByName(null, null), undefined);
+    equal(findRuleByName(null, null), undefined);
   });
   it("returns undefined for empty rule set/ null rule name", () => {
-    strictEqual(findRuleByName({}, null), undefined);
+    equal(findRuleByName({}, null), undefined);
   });
   it("returns undefined for empty rule set/ non-null rule name", () => {
-    strictEqual(findRuleByName({}, "non-null-rule-name"), undefined);
+    equal(findRuleByName({}, "non-null-rule-name"), undefined);
   });
   it("returns undefined for undefined rule set/ non-null rule name", () => {
-    strictEqual(findRuleByName(undefined, "non-null-rule-name"), undefined);
+    equal(findRuleByName(undefined, "non-null-rule-name"), undefined);
   });
   it("returns undefined if the rule is not in there", () => {
-    strictEqual(findRuleByName(lRuleSet, "another-rule"), undefined);
+    equal(findRuleByName(lRuleSet, "another-rule"), undefined);
   });
   it("returns the rule if the rule is in there", () => {
-    deepStrictEqual(findRuleByName(lRuleSet, "a-rule"), {
+    deepEqual(findRuleByName(lRuleSet, "a-rule"), {
       name: "a-rule",
       severity: "warn",
       from: {},
@@ -38,10 +38,10 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
 
 describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
   it("returns false for an empty rule set", () => {
-    strictEqual(ruleSetHasLicenseRule({}), false);
+    equal(ruleSetHasLicenseRule({}), false);
   });
   it("returns false when rule set no rules with license-like attributes", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: {} }],
@@ -50,7 +50,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
     );
   });
   it("returns true when rule set has a forbidden rule with a license attribute", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { license: "commercial" } }],
       }),
@@ -58,7 +58,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
     );
   });
   it("returns true when rule set doesn't have a forbidden rule with license like attributes", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "" } }],
       }),
@@ -66,7 +66,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
     );
   });
   it("returns true when rule set has a forbidden rule with a licenseNot attribute", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "MIT" } }],
       }),
@@ -74,7 +74,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
     );
   });
   it("returns true when rule set has an allowed rule with a license attribute", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { license: "commercial" } }],
       }),
@@ -82,7 +82,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
     );
   });
   it("returns true when rule set has an allowed rule with a licenseNot attribute", () => {
-    strictEqual(
+    equal(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { licenseNot: "MIT" } }],
       }),
@@ -93,10 +93,10 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
 
 describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
   it("returns false for an empty rule set", () => {
-    strictEqual(ruleSetHasDeprecationRule({}), false);
+    equal(ruleSetHasDeprecationRule({}), false);
   });
   it("returns false when rule set no rules with license-like attributes", () => {
-    strictEqual(
+    equal(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["npm"] } }],
         allowed: [{ from: {}, to: {} }],
@@ -105,7 +105,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
     );
   });
   it("returns true when there's a 'forbidden' rule that checks for external module deprecation", () => {
-    strictEqual(
+    equal(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],
         allowed: [{ from: {}, to: {} }],
@@ -114,7 +114,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
     );
   });
   it("returns true when there's an 'allowed' rule that checks for external module deprecation", () => {
-    strictEqual(
+    equal(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],

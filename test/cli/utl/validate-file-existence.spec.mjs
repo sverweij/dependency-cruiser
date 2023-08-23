@@ -1,4 +1,4 @@
-import { doesNotThrow, throws } from "node:assert";
+import { doesNotThrow, throws } from "node:assert/strict";
 import validateFileExistence from "../../../src/cli/utl/validate-file-existence.mjs";
 
 describe("[U] cli/utl/validateFileExistence", () => {

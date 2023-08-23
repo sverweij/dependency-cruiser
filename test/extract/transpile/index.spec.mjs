@@ -1,4 +1,4 @@
-import { deepStrictEqual, ok, strictEqual } from "node:assert";
+import { deepEqual, ok, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,14 +16,14 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 describe("[I] transpile", () => {
   it("As the 'livescript' transpiler is not available, returns the original source", () => {
-    strictEqual(
+    equal(
       transpile({ extension: ".ls", source: "whatever the bever" }),
       "whatever the bever",
     );
   });
 
   it("As the 'bf-script' transpiler is not supported at all, returns the original source", () => {
-    strictEqual(
+    equal(
       transpile({
         extension: ".bfs",
         source: "'brane-fuchs-skrybd'|#$'nicht unterstutzt'|^^^",
@@ -44,7 +44,7 @@ describe("[I] transpile", () => {
       readFileSync(join(__dirname, "__fixtures__", "svelte.js"), "utf8"),
     );
 
-    strictEqual(lObservedOutput, lExpectedOutput);
+    equal(lObservedOutput, lExpectedOutput);
   });
 
   it("Does not confuse .ts for .tsx", async () => {
@@ -63,7 +63,7 @@ describe("[I] transpile", () => {
     const lFound = await normalizeSource(
       transpile({ extension: ".ts", source: lInputFixture }),
     );
-    strictEqual(lExpected, lFound);
+    equal(lExpected, lFound);
   });
 
   it("Takes a tsconfig and takes that into account on transpilation", async () => {
@@ -94,47 +94,47 @@ describe("[I] transpile", () => {
         lTranspilerOptions,
       ),
     );
-    strictEqual(lExpected, lTranspiledFixture);
+    equal(lExpected, lTranspiledFixture);
   });
 });
 
 describe("[I] transpile/wrapper", () => {
   it("returns the 'js' wrapper for unknown extensions", () => {
-    deepStrictEqual(getWrapper(""), jsWrap);
+    deepEqual(getWrapper(""), jsWrap);
   });
 
   it("returns the 'ls' wrapper for livescript", () => {
-    deepStrictEqual(getWrapper(".ls"), lsWrap);
+    deepEqual(getWrapper(".ls"), lsWrap);
   });
 
   it("returns the 'javascript' wrapper for javascript when the babel config is not passed", () => {
-    deepStrictEqual(getWrapper(".js", {}), jsWrap);
+    deepEqual(getWrapper(".js", {}), jsWrap);
   });
 
   it("returns the 'javascript' wrapper for javascript when there's just a typscript config", () => {
-    deepStrictEqual(getWrapper(".js", { tsConfig: {} }), jsWrap);
+    deepEqual(getWrapper(".js", { tsConfig: {} }), jsWrap);
   });
 
   it("returns the 'babel' wrapper for javascript when the babel config is empty", () => {
-    deepStrictEqual(getWrapper(".js", { babelConfig: {} }), jsWrap);
+    deepEqual(getWrapper(".js", { babelConfig: {} }), jsWrap);
   });
 
   it("returns the 'babel' wrapper for javascript when the babel config is not empty", () => {
-    deepStrictEqual(
+    deepEqual(
       getWrapper(".js", { babelConfig: { babelrc: false } }),
       babelWrap,
     );
   });
 
   it("returns the 'babel' wrapper for typescript when the babel config is not empty", () => {
-    deepStrictEqual(
+    deepEqual(
       getWrapper(".ts", { babelConfig: { babelrc: false } }),
       babelWrap,
     );
   });
 
   it("returns the 'vue' wrapper for vue templates even when the babel config is not empty", () => {
-    deepStrictEqual(
+    deepEqual(
       getWrapper(".vue", { babelConfig: { babelrc: false } }),
       vueTemplateWrap,
     );

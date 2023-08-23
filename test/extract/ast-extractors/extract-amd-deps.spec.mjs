@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractAMDDeps from "../../../src/extract/ast-extractors/extract-amd-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -21,7 +21,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
       `define(["./root_one", "./root_two"], function(root_one){ /* do stuff */ });`,
       lDeps,
     );
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./root_one",
         moduleSystem: "amd",
@@ -45,7 +45,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
   });`;
 
     extractAMD(lInput, lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./one-with-require",
         moduleSystem: "amd",
@@ -69,7 +69,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
   });`;
 
     extractAMD(lInput, lDeps, ["want"]);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./one-with-want",
         moduleSystem: "amd",

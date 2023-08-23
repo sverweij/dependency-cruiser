@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable no-regex-spaces */
 import { EOL } from "node:os";
-import { doesNotMatch, match, strictEqual } from "node:assert";
+import { doesNotMatch, match, equal } from "node:assert/strict";
 import metrics from "../../../src/report/metrics.mjs";
 import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";
 
@@ -9,7 +9,7 @@ describe("[I] report/metrics", () => {
   it("errors when the input doesn't contain a 'folders' section", () => {
     const lResult = metrics({ modules: [] });
 
-    strictEqual(lResult.exitCode, 1);
+    equal(lResult.exitCode, 1);
     match(lResult.output, /ERROR/);
   });
 
@@ -27,7 +27,7 @@ describe("[I] report/metrics", () => {
       ],
     });
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     match(lResult.output, /src       1      1      1    50%/);
   });
 
@@ -48,7 +48,7 @@ describe("[I] report/metrics", () => {
       { hideFolders: true },
     );
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     doesNotMatch(lResult.output, /src       1      1      1    50%/);
   });
 
@@ -77,7 +77,7 @@ describe("[I] report/metrics", () => {
       folders: [],
     });
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     match(
       lResult.output,
       new RegExp(
@@ -114,7 +114,7 @@ describe("[I] report/metrics", () => {
       { orderBy: "name" },
     );
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     match(
       lResult.output,
       new RegExp(
@@ -151,7 +151,7 @@ describe("[I] report/metrics", () => {
       { hideModules: true },
     );
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     doesNotMatch(
       lResult.output,
       new RegExp(
@@ -165,7 +165,7 @@ describe("[I] report/metrics", () => {
       hideModules: true,
     });
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
     match(lResult.output, /src\/report/);
     doesNotMatch(lResult.output, /node_modules/);
   });

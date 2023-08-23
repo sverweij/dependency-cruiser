@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { deepStrictEqual, throws } from "node:assert";
+import { deepEqual, throws } from "node:assert/strict";
 import loadTSConfig from "../../src/config-utl/extract-ts-config.mjs";
 import pathToPosix from "../../src/utl/path-to-posix.mjs";
 
@@ -28,7 +28,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   });
 
   it("returns an empty object when an empty config file is passed", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
       ).options,
@@ -41,7 +41,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   });
 
   it("returns an empty object when an empty config file with comments is passed", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json"),
       ).options,
@@ -56,7 +56,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   });
 
   it("returns an object with a bunch of options when the default ('--init') config file is passed", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
@@ -97,7 +97,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
   });
 
   it("returns an empty object (even no 'extend') when a config with an extend to an empty base is passed", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json"),
       ).options,
@@ -127,7 +127,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     ] = 1;
 
     /* eslint no-undefined:0 */
-    deepStrictEqual(lParseResult, {
+    deepEqual(lParseResult, {
       // only in the base
       // filesSpecs: ["./dummysrc.ts"],
       options: {
@@ -162,11 +162,11 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     // reason or other typescript's TSConfig parser overrides this again with false
     // even though it isn't specified in the file that extends it =>
     // I suspect a bug in typescripts' TSConfig parser ...
-    // strictEqual(lParseResult.compileOnSave, true);
+    // equal(lParseResult.compileOnSave, true);
   });
 
   it("returns an object with properties from base, extends & overrides from extends - compilerOptions", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
@@ -193,7 +193,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
   });
 
   it("returns an object with properties from base, extends compilerOptions.lib array", () => {
-    deepStrictEqual(
+    deepEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",

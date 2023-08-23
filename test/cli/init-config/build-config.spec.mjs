@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
-import { deepStrictEqual, ok, strictEqual } from "node:assert";
+import { deepEqual, ok, equal } from "node:assert/strict";
 import Ajv from "ajv";
 import buildConfig from "../../../src/cli/init-config/build-config.mjs";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
@@ -50,7 +50,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     ajv.validate(configurationSchema, lResult);
     ok(lResult.hasOwnProperty("forbidden"));
-    strictEqual(
+    equal(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
       false,
     );
@@ -66,7 +66,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     ajv.validate(configurationSchema, lResult);
     ok(lResult.hasOwnProperty("forbidden"));
-    strictEqual(
+    equal(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
       true,
     );
@@ -82,7 +82,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     ajv.validate(configurationSchema, lResult);
     ok(lResult.hasOwnProperty("options"));
-    deepStrictEqual(lResult.options.webpackConfig, {
+    deepEqual(lResult.options.webpackConfig, {
       fileName: "./webpack.prod.js",
     });
   });
@@ -97,7 +97,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     ajv.validate(configurationSchema, lResult);
     ok(lResult.hasOwnProperty("options"));
-    deepStrictEqual(lResult.options.tsConfig, {
+    deepEqual(lResult.options.tsConfig, {
       fileName: "./tsconfig.json",
     });
   });

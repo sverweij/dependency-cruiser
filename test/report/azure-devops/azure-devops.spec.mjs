@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import normalizeNewline from "normalize-newline";
@@ -28,8 +28,8 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(okdeps);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
-    strictEqual(lResult.exitCode, 0);
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(lResult.exitCode, 0);
   });
 
   it("says there's warnings when there's warnings", () => {
@@ -38,8 +38,8 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(warndeps);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
-    strictEqual(lResult.exitCode, 0);
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(lResult.exitCode, 0);
   });
 
   it("says there's errors when there's errors", () => {
@@ -48,8 +48,8 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(errdeps);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
-    strictEqual(lResult.exitCode, 1);
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(lResult.exitCode, 1);
   });
 
   it("renders module only transgressions", () => {
@@ -58,9 +58,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(moduleErrs);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders 'required' violations", () => {
@@ -69,9 +69,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(requiredErrs);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders circular transgressions", () => {
@@ -80,18 +80,18 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(circulars);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 3);
+    equal(lResult.exitCode, 3);
   });
 
   it("renders via transgressions", () => {
     const lFixture = readFixture("__mocks__/via-deps-azure-devops-format.txt");
     const lResult = render(vias);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 4);
+    equal(lResult.exitCode, 4);
   });
 
   it("renders instability transgressions", () => {
@@ -100,9 +100,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(instabilities);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
 
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
@@ -111,9 +111,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(unsupportedErrorLevels);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     // eslint-disable-next-line no-magic-numbers
-    strictEqual(lResult.exitCode, 5);
+    equal(lResult.exitCode, 5);
   });
 
   it("renders known errors in a single warning", () => {
@@ -122,8 +122,8 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(knownViolations);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
-    strictEqual(lResult.exitCode, 0);
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(lResult.exitCode, 0);
   });
 
   it("renders known errors along with other errors", () => {
@@ -132,7 +132,7 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(errorsAndKnownViolations);
 
-    strictEqual(normalizeNewline(lResult.output), normalizeNewline(lFixture));
-    strictEqual(lResult.exitCode, 1);
+    equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
+    equal(lResult.exitCode, 1);
   });
 });

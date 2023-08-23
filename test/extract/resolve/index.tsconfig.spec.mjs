@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
 import resolve from "../../../src/extract/resolve/index.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
@@ -24,7 +24,7 @@ const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 
 describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   it("considers a typescript config - non-* alias", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "shared",
@@ -52,7 +52,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("considers a typescript config - combined/* alias", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "gewoon/wood/tree",
@@ -80,7 +80,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("considers a typescript config - * alias", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "daddayaddaya",
@@ -115,7 +115,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       "tsconfig-no-paths.json",
     );
     const PARSED_TSCONFIG_NO_PATHS = extractTSConfig(TSCONFIG_NO_PATHS);
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "common/wood/tree",
@@ -143,7 +143,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("for aliases resolves in the same fashion as the typescript compiler - dts-vs-ts", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "things/dts-before-ts",
@@ -176,7 +176,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("for aliases resolves in the same fashion as the typescript compiler - js-vs-ts", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "things/js-before-ts",
@@ -209,7 +209,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("gives a different result for the same input without a webpack config", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "shared",

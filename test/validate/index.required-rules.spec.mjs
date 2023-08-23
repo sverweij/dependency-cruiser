@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -19,7 +19,7 @@ describe("[I] validate/index - required rules", () => {
   });
 
   it("modules not matching the module criteria from the required rule are okeliedokelie", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lRequiredRuleSet, {
         source: "something",
       }),
@@ -28,7 +28,7 @@ describe("[I] validate/index - required rules", () => {
   });
 
   it("modules matching the module criteria with no dependencies bork", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lRequiredRuleSet, {
         source: "grub-controller.ts",
         dependencies: [],
@@ -41,7 +41,7 @@ describe("[I] validate/index - required rules", () => {
   });
 
   it("modules matching the module criteria with no matching dependencies bork", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lRequiredRuleSet, {
         source: "grub-controller.ts",
         dependencies: [
@@ -61,7 +61,7 @@ describe("[I] validate/index - required rules", () => {
   });
 
   it("'required' violations don't get flagged as dependency transgressions", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(lRequiredRuleSet, {
         source: "grub-controller.ts",
         dependencies: [
@@ -80,7 +80,7 @@ describe("[I] validate/index - required rules", () => {
   });
 
   it("modules matching the module criteria with matching dependencies are okeliedokelie", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lRequiredRuleSet, {
         source: "grub-controller.ts",
         dependencies: [

@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 
 import {
   getAfferentCouplings,
@@ -9,14 +9,11 @@ import {
 
 describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {
-    strictEqual(
-      getAfferentCouplings({ dependents: [] }, "src/whoopla").length,
-      0,
-    );
+    equal(getAfferentCouplings({ dependents: [] }, "src/whoopla").length, 0);
   });
 
   it("dependents from the current folder => 0", () => {
-    strictEqual(
+    equal(
       getAfferentCouplings(
         { dependents: ["src/folder/do-things.mjs"] },
         "src/folder",
@@ -26,7 +23,7 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   });
 
   it("dependents from another folder => 1", () => {
-    strictEqual(
+    equal(
       getAfferentCouplings(
         { dependents: ["src/somewhere-else/do-things.mjs"] },
         "src/whoopla",
@@ -36,7 +33,7 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   });
 
   it("dependent from another folder that starts with a similar name => 1", () => {
-    strictEqual(
+    equal(
       getAfferentCouplings(
         { dependents: ["src/folder-some-more/do-things.mjs"] },
         "src/folder",
@@ -46,7 +43,7 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   });
 
   it("all together now", () => {
-    strictEqual(
+    equal(
       getAfferentCouplings(
         {
           dependents: [
@@ -65,37 +62,34 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
 
 describe("[U] enrich/derive/folders/utl - getEfferentCouplings", () => {
   it("no dependencies => 0", () => {
-    strictEqual(
-      getEfferentCouplings({ dependencies: [] }, "src/whoopla").length,
-      0,
-    );
+    equal(getEfferentCouplings({ dependencies: [] }, "src/whoopla").length, 0);
   });
 });
 
 describe("[U] enrich/derive/folders/utl - getParentFolders", () => {
   it("for a parent-less folder just returns that folder", () => {
-    deepStrictEqual(getParentFolders("src"), ["src"]);
+    deepEqual(getParentFolders("src"), ["src"]);
   });
 
   it("for folder with parents return the parent folder and the folder itself (in that order)", () => {
-    deepStrictEqual(getParentFolders("src/reprot"), ["src", "src/reprot"]);
+    deepEqual(getParentFolders("src/reprot"), ["src", "src/reprot"]);
   });
   it("for empty folder names return that", () => {
-    deepStrictEqual(getParentFolders(""), [""]);
+    deepEqual(getParentFolders(""), [""]);
   });
 });
 
 describe("[U] enrich/derive/folders/utl - objectToArray", () => {
   it("no folders in object => empty array", () => {
-    deepStrictEqual(object2Array({}), []);
+    deepEqual(object2Array({}), []);
   });
 
   it("slaps keys into a name attribute in objects", () => {
-    deepStrictEqual(object2Array({ thename: {} }), [{ name: "thename" }]);
+    deepEqual(object2Array({ thename: {} }), [{ name: "thename" }]);
   });
 
   it("slaps keys into a name attribute in objects (multiple)", () => {
-    deepStrictEqual(
+    deepEqual(
       object2Array({
         "folder/one": {},
         "folder/two": { attribute: "yes" },

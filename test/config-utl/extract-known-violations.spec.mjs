@@ -1,4 +1,4 @@
-import { deepStrictEqual, ok } from "node:assert";
+import { deepEqual, ok } from "node:assert/strict";
 import extractKnownViolations from "../../src/config-utl/extract-known-violations.mjs";
 
 describe("[I] config-utl/extractKnownViolations", () => {
@@ -36,7 +36,7 @@ describe("[I] config-utl/extractKnownViolations", () => {
 
   it("Return the parsed json content of the violations file", async () => {
     process.chdir("./test/config-utl/__mocks__/known-violations");
-    deepStrictEqual(await extractKnownViolations("known-violations.json"), [
+    deepEqual(await extractKnownViolations("known-violations.json"), [
       {
         from: "src/schema/baseline-violations.schema.js",
         to: "src/schema/baseline-violations.schema.js",

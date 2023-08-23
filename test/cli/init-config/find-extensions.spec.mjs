@@ -1,9 +1,9 @@
-import { deepStrictEqual, throws } from "node:assert";
+import { deepEqual, throws } from "node:assert/strict";
 import findExtensions from "../../../src/cli/init-config/find-extensions.mjs";
 
 describe("[U] cli/init-config/find-extensions", () => {
   it("returns an empty array of extensions when passed no directories", () => {
-    deepStrictEqual(findExtensions([]), []);
+    deepEqual(findExtensions([]), []);
   });
 
   it("throws when passed non-existent folders", () => {
@@ -18,7 +18,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
-    deepStrictEqual(lFound, []);
+    deepEqual(lFound, []);
   });
 
   it("filters scannable extensions from all extensions", () => {
@@ -27,7 +27,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
-    deepStrictEqual(lFound, [".js", ".cjs"]);
+    deepEqual(lFound, [".js", ".cjs"]);
   });
 
   it("sorts by the number of times the extension occurs", () => {
@@ -48,7 +48,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       ],
     });
 
-    deepStrictEqual(lFound, [".js", ".ts", ".cjs", ".d.mts"]);
+    deepEqual(lFound, [".js", ".ts", ".cjs", ".d.mts"]);
   });
 
   it("ignores path elements that aren't worth scanning", () => {
@@ -71,6 +71,6 @@ describe("[U] cli/init-config/find-extensions", () => {
       ],
     });
 
-    deepStrictEqual(lFound, [".ts", ".d.mts"]);
+    deepEqual(lFound, [".ts", ".d.mts"]);
   });
 });

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -13,7 +13,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
@@ -27,7 +27,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
   });
 
   it("does flag dependencies that are required with any exotic require", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
@@ -56,7 +56,7 @@ describe("[I] validate/index - exoticRequire", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
@@ -67,7 +67,7 @@ describe("[I] validate/index - exoticRequire", () => {
   });
 
   it("does not flag dependencies that are required with an exotic require not in the forbdidden RE", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
@@ -81,7 +81,7 @@ describe("[I] validate/index - exoticRequire", () => {
   });
 
   it("flags dependencies that are required with a forbidden exotic require", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
@@ -106,7 +106,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
@@ -117,7 +117,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
   });
 
   it("does not flag dependencies that are required with a sanctioned exotic require", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
@@ -131,7 +131,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
   });
 
   it("flags dependencies are required with an unsanctioned exotic require", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },

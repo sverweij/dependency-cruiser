@@ -1,4 +1,4 @@
-import { deepStrictEqual, notDeepStrictEqual } from "node:assert";
+import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
 import { rmSync } from "node:fs";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -31,7 +31,7 @@ describe("[E] main.cruise - cache", () => {
     const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
-    deepStrictEqual(lResult.output, lCache);
+    deepEqual(lResult.output, lCache);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -48,7 +48,7 @@ describe("[E] main.cruise - cache", () => {
     const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
-    deepStrictEqual(lResult.output, lCache);
+    deepEqual(lResult.output, lCache);
 
     const lResultTwo = await cruise(
       ["test/main/__mocks__/cache"],
@@ -59,7 +59,7 @@ describe("[E] main.cruise - cache", () => {
       {},
     );
     Reflect.deleteProperty(lResultTwo.output, "revisionData");
-    deepStrictEqual(lResultTwo.output, lResult.output);
+    deepEqual(lResultTwo.output, lResult.output);
     ajv.validate(cruiseResultSchema, lResultTwo.output);
   });
 
@@ -76,7 +76,7 @@ describe("[E] main.cruise - cache", () => {
     const lOldCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lOldCache, "revisionData");
 
-    deepStrictEqual(lResult.output, lOldCache);
+    deepEqual(lResult.output, lOldCache);
 
     const lResultTwo = await cruise(
       ["test/main/__mocks__/cache test/main/__mocks__/cache-too "],
@@ -90,7 +90,7 @@ describe("[E] main.cruise - cache", () => {
     const lNewCache = await lNewCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lNewCache, "revisionData");
     notDeepStrictEqual(lNewCache, lOldCache);
-    deepStrictEqual(lNewCache, lResultTwo.output);
+    deepEqual(lNewCache, lResultTwo.output);
     ajv.validate(cruiseResultSchema, lNewCache);
   });
 });

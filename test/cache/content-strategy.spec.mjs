@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import ContentStrategy from "../../src/cache/content-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
@@ -37,7 +37,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
       ],
     };
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -54,7 +54,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
   });
 
   it("if there's no changes the change set contains the passed sha & an empty array", () => {
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -76,7 +76,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
   it("returns only the extensions passed", () => {
     const lLimitedExtensions = new Set([".wim", ".noot"]);
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().getRevisionData(
         ".",
         { modules: [] },
@@ -131,7 +131,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -186,11 +186,11 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   ];
 
   it("returns false when revision data objects don't exist", () => {
-    strictEqual(new ContentStrategy().revisionDataEqual(null, null), false);
+    equal(new ContentStrategy().revisionDataEqual(null, null), false);
   });
 
   it("returns false when old revision data object doesn't exist", () => {
-    strictEqual(
+    equal(
       new ContentStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
@@ -200,7 +200,7 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   });
 
   it("returns false when new revision data object doesn't exist", () => {
-    strictEqual(
+    equal(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         null,
@@ -210,7 +210,7 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   });
 
   it("returns false when changes are not equal", () => {
-    strictEqual(
+    equal(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: lChanges },
@@ -220,7 +220,7 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   });
 
   it("returns true when changes are equal", () => {
-    strictEqual(
+    equal(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
         { SHA1: "some-sha", changes: lChanges },
@@ -230,7 +230,7 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   });
 
   it("returns true when changes are equal  (even when neither contain changes)", () => {
-    strictEqual(
+    equal(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: [] },
@@ -274,7 +274,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       revisionData: lEmptyRevisionData,
     };
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
         lEmptyRevisionData,
@@ -333,7 +333,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       revisionData: lEmptyRevisionData,
     };
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
         lEmptyRevisionData,
@@ -422,7 +422,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       },
     };
 
-    deepStrictEqual(
+    deepEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lCruiseResult,
         lRevisionData,

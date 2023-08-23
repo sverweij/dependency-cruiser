@@ -1,37 +1,31 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
 describe("[U] ast-extractors/extract-typescript - type imports and exports", () => {
   it("extracts type imports in const declarations", () => {
-    deepStrictEqual(
-      extractTypescript("const tiepetjes: import('./types').T;"),
-      [
-        {
-          module: "./types",
-          moduleSystem: "es6",
-          dynamic: false,
-          exoticallyRequired: false,
-        },
-      ],
-    );
+    deepEqual(extractTypescript("const tiepetjes: import('./types').T;"), [
+      {
+        module: "./types",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
   });
 
   it("extracts type imports in const declarations (template literal argument)", () => {
-    deepStrictEqual(
-      extractTypescript("const tiepetjes: import(`./types`).T;"),
-      [
-        {
-          module: "./types",
-          moduleSystem: "es6",
-          dynamic: false,
-          exoticallyRequired: false,
-        },
-      ],
-    );
+    deepEqual(extractTypescript("const tiepetjes: import(`./types`).T;"), [
+      {
+        module: "./types",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
   });
 
   it("extracts type imports in parameter declarations", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescript(
         "function f(snort: import('./vypes').T){console.log(snort.bla)}",
       ),
@@ -47,7 +41,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("extracts type imports in class members", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescript(
         "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}",
       ),
@@ -63,7 +57,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("leaves type imports with template literals with placeholders alone", () => {
-    deepStrictEqual(
+    deepEqual(
       // typescript/lib/protocol.d.ts has this thing
       // eslint-disable-next-line no-template-curly-in-string
       extractTypescript("const tiepetjes: import(`./types/${lalala()}`).T;"),
@@ -72,7 +66,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("leaves 'import equals' of variables alone", () => {
-    deepStrictEqual(
+    deepEqual(
       // typescript/lib/protocol.d.ts has this thing
       extractTypescript("import protocol = ts.server.protocol"),
       [],
@@ -80,22 +74,19 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("extracts imports that explicitly state they only import a type - default import", () => {
-    deepStrictEqual(
-      extractTypescript("import type slork from './ts-typical';"),
-      [
-        {
-          module: "./ts-typical",
-          moduleSystem: "es6",
-          dynamic: false,
-          exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
-        },
-      ],
-    );
+    deepEqual(extractTypescript("import type slork from './ts-typical';"), [
+      {
+        module: "./ts-typical",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["type-only"],
+      },
+    ]);
   });
 
   it("extracts imports that explicitly state they only import a type - just a part of the module", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescript("import type {IZwabbernoot} from './ts-typical';"),
       [
         {
@@ -110,7 +101,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("extracts imports that explicitly state they only import a type - default import plus parts", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescript(
         "import type Robbedoes, {IZwabbernoot} from './ts-typical';",
       ),
@@ -127,7 +118,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("extracts re-exports that explicitly state they only re-export a type", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescript("export type * as vehicles from './vehicles';"),
       [
         {
@@ -142,7 +133,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
   });
 
   it("extracts re-exports that explicitly state they only re-export a type (without aliases)", () => {
-    deepStrictEqual(extractTypescript("export type * from './vehicles';"), [
+    deepEqual(extractTypescript("export type * from './vehicles';"), [
       {
         module: "./vehicles",
         moduleSystem: "es6",

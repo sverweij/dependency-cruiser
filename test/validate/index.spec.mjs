@@ -1,11 +1,11 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {
     const lEmptyRuleSet = parseRuleSet({});
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lEmptyRuleSet,
         { source: "koos koets" },
@@ -24,7 +24,7 @@ describe("[I] validate/index dependency - generic tests", () => {
         },
       ],
     });
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lEverythingAllowedRuleSet,
         { source: "koos koets" },
@@ -51,7 +51,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    deepStrictEqual(validate.module(lRuleSet, { source: "koos koets" }), {
+    deepEqual(validate.module(lRuleSet, { source: "koos koets" }), {
       valid: true,
     });
   });
@@ -70,7 +70,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -98,7 +98,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       allowedSeverity: "error",
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -123,7 +123,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
@@ -155,7 +155,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "something" },
@@ -232,7 +232,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("node_modules inhibition - ok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
@@ -243,7 +243,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("node_modules inhibition - violation", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
@@ -257,7 +257,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to sub except sub itself - ok - sub to sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
@@ -268,7 +268,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to sub except sub itself - ok - not sub to not sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
@@ -279,7 +279,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to sub except sub itself - ok - sub to not sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/sub/clavan.js" },
@@ -290,7 +290,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to sub except sub itself  - violation - not sub to sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
@@ -304,7 +304,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
@@ -315,7 +315,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./amber.js" },
@@ -329,7 +329,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not-to-dev-dep disallows relations to develop dependencies", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },
@@ -352,7 +352,7 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("not-to-dev-dep does allow relations to regular dependencies", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import transform from "../../../src/report/utl/dependency-to-incidence-transformer.mjs";
 
 import oneViolation from "./__mocks__/one-violation.mjs";
@@ -11,18 +11,15 @@ const MORE_VIOLATIONS_DEPS_INPUT = moreViolations.modules;
 
 describe("[U] dependencyToIncidenceTransformer", () => {
   it("leaves an empty dependencies list alone", () => {
-    deepStrictEqual(transform([]), []);
+    deepEqual(transform([]), []);
   });
 
   it("reports single rule violations at the incidence", () => {
-    deepStrictEqual(
-      transform(ONE_VIOLATION_DEPS_INPUT),
-      ONE_VIOLATION_DEPS_FIXTURE,
-    );
+    deepEqual(transform(ONE_VIOLATION_DEPS_INPUT), ONE_VIOLATION_DEPS_FIXTURE);
   });
 
   it("reports multiple rule violations per dependency at the incidence with a hint there's more", () => {
-    deepStrictEqual(
+    deepEqual(
       transform(MORE_VIOLATIONS_DEPS_INPUT),
       MORE_VIOLATIONS_DEPS_FIXTURE,
     );

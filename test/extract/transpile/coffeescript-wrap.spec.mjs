@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeNewline from "normalize-newline";
 import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.mjs";
@@ -8,15 +8,15 @@ const litWrap = coffeescriptWrap(true);
 
 describe("[I] coffeescript transpiler", () => {
   it("tells the coffeescript transpiler is available", () => {
-    strictEqual(wrap.isAvailable(), true);
+    equal(wrap.isAvailable(), true);
   });
 
   it("tells the transpiler for literate coffeescript is available", () => {
-    strictEqual(litWrap.isAvailable(), true);
+    equal(litWrap.isAvailable(), true);
   });
 
   it("transpiles coffeescript", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(
@@ -31,7 +31,7 @@ describe("[I] coffeescript transpiler", () => {
   });
 
   it("transpiles literate coffeescript", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         litWrap.transpile(
           readFileSync(
@@ -49,7 +49,7 @@ describe("[I] coffeescript transpiler", () => {
   });
 
   it("transpiles literate coffeescript in markdown", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         litWrap.transpile(
           readFileSync(
@@ -67,7 +67,7 @@ describe("[I] coffeescript transpiler", () => {
   });
 
   it("transpiles jsx'y coffeescript", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync("./test/extract/transpile/__mocks__/csx.cjsx", "utf8"),

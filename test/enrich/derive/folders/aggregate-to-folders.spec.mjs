@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 
 import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.mjs";
 
@@ -8,11 +8,11 @@ function compareFolders(pLeftFolder, pRightFolder) {
 
 describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
-    deepStrictEqual(aggregateToFolders([]), []);
+    deepEqual(aggregateToFolders([]), []);
   });
 
   it("no dependencies no dependents", () => {
-    deepStrictEqual(
+    deepEqual(
       aggregateToFolders([
         { source: "src/folder/index.js", dependencies: [], dependents: [] },
       ]).sort(compareFolders),
@@ -40,7 +40,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
   });
 
   it("dependencies no dependents", () => {
-    deepStrictEqual(
+    deepEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -92,7 +92,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
   });
 
   it("dependencies no dependents - non-zero instability", () => {
-    deepStrictEqual(
+    deepEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -180,7 +180,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
   });
 
   it("no dependencies but dependents", () => {
-    deepStrictEqual(
+    deepEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -212,7 +212,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
   });
 
   it("handling core modules", () => {
-    deepStrictEqual(
+    deepEqual(
       aggregateToFolders([
         {
           source: "src/index.js",

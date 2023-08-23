@@ -1,6 +1,6 @@
 import { createReadStream } from "node:fs";
 import { Writable } from "node:stream";
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.mjs";
 
 class WriteableExpectStream extends Writable {
@@ -13,10 +13,10 @@ class WriteableExpectStream extends Writable {
   }
 
   end() {
-    strictEqual(this.buffer.includes("<html"), true);
-    strictEqual(this.buffer.includes("</style>"), true);
-    strictEqual(this.buffer.includes('"name": "dependency-cruiser"'), true);
-    strictEqual(this.buffer.includes("</html"), true);
+    equal(this.buffer.includes("<html"), true);
+    equal(this.buffer.includes("</style>"), true);
+    equal(this.buffer.includes('"name": "dependency-cruiser"'), true);
+    equal(this.buffer.includes("</html"), true);
   }
 }
 

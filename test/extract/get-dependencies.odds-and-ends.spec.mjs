@@ -1,9 +1,4 @@
-import {
-  deepStrictEqual,
-  doesNotThrow,
-  strictEqual,
-  throws,
-} from "node:assert";
+import { deepEqual, doesNotThrow, equal, throws } from "node:assert/strict";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -60,7 +55,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   });
 
   it("Just skips require(481)", () => {
-    strictEqual(
+    equal(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
@@ -71,7 +66,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   });
 
   it("Just skips require(a function)", () => {
-    strictEqual(
+    equal(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
@@ -82,7 +77,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   });
 
   it("Just skips require(an iife)", () => {
-    strictEqual(
+    equal(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
@@ -103,7 +98,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
@@ -120,7 +115,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
@@ -150,7 +145,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
@@ -192,7 +187,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
@@ -226,7 +221,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
@@ -245,7 +240,7 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,

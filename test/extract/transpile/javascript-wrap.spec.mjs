@@ -1,14 +1,14 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import wrap from "../../../src/extract/transpile/javascript-wrap.mjs";
 
 describe("[I] javascript transpiler", () => {
   it("tells the jsx transpiler is available", () => {
-    strictEqual(wrap.isAvailable(), true);
+    equal(wrap.isAvailable(), true);
   });
 
   it("'transpiles' jsx", () => {
-    strictEqual(
+    equal(
       wrap.transpile(
         readFileSync("./test/extract/transpile/__mocks__/jsx.jsx", "utf8"),
       ),
@@ -18,7 +18,7 @@ describe("[I] javascript transpiler", () => {
   });
 
   it("transpiles mjs", () => {
-    strictEqual(
+    equal(
       wrap.transpile(
         readFileSync("./test/extract/transpile/__mocks__/mjs.mjs", "utf8"),
       ),
