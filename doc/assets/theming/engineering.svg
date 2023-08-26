@@ -19,6 +19,11 @@
 <path fill="none" stroke="white" stroke-width="2" d="M28,-16C28,-16 420.38,-16 420.38,-16 426.38,-16 432.38,-22 432.38,-28 432.38,-28 432.38,-304 432.38,-304 432.38,-310 426.38,-316 420.38,-316 420.38,-316 28,-316 28,-316 22,-316 16,-310 16,-304 16,-304 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="224.19" y="-303.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">main</text>
 </g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="none" stroke="white" stroke-width="2" d="M169.25,-114C169.25,-114 234.25,-114 234.25,-114 240.25,-114 246.25,-120 246.25,-126 246.25,-126 246.25,-154 246.25,-154 246.25,-160 240.25,-166 234.25,-166 234.25,-166 169.25,-166 169.25,-166 163.25,-166 157.25,-160 157.25,-154 157.25,-154 157.25,-126 157.25,-126 157.25,-120 163.25,-114 169.25,-114"/>
+<text text-anchor="middle" x="201.75" y="-153.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">files&#45;and&#45;dirs</text>
+</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="none" stroke="white" stroke-width="2" d="M266.25,-150C266.25,-150 412.38,-150 412.38,-150 418.38,-150 424.38,-156 424.38,-162 424.38,-162 424.38,-220 424.38,-220 424.38,-226 418.38,-232 412.38,-232 412.38,-232 266.25,-232 266.25,-232 260.25,-232 254.25,-226 254.25,-220 254.25,-220 254.25,-162 254.25,-162 254.25,-156 260.25,-150 266.25,-150"/>
@@ -33,11 +38,6 @@
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="none" stroke="white" stroke-width="2" d="M169.25,-24C169.25,-24 234.25,-24 234.25,-24 240.25,-24 246.25,-30 246.25,-36 246.25,-36 246.25,-94 246.25,-94 246.25,-100 240.25,-106 234.25,-106 234.25,-106 169.25,-106 169.25,-106 163.25,-106 157.25,-100 157.25,-94 157.25,-94 157.25,-36 157.25,-36 157.25,-30 163.25,-24 169.25,-24"/>
 <text text-anchor="middle" x="201.75" y="-93.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">rule&#45;set</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="none" stroke="white" stroke-width="2" d="M169.25,-114C169.25,-114 234.25,-114 234.25,-114 240.25,-114 246.25,-120 246.25,-126 246.25,-126 246.25,-154 246.25,-154 246.25,-160 240.25,-166 234.25,-166 234.25,-166 169.25,-166 169.25,-166 163.25,-166 157.25,-160 157.25,-154 157.25,-154 157.25,-126 157.25,-126 157.25,-120 163.25,-114 169.25,-114"/>
-<text text-anchor="middle" x="201.75" y="-153.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/cruise.mjs -->
 <g id="node1" class="node">
