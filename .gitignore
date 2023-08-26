@@ -25,7 +25,6 @@ jsdoc
 # node and npm
 /node_modules/
 npm-debug.log
-package-lock.json
 dependency-cruiser-*.tgz
 
 # yarn - we don't use it but occasionally test stuff - shouldn't get committed accidentally
