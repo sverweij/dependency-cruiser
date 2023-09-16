@@ -8,7 +8,7 @@ import chalk from "chalk";
 import cruise from "../main/cruise.mjs";
 import { INFO, bus } from "../utl/bus.mjs";
 
-import validateFileExistence from "./utl/validate-file-existence.mjs";
+import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
 import { write } from "./utl/io.mjs";
 import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
@@ -27,7 +27,7 @@ async function extractResolveOptions(pCruiseOptions) {
     lResolveOptions = await extractWebpackResolveConfig(
       lWebPackConfigFileName,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.env ?? null,
-      pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null
+      pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null,
     );
   }
   return lResolveOptions;
@@ -39,7 +39,7 @@ async function addKnownViolations(pCruiseOptions) {
       "../config-utl/extract-known-violations.mjs"
     );
     const lKnownViolations = await extractKnownViolations(
-      pCruiseOptions.knownViolationsFile
+      pCruiseOptions.knownViolationsFile,
     );
 
     // Check against json schema is already done in src/main/options/validate
@@ -95,14 +95,14 @@ function setUpListener(pCruiseOptions) {
   if (Boolean(lListenerFunction)) {
     lListenerFunction(
       bus,
-      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ?? INFO
+      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ?? INFO,
     );
   }
 }
 
 async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   const lCruiseOptions = await addKnownViolations(
-    await normalizeCliOptions(pCruiseOptions)
+    await normalizeCliOptions(pCruiseOptions),
   );
 
   pFileDirectoryArray
@@ -110,9 +110,9 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
     .map((pFileOrDirectory) =>
       lCruiseOptions?.ruleSet?.options?.baseDir
         ? join(lCruiseOptions.ruleSet.options.baseDir, pFileOrDirectory)
-        : pFileOrDirectory
+        : pFileOrDirectory,
     )
-    .forEach(validateFileExistence);
+    .forEach(assertFileExistence);
 
   setUpListener(lCruiseOptions);
 
@@ -126,7 +126,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
     pFileDirectoryArray,
     lCruiseOptions,
     lResolveOptions,
-    { tsConfig, babelConfig }
+    { tsConfig, babelConfig },
   );
 
   bus.progress("cli: writing results", { complete: 1 });
@@ -151,14 +151,14 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
     if (isInstalledGlobally) {
       process.stderr.write(
         `\n  ${chalk.yellow(
-          "WARNING"
+          "WARNING",
         )}: You're running a globally installed dependency-cruiser.\n\n` +
           `           We recommend to ${chalk.bold.italic.underline(
-            "install and run it as a local devDependency"
+            "install and run it as a local devDependency",
           )} in\n` +
           `           your project instead. There it has your project's environment and\n` +
           `           transpilers at its disposal. That will ensure it can find e.g.\n` +
-          `           TypeScript, Vue or Svelte modules and dependencies.\n\n`
+          `           TypeScript, Vue or Svelte modules and dependencies.\n\n`,
       );
     }
     /* c8 ignore stop */

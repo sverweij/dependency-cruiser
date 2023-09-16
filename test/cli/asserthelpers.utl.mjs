@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
-import { deepEqual } from "node:assert/strict";
+import { deepEqual, equal } from "node:assert/strict";
 import normalizeNewline from "normalize-newline";
 import normBaseDirectory from "../main/norm-base-directory.utl.mjs";
 
 export function assertFileEqual(pActualFileName, pExpectedFileName) {
-  deepEqual(
+  equal(
     normalizeNewline(readFileSync(pActualFileName, { encoding: "utf8" })),
     normalizeNewline(readFileSync(pExpectedFileName, { encoding: "utf8" })),
   );

@@ -1,5 +1,5 @@
 import _format from "../main/format.mjs";
-import validateFileExistence from "./utl/validate-file-existence.mjs";
+import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeOptions from "./normalize-cli-options.mjs";
 import { getInStream, write } from "./utl/io.mjs";
 
@@ -13,7 +13,7 @@ export default async function format(pResultFile, pOptions) {
   const lOptions = await normalizeOptions(pOptions);
 
   if (pResultFile !== "-") {
-    validateFileExistence(pResultFile);
+    assertFileExistence(pResultFile);
   }
 
   return new Promise((pResolve, pReject) => {
@@ -29,13 +29,13 @@ export default async function format(pResultFile, pOptions) {
         /* c8 ignore start */
         (pError) => {
           pReject(pError);
-        }
+        },
         /* c8 ignore stop */
       )
       .on("end", async () => {
         const lReportingResult = await _format(
           JSON.parse(lInputAsString),
-          lOptions
+          lOptions,
         );
 
         write(lOptions.outputTo, lReportingResult.output);

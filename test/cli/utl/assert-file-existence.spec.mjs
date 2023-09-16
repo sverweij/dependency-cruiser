@@ -1,5 +1,5 @@
 import { doesNotThrow, throws } from "node:assert/strict";
-import validateFileExistence from "../../../src/cli/utl/validate-file-existence.mjs";
+import validateFileExistence from "../../../src/cli/utl/assert-file-existence.mjs";
 
 describe("[U] cli/utl/validateFileExistence", () => {
   it("throws when the file or dir passed does not exists", () => {
