@@ -1283,7 +1283,7 @@ module.exports = {
         // Whether or not to show a list of violated rules in the summary
         showRulesSummary: true,
         // Whether or not to show rules in the list of rules for which all violations are ignored.
-        includeIgnoredInSummary
+        includeIgnoredInSummary: true,
 
         // Whether or not to show a detailed list of violations
         showDetails: true,
