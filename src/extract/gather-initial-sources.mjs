@@ -95,18 +95,21 @@ export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
     .flatMap((pFileOrDirectory) => {
       if (picomatch.scan(pFileOrDirectory).isGlob) {
         return glob
-          .sync(join(lOptions.baseDir, pFileOrDirectory))
-          .map((pExpanded) => relative(lOptions.baseDir, pExpanded));
+          .sync(
+            join(pathToPosix(lOptions.baseDir), pathToPosix(pFileOrDirectory)),
+          )
+          .map((pExpanded) =>
+            relative(pathToPosix(lOptions.baseDir), pExpanded),
+          );
       }
       return normalize(pFileOrDirectory);
     })
     .flatMap((pGlobLess) => {
       if (statSync(join(lOptions.baseDir, pGlobLess)).isDirectory()) {
         return gatherScannableFilesFromDirectory(pGlobLess, lOptions);
-      } else {
-        // it's a file
-        return pathToPosix(pGlobLess);
       }
+      // Not a glob anymore, and not a directory => it's a file
+      return pathToPosix(pGlobLess);
     })
     .sort();
 }
