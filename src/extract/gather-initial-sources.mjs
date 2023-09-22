@@ -99,10 +99,11 @@ export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
             join(pathToPosix(lOptions.baseDir), pathToPosix(pFileOrDirectory)),
           )
           .map((pExpanded) =>
-            relative(pathToPosix(lOptions.baseDir), pExpanded),
+            pathToPosix(relative(lOptions.baseDir, pExpanded)),
           );
       }
-      return normalize(pFileOrDirectory);
+
+      return pathToPosix(normalize(pFileOrDirectory));
     })
     .flatMap((pGlobLess) => {
       if (statSync(join(lOptions.baseDir, pGlobLess)).isDirectory()) {
