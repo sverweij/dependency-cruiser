@@ -245,7 +245,33 @@ describe("[I] extract/gatherInitialSources", () => {
     );
   });
 
-  it("heeds the baseDir", () => {
+  it("heeds the baseDir for regular folder paths", () => {
+    deepEqual(
+      gatherInitialSources(
+        ["ly/"],
+        normalizeCruiseOptions({
+          baseDir:
+            "test/extract/__mocks__/gather-globbing/packages/odin/src/deep",
+        }),
+      ).map(pathToPosix),
+      ["ly/index.js", "ly/nested.js"],
+    );
+  });
+
+  it("heeds the baseDir for regular files", () => {
+    deepEqual(
+      gatherInitialSources(
+        ["ly.js", "ly.spec.js"],
+        normalizeCruiseOptions({
+          baseDir:
+            "test/extract/__mocks__/gather-globbing/packages/odin/src/deep",
+        }),
+      ).map(pathToPosix),
+      ["ly.js", "ly.spec.js"],
+    );
+  });
+
+  it("heeds the baseDir for globs", () => {
     deepEqual(
       gatherInitialSources(
         ["**/src/**/*.js"],

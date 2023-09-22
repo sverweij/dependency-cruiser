@@ -1,5 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, normalize, relative } from "node:path";
+import picomatch from "picomatch";
 import { glob } from "glob";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 import getExtension from "../utl/get-extension.mjs";
@@ -45,7 +46,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return readdirSync(join(pOptions.baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
     .filter((pFullPathToFile) =>
-      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
+      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions),
     )
     .reduce((pSum, pFullPathToFile) => {
       let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
@@ -55,7 +56,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       if (lStat) {
         if (lStat.isDirectory()) {
           return pSum.concat(
-            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
+            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions),
           );
         }
         if (fileIsScannable(pOptions, pFullPathToFile)) {
@@ -90,28 +91,22 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
 export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
-  // these are `.reduce`s and not `.map`s because they typically return larger
-  // arrays than the pFileAndDirectoryArray:
-  // - `glob` returns an array of strings
-  // - so does `gatherScannableFilesFromDirectory`
   return pFileAndDirectoryArray
-    .reduce(
-      (pAll, pFileOrDirectory) =>
-        pAll.concat(
-          glob.sync(pathToPosix(pFileOrDirectory), {
-            cwd: pathToPosix(lOptions.baseDir),
-          })
-        ),
-      []
-    )
-    .reduce((pAll, pFileOrDirectory) => {
-      if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
-        return pAll.concat(
-          gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions)
-        );
-      } else {
-        return pAll.concat(pathToPosix(pFileOrDirectory));
+    .flatMap((pFileOrDirectory) => {
+      if (picomatch.scan(pFileOrDirectory).isGlob) {
+        return glob
+          .sync(join(lOptions.baseDir, pFileOrDirectory))
+          .map((pExpanded) => relative(lOptions.baseDir, pExpanded));
       }
-    }, [])
+      return normalize(pFileOrDirectory);
+    })
+    .flatMap((pGlobLess) => {
+      if (statSync(join(lOptions.baseDir, pGlobLess)).isDirectory()) {
+        return gatherScannableFilesFromDirectory(pGlobLess, lOptions);
+      } else {
+        // it's a file
+        return pathToPosix(pGlobLess);
+      }
+    })
     .sort();
 }
