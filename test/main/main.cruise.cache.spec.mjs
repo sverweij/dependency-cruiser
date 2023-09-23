@@ -79,7 +79,7 @@ describe("[E] main.cruise - cache", () => {
     deepEqual(lResult.output, lOldCache);
 
     const lResultTwo = await cruise(
-      ["test/main/__mocks__/cache test/main/__mocks__/cache-too "],
+      ["test/main/__mocks__/cache", "test/main/__mocks__/cache-too"],
       {
         cache: CACHE_FOLDER,
       },

@@ -1,6 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
-import { glob } from "glob";
+import { join, normalize } from "node:path";
+import picomatch from "picomatch";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 import getExtension from "../utl/get-extension.mjs";
 import pathToPosix from "../utl/path-to-posix.mjs";
@@ -45,7 +45,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return readdirSync(join(pOptions.baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
     .filter((pFullPathToFile) =>
-      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
+      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions),
     )
     .reduce((pSum, pFullPathToFile) => {
       let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
@@ -55,7 +55,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       if (lStat) {
         if (lStat.isDirectory()) {
           return pSum.concat(
-            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
+            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions),
           );
         }
         if (fileIsScannable(pOptions, pFullPathToFile)) {
@@ -68,6 +68,15 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
     .filter((pFullPathToFile) => shouldBeIncluded(pFullPathToFile, pOptions));
 }
 
+function expandGlob(pBaseDirectory, pScannedGlob) {
+  const isMatch = picomatch(pathToPosix(pScannedGlob.glob));
+  return readdirSync(join(pBaseDirectory, pScannedGlob.base), {
+    recursive: true,
+  })
+    .filter((pFile) => isMatch(pFile))
+    .map((pFile) => pathToPosix(join(pScannedGlob.base, pFile)));
+}
+
 /**
  * Returns an array of strings, representing paths to files to be gathered
  *
@@ -78,7 +87,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  * Files and directories are assumed to be either absolute, or relative to the
  * current working directory.
  *
- * @param  {string[]} pFileAndDirectoryArray globs and/ or paths to files or
+ * @param  {string[]} pFileDirectoryAndGlobArray globs and/ or paths to files or
  *                               directories to be gathered
  * @param  {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pOptions options that
  *                               influence what needs to be gathered/ scanned
@@ -87,31 +96,26 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  *                               - includeOnly - regexp what to include
  * @return {string[]}            paths to files to be gathered.
  */
-export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
+export default function gatherInitialSources(
+  pFileDirectoryAndGlobArray,
+  pOptions,
+) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
-  // these are `.reduce`s and not `.map`s because they typically return larger
-  // arrays than the pFileAndDirectoryArray:
-  // - `glob` returns an array of strings
-  // - so does `gatherScannableFilesFromDirectory`
-  return pFileAndDirectoryArray
-    .reduce(
-      (pAll, pFileOrDirectory) =>
-        pAll.concat(
-          glob.sync(pathToPosix(pFileOrDirectory), {
-            cwd: pathToPosix(lOptions.baseDir),
-          })
-        ),
-      []
-    )
-    .reduce((pAll, pFileOrDirectory) => {
-      if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
-        return pAll.concat(
-          gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions)
-        );
-      } else {
-        return pAll.concat(pathToPosix(pFileOrDirectory));
+  return pFileDirectoryAndGlobArray
+    .flatMap((pFileDirectoryOrGlob) => {
+      const lScannedGlob = picomatch.scan(pFileDirectoryOrGlob);
+      if (lScannedGlob.isGlob) {
+        return expandGlob(lOptions.baseDir, lScannedGlob);
       }
-    }, [])
+      return pathToPosix(normalize(pFileDirectoryOrGlob));
+    })
+    .flatMap((pFileOrDirectory) => {
+      if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
+        return gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions);
+      }
+      // Not a glob anymore, and not a directory => it's a file
+      return pathToPosix(pFileOrDirectory);
+    })
     .sort();
 }

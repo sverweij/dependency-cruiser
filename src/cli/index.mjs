@@ -1,5 +1,5 @@
 import { join } from "node:path";
-import { glob } from "glob";
+import picomatch from "picomatch";
 import cloneDeep from "lodash/cloneDeep.js";
 import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
@@ -106,7 +106,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   );
 
   pFileDirectoryArray
-    .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
+    .filter((pFileOrDirectory) => !picomatch.scan(pFileOrDirectory).isGlob)
     .map((pFileOrDirectory) =>
       lCruiseOptions?.ruleSet?.options?.baseDir
         ? join(lCruiseOptions.ruleSet.options.baseDir, pFileOrDirectory)
