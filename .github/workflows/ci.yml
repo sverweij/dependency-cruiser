@@ -27,18 +27,30 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+<<<<<<< HEAD
         node-version: [18.x, 20.x]
+=======
+        node-version: [16.x, 20.x]
+>>>>>>> 6a3e220e (Revert "disable all non-windows workflows & actions")
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+<<<<<<< HEAD
         if: github.event_name == 'pull_request' && matrix.node-version == env.NODE_LATEST
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
         if: github.event_name != 'pull_request' || matrix.node-version != env.NODE_LATEST
+=======
+        if: github.event_name == 'pull_request' && matrix.node-version == env.NODE_LATEST 
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 1
+        if: github.event_name != 'pull_request' || matrix.node-version != env.NODE_LATEST 
+>>>>>>> 6a3e220e (Revert "disable all non-windows workflows & actions")
       - uses: actions/cache@v3
         with:
           path: node_modules
@@ -142,3 +154,7 @@ jobs:
       #     node --version
       #     yarn --version
       #     yarn test:cover
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a3e220e (Revert "disable all non-windows workflows & actions")
