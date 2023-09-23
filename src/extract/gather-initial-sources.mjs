@@ -101,20 +101,14 @@ export default function gatherInitialSources(
         console.log("it's a glob:", pFileDirectoryOrGlob);
         console.log(
           "joined it looks like so:",
-          join(
-            pathToPosix(lOptions.baseDir),
-            pathToPosix(pFileDirectoryOrGlob),
-          ),
+          pathToPosix(join(lOptions.baseDir, pFileDirectoryOrGlob)),
         );
         return glob
           .sync(
-            join(
-              // needs to be "pathToPosix'ed" because glob.sync only works with
-              // posix paths on windows (\ / \\ are not treated as path separators
-              // but as escaped characters)
-              pathToPosix(lOptions.baseDir),
-              pathToPosix(pFileDirectoryOrGlob),
-            ),
+            // needs to be "pathToPosix'ed" because glob.sync only works with
+            // posix paths on windows (\ / \\ are not treated as path separators
+            // but as escaped characters)
+            pathToPosix(join(lOptions.baseDir, pFileDirectoryOrGlob)),
           )
           .map((pFileOrDirectory) => {
             console.log(
