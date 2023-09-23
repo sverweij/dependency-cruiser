@@ -46,7 +46,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return readdirSync(join(pOptions.baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
     .filter((pFullPathToFile) =>
-      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions),
+      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
     )
     .reduce((pSum, pFullPathToFile) => {
       let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
@@ -56,7 +56,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       if (lStat) {
         if (lStat.isDirectory()) {
           return pSum.concat(
-            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions),
+            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
           );
         }
         if (fileIsScannable(pOptions, pFullPathToFile)) {
@@ -90,13 +90,15 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  */
 export default function gatherInitialSources(
   pFileDirectoryAndGlobArray,
-  pOptions,
+  pOptions
 ) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
   return pFileDirectoryAndGlobArray
     .flatMap((pFileDirectoryOrGlob) => {
       if (picomatch.scan(pFileDirectoryOrGlob).isGlob) {
+        // eslint-disable-next-line no-console
+        console.log("it's a glob:", pFileDirectoryOrGlob);
         return glob
           .sync(join(lOptions.baseDir, pFileDirectoryOrGlob))
           .map((pFileOrDirectory) => {
@@ -105,7 +107,7 @@ export default function gatherInitialSources(
               "de-globbed:",
               pFileOrDirectory,
               "->",
-              pathToPosix(relative(lOptions.baseDir, pFileOrDirectory)),
+              pathToPosix(relative(lOptions.baseDir, pFileOrDirectory))
             );
             return pathToPosix(relative(lOptions.baseDir, pFileOrDirectory));
           });
