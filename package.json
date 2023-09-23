@@ -158,7 +158,6 @@
     "commander": "11.0.0",
     "enhanced-resolve": "5.15.0",
     "figures": "5.0.0",
-    "glob": "10.3.6",
     "ignore": "5.2.4",
     "indent-string": "5.0.0",
     "interpret": "^3.1.1",

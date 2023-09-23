@@ -1,7 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
-import { join, normalize, relative } from "node:path";
+import { join, normalize } from "node:path";
 import picomatch from "picomatch";
-import { glob } from "glob";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 import getExtension from "../utl/get-extension.mjs";
 import pathToPosix from "../utl/path-to-posix.mjs";
@@ -69,6 +68,11 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
     .filter((pFullPathToFile) => shouldBeIncluded(pFullPathToFile, pOptions));
 }
 
+function doMagic(pAllFiles, pGlob) {
+  const isMatch = picomatch(pGlob);
+  return pAllFiles.filter((pFile) => isMatch(pFile));
+}
+
 /**
  * Returns an array of strings, representing paths to files to be gathered
  *
@@ -93,19 +97,18 @@ export default function gatherInitialSources(
   pOptions,
 ) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
+  let lAllFiles = [];
 
   return pFileDirectoryAndGlobArray
     .flatMap((pFileDirectoryOrGlob) => {
-      if (picomatch.scan(pFileDirectoryOrGlob).isGlob) {
-        return glob
-          .sync(
-            // needs to be "pathToPosix'ed" because glob.sync only works with
-            // posix paths on windows - \ and \\ are treated as character escapes
-            pathToPosix(join(lOptions.baseDir, pFileDirectoryOrGlob)),
-          )
-          .map((pFileOrDirectory) =>
-            pathToPosix(relative(lOptions.baseDir, pFileOrDirectory)),
-          );
+      const lScannedGlob = picomatch.scan(pFileDirectoryOrGlob);
+      if (lScannedGlob.isGlob) {
+        lAllFiles = readdirSync(join(lOptions.baseDir, lScannedGlob.base), {
+          recursive: true,
+        });
+        return doMagic(lAllFiles, pathToPosix(lScannedGlob.glob)).map((pFile) =>
+          pathToPosix(join(lScannedGlob.base, pFile)),
+        );
       }
       return pathToPosix(normalize(pFileDirectoryOrGlob));
     })
