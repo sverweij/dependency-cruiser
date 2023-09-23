@@ -79,7 +79,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  * Files and directories are assumed to be either absolute, or relative to the
  * current working directory.
  *
- * @param  {string[]} pFileAndDirectoryArray globs and/ or paths to files or
+ * @param  {string[]} pFileDirectoryAndGlobArray globs and/ or paths to files or
  *                               directories to be gathered
  * @param  {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pOptions options that
  *                               influence what needs to be gathered/ scanned
@@ -88,29 +88,36 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  *                               - includeOnly - regexp what to include
  * @return {string[]}            paths to files to be gathered.
  */
-export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
+export default function gatherInitialSources(
+  pFileDirectoryAndGlobArray,
+  pOptions,
+) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
-  return pFileAndDirectoryArray
-    .flatMap((pFileOrDirectory) => {
-      if (picomatch.scan(pFileOrDirectory).isGlob) {
+  return pFileDirectoryAndGlobArray
+    .flatMap((pFileDirectoryOrGlob) => {
+      if (picomatch.scan(pFileDirectoryOrGlob).isGlob) {
         return glob
-          .sync(
-            join(pathToPosix(lOptions.baseDir), pathToPosix(pFileOrDirectory)),
-          )
-          .map((pExpanded) =>
-            pathToPosix(relative(lOptions.baseDir, pExpanded)),
-          );
+          .sync(join(lOptions.baseDir, pFileDirectoryOrGlob))
+          .map((pFileOrDirectory) => {
+            // eslint-disable-next-line no-console
+            console.log(
+              "de-globbed:",
+              pFileOrDirectory,
+              "->",
+              pathToPosix(relative(lOptions.baseDir, pFileOrDirectory)),
+            );
+            return pathToPosix(relative(lOptions.baseDir, pFileOrDirectory));
+          });
       }
-
-      return pathToPosix(normalize(pFileOrDirectory));
+      return pathToPosix(normalize(pFileDirectoryOrGlob));
     })
-    .flatMap((pGlobLess) => {
-      if (statSync(join(lOptions.baseDir, pGlobLess)).isDirectory()) {
-        return gatherScannableFilesFromDirectory(pGlobLess, lOptions);
+    .flatMap((pFileOrDirectory) => {
+      if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
+        return gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions);
       }
       // Not a glob anymore, and not a directory => it's a file
-      return pathToPosix(pGlobLess);
+      return pathToPosix(pFileOrDirectory);
     })
     .sort();
 }
