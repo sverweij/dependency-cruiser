@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { readdirSync, statSync } from "node:fs";
 import { join, normalize, relative } from "node:path";
 import picomatch from "picomatch";
@@ -98,27 +97,15 @@ export default function gatherInitialSources(
   return pFileDirectoryAndGlobArray
     .flatMap((pFileDirectoryOrGlob) => {
       if (picomatch.scan(pFileDirectoryOrGlob).isGlob) {
-        console.log("it's a glob:", pFileDirectoryOrGlob);
-        console.log(
-          "joined it looks like so:",
-          pathToPosix(join(lOptions.baseDir, pFileDirectoryOrGlob)),
-        );
         return glob
           .sync(
             // needs to be "pathToPosix'ed" because glob.sync only works with
-            // posix paths on windows (\ / \\ are not treated as path separators
-            // but as escaped characters)
+            // posix paths on windows - \ and \\ are treated as character escapes
             pathToPosix(join(lOptions.baseDir, pFileDirectoryOrGlob)),
           )
-          .map((pFileOrDirectory) => {
-            console.log(
-              "de-globbed:",
-              pFileOrDirectory,
-              "->",
-              pathToPosix(relative(lOptions.baseDir, pFileOrDirectory)),
-            );
-            return pathToPosix(relative(lOptions.baseDir, pFileOrDirectory));
-          });
+          .map((pFileOrDirectory) =>
+            pathToPosix(relative(lOptions.baseDir, pFileOrDirectory)),
+          );
       }
       return pathToPosix(normalize(pFileDirectoryOrGlob));
     })
