@@ -68,9 +68,13 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
     .filter((pFullPathToFile) => shouldBeIncluded(pFullPathToFile, pOptions));
 }
 
-function doMagic(pAllFiles, pGlob) {
-  const isMatch = picomatch(pGlob);
-  return pAllFiles.filter((pFile) => isMatch(pFile));
+function expandGlob(pBaseDirectory, pScannedGlob) {
+  const isMatch = picomatch(pathToPosix(pScannedGlob.glob));
+  return readdirSync(join(pBaseDirectory, pScannedGlob.base), {
+    recursive: true,
+  })
+    .filter((pFile) => isMatch(pFile))
+    .map((pFile) => pathToPosix(join(pScannedGlob.base, pFile)));
 }
 
 /**
@@ -97,18 +101,12 @@ export default function gatherInitialSources(
   pOptions,
 ) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
-  let lAllFiles = [];
 
   return pFileDirectoryAndGlobArray
     .flatMap((pFileDirectoryOrGlob) => {
       const lScannedGlob = picomatch.scan(pFileDirectoryOrGlob);
       if (lScannedGlob.isGlob) {
-        lAllFiles = readdirSync(join(lOptions.baseDir, lScannedGlob.base), {
-          recursive: true,
-        });
-        return doMagic(lAllFiles, pathToPosix(lScannedGlob.glob)).map((pFile) =>
-          pathToPosix(join(lScannedGlob.base, pFile)),
-        );
+        return expandGlob(lOptions.baseDir, lScannedGlob);
       }
       return pathToPosix(normalize(pFileDirectoryOrGlob));
     })
