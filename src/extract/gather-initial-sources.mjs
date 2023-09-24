@@ -47,23 +47,21 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
     .filter((pFullPathToFile) =>
       shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions),
     )
-    .reduce((pSum, pFullPathToFile) => {
+    .flatMap((pFullPathToFile) => {
       let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
         throwIfNoEntry: false,
       });
 
       if (lStat) {
         if (lStat.isDirectory()) {
-          return pSum.concat(
-            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions),
-          );
+          return gatherScannableFilesFromDirectory(pFullPathToFile, pOptions);
         }
         if (fileIsScannable(pOptions, pFullPathToFile)) {
-          return pSum.concat(pFullPathToFile);
+          return pFullPathToFile;
         }
       }
-      return pSum;
-    }, [])
+      return [];
+    })
     .map((pFullPathToFile) => pathToPosix(pFullPathToFile))
     .filter((pFullPathToFile) => shouldBeIncluded(pFullPathToFile, pOptions));
 }
@@ -108,7 +106,7 @@ export default function gatherInitialSources(
       if (lScannedGlob.isGlob) {
         return expandGlob(lOptions.baseDir, lScannedGlob);
       }
-      return pathToPosix(normalize(pFileDirectoryOrGlob));
+      return normalize(pFileDirectoryOrGlob);
     })
     .flatMap((pFileOrDirectory) => {
       if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
