@@ -135,9 +135,10 @@ function buildExtensionsAttribute(pInitOptions) {
  * @returns {string}
  */
 function buildMainFieldsAttribute(pInitOptions) {
-  return pInitOptions.usesTypeScript
-    ? `mainFields: ["main", "types", "typings"],`
-    : `// mainFields: ["main", "types", "typings"],`;
+  if (pInitOptions.isTypeModule) {
+    return `mainFields: ["module", "main", "types", "typings"],`;
+  }
+  return `mainFields: ["main", "types", "typings"],`;
 }
 
 /**

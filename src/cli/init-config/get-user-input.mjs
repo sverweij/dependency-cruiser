@@ -2,6 +2,7 @@
 import prompts from "prompts";
 import {
   isLikelyMonoRepo,
+  isTypeModule,
   getMonoRepoPackagesCandidates,
   getSourceFolderCandidates,
   getTestFolderCandidates,
@@ -34,6 +35,12 @@ const QUESTIONS = [
     initial: isLikelyMonoRepo(),
   },
   {
+    name: "isTypeModule",
+    type: () => (isTypeModule() ? "confirm" : false),
+    message: "It looks like this is an ESM package. Is that correct?",
+    initial: isTypeModule(),
+  },
+  {
     name: "sourceLocation",
     type: (_, pAnswers) => (pAnswers.isMonoRepo ? "list" : false),
     message: "Mono repo it is! Where do your packages live?",
@@ -61,7 +68,7 @@ const QUESTIONS = [
     initial: (_, pAnswers) => {
       return !hasTestsWithinSource(
         getTestFolderCandidates(),
-        toSourceLocationArray(pAnswers.sourceLocation)
+        toSourceLocationArray(pAnswers.sourceLocation),
       );
     },
   },

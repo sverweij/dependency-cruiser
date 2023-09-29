@@ -16,6 +16,7 @@ import {
   getDefaultConfigFileName,
   hasJSConfigCandidates,
   getJSConfigCandidates,
+  isTypeModule,
 } from "./environment-helpers.mjs";
 import { writeRunScriptsToManifest } from "./write-run-scripts-to-manifest.mjs";
 
@@ -32,6 +33,7 @@ function getOneShotConfig(pOneShotConfigId) {
   /** @type {import("./types").IPartialInitConfig} */
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
+    isTypeModule: isTypeModule(),
     combinedDependencies: false,
     useJsConfig: hasJSConfigCandidates() && !hasTSConfigCandidates(),
     jsConfig: getJSConfigCandidates().shift(),

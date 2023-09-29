@@ -101,4 +101,29 @@ describe("[I] cli/init-config/build-config", () => {
       fileName: "./tsconfig.json",
     });
   });
+
+  it("generates mainFields including 'module' for package.json with a type: module field", async () => {
+    const lResult = await createConfigNormalized({ isTypeModule: true });
+
+    ajv.validate(configurationSchema, lResult);
+    ok(lResult.hasOwnProperty("options"));
+    deepEqual(lResult.options.enhancedResolveOptions.mainFields, [
+      "module",
+      "main",
+      "types",
+      "typings",
+    ]);
+  });
+
+  it("generates mainFields including 'module' for package.json withOUT a type: module field", async () => {
+    const lResult = await createConfigNormalized({});
+
+    ajv.validate(configurationSchema, lResult);
+    ok(lResult.hasOwnProperty("options"));
+    deepEqual(lResult.options.enhancedResolveOptions.mainFields, [
+      "main",
+      "types",
+      "typings",
+    ]);
+  });
 });
