@@ -6,6 +6,12 @@ export interface IInitConfig {
    */
   isMonoRepo: boolean;
   /**
+   * Whether or not the current folder is a package is an ESM package
+   * by default (and resolutions of external dependencies should be
+   * treated as such)
+   */
+  isTypeModule: boolean;
+  /**
    * Whether or not you allow usage of external dependencies declared in
    * package.jsons of parent folders
    */
