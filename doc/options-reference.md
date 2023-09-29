@@ -1496,10 +1496,24 @@ contains paths/ aliases.
 
 #### `mainFields`
 
-A list of main fields in manifests (package.json-s). Typically you'd want to keep
-leave this this on its default (`['main']`) , but if you e.g. use external packages
-that only expose types, and you still want references to these types to be resolved
-you could expand this to `['main', 'types']`.
+A list of main fields in manifests (package.json-s). By default this is the `main`
+field only, but there are a few situations where you want to expand that list
+
+- If you use packages that use a different field to indicate the main file
+  (e.g. `module` or `browser`). `module` is especially interesting if you use
+  ES modules and want to have dependency-cruiser resolve to the ESM version. As
+  you might still want the 'main' field to be used as a fallback (as quite
+  a lot of external packages will still be commonjs ), you would specify
+  `['module', 'main']` here.
+- If you use external packages that only expose types which only do that via
+  'types' and/ or 'typings' fields (instead of in exportFields) and you still want
+  references to these types to be resolved, you can expand the array to
+  `['main', 'types', 'typings']`
+
+Dependency-cruiser's `--init` scaffolding will automatically add the `types`
+and `typing` fields to the `mainFields` array. As of version 14.1.0 it will
+add the `module` field to the `mainFields` array if it detects the current module
+is of type `module`.
 
 #### `mainFiles`
 
