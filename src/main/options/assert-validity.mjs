@@ -6,29 +6,29 @@ import report from "../../report/index.mjs";
 const MODULE_SYSTEM_LIST_RE = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
 
-function validateSystems(pModuleSystems) {
+function assertModuleSystemsValid(pModuleSystems) {
   if (
     Boolean(pModuleSystems) &&
     Array.isArray(pModuleSystems) &&
     !pModuleSystems.every((pModuleSystem) =>
-      Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE))
+      Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE)),
     )
   ) {
     throw new Error(
-      `Invalid module system list: '${pModuleSystems.join(", ")}'\n`
+      `Invalid module system list: '${pModuleSystems.join(", ")}'\n`,
     );
   }
 }
 
-function validateRegExpSafety(pPattern) {
+function assertRegExpSafety(pPattern) {
   if (Boolean(pPattern) && !safeRegex(pPattern)) {
     throw new Error(
-      `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`
+      `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`,
     );
   }
 }
 
-function validateOutputType(pOutputType) {
+function assertOutputTypeValid(pOutputType) {
   if (
     Boolean(pOutputType) &&
     !report.getAvailableReporters().includes(pOutputType) &&
@@ -38,15 +38,15 @@ function validateOutputType(pOutputType) {
   }
 }
 
-function validateMaxDepth(pDepth) {
+function assertMaxDepthValid(pDepth) {
   if (Boolean(pDepth) && !pDepth.toString().match(VALID_DEPTH_RE)) {
     throw new Error(
-      `'${pDepth}' is not a valid depth - use an integer between 0 and 99`
+      `'${pDepth}' is not a valid depth - use an integer between 0 and 99`,
     );
   }
 }
 
-function validateFocusDepth(pFocusDepth) {
+function assertFocusDepthValid(pFocusDepth) {
   const lFocusDepth = Number.parseInt(pFocusDepth, 10);
   const lMaxFocusDepth = 99;
 
@@ -57,18 +57,18 @@ function validateFocusDepth(pFocusDepth) {
       lFocusDepth > lMaxFocusDepth)
   ) {
     throw new Error(
-      `'${pFocusDepth}' is not a valid focus depth - use an integer between 0 and ${lMaxFocusDepth}`
+      `'${pFocusDepth}' is not a valid focus depth - use an integer between 0 and ${lMaxFocusDepth}`,
     );
   }
 }
 
-function validatePathsSafety(pFilterOption) {
+function assertPathsSafety(pFilterOption) {
   if (typeof pFilterOption === "string") {
-    validateRegExpSafety(pFilterOption);
+    assertRegExpSafety(pFilterOption);
   }
 
-  validateRegExpSafety(pFilterOption?.path ?? "");
-  validateRegExpSafety(pFilterOption?.pathNot ?? "");
+  assertRegExpSafety(pFilterOption?.path ?? "");
+  assertRegExpSafety(pFilterOption?.pathNot ?? "");
 }
 
 /**
@@ -76,32 +76,32 @@ function validatePathsSafety(pFilterOption) {
  * @throws {Error}
  * @returns {import("../../../types/dependency-cruiser.js").ICruiseOptions}
  */
-export function validateCruiseOptions(pOptions) {
+export function assertCruiseOptionsValid(pOptions) {
   let lReturnValue = {};
 
   if (Boolean(pOptions)) {
     // necessary because can slip through the cracks when passed as a cli parameter
-    validateSystems(pOptions.moduleSystems);
+    assertModuleSystemsValid(pOptions.moduleSystems);
 
     // necessary because this safety check can't be done in json schema (a.f.a.i.k.)
-    validatePathsSafety(pOptions.doNotFollow);
-    validatePathsSafety(pOptions.exclude);
-    validateRegExpSafety(pOptions.includeOnly);
-    validateRegExpSafety(pOptions.focus);
-    validateRegExpSafety(pOptions.reaches);
-    validateRegExpSafety(pOptions.highlight);
-    validateRegExpSafety(pOptions.collapse);
+    assertPathsSafety(pOptions.doNotFollow);
+    assertPathsSafety(pOptions.exclude);
+    assertRegExpSafety(pOptions.includeOnly);
+    assertRegExpSafety(pOptions.focus);
+    assertRegExpSafety(pOptions.reaches);
+    assertRegExpSafety(pOptions.highlight);
+    assertRegExpSafety(pOptions.collapse);
 
     // necessary because not in the config schema
-    validateOutputType(pOptions.outputType);
+    assertOutputTypeValid(pOptions.outputType);
 
     // necessary because not found a way to do this properly in JSON schema
-    validateMaxDepth(pOptions.maxDepth);
+    assertMaxDepthValid(pOptions.maxDepth);
 
-    validateFocusDepth(pOptions.focusDepth);
+    assertFocusDepthValid(pOptions.focusDepth);
 
     if (has(pOptions, "ruleSet.options")) {
-      lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
+      lReturnValue = assertCruiseOptionsValid(pOptions.ruleSet.options);
     }
     return merge({}, lReturnValue, pOptions);
   }
@@ -113,12 +113,12 @@ export function validateCruiseOptions(pOptions) {
  * @param {import("../../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
  * @throws {Error}
  */
-export function validateFormatOptions(pFormatOptions) {
-  validatePathsSafety(pFormatOptions.exclude);
-  validatePathsSafety(pFormatOptions.focus);
-  validatePathsSafety(pFormatOptions.reaches);
-  validatePathsSafety(pFormatOptions.includeOnly);
-  validateRegExpSafety(pFormatOptions.collapse);
-  validateOutputType(pFormatOptions.outputType);
-  validateFocusDepth(pFormatOptions.focusDepth);
+export function assertFormatOptionsValid(pFormatOptions) {
+  assertPathsSafety(pFormatOptions.exclude);
+  assertPathsSafety(pFormatOptions.focus);
+  assertPathsSafety(pFormatOptions.reaches);
+  assertPathsSafety(pFormatOptions.includeOnly);
+  assertRegExpSafety(pFormatOptions.collapse);
+  assertOutputTypeValid(pFormatOptions.outputType);
+  assertFocusDepthValid(pFormatOptions.focusDepth);
 }

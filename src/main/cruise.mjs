@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-magic-numbers */
 import { bus } from "../utl/bus.mjs";
-import { validateCruiseOptions } from "./options/validate.mjs";
+import { assertCruiseOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
 
@@ -22,7 +22,7 @@ export default async function cruise(
   bus.summary("parsing options", c(1));
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
-    validateCruiseOptions(pCruiseOptions),
+    assertCruiseOptionsValid(pCruiseOptions),
     pFileAndDirectoryArray,
   );
   let lCache = null;

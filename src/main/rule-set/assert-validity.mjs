@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import safeRegex from "safe-regex";
 import has from "lodash/has.js";
-import { validateCruiseOptions } from "../options/validate.mjs";
+import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import configurationSchema from "../../schema/configuration.schema.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 
@@ -88,7 +88,7 @@ export default function assertRuleSetValid(pConfiguration) {
   (pConfiguration.allowed || []).forEach(assertRuleSafety);
   (pConfiguration.forbidden || []).forEach(assertRuleSafety);
   if (has(pConfiguration, "options")) {
-    validateCruiseOptions(pConfiguration.options);
+    assertCruiseOptionsValid(pConfiguration.options);
   }
   return pConfiguration;
 }
