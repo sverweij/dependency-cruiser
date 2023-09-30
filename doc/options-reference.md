@@ -30,6 +30,7 @@
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
   - [exotic ways to require modules - exoticRequireStrings](#exotic-ways-to-require-modules---exoticrequirestrings)
   - [extraExtensionsToScan](#extraextensionstoscan)
+  - [`builtInModules`: influencing what to consider built-in (/ core) modules](#builtinmodules-influencing-what-to-consider-built-in--core-modules)
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
   - [parser](#parser)
@@ -1449,6 +1450,45 @@ their extensions in an `extraExtensionsToScan` array, like so:
 > it can't parse them anyway, and skipping them saves (sometimes a lot) of
 > time. This also means that if you put an extension in the extra extensions
 > to scan dependency-cruiser _could_ have had parsed it won't.
+
+### `builtInModules`: influencing what to consider built-in (/ core) modules
+
+By default dependency-cruiser considers nodejs built-in modules as core modules.
+In contexts that are not nodejs this might be not (entirely) right:
+
+- when targeting the browser, the core modules are either not available or you're
+  using a shim (e.g. the 1:1 copy of `path` on [npmjs](https://npmjs.com/package/path)).
+  In those cases dependency-cruiser should respectively flag the included core
+  module as unresolvable or resolve it to `node_modules/path`
+- when targeting a platform built on top of nodejs, like electron, you might
+  want to specify the packages built into that platform as built-in/ core
+  as well.
+
+To override the default behaviour you can pass a `builtInModules` object in
+the options section of your dependency-cruiser configuration. The object has two
+attributes, that can be used on their own or combined:
+
+- `override`: an array of strings with the names of the modules you want to
+  use as core modules instead of the default ones.
+  I.e. for a browser context you could use the empty array:
+  ```javascript
+  options: {
+    // ...
+    builtInModules: {
+      override: [];
+    }
+  }
+  ```
+- `add`: an array of strings with the names of the modules you want to add
+  to the list of core modules. I.e. for electron you could use:
+  ```javascript
+  options: {
+    // ...
+    builtInModules: {
+      add: ["electron"];
+    }
+  }
+  ```
 
 ### enhancedResolveOptions
 

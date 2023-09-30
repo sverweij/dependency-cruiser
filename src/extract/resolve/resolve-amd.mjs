@@ -1,16 +1,8 @@
 import { accessSync, R_OK } from "node:fs";
 import { relative, join } from "node:path";
-import { builtinModules } from "node:module";
 import memoize from "lodash/memoize.js";
 import pathToPosix from "../../utl/path-to-posix.mjs";
-
-// builtinModules does not expose all builtin modules for #reasons -
-// see https://github.com/nodejs/node/issues/42785. In stead we could use
-// isBuiltin, but that is not available in node 16.14, the lowest version
-// of node dependency-cruiser currently supports. So we add the missing
-// modules here.
-// b.t.w. code is duplicated in resolve-cjs.mjs
-const REALLY_BUILTIN_MODULES = builtinModules.concat(["test", "node:test"]);
+import { isBuiltin } from "./is-built-in.mjs";
 
 const fileExists = memoize((pFile) => {
   try {
@@ -46,6 +38,7 @@ export function resolveAMD(
   pStrippedModuleName,
   pBaseDirectory,
   pFileDirectory,
+  pResolveOptions,
 ) {
   // lookups:
   // - [x] could be relative in the end (implemented)
@@ -61,10 +54,10 @@ export function resolveAMD(
 
   return {
     resolved: lResolvedPath,
-    coreModule: REALLY_BUILTIN_MODULES.includes(pStrippedModuleName),
+    coreModule: isBuiltin(pStrippedModuleName, pResolveOptions),
     followable: fileExists(lResolvedPath) && lResolvedPath.endsWith(".js"),
     couldNotResolve:
-      !REALLY_BUILTIN_MODULES.includes(pStrippedModuleName) &&
+      !isBuiltin(pStrippedModuleName, pResolveOptions) &&
       !fileExists(lResolvedPath),
   };
 }

@@ -10,7 +10,7 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
         ...pBaseRule,
         ...pAll,
       }),
-      pExtendedRule
+      pExtendedRule,
     );
 }
 
@@ -23,7 +23,7 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
  *   rules get merged, where individual attributes of the named rules
  *   in pForbiddenArrayExtended win)
  *
- * @param {*} pRuleArrayExtended - array of 'fobidden' rules that extend the ...
+ * @param {*} pRuleArrayExtended - array of 'forbidden' rules that extend the ...
  * @param {*} pRuleArrayBase - array of 'forbidden' rules to extend
  *
  * @return {Array} - the merged array
@@ -32,7 +32,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
   // merge anonymous on 100% equality
   let lAnonymousRules = uniqWith(
     pRuleArrayExtended.concat(pRuleArrayBase).filter(({ name }) => !name),
-    isDeepStrictEqual
+    isDeepStrictEqual,
   );
 
   let lNamedRules = pRuleArrayExtended
@@ -48,7 +48,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
     // the other concats (anonymous, allowed) don't need it
     // but have it to be consistent with this
     lNamedRules.concat(pRuleArrayBase).filter(({ name }) => name),
-    ({ name }) => name
+    ({ name }) => name,
   );
 
   return lNamedRules.concat(lAnonymousRules);
@@ -67,7 +67,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
 function mergeAllowedRules(pAllowedArrayExtended, pAllowedArrayBase) {
   return uniqWith(
     pAllowedArrayExtended.concat(pAllowedArrayBase),
-    isDeepStrictEqual
+    isDeepStrictEqual,
   );
 }
 
@@ -109,15 +109,15 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
 export default (pConfigExtended, pConfigBase) => {
   const lForbidden = mergeRules(
     pConfigExtended?.forbidden ?? [],
-    pConfigBase?.forbidden ?? []
+    pConfigBase?.forbidden ?? [],
   );
   const lRequired = mergeRules(
     pConfigExtended?.required ?? [],
-    pConfigBase?.required ?? []
+    pConfigBase?.required ?? [],
   );
   const lAllowed = mergeAllowedRules(
     pConfigExtended?.allowed ?? [],
-    pConfigBase?.allowed ?? []
+    pConfigBase?.allowed ?? [],
   );
 
   return {
@@ -131,7 +131,7 @@ export default (pConfigExtended, pConfigBase) => {
       : {}),
     options: mergeOptions(
       pConfigExtended?.options ?? {},
-      pConfigBase?.options ?? {}
+      pConfigBase?.options ?? {},
     ),
   };
 };

@@ -21,7 +21,7 @@ function resolveModule(
   pModule,
   pBaseDirectory,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lReturnValue = null;
 
@@ -34,13 +34,14 @@ function resolveModule(
       lStrippedModuleName,
       pBaseDirectory,
       pFileDirectory,
-      pResolveOptions
+      pResolveOptions,
     );
   } else {
     lReturnValue = resolveAMD(
       lStrippedModuleName,
       pBaseDirectory,
-      pFileDirectory
+      pFileDirectory,
+      pResolveOptions,
     );
   }
   return lReturnValue;
@@ -89,13 +90,13 @@ function resolveWithRetry(
   pModule,
   pBaseDirectory,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lReturnValue = resolveModule(
     pModule,
     pBaseDirectory,
     pFileDirectory,
-    pResolveOptions
+    pResolveOptions,
   );
   const lStrippedModuleName = stripToModuleName(pModule.module);
 
@@ -123,17 +124,17 @@ function resolveWithRetry(
   ) {
     const lModuleWithoutExtension = lStrippedModuleName.replace(
       /\.(js|jsx|cjs|mjs)$/g,
-      ""
+      "",
     );
     const lExtensionsToTry = getTypeScriptExtensionsToTry(
-      extname(lStrippedModuleName)
+      extname(lStrippedModuleName),
     );
 
     const lReturnValueCandidate = resolveModule(
       { ...pModule, module: lModuleWithoutExtension },
       pBaseDirectory,
       pFileDirectory,
-      { ...pResolveOptions, extensions: lExtensionsToTry }
+      { ...pResolveOptions, extensions: lExtensionsToTry },
     );
 
     if (isTypeScriptIshExtension(lReturnValueCandidate.resolved)) {
@@ -160,13 +161,13 @@ export default function resolve(
   pDependency,
   pBaseDirectory,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lResolvedDependency = resolveWithRetry(
     pDependency,
     pBaseDirectory,
     pFileDirectory,
-    pResolveOptions
+    pResolveOptions,
   );
   const lStrippedModuleName = stripToModuleName(pDependency.module);
 
@@ -176,7 +177,7 @@ export default function resolve(
       lStrippedModuleName,
       lResolvedDependency.resolved,
       { baseDirectory: pBaseDirectory, fileDirectory: pFileDirectory },
-      pResolveOptions
+      pResolveOptions,
     ),
     dependencyTypes: determineDependencyTypes(
       { ...pDependency, ...lResolvedDependency },
@@ -184,11 +185,11 @@ export default function resolve(
       getManifest(
         pFileDirectory,
         pBaseDirectory,
-        pResolveOptions.combinedDependencies
+        pResolveOptions.combinedDependencies,
       ),
       pFileDirectory,
       pResolveOptions,
-      pBaseDirectory
+      pBaseDirectory,
     ),
   };
 
@@ -210,11 +211,11 @@ export default function resolve(
                    again corresponds with a real file on disk
                  */
                 // eslint-disable-next-line no-control-regex
-                lResolvedDependency.resolved.replace(/\u0000#/g, "#")
-              )
-            )
-          )
-        )
+                lResolvedDependency.resolved.replace(/\u0000#/g, "#"),
+              ),
+            ),
+          ),
+        ),
       );
     } catch (pError) {
       lResolvedDependency.couldNotResolve = true;
