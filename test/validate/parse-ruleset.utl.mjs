@@ -1,4 +1,4 @@
 import normalizeRuleSet from "../../src/main/rule-set/normalize.mjs";
-import validateRuleSet from "../../src/main/rule-set/validate.mjs";
+import assertRuleSetValid from "../../src/main/rule-set/assert-validity.mjs";
 
-export default (pRuleSet) => normalizeRuleSet(validateRuleSet(pRuleSet));
+export default (pRuleSet) => normalizeRuleSet(assertRuleSetValid(pRuleSet));
