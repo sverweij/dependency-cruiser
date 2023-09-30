@@ -17,20 +17,20 @@ export default async function cruise(
   pFileAndDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   bus.summary("parsing options", c(1));
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
     validateCruiseOptions(pCruiseOptions),
-    pFileAndDirectoryArray
+    pFileAndDirectoryArray,
   );
   let lCache = null;
 
   if (lCruiseOptions.cache) {
     bus.summary(
       `cache: checking freshness with ${lCruiseOptions.cache.strategy}`,
-      c(2)
+      c(2),
     );
 
     const { default: Cache } = await import("../cache/cache.mjs");
@@ -46,7 +46,7 @@ export default async function cruise(
   bus.summary("importing analytical modules", c(3));
   const [
     { default: normalizeRuleSet },
-    { default: validateRuleSet },
+    { default: assertRuleSetValid },
     { default: normalizeFilesAndDirectories },
     { default: normalizeResolveOptions },
     { default: extract },
@@ -55,7 +55,7 @@ export default async function cruise(
     // despite rule set parsing being behind an if, it's the 'normal' use case
     // for dependency-cruiser, so import it unconditionally nonetheless
     import("./rule-set/normalize.mjs"),
-    import("./rule-set/validate.mjs"),
+    import("./rule-set/assert-validity.mjs"),
     import("./files-and-dirs/normalize.mjs"),
     import("./resolve-options/normalize.mjs"),
     import("../extract/index.mjs"),
@@ -65,19 +65,19 @@ export default async function cruise(
   if (Boolean(lCruiseOptions.ruleSet)) {
     bus.summary("parsing rule set", c(4));
     lCruiseOptions.ruleSet = normalizeRuleSet(
-      validateRuleSet(lCruiseOptions.ruleSet)
+      assertRuleSetValid(lCruiseOptions.ruleSet),
     );
   }
 
   const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories(
-    pFileAndDirectoryArray
+    pFileAndDirectoryArray,
   );
 
   bus.summary("determining how to resolve", c(5));
   const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
-    pTranspileOptions?.tsConfig
+    pTranspileOptions?.tsConfig,
   );
 
   bus.summary("reading files", c(6));
@@ -85,14 +85,14 @@ export default async function cruise(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
     lNormalizedResolveOptions,
-    pTranspileOptions
+    pTranspileOptions,
   );
 
   bus.summary("analyzing", c(7));
   const lCruiseResult = enrich(
     lExtractionResult,
     lCruiseOptions,
-    lNormalizedFileAndDirectoryArray
+    lNormalizedFileAndDirectoryArray,
   );
 
   if (lCruiseOptions.cache) {

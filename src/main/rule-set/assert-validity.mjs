@@ -19,10 +19,10 @@ const ajv = new Ajv();
 // of the safe-regex package.
 const MAX_SAFE_REGEX_STAR_REPEAT_LIMIT = 10000;
 
-function validateAgainstSchema(pSchema, pConfiguration) {
+function assertSchemaCompliance(pSchema, pConfiguration) {
   if (!ajv.validate(pSchema, pConfiguration)) {
     throw new Error(
-      `The supplied configuration is not valid: ${ajv.errorsText()}.\n`
+      `The supplied configuration is not valid: ${ajv.errorsText()}.\n`,
     );
   }
 }
@@ -40,7 +40,7 @@ function safeRule(pRule, pSection, pCondition) {
   );
 }
 
-function checkRuleSafety(pRule) {
+function assertRuleSafety(pRule) {
   const lRegexConditions = [
     { section: "from", condition: "path" },
     { section: "to", condition: "path" },
@@ -56,15 +56,16 @@ function checkRuleSafety(pRule) {
 
   if (
     lRegexConditions.some(
-      (pCondition) => !safeRule(pRule, pCondition.section, pCondition.condition)
+      (pCondition) =>
+        !safeRule(pRule, pCondition.section, pCondition.condition),
     )
   ) {
     throw new Error(
       `rule ${JSON.stringify(
         pRule,
         null,
-        ""
-      )} has an unsafe regular expression. Bailing out.\n`
+        "",
+      )} has an unsafe regular expression. Bailing out.\n`,
     );
   }
 }
@@ -74,7 +75,7 @@ function checkRuleSafety(pRule) {
  * Throws an Error in all other cases.
  *
  * Validations:
- * - the ruleset adheres to the [config json schema](../../schema/configuration.schema.json)
+ * - the rule set adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
  * @param  {import("../../../types/configuration.js").IConfiguration} pConfiguration The configuration to validate
@@ -82,10 +83,10 @@ function checkRuleSafety(pRule) {
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message
  */
-export default function validateConfiguration(pConfiguration) {
-  validateAgainstSchema(configurationSchema, pConfiguration);
-  (pConfiguration.allowed || []).forEach(checkRuleSafety);
-  (pConfiguration.forbidden || []).forEach(checkRuleSafety);
+export default function assertRuleSetValid(pConfiguration) {
+  assertSchemaCompliance(configurationSchema, pConfiguration);
+  (pConfiguration.allowed || []).forEach(assertRuleSafety);
+  (pConfiguration.forbidden || []).forEach(assertRuleSafety);
   if (has(pConfiguration, "options")) {
     validateCruiseOptions(pConfiguration.options);
   }
