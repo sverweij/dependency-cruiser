@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import validateNodeEnvironment from "../src/cli/validate-node-environment.mjs";
+import assertNodeEnvironmentSuitable from "../src/cli/assert-node-environment-suitable.mjs";
 import meta from "../src/meta.js";
 import format from "../src/cli/format.mjs";
 
@@ -11,7 +11,7 @@ function formatError(pError) {
 }
 
 try {
-  validateNodeEnvironment();
+  assertNodeEnvironmentSuitable();
 
   program
     .description(
