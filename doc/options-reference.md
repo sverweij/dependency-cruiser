@@ -1454,10 +1454,10 @@ their extensions in an `extraExtensionsToScan` array, like so:
 ### `builtInModules`: influencing what to consider built-in (/ core) modules
 
 By default dependency-cruiser considers nodejs built-in modules as core modules.
-In other contexts this might be not (entirely) right:
+In contexts that are not nodejs this might be not (entirely) right:
 
 - when targeting the browser, the core modules are either not available or you're
-  using a shim (e.g. the 1:1 copy of of path on [npmjs](https://npmjs.com/package/path)).
+  using a shim (e.g. the 1:1 copy of `path` on [npmjs](https://npmjs.com/package/path)).
   In those cases dependency-cruiser should respectively flag the included core
   module as unresolvable or resolve it to `node_modules/path`
 - when targeting a platform built on top of nodejs, like electron, you might
