@@ -66,7 +66,7 @@ function pushPlugin(pPlugins, pPluginToPush) {
 async function compileResolveOptions(
   pResolveOptions,
   pTSConfig,
-  pResolveOptionsFromDCConfig
+  pResolveOptionsFromDCConfig,
 ) {
   let lResolveOptions = {};
 
@@ -113,7 +113,7 @@ async function compileResolveOptions(
         // or with the supported ones.
         extensions:
           pResolveOptions.extensions || DEFAULT_RESOLVE_OPTIONS.extensions,
-      })
+      }),
     );
   }
 
@@ -124,7 +124,7 @@ async function compileResolveOptions(
     ...pResolveOptions,
     ...getNonOverridableResolveOptions(
       pResolveOptionsFromDCConfig?.cachedInputFileSystem?.cacheDuration ??
-        DEFAULT_CACHE_DURATION
+        DEFAULT_CACHE_DURATION,
     ),
   };
 }
@@ -139,7 +139,7 @@ async function compileResolveOptions(
 export default async function normalizeResolveOptions(
   pResolveOptions,
   pOptions,
-  pTSConfig
+  pTSConfig,
 ) {
   const lRuleSet = pOptions?.ruleSet ?? {};
   // eslint-disable-next-line no-return-await
@@ -160,11 +160,15 @@ export default async function normalizeResolveOptions(
          resolve options ...
        */
       combinedDependencies: pOptions?.combinedDependencies ?? false,
+      /* Same for the builtInModules override/ add option ...*/
+      ...(pOptions?.builtInModules?.override || pOptions?.builtInModules?.add
+        ? { builtInModules: pOptions?.builtInModules }
+        : {}),
       resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},
-    pOptions?.enhancedResolveOptions ?? {}
+    pOptions?.enhancedResolveOptions ?? {},
   );
 }

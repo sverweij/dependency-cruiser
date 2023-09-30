@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -400,6 +401,110 @@ describe("[I] extract/resolve/index - general", () => {
         dependencyTypes: ["npm-no-pkg"],
         followable: true,
         resolved: "node_modules/lalala-interfaces/dist/interfaces/index.d.ts",
+      },
+    );
+  });
+
+  it("resolves modules passed as builtInModules.overrides as core modules", async () => {
+    deepEqual(
+      resolve(
+        {
+          module: "totally-not-a-core-module-irl",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        await normalizeResolveOptions({
+          bustTheCache: true,
+          builtInModules: {
+            override: ["totally-not-a-core-module-irl"],
+          },
+        }),
+      ),
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "totally-not-a-core-module-irl",
+      },
+    );
+  });
+
+  it("resolves modules passed as builtInModules.add as core modules", async () => {
+    deepEqual(
+      resolve(
+        {
+          module: "totally-not-a-core-module-irl",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        await normalizeResolveOptions({
+          bustTheCache: true,
+          builtInModules: {
+            add: ["totally-not-a-core-module-irl"],
+          },
+        }),
+      ),
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "totally-not-a-core-module-irl",
+      },
+    );
+  });
+
+  it("does not resolve nodejs core modules when builtInModules.overrides is passed", async () => {
+    deepEqual(
+      resolve(
+        {
+          module: "fs",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        await normalizeResolveOptions({
+          bustTheCache: true,
+          builtInModules: {
+            override: ["totally-not-a-core-module-irl"],
+          },
+        }),
+      ),
+      {
+        coreModule: false,
+        couldNotResolve: true,
+        dependencyTypes: ["unknown"],
+        followable: false,
+        resolved: "fs",
+      },
+    );
+  });
+
+  it("still resolves nodejs core modules when builtInModules.add is passed", async () => {
+    deepEqual(
+      resolve(
+        {
+          module: "fs",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        await normalizeResolveOptions({
+          bustTheCache: true,
+          builtInModules: {
+            add: ["totally-not-a-core-module-irl"],
+          },
+        }),
+      ),
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "fs",
       },
     );
   });

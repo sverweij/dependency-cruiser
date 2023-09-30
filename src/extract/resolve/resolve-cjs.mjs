@@ -1,16 +1,8 @@
 import { relative } from "node:path";
-import { builtinModules } from "node:module";
 import pathToPosix from "../../utl/path-to-posix.mjs";
 import { isFollowable } from "./module-classifiers.mjs";
 import { resolve } from "./resolve.mjs";
-
-// builtinModules does not expose all builtin modules for #reasons -
-// see https://github.com/nodejs/node/issues/42785. In stead we could use
-// isBuiltin, but that is not available in node 16.14, the lowest version
-// of node dependency-cruiser currently supports. So we add the missing
-// modules here.
-// b.t.w. code is duplicated in resolve-amd.mjs
-const REALLY_BUILTIN_MODULES = builtinModules.concat(["test", "node:test"]);
+import { isBuiltin } from "./is-built-in.mjs";
 
 function addResolutionAttributes(
   pBaseDirectory,
@@ -20,7 +12,7 @@ function addResolutionAttributes(
 ) {
   let lReturnValue = {};
 
-  if (REALLY_BUILTIN_MODULES.includes(pModuleName)) {
+  if (isBuiltin(pModuleName, pResolveOptions)) {
     lReturnValue.coreModule = true;
   } else {
     try {

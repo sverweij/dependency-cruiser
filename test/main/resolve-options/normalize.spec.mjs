@@ -1,4 +1,4 @@
-import { ok, equal } from "node:assert/strict";
+import { ok, equal, deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
@@ -90,5 +90,27 @@ describe("[I] main/resolve-options/normalize", () => {
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
     equal(lNormalizedOptions.plugins.length, 1);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
+  });
+
+  it("should set builtInModules if override or add is defined", async () => {
+    const lOptions = {
+      builtInModules: {
+        override: ["fs", "path"],
+        add: ["my-module"],
+      },
+    };
+
+    const lNormalizedOptions = await normalizeResolveOptions(lOptions);
+
+    deepEqual(lNormalizedOptions.builtInModules, lOptions.builtInModules);
+  });
+
+  it("should not set builtInModules if neither override nor add is defined", async () => {
+    const lOptions = {};
+
+    const lNormalizedOptions = await normalizeResolveOptions(lOptions);
+
+    // eslint-disable-next-line no-undefined
+    equal(lNormalizedOptions.builtInModules, undefined);
   });
 });
