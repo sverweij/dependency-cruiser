@@ -170,6 +170,38 @@ export default {
             "(not used anymore - module resolution strategy determination is automatic now)",
           enum: ["node_modules", "yarn-pnp"],
         },
+        builtInModules: {
+          type: "object",
+          additionalProperties: false,
+          description:
+            "Options to tweak what dependency-cruiser considers 'built-in' modules. If " +
+            "you're targeting nodejs, or don't use any built-in modules you can probably " +
+            "leave this alone.",
+          properties: {
+            override: {
+              type: "array",
+              description:
+                "List of module names that are to be considered as 'built-in'. By default dependency-cruiser " +
+                "uses the list of built-ins from nodejs. If you code for another environment (e.g. the " +
+                "browser) and you use shims for nodejs builtins like 'path' from node_modules, you could " +
+                "pass an empty array here. If you want to just add a couple of extra built-ins to " +
+                "the default list, use the 'add' attribute instead.",
+              items: {
+                type: "string",
+              },
+            },
+            add: {
+              type: "array",
+              description:
+                "List of module names that are to be considered as 'built-in' in addition to the " +
+                "default list of the environment you're currently in. Use this e.g. if you're " +
+                "writing electron code and want to add 'electron' as built-in.",
+              items: {
+                type: "string",
+              },
+            },
+          },
+        },
         forceDeriveDependents: {
           type: "boolean",
           description:
