@@ -45,5 +45,4 @@ function _interopRequireWildcard(obj, nodeInterop) {
   }
   return newObj;
 }
-var _default = console.log(alias.doStuff());
-exports.default = _default;
+var _default = (exports.default = console.log(alias.doStuff()));
