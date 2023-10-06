@@ -29,7 +29,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sverweij/dependency-cruiser"
+    "url": "git+https://github.com/sverweij/dependency-cruiser.git"
   },
   "bugs": {
     "url": "https://github.com/sverweij/dependency-cruiser/issues"
