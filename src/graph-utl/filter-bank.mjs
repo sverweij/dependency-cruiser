@@ -1,4 +1,3 @@
-import clone from "lodash/clone.js";
 import addFocus from "./add-focus.mjs";
 import IndexedModuleGraph from "./indexed-module-graph.mjs";
 import {
@@ -13,7 +12,7 @@ function includeOnly(pModules, pIncludeFilter) {
         .map((pModule) => ({
           ...pModule,
           dependencies: pModule.dependencies.filter((pDependency) =>
-            dependencyMatchesFilter(pDependency, pIncludeFilter)
+            dependencyMatchesFilter(pDependency, pIncludeFilter),
           ),
         }))
     : pModules;
@@ -27,7 +26,7 @@ function exclude(pModules, pExcludeFilter) {
           ...pModule,
           dependencies: pModule.dependencies.filter(
             (pDependency) =>
-              !dependencyMatchesFilter(pDependency, pExcludeFilter)
+              !dependencyMatchesFilter(pDependency, pExcludeFilter),
           ),
         }))
     : pModules;
@@ -49,7 +48,7 @@ function filterReaches(pModules, pReachesFilter) {
 
   for (let lModuleToReach of lModuleNamesToReach) {
     lReachingModules = lReachingModules.concat(
-      lIndexedModules.findTransitiveDependents(lModuleToReach)
+      lIndexedModules.findTransitiveDependents(lModuleToReach),
     );
   }
   return pModules
@@ -58,7 +57,7 @@ function filterReaches(pModules, pReachesFilter) {
       ...pModule,
       matchesReaches: lModuleNamesToReach.includes(pModule.source),
       dependencies: pModule.dependencies.filter(({ resolved }) =>
-        lReachingModules.includes(resolved)
+        lReachingModules.includes(resolved),
       ),
     }));
 }
@@ -73,7 +72,7 @@ function tagHighlight(pModules, pHighlightFilter) {
 // eslint-disable-next-line complexity
 export function applyFilters(pModules, pFilters) {
   if (pFilters) {
-    let lReturnValue = clone(pModules);
+    let lReturnValue = structuredClone(pModules);
 
     if (pFilters.exclude) {
       lReturnValue = exclude(lReturnValue, pFilters.exclude);

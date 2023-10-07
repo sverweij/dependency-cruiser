@@ -1,4 +1,3 @@
-import clone from "lodash/clone.js";
 import has from "lodash/has.js";
 import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
@@ -46,7 +45,7 @@ function anonymizeModules(pModules, pWordList) {
     if (pModule.dependents) {
       lReturnValue.dependents = anonymizePathArray(
         pModule.dependents,
-        pWordList
+        pWordList,
       );
     }
     if (pModule.reaches) {
@@ -77,7 +76,7 @@ function anonymizeFolders(pFolders, pWordList) {
         if (lReturnDependencies.cycle) {
           lReturnDependencies.cycle = anonymizePathArray(
             pDependency.cycle,
-            pWordList
+            pWordList,
           );
         }
         return lReturnDependencies;
@@ -114,7 +113,7 @@ function anonymizeViolations(pViolations, pWordList) {
  * @returns {import("../../../types/cruise-result.js").ICruiseResult}
  */
 function anonymize(pResults, pWordList) {
-  const lResults = clone(pResults);
+  const lResults = structuredClone(pResults);
 
   lResults.modules = anonymizeModules(lResults.modules, pWordList);
   if (lResults.folders) {
@@ -122,7 +121,7 @@ function anonymize(pResults, pWordList) {
   }
   lResults.summary.violations = anonymizeViolations(
     lResults.summary.violations,
-    pWordList
+    pWordList,
   );
 
   return lResults;
@@ -168,7 +167,7 @@ export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
     output: JSON.stringify(
       anonymize(pResults, sanitizeWordList(lAnonymousReporterOptions.wordlist)),
       null,
-      "  "
+      "  ",
     ),
     exitCode: 0,
   };

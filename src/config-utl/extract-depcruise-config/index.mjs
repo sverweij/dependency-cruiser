@@ -1,5 +1,4 @@
 import { dirname } from "node:path";
-import cloneDeep from "lodash/cloneDeep.js";
 import has from "lodash/has.js";
 import { resolve } from "../../extract/resolve/resolve.mjs";
 import normalizeResolveOptions from "../../main/resolve-options/normalize.mjs";
@@ -8,7 +7,7 @@ import mergeConfigs from "./merge-configs.mjs";
 
 /* eslint no-use-before-define: 0 */
 async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
-  let lReturnValue = cloneDeep(pReturnValue);
+  let lReturnValue = structuredClone(pReturnValue);
 
   if (typeof lReturnValue.extends === "string") {
     lReturnValue = mergeConfigs(
@@ -16,8 +15,8 @@ async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
       await extractDepcruiseConfig(
         lReturnValue.extends,
         pAlreadyVisited,
-        pBaseDirectory
-      )
+        pBaseDirectory,
+      ),
     );
   }
 
@@ -26,7 +25,7 @@ async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
       lReturnValue = mergeConfigs(
         lReturnValue,
         // eslint-disable-next-line no-await-in-loop
-        await extractDepcruiseConfig(lExtends, pAlreadyVisited, pBaseDirectory)
+        await extractDepcruiseConfig(lExtends, pAlreadyVisited, pBaseDirectory),
       );
     }
   }
@@ -54,7 +53,7 @@ async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
 export default async function extractDepcruiseConfig(
   pConfigFileName,
   pAlreadyVisited = new Set(),
-  pBaseDirectory = process.cwd()
+  pBaseDirectory = process.cwd(),
 ) {
   const lResolvedFileName = resolve(
     pConfigFileName,
@@ -63,17 +62,17 @@ export default async function extractDepcruiseConfig(
       {
         extensions: [".js", ".json", ".cjs", ".mjs"],
       },
-      {}
+      {},
     ),
-    "cli"
+    "cli",
   );
   const lBaseDirectory = dirname(lResolvedFileName);
 
   if (pAlreadyVisited.has(lResolvedFileName)) {
     throw new Error(
       `config is circular - ${[...pAlreadyVisited].join(
-        " -> "
-      )} -> ${lResolvedFileName}.\n`
+        " -> ",
+      )} -> ${lResolvedFileName}.\n`,
     );
   }
   pAlreadyVisited.add(lResolvedFileName);
@@ -84,7 +83,7 @@ export default async function extractDepcruiseConfig(
     lReturnValue = await processExtends(
       lReturnValue,
       pAlreadyVisited,
-      lBaseDirectory
+      lBaseDirectory,
     );
   }
 

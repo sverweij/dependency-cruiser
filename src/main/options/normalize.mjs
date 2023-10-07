@@ -1,5 +1,4 @@
 /* eslint-disable security/detect-object-injection */
-import clone from "lodash/clone.js";
 import has from "lodash/has.js";
 import { normalizeREProperties } from "../helpers.mjs";
 import defaults from "./defaults.mjs";
@@ -47,7 +46,7 @@ function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
   for (let lFilterOptionKey of pFilterOptionKeys) {
     if (pOptions[lFilterOptionKey]) {
       lReturnValue[lFilterOptionKey] = normalizeFilterOption(
-        lReturnValue[lFilterOptionKey]
+        lReturnValue[lFilterOptionKey],
       );
     }
   }
@@ -63,7 +62,7 @@ function normalizeCollapse(pCollapse) {
 
   if (typeof pCollapse === "number" || pCollapse.match(lSingleDigitRe)) {
     lReturnValue = `${lFolderBelowNodeModules}|^${lFolderPattern.repeat(
-      Number.parseInt(pCollapse, 10)
+      Number.parseInt(pCollapse, 10),
     )}`;
   }
   return lReturnValue;
@@ -71,12 +70,12 @@ function normalizeCollapse(pCollapse) {
 
 function normalizeFocusDepth(pFormatOptions) {
   /** @type  {import("../../../types/dependency-cruiser.js").IFormatOptions}*/
-  let lFormatOptions = clone(pFormatOptions);
+  let lFormatOptions = structuredClone(pFormatOptions);
   if (has(lFormatOptions, "focusDepth")) {
     if (has(lFormatOptions, "focus")) {
       lFormatOptions.focus.depth = Number.parseInt(
         lFormatOptions.focusDepth,
-        10
+        10,
       );
     }
     delete lFormatOptions.focusDepth;
@@ -205,7 +204,7 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
   lReturnValue.exoticRequireStrings = uniq(lReturnValue.exoticRequireStrings);
   if (lReturnValue.reporterOptions) {
     lReturnValue.reporterOptions = normalizeReporterOptions(
-      lReturnValue.reporterOptions
+      lReturnValue.reporterOptions,
     );
   }
   lReturnValue.metrics = shouldCalculateMetrics(pOptions);
@@ -225,7 +224,7 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
  * @returns {import("../../../types/strict-options.js").IStrictFormatOptions}
  */
 export function normalizeFormatOptions(pFormatOptions) {
-  let lFormatOptions = clone(pFormatOptions);
+  let lFormatOptions = structuredClone(pFormatOptions);
 
   if (has(lFormatOptions, "collapse")) {
     lFormatOptions.collapse = normalizeCollapse(lFormatOptions.collapse);

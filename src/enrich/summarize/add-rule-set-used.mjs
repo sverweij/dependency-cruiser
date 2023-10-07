@@ -1,9 +1,7 @@
-import clone from "lodash/clone.js";
-
 // the fixed name for allowed rules served a purpose during the extraction
 // process - but it's not necessary to reflect it in the output.
 function removeNames(pRule) {
-  const lReturnValue = clone(pRule);
+  const lReturnValue = structuredClone(pRule);
 
   Reflect.deleteProperty(lReturnValue, "name");
   return lReturnValue;
@@ -19,6 +17,6 @@ export default function addRuleSetUsed(pOptions) {
     lForbidden ? { forbidden: lForbidden } : {},
     lAllowed ? { allowed: lAllowed.map(removeNames) } : {},
     lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {},
-    lRequired ? { required: lRequired } : {}
+    lRequired ? { required: lRequired } : {},
   );
 }
