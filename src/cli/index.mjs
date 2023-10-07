@@ -1,6 +1,5 @@
 import { join } from "node:path";
 import picomatch from "picomatch";
-import cloneDeep from "lodash/cloneDeep.js";
 import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
@@ -44,7 +43,7 @@ async function addKnownViolations(pCruiseOptions) {
 
     // Check against json schema is already done in src/main/options/validate
     // so here we can just concentrate on the io
-    let lCruiseOptions = cloneDeep(pCruiseOptions);
+    let lCruiseOptions = structuredClone(pCruiseOptions);
     set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
     return lCruiseOptions;
   }

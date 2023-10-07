@@ -1,5 +1,4 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
-import cloneDeep from "lodash/cloneDeep.js";
 import has from "lodash/has.js";
 import matchers from "../../validate/matchers.mjs";
 import { extractGroups } from "../../utl/regex-util.mjs";
@@ -9,7 +8,7 @@ function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])
     .filter((pRule) => has(pRule.to, "reachable"))
     .concat(
-      (pRuleSet?.allowed ?? []).filter((pRule) => has(pRule.to, "reachable"))
+      (pRuleSet?.allowed ?? []).filter((pRule) => has(pRule.to, "reachable")),
     );
 }
 
@@ -33,7 +32,7 @@ function isModuleInRuleTo(pRule, pModuleTo, pModuleFrom) {
 function mergeReachableProperties(pModule, pRule, pPath, pModuleFrom) {
   const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
-    (pReachable) => pReachable.asDefinedInRule === pRule.name
+    (pReachable) => pReachable.asDefinedInRule === pRule.name,
   );
   const lIsReachable = pPath.length > 1;
 
@@ -53,7 +52,7 @@ function mergeReachableProperties(pModule, pRule, pPath, pModuleFrom) {
 function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
   const lReaches = pFromModule.reaches || [];
   const lIndexExistingReachable = lReaches.findIndex(
-    (pReachable) => pReachable.asDefinedInRule === pRule.name
+    (pReachable) => pReachable.asDefinedInRule === pRule.name,
   );
 
   if (lIndexExistingReachable > -1) {
@@ -84,7 +83,7 @@ function hasCapturingGroups(pRule) {
 
   return Boolean(
     (pRule?.to?.path ?? "").match(lCapturingGroupPlaceholderRe) ||
-      (pRule?.to?.pathNot ?? "").match(lCapturingGroupPlaceholderRe)
+      (pRule?.to?.pathNot ?? "").match(lCapturingGroupPlaceholderRe),
   );
 }
 function shouldAddReachable(pRule, pModuleTo, pGraph) {
@@ -95,7 +94,7 @@ function shouldAddReachable(pRule, pModuleTo, pGraph) {
       const lModulesFrom = pGraph.filter(isModuleInRuleFrom(pRule));
 
       lReturnValue = lModulesFrom.some((pModuleFrom) =>
-        isModuleInRuleTo(pRule, pModuleTo, pModuleFrom)
+        isModuleInRuleTo(pRule, pModuleTo, pModuleFrom),
       );
     } else {
       lReturnValue = isModuleInRuleTo(pRule, pModuleTo);
@@ -106,7 +105,7 @@ function shouldAddReachable(pRule, pModuleTo, pGraph) {
 
 function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
   const lToModules = pGraph.filter((pToModule) =>
-    isModuleInRuleTo(pReachableRule, pToModule, pModule)
+    isModuleInRuleTo(pReachableRule, pToModule, pModule),
   );
 
   for (let lToModule of lToModules) {
@@ -118,7 +117,7 @@ function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
           pModule,
           lToModule,
           pReachableRule,
-          lPath
+          lPath,
         );
       }
     }
@@ -143,7 +142,7 @@ function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
         pModule,
         pReachableRule,
         lPath,
-        lFromModule.source
+        lFromModule.source,
       );
     }
   }
@@ -152,14 +151,14 @@ function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
 
 function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
   return pGraph.map((pModule) => {
-    let lClonedModule = cloneDeep(pModule);
+    let lClonedModule = structuredClone(pModule);
 
     if (shouldAddReaches(pReachableRule, lClonedModule)) {
       lClonedModule = addReachesToModule(
         lClonedModule,
         pGraph,
         pIndexedGraph,
-        pReachableRule
+        pReachableRule,
       );
     }
     if (shouldAddReachable(pReachableRule, lClonedModule, pGraph)) {
@@ -167,7 +166,7 @@ function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
         lClonedModule,
         pGraph,
         pIndexedGraph,
-        pReachableRule
+        pReachableRule,
       );
     }
     return lClonedModule;
@@ -182,6 +181,6 @@ export default function deriveReachables(pGraph, pRuleSet) {
   return lReachableRules.reduce(
     (pReturnGraph, pRule) =>
       addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
-    cloneDeep(pGraph)
+    structuredClone(pGraph),
   );
 }

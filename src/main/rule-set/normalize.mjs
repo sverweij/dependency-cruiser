@@ -1,4 +1,3 @@
-import cloneDeep from "lodash/cloneDeep.js";
 import has from "lodash/has.js";
 import { normalizeREProperties } from "../helpers.mjs";
 
@@ -59,7 +58,7 @@ function normalizeRule(pRule) {
  * @return {import("../../../types/strict-rule-set.js").IStrictRuleSet}
  */
 export default function normalizeRuleSet(pRuleSet) {
-  const lRuleSet = cloneDeep(pRuleSet);
+  const lRuleSet = structuredClone(pRuleSet);
 
   if (has(lRuleSet, "allowed")) {
     lRuleSet.allowedSeverity = normalizeSeverity(lRuleSet.allowedSeverity);

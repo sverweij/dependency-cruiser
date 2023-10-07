@@ -1,7 +1,6 @@
 import get from "lodash/get.js";
 import has from "lodash/has.js";
 import set from "lodash/set.js";
-import cloneDeep from "lodash/cloneDeep.js";
 
 const RE_PROPERTIES = [
   "path",
@@ -30,16 +29,16 @@ export function normalizeToREAsString(pStringish) {
 
 export function normalizeREProperties(
   pPropertyContainer,
-  pREProperties = RE_PROPERTIES
+  pREProperties = RE_PROPERTIES,
 ) {
-  let lPropertyContainer = cloneDeep(pPropertyContainer);
+  let lPropertyContainer = structuredClone(pPropertyContainer);
 
   for (const lProperty of pREProperties) {
     if (has(lPropertyContainer, lProperty)) {
       set(
         lPropertyContainer,
         lProperty,
-        normalizeToREAsString(get(lPropertyContainer, lProperty))
+        normalizeToREAsString(get(lPropertyContainer, lProperty)),
       );
     }
   }
