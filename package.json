@@ -215,10 +215,12 @@
     "yarn": "1.22.19"
   },
   "overrides": {
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "postcss": "^8.4.31"
   },
   "resolutions": {
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "postcss": "^8.4.31"
   },
   "upem": {
     "policies": [
