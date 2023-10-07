@@ -3,7 +3,6 @@ import { isAbsolute } from "node:path";
 import set from "lodash/set.js";
 import get from "lodash/get.js";
 import has from "lodash/has.js";
-import clone from "lodash/clone.js";
 import loadConfig from "../config-utl/extract-depcruise-config/index.mjs";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
@@ -21,13 +20,13 @@ function getOptionValue(pDefault) {
 }
 
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
-  let lOptions = clone(pCliOptions);
+  let lOptions = structuredClone(pCliOptions);
 
   if (has(lOptions, pConfigWrapperName)) {
     set(
       lOptions,
       `ruleSet.options.${pConfigWrapperName}.fileName`,
-      getOptionValue(pDefault)(lOptions[pConfigWrapperName])
+      getOptionValue(pDefault)(lOptions[pConfigWrapperName]),
       /* eslint security/detect-object-injection: 0 */
     );
     Reflect.deleteProperty(lOptions, pConfigWrapperName);
@@ -61,7 +60,7 @@ function validateAndGetCustomRulesFileName(pValidate) {
     throw new Error(
       `Can't open config file '${pValidate}' for reading. Does it exist?\n` +
         `         - You can create a config file by running 'npx dependency-cruiser --init'\n` +
-        `         - If you intended to run without a config file use --no-config\n`
+        `         - If you intended to run without a config file use --no-config\n`,
     );
   }
   return lReturnValue;
@@ -74,7 +73,7 @@ function validateAndGetDefaultRulesFileName() {
     throw new TypeError(
       `Can't open a config file (.dependency-cruiser.(c)js) at the default location. Does it exist?\n` +
         `         - You can create one by running 'npx dependency-cruiser --init'\n` +
-        `         - Want to run a without a config file? Use --no-config\n`
+        `         - Want to run a without a config file? Use --no-config\n`,
     );
   }
   return lReturnValue;
@@ -103,7 +102,7 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
   } else {
     throw new Error(
       `Can't open '${lKnownViolationsFileName}' for reading. Does it exist?\n` +
-        `         (You can create a .dependency-cruiser-known-violations.json with --output-type baseline)\n`
+        `         (You can create a .dependency-cruiser-known-violations.json with --output-type baseline)\n`,
     );
   }
 }
@@ -114,7 +113,7 @@ function normalizeKnownViolationsOption(pCliOptions) {
   }
   return {
     knownViolationsFile: validateAndGetKnownViolationsFileName(
-      pCliOptions.ignoreKnown
+      pCliOptions.ignoreKnown,
     ),
   };
 }
@@ -129,7 +128,7 @@ async function normalizeValidationOption(pCliOptions) {
   return {
     rulesFile,
     ruleSet: await loadConfig(
-      isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
+      isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`,
     ),
     validate: true,
   };
@@ -157,7 +156,7 @@ function normalizeCacheStrategy(pCliOptions) {
   let lReturnValue = {};
 
   if (pCliOptions.cache && typeof pCliOptions.cache === "object") {
-    lReturnValue.cache = clone(pCliOptions.cache);
+    lReturnValue.cache = structuredClone(pCliOptions.cache);
     lReturnValue.cache.strategy = lStrategy;
   } else {
     lReturnValue = {
@@ -227,5 +226,5 @@ export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
 }
 
 export const determineRulesFileName = getOptionValue(
-  OLD_DEFAULT_RULES_FILE_NAME
+  OLD_DEFAULT_RULES_FILE_NAME,
 );

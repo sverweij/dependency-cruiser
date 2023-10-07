@@ -1,4 +1,3 @@
-import clone from "lodash/clone.js";
 import _reject from "lodash/reject.js";
 import uniq from "lodash/uniq.js";
 import compare from "./compare.mjs";
@@ -8,7 +7,7 @@ function mergeDependency(pLeftDependency, pRightDependency) {
     ...pLeftDependency,
     ...pRightDependency,
     dependencyTypes: uniq(
-      pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes)
+      pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes),
     ),
     rules: pLeftDependency.rules
       .concat(pRightDependency?.rules ?? [])
@@ -27,17 +26,17 @@ function mergeDependencies(pResolvedName, pDependencies) {
         dependencyTypes: [],
         rules: [],
         valid: true,
-      }
+      },
     );
 }
 
 function consolidateDependencies(pDependencies) {
-  let lDependencies = clone(pDependencies);
+  let lDependencies = structuredClone(pDependencies);
   let lReturnValue = [];
 
   while (lDependencies.length > 0) {
     lReturnValue.push(
-      mergeDependencies(lDependencies[0].resolved, lDependencies)
+      mergeDependencies(lDependencies[0].resolved, lDependencies),
     );
     lDependencies = _reject(lDependencies, {
       resolved: lDependencies[0].resolved,

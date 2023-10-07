@@ -1,4 +1,3 @@
-import clone from "lodash/clone.js";
 import _reject from "lodash/reject.js";
 import uniqBy from "lodash/uniqBy.js";
 import compare from "./compare.mjs";
@@ -9,7 +8,7 @@ function mergeModule(pLeftModule, pRightModule) {
     ...pRightModule,
     dependencies: uniqBy(
       pLeftModule.dependencies.concat(pRightModule.dependencies),
-      (pDependency) => pDependency.resolved
+      (pDependency) => pDependency.resolved,
     ),
     rules: pLeftModule.rules
       .concat(pRightModule?.rules ?? [])
@@ -30,12 +29,12 @@ function mergeModules(pSourceString, pModules) {
         dependencies: [],
         rules: [],
         valid: true,
-      }
+      },
     );
 }
 
 export default function consolidateModules(pModules) {
-  let lModules = clone(pModules);
+  let lModules = structuredClone(pModules);
   let lReturnValue = [];
 
   while (lModules.length > 0) {

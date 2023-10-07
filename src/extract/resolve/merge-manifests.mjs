@@ -1,12 +1,13 @@
 /* eslint-disable security/detect-object-injection */
 import uniq from "lodash/uniq.js";
-import clone from "lodash/clone.js";
 
 function normalizeManifestKeys(pManifest) {
   let lReturnValue = pManifest;
 
   if (pManifest.bundleDependencies) {
-    pManifest.bundledDependencies = clone(pManifest.bundleDependencies);
+    pManifest.bundledDependencies = structuredClone(
+      pManifest.bundleDependencies,
+    );
     Reflect.deleteProperty(pManifest, "bundleDependencies");
   }
   return lReturnValue;
@@ -34,8 +35,8 @@ function getDependencyKeys(pPackage) {
 function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
   return uniq(
     getDependencyKeys(pClosestPackage).concat(
-      getDependencyKeys(pFurtherPackage)
-    )
+      getDependencyKeys(pFurtherPackage),
+    ),
   );
 }
 
@@ -58,18 +59,18 @@ function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
 export default function mergeManifests(pClosestManifest, pFurtherManifest) {
   return getJointUniqueDependencyKeys(
     normalizeManifestKeys(pClosestManifest),
-    normalizeManifestKeys(pFurtherManifest)
+    normalizeManifestKeys(pFurtherManifest),
   )
     .map((pKey) => ({
       key: pKey,
       value: pKey.startsWith("bundle")
         ? mergeDependencyArray(
             pClosestManifest?.[pKey] ?? [],
-            pFurtherManifest?.[pKey] ?? []
+            pFurtherManifest?.[pKey] ?? [],
           )
         : mergeDependencyKey(
             pClosestManifest?.[pKey] ?? {},
-            pFurtherManifest?.[pKey] ?? {}
+            pFurtherManifest?.[pKey] ?? {},
           ),
     }))
     .reduce((pJoinedObject, pJoinedKey) => {

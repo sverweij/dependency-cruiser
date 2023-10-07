@@ -1,5 +1,4 @@
 import { equal, deepEqual } from "node:assert/strict";
-import _clone from "lodash/clone.js";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../../src/schema/cruise-result.schema.mjs";
 import { clearCache } from "../../../src/report/anon/anonymize-path-element.mjs";
@@ -49,7 +48,7 @@ describe("[I] report/anon", () => {
 
   it("anonymizes a result tree with the passed word list", () => {
     const lResult = anonymize(sourceReport, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
@@ -69,7 +68,7 @@ describe("[I] report/anon", () => {
 
   it("anonymizes a result tree with (violated) rules", () => {
     const lResult = anonymize(sourceCycle, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
@@ -79,7 +78,7 @@ describe("[I] report/anon", () => {
   });
   it("anonymizes a result tree with (violated) reaches rules", () => {
     const lResult = anonymize(reachesReport, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
@@ -89,7 +88,7 @@ describe("[I] report/anon", () => {
   });
   it("anonymizes a result tree with dependents", () => {
     const lResult = anonymize(sourceDependents, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
@@ -99,7 +98,7 @@ describe("[I] report/anon", () => {
   });
   it("anonymizes a result tree with folders", () => {
     const lResult = anonymize(sourceFolders, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
@@ -110,7 +109,7 @@ describe("[I] report/anon", () => {
 
   it("anonymizes a result tree with folders that contain folder cycles", () => {
     const lResult = anonymize(sourceFolderCycles, {
-      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+      wordlist: structuredClone(META_SYNTACTIC_VARIABLES),
     });
     const lOutput = JSON.parse(lResult.output);
 
