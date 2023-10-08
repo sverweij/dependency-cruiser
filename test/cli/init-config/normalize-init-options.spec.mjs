@@ -1,5 +1,5 @@
 import { deepEqual, equal } from "node:assert/strict";
-import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
+import normalizeInitOptions from "#cli/init-config/normalize-init-options.mjs";
 
 describe("[U] cli/init-config/normalize-init-options", () => {
   let lSavedWorkingDirectory = process.cwd();

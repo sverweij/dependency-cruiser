@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { validateLocation } from "../../../src/cli/init-config/validators.mjs";
+import { validateLocation } from "#cli/init-config/validators.mjs";
 
 describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
   const WORKING_DIR = process.cwd();

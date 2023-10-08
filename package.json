@@ -46,6 +46,7 @@
   "main": "src/main/index.mjs",
   "imports": {
     "#cache/*": "./src/cache/*",
+    "#cli/*": "./src/cli/*",
     "#enrich/*": "./src/enrich/*",
     "#extract/*": "./src/extract/*",
     "#graph-utl/*": "./src/graph-utl/*",

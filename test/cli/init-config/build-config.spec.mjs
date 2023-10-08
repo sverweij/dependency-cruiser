@@ -3,10 +3,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
 import { deepEqual, ok, equal } from "node:assert/strict";
 import Ajv from "ajv";
-import buildConfig from "../../../src/cli/init-config/build-config.mjs";
-import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.mjs";
 import deleteDammit from "../delete-dammit.utl.cjs";
+import buildConfig from "#cli/init-config/build-config.mjs";
+import normalizeInitOptions from "#cli/init-config/normalize-init-options.mjs";
 
 const ajv = new Ajv();
 

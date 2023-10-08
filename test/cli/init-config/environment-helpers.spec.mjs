@@ -3,7 +3,7 @@ import {
   isLikelyMonoRepo,
   hasTestsWithinSource,
   getFolderCandidates,
-} from "../../../src/cli/init-config/environment-helpers.mjs";
+} from "#cli/init-config/environment-helpers.mjs";
 
 describe("[U] cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   it("declares the current folder to be not a mono repo", () => {

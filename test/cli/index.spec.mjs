@@ -5,9 +5,9 @@ import { doesNotThrow, equal, throws } from "node:assert/strict";
 import { join, posix as path } from "node:path";
 import chalk from "chalk";
 import intercept from "intercept-stdout";
-import cli from "../../src/cli/index.mjs";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
+import cli from "#cli/index.mjs";
 
 const OUT_DIR = "./test/cli/__output__";
 const FIX_DIR = "./test/cli/__fixtures__";

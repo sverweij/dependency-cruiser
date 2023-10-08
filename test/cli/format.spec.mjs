@@ -2,8 +2,8 @@
 import { readFileSync } from "node:fs";
 import { equal } from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import format from "../../src/cli/format.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
+import format from "#cli/format.mjs";
 
 function relative(pFileName) {
   return fileURLToPath(new URL(pFileName, import.meta.url));
