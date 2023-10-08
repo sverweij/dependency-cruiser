@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { deepEqual, equal } from "node:assert/strict";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
-import configurationSchema from "../../../src/schema/configuration.schema.mjs";
+import configurationSchema from "#configuration-schema";
 import initConfig from "#cli/init-config/index.mjs";
 
 const ajv = new Ajv();

@@ -1,7 +1,7 @@
 import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
 import { rmSync } from "node:fs";
 import Ajv from "ajv";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 import Cache from "#cache/cache.mjs";
 import cruise from "#main/cruise.mjs";
 

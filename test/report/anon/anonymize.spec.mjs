@@ -1,6 +1,5 @@
 import { equal, deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
-import cruiseResultSchema from "../../../src/schema/cruise-result.schema.mjs";
 import sourceReport from "./__mocks__/src-report.mjs";
 import fixtureReport from "./__fixtures__/src-report.mjs";
 import sourceReportWithWordlist from "./__mocks__/src-report-wordlist.mjs";
@@ -15,6 +14,7 @@ import sourceFolders from "./__mocks__/folders.mjs";
 import fixtureFolders from "./__fixtures__/folders.mjs";
 import sourceFolderCycles from "./__mocks__/folder-cycles.mjs";
 import fixtureFolderCycles from "./__fixtures__/folder-cycles.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 import anonymize from "#report/anon/index.mjs";
 import { clearCache } from "#report/anon/anonymize-path-element.mjs";
 

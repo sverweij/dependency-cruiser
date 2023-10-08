@@ -3,9 +3,9 @@ import { posix as path } from "node:path";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import Ajv from "ajv";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 import cruise from "#main/cruise.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 

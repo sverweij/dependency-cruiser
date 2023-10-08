@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import Ajv from "ajv";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 import normalizeOptions from "#cli/normalize-cli-options.mjs";
 import cruise from "#main/cruise.mjs";
 

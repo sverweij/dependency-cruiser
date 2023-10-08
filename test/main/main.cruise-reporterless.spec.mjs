@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 import cruise from "#main/cruise.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
