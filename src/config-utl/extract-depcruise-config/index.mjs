@@ -1,8 +1,8 @@
 import { dirname } from "node:path";
 import has from "lodash/has.js";
-import normalizeResolveOptions from "../../main/resolve-options/normalize.mjs";
 import readConfig from "./read-config.mjs";
 import mergeConfigs from "./merge-configs.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import { resolve } from "#extract/resolve/resolve.mjs";
 
 /* eslint no-use-before-define: 0 */

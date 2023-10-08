@@ -1,7 +1,7 @@
-import _format from "../main/format.mjs";
 import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeOptions from "./normalize-cli-options.mjs";
 import { getInStream, write } from "./utl/io.mjs";
+import _format from "#main/format.mjs";
 
 /**
  *

@@ -1,8 +1,8 @@
 import { deepEqual, doesNotThrow, equal, throws } from "node:assert/strict";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
 import getDependencies from "#extract/get-dependencies.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);

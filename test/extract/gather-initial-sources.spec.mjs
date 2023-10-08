@@ -1,6 +1,6 @@
 import { deepEqual, equal } from "node:assert/strict";
 import { lstatSync } from "node:fs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
 import p2p from "#utl/path-to-posix.mjs";
 import gatherInitialSources from "#extract/gather-initial-sources.mjs";
 

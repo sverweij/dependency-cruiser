@@ -48,6 +48,7 @@
     "#enrich/*": "./src/enrich/*",
     "#extract/*": "./src/extract/*",
     "#graph-utl/*": "./src/graph-utl/*",
+    "#main/*": "./src/main/*",
     "#meta": "./src/meta.js",
     "#report/*": "./src/report/*",
     "#utl/*": "./src/utl/*"

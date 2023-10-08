@@ -2,7 +2,7 @@
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import resolve from "#extract/resolve/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));

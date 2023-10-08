@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import { normalizeREProperties } from "../../src/main/helpers.mjs";
+import { normalizeREProperties } from "#main/helpers.mjs";
 
 const POTENTIAL_ARRAY_PROPERTIES = ["aap", "noot", "mies", "wim"];
 const ARRAYED_OBJECT = {

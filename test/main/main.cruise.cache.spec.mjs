@@ -2,8 +2,8 @@ import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
 import { rmSync } from "node:fs";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
-import cruise from "../../src/main/cruise.mjs";
 import Cache from "../../src/cache/cache.mjs";
+import cruise from "#main/cruise.mjs";
 
 const ajv = new Ajv();
 

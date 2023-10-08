@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { deepEqual, ok, equal } from "node:assert/strict";
-import format from "../../src/main/format.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import format from "#main/format.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const cruiseResult = requireJSON(

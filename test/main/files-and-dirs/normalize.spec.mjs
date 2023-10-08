@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { win32, posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import normalizeFilesAndDirectories from "../../../src/main/files-and-dirs/normalize.mjs";
+import normalizeFilesAndDirectories from "#main/files-and-dirs/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

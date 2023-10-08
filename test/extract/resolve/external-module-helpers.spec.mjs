@@ -1,6 +1,6 @@
 import { ok, equal } from "node:assert/strict";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
-import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
 import clearCaches from "#extract/clear-caches.mjs";
 import {
   getPackageJson,

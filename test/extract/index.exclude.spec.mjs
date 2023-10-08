@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import extract from "#extract/index.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);

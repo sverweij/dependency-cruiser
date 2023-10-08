@@ -1,8 +1,8 @@
 import { ok, equal, deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

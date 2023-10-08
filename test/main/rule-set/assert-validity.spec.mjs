@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { deepEqual, throws } from "node:assert/strict";
-import assertRuleSetValid from "../../../src/main/rule-set/assert-validity.mjs";
+import assertRuleSetValid from "#main/rule-set/assert-validity.mjs";
 
 function shouldBarfWithMessage(pRulesFile, pMessage) {
   throws(
