@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import mergePackages from "../../../src/extract/resolve/merge-manifests.mjs";
+import mergePackages from "#extract/resolve/merge-manifests.mjs";
 
 const INPUT = {
   description: "testington",

@@ -1,8 +1,8 @@
 import { deepEqual, equal } from "node:assert/strict";
 import { lstatSync } from "node:fs";
-import gatherInitialSources from "../../src/extract/gather-initial-sources.mjs";
 import p2p from "../../src/utl/path-to-posix.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
+import gatherInitialSources from "#extract/gather-initial-sources.mjs";
 
 // make the import pathToPosix the correct function profile
 // (1 parameter exactly) for use in map

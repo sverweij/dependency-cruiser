@@ -1,13 +1,13 @@
 import { ok, equal } from "node:assert/strict";
-import clearCaches from "../../../src/extract/clear-caches.mjs";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
+import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
+import clearCaches from "#extract/clear-caches.mjs";
 import {
   getPackageJson,
   getPackageRoot,
   getLicense,
   dependencyIsDeprecated,
-} from "../../../src/extract/resolve/external-module-helpers.mjs";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
-import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
+} from "#extract/resolve/external-module-helpers.mjs";
 
 const BASIC_RESOLVE_OPTIONS = await normalizeResolveOptions(
   {},

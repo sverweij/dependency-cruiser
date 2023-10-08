@@ -45,6 +45,8 @@
   },
   "main": "src/main/index.mjs",
   "imports": {
+    "#enrich/*": "./src/enrich/*",
+    "#extract/*": "./src/extract/*",
     "#graph-utl/*": "./src/graph-utl/*",
     "#meta": "./src/meta.js",
     "#utl/*": "./src/utl/*"

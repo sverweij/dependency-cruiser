@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import tryImportAvailable from "../../../src/extract/transpile/try-import-available.mjs";
+import tryImportAvailable from "#extract/transpile/try-import-available.mjs";
 
 describe("[U] extract/transpile/try-import-available", () => {
   it("returns true when the module can be resolved", () => {

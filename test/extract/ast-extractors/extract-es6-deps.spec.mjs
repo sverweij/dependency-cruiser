@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.mjs";
-import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
+import extractES6Deps from "#extract/ast-extractors/extract-es6-deps.mjs";
+import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
 
 const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
   extractES6Deps(

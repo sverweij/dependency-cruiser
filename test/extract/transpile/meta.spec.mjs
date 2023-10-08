@@ -2,7 +2,7 @@ import { deepEqual } from "node:assert/strict";
 import {
   getAvailableTranspilers,
   scannableExtensions,
-} from "../../../src/extract/transpile/meta.mjs";
+} from "#extract/transpile/meta.mjs";
 
 describe("[U] extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {

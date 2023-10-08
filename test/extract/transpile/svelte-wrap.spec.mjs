@@ -1,8 +1,8 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import svelteWrap from "../../../src/extract/transpile/svelte-wrap.mjs";
 import normalizeSource from "../normalize-source.utl.mjs";
-import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
+import svelteWrap from "#extract/transpile/svelte-wrap.mjs";
+import typescriptWrap from "#extract/transpile/typescript-wrap.mjs";
 
 const wrap = svelteWrap(typescriptWrap(true));
 

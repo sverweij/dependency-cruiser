@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import enhancedResolve from "enhanced-resolve";
 import omit from "lodash/omit.js";
-import { scannableExtensions } from "../../extract/transpile/meta.mjs";
+import { scannableExtensions } from "#extract/transpile/meta.mjs";
 import {
   ruleSetHasDeprecationRule,
   ruleSetHasLicenseRule,

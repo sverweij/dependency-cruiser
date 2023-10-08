@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
+import getDependencies from "#extract/get-dependencies.mjs";
 
 /* eslint-disable mocha/no-exports */
 export function runFixture(pFixture, pParser = "acorn") {

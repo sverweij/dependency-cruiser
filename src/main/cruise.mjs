@@ -57,7 +57,7 @@ export default async function cruise(
     import("./rule-set/assert-validity.mjs"),
     import("./files-and-dirs/normalize.mjs"),
     import("./resolve-options/normalize.mjs"),
-    import("../extract/index.mjs"),
+    import("#extract/index.mjs"),
     import("../enrich/index.mjs"),
   ]);
 

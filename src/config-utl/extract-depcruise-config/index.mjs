@@ -1,9 +1,9 @@
 import { dirname } from "node:path";
 import has from "lodash/has.js";
-import { resolve } from "../../extract/resolve/resolve.mjs";
 import normalizeResolveOptions from "../../main/resolve-options/normalize.mjs";
 import readConfig from "./read-config.mjs";
 import mergeConfigs from "./merge-configs.mjs";
+import { resolve } from "#extract/resolve/resolve.mjs";
 
 /* eslint no-use-before-define: 0 */
 async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {

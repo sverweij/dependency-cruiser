@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { isBuiltin } from "../../../src/extract/resolve/is-built-in.mjs";
+import { isBuiltin } from "#extract/resolve/is-built-in.mjs";
 
 describe("[U] extract/resolve/is-built-in - isBuiltIn", () => {
   it("should return true for built-in modules", () => {

@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import extractAMDDeps from "../../../src/extract/ast-extractors/extract-amd-deps.mjs";
-import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
+import extractAMDDeps from "#extract/ast-extractors/extract-amd-deps.mjs";
+import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
 
 const extractAMD = (
   pJavaScriptSource,

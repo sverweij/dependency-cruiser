@@ -2,15 +2,13 @@ import { deepEqual, ok, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import transpile, {
-  getWrapper,
-} from "../../../src/extract/transpile/index.mjs";
 import normalizeSource from "../normalize-source.utl.mjs";
+import transpile, { getWrapper } from "#extract/transpile/index.mjs";
 
-import jsWrap from "../../../src/extract/transpile/javascript-wrap.mjs";
-import lsWrap from "../../../src/extract/transpile/livescript-wrap.mjs";
-import babelWrap from "../../../src/extract/transpile/babel-wrap.mjs";
-import vueTemplateWrap from "../../../src/extract/transpile/vue-template-wrap.cjs";
+import jsWrap from "#extract/transpile/javascript-wrap.mjs";
+import lsWrap from "#extract/transpile/livescript-wrap.mjs";
+import babelWrap from "#extract/transpile/babel-wrap.mjs";
+import vueTemplateWrap from "#extract/transpile/vue-template-wrap.cjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

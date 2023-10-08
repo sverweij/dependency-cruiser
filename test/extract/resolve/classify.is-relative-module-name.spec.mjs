@@ -1,5 +1,5 @@
 import { throws, equal } from "node:assert/strict";
-import { isRelativeModuleName } from "../../../src/extract/resolve/module-classifiers.mjs";
+import { isRelativeModuleName } from "#extract/resolve/module-classifiers.mjs";
 
 describe("[U] extract/resolve/module-classifiers - isRelativeModuleName", () => {
   it("throws an error when passed nothing", () => {

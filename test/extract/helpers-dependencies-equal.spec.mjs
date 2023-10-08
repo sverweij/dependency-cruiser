@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { dependenciesEqual } from "../../src/extract/helpers.mjs";
+import { dependenciesEqual } from "#extract/helpers.mjs";
 
 describe("[U] extract/helpers - dependencyEqual", () => {
   it("two empty dependencies are equal", () => {

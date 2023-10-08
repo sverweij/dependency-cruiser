@@ -6,7 +6,7 @@ import symlinkDir from "symlink-dir";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
-import getDependencies from "../../src/extract/get-dependencies.mjs";
+import getDependencies from "#extract/get-dependencies.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
