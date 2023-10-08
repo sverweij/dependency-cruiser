@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import violatesRequiredRule from "../../src/validate/violates-required-rule.mjs";
+import violatesRequiredRule from "#validate/violates-required-rule.mjs";
 
 const SIMPLE_RULE = {
   module: {

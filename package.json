@@ -55,7 +55,8 @@
     "#main/*": "./src/main/*",
     "#meta": "./src/meta.js",
     "#report/*": "./src/report/*",
-    "#utl/*": "./src/utl/*"
+    "#utl/*": "./src/utl/*",
+    "#validate/*": "./src/validate/*"
   },
   "exports": {
     ".": {

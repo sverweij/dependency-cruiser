@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import matchModuleRule from "../../src/validate/match-module-rule.mjs";
+import matchModuleRule from "#validate/match-module-rule.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ANY_REACHABLE = {

@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
+import validate from "#validate/index.mjs";
 
 describe("[I] validate/index dependency - cycle viaSomeNot - with group matching", () => {
   const lCycleButNotViaGroupMatchRuleSet = {

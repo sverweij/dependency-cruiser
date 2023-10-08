@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 import has from "lodash/has.js";
-import matchers from "../../validate/matchers.mjs";
+import matchers from "#validate/matchers.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
 

@@ -1,4 +1,4 @@
-import validate from "../validate/index.mjs";
+import validate from "#validate/index.mjs";
 
 function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
   return {
@@ -26,7 +26,7 @@ export default function addValidations(pModules, pRuleSet, pValidate) {
     ...pModule,
     ...(pValidate ? validate.module(pRuleSet, pModule) : { valid: true }),
     dependencies: pModule.dependencies.map((pDependency) =>
-      addDependencyViolations(pModule, pDependency, pRuleSet, pValidate)
+      addDependencyViolations(pModule, pDependency, pRuleSet, pValidate),
     ),
   }));
 }
