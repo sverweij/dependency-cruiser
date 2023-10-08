@@ -1,11 +1,11 @@
 import { EOL } from "node:os";
 import chalk from "chalk";
 import figures from "figures";
-import { findRuleByName } from "../graph-utl/rule-set.mjs";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
 } from "./utl/index.mjs";
+import { findRuleByName } from "#graph-utl/rule-set.mjs";
 import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
 const SEVERITY2CHALK = new Map([

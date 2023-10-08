@@ -1,5 +1,5 @@
 import has from "lodash/has.js";
-import { findRuleByName } from "../../graph-utl/rule-set.mjs";
+import { findRuleByName } from "#graph-utl/rule-set.mjs";
 
 function classifyViolation(pRule, pRuleSet) {
   const lRule = findRuleByName(pRuleSet, pRule.name);
@@ -38,7 +38,7 @@ function getViolations(pFolder, pRuleSet) {
               }
             : {}),
         };
-      })
+      }),
     );
 }
 

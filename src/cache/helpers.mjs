@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import memoize from "lodash/memoize.js";
-import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
+import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
  * @param {string} pString
@@ -101,10 +101,10 @@ export function hasInterestingExtension(pExtensions) {
 export function changeHasInterestingExtension(pExtensions) {
   return (pChange) => {
     const lNameHasInterestingExtension = hasInterestingExtension(pExtensions)(
-      pChange.name
+      pChange.name,
     );
     const lOldNameHasInterestingExtension = Boolean(
-      pChange.oldName && hasInterestingExtension(pExtensions)(pChange.oldName)
+      pChange.oldName && hasInterestingExtension(pExtensions)(pChange.oldName),
     );
     return lNameHasInterestingExtension || lOldNameHasInterestingExtension;
   };
@@ -128,7 +128,7 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
 export function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) =>
     (pInterestingChangeTypes ?? DEFAULT_INTERESTING_CHANGE_TYPES).has(
-      pChange.changeType
+      pChange.changeType,
     );
 }
 

@@ -1,5 +1,5 @@
-import compare from "../../graph-utl/compare.mjs";
 import moduleUtl from "./module-utl.mjs";
+import compare from "#graph-utl/compare.mjs";
 
 export default function prepareFlatLevel(pResults, pTheme, _, pShowMetrics) {
   return pResults.modules

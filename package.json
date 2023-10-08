@@ -45,8 +45,9 @@
   },
   "main": "src/main/index.mjs",
   "imports": {
-    "#utl/*": "./src/utl/*",
-    "#meta": "./src/meta.js"
+    "#graph-utl/*": "./src/graph-utl/*",
+    "#meta": "./src/meta.js",
+    "#utl/*": "./src/utl/*"
   },
   "exports": {
     ".": {

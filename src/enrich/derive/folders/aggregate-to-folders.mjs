@@ -2,7 +2,6 @@
 import { dirname } from "node:path/posix";
 import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
 import detectCycles from "../circular.mjs";
-import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.mjs";
 import {
   findFolderByName,
   getAfferentCouplings,
@@ -10,6 +9,7 @@ import {
   getParentFolders,
   object2Array,
 } from "./utl.mjs";
+import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
   pNewDependents.forEach((pNewDependent) => {
@@ -29,13 +29,13 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
 
   upsertCouplings(
     pAllMetrics[pDirname].dependents,
-    getAfferentCouplings(pModule, pDirname)
+    getAfferentCouplings(pModule, pDirname),
   );
   upsertCouplings(
     pAllMetrics[pDirname].dependencies,
     getEfferentCouplings(pModule, pDirname).map(
-      (pDependency) => pDependency.resolved
-    )
+      (pDependency) => pDependency.resolved,
+    ),
   );
   pAllMetrics[pDirname].moduleCount += 1;
   return pAllMetrics;
@@ -43,7 +43,7 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
 
 function aggregateToFolder(pAllFolders, pModule) {
   getParentFolders(dirname(pModule.source)).forEach((pParentDirectory) =>
-    upsertFolderAttributes(pAllFolders, pModule, pParentDirectory)
+    upsertFolderAttributes(pAllFolders, pModule, pParentDirectory),
   );
   return pAllFolders;
 }
@@ -58,9 +58,9 @@ function getFolderLevelCouplings(pCouplingArray) {
       pCouplingArray.map((pCoupling) =>
         dirname(pCoupling.name) === "."
           ? pCoupling.name
-          : dirname(pCoupling.name)
-      )
-    )
+          : dirname(pCoupling.name),
+      ),
+    ),
   ).map((pCoupling) => ({ name: pCoupling }));
 }
 
@@ -101,7 +101,9 @@ function uniq(pArray) {
 function getSinks(pFolders) {
   const lKnownFolders = new Set(pFolders.map(({ name }) => name));
   const lAllFolders = uniq(
-    pFolders.flatMap(({ dependencies }) => dependencies.map(({ name }) => name))
+    pFolders.flatMap(({ dependencies }) =>
+      dependencies.map(({ name }) => name),
+    ),
   );
   const lReturnValue = lAllFolders
     .filter((pFolder) => !lKnownFolders.has(pFolder))
@@ -116,7 +118,7 @@ function getSinks(pFolders) {
 
 export default function aggregateToFolders(pModules) {
   let lFolders = object2Array(
-    pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
+    pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {}),
   )
     .map(calculateFolderMetrics)
     .map(deNormalizeInstability);
