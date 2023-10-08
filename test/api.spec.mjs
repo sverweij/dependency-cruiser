@@ -1,6 +1,3 @@
-// eslint disable because import/no-unresolved,node/no-missing-import don't
-// know about (local) module imports yet
-/* eslint-disable import/no-unresolved,node/no-missing-import */
 import { equal } from "node:assert/strict";
 import satisfies from "semver/functions/satisfies.js";
 import dependencyCruiser from "dependency-cruiser";

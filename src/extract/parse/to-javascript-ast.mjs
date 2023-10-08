@@ -4,7 +4,7 @@ import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
 import memoize from "lodash/memoize.js";
 import transpile from "../transpile/index.mjs";
-import getExtension from "../../utl/get-extension.mjs";
+import getExtension from "#utl/get-extension.mjs";
 
 /** @type acorn.Options */
 const ACORN_OPTIONS = {
@@ -69,7 +69,7 @@ function getAST(pFileName, pTranspileOptions) {
       extension: getExtension(pFileName),
       filename: pFileName,
     },
-    pTranspileOptions
+    pTranspileOptions,
   );
 }
 
@@ -84,7 +84,7 @@ function getAST(pFileName, pTranspileOptions) {
  */
 export const getASTCached = memoize(
   getAST,
-  (pFileName, pTranspileOptions) => `${pFileName}|${pTranspileOptions}`
+  (pFileName, pTranspileOptions) => `${pFileName}|${pTranspileOptions}`,
 );
 
 export function clearCache() {

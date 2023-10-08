@@ -1,9 +1,8 @@
-/* eslint-disable no-return-await */
-/* eslint-disable no-magic-numbers */
-import { bus } from "../utl/bus.mjs";
+/* eslint-disable no-return-await, no-magic-numbers */
 import { assertCruiseOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
+import { bus } from "#utl/bus.mjs";
 
 const TOTAL_STEPS = 10;
 

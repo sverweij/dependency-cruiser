@@ -1,7 +1,7 @@
 const { EOL } = require("node:os");
 const isEmpty = require("lodash/isEmpty");
 const tryRequire = require("semver-try-require");
-const meta = require("../../meta.js");
+const meta = require("#meta");
 
 /*
  * vue-template-compiler was replaced by @vue/compiler-sfc for Vue3.
@@ -15,13 +15,13 @@ function getVueTemplateCompiler() {
 
   let lCompiler = tryRequire(
     "vue-template-compiler",
-    meta.supportedTranspilers["vue-template-compiler"]
+    meta.supportedTranspilers["vue-template-compiler"],
   );
 
   if (lCompiler === false) {
     lCompiler = tryRequire(
       "@vue/compiler-sfc",
-      meta.supportedTranspilers["@vue/compiler-sfc"]
+      meta.supportedTranspilers["@vue/compiler-sfc"],
     );
     lIsVue3 = true;
   }

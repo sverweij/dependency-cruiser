@@ -2,10 +2,10 @@
 import { writeFileSync } from "node:fs";
 import figures from "figures";
 import chalk from "chalk";
-import wrapAndIndent from "../../utl/wrap-and-indent.mjs";
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import { readManifest } from "./environment-helpers.mjs";
 import { folderNameArrayToRE } from "./utl.mjs";
+import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
 const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
 

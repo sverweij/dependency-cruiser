@@ -44,6 +44,10 @@
     "depcruise-wrap-stream-in-html": "bin/wrap-stream-in-html.mjs"
   },
   "main": "src/main/index.mjs",
+  "imports": {
+    "#utl/*": "./src/utl/*",
+    "#meta": "./src/meta.js"
+  },
   "exports": {
     ".": {
       "import": "./src/main/index.mjs",

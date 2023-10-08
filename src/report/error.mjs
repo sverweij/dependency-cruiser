@@ -2,11 +2,11 @@ import { EOL } from "node:os";
 import chalk from "chalk";
 import figures from "figures";
 import { findRuleByName } from "../graph-utl/rule-set.mjs";
-import wrapAndIndent from "../utl/wrap-and-indent.mjs";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
 } from "./utl/index.mjs";
+import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
 const SEVERITY2CHALK = new Map([
   ["error", chalk.red],
@@ -21,8 +21,8 @@ function formatExtraPathInformation(pExtra) {
   return EOL.concat(
     wrapAndIndent(
       pExtra.join(` ${figures.arrowRight} ${EOL}`),
-      EXTRA_PATH_INFORMATION_INDENT
-    )
+      EXTRA_PATH_INFORMATION_INDENT,
+    ),
   );
 }
 
@@ -32,7 +32,7 @@ function formatModuleViolation(pViolation) {
 
 function formatDependencyViolation(pViolation) {
   return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
-    pViolation.to
+    pViolation.to,
   )}`;
 }
 
@@ -44,7 +44,7 @@ function formatCycleViolation(pViolation) {
 
 function formatReachabilityViolation(pViolation) {
   return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
-    pViolation.to
+    pViolation.to,
   )}${formatExtraPathInformation(pViolation.via)}`;
 }
 
@@ -53,9 +53,9 @@ function formatInstabilityViolation(pViolation) {
     chalk.dim(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} ${
         figures.arrowRight
-      } ${formatPercentage(pViolation.metrics.to.instability)}`
+      } ${formatPercentage(pViolation.metrics.to.instability)}`,
     ),
-    EXTRA_PATH_INFORMATION_INDENT
+    EXTRA_PATH_INFORMATION_INDENT,
   )}`;
 }
 
@@ -70,12 +70,12 @@ function formatViolation(pViolation) {
   const lFormattedViolators = _formatViolation(
     pViolation,
     lViolationType2Formatter,
-    formatDependencyViolation
+    formatDependencyViolation,
   );
 
   return (
     `${SEVERITY2CHALK.get(pViolation.rule.severity)(
-      pViolation.rule.severity
+      pViolation.rule.severity,
     )} ${pViolation.rule.name}: ${lFormattedViolators}` +
     `${
       pViolation.comment
@@ -95,7 +95,7 @@ function sumMeta(pMeta) {
 
 function formatSummary(pSummary) {
   let lMessage = `${EOL}${figures.cross} ${sumMeta(
-    pSummary
+    pSummary,
   )} dependency violations (${formatMeta(pSummary)}). ${
     pSummary.totalCruised
   } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.${EOL}`;
@@ -115,7 +115,7 @@ function addExplanation(pRuleSet, pLong) {
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`
+      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`,
     );
   }
   return "";
@@ -123,18 +123,18 @@ function formatIgnoreWarning(pNumberOfIgnoredViolations) {
 
 function report(pResults, pLong) {
   const lNonIgnorableViolations = pResults.summary.violations.filter(
-    (pViolation) => pViolation.rule.severity !== "ignore"
+    (pViolation) => pViolation.rule.severity !== "ignore",
   );
 
   if (lNonIgnorableViolations.length === 0) {
     return `${EOL}${chalk.green(
-      figures.tick
+      figures.tick,
     )} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)${EOL}${formatIgnoreWarning(
-      pResults.summary.ignore
+      pResults.summary.ignore,
     )}${EOL}`;
   }
 

@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import figures from "figures";
-import { SUMMARY } from "../../utl/bus.mjs";
+import { SUMMARY } from "#utl/bus.mjs";
 
 const FULL_ON = 100;
 
@@ -19,7 +19,7 @@ function getPercentageBar(pPercentage, pParameters) {
   const lBlanks = lParameters.barSize - lBlocks;
 
   return `${chalk.green(lParameters.block.repeat(lBlocks))}${chalk.green(
-    lParameters.blank.repeat(lBlanks)
+    lParameters.blank.repeat(lBlanks),
   )} ${Math.round(FULL_ON * lPercentage)}%`;
 }
 
@@ -36,7 +36,7 @@ function getProgressMessageWriter(pStream, pState, pMaxLogLevel) {
     if (pStream.isTTY && lOptions.level <= pMaxLogLevel) {
       pStream.clearLine(1);
       pStream.write(
-        `  ${getPercentageBar(lOptions.complete)} ${pMessage} ...\n`
+        `  ${getPercentageBar(lOptions.complete)} ${pMessage} ...\n`,
       );
       pStream.moveCursor(0, -1);
     }
@@ -57,14 +57,14 @@ function getStartWriter(pStream) {
 export default function setUpCliFeedbackListener(
   pEventEmitter,
   pMaxLogLevel = SUMMARY,
-  pStream = process.stderr
+  pStream = process.stderr,
 ) {
   const lState = {
     complete: 0,
   };
   pEventEmitter.on(
     "progress",
-    getProgressMessageWriter(pStream, lState, pMaxLogLevel)
+    getProgressMessageWriter(pStream, lState, pMaxLogLevel),
   );
 
   pEventEmitter.on("write-start", getStartWriter(pStream));

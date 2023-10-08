@@ -2,7 +2,6 @@
 // @ts-check
 import { isDeepStrictEqual } from "node:util";
 import { getSHA, list } from "watskeburt";
-import { bus } from "../utl/bus.mjs";
 import {
   isInterestingChangeType,
   addCheckSumToChangeSync,
@@ -10,6 +9,8 @@ import {
   includeOnlyFilter,
   changeHasInterestingExtension,
 } from "./helpers.mjs";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
+import { bus } from "#utl/bus.mjs";
 
 export default class MetaDataStrategy {
   /**
@@ -27,7 +28,7 @@ export default class MetaDataStrategy {
     _pDirectory,
     _pCachedCruiseResult,
     pCruiseOptions,
-    pOptions
+    pOptions,
   ) {
     const lOptions = {
       shaRetrievalFn: getSHA,
@@ -45,7 +46,7 @@ export default class MetaDataStrategy {
       const lChanges = lDiff
         .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
         .filter(({ name }) =>
-          includeOnlyFilter(pCruiseOptions.includeOnly)(name)
+          includeOnlyFilter(pCruiseOptions.includeOnly)(name),
         )
         .filter(changeHasInterestingExtension(lOptions.extensions))
         .filter(isInterestingChangeType(lOptions.interestingChangeTypes));
@@ -56,7 +57,7 @@ export default class MetaDataStrategy {
       };
     } catch (pError) {
       throw new Error(
-        `The --cache option works in concert with git - and it seems either the current folder isn't version managed or git isn't installed. Error:${`\n\n          ${pError}\n`}`
+        `The --cache option works in concert with git - and it seems either the current folder isn't version managed or git isn't installed. Error:${`\n\n          ${pError}\n`}`,
       );
     }
   }

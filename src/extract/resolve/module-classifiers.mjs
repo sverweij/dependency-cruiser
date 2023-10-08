@@ -1,5 +1,5 @@
 import { isAbsolute, resolve as path_resolve } from "node:path";
-import getExtension from "../../utl/get-extension.mjs";
+import getExtension from "#utl/get-extension.mjs";
 
 let gFollowableExtensionsCache = new Set();
 let gFollowableExtensionsCacheInitialized = false;
@@ -21,7 +21,7 @@ export function isRelativeModuleName(pModuleName) {
 export function isExternalModule(
   pResolvedModuleName,
   pModuleFolderNames = ["node_modules"],
-  pBaseDirectory = "."
+  pBaseDirectory = ".",
 ) {
   return (
     Boolean(pResolvedModuleName) &&
@@ -37,11 +37,11 @@ export function isExternalModule(
       (pModuleFolderName) => {
         if (isAbsolute(pModuleFolderName)) {
           return path_resolve(pBaseDirectory, pResolvedModuleName).startsWith(
-            pModuleFolderName
+            pModuleFolderName,
           );
         }
         return pResolvedModuleName.includes(pModuleFolderName);
-      }
+      },
     )
   );
 }
@@ -85,13 +85,13 @@ function getFollowableExtensions(pResolveOptions) {
 
 export function isFollowable(pResolvedFilename, pResolveOptions) {
   return getFollowableExtensions(pResolveOptions).has(
-    getExtension(pResolvedFilename)
+    getExtension(pResolvedFilename),
   );
 }
 
 function isWebPackAliased(pModuleName, pAliasObject) {
   return Object.keys(pAliasObject || {}).some((pAliasLHS) =>
-    pModuleName.startsWith(pAliasLHS)
+    pModuleName.startsWith(pAliasLHS),
   );
 }
 
@@ -99,7 +99,7 @@ function isLikelyTSAliased(
   pModuleName,
   pResolvedModuleName,
   pResolveOptions,
-  pBaseDirectory
+  pBaseDirectory,
 ) {
   return (
     pResolveOptions.tsConfig &&

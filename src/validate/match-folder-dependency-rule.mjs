@@ -1,6 +1,6 @@
-import { extractGroups, replaceGroupPlaceholders } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
+import { extractGroups, replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 
 function fromFolderPath(pRule, pFromFolder) {
   return Boolean(!pRule.from.path || pFromFolder.name.match(pRule.from.path));
@@ -8,21 +8,23 @@ function fromFolderPath(pRule, pFromFolder) {
 
 function fromFolderPathNot(pRule, pFromFolder) {
   return Boolean(
-    !pRule.from.pathNot || !pFromFolder.name.match(pRule.from.pathNot)
+    !pRule.from.pathNot || !pFromFolder.name.match(pRule.from.pathNot),
   );
 }
 
 function toFolderPath(pRule, pToFolder, pGroups) {
   return Boolean(
     !pRule.to.path ||
-      pToFolder.name.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
+      pToFolder.name.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
   );
 }
 
 function toFolderPathNot(pRule, pToFolder, pGroups) {
   return Boolean(
     !pRule.to.pathNot ||
-      !pToFolder.name.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
+      !pToFolder.name.match(
+        replaceGroupPlaceholders(pRule.to.pathNot, pGroups),
+      ),
   );
 }
 

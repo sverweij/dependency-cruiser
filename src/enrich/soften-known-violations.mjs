@@ -1,18 +1,18 @@
-import { bus } from "../utl/bus.mjs";
 import isSameViolation from "./summarize/is-same-violation.mjs";
+import { bus } from "#utl/bus.mjs";
 
 function softenModuleViolation(
   pRule,
   pModuleSource,
   pKnownModuleViolations,
-  pSoftenedSeverity
+  pSoftenedSeverity,
 ) {
   return {
     ...pRule,
     severity: pKnownModuleViolations.some(
       (pKnownError) =>
         pKnownError.from === pModuleSource &&
-        pKnownError.rule.name === pRule.name
+        pKnownError.rule.name === pRule.name,
     )
       ? pSoftenedSeverity
       : pRule.severity,
@@ -22,12 +22,12 @@ function softenModuleViolation(
 function softenDependencyViolation(
   pViolationKey,
   pKnownDependencyViolations,
-  pSoftenedSeverity
+  pSoftenedSeverity,
 ) {
   return {
     ...pViolationKey.rule,
     severity: pKnownDependencyViolations.some((pKnownError) =>
-      isSameViolation(pKnownError, pViolationKey)
+      isSameViolation(pKnownError, pViolationKey),
     )
       ? pSoftenedSeverity
       : pViolationKey.rule.severity,
@@ -38,7 +38,7 @@ function softenDependencyViolations(
   pDependency,
   pModuleSource,
   pKnownDependencyViolations,
-  pSoftenedSeverity
+  pSoftenedSeverity,
 ) {
   if (!pDependency.valid) {
     return {
@@ -52,8 +52,8 @@ function softenDependencyViolations(
             cycle: pDependency.cycle,
           },
           pKnownDependencyViolations,
-          pSoftenedSeverity
-        )
+          pSoftenedSeverity,
+        ),
       ),
     };
   }
@@ -78,10 +78,10 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
           pModule.source,
           pKnownViolations.filter(
             (pKnownError) =>
-              pKnownError.from === pKnownError.to && !pKnownError.cycle
+              pKnownError.from === pKnownError.to && !pKnownError.cycle,
           ),
-          pSoftenedSeverity
-        )
+          pSoftenedSeverity,
+        ),
       ),
     };
   }
@@ -94,10 +94,10 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
         pModule.source,
         pKnownViolations.filter(
           (pKnownError) =>
-            pKnownError.from !== pKnownError.to || pKnownError.cycle
+            pKnownError.from !== pKnownError.to || pKnownError.cycle,
         ),
-        pSoftenedSeverity
-      )
+        pSoftenedSeverity,
+      ),
     ),
   };
 
@@ -114,12 +114,12 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
 export default function softenKnownViolations(
   pModules,
   pKnownViolations,
-  pSoftenedSeverity = "ignore"
+  pSoftenedSeverity = "ignore",
 ) {
   if (Boolean(pKnownViolations)) {
     bus.info("analyzing: comparing against known errors");
     return pModules.map((pModule) =>
-      softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity)
+      softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity),
     );
   }
   return pModules;
