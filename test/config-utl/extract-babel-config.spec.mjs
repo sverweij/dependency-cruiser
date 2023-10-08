@@ -2,7 +2,7 @@ import { deepEqual, ok, equal } from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import omit from "lodash/omit.js";
 import extractBabelConfig from "../../src/config-utl/extract-babel-config.mjs";
-import pathToPosix from "../../src/utl/path-to-posix.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));

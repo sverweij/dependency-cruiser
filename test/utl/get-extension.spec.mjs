@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import getExtension from "../../src/utl/get-extension.mjs";
+import getExtension from "#utl/get-extension.mjs";
 
 describe("[U] utl/getExtension", () => {
   it(".coffee.md classifies as .coffee.md", () => {
