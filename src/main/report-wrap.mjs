@@ -1,6 +1,6 @@
 import has from "lodash/has.js";
-import summarize from "../enrich/summarize/index.mjs";
 import report from "../report/index.mjs";
+import summarize from "#enrich/summarize/index.mjs";
 import { applyFilters } from "#graph-utl/filter-bank.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
 import compare from "#graph-utl/compare.mjs";

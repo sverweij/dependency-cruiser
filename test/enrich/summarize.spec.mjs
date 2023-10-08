@@ -1,10 +1,10 @@
 import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
-import summarize from "../../src/enrich/summarize/index.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
+import summarize from "#enrich/summarize/index.mjs";
 
 const ajv = new Ajv();
 

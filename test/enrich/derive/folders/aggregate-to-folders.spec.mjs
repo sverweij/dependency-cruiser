@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 
-import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.mjs";
+import aggregateToFolders from "#enrich/derive/folders/aggregate-to-folders.mjs";
 
 function compareFolders(pLeftFolder, pRightFolder) {
   return pLeftFolder.name.localeCompare(pRightFolder.name);
