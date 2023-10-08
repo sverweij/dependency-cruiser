@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import consolidateToPattern from "../../src/graph-utl/consolidate-to-pattern.mjs";
+import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
 
 describe("[U] graph-utl/consolidateToPattern", () => {
   it("no pattern => no squashing", () => {

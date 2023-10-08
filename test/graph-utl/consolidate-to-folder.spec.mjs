@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import consolidateToFolder from "../../src/graph-utl/consolidate-to-folder.mjs";
+import consolidateToFolder from "#graph-utl/consolidate-to-folder.mjs";
 
 describe("[U] graph-utl/consolidateToFolder", () => {
   it("source gets squashed to its folder", () => {
