@@ -3,12 +3,12 @@
 import { equal, match } from "node:assert/strict";
 import { EOL } from "node:os";
 import chalk from "chalk";
-import render from "../../../src/report/error-long.mjs";
 import okDeps from "./__mocks__/everything-fine.mjs";
 import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 import warnDeps from "./__mocks__/err-only-warnings.mjs";
 import errorsAdditionalInfo from "./__mocks__/err-with-additional-information.mjs";
 import orphanErrs from "./__mocks__/orphan-deps.mjs";
+import render from "#report/error-long.mjs";
 
 describe("[I] report/error-long", () => {
   let chalkLevel = chalk.level;

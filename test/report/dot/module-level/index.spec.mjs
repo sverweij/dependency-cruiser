@@ -2,9 +2,9 @@ import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import defaultTheme from "../../../../src/report/dot/default-theme.mjs";
-import dot from "../../../../src/report/dot/index.mjs";
 import { createRequireJSON } from "../../../backwards.utl.mjs";
+import defaultTheme from "#report/dot/default-theme.mjs";
+import dot from "#report/dot/index.mjs";
 
 const defaultRender = dot();
 const render = dot("module");

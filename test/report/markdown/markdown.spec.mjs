@@ -1,10 +1,10 @@
 /* eslint-disable prefer-regex-literals */
 import { match, doesNotMatch, equal } from "node:assert/strict";
-import markdown from "../../../src/report/markdown.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
 import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
+import markdown from "#report/markdown.mjs";
 
 describe("[I] report/markdown", () => {
   const lOkeliDokelyKey = "gummy bears";

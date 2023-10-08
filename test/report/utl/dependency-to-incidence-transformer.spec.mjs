@@ -1,10 +1,10 @@
 import { deepEqual } from "node:assert/strict";
-import transform from "../../../src/report/utl/dependency-to-incidence-transformer.mjs";
 
 import oneViolation from "./__mocks__/one-violation.mjs";
 import ONE_VIOLATION_DEPS_FIXTURE from "./__mocks__/one-violation-incidences.mjs";
 import moreViolations from "./__mocks__/more-violations.mjs";
 import MORE_VIOLATIONS_DEPS_FIXTURE from "./__mocks__/more-violations-incidences.mjs";
+import transform from "#report/utl/dependency-to-incidence-transformer.mjs";
 
 const ONE_VIOLATION_DEPS_INPUT = oneViolation.modules;
 const MORE_VIOLATIONS_DEPS_INPUT = moreViolations.modules;

@@ -1,7 +1,7 @@
 import { match, equal } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getExternalPluginReporter } from "../../../src/report/plugins.mjs";
+import { getExternalPluginReporter } from "#report/plugins.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const FIXTURE_DIRECTORY = join(__dirname, "__fixtures__");

@@ -49,6 +49,7 @@
     "#extract/*": "./src/extract/*",
     "#graph-utl/*": "./src/graph-utl/*",
     "#meta": "./src/meta.js",
+    "#report/*": "./src/report/*",
     "#utl/*": "./src/utl/*"
   },
   "exports": {

@@ -3,7 +3,6 @@
 import { doesNotMatch, match, equal } from "node:assert/strict";
 import { EOL } from "node:os";
 import chalk from "chalk";
-import render from "../../../src/report/error.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import dependencies from "./__mocks__/cjs-no-dependency-valid.mjs";
 import onlyWarningDependencies from "./__mocks__/err-only-warnings.mjs";
@@ -15,6 +14,7 @@ import ignoredViolations from "./__mocks__/ignored-violations.mjs";
 import ignoredAndRealViolations from "./__mocks__/ignored-and-real-violations.mjs";
 import missingViolationType from "./__mocks__/missing-violation-type.mjs";
 import unknownViolationType from "./__mocks__/unknown-violation-type.mjs";
+import render from "#report/error.mjs";
 
 describe("[I] report/error", () => {
   let chalkLevel = chalk.level;

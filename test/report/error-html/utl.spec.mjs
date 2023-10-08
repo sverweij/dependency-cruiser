@@ -1,5 +1,5 @@
 import { deepEqual, equal } from "node:assert/strict";
-import utl from "../../../src/report/error-html/utl.mjs";
+import utl from "#report/error-html/utl.mjs";
 
 function summaryHasMinimalAttributes(pResult) {
   equal(pResult.hasOwnProperty("depcruiseVersion"), true);

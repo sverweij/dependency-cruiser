@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import _cloneDeep from "lodash/cloneDeep.js";
-import theming from "../../../src/report/dot/theming.mjs";
+import theming from "#report/dot/theming.mjs";
 
 describe("[U] report/dot/theming - determineModuleColors - default theme", () => {
   it("empty module => no colors", () => {

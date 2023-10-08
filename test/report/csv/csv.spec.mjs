@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { deepEqual, equal } from "node:assert/strict";
 import normalizeNewline from "normalize-newline";
-import render from "../../../src/report/csv.mjs";
 import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
+import render from "#report/csv.mjs";
 
 const elementFixture = normalizeNewline(
   readFileSync(

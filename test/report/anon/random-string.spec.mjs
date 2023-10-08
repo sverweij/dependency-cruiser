@@ -1,5 +1,5 @@
 import { match, equal } from "node:assert/strict";
-import randomString from "../../../src/report/anon/random-string.mjs";
+import randomString from "#report/anon/random-string.mjs";
 
 describe("[U] report/anon/random-string", () => {
   it("returns the empty string when passed the empty string", () => {

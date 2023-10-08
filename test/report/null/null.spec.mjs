@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import nullReporter from "../../../src/report/null.mjs";
+import nullReporter from "#report/null.mjs";
 
 const gSmallOKResult = {
   modules: [

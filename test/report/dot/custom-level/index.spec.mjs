@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequireJSON } from "../../../backwards.utl.mjs";
-import dot from "../../../../src/report/dot/index.mjs";
+import dot from "#report/dot/index.mjs";
 
 const render = dot("custom");
 const requireJSON = createRequireJSON(import.meta.url);

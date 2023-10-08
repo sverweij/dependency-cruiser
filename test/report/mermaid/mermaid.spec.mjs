@@ -3,8 +3,8 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { deepEqual } from "node:assert/strict";
 import mermaidReporterPlugin from "dependency-cruiser/mermaid-reporter-plugin";
-import mermaid from "../../../src/report/mermaid.mjs";
 import { createRequireJSON } from "../../backwards.utl.mjs";
+import mermaid from "#report/mermaid.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
