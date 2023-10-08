@@ -1,5 +1,5 @@
 import { deepEqual, equal } from "node:assert/strict";
-import ContentStrategy from "../../src/cache/content-strategy.mjs";
+import ContentStrategy from "#cache/content-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([

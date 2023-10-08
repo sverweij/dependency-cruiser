@@ -3,7 +3,7 @@ import { rmSync } from "node:fs";
 import { join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { describe } from "mocha";
-import Cache from "../../src/cache/cache.mjs";
+import Cache from "#cache/cache.mjs";
 
 const OUTPUTS_FOLDER = "test/cache/__outputs__/";
 

@@ -45,6 +45,7 @@
   },
   "main": "src/main/index.mjs",
   "imports": {
+    "#cache/*": "./src/cache/*",
     "#enrich/*": "./src/enrich/*",
     "#extract/*": "./src/extract/*",
     "#graph-utl/*": "./src/graph-utl/*",
