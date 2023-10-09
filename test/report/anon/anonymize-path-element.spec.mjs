@@ -1,5 +1,5 @@
 import { match, notDeepStrictEqual, equal } from "node:assert/strict";
-import { anonymizePathElement } from "../../../src/report/anon/anonymize-path-element.mjs";
+import { anonymizePathElement } from "#report/anon/anonymize-path-element.mjs";
 
 describe("[U] report/anon/anonymizePathElement - uncached", () => {
   it("'' => ''", () => {

@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import { INFO, SUMMARY } from "../../utl/bus.mjs";
+import { INFO, SUMMARY } from "#utl/bus.mjs";
 
 const MICRO_SECONDS_PER_SECOND = 1000000;
 
@@ -72,7 +72,7 @@ function getProgressWriter(pStream, pState, pMaxLevel) {
 export default function setUpNDJSONListener(
   pEventEmitter,
   pMaxLevel = INFO,
-  pStream = process.stderr
+  pStream = process.stderr,
 ) {
   let lState = {
     runStartTime: new Date(Date.now()).toISOString(),

@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { deepEqual } from "node:assert/strict";
-import readConfig from "../../../src/config-utl/extract-depcruise-config/read-config.mjs";
+import readConfig from "#config-utl/extract-depcruise-config/read-config.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));

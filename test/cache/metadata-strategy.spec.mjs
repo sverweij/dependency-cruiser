@@ -1,5 +1,5 @@
 import { deepEqual, equal, match } from "node:assert/strict";
-import MetaDataStrategy from "../../src/cache/metadata-strategy.mjs";
+import MetaDataStrategy from "#cache/metadata-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([

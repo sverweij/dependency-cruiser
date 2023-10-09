@@ -1,4 +1,3 @@
-import compare from "../../graph-utl/compare.mjs";
 import addRuleSetUsed from "./add-rule-set-used.mjs";
 import summarizeModules from "./summarize-modules.mjs";
 import summarizeFolders from "./summarize-folders.mjs";
@@ -8,6 +7,7 @@ import {
   getModulesCruised,
   getDependenciesCruised,
 } from "./get-stats.mjs";
+import compare from "#graph-utl/compare.mjs";
 
 /**
  *
@@ -27,7 +27,7 @@ export default function summarize(
   pModules,
   pOptions,
   pFileDirectoryArray,
-  pFolders
+  pFolders,
 ) {
   const lViolations = summarizeModules(pModules, pOptions.ruleSet)
     .concat(summarizeFolders(pFolders || [], pOptions.ruleSet))

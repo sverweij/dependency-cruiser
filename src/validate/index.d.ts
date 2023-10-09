@@ -1,6 +1,4 @@
 /* eslint-disable node/no-unpublished-import */
-/* eslint-disable node/no-missing-import */
-/* eslint-disable import/no-unresolved */
 import {
   IDependency,
   IFolder,

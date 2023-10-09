@@ -1,8 +1,8 @@
 import { relative } from "node:path";
-import pathToPosix from "../../utl/path-to-posix.mjs";
 import { isFollowable } from "./module-classifiers.mjs";
 import { resolve } from "./resolve.mjs";
 import { isBuiltin } from "./is-built-in.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 function addResolutionAttributes(
   pBaseDirectory,

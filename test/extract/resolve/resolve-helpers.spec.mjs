@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { stripToModuleName } from "../../../src/extract/resolve/resolve-helpers.mjs";
+import { stripToModuleName } from "#extract/resolve/resolve-helpers.mjs";
 
 describe("[U] extract/resolve/resolveHelpers - stripToModuleName", () => {
   it("yields the empty string when stripping the empty string", () => {

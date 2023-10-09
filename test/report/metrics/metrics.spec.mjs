@@ -2,8 +2,8 @@
 /* eslint-disable no-regex-spaces */
 import { EOL } from "node:os";
 import { doesNotMatch, match, equal } from "node:assert/strict";
-import metrics from "../../../src/report/metrics.mjs";
 import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";
+import metrics from "#report/metrics.mjs";
 
 describe("[I] report/metrics", () => {
   it("errors when the input doesn't contain a 'folders' section", () => {

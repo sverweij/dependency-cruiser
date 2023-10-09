@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import summarizeFolders from "../../src/enrich/summarize/summarize-folders.mjs";
+import summarizeFolders from "#enrich/summarize/summarize-folders.mjs";
 
 const FIXTURE_WITHOUT_VIOLATIONS = [
   {

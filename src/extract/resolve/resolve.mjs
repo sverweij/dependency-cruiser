@@ -1,6 +1,6 @@
 import enhancedResolve from "enhanced-resolve";
-import pathToPosix from "../../utl/path-to-posix.mjs";
 import { stripQueryParameters } from "../helpers.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 let gResolvers = {};
 let gInitialized = {};
@@ -38,7 +38,7 @@ export function resolve(
   pModuleName,
   pFileDirectory,
   pResolveOptions,
-  pCachingContext = "cruise"
+  pCachingContext = "cruise",
 ) {
   init(pResolveOptions, pCachingContext);
 
@@ -48,8 +48,8 @@ export function resolve(
       // lookupStartPath
       pathToPosix(pFileDirectory),
       // request
-      pModuleName
-    )
+      pModuleName,
+    ),
   );
 }
 

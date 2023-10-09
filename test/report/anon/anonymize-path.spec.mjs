@@ -1,6 +1,6 @@
 import { equal } from "node:assert/strict";
-import { anonymizePath } from "../../../src/report/anon/anonymize-path.mjs";
-import { clearCache } from "../../../src/report/anon/anonymize-path-element.mjs";
+import { anonymizePath } from "#report/anon/anonymize-path.mjs";
+import { clearCache } from "#report/anon/anonymize-path-element.mjs";
 
 describe("[U] report/anon/anonymizePath", () => {
   beforeEach(() => {

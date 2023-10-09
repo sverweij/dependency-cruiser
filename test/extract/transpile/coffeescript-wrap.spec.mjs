@@ -1,7 +1,7 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeNewline from "normalize-newline";
-import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.mjs";
+import coffeescriptWrap from "#extract/transpile/coffeescript-wrap.mjs";
 
 const wrap = coffeescriptWrap();
 const litWrap = coffeescriptWrap(true);

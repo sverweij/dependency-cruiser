@@ -1,5 +1,5 @@
 import { deepEqual, throws } from "node:assert/strict";
-import findExtensions from "../../../src/cli/init-config/find-extensions.mjs";
+import findExtensions from "#cli/init-config/find-extensions.mjs";
 
 describe("[U] cli/init-config/find-extensions", () => {
   it("returns an empty array of extensions when passed no directories", () => {

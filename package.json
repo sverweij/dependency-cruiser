@@ -44,6 +44,21 @@
     "depcruise-wrap-stream-in-html": "bin/wrap-stream-in-html.mjs"
   },
   "main": "src/main/index.mjs",
+  "imports": {
+    "#cache/*": "./src/cache/*",
+    "#config-utl/*": "./src/config-utl/*",
+    "#configuration-schema": "./src/schema/configuration.schema.mjs",
+    "#cli/*": "./src/cli/*",
+    "#cruise-result-schema": "./src/schema/cruise-result.schema.mjs",
+    "#enrich/*": "./src/enrich/*",
+    "#extract/*": "./src/extract/*",
+    "#graph-utl/*": "./src/graph-utl/*",
+    "#main/*": "./src/main/*",
+    "#meta": "./src/meta.js",
+    "#report/*": "./src/report/*",
+    "#utl/*": "./src/utl/*",
+    "#validate/*": "./src/validate/*"
+  },
   "exports": {
     ".": {
       "import": "./src/main/index.mjs",

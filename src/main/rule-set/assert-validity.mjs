@@ -2,8 +2,8 @@ import Ajv from "ajv";
 import safeRegex from "safe-regex";
 import has from "lodash/has.js";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
-import configurationSchema from "../../schema/configuration.schema.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
+import configurationSchema from "#configuration-schema";
 
 const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,

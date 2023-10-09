@@ -1,6 +1,6 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import wrap from "../../../src/extract/transpile/javascript-wrap.mjs";
+import wrap from "#extract/transpile/javascript-wrap.mjs";
 
 describe("[I] javascript transpiler", () => {
   it("tells the jsx transpiler is available", () => {

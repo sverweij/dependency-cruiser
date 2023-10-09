@@ -1,9 +1,9 @@
 import Ajv from "ajv";
 
-import cruiseResultSchema from "../schema/cruise-result.schema.mjs";
 import { assertFormatOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeFormatOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
+import cruiseResultSchema from "#cruise-result-schema";
 
 function validateResultAgainstSchema(pResult) {
   const ajv = new Ajv();

@@ -1,7 +1,7 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeSource from "../normalize-source.utl.mjs";
-import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
+import typescriptWrap from "#extract/transpile/typescript-wrap.mjs";
 
 const typeScriptRegularWrap = typescriptWrap();
 const typeScriptTsxWrap = typescriptWrap("tsx");

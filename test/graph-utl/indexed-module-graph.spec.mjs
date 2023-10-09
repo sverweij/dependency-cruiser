@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers, no-undefined */
 import { deepEqual, equal } from "node:assert/strict";
-import IndexedModuleGraph from "../../src/graph-utl/indexed-module-graph.mjs";
 import unIndexedModules from "./__mocks__/un-indexed-modules.mjs";
 import unIndexedModulesWithoutDependents from "./__mocks__/un-indexed-modules-without-dependents.mjs";
 import cycleInputGraphs from "./__mocks__/cycle-input-graphs.mjs";
+import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 describe("[U] graph-utl/indexed-module-graph - findModuleByName", () => {
   it("searching any module in an empty graph yields undefined", () => {

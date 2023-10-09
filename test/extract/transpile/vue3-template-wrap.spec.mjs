@@ -13,17 +13,14 @@ const proxyquire = require("proxyquire").noPreserveCache();
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 // instead of requiring the module under test, proxyquire it
-const wrap = proxyquire.load(
-  "../../../src/extract/transpile/vue-template-wrap.cjs",
-  {
-    // Force the tryRequire on "vue-template-compiler" to fail
-    // so that we ensure we are using Vue 3 for this test
-    "semver-try-require": (pModuleName) =>
-      pModuleName === "vue-template-compiler"
-        ? false
-        : require("@vue/compiler-sfc"),
-  },
-);
+const wrap = proxyquire.load("#extract/transpile/vue-template-wrap.cjs", {
+  // Force the tryRequire on "vue-template-compiler" to fail
+  // so that we ensure we are using Vue 3 for this test
+  "semver-try-require": (pModuleName) =>
+    pModuleName === "vue-template-compiler"
+      ? false
+      : require("@vue/compiler-sfc"),
+});
 
 describe("[I] vue transpiler", () => {
   it("extracts the script content from a vue SFC", () => {

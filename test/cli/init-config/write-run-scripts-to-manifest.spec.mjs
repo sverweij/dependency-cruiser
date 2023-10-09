@@ -2,7 +2,7 @@ import { deepEqual } from "node:assert/strict";
 import {
   addRunScriptsToManifest,
   compileRunScripts,
-} from "../../../src/cli/init-config/write-run-scripts-to-manifest.mjs";
+} from "#cli/init-config/write-run-scripts-to-manifest.mjs";
 
 describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {

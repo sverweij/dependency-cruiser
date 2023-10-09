@@ -1,5 +1,4 @@
 import has from "lodash/has.js";
-import meta from "../../meta.js";
 import {
   getSourceFolderCandidates,
   getTestFolderCandidates,
@@ -7,6 +6,7 @@ import {
   toSourceLocationArray,
 } from "./environment-helpers.mjs";
 import findExtensions from "./find-extensions.mjs";
+import meta from "#meta";
 
 /**
  * @param {import("./types.js").IInitConfig} pInitOptions

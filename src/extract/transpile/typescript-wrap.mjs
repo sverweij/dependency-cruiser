@@ -1,9 +1,9 @@
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 const typescript = await tryImport(
   "typescript",
-  meta.supportedTranspilers.typescript
+  meta.supportedTranspilers.typescript,
 );
 
 function getCompilerOptions(pFlavor, pTSConfig) {
@@ -41,7 +41,7 @@ export default function typescriptWrap(pFlavor) {
         ...(pTranspileOptions.tsConfig || {}),
         compilerOptions: getCompilerOptions(
           pFlavor,
-          pTranspileOptions.tsConfig || {}
+          pTranspileOptions.tsConfig || {},
         ),
       }).outputText,
   };

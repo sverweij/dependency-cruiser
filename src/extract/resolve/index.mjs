@@ -1,13 +1,13 @@
 import { realpathSync } from "node:fs";
 import { extname, resolve as path_resolve, relative } from "node:path";
 import monkeyPatchedModule from "node:module";
-import pathToPosix from "../../utl/path-to-posix.mjs";
 import { isRelativeModuleName } from "./module-classifiers.mjs";
 import { resolveAMD } from "./resolve-amd.mjs";
 import resolveCommonJS from "./resolve-cjs.mjs";
 import { stripToModuleName, addLicenseAttribute } from "./resolve-helpers.mjs";
 import determineDependencyTypes from "./determine-dependency-types.mjs";
 import { getManifest } from "./get-manifest.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 /**
  *

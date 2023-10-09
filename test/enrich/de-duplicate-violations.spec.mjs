@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import uniqWith from "lodash/uniqWith.js";
-import isSameViolation from "../../src/enrich/summarize/is-same-violation.mjs";
+import isSameViolation from "#enrich/summarize/is-same-violation.mjs";
 
 const deDuplicateViolations = (pViolations) =>
   uniqWith(pViolations, isSameViolation);

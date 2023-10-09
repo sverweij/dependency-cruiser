@@ -1,9 +1,9 @@
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 const livescript = await tryImport(
   "livescript",
-  meta.supportedTranspilers.livescript
+  meta.supportedTranspilers.livescript,
 );
 
 /* c8 ignore start */

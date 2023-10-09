@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { isValidPlugin } from "../../../src/report/plugins.mjs";
+import { isValidPlugin } from "#report/plugins.mjs";
 
 describe("[U] report/plugins - isValidPlugin", () => {
   it("returns false when the plugin's function doesn't return an exit code attribute", async () => {

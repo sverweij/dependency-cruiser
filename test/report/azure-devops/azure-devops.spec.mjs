@@ -2,7 +2,6 @@ import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import normalizeNewline from "normalize-newline";
-import render from "../../../src/report/azure-devops.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import warndeps from "./__mocks__/there-are-warnings.mjs";
 import errdeps from "./__mocks__/there-are-errors.mjs";
@@ -14,6 +13,7 @@ import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
 import knownViolations from "./__mocks__/known-violations.mjs";
 import errorsAndKnownViolations from "./__mocks__/errors-and-known-violations.mjs";
 import instabilities from "./__mocks__/instabilities.mjs";
+import render from "#report/azure-devops.mjs";
 
 function readFixture(pRelativePath) {
   return readFileSync(

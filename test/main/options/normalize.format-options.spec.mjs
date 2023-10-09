@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import { normalizeFormatOptions } from "../../../src/main/options/normalize.mjs";
+import { normalizeFormatOptions } from "#main/options/normalize.mjs";
 
 describe("[U] main/options/normalize - format options", () => {
   it("makes focus strings into an object", () => {

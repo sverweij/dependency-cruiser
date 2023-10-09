@@ -3,9 +3,9 @@ import { fileURLToPath } from "node:url";
 import { equal } from "node:assert/strict";
 import chalk from "chalk";
 import normalizeNewline from "normalize-newline";
-import renderText from "../../../src/report/text.mjs";
 import dependencies from "./__mocks__/dependencies.mjs";
 import cruiseResultWithFocus from "./__mocks__/cruise-result-with-focus.mjs";
+import renderText from "#report/text.mjs";
 
 describe("[I] report/text", () => {
   let lOldChalkLevel = 0;

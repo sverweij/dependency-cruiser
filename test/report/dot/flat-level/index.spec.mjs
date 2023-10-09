@@ -2,8 +2,8 @@ import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import dot from "../../../../src/report/dot/index.mjs";
 import { createRequireJSON } from "../../../backwards.utl.mjs";
+import dot from "#report/dot/index.mjs";
 
 const render = dot("flat");
 const requireJSON = createRequireJSON(import.meta.url);

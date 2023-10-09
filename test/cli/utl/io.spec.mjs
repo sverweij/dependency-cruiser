@@ -2,7 +2,7 @@ import { ReadStream } from "node:fs";
 import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import { deepEqual, notDeepStrictEqual, equal } from "node:assert/strict";
-import { getInStream } from "../../../src/cli/utl/io.mjs";
+import { getInStream } from "#cli/utl/io.mjs";
 
 describe("[U] cli/utl/io", () => {
   const OUTFILE = fileURLToPath(

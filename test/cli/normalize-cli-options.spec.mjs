@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url";
 import { deepEqual, equal } from "node:assert/strict";
 import normalizeCliOptions, {
   determineRulesFileName,
-} from "../../src/cli/normalize-cli-options.mjs";
+} from "#cli/normalize-cli-options.mjs";
 
 // eslint-disable-next-line max-statements
 describe("[I] cli/normalizeCliOptions - regular normalizations", () => {

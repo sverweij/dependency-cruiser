@@ -2,7 +2,7 @@ import { ok, equal } from "node:assert/strict";
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import deleteDammit from "../delete-dammit.utl.cjs";
-import writeConfig from "../../../src/cli/init-config/write-config.mjs";
+import writeConfig from "#cli/init-config/write-config.mjs";
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 

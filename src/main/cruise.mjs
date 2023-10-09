@@ -1,9 +1,8 @@
-/* eslint-disable no-return-await */
-/* eslint-disable no-magic-numbers */
-import { bus } from "../utl/bus.mjs";
+/* eslint-disable no-return-await, no-magic-numbers */
 import { assertCruiseOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
+import { bus } from "#utl/bus.mjs";
 
 const TOTAL_STEPS = 10;
 
@@ -33,7 +32,7 @@ export default async function cruise(
       c(2),
     );
 
-    const { default: Cache } = await import("../cache/cache.mjs");
+    const { default: Cache } = await import("#cache/cache.mjs");
     lCache = new Cache(lCruiseOptions.cache.strategy);
     const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
@@ -58,8 +57,8 @@ export default async function cruise(
     import("./rule-set/assert-validity.mjs"),
     import("./files-and-dirs/normalize.mjs"),
     import("./resolve-options/normalize.mjs"),
-    import("../extract/index.mjs"),
-    import("../enrich/index.mjs"),
+    import("#extract/index.mjs"),
+    import("#enrich/index.mjs"),
   ]);
 
   if (Boolean(lCruiseOptions.ruleSet)) {

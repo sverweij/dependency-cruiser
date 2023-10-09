@@ -4,7 +4,7 @@ import {
   getHeader,
   getEndText,
   getProgressLine,
-} from "../../../../src/cli/listeners/performance-log/handlers.mjs";
+} from "#cli/listeners/performance-log/handlers.mjs";
 
 const MAX_LEVEL = 20;
 

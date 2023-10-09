@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { deepEqual, throws } from "node:assert/strict";
-import loadTSConfig from "../../src/config-utl/extract-ts-config.mjs";
-import pathToPosix from "../../src/utl/path-to-posix.mjs";
+import loadTSConfig from "#config-utl/extract-ts-config.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));

@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import normalizeNewline from "normalize-newline";
-import wrap from "../../../src/extract/transpile/vue-template-wrap.cjs";
+import wrap from "#extract/transpile/vue-template-wrap.cjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

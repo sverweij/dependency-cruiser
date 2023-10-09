@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import assertNodeEnvironmentSuitable from "../src/cli/assert-node-environment-suitable.mjs";
-import meta from "../src/meta.js";
-import format from "../src/cli/format.mjs";
+import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
+import format from "#cli/format.mjs";
+import meta from "#meta";
 
 function formatError(pError) {
   process.stderr.write(pError.message);

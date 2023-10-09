@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-object-injection */
 import has from "lodash/has.js";
-import { replaceGroupPlaceholders } from "../utl/regex-util.mjs";
-import { intersects } from "../utl/array-util.mjs";
+import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
+import { intersects } from "#utl/array-util.mjs";
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
@@ -15,7 +15,7 @@ function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
       (pDependency[pProperty] &&
-        pDependency[pProperty].match(pRule.to[pRuleProperty]))
+        pDependency[pProperty].match(pRule.to[pRuleProperty])),
   );
 }
 
@@ -23,7 +23,7 @@ function propertyMatchesNot(pRule, pDependency, pRuleProperty, pProperty) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
       (pDependency[pProperty] &&
-        !pDependency[pProperty].match(pRule.to[pRuleProperty]))
+        !pDependency[pProperty].match(pRule.to[pRuleProperty])),
   );
 }
 
@@ -33,7 +33,7 @@ function fromPath(pRule, pModule) {
 
 function fromPathNot(pRule, pModule) {
   return Boolean(
-    !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot)
+    !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot),
   );
 }
 
@@ -43,14 +43,14 @@ function modulePath(pRule, pModule) {
 
 function modulePathNot(pRule, pModule) {
   return Boolean(
-    !pRule.module.pathNot || !pModule.source.match(pRule.module.pathNot)
+    !pRule.module.pathNot || !pModule.source.match(pRule.module.pathNot),
   );
 }
 
 function _toPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
-      pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
+      pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
   );
 }
 
@@ -80,14 +80,14 @@ function toModulePathNot(pRule, pModule, pGroups) {
 function toDependencyTypes(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypes ||
-      intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes)
+      intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes),
   );
 }
 
 function toDependencyTypesNot(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypesNot ||
-      !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot)
+      !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
   );
 }
 
@@ -96,8 +96,8 @@ function toVia(pRule, pDependency, pGroups) {
     !pRule.to.via ||
       (pDependency.cycle &&
         pDependency.cycle.some((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups))
-        ))
+          pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups)),
+        )),
   );
 }
 
@@ -106,8 +106,8 @@ function toViaOnly(pRule, pDependency, pGroups) {
     !pRule.to.viaOnly ||
       (pDependency.cycle &&
         pDependency.cycle.every((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups))
-        ))
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups)),
+        )),
   );
 }
 
@@ -116,8 +116,8 @@ function toViaNot(pRule, pDependency, pGroups) {
     !pRule.to.viaNot ||
       (pDependency.cycle &&
         !pDependency.cycle.some((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups))
-        ))
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups)),
+        )),
   );
 }
 
@@ -126,8 +126,8 @@ function toviaSomeNot(pRule, pDependency, pGroups) {
     !pRule.to.viaSomeNot ||
       (pDependency.cycle &&
         !pDependency.cycle.every((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups))
-        ))
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups)),
+        )),
   );
 }
 

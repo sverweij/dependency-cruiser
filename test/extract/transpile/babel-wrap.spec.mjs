@@ -1,7 +1,7 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeSource from "../normalize-source.utl.mjs";
-import wrap from "../../../src/extract/transpile/babel-wrap.mjs";
+import wrap from "#extract/transpile/babel-wrap.mjs";
 
 describe("[I] extract/transpile/babel-wrap", () => {
   it("tells the babel transpiler is available", () => {

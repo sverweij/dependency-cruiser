@@ -1,8 +1,6 @@
 /* eslint-disable no-inline-comments */
 // @ts-check
 import { join } from "node:path/posix";
-import { bus } from "../utl/bus.mjs";
-import findAllFiles from "../utl/find-all-files.mjs";
 import {
   getFileHashSync,
   excludeFilter,
@@ -10,6 +8,10 @@ import {
   hasInterestingExtension,
   moduleIsInterestingForDiff,
 } from "./helpers.mjs";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
+import { bus } from "#utl/bus.mjs";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
+import findAllFiles from "#utl/find-all-files.mjs";
 
 /**
  * @param {Set<string>} pFileSet
@@ -19,7 +21,7 @@ import {
 function diffCachedModuleAgainstFileSet(
   pFileSet,
   pBaseDirectory,
-  pFileHashFunction = getFileHashSync
+  pFileHashFunction = getFileHashSync,
 ) {
   return (pModule) => {
     if (!moduleIsInterestingForDiff(pModule)) {
@@ -31,7 +33,7 @@ function diffCachedModuleAgainstFileSet(
     }
 
     const lNewCheckSum = pFileHashFunction(
-      join(pBaseDirectory, pModule.source)
+      join(pBaseDirectory, pModule.source),
     );
     if (lNewCheckSum !== pModule.checksum) {
       return {
@@ -72,7 +74,7 @@ function diffCachedModuleAgainstFileSet(
 export default function findContentChanges(
   pDirectory,
   pCachedCruiseResult,
-  pOptions
+  pOptions,
 ) {
   bus.debug("cache: - getting revision data");
   const lFileSet = new Set(
@@ -80,12 +82,12 @@ export default function findContentChanges(
       baseDir: pOptions.baseDir,
       excludeFilterFn: excludeFilter(pOptions.exclude),
       includeOnlyFilterFn: includeOnlyFilter(pOptions.includeOnly),
-    }).filter(hasInterestingExtension(pOptions.extensions))
+    }).filter(hasInterestingExtension(pOptions.extensions)),
   );
 
   bus.debug("cache: - getting (cached - new)");
   const lDiffCachedVsNew = pCachedCruiseResult.modules.map(
-    diffCachedModuleAgainstFileSet(lFileSet, pOptions.baseDir)
+    diffCachedModuleAgainstFileSet(lFileSet, pOptions.baseDir),
   );
 
   bus.debug("cache: - getting (new - cached)");

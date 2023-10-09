@@ -1,5 +1,5 @@
-import meta from "../meta.js";
 import errorHtmlUtl from "./error-html/utl.mjs";
+import meta from "#meta";
 
 const { aggregateViolations, determineTo, determineFromExtras } = errorHtmlUtl;
 
@@ -64,18 +64,18 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 
   return aggregateViolations(
     pCruiseResult.summary.violations,
-    pCruiseResult.summary.ruleSetUsed
+    pCruiseResult.summary.ruleSetUsed,
   )
     .filter(
       (pRule) =>
-        pRule.count > 0 || (pIncludeIgnoredInSummary && pRule.ignoredCount > 0)
+        pRule.count > 0 || (pIncludeIgnoredInSummary && pRule.ignoredCount > 0),
     )
     .reduce(
       (pAll, pRule) =>
         `${pAll}|${severity2Icon(pRule.severity)}&nbsp;_${pRule.name}_|**${
           pRule.count
         }**|**${pRule.ignoredCount}**|${pRule.comment}|\n`,
-      lTableHead
+      lTableHead,
     );
 }
 
@@ -91,7 +91,7 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
   return pViolations
     .filter(
       (pViolation) =>
-        pViolation.rule.severity !== "ignore" || pIncludeIgnoredInDetails
+        pViolation.rule.severity !== "ignore" || pIncludeIgnoredInDetails,
     )
     .reduce((pAll, pViolation) => {
       const lFromExtras = determineFromExtras(pViolation);
@@ -127,7 +127,7 @@ function report(pResults, pOptions) {
     if (pResults.summary.violations.length > 0 && lOptions.showRulesSummary) {
       lReturnValue += `${formatRulesSummary(
         pResults,
-        lOptions.includeIgnoredInSummary
+        lOptions.includeIgnoredInSummary,
       )}\n\n`;
     }
   }
@@ -142,7 +142,7 @@ function report(pResults, pOptions) {
       }
       lReturnValue += `${formatViolations(
         pResults.summary.violations,
-        lOptions.includeIgnoredInDetails
+        lOptions.includeIgnoredInDetails,
       )}\n\n`;
       if (lOptions.collapseDetails) {
         lReturnValue += "</details>\n\n";

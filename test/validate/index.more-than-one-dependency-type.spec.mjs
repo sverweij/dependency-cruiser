@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
+import validate from "#validate/index.mjs";
 
 describe("[I] index/validate - moreThanOneDependencyType", () => {
   it(`no relations with modules of > 1 dep type (e.g. specified 2x in package.json)`, () => {

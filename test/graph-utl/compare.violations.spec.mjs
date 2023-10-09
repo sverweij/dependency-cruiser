@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { violations } from "../../src/graph-utl/compare.mjs";
+import { violations } from "#graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - violations", () => {
   const lViolation = {

@@ -1538,7 +1538,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/add-focus",
+          module: "#graph-utl/add-focus",
           moduleSystem: "cjs",
           exoticallyRequired: false,
           resolved: "src/graph-utl/add-focus.js",
@@ -18183,7 +18183,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/add-focus.js",
+          module: "#graph-utl/add-focus.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/add-focus.js",
@@ -18220,7 +18220,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/compare.js",
+          module: "#graph-utl/compare.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/compare.js",
@@ -18257,7 +18257,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/compare.js",
+          module: "#graph-utl/compare.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/compare.js",
@@ -18294,7 +18294,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/compare.js",
+          module: "#graph-utl/compare.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/compare.js",
@@ -18331,7 +18331,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/consolidate-to-folder.js",
+          module: "#graph-utl/consolidate-to-folder.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/consolidate-to-folder.js",
@@ -18368,7 +18368,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/consolidate-to-pattern.js",
+          module: "#graph-utl/consolidate-to-pattern.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/consolidate-to-pattern.js",
@@ -18405,7 +18405,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/filterbank.js",
+          module: "#graph-utl/filterbank.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/filterbank.js",
@@ -18442,7 +18442,7 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/rule-set.js",
+          module: "#graph-utl/rule-set.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/graph-utl/rule-set.js",

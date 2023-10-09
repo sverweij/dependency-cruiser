@@ -1,6 +1,6 @@
 import tryImport from "semver-try-require";
 import memoize from "lodash/memoize.js";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 /** @type {import('@swc/core')} */
 const swc = await tryImport("@swc/core", meta.supportedTranspilers.swc);

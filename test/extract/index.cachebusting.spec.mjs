@@ -1,9 +1,9 @@
 import { renameSync } from "node:fs";
 import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
-import extract from "../../src/extract/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
+import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
+import extract from "#extract/index.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 

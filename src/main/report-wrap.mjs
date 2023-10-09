@@ -1,10 +1,10 @@
 import has from "lodash/has.js";
-import { applyFilters } from "../graph-utl/filter-bank.mjs";
-import summarize from "../enrich/summarize/index.mjs";
-import consolidateToPattern from "../graph-utl/consolidate-to-pattern.mjs";
-import compare from "../graph-utl/compare.mjs";
-import stripSelfTransitions from "../graph-utl/strip-self-transitions.mjs";
-import report from "../report/index.mjs";
+import report from "#report/index.mjs";
+import summarize from "#enrich/summarize/index.mjs";
+import { applyFilters } from "#graph-utl/filter-bank.mjs";
+import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
+import compare from "#graph-utl/compare.mjs";
+import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
 
 /**
  *
@@ -32,7 +32,7 @@ function reSummarizeResults(pResult, pFormatOptions) {
         },
         (pResult.summary.optionsUsed.args || "").split(" "),
         // TODO: apply filters to the folders too
-        pResult.folders
+        pResult.folders,
       ),
     },
     modules: lModules,
@@ -57,6 +57,6 @@ export default async function reportWrap(pResult, pFormatOptions) {
     // from the result take the one passed in the format options instead
     has(pFormatOptions, "collapse")
       ? { ...lReportOptions, collapsePattern: pFormatOptions.collapse }
-      : lReportOptions
+      : lReportOptions,
   );
 }

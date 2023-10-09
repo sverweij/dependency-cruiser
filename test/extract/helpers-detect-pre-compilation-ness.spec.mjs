@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import { detectPreCompilationNess } from "../../src/extract/helpers.mjs";
+import { detectPreCompilationNess } from "#extract/helpers.mjs";
 
 describe("[U] extract/helpers - detectPreCompilationNess", () => {
   it("empty dependency lists yield an empty one", () => {

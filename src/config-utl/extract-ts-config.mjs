@@ -1,10 +1,10 @@
 import { dirname, resolve } from "node:path";
 import tryImport from "semver-try-require";
-import meta from "../meta.js";
+import meta from "#meta";
 
 const typescript = await tryImport(
   "typescript",
-  meta.supportedTranspilers.typescript
+  meta.supportedTranspilers.typescript,
 );
 
 const FORMAT_DIAGNOSTICS_HOST = {
@@ -44,12 +44,12 @@ export default function extractTSConfig(pTSConfigFileName) {
   if (typescript) {
     const lConfig = typescript.readConfigFile(
       pTSConfigFileName,
-      typescript.sys.readFile
+      typescript.sys.readFile,
     );
 
     if (typeof lConfig.error !== "undefined") {
       throw new TypeError(
-        typescript.formatDiagnostics([lConfig.error], FORMAT_DIAGNOSTICS_HOST)
+        typescript.formatDiagnostics([lConfig.error], FORMAT_DIAGNOSTICS_HOST),
       );
     }
     lReturnValue = typescript.parseJsonConfigFileContent(
@@ -57,15 +57,15 @@ export default function extractTSConfig(pTSConfigFileName) {
       typescript.sys,
       dirname(resolve(pTSConfigFileName)),
       {},
-      pTSConfigFileName
+      pTSConfigFileName,
     );
 
     if (lReturnValue.errors.length > 0) {
       throw new Error(
         typescript.formatDiagnostics(
           lReturnValue.errors,
-          FORMAT_DIAGNOSTICS_HOST
-        )
+          FORMAT_DIAGNOSTICS_HOST,
+        ),
       );
     }
     // lRetval.fileNames; // all files included in the project

@@ -1,6 +1,5 @@
 import { join, extname, dirname } from "node:path";
 import uniqBy from "lodash/uniqBy.js";
-import { intersects } from "../utl/array-util.mjs";
 import resolve from "./resolve/index.mjs";
 import extractES6Deps from "./ast-extractors/extract-es6-deps.mjs";
 import extractCommonJSDeps from "./ast-extractors/extract-cjs-deps.mjs";
@@ -14,22 +13,23 @@ import {
   detectPreCompilationNess,
   extractModuleAttributes,
 } from "./helpers.mjs";
+import { intersects } from "#utl/array-util.mjs";
 
 function extractFromSwcAST({ baseDir, exoticRequireStrings }, pFileName) {
   return extractSwcDeps(
     toSwcAST.getASTCached(join(baseDir, pFileName)),
-    exoticRequireStrings
+    exoticRequireStrings,
   );
 }
 
 function extractFromTypeScriptAST(
   { baseDir, exoticRequireStrings },
   pFileName,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   return extractTypeScriptDeps(
     toTypescriptAST.getASTCached(join(baseDir, pFileName), pTranspileOptions),
-    exoticRequireStrings
+    exoticRequireStrings,
   );
 }
 
@@ -65,12 +65,12 @@ function shouldUseSwc({ parser }, pFileName) {
 function extractFromJavaScriptAST(
   { baseDir, moduleSystems, exoticRequireStrings },
   pFileName,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   let lDependencies = [];
   const lAST = toJavascriptAST.getASTCached(
     join(baseDir, pFileName),
-    pTranspileOptions
+    pTranspileOptions,
   );
 
   if (moduleSystems.includes("cjs")) {
@@ -88,7 +88,7 @@ function extractFromJavaScriptAST(
 
 function extractWithSwc(pCruiseOptions, pFileName) {
   return extractFromSwcAST(pCruiseOptions, pFileName).filter(
-    ({ moduleSystem }) => pCruiseOptions.moduleSystems.includes(moduleSystem)
+    ({ moduleSystem }) => pCruiseOptions.moduleSystems.includes(moduleSystem),
   );
 }
 
@@ -96,15 +96,15 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = extractFromTypeScriptAST(
     pCruiseOptions,
     pFileName,
-    pTranspileOptions
+    pTranspileOptions,
   ).filter(({ moduleSystem }) =>
-    pCruiseOptions.moduleSystems.includes(moduleSystem)
+    pCruiseOptions.moduleSystems.includes(moduleSystem),
   );
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     lDependencies = detectPreCompilationNess(
       lDependencies,
-      extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions)
+      extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions),
     );
   }
   return lDependencies;
@@ -128,13 +128,13 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
       lDependencies = extractWithTsc(
         pCruiseOptions,
         pFileName,
-        pTranspileOptions
+        pTranspileOptions,
       );
     } else {
       lDependencies = extractFromJavaScriptAST(
         pCruiseOptions,
         pFileName,
-        pTranspileOptions
+        pTranspileOptions,
       );
     }
   }
@@ -159,14 +159,14 @@ function matchesDoNotFollow({ resolved, dependencyTypes }, pDoNotFollow) {
 function addResolutionAttributes(
   { baseDir, doNotFollow },
   pFileName,
-  pResolveOptions
+  pResolveOptions,
 ) {
   return function addAttributes(pDependency) {
     const lResolved = resolve(
       pDependency,
       baseDir,
       join(baseDir, dirname(pFileName)),
-      pResolveOptions
+      pResolveOptions,
     );
     const lMatchesDoNotFollow = matchesDoNotFollow(lResolved, doNotFollow);
 
@@ -190,13 +190,13 @@ function matchesPattern(pFullPathToFile, pPattern) {
  */
 function getDependencyUniqueKey({ module, moduleSystem, dependencyTypes }) {
   return `${module} ${moduleSystem} ${(dependencyTypes || []).includes(
-    "type-only"
+    "type-only",
   )}`;
 }
 
 function compareDeps(pLeft, pRight) {
   return getDependencyUniqueKey(pLeft).localeCompare(
-    getDependencyUniqueKey(pRight)
+    getDependencyUniqueKey(pRight),
   );
 }
 
@@ -223,12 +223,12 @@ export default function getDependencies(
   pFileName,
   pCruiseOptions,
   pResolveOptions,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   try {
     return uniqBy(
       extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
-      getDependencyUniqueKey
+      getDependencyUniqueKey,
     )
       .sort(compareDeps)
       .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
@@ -237,11 +237,11 @@ export default function getDependencies(
           (!pCruiseOptions?.exclude?.path ||
             !matchesPattern(resolved, pCruiseOptions.exclude.path)) &&
           (!pCruiseOptions?.includeOnly?.path ||
-            matchesPattern(resolved, pCruiseOptions.includeOnly.path))
+            matchesPattern(resolved, pCruiseOptions.includeOnly.path)),
       );
   } catch (pError) {
     throw new Error(
-      `Extracting dependencies ran afoul of...\n\n  ${pError.message}\n... in ${pFileName}\n\n`
+      `Extracting dependencies ran afoul of...\n\n  ${pError.message}\n... in ${pFileName}\n\n`,
     );
   }
 }

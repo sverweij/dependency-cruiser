@@ -1,6 +1,6 @@
-import { extractGroups } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
+import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
  *
@@ -37,7 +37,7 @@ function match(pFrom, pTo) {
         pRule,
         pTo,
         "exoticRequireNot",
-        "exoticRequire"
+        "exoticRequire",
       ) &&
       matchers.toVia(pRule, pTo, lGroups) &&
       matchers.toViaOnly(pRule, pTo, lGroups) &&

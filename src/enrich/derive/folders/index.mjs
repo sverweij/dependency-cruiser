@@ -1,5 +1,5 @@
-import validate from "../../../validate/index.mjs";
 import aggregateToFolders from "./aggregate-to-folders.mjs";
+import validate from "#validate/index.mjs";
 
 /**
  * @param {import("../../../../types/dependency-cruiser.js").IFolder} pFolder
@@ -18,7 +18,7 @@ function addFolderDependencyViolations(pOptions) {
     ...pFolder,
 
     dependencies: pFolder.dependencies.map(
-      validateFolderDependency(pFolder, pOptions)
+      validateFolderDependency(pFolder, pOptions),
     ),
   });
 }
@@ -34,7 +34,7 @@ export default function deriveFolderMetrics(pModules, pOptions) {
   if (pOptions.metrics) {
     lReturnValue = {
       folders: aggregateToFolders(pModules).map(
-        addFolderDependencyViolations(pOptions)
+        addFolderDependencyViolations(pOptions),
       ),
     };
   }

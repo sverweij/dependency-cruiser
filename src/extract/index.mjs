@@ -1,8 +1,8 @@
 import has from "lodash/has.js";
-import { bus } from "../utl/bus.mjs";
 import getDependencies from "./get-dependencies.mjs";
 import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
+import { bus } from "#utl/bus.mjs";
 
 /* eslint max-params:0 */
 function extractRecursive(
@@ -11,7 +11,7 @@ function extractRecursive(
   pVisited,
   pDepth,
   pResolveOptions,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   pVisited.add(pFileName);
   const lDependencies =
@@ -20,13 +20,13 @@ function extractRecursive(
           pFileName,
           pCruiseOptions,
           pResolveOptions,
-          pTranspileOptions
+          pTranspileOptions,
         )
       : [];
 
   return lDependencies
     .filter(
-      ({ followable, matchesDoNotFollow }) => followable && !matchesDoNotFollow
+      ({ followable, matchesDoNotFollow }) => followable && !matchesDoNotFollow,
     )
     .reduce(
       (pAll, { resolved }) => {
@@ -38,8 +38,8 @@ function extractRecursive(
               pVisited,
               pDepth + 1,
               pResolveOptions,
-              pTranspileOptions
-            )
+              pTranspileOptions,
+            ),
           );
         }
         return pAll;
@@ -49,7 +49,7 @@ function extractRecursive(
           source: pFileName,
           dependencies: lDependencies,
         },
-      ]
+      ],
     );
 }
 
@@ -57,14 +57,14 @@ function extractFileDirectoryArray(
   pFileDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   let lVisited = new Set();
 
   bus.info("reading files: gathering initial sources");
   const lInitialSources = gatherInitialSources(
     pFileDirectoryArray,
-    pCruiseOptions
+    pCruiseOptions,
   );
 
   bus.info("reading files: visiting dependencies");
@@ -78,8 +78,8 @@ function extractFileDirectoryArray(
           lVisited,
           0,
           pResolveOptions,
-          pTranspileOptions
-        )
+          pTranspileOptions,
+        ),
       );
     }
     return pDependencies;
@@ -113,7 +113,7 @@ function complete(pAll, pFromListItem) {
       pFromListItem.dependencies
         .filter(isNotFollowable)
         .filter(notInFromListAlready(pAll))
-        .map(toDependencyToSource)
+        .map(toDependencyToSource),
     );
 }
 
@@ -122,7 +122,8 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.filter(
-      ({ dynamic }) => !has(pExclude, "dynamic") || pExclude.dynamic !== dynamic
+      ({ dynamic }) =>
+        !has(pExclude, "dynamic") || pExclude.dynamic !== dynamic,
     ),
   };
 }
@@ -141,7 +142,7 @@ export default function extract(
   pFileDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
-  pTranspileOptions
+  pTranspileOptions,
 ) {
   clearCaches();
 
@@ -149,11 +150,11 @@ export default function extract(
     pFileDirectoryArray,
     pCruiseOptions,
     pResolveOptions,
-    pTranspileOptions
+    pTranspileOptions,
   )
     .reduce(complete, [])
     .map((pModule) =>
-      filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude)
+      filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude),
     );
   pResolveOptions.fileSystem.purge();
   clearCaches();

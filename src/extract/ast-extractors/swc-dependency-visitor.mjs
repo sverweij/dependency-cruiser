@@ -1,12 +1,12 @@
 /* eslint-disable no-inline-comments */
 /* eslint-disable max-classes-per-file */
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 /** @type {import('@swc/core/Visitor')} */
 const { Visitor } = await tryImport(
   "@swc/core/Visitor.js",
-  meta.supportedTranspilers.swc
+  meta.supportedTranspilers.swc,
 );
 
 function pryStringsFromArguments(pArguments) {
@@ -39,7 +39,7 @@ function argumentsAreUsable(pArguments) {
   return (
     pArguments.length > 0 &&
     ["StringLiteral", "TemplateLiteral"].includes(
-      pArguments[0].expression.type
+      pArguments[0].expression.type,
     ) &&
     (!(pArguments[0].expression.type === "TemplateLiteral") ||
       isPlaceholderlessTemplateLiteral(pArguments[0]))
@@ -209,7 +209,7 @@ export default Visitor
 
         // using "window.require" as an exotic require string...
         this.lResult = this.lResult.concat(
-          extractExoticMemberCallExpression(pNode, this.lExoticRequireStrings)
+          extractExoticMemberCallExpression(pNode, this.lExoticRequireStrings),
         );
 
         return super.visitCallExpression(pNode);

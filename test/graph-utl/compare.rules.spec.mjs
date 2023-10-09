@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { rules } from "../../src/graph-utl/compare.mjs";
+import { rules } from "#graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - rules", () => {
   it("samesies yield 0", () => {

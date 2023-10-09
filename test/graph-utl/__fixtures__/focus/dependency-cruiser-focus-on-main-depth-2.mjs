@@ -310,7 +310,7 @@ export default [
     source: "src/enrich/enrich-modules.js",
     dependencies: [
       {
-        module: "../../src/graph-utl/add-focus",
+        module: "#graph-utl/add-focus",
         moduleSystem: "cjs",
         dynamic: false,
         exoticallyRequired: false,

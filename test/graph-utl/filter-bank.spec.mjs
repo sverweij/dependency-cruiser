@@ -1,9 +1,9 @@
 import { deepEqual } from "node:assert/strict";
-import { applyFilters } from "../../src/graph-utl/filter-bank.mjs";
 import reportModules from "./__mocks__/report-modules.mjs";
 import reportIndexModule from "./__fixtures__/reaches/report-index-module.mjs";
 import multiModuleRegexResult from "./__fixtures__/reaches/multi-module-regex-result.mjs";
 import highlightResult from "./__fixtures__/highlight/highlight-result.mjs";
+import { applyFilters } from "#graph-utl/filter-bank.mjs";
 
 const MODULES = [
   {

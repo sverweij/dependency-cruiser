@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import meta from "../../src/cli/format-meta-info.mjs";
+import meta from "#cli/format-meta-info.mjs";
 
 describe("[U] cli/formatMetaInfo - transpiler formatted meta information", () => {
   it("tells which extensions can be scanned", () => {

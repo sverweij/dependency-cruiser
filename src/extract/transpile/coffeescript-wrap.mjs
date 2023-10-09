@@ -1,5 +1,5 @@
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 /*
  * coffeescript's npm repo was renamed from coffee-script to coffeescript
@@ -9,14 +9,14 @@ import meta from "../../meta.js";
 async function getCoffeeScriptModule() {
   let lReturnValue = await tryImport(
     "coffeescript",
-    meta.supportedTranspilers.coffeescript
+    meta.supportedTranspilers.coffeescript,
   );
 
   /* c8 ignore start */
   if (lReturnValue === false) {
     lReturnValue = await tryImport(
       "coffee-script",
-      meta.supportedTranspilers["coffee-script"]
+      meta.supportedTranspilers["coffee-script"],
     );
   }
   /* c8 ignore stop */

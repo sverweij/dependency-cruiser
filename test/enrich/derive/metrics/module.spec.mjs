@@ -1,6 +1,6 @@
 import { deepEqual, equal } from "node:assert/strict";
 
-import deriveModuleMetrics from "../../../../src/enrich/derive/metrics/index.mjs";
+import deriveModuleMetrics from "#enrich/derive/metrics/index.mjs";
 
 describe("[U] enrich/derive/metrics/module - module stability metrics derivation", () => {
   it("doesn't do anything when we're not asking for metrics (metrics nor outputType)", () => {

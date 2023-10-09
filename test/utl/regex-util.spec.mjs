@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { replaceGroupPlaceholders } from "../../src/utl/regex-util.mjs";
+import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 
 describe("[U] utl/regex-util", () => {
   it("replaceGroupPlaceholders - leaves re alone if passed empty match result", () => {

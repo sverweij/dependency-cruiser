@@ -1,5 +1,5 @@
-import { INFO, SUMMARY } from "../../../utl/bus.mjs";
 import { getHeader, getProgressLine, getEndText } from "./handlers.mjs";
+import { INFO, SUMMARY } from "#utl/bus.mjs";
 
 function getHeaderWriter(pStream, pMaxLevel) {
   return (_pMessage, pOptions) => {
@@ -16,7 +16,7 @@ function getProgressWriter(pStream, pState, pMaxLevel) {
       pMessage,
       pState,
       lOptions.level,
-      pMaxLevel
+      pMaxLevel,
     );
     pStream.write(lProgressLine);
   };
@@ -32,7 +32,7 @@ function getEndWriter(pStream, pState, pMaxLevel) {
 export default function setUpPerformanceLogListener(
   pEventEmitter,
   pMaxLevel = INFO,
-  pStream = process.stderr
+  pStream = process.stderr,
 ) {
   let lState = {
     previousMessage: "nodejs starting",

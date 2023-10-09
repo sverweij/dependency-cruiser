@@ -11,11 +11,14 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off", // we kind-of live off of those in here
     "@typescript-eslint/no-unused-vars": "off", // duplicate of the same in several other sets
     "budapestian/global-constant-pattern": "off", // currently does not work with the AST as emitted @typescript-eslint parser (FIXME)
-    "no-param-reassign": "error",
     "security/detect-non-literal-fs-filename": "off",
-    "unicorn/no-useless-fallback-in-spread": "off", // useful, probably. We'll try it later, though
     "import/exports-last": "off", // Useless remnant of the time when single pass compilers were in vogue
+    "import/no-unresolved": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
+    "no-param-reassign": "error",
+    "node/no-missing-import": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
+    "node/no-missing-require": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
     "unicorn/no-empty-file": "off", // See https://github.com/sindresorhus/eslint-plugin-unicorn/issues/2175
+    "unicorn/no-useless-fallback-in-spread": "off", // useful, probably. We'll try it later, though
   },
   overrides: [
     {

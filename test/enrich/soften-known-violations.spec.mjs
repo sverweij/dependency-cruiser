@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import softenKnownViolations from "../../src/enrich/soften-known-violations.mjs";
+import softenKnownViolations from "#enrich/soften-known-violations.mjs";
 
 describe("[U] enrich/soften-known-violations - modules violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */

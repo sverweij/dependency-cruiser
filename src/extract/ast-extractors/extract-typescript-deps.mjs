@@ -1,11 +1,11 @@
 /* eslint-disable no-inline-comments */
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
+import meta from "#meta";
 
 /** @type {import("typescript")} */
 const typescript = await tryImport(
   "typescript",
-  meta.supportedTranspilers.typescript
+  meta.supportedTranspilers.typescript,
 );
 
 function isTypeOnly(pStatement) {
@@ -41,7 +41,7 @@ function extractImportsAndExports(pAST) {
       (pStatement) =>
         (typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" ||
           typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration") &&
-        Boolean(pStatement.moduleSpecifier)
+        Boolean(pStatement.moduleSpecifier),
     )
     .map((pStatement) => ({
       module: pStatement.moduleSpecifier.text,
@@ -69,7 +69,7 @@ function extractImportEquals(pAST) {
         typescript.SyntaxKind[pStatement.kind] === "ImportEqualsDeclaration" &&
         pStatement.moduleReference &&
         pStatement.moduleReference.expression &&
-        pStatement.moduleReference.expression.text
+        pStatement.moduleReference.expression.text,
     )
     .map((pStatement) => ({
       module: pStatement.moduleReference.expression.text,
@@ -97,14 +97,14 @@ function extractTripleSlashDirectives(pAST) {
         module: pReference.fileName,
         moduleSystem: "tsd",
         exoticallyRequired: false,
-      }))
+      })),
     )
     .concat(
       pAST.amdDependencies.map((pReference) => ({
         module: pReference.path,
         moduleSystem: "tsd",
         exoticallyRequired: false,
-      }))
+      })),
     );
 }
 
@@ -267,14 +267,14 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
  */
 export default function extractTypeScriptDependencies(
   pTypeScriptAST,
-  pExoticRequireStrings
+  pExoticRequireStrings,
 ) {
   return Boolean(typescript)
     ? extractImportsAndExports(pTypeScriptAST)
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
-          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings)
+          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings),
         )
         .map((pModule) => ({ dynamic: false, ...pModule }))
     : /* c8 ignore next */ [];

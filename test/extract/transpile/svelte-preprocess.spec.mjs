@@ -2,8 +2,8 @@ import { equal } from "node:assert/strict";
 // eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
 import normalizeNewline from "normalize-newline";
-import thing from "../../../src/extract/transpile/typescript-wrap.mjs";
-import sveltePreProcess from "../../../src/extract/transpile/svelte-preprocess.mjs";
+import thing from "#extract/transpile/typescript-wrap.mjs";
+import sveltePreProcess from "#extract/transpile/svelte-preprocess.mjs";
 
 const typeScriptWrap = thing(false);
 

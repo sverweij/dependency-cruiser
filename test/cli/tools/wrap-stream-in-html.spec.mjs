@@ -1,7 +1,7 @@
 import { createReadStream } from "node:fs";
 import { Writable } from "node:stream";
 import { equal } from "node:assert/strict";
-import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.mjs";
+import wrapStreamInHTML from "#cli/tools/wrap-stream-in-html.mjs";
 
 class WriteableExpectStream extends Writable {
   _write(pThing) {

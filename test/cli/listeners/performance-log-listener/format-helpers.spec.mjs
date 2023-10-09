@@ -5,7 +5,7 @@ import {
   formatTime,
   formatMemory,
   formatPerfLine,
-} from "../../../../src/cli/listeners/performance-log/format-helpers.mjs";
+} from "#cli/listeners/performance-log/format-helpers.mjs";
 
 /*
  * as the formatHelpers use the Intl API, it's necessary to set the locale

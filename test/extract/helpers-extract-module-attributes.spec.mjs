@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import { extractModuleAttributes } from "../../src/extract/helpers.mjs";
+import { extractModuleAttributes } from "#extract/helpers.mjs";
 
 describe("[U] extract/helpers - extractModuleAttributes", () => {
   it("leaves regular module specifications alone", () => {

@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { parse, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { deepEqual, equal, throws } from "node:assert/strict";
-import { getManifest } from "../../../src/extract/resolve/get-manifest.mjs";
+import { getManifest } from "#extract/resolve/get-manifest.mjs";
 
 const rootPackageJson = JSON.parse(
   readFileSync(

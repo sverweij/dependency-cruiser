@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { deepEqual } from "node:assert/strict";
-import addFocus from "../../src/graph-utl/add-focus.mjs";
 import $input from "./__fixtures__/focus/dependency-cruiser-only-src.mjs";
 import focusOnMainDepthOne from "./__fixtures__/focus/dependency-cruiser-focus-on-main.mjs";
 import focusOnMainDepthTwo from "./__fixtures__/focus/dependency-cruiser-focus-on-main-depth-2.mjs";
+import addFocus from "#graph-utl/add-focus.mjs";
 
 describe("[U] graph-utl/add-focus", () => {
   it("returns the input modules when there's no pattern", () => {

@@ -1,11 +1,13 @@
 // @ts-check
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { scannableExtensions } from "../extract/transpile/meta.mjs";
-import { bus } from "../utl/bus.mjs";
 import { optionsAreCompatible } from "./options-compatible.mjs";
 import MetadataStrategy from "./metadata-strategy.mjs";
 import ContentStrategy from "./content-strategy.mjs";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
+import { scannableExtensions } from "#extract/transpile/meta.mjs";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
+import { bus } from "#utl/bus.mjs";
 
 const CACHE_FILE_NAME = "cache.json";
 
@@ -36,19 +38,19 @@ export default class Cache {
         pCruiseOptions,
         {
           extensions: new Set(
-            scannableExtensions.concat(pCruiseOptions.extraExtensionsToScan)
+            scannableExtensions.concat(pCruiseOptions.extraExtensionsToScan),
           ),
-        }
+        },
       ));
     bus.debug("cache: - comparing");
     return (
       this.cacheStrategy.revisionDataEqual(
         pCachedCruiseResult.revisionData,
-        this.revisionData
+        this.revisionData,
       ) &&
       optionsAreCompatible(
         pCachedCruiseResult.summary.optionsUsed,
-        pCruiseOptions
+        pCruiseOptions,
       )
     );
   }
@@ -60,7 +62,7 @@ export default class Cache {
   async read(pCacheFolder) {
     try {
       return JSON.parse(
-        await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
+        await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8"),
       );
     } catch (pError) {
       return { modules: [], summary: {} };
@@ -81,10 +83,10 @@ export default class Cache {
       JSON.stringify(
         this.cacheStrategy.prepareRevisionDataForSaving(
           pCruiseResult,
-          lRevisionData
-        )
+          lRevisionData,
+        ),
       ),
-      "utf8"
+      "utf8",
     );
   }
 }

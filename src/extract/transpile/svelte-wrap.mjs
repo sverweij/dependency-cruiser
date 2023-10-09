@@ -1,10 +1,10 @@
 import tryImport from "semver-try-require";
-import meta from "../../meta.js";
 import preProcess from "./svelte-preprocess.mjs";
+import meta from "#meta";
 
 const { compile } = await tryImport(
   "svelte/compiler",
-  meta.supportedTranspilers.svelte
+  meta.supportedTranspilers.svelte,
 );
 
 function getTranspiler(pTranspilerWrapper) {
@@ -12,7 +12,7 @@ function getTranspiler(pTranspilerWrapper) {
     const lPreProcessedSource = preProcess(
       pSource,
       pTranspilerWrapper,
-      pTranspilerOptions
+      pTranspilerOptions,
     );
     return compile(lPreProcessedSource).js.code;
   };

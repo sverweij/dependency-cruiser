@@ -1,5 +1,5 @@
 import { deepEqual, ok, equal } from "node:assert/strict";
-import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
+import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
 
 describe("[U] main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {

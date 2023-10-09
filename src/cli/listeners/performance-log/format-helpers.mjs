@@ -1,6 +1,5 @@
- 
 import chalk from "chalk";
-import { INFO } from "../../../utl/bus.mjs";
+import { INFO } from "#utl/bus.mjs";
 
 const MS_PER_SECOND = 1000;
 const MS_PER_MICRO_SECOND = 0.001;
@@ -39,7 +38,7 @@ export function formatDividerLine() {
   const lMessageColumnHDivider = "-".repeat(MAX_EXPECTED_MESSAGE_LENGTH);
 
   return `${`${lNumberColumnDivider} `.repeat(
-    NUMBER_OF_COLUMNS - 1
+    NUMBER_OF_COLUMNS - 1,
   )}${lMessageColumnHDivider}\n`;
 }
 
@@ -54,7 +53,7 @@ export function formatHeader() {
         pad("⏱  system") +
         pad("⏱  user") +
         pad("⏱  real")
-      }after step...\n`
+      }after step...\n`,
     )
     .concat(formatDividerLine());
 }
@@ -66,24 +65,24 @@ function formatMessage(pMessage, pLevel) {
 export function formatTime(
   pNumber,
   pConversionMultiplier = MS_PER_SECOND,
-  pLevel
+  pLevel,
 ) {
   return formatMessage(
     gTimeFormat(pConversionMultiplier * pNumber)
       .padStart(MAX_EXPECTED_METRIC_LENGTH)
       .concat(" "),
-    pLevel
+    pLevel,
   );
 }
 
 export function formatMemory(pBytes, pLevel) {
   const lReturnValue = gSizeFormat(pBytes / K).padStart(
-    MAX_EXPECTED_METRIC_LENGTH
+    MAX_EXPECTED_METRIC_LENGTH,
   );
 
   return formatMessage(
     (pBytes < 0 ? chalk.blue(lReturnValue) : lReturnValue).concat(" "),
-    pLevel
+    pLevel,
   );
 }
 

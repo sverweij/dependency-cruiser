@@ -1,15 +1,15 @@
 import flattenDeep from "lodash/flattenDeep.js";
 import has from "lodash/has.js";
 import uniqWith from "lodash/uniqWith.js";
-import { findRuleByName } from "../../graph-utl/rule-set.mjs";
-import compare from "../../graph-utl/compare.mjs";
 import isSameViolation from "./is-same-violation.mjs";
+import { findRuleByName } from "#graph-utl/rule-set.mjs";
+import compare from "#graph-utl/compare.mjs";
 
 function cutNonTransgressions(pModule) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.filter(
-      (pDependency) => pDependency.valid === false
+      (pDependency) => pDependency.valid === false,
     ),
   };
 }
@@ -76,10 +76,10 @@ function extractDependencyViolations(pModules, pRuleSet) {
       .map((pModule) =>
         pModule.dependencies.map((pDependency) =>
           pDependency.rules.map((pRule) =>
-            toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet)
-          )
-        )
-      )
+            toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet),
+          ),
+        ),
+      ),
   );
 }
 
@@ -96,9 +96,9 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
             pReachable.modules.map((pReachableModule) => ({
               to: pReachableModule.source,
               via: pReachableModule.via,
-            }))
+            })),
           ),
-        []
+        [],
       )
       .map((pToModule) => ({
         type: "reachability",
@@ -121,12 +121,12 @@ function extractModuleViolations(pModules, pRuleSet) {
           pModule.rules.reduce(
             (pAllRules, pRule) =>
               pAllRules.concat(
-                toModuleViolationSummary(pRule, pModule, pRuleSet)
+                toModuleViolationSummary(pRule, pModule, pRuleSet),
               ),
-            []
-          )
+            [],
+          ),
         ),
-      []
+      [],
     );
 }
 
@@ -135,6 +135,6 @@ export default function summarizeModules(pModules, pRuleSet) {
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
       .sort(compare.violations),
-    isSameViolation
+    isSameViolation,
   );
 }

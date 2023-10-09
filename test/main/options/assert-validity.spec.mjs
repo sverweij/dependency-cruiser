@@ -1,5 +1,5 @@
 import { doesNotThrow, equal, throws } from "node:assert/strict";
-import { assertCruiseOptionsValid } from "../../../src/main/options/assert-validity.mjs";
+import { assertCruiseOptionsValid } from "#main/options/assert-validity.mjs";
 
 describe("[U] main/options/validate - module systems", () => {
   it("throws when a invalid module system is passed ", () => {

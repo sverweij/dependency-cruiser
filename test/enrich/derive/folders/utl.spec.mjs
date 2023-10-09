@@ -5,7 +5,7 @@ import {
   getEfferentCouplings,
   getParentFolders,
   object2Array,
-} from "../../../../src/enrich/derive/folders/utl.mjs";
+} from "#enrich/derive/folders/utl.mjs";
 
 describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {

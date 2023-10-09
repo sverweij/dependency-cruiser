@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import normalize from "../../../src/main/rule-set/normalize.mjs";
+import normalize from "#main/rule-set/normalize.mjs";
 
 describe("[U] main/rule-set/normalize", () => {
   it("leaves the empty ruleset alone", () => {

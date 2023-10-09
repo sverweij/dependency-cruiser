@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import determineDependencyTypes from "../../../src/extract/resolve/determine-dependency-types.mjs";
+import determineDependencyTypes from "#extract/resolve/determine-dependency-types.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

@@ -9,7 +9,7 @@ import {
   getWebpackConfigCandidates,
   getDefaultConfigFileName,
   isTypeModule,
-} from "../../../src/cli/init-config/environment-helpers.mjs";
+} from "#cli/init-config/environment-helpers.mjs";
 
 describe("[U] cli/init-config/environment-helpers - getBabelConfigCandidates", () => {
   const WORKINGDIR = process.cwd();

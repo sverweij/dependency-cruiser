@@ -1,5 +1,5 @@
 import { doesNotThrow, throws } from "node:assert/strict";
-import assertNodeEnvironmentSuitable from "../../src/cli/assert-node-environment-suitable.mjs";
+import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 
 describe("[U] cli/validateNodeEnv", () => {
   it("throws when an older and unsupported node version is passed", () => {

@@ -1,10 +1,10 @@
 import { deepEqual } from "node:assert/strict";
 
-import orphan from "../../../../src/enrich/derive/orphan/index.mjs";
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
 import ONE_MODULE_AFTER_PROCESSING from "./__mocks__/one-module.afterprocessing.mjs";
 import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 import TWO_MODULES_AFTER_PROCESSING from "./__mocks__/two-module.afterprocessing.mjs";
+import orphan from "#enrich/derive/orphan/index.mjs";
 
 describe("[U] enrich/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {

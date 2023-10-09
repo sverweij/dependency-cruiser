@@ -3,8 +3,8 @@ import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import json5 from "json5";
 import tryImport from "semver-try-require";
-import meta from "../meta.js";
 import makeAbsolute from "./make-absolute.mjs";
+import meta from "#meta";
 
 async function getJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
@@ -19,7 +19,7 @@ async function getJSConfig(pBabelConfigFileName) {
       `${
         `Encountered an error while parsing babel config '${pBabelConfigFileName}':` +
         `\n\n          ${pError}`
-      }\n\n         At this time dependency-cruiser only supports babel configurations\n         in either commonjs or json5.\n`
+      }\n\n         At this time dependency-cruiser only supports babel configurations\n         in either commonjs or json5.\n`,
     );
   }
 
@@ -28,7 +28,7 @@ async function getJSConfig(pBabelConfigFileName) {
     // function with a bunch of params (lReturnValue = lReturnValue(APIPAPI))
     throw new TypeError(
       `The babel config '${pBabelConfigFileName}' returns a function. At this time\n` +
-        `         dependency-cruiser doesn't support that yet.`
+        `         dependency-cruiser doesn't support that yet.`,
     );
   }
   return lReturnValue;
@@ -42,7 +42,7 @@ async function getJSON5Config(pBabelConfigFileName) {
   } catch (pError) {
     throw new Error(
       `Encountered an error while parsing the babel config '${pBabelConfigFileName}':` +
-        `\n\n          ${pError}\n`
+        `\n\n          ${pError}\n`,
     );
   }
 
@@ -65,7 +65,7 @@ async function getConfig(pBabelConfigFileName) {
 
   if (!lExtensionToParseFunction.has(lExtension)) {
     throw new Error(
-      `${`The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n`}         dependency-cruiser doesn't support yet.\n`
+      `${`The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n`}         dependency-cruiser doesn't support yet.\n`,
     );
   }
   // eslint-disable-next-line no-return-await

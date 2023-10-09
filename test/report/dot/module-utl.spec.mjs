@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import moduleUtl from "../../../src/report/dot/module-utl.mjs";
+import moduleUtl from "#report/dot/module-utl.mjs";
 
 describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {

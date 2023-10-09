@@ -1,7 +1,6 @@
 import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import render from "../../../src/report/teamcity.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import moduleErrs from "./__mocks__/module-errors.mjs";
 import requiredErrs from "./__mocks__/required-errors.mjs";
@@ -10,6 +9,7 @@ import vias from "./__mocks__/via-deps.mjs";
 import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
 import knownViolations from "./__mocks__/known-violations.mjs";
 import instabilities from "./__mocks__/instabilities.mjs";
+import render from "#report/teamcity.mjs";
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");

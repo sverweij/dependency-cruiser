@@ -1,10 +1,10 @@
 import { readdirSync, statSync } from "node:fs";
 import { join, normalize } from "node:path";
 import picomatch from "picomatch";
-import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
-import getExtension from "../utl/get-extension.mjs";
-import pathToPosix from "../utl/path-to-posix.mjs";
 import { scannableExtensions } from "./transpile/meta.mjs";
+import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
+import getExtension from "#utl/get-extension.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 /**
  *

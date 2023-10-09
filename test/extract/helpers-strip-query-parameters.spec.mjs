@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { stripQueryParameters } from "../../src/extract/helpers.mjs";
+import { stripQueryParameters } from "#extract/helpers.mjs";
 
 describe("[U] extract/helpers - stripQueryParams", () => {
   it("leaves the empty string alone", () => {

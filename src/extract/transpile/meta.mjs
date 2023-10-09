@@ -1,6 +1,6 @@
 /* eslint security/detect-object-injection : 0*/
-import meta from "../../meta.js";
 import tryAvailable from "./try-import-available.mjs";
+import meta from "#meta";
 
 function gotCoffee() {
   return (
@@ -20,11 +20,11 @@ const TRANSPILER2AVAILABLE = {
   typescript: tryAvailable("typescript", meta.supportedTranspilers.typescript),
   "vue-template-compiler": tryAvailable(
     "vue-template-compiler",
-    meta.supportedTranspilers["vue-template-compiler"]
+    meta.supportedTranspilers["vue-template-compiler"],
   ),
   "@vue/compiler-sfc": tryAvailable(
     "@vue/compiler-sfc",
-    meta.supportedTranspilers["@vue/compiler-sfc"]
+    meta.supportedTranspilers["@vue/compiler-sfc"],
   ),
 };
 
@@ -78,7 +78,7 @@ export const allExtensions = Array.from(EXTENSION2AVAILABLE.keys()).map(
   (pExtension) => ({
     extension: pExtension,
     available: extensionIsAvailable(pExtension),
-  })
+  }),
 );
 
 /**
@@ -88,7 +88,7 @@ export const allExtensions = Array.from(EXTENSION2AVAILABLE.keys()).map(
  * @type {string[]}
  */
 export const scannableExtensions = Array.from(
-  EXTENSION2AVAILABLE.keys()
+  EXTENSION2AVAILABLE.keys(),
 ).filter(extensionIsAvailable);
 
 /**

@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { folderNameArrayToRE } from "../../../src/cli/init-config/utl.mjs";
+import { folderNameArrayToRE } from "#cli/init-config/utl.mjs";
 
 describe("[U] cli/init-config/utl - folderNameArrayToRE", () => {
   it("transforms an array of folder names into a regex string - empty", () => {

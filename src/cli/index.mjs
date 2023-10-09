@@ -4,15 +4,14 @@ import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
-import cruise from "../main/cruise.mjs";
-import { INFO, bus } from "../utl/bus.mjs";
-
 import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
 import { write } from "./utl/io.mjs";
 import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
 import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
 import setUpNDJSONListener from "./listeners/ndjson.mjs";
+import cruise from "#main/cruise.mjs";
+import { INFO, bus } from "#utl/bus.mjs";
 
 async function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -21,7 +20,7 @@ async function extractResolveOptions(pCruiseOptions) {
 
   if (lWebPackConfigFileName) {
     const { default: extractWebpackResolveConfig } = await import(
-      "../config-utl/extract-webpack-resolve-config.mjs"
+      "#config-utl/extract-webpack-resolve-config.mjs"
     );
     lResolveOptions = await extractWebpackResolveConfig(
       lWebPackConfigFileName,
@@ -35,7 +34,7 @@ async function extractResolveOptions(pCruiseOptions) {
 async function addKnownViolations(pCruiseOptions) {
   if (pCruiseOptions.knownViolationsFile) {
     const { default: extractKnownViolations } = await import(
-      "../config-utl/extract-known-violations.mjs"
+      "#config-utl/extract-known-violations.mjs"
     );
     const lKnownViolations = await extractKnownViolations(
       pCruiseOptions.knownViolationsFile,
@@ -57,7 +56,7 @@ async function extractTSConfigOptions(pCruiseOptions) {
 
   if (lTSConfigFileName) {
     const { default: extractTSConfig } = await import(
-      "../config-utl/extract-ts-config.mjs"
+      "#config-utl/extract-ts-config.mjs"
     );
     lReturnValue = extractTSConfig(lTSConfigFileName);
   }
@@ -71,7 +70,7 @@ async function extractBabelConfigOptions(pCruiseOptions) {
     pCruiseOptions?.ruleSet?.options?.babelConfig?.fileName ?? null;
   if (lBabelConfigFileName) {
     const { default: extractBabelConfig } = await import(
-      "../config-utl/extract-babel-config.mjs"
+      "#config-utl/extract-babel-config.mjs"
     );
     lReturnValue = extractBabelConfig(lBabelConfigFileName);
   }

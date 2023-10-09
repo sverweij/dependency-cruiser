@@ -1,5 +1,5 @@
-import { extractGroups } from "../utl/regex-util.mjs";
 import matchers from "./matchers.mjs";
+import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
  * Returns true if the module violates the rule.
@@ -19,7 +19,7 @@ export default function violatesRequiredRule(pRule, pModule) {
     const lGroups = extractGroups(pRule.module, pModule.source);
 
     lReturnValue = !pModule.dependencies.some((pDependency) =>
-      matchers.toPath(pRule, pDependency, lGroups)
+      matchers.toPath(pRule, pDependency, lGroups),
     );
   }
   return lReturnValue;

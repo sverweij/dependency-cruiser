@@ -4,7 +4,7 @@ import {
   findRuleByName,
   ruleSetHasLicenseRule,
   ruleSetHasDeprecationRule,
-} from "../../src/graph-utl/rule-set.mjs";
+} from "#graph-utl/rule-set.mjs";
 
 describe("[U] graph-utl/rule-set - findRuleByName", () => {
   const lRuleSet = {

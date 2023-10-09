@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import merge from "../../../src/config-utl/extract-depcruise-config/merge-configs.mjs";
+import merge from "#config-utl/extract-depcruise-config/merge-configs.mjs";
 
 describe("[U] config-utl/mergeRuleSets - general", () => {
   it("two empty rule sets yield an empty rule set with named attributes", () => {

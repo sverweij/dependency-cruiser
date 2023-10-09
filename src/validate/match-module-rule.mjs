@@ -1,7 +1,7 @@
 import has from "lodash/has.js";
-import { extractGroups } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
+import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
  * Returns true if pRule is an orphan rule and pModule is an orphan.
@@ -37,7 +37,7 @@ function matchesReachableRule(pRule, pModule) {
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
         // @ts-expect-error the 'has' above ensures the 'to.reachable' exists
-        pReachable.value === pRule.to.reachable
+        pReachable.value === pRule.to.reachable,
     );
     if (lReachableRecord) {
       const lGroups = extractGroups(pRule.from, lReachableRecord.matchedFrom);
@@ -71,8 +71,8 @@ function matchesReachesRule(pRule, pModule) {
         pReaches.modules.some(
           (pReachesModule) =>
             matchers.toModulePath(pRule, pReachesModule) &&
-            matchers.toModulePathNot(pRule, pReachesModule)
-        )
+            matchers.toModulePathNot(pRule, pReachesModule),
+        ),
     )
   );
 }
@@ -86,7 +86,7 @@ function dependentsCountsMatch(pRule, pDependents) {
   const lMatchingDependentsCount = pDependents.filter(
     (pDependent) =>
       Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
-      Boolean(!pRule.from.pathNot || !pDependent.match(pRule.from.pathNot))
+      Boolean(!pRule.from.pathNot || !pDependent.match(pRule.from.pathNot)),
   ).length;
   return (
     (!pRule.module.numberOfDependentsLessThan ||
