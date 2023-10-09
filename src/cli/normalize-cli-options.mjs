@@ -3,7 +3,6 @@ import { isAbsolute } from "node:path";
 import set from "lodash/set.js";
 import get from "lodash/get.js";
 import has from "lodash/has.js";
-import loadConfig from "../config-utl/extract-depcruise-config/index.mjs";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
   DEFAULT_BASELINE_FILE_NAME,
@@ -14,6 +13,7 @@ import {
   BABEL_CONFIG,
   OLD_DEFAULT_RULES_FILE_NAME,
 } from "./defaults.mjs";
+import loadConfig from "#config-utl/extract-depcruise-config/index.mjs";
 
 function getOptionValue(pDefault) {
   return (pValue) => (typeof pValue === "string" ? pValue : pDefault);

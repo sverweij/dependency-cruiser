@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { deepEqual } from "node:assert/strict";
-import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
+import extractTSConfig from "#config-utl/extract-ts-config.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import resolve from "#extract/resolve/index.mjs";
 

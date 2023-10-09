@@ -1,5 +1,5 @@
 import { deepEqual, ok } from "node:assert/strict";
-import extractKnownViolations from "../../src/config-utl/extract-known-violations.mjs";
+import extractKnownViolations from "#config-utl/extract-known-violations.mjs";
 
 describe("[I] config-utl/extractKnownViolations", () => {
   const WORKINGDIR = process.cwd();

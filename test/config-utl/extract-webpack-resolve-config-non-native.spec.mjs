@@ -1,7 +1,7 @@
 import { deepEqual, match, equal } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
+import loadResolveConfig from "#config-utl/extract-webpack-resolve-config.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

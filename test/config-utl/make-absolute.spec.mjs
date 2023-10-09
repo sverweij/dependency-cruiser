@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { equal } from "node:assert/strict";
-import makeAbsolute from "../../src/config-utl/make-absolute.mjs";
+import makeAbsolute from "#config-utl/make-absolute.mjs";
 
 describe("[U] cli/utl/makeAbsolute", () => {
   it("leaves absolute path names alone", () => {

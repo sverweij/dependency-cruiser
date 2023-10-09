@@ -46,6 +46,7 @@
   "main": "src/main/index.mjs",
   "imports": {
     "#cache/*": "./src/cache/*",
+    "#config-utl/*": "./src/config-utl/*",
     "#configuration-schema": "./src/schema/configuration.schema.mjs",
     "#cli/*": "./src/cli/*",
     "#cruise-result-schema": "./src/schema/cruise-result.schema.mjs",

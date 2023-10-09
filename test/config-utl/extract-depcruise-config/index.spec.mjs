@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { ok, deepEqual } from "node:assert/strict";
-import loadConfig from "../../../src/config-utl/extract-depcruise-config/index.mjs";
+import loadConfig from "#config-utl/extract-depcruise-config/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const mockDirectory = join(__dirname, "__mocks__");
