@@ -1,5 +1,4 @@
 import { deepEqual } from "node:assert/strict";
-import _cloneDeep from "lodash/cloneDeep.js";
 import theming from "#report/dot/theming.mjs";
 
 describe("[U] report/dot/theming - determineModuleColors - default theme", () => {
@@ -41,7 +40,7 @@ describe("[U] report/dot/theming - determineModuleColors - default theme", () =>
   });
 
   it("normalizeTheme doesn't mutate the default theme", () => {
-    const lOriginalDefaultTheme = _cloneDeep(theming.normalizeTheme());
+    const lOriginalDefaultTheme = structuredClone(theming.normalizeTheme());
 
     theming.normalizeTheme({ graph: { someAttribute: 1234 } });
     deepEqual(theming.normalizeTheme(), lOriginalDefaultTheme);
