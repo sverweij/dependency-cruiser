@@ -3,7 +3,7 @@
 import { program } from "commander";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import format from "#cli/format.mjs";
-import meta from "#meta";
+import meta from "#meta.js";
 
 function formatError(pError) {
   process.stderr.write(pError.message);

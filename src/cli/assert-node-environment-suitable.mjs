@@ -1,5 +1,5 @@
 import satisfies from "semver/functions/satisfies.js";
-import meta from "#meta";
+import meta from "#meta.js";
 
 export default function assertNodeEnvironmentSuitable(pNodeVersion) {
   // not using default parameter here because the check should run

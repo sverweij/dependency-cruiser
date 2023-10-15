@@ -4,7 +4,7 @@ import { extname } from "node:path";
 import json5 from "json5";
 import tryImport from "semver-try-require";
 import makeAbsolute from "./make-absolute.mjs";
-import meta from "#meta";
+import meta from "#meta.js";
 
 async function getJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};

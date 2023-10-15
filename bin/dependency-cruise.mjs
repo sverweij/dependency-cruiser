@@ -3,7 +3,7 @@ import { EOL } from "node:os";
 import { program } from "commander";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import cli from "#cli/index.mjs";
-import meta from "#meta";
+import meta from "#meta.js";
 
 try {
   assertNodeEnvironmentSuitable();

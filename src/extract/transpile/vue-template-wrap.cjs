@@ -1,7 +1,7 @@
 const { EOL } = require("node:os");
 const isEmpty = require("lodash/isEmpty");
 const tryRequire = require("semver-try-require");
-const meta = require("#meta");
+const meta = require("#meta.js");
 
 /*
  * vue-template-compiler was replaced by @vue/compiler-sfc for Vue3.

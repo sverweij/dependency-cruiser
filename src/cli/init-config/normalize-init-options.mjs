@@ -6,7 +6,7 @@ import {
   toSourceLocationArray,
 } from "./environment-helpers.mjs";
 import findExtensions from "./find-extensions.mjs";
-import meta from "#meta";
+import meta from "#meta.js";
 
 /**
  * @param {import("./types.js").IInitConfig} pInitOptions

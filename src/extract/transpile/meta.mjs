@@ -1,6 +1,6 @@
 /* eslint security/detect-object-injection : 0*/
 import tryAvailable from "./try-import-available.mjs";
-import meta from "#meta";
+import meta from "#meta.js";
 
 function gotCoffee() {
   return (
