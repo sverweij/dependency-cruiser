@@ -2,10 +2,9 @@
 import { writeFileSync } from "node:fs";
 import { extname } from "node:path";
 import prettier from "prettier";
-import clone from "lodash/clone.js";
 
 function stripAttribute(pObject, pAttribute) {
-  const lObject = clone(pObject);
+  const lObject = structuredClone(pObject);
   delete lObject[pAttribute];
 
   Object.keys(pObject).forEach((pKey) => {
