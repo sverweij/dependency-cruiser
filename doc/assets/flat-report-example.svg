@@ -342,7 +342,7 @@
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="323.13,-207.1 329.13,-205 323.13,-202.9 323.13,-207.1"/>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/graph&#45;utl/filter&#45;bank.mjs -->
-<g id="edge21" class="edge">
+<g id="edge26" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/graph&#45;utl/filter&#45;bank.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M343.51,-189.65C343.51,-189.65 343.51,-124 343.51,-124"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="345.61,-124 343.51,-118 341.41,-124 345.61,-124"/>
@@ -358,7 +358,7 @@
 </g>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs -->
-<g id="edge22" class="edge">
+<g id="edge21" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M397.82,-216.33C397.82,-216.33 397.82,-217.18 397.82,-217.18"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="395.72,-215.79 397.82,-221.79 399.92,-215.79 395.72,-215.79"/>
@@ -374,7 +374,7 @@
 </g>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;custom&#45;level.mjs -->
-<g id="edge23" class="edge">
+<g id="edge22" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;custom&#45;level.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M385.54,-216.3C385.54,-238.4 385.54,-280 385.54,-280 385.54,-280 266.02,-280 266.02,-280"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="266.02,-277.9 260.02,-280 266.02,-282.1 266.02,-277.9"/>
@@ -390,7 +390,7 @@
 </g>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;flat&#45;level.mjs -->
-<g id="edge24" class="edge">
+<g id="edge23" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;flat&#45;level.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M387.57,-216.05C387.57,-216.05 387.57,-278.34 387.57,-278.34"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="385.47,-278.34 387.57,-284.34 389.67,-278.34 385.47,-278.34"/>
@@ -406,7 +406,7 @@
 </g>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;folder&#45;level.mjs -->
-<g id="edge25" class="edge">
+<g id="edge24" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/report/dot/prepare&#45;folder&#45;level.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M358.01,-216.07C358.01,-216.07 358.01,-240.16 358.01,-240.16"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="355.91,-240.16 358.01,-246.16 360.11,-240.16 355.91,-240.16"/>
@@ -422,7 +422,7 @@
 </g>
 </g>
 <!-- src/report/dot/index.mjs&#45;&gt;src/report/dot/theming.mjs -->
-<g id="edge26" class="edge">
+<g id="edge25" class="edge">
 <title>src/report/dot/index.mjs&#45;&gt;src/report/dot/theming.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M389.59,-216.15C389.59,-234.94 389.59,-267 389.59,-267 389.59,-267 444.31,-267 444.31,-267"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="444.31,-269.1 450.31,-267 444.31,-264.9 444.31,-269.1"/>
@@ -488,61 +488,61 @@
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="460.01,-249.61 462.11,-255.61 464.21,-249.61 460.01,-249.61"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs -->
-<g id="edge29" class="edge">
+<g id="edge30" class="edge">
 <title>src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M256.95,-291C278.1,-291 296.4,-291 296.4,-291 296.4,-291 296.4,-312.31 296.4,-312.31"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="294.3,-312.31 296.4,-318.31 298.5,-312.31 294.3,-312.31"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.mjs -->
-<g id="edge30" class="edge">
+<g id="edge31" class="edge">
 <title>src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M144.77,-296.17C144.77,-296.17 144.77,-337.03 144.77,-337.03"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="142.67,-337.03 144.77,-343.03 146.87,-337.03 142.67,-337.03"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.mjs -->
-<g id="edge31" class="edge">
+<g id="edge32" class="edge">
 <title>src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M130.24,-287C130.24,-287 129.36,-287 129.36,-287"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="130.44,-284.9 124.44,-287 130.44,-289.1 130.44,-284.9"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs -->
-<g id="edge32" class="edge">
+<g id="edge29" class="edge">
 <title>src/report/dot/prepare&#45;custom&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M248,-269.31C248,-255.8 248,-237 248,-237 248,-237 382.36,-237 382.36,-237"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="382.36,-239.1 388.36,-237 382.36,-234.9 382.36,-239.1"/>
 </g>
 <!-- src/report/dot/prepare&#45;flat&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs -->
-<g id="edge33" class="edge">
+<g id="edge34" class="edge">
 <title>src/report/dot/prepare&#45;flat&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M342.94,-314.1C342.94,-314.1 342.94,-314.83 342.94,-314.83"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="340.84,-312.3 342.94,-318.3 345.04,-312.3 340.84,-312.3"/>
 </g>
 <!-- src/report/dot/prepare&#45;flat&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs -->
-<g id="edge34" class="edge">
+<g id="edge33" class="edge">
 <title>src/report/dot/prepare&#45;flat&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M427.59,-287.36C427.59,-287.36 427.59,-260.27 427.59,-260.27"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="429.69,-260.27 427.59,-254.27 425.49,-260.27 429.69,-260.27"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs -->
-<g id="edge35" class="edge">
+<g id="edge36" class="edge">
 <title>src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/compare.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M317.24,-275.62C317.24,-275.62 317.24,-312.47 317.24,-312.47"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="315.14,-312.47 317.24,-318.47 319.34,-312.47 315.14,-312.47"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;folder.mjs -->
-<g id="edge36" class="edge">
+<g id="edge37" class="edge">
 <title>src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;folder.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M271.96,-275.67C271.96,-300.19 271.96,-350 271.96,-350 271.96,-350 324.79,-350 324.79,-350 324.79,-350 324.79,-354.16 324.79,-354.16"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="322.69,-354.16 324.79,-360.16 326.89,-354.16 322.69,-354.16"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.mjs -->
-<g id="edge37" class="edge">
+<g id="edge38" class="edge">
 <title>src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M268.36,-275.52C268.36,-286.38 268.36,-300 268.36,-300 268.36,-300 130.59,-300 130.59,-300"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="130.59,-297.9 124.59,-300 130.59,-302.1 130.59,-297.9"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs -->
-<g id="edge38" class="edge">
+<g id="edge35" class="edge">
 <title>src/report/dot/prepare&#45;folder&#45;level.mjs&#45;&gt;src/report/dot/module&#45;utl.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M383.96,-254C398.33,-254 409.6,-254 409.6,-254 409.6,-254 409.6,-253.72 409.6,-253.72"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="411.7,-260.23 409.6,-254.23 407.5,-260.23 411.7,-260.23"/>
@@ -628,13 +628,13 @@
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="536.02,-104.51 538.12,-110.51 540.22,-104.51 536.02,-104.51"/>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/graph&#45;utl/rule&#45;set.mjs -->
-<g id="edge44" class="edge">
+<g id="edge45" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/graph&#45;utl/rule&#45;set.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M570.44,-113.65C570.44,-113.65 570.44,-102.65 570.44,-102.65"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="572.54,-102.65 570.44,-96.65 568.34,-102.65 572.54,-102.65"/>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/report/utl/index.mjs -->
-<g id="edge46" class="edge">
+<g id="edge44" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/report/utl/index.mjs</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M549.92,-140.24C549.92,-140.24 549.92,-187.45 549.92,-187.45"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="547.82,-187.45 549.92,-193.45 552.02,-187.45 547.82,-187.45"/>
@@ -650,7 +650,7 @@
 </g>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/utl/wrap&#45;and&#45;indent.mjs -->
-<g id="edge45" class="edge">
+<g id="edge46" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/utl/wrap&#45;and&#45;indent.mjs</title>
 <path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M578.46,-124C593.58,-124 609.08,-124 609.08,-124 609.08,-124 609.08,-125.13 609.08,-125.13"/>
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="606.98,-125.13 609.08,-131.13 611.18,-125.13 606.98,-125.13"/>

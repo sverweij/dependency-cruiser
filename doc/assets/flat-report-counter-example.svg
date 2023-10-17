@@ -348,13 +348,13 @@
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="120.36,-305.1 126.36,-303 120.36,-300.9 120.36,-305.1"/>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/graph&#45;utl/rule&#45;set.mjs -->
-<g id="edge22" class="edge">
+<g id="edge23" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/graph&#45;utl/rule&#45;set.mjs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M166,-312.17C166,-348.85 166,-483 166,-483 166,-483 236.79,-483 236.79,-483"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="236.79,-485.1 242.79,-483 236.79,-480.9 236.79,-485.1"/>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/report/utl -->
-<g id="edge24" class="edge">
+<g id="edge22" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/report/utl</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M183.96,-303C222.19,-303 287,-303 287,-303 287,-303 287,-216.35 287,-216.35"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="289.1,-216.35 287,-210.35 284.9,-216.35 289.1,-216.35"/>
@@ -369,7 +369,7 @@
 </g>
 </g>
 <!-- src/report/error.mjs&#45;&gt;src/utl/wrap&#45;and&#45;indent.mjs -->
-<g id="edge23" class="edge">
+<g id="edge24" class="edge">
 <title>src/report/error.mjs&#45;&gt;src/utl/wrap&#45;and&#45;indent.mjs</title>
 <path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M148,-312.12C148,-355.95 148,-543 148,-543 148,-543 218.63,-543 218.63,-543"/>
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="218.63,-545.1 224.63,-543 218.63,-540.9 218.63,-545.1"/>
