@@ -9,37 +9,36 @@ const WORKING_DIR = process.cwd();
 const MAIN_FIXTURE_DIR = join(__dirname, "..", "test", "main", "__fixtures__");
 const MAIN_MOCKS_DIR = join(__dirname, "..", "test", "main", "__mocks__");
 
-function barfTheJSON(
+async function barfTheJSON(
   pTargetFileName,
   pResult,
   pTargetDirectory = MAIN_MOCKS_DIR,
 ) {
-  writeFileSync(
-    join(pTargetDirectory, pTargetFileName),
-    prettier.format(JSON.stringify(pResult.output), { parser: "json" }),
-    {
-      encoding: "utf8",
-    },
-  );
+  const lFormatted = await prettier.format(JSON.stringify(pResult.output), {
+    parser: "json",
+  });
+  writeFileSync(join(pTargetDirectory, pTargetFileName), lFormatted, {
+    encoding: "utf8",
+  });
 }
 
 // main.cruise
-barfTheJSON(
+await barfTheJSON(
   "ts.json",
   await main.cruise(["test/main/__mocks__/ts"]),
   MAIN_FIXTURE_DIR,
 );
-barfTheJSON(
+await barfTheJSON(
   "tsx.json",
   await main.cruise(["test/main/__mocks__/tsx"], {}, { bustTheCache: true }),
   MAIN_FIXTURE_DIR,
 );
-barfTheJSON(
+await barfTheJSON(
   "jsx.json",
   await main.cruise(["test/main/__mocks__/jsx"], {}, { bustTheCache: true }),
   MAIN_FIXTURE_DIR,
 );
-barfTheJSON(
+await barfTheJSON(
   "jsx-as-object.json",
   await main.cruise(
     ["test/main/__mocks__/jsx"],
@@ -50,7 +49,7 @@ barfTheJSON(
   ),
   MAIN_FIXTURE_DIR,
 );
-barfTheJSON(
+await barfTheJSON(
   "collapse-after-cruise/expected-result.json",
   await main.cruise(
     ["test/main/__mocks__/collapse-after-cruise"],
@@ -63,7 +62,7 @@ barfTheJSON(
 );
 
 // // main.cruise - tsPreCompilationDeps
-barfTheJSON(
+await barfTheJSON(
   "ts-precomp-cjs.json",
   await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-on-cjs"],
@@ -86,7 +85,7 @@ barfTheJSON(
   MAIN_FIXTURE_DIR,
 );
 
-barfTheJSON(
+await barfTheJSON(
   "ts-no-precomp-cjs.json",
   await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-off-cjs"],
@@ -109,7 +108,7 @@ barfTheJSON(
   MAIN_FIXTURE_DIR,
 );
 
-barfTheJSON(
+await barfTheJSON(
   "ts-precomp-es.json",
   await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-on-es"],
@@ -132,7 +131,7 @@ barfTheJSON(
   MAIN_FIXTURE_DIR,
 );
 
-barfTheJSON(
+await barfTheJSON(
   "ts-no-precomp-es.json",
   await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-off-es"],
@@ -182,21 +181,21 @@ const DYNAMIC_IMPORTS_RULE_SET = {
 };
 
 process.chdir("test/main/__mocks__/dynamic-imports/es");
-barfTheJSON(
+await barfTheJSON(
   "dynamic-imports/es/output.json",
   await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true }),
 );
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/dynamic-imports/typescript");
-barfTheJSON(
+await barfTheJSON(
   "dynamic-imports/typescript/output.json",
   await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true }),
 );
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/dynamic-imports/typescript");
-barfTheJSON(
+await barfTheJSON(
   "dynamic-imports/typescript/output-pre-compilation-deps.json",
   await main.cruise(
     ["src"],
@@ -208,7 +207,7 @@ process.chdir(WORKING_DIR);
 
 // main.cruise - type only module references
 process.chdir("test/main/__mocks__/type-only-module-references");
-barfTheJSON(
+await barfTheJSON(
   "type-only-module-references/output.json",
   await main.cruise(
     ["src"],
@@ -219,7 +218,7 @@ barfTheJSON(
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/type-only-module-references");
-barfTheJSON(
+await barfTheJSON(
   "type-only-module-references/output-no-ts.json",
   await main.cruise(
     ["src"],
@@ -231,7 +230,7 @@ process.chdir(WORKING_DIR);
 
 // main. cruise - explicitly type only imports
 process.chdir("test/main/__mocks__/type-only-imports");
-barfTheJSON(
+await barfTheJSON(
   "type-only-imports/output.json",
   await main.cruise(
     ["src"],
@@ -244,7 +243,7 @@ barfTheJSON(
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/type-only-imports");
-barfTheJSON(
+await barfTheJSON(
   "type-only-imports/output-with-rules.json",
   await main.cruise(
     ["src"],
