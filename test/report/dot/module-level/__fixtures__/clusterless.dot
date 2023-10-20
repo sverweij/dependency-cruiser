@@ -3,8 +3,8 @@ strict digraph "dependency-cruiser output"{
 
 
 
-    "fs" [label=<fs> tooltip="fs" ]
-    "http" [label=<http> tooltip="http" ]
+    "fs" [label=<fs> tooltip="fs" URL="https://nodejs.org/api/fs.html" ]
+    "http" [label=<http> tooltip="http" URL="https://nodejs.org/api/http.html" ]
     subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/somemodule" {label="somemodule" subgraph "cluster_node_modules/somemodule/node_modules" {label="node_modules" subgraph "cluster_node_modules/somemodule/node_modules/someothermodule" {label="someothermodule" "node_modules/somemodule/node_modules/someothermodule/main.js" [label=<main.js> tooltip="main.js" URL="node_modules/somemodule/node_modules/someothermodule/main.js" ] } } } }
     subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/somemodule" {label="somemodule" subgraph "cluster_node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/moar-javascript.js" [label=<moar-javascript.js> tooltip="moar-javascript.js" URL="node_modules/somemodule/src/moar-javascript.js" ] } } }
     subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/somemodule" {label="somemodule" subgraph "cluster_node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/somemodule.js" [label=<somemodule.js> tooltip="somemodule.js" URL="node_modules/somemodule/src/somemodule.js" ] } } }
@@ -14,7 +14,7 @@ strict digraph "dependency-cruiser output"{
     "one_only_one.js" -> "path" [xlabel="unnamed" tooltip="unnamed" ]
     "one_only_two.js" [label=<one_only_two.js> tooltip="one_only_two.js" URL="one_only_two.js" ]
     "one_only_two.js" -> "path" [xlabel="unnamed" tooltip="unnamed" ]
-    "path" [label=<path> tooltip="path" ]
+    "path" [label=<path> tooltip="path" URL="https://nodejs.org/api/path.html" ]
     "root_one.js" [label=<root_one.js> tooltip="root_one.js" URL="root_one.js" ]
     "root_one.js" -> "one_only_one.js" [xlabel="unnamed" tooltip="unnamed" ]
     "root_one.js" -> "one_only_two.js" [xlabel="unnamed" tooltip="unnamed" ]

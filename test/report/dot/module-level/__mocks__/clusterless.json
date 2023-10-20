@@ -69,7 +69,8 @@
       "valid": true,
       "followable": false,
       "coreModule": true,
-      "dependencies": []
+      "dependencies": [],
+      "dependencyTypes": ["core"]
     },
     {
       "source": "one_only_two.js",
@@ -185,7 +186,8 @@
       "valid": true,
       "followable": false,
       "coreModule": true,
-      "dependencies": []
+      "dependencies": [],
+      "dependencyTypes": ["core"]
     },
     {
       "source": "shared.js",
@@ -336,7 +338,8 @@
       "valid": true,
       "followable": false,
       "coreModule": true,
-      "dependencies": []
+      "dependencies": [],
+      "dependencyTypes": ["core"]
     },
     {
       "source": "two_only_one.js",
