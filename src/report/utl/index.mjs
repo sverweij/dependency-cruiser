@@ -1,3 +1,7 @@
+import { join } from "node:path/posix";
+
+const PROTOCOL_PREFIX_RE = /^[a-z]+:\/\//;
+
 // eslint-disable-next-line no-undefined
 export const formatPercentage = new Intl.NumberFormat(undefined, {
   style: "percent",
@@ -6,9 +10,78 @@ export const formatPercentage = new Intl.NumberFormat(undefined, {
 export function formatViolation(
   pViolation,
   pViolationType2Formatter,
-  pDefaultFormatter
+  pDefaultFormatter,
 ) {
   return (pViolationType2Formatter[pViolation.type] || pDefaultFormatter)(
-    pViolation
+    pViolation,
   );
+}
+
+/**
+ * Sort of smartly concatenate the given prefix and source:
+ *
+ * if it's an uri pattern (e.g. https://yadda, file://snorkel/bla)
+ * simply concat.
+ *
+ * in all other cases path.posix.join the two
+ *
+ * @param {string} pPrefix - prefix
+ * @param {string} pSource - filename
+ * @return {string} prefix and filename concatenated
+ */
+function smartURIConcat(pPrefix, pSource) {
+  if (pPrefix.match(PROTOCOL_PREFIX_RE)) {
+    return `${pPrefix}${pSource}`;
+  } else {
+    return join(pPrefix, pSource);
+  }
+}
+
+/**
+ *
+ * @param {string} pSource
+ * @returns {string}
+ */
+function deriveExternalPackageName(pSource) {
+  const lRE =
+    /node_modules\/(?<packageName>[^@][^/]+)|(?<atPackageName>@[^/]+\/[^/]+)/;
+  const lMatch = pSource.match(lRE);
+  if (lMatch) {
+    return lMatch.groups.packageName || lMatch.groups.atPackageName;
+  }
+  return "";
+}
+
+/**
+ * @param {string} pSource
+ * @returns {string}
+ */
+function deriveCorePackageName(pSource) {
+  return pSource.split("/").shift();
+}
+
+/**
+ *
+ * @param {import("../../../types/cruise-result").IModule} pModule
+ * @param {string} pPrefix
+ * @returns {string}
+ */
+export function getURLForModule(pModule, pPrefix) {
+  // TODO: derive the URLs from configuration
+  if (pModule.dependencyTypes?.some((pType) => pType === "core")) {
+    return "https://nodejs.org/api/{{packageName}}.html".replace(
+      "{{packageName}}",
+      deriveCorePackageName(pModule.source),
+    );
+  } else if (
+    pModule.dependencyTypes?.some((pType) => pType.startsWith("npm"))
+  ) {
+    return "https://www.npmjs.com/package/{{packageName}}".replace(
+      "{{packageName}}",
+      deriveExternalPackageName(pModule.source),
+    );
+  } else if (pPrefix) {
+    return smartURIConcat(pPrefix, pModule.source);
+  }
+  return pModule.source;
 }

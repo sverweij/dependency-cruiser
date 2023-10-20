@@ -1,9 +1,7 @@
-import { basename, sep, dirname, join } from "node:path/posix";
+import { basename, sep, dirname } from "node:path/posix";
 import has from "lodash/has.js";
-import { formatPercentage } from "../utl/index.mjs";
+import { formatPercentage, getURLForModule } from "../utl/index.mjs";
 import theming from "./theming.mjs";
-
-const PROTOCOL_PREFIX_RE = /^[a-z]+:\/\//;
 
 function attributizeObject(pObject) {
   return (
@@ -25,7 +23,7 @@ function extractFirstTransgression(pModule) {
             ...pDependency,
             rule: pDependency.rules[0],
           }
-        : pDependency
+        : pDependency,
     ),
   };
 }
@@ -37,7 +35,7 @@ function applyTheme(pTheme) {
       .map((pDependency) => ({
         ...pDependency,
         themeAttrs: attributizeObject(
-          theming.determineAttributes(pDependency, pTheme.dependencies)
+          theming.determineAttributes(pDependency, pTheme.dependencies),
         ),
       }))
       .map((pDependency) => ({
@@ -45,7 +43,7 @@ function applyTheme(pTheme) {
         hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs),
       })),
     themeAttrs: attributizeObject(
-      theming.determineAttributes(pModule, pTheme.modules)
+      theming.determineAttributes(pModule, pTheme.modules),
     ),
   });
 }
@@ -68,13 +66,14 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
 
   if (pShowMetrics && has(pModule, "instability") && !pModule.consolidated) {
     lInstabilityString = ` <FONT color="#808080" point-size="8">${formatPercentage(
-      pModule.instability
+      pModule.instability,
     )}</FONT>`;
   }
   return lInstabilityString;
 }
 
 function folderify(pShowMetrics) {
+  /** @param {import("../../../types/cruise-result").IModule} pModule*/
   return (pModule) => {
     let lAdditions = {};
     let lDirectoryName = dirname(pModule.source);
@@ -86,7 +85,7 @@ function folderify(pShowMetrics) {
 
     lAdditions.label = `<${basename(pModule.source)}${makeInstabilityString(
       pModule,
-      pShowMetrics
+      pShowMetrics,
     )}>`;
     lAdditions.tooltip = basename(pModule.source);
 
@@ -98,37 +97,25 @@ function folderify(pShowMetrics) {
 }
 
 /**
- * Sort of smartly concatenate the given prefix and source:
- *
- * if it's an uri pattern (e.g. https://yadda, file://snorkel/bla)
- * simply concat.
- *
- * in all other cases path.posix.join the two
- *
- * @param {string} pPrefix - prefix
- * @param {string} pSource - filename
- * @return {string} prefix and filename concatenated
+ * @param {string} pPrefix
+ * @returns {URL?: string}
  */
-function smartURIConcat(pPrefix, pSource) {
-  if (pPrefix.match(PROTOCOL_PREFIX_RE)) {
-    return `${pPrefix}${pSource}`;
-  } else {
-    return join(pPrefix, pSource);
-  }
-}
-
 function addURL(pPrefix) {
-  return (pModule) => ({
-    ...pModule,
-    ...(pModule.coreModule || pModule.couldNotResolve
-      ? {}
-      : { URL: smartURIConcat(pPrefix, pModule.source) }),
-  });
+  return (pModule) => {
+    if (pModule.couldNotResolve) {
+      return pModule;
+    }
+
+    return {
+      ...pModule,
+      URL: getURLForModule(pModule, pPrefix),
+    };
+  };
 }
 
 function makeLabel(pModule, pShowMetrics) {
   return `<${dirname(pModule.source)}/<BR/><B>${basename(
-    pModule.source
+    pModule.source,
   )}</B>${makeInstabilityString(pModule, pShowMetrics)}>`;
 }
 
