@@ -995,6 +995,11 @@ when set to true:
 }
 ```
 
+For this rule the `aliased`, `aliased-subpath-import`, `aliased-webpack`,
+`aliased-tsconfig` and `type-only` dependency types do not count towards the
+number of dependency types a dependency has, as these _by definition_ are
+always in addition to one of the other dependency types.
+
 When left out it doesn't matter how many dependency types a dependency has.
 
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
