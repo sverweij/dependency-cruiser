@@ -169,7 +169,7 @@ function determineExternalModuleDependencyTypes(
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
- * @param {any} pResolveOptions an enhanced resolve 'resolve' key
+ * @param {import("../../../types/resolve-options.js").IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
  *
  * @return {import("../../../types/shared-types.js").DependencyType[]} an array of dependency types for the dependency
@@ -184,20 +184,40 @@ export default function determineDependencyTypes(
   pBaseDirectory,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]}*/
-  let lReturnValue = ["undetermined"];
+  let lReturnValue = [];
   const lResolveOptions = pResolveOptions || {};
 
   if (pDependency.couldNotResolve) {
-    lReturnValue = ["unknown"];
-  } else if (pDependency.coreModule) {
+    return ["unknown"];
+  }
+
+  const lAliases = getAliasTypes(
+    pModuleName,
+    pDependency.resolved,
+    lResolveOptions,
+    pManifest,
+  );
+  if (lAliases.length > 0) {
+    lReturnValue = lAliases;
+  }
+
+  if (pDependency.coreModule) {
     // this business seems duplicate (it's already in
     // the passed object as `coreModule`- determined by the resolve-AMD or
     // resolve-commonJS module). I want to deprecate the `coreModule`
     // attribute in favor of this one and determining it here will make
     // live easier in the future
-    lReturnValue = ["core"];
-  } else if (isRelativeModuleName(pModuleName)) {
-    lReturnValue = ["local"];
+    lReturnValue.push("core");
+  } else if (
+    isRelativeModuleName(pModuleName) ||
+    (lAliases.length > 0 &&
+      !isExternalModule(
+        pDependency.resolved,
+        lResolveOptions.modules,
+        pBaseDirectory,
+      ))
+  ) {
+    lReturnValue.push("local");
   } else if (
     isExternalModule(
       pDependency.resolved,
@@ -205,24 +225,18 @@ export default function determineDependencyTypes(
       pBaseDirectory,
     )
   ) {
-    lReturnValue = determineExternalModuleDependencyTypes(
-      pDependency,
-      pModuleName,
-      pManifest,
-      pFileDirectory,
-      lResolveOptions,
-      pBaseDirectory,
+    lReturnValue = lReturnValue.concat(
+      determineExternalModuleDependencyTypes(
+        pDependency,
+        pModuleName,
+        pManifest,
+        pFileDirectory,
+        lResolveOptions,
+        pBaseDirectory,
+      ),
     );
   } else {
-    const lAliases = getAliasTypes(
-      pModuleName,
-      pDependency.resolved,
-      lResolveOptions,
-      pManifest,
-    );
-    if (lAliases.length > 0) {
-      lReturnValue = lAliases;
-    }
+    lReturnValue.push("undetermined");
   }
 
   return lReturnValue.concat(pDependency.dependencyTypes || []);

@@ -243,7 +243,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "#the-alias",
         {
           imports: {
-            "#the-alias": "src/i-was-aliased.js",
+            "#the-alias": "./src/i-was-aliased.js",
           },
         },
         ".",
@@ -251,7 +251,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules"],
         },
       ),
-      ["aliased", "aliased-subpath-import"],
+      ["aliased", "aliased-subpath-import", "local"],
     );
   });
 
@@ -265,7 +265,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "#some/folder/source.mjs",
         {
           imports: {
-            "#*": "src/*",
+            "#*": "./src/*",
           },
         },
         ".",
@@ -273,7 +273,52 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules"],
         },
       ),
-      ["aliased", "aliased-subpath-import"],
+      ["aliased", "aliased-subpath-import", "local"],
+    );
+  });
+
+  it("classifies subpath imports that resolve to an external modules both as external module and as aliased", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "#the-alias",
+        {
+          imports: {
+            "#the-alias": "cool-module",
+          },
+        },
+        ".",
+        {
+          modules: ["node_modules"],
+        },
+      ),
+      ["aliased", "aliased-subpath-import", "npm-no-pkg"],
+    );
+  });
+
+  it("classifies subpath imports that resolve to an builtin module both as core module and as aliased", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "test",
+          coreModule: true,
+        },
+        "#the-alias",
+        {
+          imports: {
+            "#the-alias": "test",
+          },
+        },
+        ".",
+        {
+          modules: ["node_modules"],
+        },
+      ),
+      ["aliased", "aliased-subpath-import", "core"],
     );
   });
 
@@ -321,7 +366,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         // pBaseDirectory
       ),
-      ["aliased", "aliased-webpack"],
+      ["aliased", "aliased-webpack", "local"],
     );
   });
 
@@ -345,7 +390,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         // pBaseDirectory
       ),
-      ["aliased", "aliased-tsconfig"],
+      ["aliased", "aliased-tsconfig", "local"],
     );
   });
 

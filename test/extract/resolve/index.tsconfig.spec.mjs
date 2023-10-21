@@ -44,7 +44,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved: "ts-config-with-path/src/shared/index.ts",
       },
@@ -72,7 +72,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved: "ts-config-with-path/src/common/wood/tree.ts",
       },
@@ -100,7 +100,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved: "ts-config-with-path/src/typos/daddayaddaya.ts",
       },
@@ -135,7 +135,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved: "ts-config-with-path/src/common/wood/tree.ts",
       },
@@ -167,7 +167,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved:
           "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts",
@@ -200,7 +200,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-tsconfig"],
+        dependencyTypes: ["aliased", "aliased-tsconfig", "local"],
         followable: true,
         resolved:
           "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js",
