@@ -70,4 +70,58 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
       },
     );
   });
+  it("ignores aliases in counting dependency types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "please-duplicate-dep-types",
+          severity: "warn",
+          from: {},
+          to: { moreThanOneDependencyType: true },
+        },
+      ],
+    });
+
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "src/aap/zus/jet.js" },
+        {
+          module: "sneeze",
+          resolved: "node_modules/sneeze/index.js",
+          dependencyTypes: ["local", "aliased", "aliased-subpath-import"],
+        },
+      ),
+      {
+        valid: true,
+      },
+    );
+  });
+  it("ignores type-only in counting dependency types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "please-duplicate-dep-types",
+          severity: "warn",
+          from: {},
+          to: { moreThanOneDependencyType: true },
+        },
+      ],
+    });
+
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "src/aap/zus/jet.js" },
+        {
+          module: "sneeze",
+          resolved: "node_modules/sneeze/index.js",
+          dependencyTypes: ["npm-dev", "type-only"],
+        },
+      ),
+      {
+        valid: true,
+      },
+    );
+  });
 });

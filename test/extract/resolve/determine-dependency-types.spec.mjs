@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { deepEqual } from "node:assert/strict";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -232,23 +233,119 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
     );
   });
 
-  it("classifies aliased modules as aliased", () => {
+  it("classifies fixed subpath imports as aliased & aliased-subpath-import", () => {
     deepEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
+          resolved: "src/i-was-aliased.js",
+        },
+        "#the-alias",
+        {
+          imports: {
+            "#the-alias": "src/i-was-aliased.js",
+          },
+        },
+        ".",
+        {
+          modules: ["node_modules"],
+        },
+      ),
+      ["aliased", "aliased-subpath-import"],
+    );
+  });
+
+  it("classifies wildcard subpath imports as aliased & aliased-subpath-import", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "src/folder/source.mjs",
+        },
+        "#some/folder/source.mjs",
+        {
+          imports: {
+            "#*": "src/*",
+          },
+        },
+        ".",
+        {
+          modules: ["node_modules"],
+        },
+      ),
+      ["aliased", "aliased-subpath-import"],
+    );
+  });
+
+  it("does not classify modules starting with # that aren't subpath imports as aliased (but as 'undetermined')", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "src/i-was-not-aliased.js",
+        },
+        "#not-the-alias",
+        {
+          imports: {
+            "#the-alias": "src/i-was-aliased.js",
+          },
+        },
+        ".",
+        {
+          modules: ["node_modules"],
+        },
+      ),
+      ["undetermined"],
+    );
+  });
+
+  it("classifies webpack aliased modules as aliased & aliased-webpack", () => {
+    deepEqual(
+      determineDependencyTypes(
+        // dependency
+        {
+          couldNotResolve: false,
           resolved: "src/wappie.js",
         },
+        // pModuleName
         "@wappie",
+        // pManifest
         {},
+        // pFileDirectory
         ".",
+        // pResolveOptions
         {
           alias: {
             "@": "src",
           },
         },
+        // pBaseDirectory
       ),
-      ["aliased"],
+      ["aliased", "aliased-webpack"],
+    );
+  });
+
+  it("classifies likely TS aliased modules as aliased & aliased-tsconfig", () => {
+    deepEqual(
+      determineDependencyTypes(
+        // dependency
+        {
+          couldNotResolve: false,
+          resolved: "src/wappie.js",
+        },
+        // pModuleName
+        "@wappie",
+        // pManifest
+        {},
+        // pFileDirectory
+        ".",
+        // pResolveOptions
+        {
+          tsConfig: "tsconfig.json",
+        },
+        // pBaseDirectory
+      ),
+      ["aliased", "aliased-tsconfig"],
     );
   });
 

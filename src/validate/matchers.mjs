@@ -3,6 +3,14 @@ import has from "lodash/has.js";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
+const NOT_REALLY_DUPLICATES = new Set([
+  "aliased",
+  "aliased-subpath-import",
+  "aliased-webpack",
+  "aliased-tsconfig",
+  "type-only",
+]);
+
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
   if (has(pRule.to, pProperty)) {
@@ -143,10 +151,27 @@ function toIsMoreUnstable(pRule, pModule, pDependency) {
 }
 
 function matchesMoreThanOneDependencyType(pRule, pDependency) {
+  /**
+   * this rule exists to weed out i.e. dependencies declared in both
+   * dependencies and devDependencies. We, however, also use the dependencyTypes
+   * to specify closer to the source what kind of dependency it is (aliased via
+   * a subpath import => both 'aliased' and 'aliased-subpath-import').
+   *
+   * Moreover an alias per definition is also a regular dependency. So we also
+   * need to exclude those.
+   *
+   * Something similar goes for dependencies that are imported as 'type-only' -
+   * which are some sort of regular dependency as well. Hence the use of the
+   * lNotReallyDuplicates set.
+   */
+
   if (has(pRule.to, "moreThanOneDependencyType")) {
     return (
       pRule.to.moreThanOneDependencyType ===
-      pDependency.dependencyTypes.length > 1
+      pDependency.dependencyTypes.filter(
+        (pDependencyType) => !NOT_REALLY_DUPLICATES.has(pDependencyType),
+      ).length >
+        1
     );
   }
   return true;

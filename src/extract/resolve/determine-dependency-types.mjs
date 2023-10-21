@@ -3,7 +3,7 @@ import has from "lodash/has.js";
 import {
   isRelativeModuleName,
   isExternalModule,
-  isAliassy,
+  getAliasTypes,
 } from "./module-classifiers.mjs";
 import {
   dependencyIsDeprecated,
@@ -13,7 +13,7 @@ import {
 function dependencyKeyHasModuleName(
   pPackageDependencies,
   pModuleName,
-  pPrefix
+  pPrefix,
 ) {
   return (pKey) =>
     pKey.includes("ependencies") &&
@@ -30,25 +30,25 @@ const NPM2DEP_TYPE = new Map([
 function findModuleInPackageDependencies(
   pPackageDependencies,
   pModuleName,
-  pPrefix
+  pPrefix,
 ) {
   return Object.keys(pPackageDependencies)
     .filter(
-      dependencyKeyHasModuleName(pPackageDependencies, pModuleName, pPrefix)
+      dependencyKeyHasModuleName(pPackageDependencies, pModuleName, pPrefix),
     )
     .map((pKey) => NPM2DEP_TYPE.get(pKey) || "npm-no-pkg");
 }
 
 function needToLookAtTypesToo(pResolverModulePaths) {
   return (pResolverModulePaths || ["node_modules", "node_modules/@types"]).some(
-    (pPath) => pPath.includes("@types")
+    (pPath) => pPath.includes("@types"),
   );
 }
 
 function determineManifestDependencyTypes(
   pModuleName,
   pPackageDependencies,
-  pResolverModulePaths
+  pResolverModulePaths,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]} */
   let lReturnValue = ["npm-unknown"];
@@ -57,7 +57,7 @@ function determineManifestDependencyTypes(
     lReturnValue = findModuleInPackageDependencies(
       pPackageDependencies,
       pModuleName,
-      ""
+      "",
     );
 
     if (
@@ -67,7 +67,7 @@ function determineManifestDependencyTypes(
       lReturnValue = findModuleInPackageDependencies(
         pPackageDependencies,
         pModuleName,
-        "@types"
+        "@types",
       );
     }
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
@@ -106,13 +106,13 @@ function determineNodeModuleDependencyTypes(
   pModuleName,
   pPackageDeps,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]} */
   let lReturnValue = determineManifestDependencyTypes(
     getPackageRoot(pModuleName),
     pPackageDeps,
-    pResolveOptions.modules
+    pResolveOptions.modules,
   );
   if (
     pResolveOptions.resolveDeprecations &&
@@ -142,7 +142,7 @@ function determineExternalModuleDependencyTypes(
   pPackageDeps,
   pFileDirectory,
   pResolveOptions,
-  pBaseDirectory
+  pBaseDirectory,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]} */
   let lReturnValue = [];
@@ -154,7 +154,7 @@ function determineExternalModuleDependencyTypes(
       pModuleName,
       pPackageDeps,
       pFileDirectory,
-      pResolveOptions
+      pResolveOptions,
     );
   } else {
     lReturnValue = ["localmodule"];
@@ -174,13 +174,14 @@ function determineExternalModuleDependencyTypes(
  *
  * @return {import("../../../types/shared-types.js").DependencyType[]} an array of dependency types for the dependency
  */
+// eslint-disable-next-line max-lines-per-function
 export default function determineDependencyTypes(
   pDependency,
   pModuleName,
   pManifest,
   pFileDirectory,
   pResolveOptions,
-  pBaseDirectory
+  pBaseDirectory,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]}*/
   let lReturnValue = ["undetermined"];
@@ -201,7 +202,7 @@ export default function determineDependencyTypes(
     isExternalModule(
       pDependency.resolved,
       lResolveOptions.modules,
-      pBaseDirectory
+      pBaseDirectory,
     )
   ) {
     lReturnValue = determineExternalModuleDependencyTypes(
@@ -210,10 +211,18 @@ export default function determineDependencyTypes(
       pManifest,
       pFileDirectory,
       lResolveOptions,
-      pBaseDirectory
+      pBaseDirectory,
     );
-  } else if (isAliassy(pModuleName, pDependency.resolved, lResolveOptions)) {
-    lReturnValue = ["aliased"];
+  } else {
+    const lAliases = getAliasTypes(
+      pModuleName,
+      pDependency.resolved,
+      lResolveOptions,
+      pManifest,
+    );
+    if (lAliases.length > 0) {
+      lReturnValue = lAliases;
+    }
   }
 
   return lReturnValue.concat(pDependency.dependencyTypes || []);
