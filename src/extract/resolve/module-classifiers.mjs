@@ -95,6 +95,24 @@ function isWebPackAliased(pModuleName, pAliasObject) {
   );
 }
 
+/**
+ *
+ * @param {string} pModuleName
+ * @param {object} pManifest
+ * @returns {boolean}
+ */
+function isSubpathImport(pModuleName, pManifest) {
+  return (
+    pModuleName.startsWith("#") &&
+    Object.keys(pManifest?.imports || {}).some((pImportLHS) => {
+      const lMatchREasString = pImportLHS.replace(/\*/g, ".+");
+      // eslint-disable-next-line security/detect-non-literal-regexp
+      const lMatchRE = new RegExp(`^${lMatchREasString}$`);
+      return Boolean(pModuleName.match(lMatchRE));
+    })
+  );
+}
+
 function isLikelyTSAliased(
   pModuleName,
   pResolvedModuleName,
@@ -109,9 +127,35 @@ function isLikelyTSAliased(
   );
 }
 
-export function isAliassy(pModuleName, pResolvedModuleName, pResolveOptions) {
-  return (
-    isWebPackAliased(pModuleName, pResolveOptions.alias) ||
-    isLikelyTSAliased(pModuleName, pResolvedModuleName, pResolveOptions)
-  );
+/**
+ *
+ * @param {string} pModuleName
+ * @param {string} pResolvedModuleName
+ * @param {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
+ * @param {object} pManifest
+ * @returns {string[]}
+ */
+export function getAliasTypes(
+  pModuleName,
+  pResolvedModuleName,
+  pResolveOptions,
+  pManifest,
+) {
+  if (isSubpathImport(pModuleName, pManifest)) {
+    return ["aliased", "aliased-subpath-import"];
+  }
+  if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
+    return ["aliased", "aliased-webpack"];
+  }
+  if (
+    isLikelyTSAliased(
+      pModuleName,
+      pResolvedModuleName,
+      pResolveOptions,
+      pResolveOptions.baseDirectory,
+    )
+  ) {
+    return ["aliased", "aliased-tsconfig"];
+  }
+  return [];
 }

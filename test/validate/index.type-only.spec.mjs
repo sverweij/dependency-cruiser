@@ -2,7 +2,7 @@ import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 import validate from "#validate/index.mjs";
 
-describe("[I] [I] validate/index - type-only", () => {
+describe("[I] validate/index - type-only", () => {
   const lTypeOnlyRuleSet = parseRuleSet({
     forbidden: [
       {

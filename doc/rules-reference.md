@@ -918,23 +918,26 @@ will ignore them in the evaluation of that rule.
 
 This is a list of dependency types dependency-cruiser currently detects.
 
-| dependency type | meaning                                                                                                                                                                       | example                   |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| local           | a module in your own ('local') package                                                                                                                                        | "./klont"                 |
-| localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                     | "shared/stuff.ts"         |
-| npm             | it's a module in package.json's `dependencies`                                                                                                                                | "lodash"                  |
-| npm-dev         | it's a module in package.json's `devDependencies`                                                                                                                             | "chai"                    |
-| npm-optional    | it's a module in package.json's `optionalDependencies`                                                                                                                        | "livescript"              |
-| npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                                | "thing-i-am-a-plugin-for" |
-| npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                     | "iwillgetbundled"         |
-| npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                                                    | "forgetmenot"             |
-| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                          |                           |
-| deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                                | "some-deprecated-package" |
-| core            | it's a core module                                                                                                                                                            | "fs"                      |
-| aliased         | it's a module that's linked through an aliased (webpack)                                                                                                                      | "~/hello.ts"              |
-| unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                      | "loodash"                 |
-| undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole Jurassic park of ways to define where to resolve modules to     | "veloci!./raptor"         |
-| type-only       | the module was imported as 'type only' (e.g. `import type { IThing } from "./things";`) - only available for TypeScript sources, and only when tsPreCompilationDeps !== false |                           |
+| dependency type        | meaning                                                                                                                                                                       | example                   |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| local                  | a module in your own ('local') package                                                                                                                                        | "./klont"                 |
+| localmodule            | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                     | "shared/stuff.ts"         |
+| npm                    | it's a module in package.json's `dependencies`                                                                                                                                | "lodash"                  |
+| npm-dev                | it's a module in package.json's `devDependencies`                                                                                                                             | "chai"                    |
+| npm-optional           | it's a module in package.json's `optionalDependencies`                                                                                                                        | "livescript"              |
+| npm-peer               | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                                | "thing-i-am-a-plugin-for" |
+| npm-bundled            | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                     | "iwillgetbundled"         |
+| npm-no-pkg             | it's an npm module - but it's nowhere in your package.json                                                                                                                    | "forgetmenot"             |
+| npm-unknown            | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                          |                           |
+| deprecated             | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                                | "some-deprecated-package" |
+| core                   | it's a core module                                                                                                                                                            | "fs"                      |
+| aliased                | the module was imported via an alias - always occurs alongside one of 'aliased-subpath-import', 'aliased-webpack' and 'aliased-tsconfig' dependency types                     | "~/hello.ts"              |
+| aliased-subpath-import | the module was imported via a [subpath import](https://nodejs.org/api/packages.html#subpath-imports)                                                                          | "#thing/hello.mjs"        |
+| aliased-webpack        | the module was imported via a [webpack resolve alias](https://webpack.js.org/configuration/resolve/#resolvealias)                                                             | "Utilities"               |
+| aliased-tsconfig       | the module was imported via a typescript [compilerOptions.paths setting in tsconfig](https://www.typescriptlang.org/tsconfig#paths)                                           | "@thing/hello"            |
+| unknown                | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                      | "loodash"                 |
+| undetermined           | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole Jurassic park of ways to define where to resolve modules to     | "veloci!./raptor"         |
+| type-only              | the module was imported as 'type only' (e.g. `import type { IThing } from "./things";`) - only available for TypeScript sources, and only when tsPreCompilationDeps !== false |                           |
 
 ### `dynamic`
 
@@ -991,6 +994,11 @@ when set to true:
   "to": { "moreThanOneDependencyType": true }
 }
 ```
+
+For this rule the `aliased`, `aliased-subpath-import`, `aliased-webpack`,
+`aliased-tsconfig` and `type-only` dependency types do not count towards the
+number of dependency types a dependency has, as these _by definition_ are
+always in addition to one of the other dependency types.
 
 When left out it doesn't matter how many dependency types a dependency has.
 

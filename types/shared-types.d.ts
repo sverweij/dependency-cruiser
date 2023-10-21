@@ -35,6 +35,9 @@ export type SeverityType = "error" | "warn" | "info" | "ignore";
 // cruise options, cruise result, rule set
 export type DependencyType =
   | "aliased"
+  | "aliased-subpath-import"
+  | "aliased-webpack"
+  | "aliased-tsconfig"
   | "core"
   | "deprecated"
   | "local"

@@ -21,7 +21,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": ["aliased", "aliased-webpack"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -35,7 +35,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": ["aliased", "aliased-webpack"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -51,7 +51,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["aliased"],
+      "dependencyTypes": ["aliased", "aliased-webpack"],
       "dependencies": [],
       "dependents": [
         "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"
