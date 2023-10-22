@@ -104,7 +104,7 @@ function isWebPackAliased(pModuleName, pAliasObject) {
 function isSubpathImport(pModuleName, pManifest) {
   return (
     pModuleName.startsWith("#") &&
-    Object.keys(pManifest?.imports || {}).some((pImportLHS) => {
+    Object.keys(pManifest?.imports ?? {}).some((pImportLHS) => {
       const lMatchREasString = pImportLHS.replace(/\*/g, ".+");
       // eslint-disable-next-line security/detect-non-literal-regexp
       const lMatchRE = new RegExp(`^${lMatchREasString}$`);

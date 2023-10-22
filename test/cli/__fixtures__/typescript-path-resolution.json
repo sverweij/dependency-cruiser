@@ -12,7 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-tsconfig"],
+          "dependencyTypes": ["aliased", "aliased-tsconfig", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -44,7 +44,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-tsconfig"],
+          "dependencyTypes": ["aliased", "aliased-tsconfig", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

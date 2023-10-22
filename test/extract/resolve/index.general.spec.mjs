@@ -236,7 +236,7 @@ describe("[I] extract/resolve/index - general", () => {
       {
         coreModule: false,
         couldNotResolve: false,
-        dependencyTypes: ["aliased", "aliased-webpack"],
+        dependencyTypes: ["aliased", "aliased-webpack", "local"],
         followable: true,
         resolved: "i-got-aliased-to-hoepla/hoi/index.js",
       },
