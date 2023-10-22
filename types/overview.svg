@@ -233,7 +233,7 @@
 <!-- node_modules/watskeburt -->
 <g id="node10" class="node">
 <title>node_modules/watskeburt</title>
-<g id="a_node10"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/node_modules/watskeburt" xlink:title="watskeburt">
+<g id="a_node10"><a xlink:href="https://www.npmjs.com/package/watskeburt" xlink:title="watskeburt">
 <polygon fill="#c40b0a" fill-opacity="0.101961" stroke="black" points="413,-247.75 354.72,-247.75 352.75,-245.78 352.75,-230 411.03,-230 413,-231.97 413,-247.75"/>
 <polyline fill="none" stroke="black" points="411.03,-245.78 352.75,-245.78"/>
 <polyline fill="none" stroke="black" points="411.03,-245.78 411.03,-230"/>
@@ -311,7 +311,7 @@
 <!-- node_modules/enhanced&#45;resolve -->
 <g id="node19" class="node">
 <title>node_modules/enhanced&#45;resolve</title>
-<g id="a_node19"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/node_modules/enhanced-resolve" xlink:title="enhanced&#45;resolve">
+<g id="a_node19"><a xlink:href="https://www.npmjs.com/package/enhanced-resolve" xlink:title="enhanced&#45;resolve">
 <polygon fill="#c40b0a" fill-opacity="0.101961" stroke="black" points="428,-217.75 339.72,-217.75 337.75,-215.78 337.75,-200 426.03,-200 428,-201.97 428,-217.75"/>
 <polyline fill="none" stroke="black" points="426.03,-215.78 337.75,-215.78"/>
 <polyline fill="none" stroke="black" points="426.03,-215.78 426.03,-200"/>
@@ -362,7 +362,7 @@
 <!-- node_modules/typescript -->
 <g id="node16" class="node">
 <title>node_modules/typescript</title>
-<g id="a_node16"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/node_modules/typescript" xlink:title="typescript">
+<g id="a_node16"><a xlink:href="https://www.npmjs.com/package/typescript" xlink:title="typescript">
 <polygon fill="#c40b0a" fill-opacity="0.101961" stroke="black" points="410.38,-187.75 357.35,-187.75 355.38,-185.78 355.38,-170 408.4,-170 410.38,-171.97 410.38,-187.75"/>
 <polyline fill="none" stroke="black" points="408.4,-185.78 355.38,-185.78"/>
 <polyline fill="none" stroke="black" points="408.4,-185.78 408.4,-170"/>
