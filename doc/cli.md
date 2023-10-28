@@ -263,8 +263,8 @@ style src_main_rule_set_normalize_js fill:lime,color:black
 
 Generates a graph in [d2](https://d2lang.com/) format. D2 is a nice, well thought
 out alternative to mermaid. It supports a several layout engines, of which ELK looks
-especially pleasing. Trade-of: its graphs tend to take up more space than the
-dot ones.
+especially pleasing. The current trade-off between D2 and dot is that its graphs
+tend to take up more space than the dot ones.
 
 Sample use:
 
