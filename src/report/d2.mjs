@@ -1,6 +1,6 @@
 import { EOL } from "node:os";
 import { basename, dirname } from "node:path";
-import { getURLForModule } from "#report/utl/index.mjs";
+import { getURLForModule } from "./utl/index.mjs";
 
 const severity2color = new Map([
   ["error", "red"],
@@ -9,21 +9,22 @@ const severity2color = new Map([
 ]);
 
 /**
- *
  * @param {import("../../types/rule-summary").IRuleSummary} pRules
  * @returns {string}
  */
 function getMaxSeverity(pRules) {
   const lSeverity2Number = new Map([
-    ["error", 0],
-    ["warn", 1],
     // eslint-disable-next-line no-magic-numbers
-    ["info", 2],
+    ["error", 3],
+    // eslint-disable-next-line no-magic-numbers
+    ["warn", 2],
+    ["info", 1],
   ]);
   return pRules
     .map((pRule) => pRule.severity)
     .reduce((pMax, pCurrent) => {
-      return lSeverity2Number.get(pMax) > lSeverity2Number.get(pCurrent)
+      return (lSeverity2Number.get(pMax) ?? 0) >
+        (lSeverity2Number.get(pCurrent) ?? 0)
         ? pMax
         : pCurrent;
     });
@@ -64,9 +65,9 @@ function getModuleAttributes(pModule, pOptions) {
     lReturnValue = `${lReturnValue}; style.fill: yellow`;
   }
   if (pModule.valid === false) {
-    lReturnValue = `${lReturnValue}; style.stroke: ${severity2color.get(
-      getMaxSeverity(pModule.rules),
-    )}`;
+    lReturnValue = `${lReturnValue}; style.stroke: ${
+      severity2color.get(getMaxSeverity(pModule.rules)) ?? "orange"
+    }`;
     lReturnValue = `${lReturnValue}; tooltip: "${pModule.rules
       .map((pRule) => pRule.name)
       .join(EOL)}"`;
@@ -86,7 +87,6 @@ function getModuleAttributes(pModule, pOptions) {
 }
 
 /**
- *
  * @param {import("../../types/cruise-result").IDependency} pDependency
  * @returns {string}
  */
@@ -94,11 +94,9 @@ function getModuleAttributes(pModule, pOptions) {
 function getDependencyAttributes(pDependency) {
   let lThing = "";
   if (pDependency.valid === false) {
-    lThing = `${
-      lThing ? `${lThing};` : lThing
-    } style: { stroke: ${severity2color.get(
-      getMaxSeverity(pDependency.rules),
-    )} }`;
+    lThing = `${lThing ? `${lThing};` : lThing} style: { stroke: ${
+      severity2color.get(getMaxSeverity(pDependency.rules)) ?? "orange"
+    } }`;
     lThing = `${lThing ? `${lThing};` : lThing} label: "${pDependency.rules
       .map((pRule) => pRule.name)
       .join(EOL)}"`;
@@ -117,7 +115,6 @@ function getDependencyAttributes(pDependency) {
 }
 
 /**
- *
  * @param {import('../../types/cruise-result').ICruiseResult} pCruiseResult
  * @return {string}
  */
