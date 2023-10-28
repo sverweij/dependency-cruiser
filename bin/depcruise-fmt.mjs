@@ -24,7 +24,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json",
+      "output type; e.g. err, err-html, dot, ddot, archi, flat, d2, mermaid or json",
       "err",
     )
     .option(

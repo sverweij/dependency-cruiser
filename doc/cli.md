@@ -204,7 +204,7 @@ GitLab support this out of the box in their on-line rendering of markdown.
 
 Both due to limitations in the mermaid format and to the relative newness of this
 reporter the graph cannot be (made as) feature rich as those produced by the
-`dot` reporters.
+`dot` or `d2` reporters.
 
 <details>
 <summary>Sample output</summary>
@@ -256,6 +256,26 @@ test_validate_parse_ruleset_utl_mjs-->src_main_rule_set_normalize_js
 
 style src_main_rule_set_normalize_js fill:lime,color:black
 ```
+
+</details>
+
+#### d2
+
+Generates a graph in [d2](https://d2lang.com/) format. D2 is a nice, well thought
+out alternative to mermaid. It supports a several layout engines, of which ELK looks
+especially pleasing. Trade-of: its graphs tend to take up more space than the
+dot ones.
+
+Sample use:
+
+```sh
+dependency-cruise src/cache --include-only "^src/cache" -T d2 | d2 --layout elk --scale 1 - > dependencygraph.svg
+```
+
+<details>
+<summary>Sample output</summary>
+
+![d2 representation of dependency-cruiser's caching feature, with d2 set to use the 'ELK' layout](./assets/d2.svg)]
 
 </details>
 
