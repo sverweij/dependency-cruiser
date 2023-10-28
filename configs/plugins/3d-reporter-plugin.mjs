@@ -1,5 +1,5 @@
-const path = require("node:path");
-const figures = require("figures");
+import * as path from "node:path";
+import figures from "figures";
 
 const TEMPLATE = `
 <html>
@@ -75,13 +75,13 @@ function formatFileName(pFileName) {
 }
 function formatDependency(pFrom, pTo) {
   return `${formatFileName(pFrom)} ${figures.arrowRight}</br>${formatFileName(
-    pTo,
+    pTo
   )}`;
 }
 
 /**
  *
- * @param {import('../..').ICruiseResult} pCruiseResult
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  */
 function render3DThing(pCruiseResult) {
   const lNodes = pCruiseResult.modules.map((pModule) => {
@@ -100,28 +100,28 @@ function render3DThing(pCruiseResult) {
           source: pCurrentModule.source,
           target: pDependency.resolved,
           label: formatDependency(pCurrentModule.source, pDependency.resolved),
-        })),
+        }))
       ),
-    [],
+    []
   );
 
   return TEMPLATE.replace(/@@NODES@@/g, JSON.stringify(lNodes)).replace(
     /@@LINKS@@/g,
-    JSON.stringify(lLinks),
+    JSON.stringify(lLinks)
   );
 }
 
 /**
  * Sample plugin: 3d representation
  *
- * @param {import('../..').ICruiseResult} pCruiseResult -
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../..').IReporterOutput} -
+ * @return {import('../../types/dependency-cruiser').IReporterOutput} -
  *      output: a string
  *      exitCode: 0
  */
-module.exports = (pCruiseResult) => ({
+export default (pCruiseResult) => ({
   output: render3DThing(pCruiseResult),
   exitCode: 0,
 });

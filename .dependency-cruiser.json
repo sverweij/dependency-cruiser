@@ -20,7 +20,7 @@
           "\\.d\\.ts$",
           "(^|/)tsconfig\\.json$",
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
-          "-reporter-plugin\\.js$",
+          "-reporter-plugin\\.mjs$",
           "\\.schema\\.json$",
           "^tools/istanbul-json-summary-to-markdown\\.mjs$",
           "^src/report/json\\.mjs",
@@ -39,8 +39,7 @@
       "to": {
         "pathNot": [
           "^src/(main|utl|config-utl)/",
-          "^node_modules",
-          "^\\.yarn/cache",
+          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
           "^os$",
           "^fs(/promises)?$",
           "^path$",
@@ -61,8 +60,7 @@
       "to": {
         "pathNot": [
           "$1",
-          "^node_modules",
-          "^\\.yarn/cache",
+          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
           "^os$",
           "^path$",
           "^path/posix$",
@@ -82,8 +80,7 @@
       "to": {
         "pathNot": [
           "$1",
-          "^node_modules",
-          "^\\.yarn/cache",
+          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
           "^(path|path/posix|fs|module|os)$",
           "^src/meta\\.js$",
           "^types/",
@@ -109,8 +106,7 @@
       "to": {
         "pathNot": [
           "^src/cli",
-          "^node_modules",
-          "^\\.yarn/cache",
+          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
           "^src/meta\\.js$",
           "^os$"
         ]

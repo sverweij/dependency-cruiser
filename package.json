@@ -70,8 +70,8 @@
       "import": "./src/config-utl/extract-webpack-resolve-config.mjs",
       "types": "./types/extract-webpack-resolve-config.d.ts"
     },
-    "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js",
-    "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.js",
+    "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.mjs",
+    "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.mjs",
     "./mermaid-reporter-plugin": "./src/report/mermaid.mjs"
   },
   "types": "types/dependency-cruiser.d.ts",
