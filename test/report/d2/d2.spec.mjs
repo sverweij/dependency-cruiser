@@ -11,8 +11,8 @@ describe("[I] d2", () => {
       const lExpected = readFileSync(
         `./test/report/d2/__fixtures__/${pMock.split(".").shift()}.d2`,
         { encoding: "utf8" },
-      );
-      const lActual = d2(lCruiseResult.default).output;
+      ).replace(/\r\n/g, "\n");
+      const lActual = d2(lCruiseResult.default).output.replace(/\r\n/g, "\n");
 
       equal(lActual, lExpected);
     });
