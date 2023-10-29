@@ -30,7 +30,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi, flat, text or json",
+      "output type; e.g. err, err-html, dot, ddot, archi, flat, d2, mermaid, text or json",
       "err",
     )
     .option("-m, --metrics", "calculate stability metrics", false)

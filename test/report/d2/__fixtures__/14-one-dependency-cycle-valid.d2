@@ -1,0 +1,18 @@
+# modules
+
+"aap"."noot"."mies.js": {class: module; link: "aap/noot/mies.js"}
+"aap"."noot"."zus.js": {class: module; link: "aap/noot/zus.js"}
+
+# dependencies
+
+"aap"."noot"."mies.js" -> "aap"."noot"."zus.js": { target-arrowhead: {shape: circle}}
+"aap"."noot"."zus.js" -> "aap"."noot"."mies.js": { target-arrowhead: {shape: circle}}
+
+# styling
+
+classes: {
+  module: {
+    height: 30;
+    style.border-radius: 10;
+  }
+}

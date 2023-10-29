@@ -25,9 +25,10 @@ export type OutputType =
   | "metrics"
   | "markdown"
   | "mermaid"
+  | "d2"
   | "null"
   // for plugins: string. TODO: research whether it's possible to
-  // tie this down to the `^plugin:[^:]+-reporter-plugin.c?js$` regex
+  // tie this down to the `^plugin:[^:]+-reporter-plugin.[cm]?js$` regex
   | string;
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
