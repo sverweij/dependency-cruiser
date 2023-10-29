@@ -1,0 +1,48 @@
+/** @type {import('../../../../types/dependency-cruiser').ICruiseResult} */
+export default {
+  modules: [
+    {
+      source: "aap/noot/mies.js",
+      dependencies: [
+        {
+          resolved: "aap/noot/zus.js",
+          module: "#noot/zus.js",
+          coreModule: false,
+          followable: true,
+          couldNotResolve: false,
+          dynamic: false,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          moduleSystem: "es6",
+          valid: true,
+          circular: true,
+          cycle: ["aap/noot/mies.js", "aap/noot/zus.js"],
+          dependencyTypes: ["aliased", "aliased-subpath-import", "local"],
+        },
+      ],
+    },
+    {
+      source: "aap/noot/zus.js",
+      dependencies: [
+        {
+          resolved: "aap/noot/mies.js",
+          module: "#noot/mies.js",
+          coreModule: false,
+          followable: true,
+          couldNotResolve: false,
+          dynamic: false,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          moduleSystem: "es6",
+          valid: true,
+          circular: true,
+          cycle: ["aap/noot/zus.js", "aap/noot/mies.js"],
+          dependencyTypes: ["aliased", "aliased-subpath-import", "local"],
+        },
+      ],
+    },
+  ],
+  summary: {
+    optionsUsed: {},
+  },
+};

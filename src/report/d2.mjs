@@ -70,7 +70,7 @@ function getModuleAttributes(pModule, pOptions) {
     }`;
     lReturnValue = `${lReturnValue}; tooltip: "${pModule.rules
       .map((pRule) => pRule.name)
-      .join(EOL)}"`;
+      .join("\\n")}"`;
   }
   if (
     pModule.dependencyTypes?.some((pDependencyType) =>
@@ -94,12 +94,11 @@ function getModuleAttributes(pModule, pOptions) {
 function getDependencyAttributes(pDependency) {
   let lThing = "";
   if (pDependency.valid === false) {
-    lThing = `${lThing ? `${lThing};` : lThing} style: { stroke: ${
-      severity2color.get(getMaxSeverity(pDependency.rules)) ?? "orange"
-    } }`;
-    lThing = `${lThing ? `${lThing};` : lThing} label: "${pDependency.rules
-      .map((pRule) => pRule.name)
-      .join(EOL)}"`;
+    lThing =
+      `style: {stroke: ${
+        severity2color.get(getMaxSeverity(pDependency.rules)) ?? "orange"
+      }}; ` +
+      `label: "${pDependency.rules.map((pRule) => pRule.name).join("\\n")}"`;
   }
   if (pDependency.circular) {
     lThing = `${

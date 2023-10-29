@@ -6,6 +6,7 @@ export default {
       dependencies: [
         {
           resolved: "aap/noot/zus.js",
+          module: "#noot/zus.js",
           coreModule: false,
           followable: true,
           couldNotResolve: false,
@@ -13,9 +14,14 @@ export default {
           exoticallyRequired: false,
           matchesDoNotFollow: false,
           moduleSystem: "es6",
-          module: "#noot/zus.js",
-          moduleSystem: "es6",
+          valid: false,
           dependencyTypes: ["aliased", "aliased-subpath-import", "local"],
+          rules: [
+            {
+              severity: "bist-du-verrückt?",
+              name: "keine-ahnung",
+            },
+          ],
         },
       ],
     },

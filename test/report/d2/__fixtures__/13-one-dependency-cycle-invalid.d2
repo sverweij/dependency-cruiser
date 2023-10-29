@@ -1,0 +1,18 @@
+# modules
+
+"aap"."noot"."mies.js": {class: module; link: "aap/noot/mies.js"}
+"aap"."noot"."zus.js": {class: module; link: "aap/noot/zus.js"}
+
+# dependencies
+
+"aap"."noot"."mies.js" -> "aap"."noot"."zus.js": {style: {stroke: red}; label: "pas-de-alez-houpe\nno-cycles"; target-arrowhead: {shape: circle}}
+"aap"."noot"."zus.js" -> "aap"."noot"."mies.js": {style: {stroke: red}; label: "no-cycles"; target-arrowhead: {shape: circle}}
+
+# styling
+
+classes: {
+  module: {
+    height: 30;
+    style.border-radius: 10;
+  }
+}

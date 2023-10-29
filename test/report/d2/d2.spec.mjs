@@ -13,9 +13,7 @@ describe("[I] d2", () => {
         { encoding: "utf8" },
       );
       const lActual = d2(lCruiseResult.default).output;
-      //   if (pIndex === pArray.length - 1) {
-      //     console.log(lActual);
-      //   }
+
       equal(lActual, lExpected);
     });
   });

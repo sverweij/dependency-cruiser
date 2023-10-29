@@ -1,0 +1,76 @@
+# modules
+
+"src"."cache"."cache.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/cache.mjs"}
+"fs"."promises": {class: module; link: "https://nodejs.org/api/fs.html"}
+"path": {class: module; link: "https://nodejs.org/api/path.html"}
+"src"."cache"."content-strategy.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/content-strategy.mjs"}
+"path"."posix": {class: module; link: "https://nodejs.org/api/path.html"}
+"util": {class: module; link: "https://nodejs.org/api/util.html"}
+"src"."cache"."find-content-changes.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/find-content-changes.mjs"}
+"src"."cache"."helpers.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/helpers.mjs"}
+"crypto": {class: module; link: "https://nodejs.org/api/crypto.html"}
+"fs": {class: module; link: "https://nodejs.org/api/fs.html"}
+"node_modules"."lodash"."memoize.js": {class: module; shape: package; link: "https://www.npmjs.com/package/lodash"}
+"src"."graph-utl"."match-facade.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/graph-utl/match-facade.mjs"}
+"src"."utl"."bus.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/utl/bus.mjs"}
+"events": {class: module; link: "https://nodejs.org/api/events.html"}
+"src"."utl"."find-all-files.mjs": {class: module; style.stroke: blue; tooltip: "utl-module-not-shared-enough"; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/utl/find-all-files.mjs"}
+"node_modules"."ignore"."index.js": {class: module; shape: package; link: "https://www.npmjs.com/package/ignore"}
+"src"."utl"."path-to-posix.mjs": {class: module; style.stroke: blue; tooltip: "utl-module-not-shared-enough"; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/utl/path-to-posix.mjs"}
+"src"."cache"."metadata-strategy.mjs": {class: module; style.fill: yellow; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/metadata-strategy.mjs"}
+"node_modules"."watskeburt"."dist"."main.js": {class: module; shape: package; link: "https://www.npmjs.com/package/watskeburt"}
+"src"."cache"."options-compatible.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/cache/options-compatible.mjs"}
+"src"."extract"."transpile"."meta.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/extract/transpile/meta.mjs"}
+"src"."extract"."transpile"."try-import-available.mjs": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/extract/transpile/try-import-available.mjs"}
+"module": {class: module; link: "https://nodejs.org/api/module.html"}
+"node_modules"."semver"."index.js": {class: module; shape: package; link: "https://www.npmjs.com/package/semver"}
+"src"."meta.js": {class: module; link: "https://github.com/sverweij/dependency-cruiser/blob/main/src/meta.js"}
+
+# dependencies
+
+"src"."cache"."cache.mjs" -> "src"."cache"."content-strategy.mjs"
+"src"."cache"."cache.mjs" -> "src"."cache"."metadata-strategy.mjs"
+"src"."cache"."cache.mjs" -> "src"."cache"."options-compatible.mjs"
+"src"."cache"."cache.mjs" -> "src"."extract"."transpile"."meta.mjs"
+"src"."cache"."cache.mjs" -> "src"."utl"."bus.mjs"
+"src"."cache"."cache.mjs" -> "fs"."promises"
+"src"."cache"."cache.mjs" -> "path"
+"src"."cache"."content-strategy.mjs" -> "src"."cache"."find-content-changes.mjs"
+"src"."cache"."content-strategy.mjs" -> "src"."cache"."helpers.mjs"
+"src"."cache"."content-strategy.mjs" -> "path"."posix"
+"src"."cache"."content-strategy.mjs" -> "util"
+"src"."cache"."find-content-changes.mjs" -> "src"."cache"."helpers.mjs"
+"src"."cache"."find-content-changes.mjs" -> "src"."utl"."bus.mjs"
+"src"."cache"."find-content-changes.mjs" -> "src"."utl"."find-all-files.mjs"
+"src"."cache"."find-content-changes.mjs" -> "path"."posix"
+"src"."cache"."helpers.mjs" -> "src"."graph-utl"."match-facade.mjs"
+"src"."cache"."helpers.mjs" -> "crypto"
+"src"."cache"."helpers.mjs" -> "fs"
+"src"."cache"."helpers.mjs" -> "fs"."promises"
+"src"."cache"."helpers.mjs" -> "node_modules"."lodash"."memoize.js"
+"src"."cache"."helpers.mjs" -> "path"
+"src"."utl"."bus.mjs" -> "events"
+"src"."utl"."find-all-files.mjs" -> "src"."utl"."path-to-posix.mjs"
+"src"."utl"."find-all-files.mjs" -> "fs"
+"src"."utl"."find-all-files.mjs" -> "node_modules"."ignore"."index.js"
+"src"."utl"."find-all-files.mjs" -> "path"
+"src"."utl"."path-to-posix.mjs" -> "path"
+"src"."cache"."metadata-strategy.mjs" -> "src"."cache"."helpers.mjs"
+"src"."cache"."metadata-strategy.mjs" -> "src"."utl"."bus.mjs"
+"src"."cache"."metadata-strategy.mjs" -> "util"
+"src"."cache"."metadata-strategy.mjs" -> "node_modules"."watskeburt"."dist"."main.js"
+"src"."cache"."options-compatible.mjs" -> "util"
+"src"."extract"."transpile"."meta.mjs" -> "src"."extract"."transpile"."try-import-available.mjs"
+"src"."extract"."transpile"."meta.mjs" -> "src"."meta.js"
+"src"."extract"."transpile"."try-import-available.mjs" -> "module"
+"src"."extract"."transpile"."try-import-available.mjs" -> "path"."posix"
+"src"."extract"."transpile"."try-import-available.mjs" -> "node_modules"."semver"."index.js"
+
+# styling
+
+classes: {
+  module: {
+    height: 30;
+    style.border-radius: 10;
+  }
+}
