@@ -1,5 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
 import { join, normalize } from "node:path";
+import { platform } from "node:process";
 import picomatch from "picomatch";
 import { scannableExtensions } from "./transpile/meta.mjs";
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
@@ -67,7 +68,9 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
 }
 
 function expandGlob(pBaseDirectory, pScannedGlob) {
-  const isMatch = picomatch(pathToPosix(pScannedGlob.glob));
+  const isMatch = picomatch(pathToPosix(pScannedGlob.glob), {
+    windows: platform === "win32",
+  });
   return readdirSync(join(pBaseDirectory, pScannedGlob.base), {
     recursive: true,
   })
@@ -102,7 +105,9 @@ export default function gatherInitialSources(
 
   return pFileDirectoryAndGlobArray
     .flatMap((pFileDirectoryOrGlob) => {
-      const lScannedGlob = picomatch.scan(pFileDirectoryOrGlob);
+      const lScannedGlob = picomatch.scan(pFileDirectoryOrGlob, {
+        windows: platform === "win32",
+      });
       if (lScannedGlob.isGlob) {
         return expandGlob(lOptions.baseDir, lScannedGlob);
       }

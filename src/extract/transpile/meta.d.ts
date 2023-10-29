@@ -1,4 +1,4 @@
-import {
+import type {
   IAvailableExtension,
   IAvailableTranspiler,
 } from "../../../types/dependency-cruiser.d.ts";

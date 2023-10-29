@@ -39,15 +39,11 @@
       "to": {
         "pathNot": [
           "^src/(main|utl|config-utl)/",
-          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
-          "^os$",
-          "^fs(/promises)?$",
-          "^path$",
-          "^url$",
           "$1",
           "^src/meta\\.js$",
           "^src/extract/transpile/meta\\.mjs$"
-        ]
+        ],
+        "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
     {
@@ -58,16 +54,8 @@
         "path": "(^src/report/)"
       },
       "to": {
-        "pathNot": [
-          "$1",
-          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
-          "^os$",
-          "^path$",
-          "^path/posix$",
-          "^src/meta\\.js$",
-          "^src/graph-utl",
-          "^src/utl"
-        ]
+        "pathNot": ["$1", "^src/meta\\.js$", "^src/graph-utl", "^src/utl"],
+        "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
     {
@@ -78,15 +66,8 @@
         "path": "(^src/extract/)"
       },
       "to": {
-        "pathNot": [
-          "$1",
-          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
-          "^(path|path/posix|fs|module|os)$",
-          "^src/meta\\.js$",
-          "^types/",
-          "^src/graph-utl",
-          "^src/utl"
-        ],
+        "pathNot": ["$1", "^src/meta\\.js$", "^src/graph-utl", "^src/utl"],
+        "dependencyTypesNot": ["npm", "core", "type-only"],
         "exoticallyRequired": false
       }
     },
@@ -104,12 +85,8 @@
       "severity": "error",
       "from": { "path": "(^bin/)" },
       "to": {
-        "pathNot": [
-          "^src/cli",
-          "node_modules/", // ^node_modules should work, but doesn't - on _planet yarn_. .yarn/cache/ or .yarn/berry/cache/ don't work either anymore, although it's where they're _actualy_ located. So we're stuck with this for now.
-          "^src/meta\\.js$",
-          "^os$"
-        ]
+        "pathNot": ["^src/cli", "^src/meta\\.js$"],
+        "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
     {
