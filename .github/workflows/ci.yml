@@ -45,7 +45,7 @@ jobs:
           key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{matrix.node-version}}@${{matrix.platform}}-build-
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
       - name: install & build
@@ -99,7 +99,7 @@ jobs:
           key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
@@ -123,7 +123,7 @@ jobs:
           key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
