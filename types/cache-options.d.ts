@@ -19,4 +19,13 @@ export interface ICacheOptions {
    * Defaults to 'metadata'
    */
   strategy: cacheStrategyType;
+  /**
+   * Whether to compress the cache or not
+   *
+   *  Setting this to true adds a few ms to the execution time, but
+   * typically reduces the cache size by 80-90%.
+   *
+   * Defaults to false.
+   */
+  compress: boolean;
 }

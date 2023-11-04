@@ -1,6 +1,10 @@
-// @ts-check
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import {
+  brotliCompressSync,
+  brotliDecompressSync,
+  constants as zlibConstants,
+} from "node:zlib";
 import { optionsAreCompatible } from "./options-compatible.mjs";
 import MetadataStrategy from "./metadata-strategy.mjs";
 import ContentStrategy from "./content-strategy.mjs";
@@ -14,13 +18,15 @@ const CACHE_FILE_NAME = "cache.json";
 export default class Cache {
   /**
    * @param {import("../../types/cache-options.js").cacheStrategyType=} pCacheStrategy
+   * @param {import("../../types/cache-options.js").cacheCompressionType=} pCompress
    */
-  constructor(pCacheStrategy) {
+  constructor(pCacheStrategy, pCompress) {
     this.revisionData = null;
     this.cacheStrategy =
       pCacheStrategy === "content"
         ? new ContentStrategy()
         : new MetadataStrategy();
+    this.compress = pCompress ?? false;
   }
 
   /**
@@ -61,9 +67,17 @@ export default class Cache {
    */
   async read(pCacheFolder) {
     try {
-      return JSON.parse(
-        await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8"),
-      );
+      let lPayload = "";
+      if (this.compress === true) {
+        const lCompressedPayload = await readFile(
+          join(pCacheFolder, CACHE_FILE_NAME),
+        );
+        const lPayloadAsBuffer = brotliDecompressSync(lCompressedPayload);
+        lPayload = lPayloadAsBuffer.toString("utf8");
+      } else {
+        lPayload = await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8");
+      }
+      return JSON.parse(lPayload);
     } catch (pError) {
       return { modules: [], summary: {} };
     }
@@ -78,15 +92,39 @@ export default class Cache {
     const lRevisionData = pRevisionData ?? this.revisionData;
 
     await mkdir(pCacheFolder, { recursive: true });
-    await writeFile(
-      join(pCacheFolder, CACHE_FILE_NAME),
-      JSON.stringify(
-        this.cacheStrategy.prepareRevisionDataForSaving(
-          pCruiseResult,
-          lRevisionData,
-        ),
+    const lUncompressedPayload = JSON.stringify(
+      this.cacheStrategy.prepareRevisionDataForSaving(
+        pCruiseResult,
+        lRevisionData,
       ),
-      "utf8",
     );
+    let lPayload = lUncompressedPayload;
+    if (this.compress === true) {
+      /**
+       * we landed on brotli with BROTLI_MIN_QUALITY because:
+       * - even with BROTLI_MIN_QUALITY it compresses
+       *   better than gzip (regardless of the compression level)
+       * - at BROTLI_MIN_QUALITY it's faster than gzip (/ deflate)
+       * - BROTLI_MAX_QUALITY gives a bit better compression
+       *   but is _much_ slower than even gzip (on compressing)
+       *
+       * In our situation the sync version is significantly
+       * faster than the async version. As sync or async doesn't _really_
+       * matter for the cli, we're using the sync version here.
+       *
+       * (also zlib functions need to promisified first before they can be
+       * used in promises, which will add the to the execution time)
+       */
+      lPayload = brotliCompressSync(lPayload, {
+        params: {
+          [zlibConstants.BROTLI_PARAM_QUALITY]:
+            zlibConstants.BROTLI_MIN_QUALITY,
+        },
+      });
+    }
+
+    // relying on writeFile defaults to 'do the right thing' (i.e. utf8
+    // when the payload is a string, raw buffer otherwise)
+    await writeFile(join(pCacheFolder, CACHE_FILE_NAME), lPayload);
   }
 }

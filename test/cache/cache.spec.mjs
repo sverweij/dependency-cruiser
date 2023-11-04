@@ -1,7 +1,7 @@
 import { deepEqual, equal } from "node:assert/strict";
-import { rmSync } from "node:fs";
+import { readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { isDeepStrictEqual } from "node:util";
+import { brotliDecompressSync } from "node:zlib";
 import { describe } from "mocha";
 import Cache from "#cache/cache.mjs";
 
@@ -84,7 +84,7 @@ describe("[I] cache/cache - writeCache", () => {
     const lRevisionData = { SHA1: "dummy-sha", changes: [] };
 
     await lCache.write(lCacheFolder, lDummyCacheContents, lRevisionData);
-    isDeepStrictEqual(await lCache.read(lCacheFolder), lDummyCacheContents);
+    deepEqual(await lCache.read(lCacheFolder), lDummyCacheContents);
   });
 });
 
@@ -196,5 +196,82 @@ describe("[I] cache/cache - canServeFromCache", () => {
     );
 
     equal(lFound, true);
+  });
+});
+
+describe("[I] cache/cache - compression", () => {
+  before("remove __outputs__ folder", () => {
+    rmSync(OUTPUTS_FOLDER, { recursive: true, force: true });
+  });
+  after("remove __outputs__ folder", () => {
+    rmSync(OUTPUTS_FOLDER, { recursive: true, force: true });
+  });
+
+  const lCacheFolderContent = {
+    modules: [],
+    summary: { optionsUsed: { baseDir: "test/cache/__mocks__/cache" } },
+    revisionData: { SHA1: "dummy-sha", changes: [] },
+  };
+
+  it("read & write remain transparent when pCompress === true", async () => {
+    const lCache = new Cache("metadata", true);
+    const lCacheFolder = join(OUTPUTS_FOLDER, "compression-transparent-true");
+    await lCache.write(lCacheFolder, lCacheFolderContent);
+    deepEqual(await lCache.read(lCacheFolder), lCacheFolderContent);
+  });
+
+  it("read & write remain transparent when pCompress === false", async () => {
+    const lCache = new Cache("metadata", false);
+    const lCacheFolder = join(OUTPUTS_FOLDER, "compression-transparent-false");
+    await lCache.write(lCacheFolder, lCacheFolderContent);
+    deepEqual(await lCache.read(lCacheFolder), lCacheFolderContent);
+  });
+
+  it("compresses the cache when pCompress === true", async () => {
+    const lCacheFolder = join(OUTPUTS_FOLDER, "compression-compress-when-true");
+    const lCache = new Cache("metadata", true);
+    await lCache.write(lCacheFolder, lCacheFolderContent);
+    const lCompressedCacheContents = readFileSync(
+      join(lCacheFolder, "cache.json"),
+    );
+    const lCacheContentsString = brotliDecompressSync(
+      lCompressedCacheContents,
+    ).toString("utf8");
+    const lCacheContents = JSON.parse(lCacheContentsString);
+    deepEqual(lCacheContents, lCacheFolderContent);
+  });
+
+  it("does _not_ compress the cache when pCompress is false", async () => {
+    const lCacheFolder = join(
+      OUTPUTS_FOLDER,
+      "compression-no-compress-when-false",
+    );
+    const lCache = new Cache("metadata", false);
+    await lCache.write(lCacheFolder, lCacheFolderContent);
+    const lCacheContentsString = readFileSync(
+      join(lCacheFolder, "cache.json"),
+      {
+        encoding: "utf8",
+      },
+    );
+    const lCacheContents = JSON.parse(lCacheContentsString);
+    deepEqual(lCacheContents, lCacheFolderContent);
+  });
+
+  it("does _not_ compress the cache when pCompress isn't provided", async () => {
+    const lCacheFolder = join(
+      OUTPUTS_FOLDER,
+      "compression-no-compress-when-not-provided",
+    );
+    const lCache = new Cache("metadata");
+    await lCache.write(lCacheFolder, lCacheFolderContent);
+    const lCacheContentsString = readFileSync(
+      join(lCacheFolder, "cache.json"),
+      {
+        encoding: "utf8",
+      },
+    );
+    const lCacheContents = JSON.parse(lCacheContentsString);
+    deepEqual(lCacheContents, lCacheFolderContent);
   });
 });

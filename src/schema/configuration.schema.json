@@ -1045,7 +1045,12 @@
           "type": "string",
           "description": "The folder to store the cache in. Defaults to node_modules/.cache/dependency-cruiser"
         },
-        "strategy": { "$ref": "#/definitions/CacheStrategyType" }
+        "strategy": { "$ref": "#/definitions/CacheStrategyType" },
+        "compress": {
+          "type": "boolean",
+          "description": "Whether to compress the cache or not\nSetting this to true will adds a few ms to the execution time, but\ntypically reduces the cache size by 80-90%.\n\nDefaults to false.",
+          "default": false
+        }
       }
     },
     "CacheStrategyType": {
