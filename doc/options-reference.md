@@ -1644,7 +1644,12 @@ The long form:
       // background) or 'content' (which will look at file content (hashes),
       // is slower than 'metadata' and is a bleeding edge feature as of
       // version 12.5.0)
-      strategy: "metadata"
+      strategy: "metadata",
+      // whether or not to compress the cache file. Switching this to true
+      // will make dependency-cruiser a few milliseconds slower over all.
+      // The resulting cache file will be 80-90% smaller though.
+      // Defaults to false (don't compress)
+      compress: false
     }
     // ...
   }
@@ -1668,7 +1673,7 @@ will interpret that as the cache folder.
 }
 ```
 
-If you don't want to use caching you cah leave the cache option out altogether or
+If you don't want to use caching you can leave the cache option out altogether or
 use `cache: false`.
 
 As with most settings the command line option of the same name takes

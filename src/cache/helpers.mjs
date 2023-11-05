@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import memoize from "lodash/memoize.js";
+// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
@@ -62,7 +63,7 @@ export function addCheckSumToChangeSync(pChange) {
 
 /**
  *
- * @param {import("../../types/strict-filter-types.js").IStrictExcludeType} pExcludeOption
+ * @param {import("../../types/filter-types.js").IExcludeType} pExcludeOption
  * @returns {(pFileName: string) => boolean}
  */
 export function excludeFilter(pExcludeOption) {
@@ -75,7 +76,7 @@ export function excludeFilter(pExcludeOption) {
 }
 
 /**
- * @param {import("../../types/strict-filter-types.js").IStrictIncludeOnlyType} pIncludeOnlyFilter
+ * @param {import("../../types/strict-filter-types.js").IStrictIncludeOnlyType=} pIncludeOnlyFilter
  * @returns {(pFileName: string) => boolean}
  */
 export function includeOnlyFilter(pIncludeOnlyFilter) {
@@ -122,7 +123,7 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
 ]);
 
 /**
- * @param {Set<import("watskeburt").changeTypeType>} pInterestingChangeTypes
+ * @param {Set<import("watskeburt").changeTypeType>=} pInterestingChangeTypes
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
 export function isInterestingChangeType(pInterestingChangeTypes) {

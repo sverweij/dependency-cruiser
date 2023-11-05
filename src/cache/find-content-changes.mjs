@@ -69,6 +69,8 @@ function diffCachedModuleAgainstFileSet(
  * @param {Object} pOptions
  * @param {Set<string>} pOptions.extensions
  * @param {string} pOptions.baseDir
+ * @param {import("../../types/strict-filter-types").IStrictExcludeType} pOptions.exclude
+ * @param {import("../../types/strict-filter-types").IStrictIncludeOnlyType=} pOptions.includeOnly
  * @returns {import("../..").IRevisionChange[]}
  */
 export default function findContentChanges(

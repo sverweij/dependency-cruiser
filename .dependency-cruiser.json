@@ -500,7 +500,8 @@
     },
     "progress": { "type": "performance-log", "maximumLevel": 60 },
     "cache": {
-      "strategy": "metadata"
+      "strategy": "metadata",
+      "compress": true
     }
   }
 }

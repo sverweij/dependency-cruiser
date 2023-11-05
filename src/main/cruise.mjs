@@ -33,7 +33,10 @@ export default async function cruise(
     );
 
     const { default: Cache } = await import("#cache/cache.mjs");
-    lCache = new Cache(lCruiseOptions.cache.strategy);
+    lCache = new Cache(
+      lCruiseOptions.cache.strategy,
+      lCruiseOptions.cache.compress,
+    );
     const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
     if (await lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {

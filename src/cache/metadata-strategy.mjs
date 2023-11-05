@@ -18,7 +18,7 @@ export default class MetaDataStrategy {
    * @param {import("../../types/cruise-result.js").ICruiseResult} _pCachedCruiseResult
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
+   * @param {Set<import("watskeburt").changeTypeType>=} pOptions.interestingChangeTypes
    * @param {typeof getSHA=} pOptions.shaRetrievalFn
    * @param {typeof list=} pOptions.diffListFn
    * @param {typeof addCheckSumToChangeSync=} pOptions.checksumFn
@@ -63,15 +63,19 @@ export default class MetaDataStrategy {
   }
 
   /**
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pExistingRevisionData
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pNewRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pExistingRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pNewRevisionData
    * @returns {boolean}
    */
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
     return (
       Boolean(pExistingRevisionData) &&
       Boolean(pNewRevisionData) &&
+      // @ts-expect-error ts(18048) - tsc complains pExistingRevisionData &
+      // pNewRevisionData can be undefined, but it should probably get a course
+      // in reading typescript as we've just checked this.
       pExistingRevisionData.SHA1 === pNewRevisionData.SHA1 &&
+      // @ts-expect-error ts(18048)
       isDeepStrictEqual(pExistingRevisionData.changes, pNewRevisionData.changes)
     );
   }
