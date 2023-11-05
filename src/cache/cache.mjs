@@ -84,6 +84,38 @@ export default class Cache {
   }
 
   /**
+   * @param {boolean} pCompress
+   * @return {Buffer|string}
+   */
+  #compact(pPayload, pCompress) {
+    if (pCompress) {
+      /**
+       * we landed on brotli with BROTLI_MIN_QUALITY because:
+       * - even with BROTLI_MIN_QUALITY it compresses better than gzip
+       *   (regardless of compression level)
+       * - at BROTLI_MIN_QUALITY it's faster than gzip
+       * - BROTLI_MAX_QUALITY gives a bit better compression but is _much_
+       *   slower than even gzip
+       *
+       * In our situation the sync version is significantly faster than the
+       * async version + zlib functions need to be promisified before they
+       * can be used in promises, which will add the to the execution time
+       * as well.
+       *
+       * As sync or async doesn't _really_
+       * matter for the cli, we're using the sync version here.
+       */
+      return brotliCompressSync(pPayload, {
+        params: {
+          [zlibConstants.BROTLI_PARAM_QUALITY]:
+            zlibConstants.BROTLI_MIN_QUALITY,
+        },
+      });
+    }
+    return pPayload;
+  }
+
+  /**
    * @param {string} pCacheFolder
    * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
    * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
@@ -98,33 +130,10 @@ export default class Cache {
         lRevisionData,
       ),
     );
-    let lPayload = lUncompressedPayload;
-    if (this.compress === true) {
-      /**
-       * we landed on brotli with BROTLI_MIN_QUALITY because:
-       * - even with BROTLI_MIN_QUALITY it compresses
-       *   better than gzip (regardless of the compression level)
-       * - at BROTLI_MIN_QUALITY it's faster than gzip (/ deflate)
-       * - BROTLI_MAX_QUALITY gives a bit better compression
-       *   but is _much_ slower than even gzip (on compressing)
-       *
-       * In our situation the sync version is significantly
-       * faster than the async version. As sync or async doesn't _really_
-       * matter for the cli, we're using the sync version here.
-       *
-       * (also zlib functions need to promisified first before they can be
-       * used in promises, which will add the to the execution time)
-       */
-      lPayload = brotliCompressSync(lPayload, {
-        params: {
-          [zlibConstants.BROTLI_PARAM_QUALITY]:
-            zlibConstants.BROTLI_MIN_QUALITY,
-        },
-      });
-    }
+    let lPayload = this.#compact(lUncompressedPayload, this.compress);
 
     // relying on writeFile defaults to 'do the right thing' (i.e. utf8
-    // when the payload is a string, raw buffer otherwise)
+    // when the payload is a string; raw buffer otherwise)
     await writeFile(join(pCacheFolder, CACHE_FILE_NAME), lPayload);
   }
 }
