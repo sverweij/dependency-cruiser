@@ -6,22 +6,31 @@ import { describe } from "mocha";
 import Cache from "#cache/cache.mjs";
 
 const OUTPUTS_FOLDER = "test/cache/__outputs__/";
+const EMPTY_CACHE = {
+  modules: [],
+  summary: {
+    error: 0,
+    warn: 0,
+    info: 0,
+    ignore: 0,
+    totalCruised: 0,
+    violations: [],
+    optionsUsed: {},
+  },
+};
 
 describe("[I] cache/cache - readCache", () => {
   it("returns an empty cache when trying to read from a non-existing one", async () => {
     const lCache = new Cache();
-    deepEqual(await lCache.read("this/folder/does/not-exist"), {
-      modules: [],
-      summary: {},
-    });
+    deepEqual(await lCache.read("this/folder/does/not-exist"), EMPTY_CACHE);
   });
 
   it("returns an empty cache when trying to read from a file that is invalid JSON", async () => {
     const lCache = new Cache();
-    deepEqual(await lCache.read("test/cache/__mocks__/cache/invalid-json"), {
-      modules: [],
-      summary: {},
-    });
+    deepEqual(
+      await lCache.read("test/cache/__mocks__/cache/invalid-json"),
+      EMPTY_CACHE,
+    );
   });
 
   it("returns the contents of the cache when trying to read from an existing, valid json", async () => {

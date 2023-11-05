@@ -1,3 +1,4 @@
+// @ts-check
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
@@ -14,11 +15,23 @@ import { scannableExtensions } from "#extract/transpile/meta.mjs";
 import { bus } from "#utl/bus.mjs";
 
 const CACHE_FILE_NAME = "cache.json";
+const EMPTY_CACHE = {
+  modules: [],
+  summary: {
+    error: 0,
+    warn: 0,
+    info: 0,
+    ignore: 0,
+    totalCruised: 0,
+    violations: [],
+    optionsUsed: {},
+  },
+};
 
 export default class Cache {
   /**
    * @param {import("../../types/cache-options.js").cacheStrategyType=} pCacheStrategy
-   * @param {import("../../types/cache-options.js").cacheCompressionType=} pCompress
+   * @param {boolean=} pCompress
    */
   constructor(pCacheStrategy, pCompress) {
     this.revisionData = null;
@@ -55,6 +68,8 @@ export default class Cache {
         this.revisionData,
       ) &&
       optionsAreCompatible(
+        // @ts-expect-error ts(2345) - it's indeed not strict cruise options,
+        // but it will do for now (_it works_)
         pCachedCruiseResult.summary.optionsUsed,
         pCruiseOptions,
       )
@@ -79,11 +94,12 @@ export default class Cache {
       }
       return JSON.parse(lPayload);
     } catch (pError) {
-      return { modules: [], summary: {} };
+      return EMPTY_CACHE;
     }
   }
 
   /**
+   * @param {string} pPayload
    * @param {boolean} pCompress
    * @return {Buffer|string}
    */

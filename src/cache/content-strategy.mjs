@@ -36,8 +36,8 @@ function refreshChanges(pChanges, pModules) {
       !pModules.some(
         (pModule) =>
           pModule.source === pChange.name &&
-          pModule.checksum === pChange.checksum
-      )
+          pModule.checksum === pChange.checksum,
+      ),
   );
 }
 
@@ -48,10 +48,10 @@ export default class ContentStrategy {
    * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
+   * @param {Set<import("watskeburt").changeTypeType>=} pOptions.interestingChangeTypes?
    * @param {string=} pOptions.baseDir
    * @param {typeof findContentChanges=} pOptions.diffListFn
-   * @param {typeof import('watskeburt').getSHASync=} pOptions.checksumFn
+   * @param {typeof import('watskeburt').getSHA=} pOptions.checksumFn
    * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
    */
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
@@ -89,19 +89,19 @@ export default class ContentStrategy {
         pExistingRevisionData.SHA1 === pNewRevisionData.SHA1 &&
         isDeepStrictEqual(
           pExistingRevisionData.changes,
-          pNewRevisionData.changes
-        )
+          pNewRevisionData.changes,
+        ),
     );
   }
 
   /**
    * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
    * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
     const lModulesWithCheckSum = pCruiseResult.modules.map(
-      addCheckSumToModule(pCruiseResult.summary.optionsUsed.baseDir)
+      addCheckSumToModule(pCruiseResult.summary.optionsUsed.baseDir),
     );
     const lRevisionData = {
       ...pRevisionData,
