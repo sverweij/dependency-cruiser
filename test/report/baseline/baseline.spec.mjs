@@ -1,7 +1,7 @@
 import { deepEqual, equal } from "node:assert/strict";
 import Ajv from "ajv";
 import { createRequireJSON } from "../../backwards.utl.mjs";
-import baselineSchema from "../../../src/schema/baseline-violations.schema.mjs";
+import baselineSchema from "#schema/baseline-violations.schema.mjs";
 import baseline from "#report/baseline.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);

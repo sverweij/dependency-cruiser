@@ -1,6 +1,6 @@
 import { win32, posix } from "node:path";
 import { equal } from "node:assert/strict";
-import pathToPosix from "../../src/utl/path-to-posix.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 describe("[U] utl/pathToPosix on win32", () => {
   it('transforms win32 style paths to posix ones: ""', () => {

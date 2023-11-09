@@ -183,6 +183,33 @@
       }
     },
     {
+      "name": "test-to-src-with-subpaths-only",
+      "severity": "error",
+      "from": {
+        "pathNot": [
+          "^src/",
+          "^test/api\\.spec\\.mjs",
+          "^test/report/mermaid/mermaid\\.spec\\.mjs"
+        ]
+      },
+      "to": {
+        "path": "^src/",
+        "dependencyTypesNot": ["aliased-subpath-import"]
+      }
+    },
+    {
+      "name": "src-to-other-sub-paths-with-subpath-imports-only",
+      "severity": "error",
+      "from": {
+        "path": "(^src/[^/]+/)"
+      },
+      "to": {
+        "path": "^src/",
+        "pathNot": "$1",
+        "dependencyTypesNot": ["aliased-subpath-import"]
+      }
+    },
+    {
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
       "severity": "warn",
