@@ -37,8 +37,9 @@ export type SeverityType = "error" | "warn" | "info" | "ignore";
 export type DependencyType =
   | "aliased"
   | "aliased-subpath-import"
-  | "aliased-webpack"
   | "aliased-tsconfig"
+  | "aliased-webpack"
+  | "aliased-workspace"
   | "core"
   | "deprecated"
   | "local"
