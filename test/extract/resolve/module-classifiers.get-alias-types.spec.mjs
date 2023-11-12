@@ -199,6 +199,25 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
+  it("returns aliased and aliased-workspace for workspace alias (even when the symlink isn't followed)", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: ["*/?-package"],
+    };
+    const lResolveOptions = {};
+    deepEqual(
+      getAliasTypes(
+        "some-workspaced-local-package",
+        "node_modules/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      ["aliased", "aliased-workspace"],
+    );
+  });
+
   it("should return aliased and aliased-tsconfig for tsconfig alias", () => {
     const lManifest = {
       name: "test",

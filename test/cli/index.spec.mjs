@@ -125,6 +125,26 @@ const TEST_PAIRS = [
     expect: "alternate-basedir/expected.json",
     cleanup: true,
   },
+  {
+    description: "workspaces mono repo",
+    dirOrFile: "apps",
+    options: {
+      outputTo: path.join(OUT_DIR, "workspaces-mono-repo.json"),
+      outputType: "json",
+      doNotFollow: "node_modules",
+      ruleSet: {
+        options: {
+          preserveSymlinks: false,
+          baseDir: join(
+            process.cwd(),
+            "test/cli/__fixtures__/workspaces-mono-repo",
+          ),
+        },
+      },
+    },
+    expect: "workspaces-mono-repo/expected.json",
+    cleanup: true,
+  },
 ];
 
 function resetOutputDirectory() {
