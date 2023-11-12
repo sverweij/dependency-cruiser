@@ -53,7 +53,7 @@ function canBeResolvedToTsVariant(pModuleName) {
 function isTypeScriptIshExtension(pModuleName) {
   return [".ts", ".tsx", ".cts", ".mts"].includes(extname(pModuleName));
 }
-function resolveYarnVirtual(pPath) {
+function resolveYarnVirtual(pBaseDirectory, pPath) {
   const pnpAPI = (monkeyPatchedModule?.findPnpApi ?? (() => false))(pPath);
 
   // the pnp api only works in plug'n play environments, and resolveVirtual
@@ -62,7 +62,15 @@ function resolveYarnVirtual(pPath) {
   // cover it in a separate integration test.
   /* c8 ignore start */
   if (pnpAPI && (pnpAPI?.VERSIONS?.resolveVirtual ?? 0) === 1) {
-    return pnpAPI.resolveVirtual(pPath) || pPath;
+    // resolveVirtual takes absolute paths, hence the path.resolve:
+    const lResolvedAbsolute = path_resolve(pBaseDirectory, pPath);
+    const lResolvedVirtual = pnpAPI.resolveVirtual(lResolvedAbsolute);
+    if (lResolvedVirtual) {
+      const lResolvedRelative = relative(pBaseDirectory, lResolvedVirtual);
+      // in win32 environments resolveVirtual might return win32 paths,
+      // so we have to convert them to posix paths again
+      return pathToPosix(lResolvedRelative);
+    }
   }
   /* c8 ignore stop */
   return pPath;
@@ -193,36 +201,20 @@ export default function resolve(
   };
 
   if (!lResolvedDependency.coreModule && !lResolvedDependency.couldNotResolve) {
-    try {
-      // enhanced-resolve inserts a NULL character in front of any `#` character.
-      // This wonky replace corrects that that so the filename again corresponds
-      // with a real file on disk
-      const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
-        // eslint-disable-next-line no-control-regex
-        /\u0000#/g,
-        "#",
-      );
+    // enhanced-resolve inserts a NULL character in front of any `#` character.
+    // This wonky replace corrects that that so the filename again corresponds
+    // with a real file on disk
+    const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
+      // eslint-disable-next-line no-control-regex
+      /\u0000#/g,
+      "#",
+    );
+    const lResolvedYarnVirtual = resolveYarnVirtual(
+      pBaseDirectory,
+      lResolvedEHRCorrected,
+    );
 
-      // TODO: refactor this - apparently yarn's resolveVirtual takes an absolute
-      //       path (to check?). If that is indeed the case this making it absolute
-      //       and after making it relative again should move over there.
-      const lResolvedAbsolute = path_resolve(
-        pBaseDirectory,
-        lResolvedEHRCorrected,
-      );
-      const lResolvedYarnVirtualAbsolute =
-        resolveYarnVirtual(lResolvedAbsolute);
-      const lResolvedRealPathRelative = relative(
-        pBaseDirectory,
-        lResolvedYarnVirtualAbsolute,
-      );
-      const lResolvedRealPathRelativePosix = pathToPosix(
-        lResolvedRealPathRelative,
-      );
-      lResolvedDependency.resolved = lResolvedRealPathRelativePosix;
-    } catch (pError) {
-      lResolvedDependency.couldNotResolve = true;
-    }
+    lResolvedDependency.resolved = lResolvedYarnVirtual;
   }
   return lResolvedDependency;
 }
