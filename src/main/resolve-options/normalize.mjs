@@ -10,14 +10,7 @@ import {
 const DEFAULT_CACHE_DURATION = 4000;
 /** @type {Partial<import("../../../types/dependency-cruiser").IResolveOptions>} */
 const DEFAULT_RESOLVE_OPTIONS = {
-  // for later: check semantics of enhanced-resolve symlinks and
-  // node's preserveSymlinks. They seem to be
-  // symlink === !preserveSymlinks - but using it that way
-  // breaks backwards compatibility
-  //
-  // Someday we'll rely on this and remove the code that manually
-  // does this in extract/resolve/index.js
-  symlinks: false,
+  symlinks: true,
   // if a webpack config overrides extensions, there's probably
   // good cause. The scannableExtensions are an educated guess
   // anyway, that works well in most circumstances.
@@ -145,13 +138,12 @@ export default async function normalizeResolveOptions(
   // eslint-disable-next-line no-return-await
   return await compileResolveOptions(
     {
-      /*
-        for later: check semantics of enhanced-resolve symlinks and
-        node's preserveSymlinks. They seem to be
-        symlink === !preserveSymlinks - but using it that way
-        breaks backwards compatibility
-      */
-      symlinks: pOptions?.preserveSymlinks ?? null,
+      // EnhancedResolve's symlinks:
+      // - true => symlinks are followed (vv)
+      // node's --preserve-symlinks:
+      // - true => symlinks are NOT followed (vv)
+      // => symlinks = !preserveSymlinks
+      symlinks: !pOptions?.preserveSymlinks,
       tsConfig: pOptions?.ruleSet?.options?.tsConfig?.fileName ?? null,
 
       /* squirrel the externalModuleResolutionStrategy and combinedDependencies

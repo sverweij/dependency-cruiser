@@ -1,4 +1,3 @@
-import { realpathSync } from "node:fs";
 import { extname, resolve as path_resolve, relative } from "node:path";
 import monkeyPatchedModule from "node:module";
 import { isRelativeModuleName } from "./module-classifiers.mjs";
@@ -54,7 +53,7 @@ function canBeResolvedToTsVariant(pModuleName) {
 function isTypeScriptIshExtension(pModuleName) {
   return [".ts", ".tsx", ".cts", ".mts"].includes(extname(pModuleName));
 }
-function resolveYarnVirtual(pPath) {
+function resolveYarnVirtual(pBaseDirectory, pPath) {
   const pnpAPI = (monkeyPatchedModule?.findPnpApi ?? (() => false))(pPath);
 
   // the pnp api only works in plug'n play environments, and resolveVirtual
@@ -63,7 +62,15 @@ function resolveYarnVirtual(pPath) {
   // cover it in a separate integration test.
   /* c8 ignore start */
   if (pnpAPI && (pnpAPI?.VERSIONS?.resolveVirtual ?? 0) === 1) {
-    return pnpAPI.resolveVirtual(path_resolve(pPath)) || pPath;
+    // resolveVirtual takes absolute paths, hence the path.resolve:
+    const lResolvedAbsolute = path_resolve(pBaseDirectory, pPath);
+    const lResolvedVirtual = pnpAPI.resolveVirtual(lResolvedAbsolute);
+    if (lResolvedVirtual) {
+      const lResolvedRelative = relative(pBaseDirectory, lResolvedVirtual);
+      // in win32 environments resolveVirtual might return win32 paths,
+      // so we have to convert them to posix paths again
+      return pathToPosix(lResolvedRelative);
+    }
   }
   /* c8 ignore stop */
   return pPath;
@@ -193,33 +200,21 @@ export default function resolve(
     ),
   };
 
-  if (
-    !pResolveOptions.symlinks &&
-    !lResolvedDependency.coreModule &&
-    !lResolvedDependency.couldNotResolve
-  ) {
-    try {
-      lResolvedDependency.resolved = pathToPosix(
-        relative(
-          pBaseDirectory,
-          realpathSync(
-            resolveYarnVirtual(
-              path_resolve(
-                pBaseDirectory,
-                /* enhanced-resolve inserts a NULL character in front of any `#` 
-                   character. This wonky replace undoes that so the filename
-                   again corresponds with a real file on disk
-                 */
-                // eslint-disable-next-line no-control-regex
-                lResolvedDependency.resolved.replace(/\u0000#/g, "#"),
-              ),
-            ),
-          ),
-        ),
-      );
-    } catch (pError) {
-      lResolvedDependency.couldNotResolve = true;
-    }
+  if (!lResolvedDependency.coreModule && !lResolvedDependency.couldNotResolve) {
+    // enhanced-resolve inserts a NULL character in front of any `#` character.
+    // This wonky replace corrects that that so the filename again corresponds
+    // with a real file on disk
+    const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
+      // eslint-disable-next-line no-control-regex
+      /\u0000#/g,
+      "#",
+    );
+    const lResolvedYarnVirtual = resolveYarnVirtual(
+      pBaseDirectory,
+      lResolvedEHRCorrected,
+    );
+
+    lResolvedDependency.resolved = lResolvedYarnVirtual;
   }
   return lResolvedDependency;
 }
