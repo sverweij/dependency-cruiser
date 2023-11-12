@@ -6,6 +6,7 @@ import {
   formatMemory,
   formatPerfLine,
 } from "#cli/listeners/performance-log/format-helpers.mjs";
+import { DEBUG } from "#utl/bus.mjs";
 
 /*
  * as the formatHelpers use the Intl API, it's necessary to set the locale
@@ -80,7 +81,7 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatMemory", () =
   });
 
   it("converts to kB, left pads & adds the unit at the end (not a number)", () => {
-    equal(formatMemory("not a number"), "        NaNkB ");
+    equal(formatMemory("not a number", DEBUG), "        NaNkB ");
   });
 });
 

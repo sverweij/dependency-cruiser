@@ -1,7 +1,6 @@
 // @ts-check
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import memoize from "lodash/memoize.js";
 // @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
@@ -13,27 +12,6 @@ import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
  */
 function hash(pString) {
   return createHash("sha1").update(pString).digest("base64");
-}
-
-/**
- * @param {string} pFileName
- * @returns {Promise<string>}
- */
-async function _getFileHash(pFileName) {
-  try {
-    return hash(await readFile(pFileName, "utf8"));
-  } catch (pError) {
-    return "file not found";
-  }
-}
-
-export const getFileHash = memoize(_getFileHash);
-
-export async function addCheckSumToChange(pChange) {
-  return {
-    ...pChange,
-    checksum: await getFileHash(pChange.name),
-  };
 }
 
 /**
