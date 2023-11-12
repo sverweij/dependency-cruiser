@@ -1,4 +1,3 @@
-import { realpathSync } from "node:fs";
 import { extname, resolve as path_resolve, relative } from "node:path";
 import monkeyPatchedModule from "node:module";
 import { isRelativeModuleName } from "./module-classifiers.mjs";
@@ -63,7 +62,7 @@ function resolveYarnVirtual(pPath) {
   // cover it in a separate integration test.
   /* c8 ignore start */
   if (pnpAPI && (pnpAPI?.VERSIONS?.resolveVirtual ?? 0) === 1) {
-    return pnpAPI.resolveVirtual(path_resolve(pPath)) || pPath;
+    return pnpAPI.resolveVirtual(pPath) || pPath;
   }
   /* c8 ignore stop */
   return pPath;
@@ -193,30 +192,34 @@ export default function resolve(
     ),
   };
 
-  if (
-    !pResolveOptions.symlinks &&
-    !lResolvedDependency.coreModule &&
-    !lResolvedDependency.couldNotResolve
-  ) {
+  if (!lResolvedDependency.coreModule && !lResolvedDependency.couldNotResolve) {
     try {
-      lResolvedDependency.resolved = pathToPosix(
-        relative(
-          pBaseDirectory,
-          realpathSync(
-            resolveYarnVirtual(
-              path_resolve(
-                pBaseDirectory,
-                /* enhanced-resolve inserts a NULL character in front of any `#` 
-                   character. This wonky replace undoes that so the filename
-                   again corresponds with a real file on disk
-                 */
-                // eslint-disable-next-line no-control-regex
-                lResolvedDependency.resolved.replace(/\u0000#/g, "#"),
-              ),
-            ),
-          ),
-        ),
+      // enhanced-resolve inserts a NULL character in front of any `#` character.
+      // This wonky replace corrects that that so the filename again corresponds
+      // with a real file on disk
+      const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
+        // eslint-disable-next-line no-control-regex
+        /\u0000#/g,
+        "#",
       );
+
+      // TODO: refactor this - apparently yarn's resolveVirtual takes an absolute
+      //       path (to check?). If that is indeed the case this making it absolute
+      //       and after making it relative again should move over there.
+      const lResolvedAbsolute = path_resolve(
+        pBaseDirectory,
+        lResolvedEHRCorrected,
+      );
+      const lResolvedYarnVirtualAbsolute =
+        resolveYarnVirtual(lResolvedAbsolute);
+      const lResolvedRealPathRelative = relative(
+        pBaseDirectory,
+        lResolvedYarnVirtualAbsolute,
+      );
+      const lResolvedRealPathRelativePosix = pathToPosix(
+        lResolvedRealPathRelative,
+      );
+      lResolvedDependency.resolved = lResolvedRealPathRelativePosix;
     } catch (pError) {
       lResolvedDependency.couldNotResolve = true;
     }

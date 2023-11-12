@@ -21,7 +21,7 @@ describe("[I] main/resolve-options/normalize", () => {
     );
 
     equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
-    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.symlinks, true);
     equal(lNormalizedOptions.tsConfig, null);
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
@@ -39,7 +39,7 @@ describe("[I] main/resolve-options/normalize", () => {
     );
 
     equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
-    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.symlinks, true);
     equal(lNormalizedOptions.tsConfig, null);
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
@@ -61,7 +61,7 @@ describe("[I] main/resolve-options/normalize", () => {
       Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
-    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.symlinks, true);
     equal(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
@@ -83,7 +83,7 @@ describe("[I] main/resolve-options/normalize", () => {
       Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
-    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.symlinks, true);
     equal(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
