@@ -5,8 +5,9 @@ export default {
       enum: [
         "aliased",
         "aliased-subpath-import",
-        "aliased-webpack",
         "aliased-tsconfig",
+        "aliased-webpack",
+        "aliased-workspace",
         "core",
         "deprecated",
         "local",

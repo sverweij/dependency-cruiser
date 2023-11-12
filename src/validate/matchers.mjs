@@ -6,8 +6,9 @@ import { intersects } from "#utl/array-util.mjs";
 const NOT_REALLY_DUPLICATES = new Set([
   "aliased",
   "aliased-subpath-import",
-  "aliased-webpack",
   "aliased-tsconfig",
+  "aliased-webpack",
+  "aliased-workspace",
   "type-only",
 ]);
 

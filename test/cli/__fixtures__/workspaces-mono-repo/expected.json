@@ -1,0 +1,206 @@
+{
+  "modules": [
+    {
+      "source": "apps/index.mjs",
+      "dependencies": [
+        {
+          "module": "3kq578f",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "packages/事物/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "chose",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "packages/chose/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "ding",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "packages/ding/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "libs/books/index.mjs",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "libs/books/index.mjs",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "libs/bücher/index.mjs",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "libs/bücher/index.mjs",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "libs/livres/index.mjs",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "libs/livres/index.mjs",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "libs/图书/index.mjs",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "libs/图书/index.mjs",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "thing",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "packages/thing/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "packages/事物/index.js",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "packages/chose/index.js",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "packages/ding/index.js",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/books/index.mjs",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/bücher/index.mjs",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/livres/index.mjs",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/图书/index.mjs",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "packages/thing/index.js",
+      "dependencies": [],
+      "dependents": ["apps/index.mjs"],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 9,
+    "totalDependenciesCruised": 8,
+    "optionsUsed": {
+      "baseDir": "test/cli/__fixtures__/workspaces-mono-repo",
+      "combinedDependencies": false,
+      "doNotFollow": {
+        "path": "node_modules"
+      },
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "outputTo": "test/cli/__output__/workspaces-mono-repo.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "args": "apps"
+    },
+    "ruleSetUsed": {}
+  }
+}
