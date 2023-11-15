@@ -59,7 +59,7 @@ As a single regular expression:
 ```javascript
 options: {
   includeOnly: {
-    path: "^bin|^src|^test|^packages";
+    path: "^bin|^src|^test|^packages",
   }
 }
 ```
@@ -69,7 +69,7 @@ As an array of regular expressions:
 ```javascript
 options: {
   includeOnly: {
-    path: ["^bin", "^src", "^test", "^packages"];
+    path: ["^bin", "^src", "^test", "^packages"],
   }
 }
 ```
@@ -78,7 +78,7 @@ Or in shorthand:
 
 ```javascript
 options: {
-  includeOnly: ["^bin", "^src", "^test", "^packages"];
+  includeOnly: ["^bin", "^src", "^test", "^packages"],
 }
 ```
 
