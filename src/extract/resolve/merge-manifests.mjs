@@ -24,12 +24,12 @@ function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
   return uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
 }
 
-function isDependencyKey(pKey) {
-  return pKey.endsWith("ependencies");
+function isInterestingKey(pKey) {
+  return pKey.endsWith("ependencies") || pKey === "workspaces";
 }
 
 function getDependencyKeys(pPackage) {
-  return Object.keys(pPackage).filter(isDependencyKey);
+  return Object.keys(pPackage).filter(isInterestingKey);
 }
 
 function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
@@ -38,6 +38,10 @@ function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
       getDependencyKeys(pFurtherPackage),
     ),
   );
+}
+
+function isAnArrayKey(pKey) {
+  return pKey.startsWith("bundle") || pKey === "workspaces";
 }
 
 /**
@@ -63,7 +67,7 @@ export default function mergeManifests(pClosestManifest, pFurtherManifest) {
   )
     .map((pKey) => ({
       key: pKey,
-      value: pKey.startsWith("bundle")
+      value: isAnArrayKey(pKey)
         ? mergeDependencyArray(
             pClosestManifest?.[pKey] ?? [],
             pFurtherManifest?.[pKey] ?? [],
