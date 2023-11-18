@@ -47,14 +47,6 @@ export default {
       attributes: { fontcolor: "blue", color: "blue" },
     },
     {
-      criteria: { valid: false },
-      attributes: { fontcolor: "red", color: "red" },
-    },
-    {
-      criteria: { couldNotResolve: true },
-      attributes: { color: "red", fontcolor: "red" },
-    },
-    {
       criteria: { coreModule: true },
       attributes: { color: "grey", fontcolor: "grey" },
     },
@@ -130,10 +122,6 @@ export default {
     {
       criteria: { dynamic: true },
       attributes: { style: "dashed" },
-    },
-    {
-      criteria: { valid: false },
-      attributes: { fontcolor: "red", color: "red" },
     },
     {
       criteria: { circular: true },
