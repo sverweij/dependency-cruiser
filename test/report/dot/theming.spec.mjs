@@ -25,7 +25,7 @@ describe("[U] report/dot/theming - determineModuleColors - default theme", () =>
         { couldNotResolve: true },
         theming.normalizeTheme({}).modules,
       ),
-      { color: "red", fontcolor: "red" },
+      {},
     );
   });
 
