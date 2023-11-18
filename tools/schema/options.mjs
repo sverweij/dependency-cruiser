@@ -212,7 +212,7 @@ export default {
           type: "object",
           additionalProperties: false,
           description:
-            "Webpack configuration to use to get resolve options from",
+            "Webpack configuration file to use to get resolve options from",
           properties: {
             fileName: {
               type: "string",
@@ -298,6 +298,9 @@ export default {
                 "you e.g. use external packages that only expose types, and you " +
                 "still want references to these types to be resolved you could expand " +
                 "this to ['main', 'types', 'typings']",
+              items: {
+                type: "string",
+              },
             },
             mainFiles: {
               type: "array",
@@ -305,6 +308,18 @@ export default {
                 "A list of files to consider 'main' files, defaults to " +
                 "['index']. Only set this when you have really special needs " +
                 "that warrant it.",
+            },
+            aliasFields: {
+              type: "array",
+              description:
+                "A list of alias fields in manifests (package.jsons). " +
+                "Specify a field, such as browser, to be parsed according to " +
+                "[this specification](https://github.com/defunctzombie/package-browser-field-spec). " +
+                "Also see [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields) " +
+                "in the webpack docs. Defaults to an empty array (don't use any alias fields).",
+              items: {
+                type: "string",
+              },
             },
             cachedInputFileSystem: {
               type: "object",

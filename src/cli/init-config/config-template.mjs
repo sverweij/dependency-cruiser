@@ -333,6 +333,16 @@ module.exports = {
          of dependency-cruiser this will likely become the default.
        */
       {{mainFieldsAttribute}}
+      /*
+         A list of alias fields in manifests (package.jsons).
+         Specify a field, such as browser, to be parsed according to
+         [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+         Also see [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
+         in the webpack docs. 
+         
+         Defaults to an empty array (don't use any alias fields).
+       */
+      // aliasFields: ["browser"],
     },
     reporterOptions: {
       dot: {
