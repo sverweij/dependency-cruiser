@@ -1562,6 +1562,33 @@ is of type `module`.
 A list of files to consider 'main' files, defaults to ['index']. Only set this
 when you have really special needs that that warrant it.
 
+#### `aliasFields`
+
+> Likely you will not need to use this
+
+If you use a package that, in stead of the `main` field, or `exports` still uses
+the [`browser` field](https://github.com/defunctzombie/package-browser-field-spec)
+to indicate the main file in case it's for the browser, you can use:
+
+```javascript
+  {
+  // ...
+ "options": {
+    // ...
+    "aliasFields": [ "browser" ]
+    // ...
+  }
+}
+```
+
+In typical enhanced-resolve fashion this field was added to support this scenario,
+but implemented in a more generic fashion. See
+[resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
+in the webpack docs.
+
+Defaults to an empty array (don't use any alias fields) to keep backwards
+compatibility.
+
 #### cachedInputFileSystem - `cacheDuration`
 
 > Likely you will not need to use this
