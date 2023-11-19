@@ -216,14 +216,22 @@ export function getAliasTypes(
   pResolveOptions,
   pManifest,
 ) {
+  if (isRelativeModuleName(pModuleName)) {
+    return [];
+  }
+  // the order of these ifs is deliberate - node native stuff first, then things
+  // bolted on by bundlers & transpilers. The order of subpath imports and workspaces
+  // isn't _that_ important, as they can't be confused
+  // - subpath imports _must_ start with a #
+  // - workspaces (or actualy: package names) are forbidden to even _contain_ a #
   if (isSubpathImport(pModuleName, pManifest)) {
     return ["aliased", "aliased-subpath-import"];
   }
-  if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
-    return ["aliased", "aliased-webpack"];
-  }
   if (isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest)) {
     return ["aliased", "aliased-workspace"];
+  }
+  if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
+    return ["aliased", "aliased-webpack"];
   }
   if (
     isLikelyTSAliased(
