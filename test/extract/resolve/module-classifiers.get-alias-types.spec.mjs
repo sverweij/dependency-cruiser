@@ -237,7 +237,7 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
-  it("classifies as a workspace alias if it could be both a web pack alias _and_ a workspace alias", () => {
+  it("classifies as a webpack alias if it could be both a webpack alias _and_ a workspace alias", () => {
     const lManifest = {
       name: "test",
       version: "1.0.0",
@@ -256,11 +256,11 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
         lResolveOptions,
         lManifest,
       ),
-      ["aliased", "aliased-workspace"],
+      ["aliased", "aliased-webpack"],
     );
   });
 
-  it("classifies as a subpath import if it could be both a web pack alias _and_ a subpath import", () => {
+  it("classifies as a webpack alias if it could be both a webpack alias _and_ a subpath import", () => {
     const lManifest = {
       name: "test",
       version: "1.0.0",
@@ -281,7 +281,7 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
         lResolveOptions,
         lManifest,
       ),
-      ["aliased", "aliased-subpath-import"],
+      ["aliased", "aliased-webpack"],
     );
   });
 
