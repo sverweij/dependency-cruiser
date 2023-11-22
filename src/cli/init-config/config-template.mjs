@@ -25,10 +25,10 @@ module.exports = {
       from: {
         orphan: true,
         pathNot: [
-          '(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$', // dot files
-          '\\.d\\.ts$',                            // TypeScript declaration files
-          '(^|/)tsconfig\\.json$',                 // TypeScript config
-          '(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$' // other configs
+          '(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$', // dot files
+          '[.]d[.]ts$',                            // TypeScript declaration files
+          '(^|/)tsconfig[.]json$',                 // TypeScript config
+          '(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$' // other configs
         ]
       },
       to: {},
@@ -136,7 +136,7 @@ module.exports = {
       severity: 'error',
       from: {},
       to: {
-        path: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
+        path: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
       }
     },
     {
@@ -150,7 +150,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '{{sourceLocationRE}}',
-        pathNot: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
+        pathNot: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
       },
       to: {
         dependencyTypes: [
