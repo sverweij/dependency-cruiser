@@ -162,7 +162,7 @@ module.exports = {
           'type-only'
         ],
         pathNot: [
-          '@types/'
+          'node_modules/@types/'
         ]
       }
     },
