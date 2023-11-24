@@ -55,19 +55,19 @@
       "import": "./src/main/index.mjs"
     },
     "./config-utl/extract-babel-config": {
-      "types": "./types/extract-babel-config.d.ts",
+      "types": "./types/extract-babel-config.d.mts",
       "import": "./src/config-utl/extract-babel-config.mjs"
     },
     "./config-utl/extract-depcruise-config": {
-      "types": "./types/extract-depcruise-config.d.ts",
+      "types": "./types/extract-depcruise-config.d.mts",
       "import": "./src/config-utl/extract-depcruise-config/index.mjs"
     },
     "./config-utl/extract-ts-config": {
-      "types": "./types/extract-ts-config.d.ts",
+      "types": "./types/extract-ts-config.d.mts",
       "import": "./src/config-utl/extract-ts-config.mjs"
     },
     "./config-utl/extract-webpack-resolve-config": {
-      "types": "./types/extract-webpack-resolve-config.d.ts",
+      "types": "./types/extract-webpack-resolve-config.d.mts",
       "import": "./src/config-utl/extract-webpack-resolve-config.mjs"
     },
     "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.mjs",

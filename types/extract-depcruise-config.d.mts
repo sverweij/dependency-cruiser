@@ -1,4 +1,4 @@
-import { ICruiseOptions } from "./options";
+import type { ICruiseOptions } from "./options.d.mts";
 
 /**
  * Reads the file with name `pConfigFileName` returns the parsed cruise
@@ -20,5 +20,5 @@ import { ICruiseOptions } from "./options";
 export default function extractDepcruiseConfig(
   pConfigFileName: string,
   pAlreadyVisited?: Set<string>,
-  pBaseDirectory?: string,
+  pBaseDirectory?: string
 ): Promise<ICruiseOptions>;
