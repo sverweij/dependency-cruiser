@@ -154,7 +154,15 @@ module.exports = {
       },
       to: {
         dependencyTypes: [
-          'npm-dev'
+          'npm-dev',
+        ],
+        // type only dependencies are not a problem as they don't end up in the
+        // production code or are ignored by the runtime.
+        dependencyTypesNot: [
+          'type-only'
+        ],
+        pathNot: [
+          '@types/'
         ]
       }
     },
