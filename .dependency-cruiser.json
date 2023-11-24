@@ -320,9 +320,9 @@
         // ".cts",
         // ".mts",
         // ".tsx",
-        ".d.ts"
+        ".d.ts",
         // ".d.cts",
-        // ".d.mts",
+        ".d.mts"
         // ".coffee",
         // ".litcoffee",
         // "cofee.md",
