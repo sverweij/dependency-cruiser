@@ -1,4 +1,4 @@
-import { ParsedCommandLine } from "typescript";
+import type { ParsedCommandLine } from "typescript";
 
 /**
  * Reads the file with name `pTSConfigFileName` and returns its parsed
