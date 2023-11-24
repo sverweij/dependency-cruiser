@@ -115,10 +115,10 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
  * @param {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
- * @returns {import('../../types/cruise-result.js').IDependency[]}
+ * @returns {import('../../types/cruise-result.mjs').IDependency[]}
  */
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
-  /** @type import('../../types/cruise-result.js').IDependency[] */
+  /** @type import('../../types/cruise-result.mjs').IDependency[] */
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {

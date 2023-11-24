@@ -1,11 +1,11 @@
-import {
+import type {
   IBaseRestrictionType,
   IFromRestriction,
   IToRestriction,
   IReachabilityToRestrictionType,
   IRequiredToRestrictionType,
   IDependentsModuleRestrictionType,
-} from "./restrictions";
+} from "./restrictions.mjs";
 
 export interface IStrictBaseRestrictionType extends IBaseRestrictionType {
   path?: string;

@@ -1,9 +1,13 @@
-import { ICruiseOptions } from "./options";
-import { IFlattenedRuleSet } from "./rule-set";
-import { DependencyType, ModuleSystemType, ProtocolType } from "./shared-types";
-import { IViolation } from "./violations";
-import { IRuleSummary } from "./rule-summary";
-import { IChange } from "watskeburt";
+import type { ICruiseOptions } from "./options.mjs";
+import type { IFlattenedRuleSet } from "./rule-set.mjs";
+import type {
+  DependencyType,
+  ModuleSystemType,
+  ProtocolType,
+} from "./shared-types.mjs";
+import type { IViolation } from "./violations.mjs";
+import type { IRuleSummary } from "./rule-summary.mjs";
+import type { IChange } from "watskeburt";
 
 export interface IRevisionChange extends IChange {
   // optional because
@@ -446,5 +450,5 @@ export interface IFolder {
   instability?: number;
 }
 
-export * from "./violations";
-export * from "./rule-summary";
+export type * from "./violations.mjs";
+export type * from "./rule-summary.mjs";

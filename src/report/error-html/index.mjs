@@ -33,7 +33,7 @@ function buildViolatedRuleRow(pViolatedRule) {
 }
 
 /**
- * @param {import('../../../types/cruise-result.js')} pResults
+ * @param {import('../../../types/cruise-result.mjs')} pResults
  * @returns {string}
  */
 function constructViolatedRulesTable(pResults) {
@@ -70,7 +70,7 @@ function constructViolatedRulesTable(pResults) {
 }
 
 /**
- * @param {import('../../../types/cruise-result.js').IViolation} pViolation
+ * @param {import('../../../types/cruise-result.mjs').IViolation} pViolation
  * @returns {string}
  */
 function getViolationRowClass(pViolation) {
@@ -78,7 +78,7 @@ function getViolationRowClass(pViolation) {
 }
 
 /**
- * @param {import('../../../types/cruise-result.js').IViolation} pViolation
+ * @param {import('../../../types/cruise-result.mjs').IViolation} pViolation
  * @returns {string}
  */
 function constructViolationRow(pPrefix) {
@@ -99,7 +99,7 @@ function constructViolationRow(pPrefix) {
 }
 
 /**
- * @param {import('../../../types/cruise-result.js').ICruiseResult} pResults
+ * @param {import('../../../types/cruise-result.mjs').ICruiseResult} pResults
  * @returns {string}
  */
 function constructViolationsList(pResults) {
@@ -146,7 +146,7 @@ function constructViolationsList(pResults) {
 }
 
 /**
- * @param {import('../../../types/cruise-result.js')} pResults
+ * @param {import('../../../types/cruise-result.mjs')} pResults
  * @returns {string}
  */
 function report(pResults) {
@@ -169,7 +169,7 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
+ * @param {import("../../../types/cruise-result.mjs").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
  * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */

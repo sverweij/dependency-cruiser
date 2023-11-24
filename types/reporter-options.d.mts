@@ -1,9 +1,9 @@
-import {
+import type {
   IExcludeType,
   IFocusType,
   IIncludeOnlyType,
   IReachesType,
-} from "./filter-types";
+} from "./filter-types.mjs";
 
 export interface IReporterOptions {
   /**

@@ -70,14 +70,24 @@
       "types": "./types/extract-webpack-resolve-config.d.mts",
       "import": "./src/config-utl/extract-webpack-resolve-config.mjs"
     },
-    "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.mjs",
-    "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.mjs",
-    "./mermaid-reporter-plugin": "./src/report/mermaid.mjs"
+    "./sample-reporter-plugin": {
+      "types": "./types/stats-reporter-plugin.d.mts",
+      "import": "./configs/plugins/stats-reporter-plugin.mjs"
+    },
+    "./sample-3d-reporter-plugin": {
+      "types": "./types/3d-reporter-plugin.d.mts",
+      "import": "./configs/plugins/3d-reporter-plugin.mjs"
+    },
+    "./mermaid-reporter-plugin": {
+      "types": "./types/mermaid-reporter-plugin.d.mts",
+      "import": "./src/report/mermaid.mjs"
+    }
   },
   "types": "types/dependency-cruiser.d.mts",
   "files": [
     "bin",
     "configs/**/*.js",
+    "configs/plugins/",
     "src",
     "!src/**/*.json",
     "!src/**/*.hbs",
@@ -103,7 +113,7 @@
     "depcruise:graph:doc:fmt-archi": "./bin/depcruise-fmt.mjs -T archi -f - node_modules/.cache/tmp_graph_deps.json | dot -T svg -Gordering=in -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | node bin/wrap-stream-in-html.mjs > docs/dependency-cruiser-archi-graph.html",
     "depcruise:graph:doc:fmt-dir": "./bin/depcruise-fmt.mjs -T ddot -f - node_modules/.cache/tmp_graph_deps.json | dot -T svg -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-dir-graph.svg | node bin/wrap-stream-in-html.mjs > docs/dependency-cruiser-dir-graph.html",
     "depcruise:graph:doc:fmt-schema": "cd tools/schema && node ../../bin/dependency-cruise.mjs . --output-type dot | dot -T svg | tee ../overview.svg | node ../../bin/wrap-stream-in-html.mjs > ../../docs/schema-overview.html && cd -",
-    "depcruise:graph:doc:fmt-types": "cd types && node ../bin/dependency-cruise.mjs . --output-type dot | dot -T svg > overview.svg && cd -",
+    "depcruise:graph:doc:fmt-types": "cd types && node ../bin/dependency-cruise.mjs . --output-type dot | dot -T svg | tee overview.svg | ../bin/wrap-stream-in-html.mjs > overview.html && cd -",
     "depcruise:graph:doc:samples": "sh tools/generate-samples.sh",
     "depcruise:graph:mermaid": "node ./bin/dependency-cruise.mjs bin src --include-only ^src/ --collapse 2 --output-type mermaid",
     "depcruise:graph:mermaid:diff": "node ./bin/dependency-cruise.mjs bin src test types tools --config configs/.dependency-cruiser-unlimited.mjs --output-type mermaid --reaches \"$(watskeburt $SHA)\"",

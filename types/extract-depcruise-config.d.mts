@@ -20,5 +20,5 @@ import type { ICruiseOptions } from "./options.d.mts";
 export default function extractDepcruiseConfig(
   pConfigFileName: string,
   pAlreadyVisited?: Set<string>,
-  pBaseDirectory?: string
+  pBaseDirectory?: string,
 ): Promise<ICruiseOptions>;

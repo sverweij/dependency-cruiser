@@ -109,7 +109,7 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../../types/cruise-result.mjs").ICruiseResult} pResults
  * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput}
  */
 export default function html(pResults) {

@@ -7,8 +7,8 @@ import { extractGroups } from "#utl/regex-util.mjs";
  * Returns true if pRule is an orphan rule and pModule is an orphan.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
 function matchesOrphanRule(pRule, pModule) {
@@ -26,8 +26,8 @@ function matchesOrphanRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
 function matchesReachableRule(pRule, pModule) {
@@ -56,8 +56,8 @@ function matchesReachableRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
 function matchesReachesRule(pRule, pModule) {
@@ -78,7 +78,7 @@ function matchesReachesRule(pRule, pModule) {
 }
 /**
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
  * @param {string[]} pDependents
  * @returns {boolean}
  */
@@ -98,8 +98,8 @@ function dependentsCountsMatch(pRule, pDependents) {
 
 /**
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
 function matchesDependentsRule(pRule, pModule) {
@@ -125,8 +125,8 @@ function matchesDependentsRule(pRule, pModule) {
 
 /**
  *
- * @param {import("../../types/cruise-result.js").IModule} pModule
- * @returns {(pRule:import("../../types/rule-set.js").IAnyRuleType) => boolean}
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
+ * @returns {(pRule:import("../../types/rule-set.mjs").IAnyRuleType) => boolean}
  */
 function match(pModule) {
   return (pRule) =>
@@ -138,7 +138,7 @@ function match(pModule) {
 
 /**
  *
- * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
  * @returns boolean
  */
 const isInteresting = (pRule) =>

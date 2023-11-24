@@ -33,9 +33,9 @@ function exclude(pModules, pExcludeFilter) {
 }
 /**
  *
- * @param {import("../../types/cruise-result.js").IModule[]} pModules
+ * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
  * @param {import("../../types/strict-filter-types.js").IStrictReachesType} pReachesFilter
- * @returns {import("../../types/cruise-result.js").IModule[]}
+ * @returns {import("../../types/cruise-result.mjs").IModule[]}
  */
 function filterReaches(pModules, pReachesFilter) {
   const lModuleNamesToReach = pModules

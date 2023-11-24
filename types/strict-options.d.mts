@@ -1,19 +1,19 @@
-import {
+import type {
   ICruiseOptions,
   IFormatOptions,
   ExternalModuleResolutionStrategyType,
-} from "./options";
-import { ModuleSystemType, OutputType } from "./shared-types";
-import { IStrictRuleSet } from "./strict-rule-set";
-import {
+} from "./options.mjs";
+import type { ModuleSystemType, OutputType } from "./shared-types.mjs";
+import type { IStrictRuleSet } from "./strict-rule-set.mjs";
+import type {
   IStrictDoNotFollowType,
   IStrictExcludeType,
   IStrictFocusType,
   IStrictHighlightType,
   IStrictIncludeOnlyType,
   IStrictReachesType,
-} from "./strict-filter-types";
-import { ICacheOptions } from "./cache-options";
+} from "./strict-filter-types.mjs";
+import type { ICacheOptions } from "./cache-options.mjs";
 
 /**
  * the ICruiseOptions interface is lenient in what it accepts for convenience

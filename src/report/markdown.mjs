@@ -44,7 +44,7 @@ function severity2Icon(pSeverity) {
 }
 
 /**
- * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @param {import("../../types/cruise-result.mjs").ISummary} pSummary
  * @return {string}
  */
 function formatStatsSummary(pSummary) {
@@ -54,7 +54,7 @@ function formatStatsSummary(pSummary) {
 }
 
 /**
- * @param {import("../../types/cruise-result.js").ICruiseResult} pCruiseResult
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pCruiseResult
  * @param {Boolean} pIncludeIgnoredInSummary
  * @return {string}
  */
@@ -81,7 +81,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 
 /**
  *
- * @param {import("../../types/cruise-result.js").IViolation[]} pViolations
+ * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
  * @param {boolean} pIncludeIgnoredInDetails
  * @return {string}
  */
@@ -105,7 +105,7 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
 
 /**
  *
- * @param {import("../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
  * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
  * @returns {string}
  */
@@ -162,7 +162,7 @@ function report(pResults, pOptions) {
 /**
  * Returns the violations from a cruise in markdown format
  *
- * @param {import("../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
  * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */

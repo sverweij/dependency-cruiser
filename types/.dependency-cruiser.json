@@ -7,7 +7,15 @@
     "reporterOptions": {
       "dot": {
         "collapsePattern": ["node_modules/[^/]+"],
-        "theme": { "graph": { "splines": "ortho" } }
+        "theme": {
+          "graph": { "splines": "ortho" },
+          "modules": [
+            {
+              "criteria": { "source": "\\.ts$" },
+              "attributes": { "color": "red", "fontcolor": "red" }
+            }
+          ]
+        }
       }
     }
   }

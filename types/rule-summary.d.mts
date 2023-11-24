@@ -1,4 +1,4 @@
-import { SeverityType } from "./shared-types";
+import type { SeverityType } from "./shared-types.mjs";
 
 /**
  * If there was a rule violation (valid === false), this object contains the name of the

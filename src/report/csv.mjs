@@ -12,7 +12,8 @@ function mapIncidences(pIncidences) {
 function renderBody(pModules) {
   return pModules
     .map(
-      (pModule) => `"${pModule.source}",${mapIncidences(pModule.incidences)},""`
+      (pModule) =>
+        `"${pModule.source}",${mapIncidences(pModule.incidences)},""`,
     )
     .join(EOL);
 }
@@ -24,7 +25,7 @@ function report(pModules) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../types/cruise-result.js").ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults -
  * the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */

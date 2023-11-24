@@ -153,7 +153,7 @@ function report(pResults, pLong) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total
  *   number of files cruised
- * @param {import("../../types/cruise-result.js").ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults -
  * @param {any} pOptions - An object with options;
  *                         {boolean} long - whether or not to include an explanation
  *                                          (/ comment) which each violation

@@ -22981,7 +22981,7 @@ export default {
       dependencies: [],
       dependents: [
         "types/baseline-violations.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
       ],
       orphan: false,
       valid: true,
@@ -23018,7 +23018,7 @@ export default {
           valid: true,
         },
       ],
-      dependents: ["types/dependency-cruiser.d.ts"],
+      dependents: ["types/dependency-cruiser.d.mts"],
       orphan: false,
       valid: true,
     },
@@ -23033,7 +23033,7 @@ export default {
       dependents: [
         "types/configuration.d.ts",
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
       ],
       orphan: false,
       valid: true,
@@ -23049,7 +23049,7 @@ export default {
       dependents: [
         "types/configuration.d.ts",
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
         "types/options.d.ts",
       ],
       orphan: false,
@@ -23103,7 +23103,7 @@ export default {
       ],
       dependents: [
         "types/baseline-violations.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
       ],
       orphan: false,
       valid: true,
@@ -23118,7 +23118,7 @@ export default {
       dependencies: [],
       dependents: [
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
         "types/filter-types.d.ts",
         "types/options.d.ts",
         "types/restrictions.d.ts",
@@ -23128,7 +23128,7 @@ export default {
       valid: true,
     },
     {
-      source: "types/dependency-cruiser.d.ts",
+      source: "types/dependency-cruiser.d.mts",
       dependencies: [
         {
           dynamic: false,
@@ -23311,7 +23311,7 @@ export default {
       dependents: [
         "types/configuration.d.ts",
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
       ],
       orphan: false,
       valid: true,
@@ -23430,7 +23430,7 @@ export default {
       dependents: [
         "types/configuration.d.ts",
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
         "types/options.d.ts",
       ],
       orphan: false,
@@ -23441,7 +23441,7 @@ export default {
       dependencies: [],
       dependents: [
         "types/cruise-result.d.ts",
-        "types/dependency-cruiser.d.ts",
+        "types/dependency-cruiser.d.mts",
         "types/filter-types.d.ts",
         "types/options.d.ts",
         "types/restrictions.d.ts",

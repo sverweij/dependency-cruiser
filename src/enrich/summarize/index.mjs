@@ -11,16 +11,16 @@ import compare from "#graph-utl/compare.mjs";
 
 /**
  *
- * @param {import("../../../types/cruise-result.js").IModule[]} pModules -
+ * @param {import("../../../types/cruise-result.mjs").IModule[]} pModules -
  *    cruised modules that have been enriched with mandatory attributes &
  *    have been validated against rules as passed in the options
- * @param {import("../../../types/options.js").IStrictCruiseOptions} pOptions -
+ * @param {import("../../../types/options.mjs").IStrictCruiseOptions} pOptions -
  * @param {string[]} pFileDirectoryArray -
  *    the files/ directories originally passed to be cruised
  * @param {import("../../../types/dependency-cruiser.js").IFolder[]} pFolders -
  *    the pModules collapsed to folders, with their own metrics & deps
  *
- * @returns {import("../../../types/cruise-result.js").ISummary} -
+ * @returns {import("../../../types/cruise-result.mjs").ISummary} -
  *    a summary of the found modules, dependencies and any violations
  */
 export default function summarize(

@@ -1,7 +1,7 @@
 import type {
   IAvailableExtension,
   IAvailableTranspiler,
-} from "../../../types/dependency-cruiser.d.ts";
+} from "../../../types/dependency-cruiser.d.mts";
 
 export interface ITranspilerWrapper {
   isAvailable: () => boolean;

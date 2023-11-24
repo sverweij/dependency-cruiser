@@ -166,7 +166,7 @@ function normalizeCacheOptions(pCacheOptions) {
 
 /**
  *
- * @param {import('../../../types/options.js').ICruiseOptions} pOptions
+ * @param {import('../../../types/options.mjs').ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
  * @returns {import('../../../types/strict-options.js').IStrictCruiseOptions}
  */

@@ -15,7 +15,7 @@ import { bus } from "#utl/bus.mjs";
 export default class MetaDataStrategy {
   /**
    * @param {string} _pDirectory
-   * @param {import("../../types/cruise-result.js").ICruiseResult} _pCachedCruiseResult
+   * @param {import("../../types/cruise-result.mjs").ICruiseResult} _pCachedCruiseResult
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<import("watskeburt").changeTypeType>=} pOptions.interestingChangeTypes

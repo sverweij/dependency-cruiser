@@ -5,8 +5,8 @@ import { extractGroups } from "#utl/regex-util.mjs";
  * Returns true if the module violates the rule.
  * Returns false in all other cases.
  *
- * @param {import("../../types/rule-set.js").IRequiredRuleType} pRule
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/rule-set.mjs").IRequiredRuleType} pRule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
 export default function violatesRequiredRule(pRule, pModule) {
