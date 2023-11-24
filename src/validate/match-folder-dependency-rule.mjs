@@ -30,8 +30,8 @@ function toFolderPathNot(pRule, pToFolder, pGroups) {
 
 /**
  *
- * @param {import("../../types/cruise-result.js").IFolder} pFromFolder
- * @param {import("../../types/cruise-result.js").IFolderDependency} pToFolder
+ * @param {import("../../types/cruise-result.mjs").IFolder} pFromFolder
+ * @param {import("../../types/cruise-result.mjs").IFolderDependency} pToFolder
  * @returns {(pRule) => boolean}
  */
 function match(pFromFolder, pToFolder) {

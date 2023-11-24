@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "lib": ["ES2020"],
-    "target": "ES2020",
-    "module": "ES2020",
+    "target": "ESNext",
+    "module": "NodeNext",
     "types": ["node"],
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -13,5 +12,5 @@
     "skipLibCheck": false,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./*.d.ts"]
+  "include": ["./*.d.ts", "./*.mjs", "*.d.mts"]
 }

@@ -1,12 +1,12 @@
-import {
+import type {
   IDoNotFollowType,
   IExcludeType,
   IFocusType,
   IIncludeOnlyType,
   IReachesType,
   IHighlightType,
-} from "./filter-types";
-import { DependencyType } from "./shared-types";
+} from "./filter-types.mjs";
+import type { DependencyType } from "./shared-types.mjs";
 
 export interface IStrictDoNotFollowType extends IDoNotFollowType {
   /**

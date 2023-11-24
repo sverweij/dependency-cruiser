@@ -51,7 +51,7 @@ function formatCycleViolation(pViolation) {
  */
 function formatReachabilityViolation(pViolation) {
   return `${pViolation.from} -> ${pViolation.to} (via ${pViolation.via.join(
-    " -> "
+    " -> ",
   )})`;
 }
 
@@ -63,7 +63,7 @@ function formatInstabilityViolation(pViolation) {
   return `${pViolation.from} -> ${
     pViolation.to
   } (instability: ${formatPercentage(
-    pViolation.metrics.from.instability
+    pViolation.metrics.from.instability,
   )} -> ${formatPercentage(pViolation.metrics.to.instability)})`;
 }
 
@@ -82,10 +82,10 @@ function formatViolation(pViolation) {
   let lFormattedViolators = _formatViolation(
     pViolation,
     lViolationType2Formatter,
-    formatDependencyViolation
+    formatDependencyViolation,
   );
   return `##vso[task.logissue type=${formatSeverity(
-    pViolation.rule.severity
+    pViolation.rule.severity,
   )};sourcepath=${pViolation.from};code=${
     pViolation.rule.name
   };]${lFormattedViolators}${EOL}`;
@@ -101,7 +101,7 @@ function formatResultStatus(pNumberOfErrors) {
 }
 
 /**
- * @param {import("../../types/cruise-result.js").ISummary} pMeta
+ * @param {import("../../types/cruise-result.mjs").ISummary} pMeta
  * @returns {string}
  */
 function formatMeta(pMeta) {
@@ -128,7 +128,7 @@ function formatIgnoreWarning(pNumberOfIgnored) {
 }
 
 /**
- * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @param {import("../../types/cruise-result.mjs").ISummary} pSummary
  * @returns {string}
  */
 function formatResultMessage(pSummary) {
@@ -138,22 +138,22 @@ function formatResultMessage(pSummary) {
 
   if (sumMeta(pSummary) > 0) {
     return `${sumMeta(pSummary)} dependency violations (${formatMeta(
-      pSummary
+      pSummary,
     )}). ${lStatSummary}`;
   } else {
     return `no dependency violations found${formatIgnoreWarning(
-      pSummary.ignore
+      pSummary.ignore,
     )} (${lStatSummary})`;
   }
 }
 
 /**
- * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @param {import("../../types/cruise-result.mjs").ISummary} pSummary
  * @returns {string}
  */
 function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
-    pSummary.error
+    pSummary.error,
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 
@@ -171,7 +171,7 @@ function formatSummary(pSummary) {
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export default function azureDevOps(pResults) {
   const lViolations = (pResults?.summary?.violations ?? []).filter(
-    (pViolation) => pViolation.rule.severity !== "ignore"
+    (pViolation) => pViolation.rule.severity !== "ignore",
   );
 
   return {

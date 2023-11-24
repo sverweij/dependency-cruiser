@@ -128,7 +128,7 @@ function determineNodeModuleDependencyTypes(
 
 /**
  *
- * @param {import("../../../types/cruise-result.js").IDependency} pDependency
+ * @param {import("../../../types/cruise-result.mjs").IDependency} pDependency
  * @param {string} pModuleName
  * @param {any} pPackageDeps
  * @param {string} pFileDirectory
@@ -165,11 +165,11 @@ function determineExternalModuleDependencyTypes(
 /* eslint max-params:0, complexity:0 */
 /**
  *
- * @param {import("../../../types/cruise-result.js").IDependency} pDependency the dependency object with all information found hitherto
+ * @param {import("../../../types/cruise-result.mjs").IDependency} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
- * @param {import("../../../types/resolve-options.js").IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
+ * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
  *
  * @return {import("../../../types/shared-types.js").DependencyType[]} an array of dependency types for the dependency

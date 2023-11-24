@@ -33,7 +33,7 @@ function normalizeScope(pScope) {
 
 /**
  *
- * @param {import("../../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../../types/rule-set.mjs").IAnyRuleType} pRule
  * @returns {import("../../../types/strict-rule-set.js").IStrictAnyRuleType}
  */
 function normalizeRule(pRule) {

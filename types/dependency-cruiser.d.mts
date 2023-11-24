@@ -1,13 +1,13 @@
-import { ICruiseResult } from "./cruise-result";
-import { ICruiseOptions, IFormatOptions } from "./options";
-import { IResolveOptions } from "./resolve-options";
+import type { ICruiseResult } from "./cruise-result.mjs";
+import type { ICruiseOptions, IFormatOptions } from "./options.mjs";
+import type { IResolveOptions } from "./resolve-options.mjs";
 
-export * from "./rule-set";
-export * from "./options";
-export * from "./configuration";
-export * from "./shared-types";
-export * from "./cruise-result";
-export * from "./resolve-options";
+export type * from "./rule-set.mjs";
+export type * from "./options.mjs";
+export type * from "./configuration.mjs";
+export type * from "./shared-types.mjs";
+export type * from "./cruise-result.mjs";
+export type * from "./resolve-options.mjs";
 
 /**
  * all supported extensions; for each extension whether or not

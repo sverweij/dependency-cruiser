@@ -1,12 +1,12 @@
-import { SeverityType, RuleScopeType } from "./shared-types";
-import {
+import type { SeverityType, RuleScopeType } from "./shared-types.mjs";
+import type {
   IBaseRestrictionType,
   IFromRestriction,
   IToRestriction,
   IReachabilityToRestrictionType,
   IRequiredToRestrictionType,
   IDependentsModuleRestrictionType,
-} from "./restrictions";
+} from "./restrictions.mjs";
 
 interface IBaseRuleType {
   /**

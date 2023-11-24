@@ -9,7 +9,7 @@ import pathToPosix from "#utl/path-to-posix.mjs";
 
 /**
  *
- * @param {import('../../types/options.js').IStrictCruiseOptions} pOptions
+ * @param {import('../../types/options.mjs').IStrictCruiseOptions} pOptions
  * @returns {string[]}
  */
 function getScannableExtensions(pOptions) {
@@ -39,7 +39,7 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
 /**
  *
  * @param {string} pDirectoryName
- * @param  {import('../../types/options.js').IStrictCruiseOptions} pOptions options that
+ * @param  {import('../../types/options.mjs').IStrictCruiseOptions} pOptions options that
  * @returns {string[]}
  */
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {

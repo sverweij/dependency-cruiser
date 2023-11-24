@@ -1,4 +1,4 @@
-import { DependencyType } from "./shared-types";
+import type { DependencyType } from "./shared-types.d.mts";
 
 export interface IDoNotFollowType {
   /**

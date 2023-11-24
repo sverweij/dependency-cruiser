@@ -1,12 +1,12 @@
 /* eslint-disable node/no-unpublished-import */
-import {
+import type {
   IDependency,
   IFolder,
   IFolderDependency,
   IModule,
-  IFlattenedRuleSet,
-} from "../../types/cruise-result";
-import { SeverityType } from "../../types/shared-types";
+} from "../../types/cruise-result.mjs";
+import type { IFlattenedRuleSet } from "../../types/rule-set.mjs";
+import type { SeverityType } from "../../types/shared-types.mjs";
 
 export interface IValidationResult {
   /**

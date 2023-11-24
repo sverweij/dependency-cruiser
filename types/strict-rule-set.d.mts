@@ -1,17 +1,17 @@
-import { SeverityType, RuleScopeType } from "./shared-types";
-import {
+import type { SeverityType, RuleScopeType } from "./shared-types.mjs";
+import type {
   IBaseRuleType,
   IRegularAllowedRuleType,
   IFlattenedRuleSet,
-} from "./rule-set";
-import {
+} from "./rule-set.mjs";
+import type {
   IStrictToRestriction,
   IStrictFromRestriction,
   IStrictBaseRestrictionType,
   IStrictReachabilityToRestrictionType,
   IStrictDependentsModuleRestrictionType,
   IStrictRequiredToRestrictionType,
-} from "./strict-restrictions";
+} from "./strict-restrictions.mjs";
 
 export interface IStrictBaseRuleType extends IBaseRuleType {
   name: string;

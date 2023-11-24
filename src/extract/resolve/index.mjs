@@ -154,13 +154,13 @@ function resolveWithRetry(
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {Partial <import("../../../types/cruise-result.js").IDependency>} pDependency
+ * @param  {Partial <import("../../../types/cruise-result.mjs").IDependency>} pDependency
  * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
- * @param  {import("../../../types/resolve-options.js").IResolveOptions} pResolveOptions
- * @return {Partial <import("../../../types/cruise-result.js").IDependency>}
+ * @param  {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @return {Partial <import("../../../types/cruise-result.mjs").IDependency>}
  *
  */
 // eslint-disable-next-line max-lines-per-function

@@ -31,9 +31,9 @@ function anonymizeReaches(pReachesArray, pWordList) {
 
 /**
  *
- * @param {import("../../../types/cruise-result.js").IModule[]} pModules
+ * @param {import("../../../types/cruise-result.mjs").IModule[]} pModules
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result.js").IModule[]}
+ * @returns {import("../../../types/cruise-result.mjs").IModule[]}
  */
 function anonymizeModules(pModules, pWordList) {
   return pModules.map((pModule) => {
@@ -57,9 +57,9 @@ function anonymizeModules(pModules, pWordList) {
 }
 /**
  *
- * @param {import("../../../types/cruise-result.js").IFolder[]} pFolders
+ * @param {import("../../../types/cruise-result.mjs").IFolder[]} pFolders
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result.js").IFolder[]}
+ * @returns {import("../../../types/cruise-result.mjs").IFolder[]}
  */
 function anonymizeFolders(pFolders, pWordList) {
   return pFolders.map((pFolder) => {
@@ -108,9 +108,9 @@ function anonymizeViolations(pViolations, pWordList) {
 }
 /**
  *
- * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../../types/cruise-result.mjs").ICruiseResult} pResults
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result.js").ICruiseResult}
+ * @returns {import("../../../types/cruise-result.mjs").ICruiseResult}
  */
 function anonymize(pResults, pWordList) {
   const lResults = structuredClone(pResults);
@@ -148,7 +148,7 @@ function sanitizeWordList(pWordList) {
  * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
- * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @param {import("../../../types/cruise-result.mjs").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
  * @param {{wordlist?: String[]}} pAnonymousReporterOptions of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)

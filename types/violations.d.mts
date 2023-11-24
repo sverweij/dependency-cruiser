@@ -1,5 +1,5 @@
-import { IRuleSummary } from "./rule-summary";
-import { ViolationType } from "./shared-types";
+import type { IRuleSummary } from "./rule-summary.mjs";
+import type { ViolationType } from "./shared-types.mjs";
 
 export interface IMetricsSummary {
   from: {

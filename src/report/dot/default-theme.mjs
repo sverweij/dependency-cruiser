@@ -75,7 +75,7 @@ export default {
       attributes: { fillcolor: "#41f083" },
     },
     {
-      criteria: { source: "\\.ts$" },
+      criteria: { source: "\\.([cm]?ts)$" },
       attributes: { fillcolor: "#ddfeff" },
     },
     {

@@ -1,4 +1,4 @@
-import { ResolveOptions, CachedInputFileSystem } from "enhanced-resolve";
+import type { ResolveOptions, CachedInputFileSystem } from "enhanced-resolve";
 
 /**
  * an object with options to pass to the resolver

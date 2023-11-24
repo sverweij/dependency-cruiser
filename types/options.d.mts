@@ -1,16 +1,16 @@
-import { IBaselineViolations } from "./baseline-violations";
-import { ICacheOptions } from "./cache-options";
-import {
+import type { IBaselineViolations } from "./baseline-violations.mjs";
+import type { ICacheOptions } from "./cache-options.mjs";
+import type {
   IDoNotFollowType,
   IExcludeType,
   IFocusType,
   IHighlightType,
   IIncludeOnlyType,
   IReachesType,
-} from "./filter-types";
-import { IReporterOptions } from "./reporter-options";
-import { IFlattenedRuleSet } from "./rule-set";
-import { ModuleSystemType, OutputType } from "./shared-types";
+} from "./filter-types.mjs";
+import type { IReporterOptions } from "./reporter-options.mjs";
+import type { IFlattenedRuleSet } from "./rule-set.mjs";
+import type { ModuleSystemType, OutputType } from "./shared-types.mjs";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =

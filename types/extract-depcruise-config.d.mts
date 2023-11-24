@@ -1,4 +1,4 @@
-import { ICruiseOptions } from "./options";
+import type { ICruiseOptions } from "./options.d.mts";
 
 /**
  * Reads the file with name `pConfigFileName` returns the parsed cruise

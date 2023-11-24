@@ -61,10 +61,10 @@ function softenDependencyViolations(
 }
 /**
  *
- * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
  * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
- * @returns {import("../../types/cruise-result.js").IModule}
+ * @returns {import("../../types/cruise-result.mjs").IModule}
  */
 function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
   let lReturnValue = pModule;
@@ -106,10 +106,10 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
 
 /**
  *
- * @param {import("../../types/cruise-result.js").IModule[]} pModules
+ * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
  * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
  * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
- * @returns {import("../../types/cruise-result.js").IModule[]}
+ * @returns {import("../../types/cruise-result.mjs").IModule[]}
  */
 export default function softenKnownViolations(
   pModules,
