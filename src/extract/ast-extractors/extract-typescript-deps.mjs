@@ -15,7 +15,7 @@ function isTypeOnlyImport(pStatement) {
       (pStatement.importClause.namedBindings &&
         pStatement.importClause.namedBindings.elements &&
         pStatement.importClause.namedBindings.elements.every(
-          (pE) => pE.isTypeOnly,
+          (pElement) => pElement.isTypeOnly,
         )))
   );
 }
@@ -32,7 +32,7 @@ function isTypeOnlyExport(pStatement) {
     // named reexports are per-element though
     (pStatement.exportClause &&
       pStatement.exportClause.elements &&
-      pStatement.exportClause.elements.every((pE) => pE.isTypeOnly))
+      pStatement.exportClause.elements.every((pElement) => pElement.isTypeOnly))
   );
 }
 
