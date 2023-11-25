@@ -154,7 +154,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     //
     // oh and: ```picomatch.isMatch('asdf', 'asdf/**') === true``` so
     // in case it's only 'asdf' that's in the resolved module name for some reason
-    //  we're good as well.
+    // we're good as well.
     const lModuleFriendlyWorkspaceGlobs = pManifest.workspaces.map(
       (pWorkspace) =>
         pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
@@ -185,7 +185,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
+ * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
  * @param {string} pBaseDirectory
  * @returns {boolean}
  */
@@ -206,7 +206,7 @@ function isLikelyTSAliased(
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
+ * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
  * @param {object} pManifest
  * @returns {string[]}
  */
@@ -219,20 +219,29 @@ export function getAliasTypes(
   if (isRelativeModuleName(pModuleName)) {
     return [];
   }
+  // the order of these ifs is deliberate. First stuff bolted on by bundlers & transpilers.
   if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
     return ["aliased", "aliased-webpack"];
   }
-  // the order of these ifs is deliberate - node native stuff first, then things
-  // bolted on by bundlers & transpilers. The order of subpath imports and workspaces
-  // isn't _that_ important, as they can't be confused
+  // The order of subpath imports and workspaces isn't _that_ important, as they
+  // can't be confused
   // - subpath imports _must_ start with a #
-  // - workspaces (or actualy: package names) are forbidden to even _contain_ a #
+  // - workspaces (or, more precise: package names) are forbidden to even _contain_ a #
   if (isSubpathImport(pModuleName, pManifest)) {
     return ["aliased", "aliased-subpath-import"];
   }
   if (isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest)) {
     return ["aliased", "aliased-workspace"];
   }
+  // We'd like to classify for ts config paths/ aliases earlier, but it's currently
+  // partly guess work (the resolver wouldn't know, so it'd mean checking
+  // against the tsconfig paths _again_ here which might not be conducive to
+  // performance).
+  // Putting it last is close enough for now because
+  // - it's not a common scenario to have _both_ tsconfig paths and one of the
+  //   other (clearly superior) aliasing mechanisms
+  // - if it does happen it's even less likely to have the same names for both
+  //   in both mechanisms
   if (
     isLikelyTSAliased(
       pModuleName,
