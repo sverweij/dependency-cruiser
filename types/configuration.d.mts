@@ -1,5 +1,5 @@
-import type { ICruiseOptions } from "./options.d.mts";
-import type { IFlattenedRuleSet } from "./rule-set.d.mts";
+import type { ICruiseOptions } from "./options.mjs";
+import type { IFlattenedRuleSet } from "./rule-set.mjs";
 
 export interface IConfiguration extends IFlattenedRuleSet {
   /**

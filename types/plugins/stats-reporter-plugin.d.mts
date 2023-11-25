@@ -1,7 +1,4 @@
-import type {
-  IReporterOutput,
-  ICruiseResult,
-} from "./dependency-cruiser.d.mts";
+import type { IReporterOutput, ICruiseResult } from "../dependency-cruiser.mjs";
 
 declare module "stats-reporter-plugin" {
   /**
@@ -11,6 +8,6 @@ declare module "stats-reporter-plugin" {
    * @return {IReporterOutput} - output: output: some stats on modules and dependencies in json format, exitCode: 0
    */
   export default function statsReporterPlugin(
-    pCruiseResult: ICruiseResult,
+    pCruiseResult: ICruiseResult
   ): IReporterOutput;
 }

@@ -1,4 +1,4 @@
-import type { IReporterOutput, ICruiseResult } from "./dependency-cruiser.mjs";
+import type { IReporterOutput, ICruiseResult } from "../dependency-cruiser.mjs";
 
 declare module "3d-reporter-plugin" {
   /**
@@ -8,6 +8,6 @@ declare module "3d-reporter-plugin" {
    * @return {IReporterOutput} - output: a string, exitCode: 0
    */
   export default function ThreeDReporterPlugin(
-    pCruiseResult: ICruiseResult,
+    pCruiseResult: ICruiseResult
   ): IReporterOutput;
 }

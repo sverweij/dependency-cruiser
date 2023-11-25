@@ -55,31 +55,31 @@
       "import": "./src/main/index.mjs"
     },
     "./config-utl/extract-babel-config": {
-      "types": "./types/extract-babel-config.d.mts",
+      "types": "./types/config-utl/extract-babel-config.d.mts",
       "import": "./src/config-utl/extract-babel-config.mjs"
     },
     "./config-utl/extract-depcruise-config": {
-      "types": "./types/extract-depcruise-config.d.mts",
+      "types": "./types/config-utl/extract-depcruise-config.d.mts",
       "import": "./src/config-utl/extract-depcruise-config/index.mjs"
     },
     "./config-utl/extract-ts-config": {
-      "types": "./types/extract-ts-config.d.mts",
+      "types": "./types/config-utl/extract-ts-config.d.mts",
       "import": "./src/config-utl/extract-ts-config.mjs"
     },
     "./config-utl/extract-webpack-resolve-config": {
-      "types": "./types/extract-webpack-resolve-config.d.mts",
+      "types": "./types/config-utl/extract-webpack-resolve-config.d.mts",
       "import": "./src/config-utl/extract-webpack-resolve-config.mjs"
     },
     "./sample-reporter-plugin": {
-      "types": "./types/stats-reporter-plugin.d.mts",
+      "types": "./types/plugins/stats-reporter-plugin.d.mts",
       "import": "./configs/plugins/stats-reporter-plugin.mjs"
     },
     "./sample-3d-reporter-plugin": {
-      "types": "./types/3d-reporter-plugin.d.mts",
+      "types": "./types/plugins/3d-reporter-plugin.d.mts",
       "import": "./configs/plugins/3d-reporter-plugin.mjs"
     },
     "./mermaid-reporter-plugin": {
-      "types": "./types/mermaid-reporter-plugin.d.mts",
+      "types": "./types/plugins/mermaid-reporter-plugin.d.mts",
       "import": "./src/report/mermaid.mjs"
     }
   },
@@ -93,7 +93,7 @@
     "!src/**/*.hbs",
     "!src/**/*.md",
     "!**/*.DS_Store",
-    "types/*.d.mts",
+    "types/**/*.d.mts",
     "LICENSE",
     "package.json",
     "README.md"

@@ -1,3 +1,4 @@
+// @ts-check
 import { extname } from "node:path";
 import { createRequire } from "node:module";
 import makeAbsolute from "./make-absolute.mjs";
@@ -7,7 +8,7 @@ const require = createRequire(import.meta.url);
 function pryConfigFromTheConfig(
   pWebpackConfigModule,
   pEnvironment,
-  pArguments
+  pArguments,
 ) {
   let lReturnValue = pWebpackConfigModule;
 
@@ -19,7 +20,7 @@ function pryConfigFromTheConfig(
     lReturnValue = pryConfigFromTheConfig(
       pWebpackConfigModule[0],
       pEnvironment,
-      pArguments
+      pArguments,
     );
   }
 
@@ -38,7 +39,7 @@ function suggestModules(pSuggestionList, pWebpackConfigFilename) {
     lReturnValue = lSuggestionList.reduce(
       (pAll, pCurrent) => `${pAll}         - ${pCurrent.module || pCurrent}\n`,
       `\n         Some npm modules that might fix that problem (one of which you'll` +
-        `\n         need so '${pWebpackConfigFilename}' works with webpack anyway):\n`
+        `\n         need so '${pWebpackConfigFilename}' works with webpack anyway):\n`,
     );
   }
   return lReturnValue;
@@ -57,8 +58,8 @@ function tryRegisterNonNative(pWebpackConfigFilename) {
         `\n${suggestModules(
           // eslint-disable-next-line security/detect-object-injection
           interpret.extensions[lConfigExtension],
-          pWebpackConfigFilename
-        )}`
+          pWebpackConfigFilename,
+        )}`,
     );
   }
 }
@@ -95,7 +96,7 @@ async function attemptImport(pAbsoluteWebpackConfigFileName) {
   } catch (pError) {
     throw new Error(
       `The webpack config '${pAbsoluteWebpackConfigFileName}' seems to be not quite valid for use:` +
-        `\n\n          "${pError}"\n`
+        `\n\n          "${pError}"\n`,
     );
   }
 }
@@ -106,24 +107,26 @@ async function attemptImport(pAbsoluteWebpackConfigFileName) {
  * either be a string or a keys-values object)) returns the resolve config
  * from it as an object.
  *
+ * @typedef {{ [key: string]: any } | string} webpackArgumentsType
+ *
  * @param {string} pWebpackConfigFilename
- * @param {string=} pEnvironment
- * @param {string|any=} pArguments
- * @return {any} webpack resolve config as an object
+ * @param {{ [key: string]: any }=} pEnvironment
+ * @param {webpackArgumentsType=} pArguments
+ * @return {Promise<import("enhanced-resolve").ResolveOptions|{}>} webpack resolve config as an object
  * @throws {Error} when the webpack config isn't usable (e.g. because it
  *                 doesn't exist, or because it's invalid)
  */
 export default async function extractWebpackResolveConfig(
   pWebpackConfigFilename,
   pEnvironment,
-  pArguments
+  pArguments,
 ) {
   let lReturnValue = {};
   const lAbsoluteConfigFilename = makeAbsolute(pWebpackConfigFilename);
   const lWebpackConfig = pryConfigFromTheConfig(
     await attemptImport(lAbsoluteConfigFilename),
     pEnvironment,
-    pArguments
+    pArguments,
   );
 
   if (lWebpackConfig.resolve) {

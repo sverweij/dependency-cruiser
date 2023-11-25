@@ -1,7 +1,4 @@
-import type {
-  IReporterOutput,
-  ICruiseResult,
-} from "./dependency-cruiser.d.mts";
+import type { IReporterOutput, ICruiseResult } from "../dependency-cruiser.mjs";
 
 declare module "mermaid-reporter-plugin" {
   /**
@@ -12,6 +9,6 @@ declare module "mermaid-reporter-plugin" {
    * @return {IReporterOutput} - output: the module graph in mermaid format, exitCode: 0
    */
   export default function statsReporterPlugin(
-    pCruiseResult: ICruiseResult,
+    pCruiseResult: ICruiseResult
   ): IReporterOutput;
 }

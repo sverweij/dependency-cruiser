@@ -1,3 +1,4 @@
+import type { ResolveOptions } from "enhanced-resolve";
 /**
  * Reads the file with name `pWebpackConfigFilename` and (applying the
  * environment `pEnvironment` and the arguments `pArguments` (which can
@@ -13,6 +14,6 @@
  */
 export default function extractWebpackResolveConfig(
   pWebpackConfigFilename: string,
-  pEnvironment?: string,
-  pArguments?: any, // string or a list of arguments
-): Promise<any>;
+  pEnvironment?: { [key: string]: any },
+  pArguments?: { [key: string]: any } | string
+): Promise<ResolveOptions>;

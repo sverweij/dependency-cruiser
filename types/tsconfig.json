@@ -12,5 +12,5 @@
     "skipLibCheck": false,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./*.d.ts", "./*.mjs", "*.d.mts"]
+  "include": ["**/*.d.mts"]
 }
