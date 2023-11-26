@@ -61,7 +61,7 @@ module.exports = {
     "coverage",
     "tmp",
     "src/**/*.schema.mjs",
-    "src/cli/tools/svg-in-html-snippets/script.snippet.js",
+    "src/cli/tools/svg-in-html-snippets/script.js",
     "test/integration/**",
     "test/*/__fixtures__/**",
     "test/*/*/__fixtures__/**",
