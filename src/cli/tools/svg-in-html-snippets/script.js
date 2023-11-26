@@ -263,7 +263,6 @@ document.querySelector("svg").insertAdjacentHTML(
 // chrome) do not render the gradient, but instead make the line transparent
 // (or the color of the background, I haven't looked into it that deeply,
 // but for the hack it doesn't matter which).
-// @side-effect: changes the path element passed in.
 function skewLineABit(lDrawingInstructions) {
   var lLastValue = lDrawingInstructions.match(/(\d+\.?\d*)$/)[0];
   // Smaller values than .001 _should_ work as well, but don't in all
