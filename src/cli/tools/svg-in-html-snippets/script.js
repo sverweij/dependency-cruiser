@@ -249,3 +249,27 @@ document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
 document.addEventListener("keydown", keyboardEventHandler);
 document.getElementById("close-hints").addEventListener("click", hints.hide);
 document.getElementById("button_help").addEventListener("click", hints.toggle);
+document.querySelector("svg").insertAdjacentHTML(
+  "afterbegin",
+  `<linearGradient id="edgeGradient">
+      <stop offset="0%" stop-color="fuchsia"/>
+      <stop offset="100%" stop-color="purple"/>
+   </linearGradient>
+  `,
+);
+
+// Add a small increment to the last value of the path to make gradients on
+// horizontal paths work. Without them all browsers I tested with (firefox,
+// chrome) do not render the gradient, but instead make the line transparent
+// (or the color of the background, I haven't looked into it that deeply,
+// but for the hack it doesn't matter which).
+function skewLineABit(pElement) {
+  var d = pElement.attributes.d.value;
+  var lastValue = d.match(/(\d+\.?\d*)$/)[0];
+  var newValue = parseFloat(lastValue) + 0.001;
+
+  pElement.attributes.d.value = d.replace(lastValue, newValue);
+}
+nodeListToArray(document.querySelectorAll("path"))
+  .filter((pElement) => pElement.parentElement.classList.contains("edge"))
+  .forEach((pElement) => skewLineABit(pElement));
