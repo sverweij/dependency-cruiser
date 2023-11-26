@@ -269,7 +269,7 @@
       "mocks",
       "fixtures",
       "test/integration",
-      "src/cli/tools/svg-in-html-snippets/script.snippet.js"
+      "src/cli/tools/svg-in-html-snippets/script.js"
     ],
 
     /* list of module systems to cruise */
