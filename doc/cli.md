@@ -1440,7 +1440,7 @@ GraphViz dot into html that is geared to make the graph easier to use. It adds a
   Can be cleared with a left mouse click on something not a module or dependency
   or by pressing the _Escape_ key.
 
-<img width="799" alt="highlight on hover" src="assets/highlight-on-hover.png">
+<img width="1059" alt="highlight on hover" src="assets/highlight-on-hover.png">
 
 Typical use:
 
