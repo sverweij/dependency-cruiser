@@ -14,7 +14,7 @@
 .edge:active ellipse,
 .edge:hover ellipse,
 .edge.current ellipse {
-  stroke: fuchsia;
+  stroke: url(#edgeGradient);
   stroke-width: 3;
   stroke-opacity: 1;
 }
