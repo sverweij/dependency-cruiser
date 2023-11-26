@@ -117,6 +117,37 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
     );
   });
 
+  it("extracts imports with inline type imports - only type imports", () => {
+    deepEqual(
+      extractTypescript(
+        "import { type slork, type klaatu } from './ts-typical';",
+      ),
+      [
+        {
+          module: "./ts-typical",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["type-only"],
+        },
+      ],
+    );
+  });
+
+  it("extracts imports with inline type imports - mixing type and non-type", () => {
+    deepEqual(
+      extractTypescript("import { type slork, klaatu } from './ts-typical';"),
+      [
+        {
+          module: "./ts-typical",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
+  });
+
   it("extracts re-exports that explicitly state they only re-export a type", () => {
     deepEqual(
       extractTypescript("export type * as vehicles from './vehicles';"),
@@ -142,5 +173,34 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
         dependencyTypes: ["type-only"],
       },
     ]);
+  });
+
+  it("extracts re-exports with inline type re-exports - only type re-exports", () => {
+    deepEqual(
+      extractTypescript("export { type foobar, type baz } from './vehicles';"),
+      [
+        {
+          module: "./vehicles",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["type-only"],
+        },
+      ],
+    );
+  });
+
+  it("extracts re-exports with inline type re-exports - mixing type and non-type", () => {
+    deepEqual(
+      extractTypescript("export { type foobar, baz } from './vehicles';"),
+      [
+        {
+          module: "./vehicles",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 });

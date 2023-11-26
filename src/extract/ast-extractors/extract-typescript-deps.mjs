@@ -8,16 +8,31 @@ const typescript = await tryImport(
   meta.supportedTranspilers.typescript,
 );
 
-function isTypeOnly(pStatement) {
+function isTypeOnlyImport(pStatement) {
   return (
-    (pStatement.importClause && pStatement.importClause.isTypeOnly) ||
+    pStatement.importClause &&
+    (pStatement.importClause.isTypeOnly ||
+      (pStatement.importClause.namedBindings &&
+        pStatement.importClause.namedBindings.elements &&
+        pStatement.importClause.namedBindings.elements.every(
+          (pElement) => pElement.isTypeOnly,
+        )))
+  );
+}
+
+function isTypeOnlyExport(pStatement) {
+  return (
     // for some reason the isTypeOnly indicator is on _statement_ level
     // and not in exportClause as it is in the importClause ¯\_ (ツ)_/¯.
     // Also in the case of the omission of an alias the exportClause
     // is not there entirely. So regardless whether there is a
     // pStatement.exportClause or not, we can directly test for the
     // isTypeOnly attribute.
-    pStatement.isTypeOnly
+    pStatement.isTypeOnly ||
+    // named reexports are per-element though
+    (pStatement.exportClause &&
+      pStatement.exportClause.elements &&
+      pStatement.exportClause.elements.every((pElement) => pElement.isTypeOnly))
   );
 }
 
@@ -47,7 +62,9 @@ function extractImportsAndExports(pAST) {
       module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6",
       exoticallyRequired: false,
-      ...(isTypeOnly(pStatement) ? { dependencyTypes: ["type-only"] } : {}),
+      ...(isTypeOnlyImport(pStatement) || isTypeOnlyExport(pStatement)
+        ? { dependencyTypes: ["type-only"] }
+        : {}),
     }));
 }
 
