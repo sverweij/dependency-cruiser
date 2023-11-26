@@ -1,98 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <title>dependency graph</title>
     <style>
       .node:active path,
-      .node:hover path,
-      .node.current path,
-      .node:active polygon,
-      .node:hover polygon,
-      .node.current polygon {
-        stroke: fuchsia;
-        stroke-width: 2;
-      }
-      .edge:active path,
-      .edge:hover path,
-      .edge.current path,
-      .edge:active ellipse,
-      .edge:hover ellipse,
-      .edge.current ellipse {
-        stroke: fuchsia;
-        stroke-width: 3;
-        stroke-opacity: 1;
-      }
-      .edge:active polygon,
-      .edge:hover polygon,
-      .edge.current polygon {
-        stroke: fuchsia;
-        stroke-width: 3;
-        fill: fuchsia;
-        stroke-opacity: 1;
-        fill-opacity: 1;
-      }
-      .edge:active text,
-      .edge:hover text {
-        fill: fuchsia;
-      }
-      .cluster path {
-        stroke-width: 3;
-      }
-      .cluster:active path,
-      .cluster:hover path {
-        fill: #ffff0011;
-      }
-      div.hint {
-        background-color: #000000aa;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        border-radius: 1rem;
-        position: fixed;
-        top: calc(50% - 4em);
-        right: calc(50% - 10em);
-        border: none;
-        padding: 1em 3em 1em 1em;
-      }
-      .hint button {
-        position: absolute;
-        font-weight: bolder;
-        right: 0.6em;
-        top: 0.6em;
-        color: inherit;
-        background-color: inherit;
-        border: 1px solid currentColor;
-        border-radius: 1em;
-        margin-left: 0.6em;
-      }
-      .hint a {
-        color: inherit;
-      }
-      #button_help {
-        color: white;
-        background-color: #00000011;
-        border-radius: 1em;
-        position: fixed;
-        top: 1em;
-        right: 1em;
-        font-size: 24pt;
-        font-weight: bolder;
-        width: 2em;
-        height: 2em;
-        border: none;
-      }
-      #button_help:hover {
-        cursor: pointer;
-        background-color: #00000077;
-      }
-      @media print {
-        #button_help {
-          display: none;
-        }
-        div.hint {
-          display: none;
-        }
-      }
+.node:hover path,
+.node.current path,
+.node:active polygon,
+.node:hover polygon,
+.node.current polygon {
+  stroke: fuchsia;
+  stroke-width: 2;
+}
+
+.edge:active path,
+.edge:hover path,
+.edge.current path,
+.edge:active ellipse,
+.edge:hover ellipse,
+.edge.current ellipse {
+  stroke: url(#edgeGradient);
+  stroke-width: 3;
+  stroke-opacity: 1;
+}
+
+.edge:active polygon,
+.edge:hover polygon,
+.edge.current polygon {
+  stroke: fuchsia;
+  stroke-width: 3;
+  fill: fuchsia;
+  stroke-opacity: 1;
+  fill-opacity: 1;
+}
+
+.edge:active text,
+.edge:hover text {
+  fill: fuchsia;
+}
+
+.cluster path {
+  stroke-width: 3;
+}
+
+.cluster:active path,
+.cluster:hover path {
+  fill: #ffff0011;
+}
+
+div.hint {
+  background-color: #000000aa;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 1rem;
+  position: fixed;
+  top: calc(50% - 4em);
+  right: calc(50% - 10em);
+  border: none;
+  padding: 1em 3em 1em 1em;
+}
+
+.hint button {
+  position: absolute;
+  font-weight: bolder;
+  right: 0.6em;
+  top: 0.6em;
+  color: inherit;
+  background-color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 1em;
+  margin-left: 0.6em;
+}
+
+.hint a {
+  color: inherit;
+}
+
+#button_help {
+  color: white;
+  background-color: #00000011;
+  border-radius: 1em;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  font-size: 24pt;
+  font-weight: bolder;
+  width: 2em;
+  height: 2em;
+  border: none;
+}
+
+#button_help:hover {
+  cursor: pointer;
+  background-color: #00000077;
+}
+
+@media print {
+  #button_help {
+    display: none;
+  }
+
+  div.hint {
+    display: none;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -677,7 +690,8 @@
 </g>
 </g>
 </svg>
-<script>var gMode = new Mode();
+    <script>
+      var gMode = new Mode();
 
 var title2ElementMap = (function makeElementMap() {
   /** @type {NodeListOf<SVGGElement>} */
@@ -689,7 +703,7 @@ var title2ElementMap = (function makeElementMap() {
 
 function getHoverHandler(pTitle2ElementMap) {
   /** @type {string} */
-  var currentHighlightedTitle;
+  var currentHighlightedTitle = "";
 
   /** @param {MouseEvent} pMouseEvent */
   return function hoverHighlightHandler(pMouseEvent) {
@@ -710,7 +724,7 @@ function getHoverHandler(pTitle2ElementMap) {
 
 function getSelectHandler(pTitle2ElementMap) {
   /** @type {string} */
-  var currentHighlightedTitle;
+  var currentHighlightedTitle = "";
 
   /** @param {MouseEvent} pMouseEvent */
   return function selectHighlightHandler(pMouseEvent) {
@@ -743,6 +757,9 @@ function Mode() {
     this._mode = SELECT;
   }
 
+  /**
+   * @returns {number}
+   */
   function get() {
     return this._mode || HOVER;
   }
@@ -889,23 +906,23 @@ function addHighlight(pGroup) {
   }
 }
 
-var hints = {
+var gHints = {
   HIDDEN: 1,
   SHOWN: 2,
   state: this.HIDDEN,
   show: function () {
     document.getElementById("hints").removeAttribute("style");
-    hints.state = hints.SHOWN;
+    gHints.state = gHints.SHOWN;
   },
   hide: function () {
     document.getElementById("hints").style = "display:none";
-    hints.state = hints.HIDDEN;
+    gHints.state = gHints.HIDDEN;
   },
   toggle: function () {
-    if ((hints.state || hints.HIDDEN) === hints.HIDDEN) {
-      hints.show();
+    if ((gHints.state || gHints.HIDDEN) === gHints.HIDDEN) {
+      gHints.show();
     } else {
-      hints.hide();
+      gHints.hide();
     }
   },
 };
@@ -915,18 +932,52 @@ function keyboardEventHandler(pKeyboardEvent) {
   if (pKeyboardEvent.key === "Escape") {
     resetNodesAndEdges();
     gMode.setToHover();
-    hints.hide();
+    gHints.hide();
   }
   if (pKeyboardEvent.key === "F1") {
     pKeyboardEvent.preventDefault();
-    hints.toggle();
+    gHints.toggle();
   }
 }
 
 document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
 document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
 document.addEventListener("keydown", keyboardEventHandler);
-document.getElementById("close-hints").addEventListener("click", hints.hide);
-document.getElementById("button_help").addEventListener("click", hints.toggle);
-</script>  </body>
+document.getElementById("close-hints").addEventListener("click", gHints.hide);
+document.getElementById("button_help").addEventListener("click", gHints.toggle);
+document.querySelector("svg").insertAdjacentHTML(
+  "afterbegin",
+  `<linearGradient id="edgeGradient">
+      <stop offset="0%" stop-color="fuchsia"/>
+      <stop offset="100%" stop-color="purple"/>
+   </linearGradient>
+  `,
+);
+
+// Add a small increment to the last value of the path to make gradients on
+// horizontal paths work. Without them all browsers I tested with (firefox,
+// chrome) do not render the gradient, but instead make the line transparent
+// (or the color of the background, I haven't looked into it that deeply,
+// but for the hack it doesn't matter which).
+function skewLineABit(lDrawingInstructions) {
+  var lLastValue = lDrawingInstructions.match(/(\d+\.?\d*)$/)[0];
+  // Smaller values than .001 _should_ work as well, but don't in all
+  // cases. Even this value is so small that it is not visible to the
+  // human eye (tested with the two I have at my disposal).
+  var lIncrement = 0.001;
+  var lNewLastValue = parseFloat(lLastValue) + lIncrement;
+
+  return lDrawingInstructions.replace(lLastValue, lNewLastValue);
+}
+
+nodeListToArray(document.querySelectorAll("path"))
+  .filter(function (pElement) {
+    return pElement.parentElement.classList.contains("edge");
+  })
+  .forEach(function (pElement) {
+    pElement.attributes.d.value = skewLineABit(pElement.attributes.d.value);
+  });
+
+    </script>
+  </body>
 </html>
