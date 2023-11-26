@@ -10,7 +10,7 @@ var title2ElementMap = (function makeElementMap() {
 
 function getHoverHandler(pTitle2ElementMap) {
   /** @type {string} */
-  var currentHighlightedTitle;
+  var currentHighlightedTitle = "";
 
   /** @param {MouseEvent} pMouseEvent */
   return function hoverHighlightHandler(pMouseEvent) {
@@ -31,7 +31,7 @@ function getHoverHandler(pTitle2ElementMap) {
 
 function getSelectHandler(pTitle2ElementMap) {
   /** @type {string} */
-  var currentHighlightedTitle;
+  var currentHighlightedTitle = "";
 
   /** @param {MouseEvent} pMouseEvent */
   return function selectHighlightHandler(pMouseEvent) {
@@ -64,6 +64,9 @@ function Mode() {
     this._mode = SELECT;
   }
 
+  /**
+   * @returns {number}
+   */
   function get() {
     return this._mode || HOVER;
   }
@@ -210,23 +213,23 @@ function addHighlight(pGroup) {
   }
 }
 
-var hints = {
+var gHints = {
   HIDDEN: 1,
   SHOWN: 2,
   state: this.HIDDEN,
   show: function () {
     document.getElementById("hints").removeAttribute("style");
-    hints.state = hints.SHOWN;
+    gHints.state = gHints.SHOWN;
   },
   hide: function () {
     document.getElementById("hints").style = "display:none";
-    hints.state = hints.HIDDEN;
+    gHints.state = gHints.HIDDEN;
   },
   toggle: function () {
-    if ((hints.state || hints.HIDDEN) === hints.HIDDEN) {
-      hints.show();
+    if ((gHints.state || gHints.HIDDEN) === gHints.HIDDEN) {
+      gHints.show();
     } else {
-      hints.hide();
+      gHints.hide();
     }
   },
 };
@@ -236,19 +239,19 @@ function keyboardEventHandler(pKeyboardEvent) {
   if (pKeyboardEvent.key === "Escape") {
     resetNodesAndEdges();
     gMode.setToHover();
-    hints.hide();
+    gHints.hide();
   }
   if (pKeyboardEvent.key === "F1") {
     pKeyboardEvent.preventDefault();
-    hints.toggle();
+    gHints.toggle();
   }
 }
 
 document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
 document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
 document.addEventListener("keydown", keyboardEventHandler);
-document.getElementById("close-hints").addEventListener("click", hints.hide);
-document.getElementById("button_help").addEventListener("click", hints.toggle);
+document.getElementById("close-hints").addEventListener("click", gHints.hide);
+document.getElementById("button_help").addEventListener("click", gHints.toggle);
 document.querySelector("svg").insertAdjacentHTML(
   "afterbegin",
   `<linearGradient id="edgeGradient">
@@ -268,14 +271,16 @@ function skewLineABit(lDrawingInstructions) {
   // Smaller values than .001 _should_ work as well, but don't in all
   // cases. Even this value is so small that it is not visible to the
   // human eye (tested with the two I have at my disposal).
-  var lNewLastValue = parseFloat(lLastValue) + 0.001;
+  var lIncrement = 0.001;
+  var lNewLastValue = parseFloat(lLastValue) + lIncrement;
 
   return lDrawingInstructions.replace(lLastValue, lNewLastValue);
 }
 
 nodeListToArray(document.querySelectorAll("path"))
-  .filter((pElement) => pElement.parentElement.classList.contains("edge"))
-  .forEach(
-    (pElement) =>
-      (pElement.attributes.d.value = skewLineABit(pElement.attributes.d.value)),
-  );
+  .filter(function (pElement) {
+    return pElement.parentElement.classList.contains("edge");
+  })
+  .forEach(function (pElement) {
+    pElement.attributes.d.value = skewLineABit(pElement.attributes.d.value);
+  });
