@@ -1,4 +1,5 @@
 import { writeFileSync, createReadStream } from "node:fs";
+import { EOL } from "node:os";
 
 const PIPE_BUFFER_SIZE = 512;
 
@@ -35,15 +36,18 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
     const lChunkStart = lIndex * pBufferSize;
     process.stdout.write(
       pString.substring(lChunkStart, lChunkStart + pBufferSize),
-      "utf8"
+      "utf8",
     );
   }
 }
 export function write(pOutputTo, pContent) {
+  const lContentWithTrailingNewline = pContent.endsWith(EOL)
+    ? pContent
+    : pContent + EOL;
   if ("-" === pOutputTo) {
-    writeToStdOut(pContent);
+    writeToStdOut(lContentWithTrailingNewline);
   } else {
-    writeToFile(pOutputTo, pContent);
+    writeToFile(pOutputTo, lContentWithTrailingNewline);
   }
 }
 
