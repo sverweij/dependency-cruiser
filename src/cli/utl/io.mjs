@@ -1,5 +1,4 @@
 import { writeFileSync, createReadStream } from "node:fs";
-import { EOL } from "node:os";
 
 const PIPE_BUFFER_SIZE = 512;
 
@@ -41,9 +40,9 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
   }
 }
 export function write(pOutputTo, pContent) {
-  const lContentWithTrailingNewline = pContent.endsWith(EOL)
+  const lContentWithTrailingNewline = pContent.endsWith("\n")
     ? pContent
-    : pContent + EOL;
+    : `${pContent}\n`;
   if ("-" === pOutputTo) {
     writeToStdOut(lContentWithTrailingNewline);
   } else {
