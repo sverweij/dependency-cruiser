@@ -35,15 +35,18 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
     const lChunkStart = lIndex * pBufferSize;
     process.stdout.write(
       pString.substring(lChunkStart, lChunkStart + pBufferSize),
-      "utf8"
+      "utf8",
     );
   }
 }
 export function write(pOutputTo, pContent) {
+  const lContentWithTrailingNewline = pContent.endsWith("\n")
+    ? pContent
+    : `${pContent}\n`;
   if ("-" === pOutputTo) {
-    writeToStdOut(pContent);
+    writeToStdOut(lContentWithTrailingNewline);
   } else {
-    writeToFile(pOutputTo, pContent);
+    writeToFile(pOutputTo, lContentWithTrailingNewline);
   }
 }
 
