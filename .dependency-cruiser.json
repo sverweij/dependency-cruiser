@@ -254,6 +254,15 @@
       "to": {
         "dependencyTypesNot": ["type-only"]
       }
+    },
+    {
+      "name": "only-type-only-to-dts",
+      "severity": "error",
+      "from": {},
+      "to": {
+        "path": "[.]d[.][cm]?ts$",
+        "dependencyTypesNot": ["type-only"]
+      }
     }
   ],
   "options": {
