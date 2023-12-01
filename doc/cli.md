@@ -79,7 +79,7 @@ depcruise --output-type dot src test lib index.ts
 
 #### passing globs as parameters
 
-dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
+dependency-cruiser uses [picomatch](https://github.com/micromatch/picomatch) to
 make sure globs work the same across platforms. It cannot prevent the
 environment from expanding globs before it can process it, however.
 
