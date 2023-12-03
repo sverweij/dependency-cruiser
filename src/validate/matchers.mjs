@@ -3,10 +3,15 @@ import has from "lodash/has.js";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
+// by their nature these dependency types always occur alongside other
+// dependency types, like 'local' or 'npm'. Hence we exclude them from
+// the 'duplicate dependency types' matcher.
 const NOT_REALLY_DUPLICATES = new Set([
   "aliased",
   "aliased-subpath-import",
   "aliased-tsconfig",
+  "aliased-tsconfig-base-url",
+  "aliased-tsconfig-paths",
   "aliased-webpack",
   "aliased-workspace",
   "type-only",
