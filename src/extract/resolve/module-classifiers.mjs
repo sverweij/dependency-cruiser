@@ -1,4 +1,5 @@
-import { isAbsolute, resolve as path_resolve } from "node:path";
+/* eslint-disable max-lines */
+import { isAbsolute, join, resolve as path_resolve, relative } from "node:path";
 import { isMatch } from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
@@ -131,7 +132,6 @@ function isWebPackAliased(pModuleName, pAliasObject) {
  */
 // eslint-disable-next-line max-lines-per-function
 function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
-  // console.error(...arguments);
   // reference: https://docs.npmjs.com/cli/v10/using-npm/workspaces
   if (pManifest?.workspaces) {
     // workspaces are an array of globs that match the (sub) workspace
@@ -184,25 +184,83 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
 }
 
 /**
+ *
+ * @param {string} pModuleName
+ * @param {Record<string, string[]>} pPaths
+ * @returns
+ */
+
+function matchesATSConfigPath(pModuleName, pPaths) {
+  // "paths patterns can contain a single * wildcard, which matches any string.
+  // The * token can then be used in the file path values to substitute the
+  // matched string."
+  // https://www.typescriptlang.org/docs/handbook/modules/reference.html#wildcard-substitutions
+  //
+  // So, just like with subpath imports, the LHS of a path pattern is not a glob
+  // and the '*' functions as a string replacement only.
+  //
+  // TODO: 'any string' - does this include the empty string as well?
+  return Object.keys(pPaths).some((pPathLHS) => {
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    const lMatchRE = new RegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`);
+    return Boolean(pModuleName.match(lMatchRE));
+  });
+}
+
+function stripExtension(pModulePath) {
+  const lExtension = getExtension(pModulePath);
+  return lExtension ? pModulePath.slice(0, -lExtension.length) : pModulePath;
+}
+
+/**
+ *
+ * https://www.typescriptlang.org/docs/handbook/modules/reference.html#baseurl
+ *
+ * @param {string} pModuleName
+ * @param {string} pResolvedModuleName
+ * @param {string} pTSConfigBaseURL
+ */
+function matchesTSConfigBaseURL(
+  pModuleName,
+  pResolvedModuleName,
+  pTSConfigBaseURL,
+) {
+  if (!pTSConfigBaseURL) {
+    return false;
+  }
+  // "If baseUrl is set, TypeScript will resolve non-relative module names
+  // relative to the baseUrl."
+  // https://www.typescriptlang.org/docs/handbook/modules.html#base-url
+  // console.error(
+  //   ...arguments,
+  //   stripExtension(join(pTSConfigBaseURL, pModuleName)),
+  //   stripExtension(pResolvedModuleName)
+  // );
+  return stripExtension(join(pTSConfigBaseURL, pModuleName)).endsWith(
+    stripExtension(pResolvedModuleName),
+  );
+}
+
+/**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
  * @param {any} pTSConfigExpanded
  * @param {string} pBaseDirectory
  * @returns {boolean}
  */
-function isLikelyTSAliased(
-  pModuleName,
-  pResolvedModuleName,
-  pTSConfigExpanded,
-  pBaseDirectory,
-) {
-  return (
-    (pTSConfigExpanded?.options?.baseUrl ||
-      Object.keys(pTSConfigExpanded?.options?.paths ?? {}).length > 0) &&
-    !isRelativeModuleName(pModuleName) &&
-    pResolvedModuleName &&
-    !isExternalModule(pResolvedModuleName, ["node_modules"], pBaseDirectory)
+function isTSAliased(pModuleName, pResolvedModuleName, pTSConfigExpanded) {
+  // we should probably test whether the module name is relative here as well,
+  // but because we test that before we call this function we can skip that
+  const lMatchesBaseUrl = matchesTSConfigBaseURL(
+    pModuleName,
+    pResolvedModuleName,
+    pTSConfigExpanded?.options?.baseUrl,
   );
+  const lMatchesPaths = matchesATSConfigPath(
+    pModuleName,
+    pTSConfigExpanded?.options?.paths ?? {},
+  );
+  return lMatchesBaseUrl || lMatchesPaths;
 }
 
 /**
@@ -229,12 +287,7 @@ export function getAliasTypes(
     return ["aliased", "aliased-webpack"];
   }
   if (
-    isLikelyTSAliased(
-      pModuleName,
-      pResolvedModuleName,
-      pTranspileOptions?.tsConfig,
-      pResolveOptions.baseDirectory,
-    )
+    isTSAliased(pModuleName, pResolvedModuleName, pTranspileOptions?.tsConfig)
   ) {
     return ["aliased", "aliased-tsconfig"];
   }
