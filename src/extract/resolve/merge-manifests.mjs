@@ -25,7 +25,9 @@ function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
 }
 
 function isInterestingKey(pKey) {
-  return pKey.endsWith("ependencies") || pKey === "workspaces";
+  return (
+    pKey.endsWith("ependencies") || pKey === "workspaces" || pKey === "imports"
+  );
 }
 
 function getDependencyKeys(pPackage) {
