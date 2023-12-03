@@ -292,15 +292,22 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
       version: "1.0.0",
       dependencies: {},
     };
-    const lResolveOptions = {
-      tsConfig: "tsconfig.json",
+    const lTranspileOptions = {
+      tsConfig: {
+        options: {
+          paths: {
+            "@tsconfig/*": ["./src/*"],
+          },
+        },
+      },
     };
     deepEqual(
       getAliasTypes(
         "@tsconfig/package",
-        "aap/noot/mies.js",
-        lResolveOptions,
+        "src/package/index.js",
+        {},
         lManifest,
+        lTranspileOptions,
       ),
       ["aliased", "aliased-tsconfig"],
     );

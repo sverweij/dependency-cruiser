@@ -371,24 +371,35 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
   });
 
   it("classifies likely TS aliased modules as aliased & aliased-tsconfig", () => {
+    const lDependency = {
+      couldNotResolve: false,
+      resolved: "src/wappie.js",
+    };
+    const lModuleName = "@wappie";
+    const lManifest = {};
+    const lFileDirectory = ".";
+    const lResolveOptions = {
+      tsConfig: "tsconfig.json",
+    };
+    const lBaseDirectory = null;
+    const lTranspileOptions = {
+      tsConfig: {
+        options: {
+          paths: {
+            "@wappie": ["src"],
+          },
+        },
+      },
+    };
     deepEqual(
       determineDependencyTypes(
-        // dependency
-        {
-          couldNotResolve: false,
-          resolved: "src/wappie.js",
-        },
-        // pModuleName
-        "@wappie",
-        // pManifest
-        {},
-        // pFileDirectory
-        ".",
-        // pResolveOptions
-        {
-          tsConfig: "tsconfig.json",
-        },
-        // pBaseDirectory
+        lDependency,
+        lModuleName,
+        lManifest,
+        lFileDirectory,
+        lResolveOptions,
+        lBaseDirectory,
+        lTranspileOptions,
       ),
       ["aliased", "aliased-tsconfig", "local"],
     );

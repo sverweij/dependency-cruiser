@@ -160,6 +160,7 @@ function addResolutionAttributes(
   { baseDir, doNotFollow },
   pFileName,
   pResolveOptions,
+  pTranspileOptions,
 ) {
   return function addAttributes(pDependency) {
     const lResolved = resolve(
@@ -167,6 +168,7 @@ function addResolutionAttributes(
       baseDir,
       join(baseDir, dirname(pFileName)),
       pResolveOptions,
+      pTranspileOptions,
     );
     const lMatchesDoNotFollow = matchesDoNotFollow(lResolved, doNotFollow);
 
@@ -231,7 +233,14 @@ export default function getDependencies(
       getDependencyUniqueKey,
     )
       .sort(compareDeps)
-      .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
+      .map(
+        addResolutionAttributes(
+          pCruiseOptions,
+          pFileName,
+          pResolveOptions,
+          pTranspileOptions,
+        ),
+      )
       .filter(
         ({ resolved }) =>
           (!pCruiseOptions?.exclude?.path ||
