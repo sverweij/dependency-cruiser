@@ -1,0 +1,106 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/index.js",
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js",
+      "dependencies": [
+        {
+          "module": "configSpullenAlias",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-webpack",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "configSpullenAlias/someconfig.json",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/someconfig.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-webpack",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/someconfig.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": [
+        "aliased",
+        "aliased-webpack",
+        "local"
+      ],
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"
+      ],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 2,
+    "optionsUsed": {
+      "baseDir": "/Users/sander/prg/js/dependency-cruiser",
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
+      "outputTo": "test/cli/__output__/webpack-config-alias.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "webpackConfig": {
+        "fileName": "test/cli/__fixtures__/webpackconfig/aliassy/webpack.regularexport.config.js"
+      },
+      "args": "test/cli/__fixtures__/webpackconfig/aliassy/src"
+    },
+    "ruleSetUsed": {}
+  }
+}

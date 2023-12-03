@@ -1,0 +1,7 @@
+
+  error sub-not-allowed: test/cli/__fixtures__/cjs/two_only_one.js → test/cli/__fixtures__/cjs/sub/dir.js
+  error sub-not-allowed: test/cli/__fixtures__/cjs/sub/dir.js → test/cli/__fixtures__/cjs/sub/depindir.js
+  error sub-not-allowed: test/cli/__fixtures__/cjs/root_one.js → test/cli/__fixtures__/cjs/sub/dir.js
+
+✘ 3 dependency violations (3 errors, 0 warnings). 15 modules, 19 dependencies cruised.
+

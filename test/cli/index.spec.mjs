@@ -220,12 +220,17 @@ function runFileBasedTests(pModuleType) {
 }
 /* eslint mocha/no-hooks-for-single-case: off */
 describe("[E] cli/index", () => {
+  const lCurrentWorkingDirectory = process.cwd();
   before("set up", () => {
     resetOutputDirectory();
   });
 
   after("tear down", () => {
-    resetOutputDirectory();
+    // resetOutputDirectory();
+  });
+
+  afterEach("reset cwd", () => {
+    process.chdir(lCurrentWorkingDirectory);
   });
 
   describe("[E] specials", () => {
@@ -493,6 +498,21 @@ describe("[E] cli/index", () => {
 
     equal(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
+  });
+
+  it("dependency-cruise on a mono repo with tsconfig aliases will resolve the correct alias types", async () => {
+    const lOutputFileName = "workspaces-mono-repo-aliases.json";
+    const lOutputTo = path.join("../../__output__", lOutputFileName);
+    process.chdir("./test/cli/__fixtures__/workspaces-mono-repo-aliases");
+
+    const lExitCode = await cli(["apps/admin/typescript-though.ts"], {
+      config: ".dependency-cruiser.js",
+      outputType: "json",
+      outputTo: lOutputTo,
+    });
+
+    equal(lExitCode, 0);
+    assertJSONFileEqual(lOutputTo, "expected.json");
   });
 
   it("dependency-cruise with a babelConfig will use that (es6 edition)", async () => {

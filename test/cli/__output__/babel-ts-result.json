@@ -1,0 +1,236 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/index.ts",
+      "dependencies": [
+        {
+          "module": "./shared",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/babel/ts/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/shared/index.ts",
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/index.ts",
+        "test/cli/__fixtures__/babel/ts/src/something/else.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/something/else.ts",
+      "dependencies": [
+        {
+          "module": "../shared",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/babel/ts/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/something/home.ts",
+      "dependencies": [
+        {
+          "module": "react",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "react",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "react",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": [
+        "unknown"
+      ],
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/home.ts",
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/something/routes-config.ts",
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx",
+      "dependencies": [
+        {
+          "module": "./home",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/babel/ts/src/something/home.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "./routes-config",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/babel/ts/src/something/routes-config.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "react",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "react",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "module": "react-router-dom",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "react-router-dom",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "react-router-dom",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": [
+        "unknown"
+      ],
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 8,
+    "totalDependenciesCruised": 7,
+    "optionsUsed": {
+      "babelConfig": {
+        "fileName": "test/cli/__fixtures__/babel/ts/babelrc.json"
+      },
+      "baseDir": "/Users/sander/prg/js/dependency-cruiser",
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
+      "outputTo": "test/cli/__output__/babel-ts-result.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "webpackConfig": {
+        "fileName": "test/cli/__fixtures__/babel/ts/webpack-cache-bust.config.js"
+      },
+      "args": "test/cli/__fixtures__/babel/ts/src"
+    },
+    "ruleSetUsed": {}
+  }
+}

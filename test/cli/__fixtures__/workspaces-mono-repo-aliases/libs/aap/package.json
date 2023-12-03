@@ -1,0 +1,8 @@
+{
+  "name": "aap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Sander Verweij (https://sverweij.github.io/)",
+  "license": "MIT"
+}
