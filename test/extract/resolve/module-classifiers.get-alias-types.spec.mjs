@@ -309,7 +309,7 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
         lManifest,
         lTranspileOptions,
       ),
-      ["aliased", "aliased-tsconfig"],
+      ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths"],
     );
   });
 });

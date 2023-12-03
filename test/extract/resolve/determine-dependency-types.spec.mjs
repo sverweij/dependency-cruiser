@@ -401,7 +401,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         lBaseDirectory,
         lTranspileOptions,
       ),
-      ["aliased", "aliased-tsconfig", "local"],
+      ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths", "local"],
     );
   });
 
