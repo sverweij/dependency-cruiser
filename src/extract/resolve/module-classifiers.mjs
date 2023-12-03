@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-import { isAbsolute, join, resolve as path_resolve, relative } from "node:path";
+import { isAbsolute, resolve as path_resolve } from "node:path";
+import { join as posix_join } from "node:path/posix";
 import { isMatch } from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
@@ -236,7 +237,7 @@ function matchesTSConfigBaseURL(
   //   stripExtension(join(pTSConfigBaseURL, pModuleName)),
   //   stripExtension(pResolvedModuleName)
   // );
-  return stripExtension(join(pTSConfigBaseURL, pModuleName)).endsWith(
+  return stripExtension(posix_join(pTSConfigBaseURL, pModuleName)).endsWith(
     stripExtension(pResolvedModuleName),
   );
 }
