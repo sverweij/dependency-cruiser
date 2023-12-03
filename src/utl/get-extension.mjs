@@ -15,7 +15,7 @@ const EXTENSION_RE = /(?<extension>((\.d\.(c|m)?ts)|\.coffee\.md)$)/;
  * @param {string} pFileName path to the file to be parsed
  * @return {string}          extension
  */
-export default function getExtensions(pFileName) {
+export default function getExtension(pFileName) {
   const lMatchResult = pFileName.match(EXTENSION_RE);
 
   return lMatchResult?.groups?.extension ?? extname(pFileName);
