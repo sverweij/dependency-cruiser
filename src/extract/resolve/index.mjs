@@ -160,15 +160,18 @@ function resolveWithRetry(
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
  * @param  {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @param  {any} pTranspileOptions
  * @return {Partial <import("../../../types/cruise-result.mjs").IDependency>}
  *
+ *
  */
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-lines-per-function, max-params
 export default function resolve(
   pDependency,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions,
+  pTranspileOptions,
 ) {
   let lResolvedDependency = resolveWithRetry(
     pDependency,
@@ -197,6 +200,7 @@ export default function resolve(
       pFileDirectory,
       pResolveOptions,
       pBaseDirectory,
+      pTranspileOptions,
     ),
   };
 

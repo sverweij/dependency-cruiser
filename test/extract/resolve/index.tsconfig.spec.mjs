@@ -24,22 +24,30 @@ const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 
 describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   it("considers a typescript config - non-* alias", async () => {
+    const lDependency = {
+      module: "shared",
+      moduleSystem: "es6",
+    };
+    const lBaseDirectory = join(__dirname, "__mocks__");
+    const lFileDirectory = join(__dirname, "__mocks__", "ts-config-with-path");
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        tsConfig: TSCONFIG,
+        bustTheCache: true,
+      },
+      {},
+      PARSED_TSCONFIG,
+    );
+    const lTranspileOptions = {
+      tsConfig: PARSED_TSCONFIG,
+    };
     deepEqual(
       resolve(
-        {
-          module: "shared",
-          moduleSystem: "es6",
-        },
-        join(__dirname, "__mocks__"),
-        join(__dirname, "__mocks__", "ts-config-with-path"),
-        await normalizeResolveOptions(
-          {
-            tsConfig: TSCONFIG,
-            bustTheCache: true,
-          },
-          {},
-          PARSED_TSCONFIG,
-        ),
+        lDependency,
+        lBaseDirectory,
+        lFileDirectory,
+        lResolveOptions,
+        lTranspileOptions,
       ),
       {
         coreModule: false,
@@ -52,22 +60,30 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("considers a typescript config - combined/* alias", async () => {
+    const lDependency = {
+      module: "gewoon/wood/tree",
+      moduleSystem: "es6",
+    };
+    const lBaseDirectory = join(__dirname, "__mocks__");
+    const lFileDirectory = join(__dirname, "__mocks__", "ts-config-with-path");
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        tsConfig: TSCONFIG,
+        bustTheCache: true,
+      },
+      {},
+      PARSED_TSCONFIG,
+    );
+    const lTranspileOptions = {
+      tsConfig: PARSED_TSCONFIG,
+    };
     deepEqual(
       resolve(
-        {
-          module: "gewoon/wood/tree",
-          moduleSystem: "es6",
-        },
-        join(__dirname, "__mocks__"),
-        join(__dirname, "__mocks__", "ts-config-with-path"),
-        await normalizeResolveOptions(
-          {
-            tsConfig: TSCONFIG,
-            bustTheCache: true,
-          },
-          {},
-          PARSED_TSCONFIG,
-        ),
+        lDependency,
+        lBaseDirectory,
+        lFileDirectory,
+        lResolveOptions,
+        lTranspileOptions,
       ),
       {
         coreModule: false,
@@ -80,22 +96,30 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("considers a typescript config - * alias", async () => {
+    const lDependency = {
+      module: "daddayaddaya",
+      moduleSystem: "es6",
+    };
+    const lBaseDirectory = join(__dirname, "__mocks__");
+    const lFileDirectory = join(__dirname, "__mocks__", "ts-config-with-path");
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        tsConfig: TSCONFIG,
+        bustTheCache: true,
+      },
+      {},
+      PARSED_TSCONFIG,
+    );
+    const lTranspileOptions = {
+      tsConfig: PARSED_TSCONFIG,
+    };
     deepEqual(
       resolve(
-        {
-          module: "daddayaddaya",
-          moduleSystem: "es6",
-        },
-        join(__dirname, "__mocks__"),
-        join(__dirname, "__mocks__", "ts-config-with-path"),
-        await normalizeResolveOptions(
-          {
-            tsConfig: TSCONFIG,
-            bustTheCache: true,
-          },
-          {},
-          PARSED_TSCONFIG,
-        ),
+        lDependency,
+        lBaseDirectory,
+        lFileDirectory,
+        lResolveOptions,
+        lTranspileOptions,
       ),
       {
         coreModule: false,
@@ -115,22 +139,35 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       "tsconfig-no-paths.json",
     );
     const PARSED_TSCONFIG_NO_PATHS = extractTSConfig(TSCONFIG_NO_PATHS);
+    const lDependency = {
+      module: "common/wood/tree",
+      moduleSystem: "es6",
+    };
+    const lBaseDirectory = join(__dirname, "__mocks__");
+    const lFileDirectory = join(
+      __dirname,
+      "__mocks__",
+      "ts-config-with-path",
+      "src",
+      "typos",
+    );
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        tsConfig: TSCONFIG_NO_PATHS,
+        bustTheCache: true,
+      },
+      {},
+      PARSED_TSCONFIG_NO_PATHS,
+    );
+    const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_NO_PATHS };
+
     deepEqual(
       resolve(
-        {
-          module: "common/wood/tree",
-          moduleSystem: "es6",
-        },
-        join(__dirname, "__mocks__"),
-        join(__dirname, "__mocks__", "ts-config-with-path", "src", "typos"),
-        await normalizeResolveOptions(
-          {
-            tsConfig: TSCONFIG_NO_PATHS,
-            bustTheCache: true,
-          },
-          {},
-          PARSED_TSCONFIG_NO_PATHS,
-        ),
+        lDependency,
+        lBaseDirectory,
+        lFileDirectory,
+        lResolveOptions,
+        lTranspileOptions,
       ),
       {
         coreModule: false,
@@ -143,26 +180,32 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   });
 
   it("for aliases resolves in the same fashion as the typescript compiler - dts-vs-ts", async () => {
+    const lDependency = {
+      module: "things/dts-before-ts",
+      moduleSystem: "es6",
+    };
+    const lBaseDirectory = join(__dirname, "__mocks__");
+    const lFileDirectory = join(
+      __dirname,
+      "__mocks__",
+      "ts-config-with-path-correct-resolution-prio",
+    );
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        tsConfig: TSCONFIG_RESOLUTIONS,
+        bustTheCache: true,
+      },
+      {},
+      PARSED_TSCONFIG_RESOLUTIONS,
+    );
+    const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_RESOLUTIONS };
     deepEqual(
       resolve(
-        {
-          module: "things/dts-before-ts",
-          moduleSystem: "es6",
-        },
-        join(__dirname, "__mocks__"),
-        join(
-          __dirname,
-          "__mocks__",
-          "ts-config-with-path-correct-resolution-prio",
-        ),
-        await normalizeResolveOptions(
-          {
-            tsConfig: TSCONFIG_RESOLUTIONS,
-            bustTheCache: true,
-          },
-          {},
-          PARSED_TSCONFIG_RESOLUTIONS,
-        ),
+        lDependency,
+        lBaseDirectory,
+        lFileDirectory,
+        lResolveOptions,
+        lTranspileOptions,
       ),
       {
         coreModule: false,
@@ -196,6 +239,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           {},
           PARSED_TSCONFIG_RESOLUTIONS,
         ),
+        {
+          tsConfig: PARSED_TSCONFIG_RESOLUTIONS,
+        },
       ),
       {
         coreModule: false,

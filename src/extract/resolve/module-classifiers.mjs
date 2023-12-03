@@ -131,6 +131,7 @@ function isWebPackAliased(pModuleName, pAliasObject) {
  */
 // eslint-disable-next-line max-lines-per-function
 function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
+  // console.error(...arguments);
   // reference: https://docs.npmjs.com/cli/v10/using-npm/workspaces
   if (pManifest?.workspaces) {
     // workspaces are an array of globs that match the (sub) workspace
@@ -185,18 +186,19 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @param {any} pTSConfigExpanded
  * @param {string} pBaseDirectory
  * @returns {boolean}
  */
 function isLikelyTSAliased(
   pModuleName,
   pResolvedModuleName,
-  pResolveOptions,
+  pTSConfigExpanded,
   pBaseDirectory,
 ) {
   return (
-    pResolveOptions.tsConfig &&
+    (pTSConfigExpanded?.options?.baseUrl ||
+      Object.keys(pTSConfigExpanded?.options?.paths ?? {}).length > 0) &&
     !isRelativeModuleName(pModuleName) &&
     pResolvedModuleName &&
     !isExternalModule(pResolvedModuleName, ["node_modules"], pBaseDirectory)
@@ -207,14 +209,17 @@ function isLikelyTSAliased(
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
  * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
- * @param {object} pManifest
+ * @param {any} pManifest
+ * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
  * @returns {string[]}
  */
+// eslint-disable-next-line max-params
 export function getAliasTypes(
   pModuleName,
   pResolvedModuleName,
   pResolveOptions,
   pManifest,
+  pTranspileOptions,
 ) {
   if (isRelativeModuleName(pModuleName)) {
     return [];
@@ -222,6 +227,16 @@ export function getAliasTypes(
   // the order of these ifs is deliberate. First stuff bolted on by bundlers & transpilers.
   if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
     return ["aliased", "aliased-webpack"];
+  }
+  if (
+    isLikelyTSAliased(
+      pModuleName,
+      pResolvedModuleName,
+      pTranspileOptions?.tsConfig,
+      pResolveOptions.baseDirectory,
+    )
+  ) {
+    return ["aliased", "aliased-tsconfig"];
   }
   // The order of subpath imports and workspaces isn't _that_ important, as they
   // can't be confused
@@ -232,25 +247,6 @@ export function getAliasTypes(
   }
   if (isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest)) {
     return ["aliased", "aliased-workspace"];
-  }
-  // We'd like to classify for ts config paths/ aliases earlier, but it's currently
-  // partly guess work (the resolver wouldn't know, so it'd mean checking
-  // against the tsconfig paths _again_ here which might not be conducive to
-  // performance).
-  // Putting it last is close enough for now because
-  // - it's not a common scenario to have _both_ tsconfig paths and one of the
-  //   other (clearly superior) aliasing mechanisms
-  // - if it does happen it's even less likely to have the same names for both
-  //   in both mechanisms
-  if (
-    isLikelyTSAliased(
-      pModuleName,
-      pResolvedModuleName,
-      pResolveOptions,
-      pResolveOptions.baseDirectory,
-    )
-  ) {
-    return ["aliased", "aliased-tsconfig"];
   }
   return [];
 }
