@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { isAbsolute, join, resolve as path_resolve } from "node:path/posix";
+import { isAbsolute, join, resolve as path_resolve, relative } from "node:path";
 import { isMatch } from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
