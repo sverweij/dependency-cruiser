@@ -6,6 +6,8 @@ export default {
         "aliased",
         "aliased-subpath-import",
         "aliased-tsconfig",
+        "aliased-tsconfig-base-url",
+        "aliased-tsconfig-paths",
         "aliased-webpack",
         "aliased-workspace",
         "core",
