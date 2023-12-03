@@ -13,7 +13,7 @@
     "paths": {
       "*": ["./typos/*"],
       "gewoon/*": ["./common/*"],
-      "shared": ["./shared"]
+      "@shared": ["./shared"]
     },
     "esModuleInterop": true
   }

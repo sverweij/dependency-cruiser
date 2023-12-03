@@ -33,8 +33,7 @@ export function isExternalModule(
       // WebPack treats these differently:
       // - absolute paths only match that exact path
       // - relative paths get a node lookup treatment so "turtle" matches
-      //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
-      // turtles all the way down)
+      //   "turtle", "../turtle", "../../turtle", "../../../turtle"
       // hence we'll have to test for them in different fashion as well.
       // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
       (pModuleFolderName) => {
@@ -52,15 +51,13 @@ export function isExternalModule(
 function determineFollowableExtensions(pResolveOptions) {
   let lReturnValue = new Set(pResolveOptions.extensions);
 
-  // we could include things like pictures, movies, html, xml
-  // etc in lKnownUnfollowables as well. Typically in
-  // javascript-like sources you don't import non-javascript
-  // stuff without mentioning the extension (`import 'styles.scss`
-  // is more clear than`import 'styles'` as you'd expect that
-  // to resolve to something javascript-like.
-  // Defensively added the stylesheetlanguages here explicitly
-  // nonetheless - they can contain import statements and the
-  // fallback javascript parser will happily parse them, which
+  // we could include things like pictures, movies, html, xml etc in
+  // lKnownUnfollowables as well. Typically in javascript-like sources you don't
+  //  import non-javascript stuff without mentioning the extension
+  // (`import 'styles.scss` is more clear than`import 'styles'` as you'd expect
+  // that to resolve to something javascript-like. Defensively added the
+  // stylesheetlanguages here explicitly nonetheless - they can contain import
+  // statements and the fallback javascript parser will happily parse them, which
   // will result in false positives.
   const lKnownUnfollowables = [
     ".json",
@@ -168,7 +165,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     // the symlinked workspace folders are not resolved to their realpath.
     // So we need to check both the thing in node_modules _and_ the resolved
     // thing. Annoyingly, the symlink in node_modules is the `name` attribute
-    // of the workspace, not the path of the  workspace itself. So if it's
+    // of the workspace, not the path of the workspace itself. So if it's
     // in node_modules we need to check against the unresolved modulename.
     //
     // Other then the detection for when symlinks are resolved to their realpath
@@ -188,10 +185,9 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
  *
  * @param {string} pModuleName
  * @param {Record<string, string[]>} pPaths
- * @returns
+ * @returns {boolean}
  */
-
-function matchesATSConfigPath(pModuleName, pPaths) {
+function matchesTSConfigPaths(pModuleName, pPaths) {
   // "paths patterns can contain a single * wildcard, which matches any string.
   // The * token can then be used in the file path values to substitute the
   // matched string."
@@ -213,6 +209,12 @@ function stripExtension(pModulePath) {
   return lExtension ? pModulePath.slice(0, -lExtension.length) : pModulePath;
 }
 
+function stripIndex(pModulePath) {
+  return pModulePath.endsWith("/index")
+    ? pModulePath.slice(0, -"/index".length)
+    : pModulePath;
+}
+
 /**
  *
  * https://www.typescriptlang.org/docs/handbook/modules/reference.html#baseurl
@@ -232,36 +234,18 @@ function matchesTSConfigBaseURL(
   // "If baseUrl is set, TypeScript will resolve non-relative module names
   // relative to the baseUrl."
   // https://www.typescriptlang.org/docs/handbook/modules.html#base-url
-  // console.error(
-  //   ...arguments,
-  //   stripExtension(join(pTSConfigBaseURL, pModuleName)),
-  //   stripExtension(pResolvedModuleName)
-  // );
-  return stripExtension(posix_join(pTSConfigBaseURL, pModuleName)).endsWith(
+  const strippedModuleNameJoinedToBaseURL = stripIndex(
+    stripExtension(posix_join(pTSConfigBaseURL, pModuleName)),
+  );
+  const strippedResolvedModuleName = stripIndex(
     stripExtension(pResolvedModuleName),
   );
-}
-
-/**
- * @param {string} pModuleName
- * @param {string} pResolvedModuleName
- * @param {any} pTSConfigExpanded
- * @param {string} pBaseDirectory
- * @returns {boolean}
- */
-function isTSAliased(pModuleName, pResolvedModuleName, pTSConfigExpanded) {
-  // we should probably test whether the module name is relative here as well,
-  // but because we test that before we call this function we can skip that
-  const lMatchesBaseUrl = matchesTSConfigBaseURL(
-    pModuleName,
-    pResolvedModuleName,
-    pTSConfigExpanded?.options?.baseUrl,
-  );
-  const lMatchesPaths = matchesATSConfigPath(
-    pModuleName,
-    pTSConfigExpanded?.options?.paths ?? {},
-  );
-  return lMatchesBaseUrl || lMatchesPaths;
+  // console.error(
+  //   ...arguments,
+  //   strippedModuleNameJoinedToBaseURL
+  //   strippedResolvedModuleName
+  // );
+  return strippedModuleNameJoinedToBaseURL.endsWith(strippedResolvedModuleName);
 }
 
 /**
@@ -272,7 +256,7 @@ function isTSAliased(pModuleName, pResolvedModuleName, pTSConfigExpanded) {
  * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
  * @returns {string[]}
  */
-// eslint-disable-next-line max-params
+// eslint-disable-next-line max-params, complexity
 export function getAliasTypes(
   pModuleName,
   pResolvedModuleName,
@@ -288,9 +272,21 @@ export function getAliasTypes(
     return ["aliased", "aliased-webpack"];
   }
   if (
-    isTSAliased(pModuleName, pResolvedModuleName, pTranspileOptions?.tsConfig)
+    matchesTSConfigBaseURL(
+      pModuleName,
+      pResolvedModuleName,
+      pTranspileOptions?.tsConfig?.options?.baseUrl,
+    )
   ) {
-    return ["aliased", "aliased-tsconfig"];
+    return ["aliased", "aliased-tsconfig", "aliased-tsconfig-base-url"];
+  }
+  if (
+    matchesTSConfigPaths(
+      pModuleName,
+      pTranspileOptions?.tsConfig?.options?.paths ?? {},
+    )
+  ) {
+    return ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths"];
   }
   // The order of subpath imports and workspaces isn't _that_ important, as they
   // can't be confused
