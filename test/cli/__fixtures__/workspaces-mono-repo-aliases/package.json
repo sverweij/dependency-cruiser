@@ -1,0 +1,17 @@
+{
+  "name": "workspaces-example",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "libs/aap",
+    "libs/noot",
+    "libs/mies",
+    "libs/wim",
+    "libs/zus"
+  ],
+  "imports": {
+    "#*": "./libs/*"
+  }
+}

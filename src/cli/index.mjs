@@ -137,7 +137,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
 /**
  *
  * @param {string[]} pFileDirectoryArray
- * @param {import("../../types/options").ICruiseOptions} lCruiseOptions
+ * @param {import("../../types/options.mjs").ICruiseOptions} lCruiseOptions
  * @returns {number}
  */
 export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {

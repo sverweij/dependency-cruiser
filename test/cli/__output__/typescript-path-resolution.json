@@ -1,0 +1,102 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/index.ts",
+      "dependencies": [
+        {
+          "module": "shared",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-base-url",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/index.ts",
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/something/else.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/something/else.ts",
+      "dependencies": [
+        {
+          "module": "shared",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-base-url",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 2,
+    "optionsUsed": {
+      "baseDir": "/Users/sander/prg/js/dependency-cruiser",
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
+      "outputTo": "test/cli/__output__/typescript-path-resolution.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/tsconfig.json"
+      },
+      "tsPreCompilationDeps": false,
+      "webpackConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/webpack.config.js"
+      },
+      "args": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src"
+    },
+    "ruleSetUsed": {}
+  }
+}

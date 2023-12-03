@@ -1,0 +1,177 @@
+{
+  "modules": [
+    {
+      "source": "apps/admin/typescript-though.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "@schwester/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "dynamic": false,
+          "module": "@sister",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "dynamic": false,
+          "module": "#mies/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/mies/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-subpath-import",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "dynamic": false,
+          "module": "libs/aap",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/aap/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-base-url",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "dynamic": false,
+          "module": "noot/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/noot/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/zus/index.js",
+      "dependencies": [],
+      "dependents": [
+        "apps/admin/typescript-though.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/mies/index.js",
+      "dependencies": [],
+      "dependents": [
+        "apps/admin/typescript-though.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/aap/index.js",
+      "dependencies": [],
+      "dependents": [
+        "apps/admin/typescript-though.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/noot/index.js",
+      "dependencies": [],
+      "dependents": [
+        "apps/admin/typescript-though.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 5,
+    "totalDependenciesCruised": 5,
+    "optionsUsed": {
+      "baseDir": "/Users/sander/prg/js/dependency-cruiser/test/cli/__fixtures__/workspaces-mono-repo-aliases",
+      "cache": false,
+      "combinedDependencies": true,
+      "doNotFollow": {
+        "path": "node_modules"
+      },
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": [
+        "es6",
+        "cjs"
+      ],
+      "outputTo": "../../__output__/workspaces-mono-repo-aliases.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "rulesFile": ".dependency-cruiser.js",
+      "tsConfig": {
+        "fileName": "tsconfig.json"
+      },
+      "tsPreCompilationDeps": true,
+      "args": "apps/admin/typescript-though.ts"
+    },
+    "ruleSetUsed": {
+      "forbidden": []
+    }
+  }
+}
