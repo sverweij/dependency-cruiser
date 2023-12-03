@@ -169,6 +169,7 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
   deleteDammit(path.join(OUT_DIR, "known-errors-known.txt"));
   deleteDammit(path.join(OUT_DIR, "this-thing-likely-wont-exist.txt"));
+  deleteDammit(path.join(OUT_DIR, "workspaces-mono-repo-aliases.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -226,7 +227,7 @@ describe("[E] cli/index", () => {
   });
 
   after("tear down", () => {
-    // resetOutputDirectory();
+    resetOutputDirectory();
   });
 
   afterEach("reset cwd", () => {
