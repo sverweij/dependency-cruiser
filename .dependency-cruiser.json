@@ -463,10 +463,6 @@
               "attributes": { "fontcolor": "blue", "color": "blue" }
             },
             {
-              "criteria": { "valid": false },
-              "attributes": { "fontcolor": "red", "color": "red" }
-            },
-            {
               "criteria": { "resolved": "^src/cli" },
               "attributes": { "color": "#0000ff77" }
             },
