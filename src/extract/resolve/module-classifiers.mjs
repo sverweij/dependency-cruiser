@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { isAbsolute, resolve as path_resolve } from "node:path";
 import { join as posix_join } from "node:path/posix";
 import { isMatch } from "picomatch";
@@ -196,7 +195,8 @@ function matchesTSConfigPaths(pModuleName, pPaths) {
   // So, just like with subpath imports, the LHS of a path pattern is not a glob
   // and the '*' functions as a string replacement only.
   //
-  // TODO: 'any string' - does this include the empty string as well?
+  // TODO: 'any string' - does this include the empty string as well? Checks seem
+  // to indicate it doesn't, so we use `.+` instead of `.*`
   return Object.keys(pPaths).some((pPathLHS) => {
     // eslint-disable-next-line security/detect-non-literal-regexp
     const lMatchRE = new RegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`);
@@ -240,11 +240,6 @@ function matchesTSConfigBaseURL(
   const strippedResolvedModuleName = stripIndex(
     stripExtension(pResolvedModuleName),
   );
-  // console.error(
-  //   ...arguments,
-  //   strippedModuleNameJoinedToBaseURL
-  //   strippedResolvedModuleName
-  // );
   return strippedModuleNameJoinedToBaseURL.endsWith(strippedResolvedModuleName);
 }
 
