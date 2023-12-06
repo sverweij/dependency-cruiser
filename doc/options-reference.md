@@ -841,7 +841,9 @@ Most representational aspects of the 'dot' reporter are customizable:
   - You can use any
     [module attribute](https://github.com/sverweij/dependency-cruiser/blob/main/types/cruise-result.d.ts#L16)
     and any [dependency attribute](https://github.com/sverweij/dependency-cruiser/blob/main/types/cruise-result.d.ts#L73)
-    for dependencies.
+    for dependencies in the criteria of those.
+  - If you provide an array of criteria for the attributes the module/ dependency
+    will be matched if it matches _any_ of the criteria.
   - For attributes you can use anything GraphViz dot can understand as an attribute
     (see their [attributes](https://graphviz.gitlab.io/_pages/doc/info/attrs.html)
     documentation for a complete overview).
