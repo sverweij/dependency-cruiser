@@ -62,8 +62,8 @@ npx depcruise src --include-only "^src" --output-type dot | dot -T svg > depende
 > <details>
 > <summary>dependency-cruiser v12 and older: add --config option</summary>
 >
-> While not necessary from dependency-cruiser v13, in v12 and older you'll have
-> to pass the --config option to make it find the .dependency-cruiser.js
+> While not necessary from dependency-cruiser v13 and later, in v12 and older
+> you'll have to pass the --config option to make it find the .dependency-cruiser.js
 > configuration file:
 >
 > ```shell

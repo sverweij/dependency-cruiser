@@ -486,7 +486,8 @@ Only cruise the specified depth, counting from the specified root-module(s). Thi
 command is mostly useful in combination with visualization output like _dot_ to
 keep the generated output to a manageable size.
 
-> :bulb: If you use this to get a high level overview of your dependencies, be sure
+> [!tip]
+> If you use this to get a high level overview of your dependencies, be sure
 > to check out the [archi](#archi) reporter. That's more flexible, while still
 > taking into account all your rules and dependencies. You can also consider the
 > [collapse](#collapse-summarize-to-folder-depth-or-pattern) option for this.
@@ -510,7 +511,8 @@ And with `"maxDepth": 3` like this:
 
 <img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.svg">
 
-> :bulb: The `maxDepth` option is there to help with visualising. If your goal is to _validate_
+> [!tip]
+> The `maxDepth` option is there to help with visualizing. If your goal is to _validate_
 > this option is best left alone as you'll miss a dependency or two otherwise.
 
 ## Matching your environment

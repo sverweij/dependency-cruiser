@@ -301,6 +301,7 @@ results in a PR - potentially along with the mermaid reporter. The markdown
 reporter is fairly configurable - see the [markdown](./options-reference.md#markdown)
 section in the options reference for details.
 
+> [!note]
 > As compared to the `err-html` reporter this one doesn't emit links or show
 > a complete list of all run validations. If you need that: create a feature
 > request in the dependency-cruiser repo.
@@ -1232,6 +1233,7 @@ want to do this in a configuration file - see
 [tsConfig](./options-reference.md#tsconfig-use-a-typescript-configuration-file-project)
 section in the options reference for details.
 
+> [!tip]
 > If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
 > you can pass that as well - the syntax for tsconfig.json and jsconfig.json
 > is identical for all practical purposes.
@@ -1444,8 +1446,8 @@ GraphViz dot into html that is geared to make the graph easier to use. It adds a
 
 Typical use:
 
-```sh
-depcruise -v -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
+```console
+$ depcruise -v -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
 ```
 
 This works for all dot-based reporters, including `archi` and `ddot`
