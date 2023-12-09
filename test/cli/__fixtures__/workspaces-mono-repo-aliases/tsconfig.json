@@ -4,7 +4,7 @@
     "module": "commonjs",
     "baseUrl": "./",
     "paths": {
-      "@schwester/*": ["./libs/zus/*"],
+      "@modules/*": ["./libs/*"],
       "@sister": ["./libs/zus/*"]
     },
     "noEmit": true,

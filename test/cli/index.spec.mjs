@@ -1,7 +1,7 @@
 import { readFileSync, unlinkSync } from "node:fs";
+import { doesNotThrow, equal, throws } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { doesNotThrow, equal, throws } from "node:assert/strict";
 import { join, posix as path } from "node:path";
 import chalk from "chalk";
 import intercept from "intercept-stdout";
@@ -506,7 +506,7 @@ describe("[E] cli/index", () => {
     const lOutputTo = path.join("../../__output__", lOutputFileName);
     process.chdir("./test/cli/__fixtures__/workspaces-mono-repo-aliases");
 
-    const lExitCode = await cli(["apps/admin/typescript-though.ts"], {
+    const lExitCode = await cli(["apps/admin/"], {
       config: ".dependency-cruiser.js",
       outputType: "json",
       outputTo: lOutputTo,
