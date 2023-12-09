@@ -1,0 +1,222 @@
+{
+  "modules": [
+    {
+      "source": "apps/admin/direct-relative-import.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "../../libs/aap",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/aap/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/aap/index.js",
+      "dependencies": [],
+      "dependents": ["apps/admin/direct-relative-import.ts"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "apps/admin/from-subpath-import.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "#mies/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/mies/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-subpath-import", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/mies/index.js",
+      "dependencies": [],
+      "dependents": ["apps/admin/from-subpath-import.ts"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "apps/admin/from-tsconfig-base-url.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "libs/wim",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/wim/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-base-url",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/wim/index.js",
+      "dependencies": [],
+      "dependents": ["apps/admin/from-tsconfig-base-url.ts"],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "apps/admin/from-tsconfig-path-star.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "@modules/zus/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/zus/index.js",
+      "dependencies": [],
+      "dependents": [
+        "apps/admin/from-tsconfig-path-star.ts",
+        "apps/admin/from-tsconfig-path.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "apps/admin/from-tsconfig-path.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "@sister",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "apps/admin/from-workspace.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "noot/index.js",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "resolved": "libs/noot/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "libs/noot/index.js",
+      "dependencies": [],
+      "dependents": ["apps/admin/from-workspace.ts"],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 11,
+    "totalDependenciesCruised": 6,
+    "optionsUsed": {
+      "baseDir": ".",
+      "cache": false,
+      "combinedDependencies": true,
+      "doNotFollow": {
+        "path": "node_modules"
+      },
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs"],
+      "outputTo": "../../__output__/workspaces-mono-repo-aliases.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "rulesFile": ".dependency-cruiser.js",
+      "tsConfig": {
+        "fileName": "tsconfig.json"
+      },
+      "tsPreCompilationDeps": true,
+      "args": "apps/admin/"
+    },
+    "ruleSetUsed": {
+      "forbidden": []
+    }
+  }
+}

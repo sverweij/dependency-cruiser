@@ -1,7 +1,7 @@
 import { readFileSync, unlinkSync } from "node:fs";
+import { doesNotThrow, equal, throws } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { doesNotThrow, equal, throws } from "node:assert/strict";
 import { join, posix as path } from "node:path";
 import chalk from "chalk";
 import intercept from "intercept-stdout";
@@ -169,6 +169,7 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
   deleteDammit(path.join(OUT_DIR, "known-errors-known.txt"));
   deleteDammit(path.join(OUT_DIR, "this-thing-likely-wont-exist.txt"));
+  deleteDammit(path.join(OUT_DIR, "workspaces-mono-repo-aliases.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -220,12 +221,17 @@ function runFileBasedTests(pModuleType) {
 }
 /* eslint mocha/no-hooks-for-single-case: off */
 describe("[E] cli/index", () => {
+  const lCurrentWorkingDirectory = process.cwd();
   before("set up", () => {
     resetOutputDirectory();
   });
 
   after("tear down", () => {
     resetOutputDirectory();
+  });
+
+  afterEach("reset cwd", () => {
+    process.chdir(lCurrentWorkingDirectory);
   });
 
   describe("[E] specials", () => {
@@ -493,6 +499,21 @@ describe("[E] cli/index", () => {
 
     equal(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
+  });
+
+  it("dependency-cruise on a mono repo with tsconfig aliases will resolve the correct alias types", async () => {
+    const lOutputFileName = "workspaces-mono-repo-aliases.json";
+    const lOutputTo = path.join("../../__output__", lOutputFileName);
+    process.chdir("./test/cli/__fixtures__/workspaces-mono-repo-aliases");
+
+    const lExitCode = await cli(["apps/admin/"], {
+      config: ".dependency-cruiser.js",
+      outputType: "json",
+      outputTo: lOutputTo,
+    });
+
+    equal(lExitCode, 0);
+    assertJSONFileEqual(lOutputTo, "expected.json");
   });
 
   it("dependency-cruise with a babelConfig will use that (es6 edition)", async () => {

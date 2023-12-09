@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "@modules/*": ["./libs/*"],
+      "@sister": ["./libs/zus/*"]
+    },
+    "noEmit": true,
+    "skipLibCheck": true
+  }
+}

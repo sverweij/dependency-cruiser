@@ -68,6 +68,7 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
       [],
     );
   });
+
   it("doesn't run aliased and aliased-subpath-import when a thing starts with #, but there are no imports", () => {
     const lManifest = {
       name: "test",
@@ -218,23 +219,97 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
+  it("doesn't run aliased and aliased-workspace for when resolved matches a workspace, but module requested is relative", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: ["*/?-package"],
+    };
+    const lResolveOptions = {};
+    deepEqual(
+      getAliasTypes(
+        "../a-package/some-workspaced-local-package",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      [],
+    );
+  });
+
+  it("classifies as a webpack alias if it could be both a webpack alias _and_ a workspace alias", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: ["*/?-package"],
+    };
+    const lResolveOptions = {
+      alias: {
+        "@": "./src",
+      },
+    };
+    deepEqual(
+      getAliasTypes(
+        "@some/thing.js",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      ["aliased", "aliased-webpack"],
+    );
+  });
+
+  it("classifies as a webpack alias if it could be both a webpack alias _and_ a subpath import", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      imports: {
+        "#*": "./src/*",
+      },
+    };
+    const lResolveOptions = {
+      alias: {
+        "#": "./src",
+      },
+    };
+    deepEqual(
+      getAliasTypes(
+        "#some/thing.js",
+        "src/some/thing.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      ["aliased", "aliased-webpack"],
+    );
+  });
+
   it("should return aliased and aliased-tsconfig for tsconfig alias", () => {
     const lManifest = {
       name: "test",
       version: "1.0.0",
       dependencies: {},
     };
-    const lResolveOptions = {
-      tsConfig: "tsconfig.json",
+    const lTranspileOptions = {
+      tsConfig: {
+        options: {
+          paths: {
+            "@tsconfig/*": ["./src/*"],
+          },
+        },
+      },
     };
     deepEqual(
       getAliasTypes(
         "@tsconfig/package",
-        "aap/noot/mies.js",
-        lResolveOptions,
+        "src/package/index.js",
+        {},
         lManifest,
+        lTranspileOptions,
       ),
-      ["aliased", "aliased-tsconfig"],
+      ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths"],
     );
   });
 });

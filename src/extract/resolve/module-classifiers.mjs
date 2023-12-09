@@ -1,4 +1,5 @@
 import { isAbsolute, resolve as path_resolve } from "node:path";
+import { join as posix_join } from "node:path/posix";
 import { isMatch } from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
@@ -31,8 +32,7 @@ export function isExternalModule(
       // WebPack treats these differently:
       // - absolute paths only match that exact path
       // - relative paths get a node lookup treatment so "turtle" matches
-      //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
-      // turtles all the way down)
+      //   "turtle", "../turtle", "../../turtle", "../../../turtle"
       // hence we'll have to test for them in different fashion as well.
       // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
       (pModuleFolderName) => {
@@ -50,15 +50,13 @@ export function isExternalModule(
 function determineFollowableExtensions(pResolveOptions) {
   let lReturnValue = new Set(pResolveOptions.extensions);
 
-  // we could include things like pictures, movies, html, xml
-  // etc in lKnownUnfollowables as well. Typically in
-  // javascript-like sources you don't import non-javascript
-  // stuff without mentioning the extension (`import 'styles.scss`
-  // is more clear than`import 'styles'` as you'd expect that
-  // to resolve to something javascript-like.
-  // Defensively added the stylesheetlanguages here explicitly
-  // nonetheless - they can contain import statements and the
-  // fallback javascript parser will happily parse them, which
+  // we could include things like pictures, movies, html, xml etc in
+  // lKnownUnfollowables as well. Typically in javascript-like sources you don't
+  //  import non-javascript stuff without mentioning the extension
+  // (`import 'styles.scss` is more clear than`import 'styles'` as you'd expect
+  // that to resolve to something javascript-like. Defensively added the
+  // stylesheetlanguages here explicitly nonetheless - they can contain import
+  // statements and the fallback javascript parser will happily parse them, which
   // will result in false positives.
   const lKnownUnfollowables = [
     ".json",
@@ -154,7 +152,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     //
     // oh and: ```picomatch.isMatch('asdf', 'asdf/**') === true``` so
     // in case it's only 'asdf' that's in the resolved module name for some reason
-    //  we're good as well.
+    // we're good as well.
     const lModuleFriendlyWorkspaceGlobs = pManifest.workspaces.map(
       (pWorkspace) =>
         pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
@@ -166,7 +164,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     // the symlinked workspace folders are not resolved to their realpath.
     // So we need to check both the thing in node_modules _and_ the resolved
     // thing. Annoyingly, the symlink in node_modules is the `name` attribute
-    // of the workspace, not the path of the  workspace itself. So if it's
+    // of the workspace, not the path of the workspace itself. So if it's
     // in node_modules we need to check against the unresolved modulename.
     //
     // Other then the detection for when symlinks are resolved to their realpath
@@ -183,57 +181,117 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
 }
 
 /**
+ *
  * @param {string} pModuleName
- * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
- * @param {string} pBaseDirectory
+ * @param {Record<string, string[]>} pPaths
  * @returns {boolean}
  */
-function isLikelyTSAliased(
+function matchesTSConfigPaths(pModuleName, pPaths) {
+  // "paths patterns can contain a single * wildcard, which matches any string.
+  // The * token can then be used in the file path values to substitute the
+  // matched string."
+  // https://www.typescriptlang.org/docs/handbook/modules/reference.html#wildcard-substitutions
+  //
+  // So, just like with subpath imports, the LHS of a path pattern is not a glob
+  // and the '*' functions as a string replacement only.
+  //
+  // TODO: 'any string' - does this include the empty string as well? Checks seem
+  // to indicate it doesn't, so we use `.+` instead of `.*`
+  return Object.keys(pPaths).some((pPathLHS) => {
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    const lMatchRE = new RegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`);
+    return Boolean(pModuleName.match(lMatchRE));
+  });
+}
+
+function stripExtension(pModulePath) {
+  const lExtension = getExtension(pModulePath);
+  return lExtension ? pModulePath.slice(0, -lExtension.length) : pModulePath;
+}
+
+function stripIndex(pModulePath) {
+  return pModulePath.endsWith("/index")
+    ? pModulePath.slice(0, -"/index".length)
+    : pModulePath;
+}
+
+/**
+ *
+ * https://www.typescriptlang.org/docs/handbook/modules/reference.html#baseurl
+ *
+ * @param {string} pModuleName
+ * @param {string} pResolvedModuleName
+ * @param {string} pTSConfigBaseURL
+ */
+function matchesTSConfigBaseURL(
   pModuleName,
   pResolvedModuleName,
-  pResolveOptions,
-  pBaseDirectory,
+  pTSConfigBaseURL,
 ) {
-  return (
-    pResolveOptions.tsConfig &&
-    !isRelativeModuleName(pModuleName) &&
-    pResolvedModuleName &&
-    !isExternalModule(pResolvedModuleName, ["node_modules"], pBaseDirectory)
+  if (!pTSConfigBaseURL) {
+    return false;
+  }
+  // "If baseUrl is set, TypeScript will resolve non-relative module names
+  // relative to the baseUrl."
+  // https://www.typescriptlang.org/docs/handbook/modules.html#base-url
+  const strippedModuleNameJoinedToBaseURL = stripIndex(
+    stripExtension(posix_join(pTSConfigBaseURL, pModuleName)),
   );
+  const strippedResolvedModuleName = stripIndex(
+    stripExtension(pResolvedModuleName),
+  );
+  return strippedModuleNameJoinedToBaseURL.endsWith(strippedResolvedModuleName);
 }
 
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
- * @param {object} pManifest
+ * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @param {any} pManifest
+ * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
  * @returns {string[]}
  */
+// eslint-disable-next-line max-params, complexity
 export function getAliasTypes(
   pModuleName,
   pResolvedModuleName,
   pResolveOptions,
   pManifest,
+  pTranspileOptions,
 ) {
-  if (isSubpathImport(pModuleName, pManifest)) {
-    return ["aliased", "aliased-subpath-import"];
+  if (isRelativeModuleName(pModuleName)) {
+    return [];
   }
+  // the order of these ifs is deliberate. First stuff bolted on by bundlers & transpilers.
   if (isWebPackAliased(pModuleName, pResolveOptions.alias)) {
     return ["aliased", "aliased-webpack"];
   }
-  if (isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest)) {
-    return ["aliased", "aliased-workspace"];
-  }
   if (
-    isLikelyTSAliased(
+    matchesTSConfigBaseURL(
       pModuleName,
       pResolvedModuleName,
-      pResolveOptions,
-      pResolveOptions.baseDirectory,
+      pTranspileOptions?.tsConfig?.options?.baseUrl,
     )
   ) {
-    return ["aliased", "aliased-tsconfig"];
+    return ["aliased", "aliased-tsconfig", "aliased-tsconfig-base-url"];
+  }
+  if (
+    matchesTSConfigPaths(
+      pModuleName,
+      pTranspileOptions?.tsConfig?.options?.paths ?? {},
+    )
+  ) {
+    return ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths"];
+  }
+  // The order of subpath imports and workspaces isn't _that_ important, as they
+  // can't be confused
+  // - subpath imports _must_ start with a #
+  // - workspaces (or, more precise: package names) are forbidden to even _contain_ a #
+  if (isSubpathImport(pModuleName, pManifest)) {
+    return ["aliased", "aliased-subpath-import"];
+  }
+  if (isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest)) {
+    return ["aliased", "aliased-workspace"];
   }
   return [];
 }

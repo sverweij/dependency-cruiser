@@ -171,6 +171,7 @@ function determineExternalModuleDependencyTypes(
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
  * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
+ * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
  *
  * @return {import("../../../types/shared-types.js").DependencyType[]} an array of dependency types for the dependency
  */
@@ -182,6 +183,7 @@ export default function determineDependencyTypes(
   pFileDirectory,
   pResolveOptions,
   pBaseDirectory,
+  pTranspileOptions,
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]}*/
   let lReturnValue = [];
@@ -196,6 +198,7 @@ export default function determineDependencyTypes(
     pDependency.resolved,
     lResolveOptions,
     pManifest,
+    pTranspileOptions,
   );
   if (lAliases.length > 0) {
     lReturnValue = lAliases;
