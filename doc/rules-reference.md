@@ -41,7 +41,7 @@
    - [`dependencyTypes` and `dependencyTypesNot`](#dependencytypes-and-dependencytypesnot)
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
-   - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
+   - [`exoticallyRequired`, `exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
    - [`preCompilationOnly`](#precompilationonly)
    - [`moreUnstable`](#moreunstable)
 4. [Configurations in JavaScript](#configurations-in-javascript)
@@ -916,31 +916,50 @@ will ignore them in the evaluation of that rule.
 
 #### OK - `unknown`, `npm-unknown`, `undetermined` - I'm officially weirded out - what's that about?
 
-This is a list of dependency types dependency-cruiser currently detects.
+This is a list of the main dependency types dependency-cruiser currently detects.
 
-| dependency type           | meaning                                                                                                                                                                                                      | example                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
-| local                     | a module in your own ('local') package                                                                                                                                                                       | "./klont"                    |
-| localmodule               | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                                                    | "shared/stuff.ts"            |
-| npm                       | it's a module in package.json's `dependencies`                                                                                                                                                               | "lodash"                     |
-| npm-dev                   | it's a module in package.json's `devDependencies`                                                                                                                                                            | "chai"                       |
-| npm-optional              | it's a module in package.json's `optionalDependencies`                                                                                                                                                       | "livescript"                 |
-| npm-peer                  | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3, but later on revived.                                                                                                        | "thing-i-am-a-plugin-for"    |
-| npm-bundled               | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                                                    | "iwillgetbundled"            |
-| npm-no-pkg                | it's an npm module - but it's nowhere in your package.json                                                                                                                                                   | "forgetmenot"                |
-| npm-unknown               | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                                                         |                              |
-| deprecated                | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                                                               | "some-deprecated-package"    |
-| core                      | it's a (nodejs) core module. B.t.w. you can [influence](./options-reference.md#builtinmodules-influencing-what-to-consider-built-in--core-modules) what to consider a core module if                         | "fs", "node:test"            |
-| aliased                   | the module was imported via an alias - always occurs alongside one of 'aliased-\*' dependency types below _and_ alongside the dependency type of the dependency it's aliased to (so: local, npm, core ,...)  | "~/hello.ts"                 |
-| aliased-subpath-import    | the module was imported via a [subpath import](https://nodejs.org/api/packages.html#subpath-imports)                                                                                                         | "#thing/hello.mjs"           |
-| aliased-tsconfig          | the module was imported via a typescript compilerOptions.paths or compilerOptions.baseUrl setting in tsconfig. Always occurs alongside one of the 'aliased-tsconfig-\*' types below                          | "@thing/hello"               |
-| aliased-tsconfig-base-url | the module was imported via a typescript [compilerOptions.baseUrl setting in tsconfig](https://www.typescriptlang.org/tsconfig#baseUrl)                                                                      | "libs/utensils/src/hello.js" |
-| aliased-tsconfig-paths    | the module was imported via a typescript [compilerOptions.paths setting in tsconfig](https://www.typescriptlang.org/tsconfig#paths)                                                                          | "@thing/hello"               |
-| aliased-webpack           | the module was imported via a [webpack resolve alias](https://webpack.js.org/configuration/resolve/#resolvealias)                                                                                            | "Utilities"                  |
-| aliased-workspace         | the module was imported via a [workspace](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#workspaces)                                                                                            | "local-workspace-package"    |
-| unknown                   | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                                                     | "loodash"                    |
-| undetermined              | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole Jurassic park of ways to define where to resolve modules to                                    | "veloci!./raptor"            |
-| type-only                 | the module was imported as 'type only' (e.g. `import type { IThing } from "./things";`) - only available for TypeScript sources, only for tsPreCompilationDeps !== false. Will appear alongside other types. |                              |
+| dependency type | meaning                                                                                                                                                 | example                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| local           | a module in your own ('local') package                                                                                                                  | "./klont"                 |
+| localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                               | "shared/stuff.ts"         |
+| npm             | it's a module in package.json's `dependencies`                                                                                                          | "lodash"                  |
+| npm-dev         | it's a module in package.json's `devDependencies`                                                                                                       | "chai"                    |
+| npm-optional    | it's a module in package.json's `optionalDependencies`                                                                                                  | "livescript"              |
+| npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3, but later on revived.                                                   | "thing-i-am-a-plugin-for" |
+| npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                               | "iwillgetbundled"         |
+| npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                              | "forgetmenot"             |
+| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                    |                           |
+| deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                          | "some-deprecated-package" |
+| core            | it's a (nodejs) core module. B.t.w. you can [influence](./options-reference.md#builtinmodules-influencing-what-to-consider-built-in--core-modules) this | "fs", "node:test"         |
+| unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                | "loodash"                 |
+| undetermined    | the dependency fell through all detection holes.                                                                                                        | "veloci!./raptor"         |
+
+These are types that will typically occur alongside the ones above, telling a little bit more on how
+the dependency was declared. One or more of these can occur at the same time. E.g. if you import a
+dependency which resolves to a base url in a tsconfig.json you'll see `import`, `aliased` as well as
+`aliased-tsconfig` and `aliased-tsconfig-base-url`.
+
+| dependency type             | meaning the module was imported ...                                                                                    | example                                          |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| aliased                     | via an alias of some sort (e.g. tsconfig paths, subpath imports, npm workspace or webpack aliases)                     | "~/hello.ts"                                     |
+| aliased-subpath-import      | via a [subpath import](https://nodejs.org/api/packages.html#subpath-imports)                                           | "#thing/hello.mjs"                               |
+| aliased-tsconfig            | via a typescript compilerOptions.paths or compilerOptions.baseUrl setting in tsconfig.                                 | "@thing/hello"                                   |
+| aliased-tsconfig-base-url   | via a typescript [compilerOptions.baseUrl setting in tsconfig](https://www.typescriptlang.org/tsconfig#baseUrl)        | "libs/utensils/src/hello.js"                     |
+| aliased-tsconfig-paths      | via a typescript [compilerOptions.paths setting in tsconfig](https://www.typescriptlang.org/tsconfig#paths)            | "@thing/hello"                                   |
+| aliased-webpack             | via a [webpack resolve alias](https://webpack.js.org/configuration/resolve/#resolvealias)                              | "Utilities"                                      |
+| aliased-workspace           | via a [workspace](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#workspaces)                              | "local-workspace-package"                        |
+| type-only                   | as 'type only' - only available for TypeScript sources, only for tsPreCompilationDeps !== false.                       | `import type { IThing } from "./things"`         |
+| export                      | implicitly via a module export                                                                                         | `export { thing } from "./things"`               |
+| import                      | with a 'regular' ES import                                                                                             | `import { thing } from "./things`                |
+| dynamic-import              | with a dynamic import statement                                                                                        | `const { thing } = await import("./things")`     |
+| import-equals               | with an 'import equals' statement                                                                                      | `import fs = require("fs")`                      |
+| type-import                 | as part of a type declaration                                                                                          | `const lAThing: import('./things').IThing = {}`  |
+| require                     | with a commonjs 'require' statement                                                                                    | `const memoize = require("lodash/memoize")`      |
+| exotic-require              | with a statement that isn't 'require' see [exoticallyRequired](#exoticallyrequired-exoticrequire-and-exoticrequirenot) | `const { thing } = want("./thing")`              |
+| triple-slash-directive      | with a triple slash directive (oldskool TypeScript)                                                                    |                                                  |
+| triple-slash-file-reference | with a triple slash directive, specifically importing another module                                                   | `/// <reference path="./ts-thing" />`            |
+| triple-slash-type-reference | with a triple slash directive, specifically importing types                                                            | `/// <reference types="./ts-thing-types" />`     |
+| triple-slash-amd-dependency | with a triple slash directive, specifically declaring an AMD dependency                                                | `/// <amd-dependency path="./ts-thing-types" />` |
 
 ### `dynamic`
 
