@@ -9,6 +9,10 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
         moduleSystem: "tsd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: [
+          "triple-slash-directive",
+          "triple-slash-file-reference",
+        ],
       },
     ]);
   });
@@ -20,6 +24,10 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
         moduleSystem: "tsd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: [
+          "triple-slash-directive",
+          "triple-slash-type-reference",
+        ],
       },
     ]);
   });
@@ -33,6 +41,10 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
           moduleSystem: "tsd",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: [
+            "triple-slash-directive",
+            "triple-slash-amd-dependency",
+          ],
         },
       ],
     );

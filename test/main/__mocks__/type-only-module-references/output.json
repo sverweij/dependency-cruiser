@@ -13,7 +13,7 @@
           "followable": true,
           "couldNotResolve": false,
           "license": "MIT",
-          "dependencyTypes": ["npm-no-pkg"],
+          "dependencyTypes": ["npm-no-pkg", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

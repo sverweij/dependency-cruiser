@@ -12,7 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -40,7 +40,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -68,7 +68,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "dynamic-import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [

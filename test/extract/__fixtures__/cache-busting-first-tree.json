@@ -8,7 +8,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
         "module": "./local",
         "moduleSystem": "cjs",
@@ -20,7 +20,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["npm"],
+        "dependencyTypes": ["npm", "import"],
         "dynamic": false,
         "module": "different-in-other-tree",
         "moduleSystem": "es6",
@@ -32,7 +32,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["core"],
+        "dependencyTypes": ["core", "import"],
         "dynamic": false,
         "module": "path",
         "moduleSystem": "es6",
@@ -46,7 +46,7 @@
     "coreModule": false,
     "couldNotResolve": false,
     "matchesDoNotFollow": true,
-    "dependencyTypes": ["npm"],
+    "dependencyTypes": ["npm", "import"],
     "dependencies": []
   },
   {
@@ -55,7 +55,7 @@
     "coreModule": true,
     "couldNotResolve": false,
     "matchesDoNotFollow": false,
-    "dependencyTypes": ["core"],
+    "dependencyTypes": ["core", "import"],
     "dependencies": []
   },
   {

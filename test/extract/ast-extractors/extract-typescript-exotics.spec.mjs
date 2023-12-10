@@ -25,6 +25,7 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
           dynamic: false,
           exoticRequire: "want",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );
@@ -43,6 +44,7 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
           dynamic: false,
           exoticRequire: "window.require",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );
@@ -61,6 +63,7 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
           dynamic: false,
           exoticRequire: "want",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
         {
           module: "./required-with-need",
@@ -68,6 +71,7 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
           dynamic: false,
           exoticRequire: "need",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );

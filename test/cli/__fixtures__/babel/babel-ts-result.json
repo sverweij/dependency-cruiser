@@ -190,7 +190,12 @@
     "totalCruised": 8,
     "totalDependenciesCruised": 7,
     "optionsUsed": {
+      "babelConfig": {
+        "fileName": "test/cli/__fixtures__/babel/ts/babelrc.json"
+      },
+      "baseDir": ".",
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
@@ -201,10 +206,6 @@
       "webpackConfig": {
         "fileName": "test/cli/__fixtures__/babel/ts/webpack-cache-bust.config.js"
       },
-      "babelConfig": {
-        "fileName": "test/cli/__fixtures__/babel/ts/babelrc.json"
-      },
-      "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/babel/ts/src"
     },
     "ruleSetUsed": {}

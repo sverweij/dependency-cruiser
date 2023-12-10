@@ -9,6 +9,7 @@ describe("[U] ast-extractors/extract-typescript - regular imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
     ]);
   });
@@ -22,6 +23,7 @@ describe("[U] ast-extractors/extract-typescript - regular imports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["import"],
         },
       ],
     );
@@ -38,6 +40,7 @@ describe("[U] ast-extractors/extract-typescript - regular imports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["import"],
         },
       ],
     );
@@ -54,6 +57,7 @@ describe("[U] ast-extractors/extract-typescript - regular imports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["import"],
         },
       ],
     );

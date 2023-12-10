@@ -358,10 +358,12 @@
     "totalCruised": 12,
     "totalDependenciesCruised": 16,
     "optionsUsed": {
+      "baseDir": ".",
       "combinedDependencies": false,
       "exclude": {
         "path": "node_modules"
       },
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
@@ -369,7 +371,6 @@
       "outputType": "json",
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/cjs"
     }
   }

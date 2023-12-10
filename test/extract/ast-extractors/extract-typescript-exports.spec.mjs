@@ -9,6 +9,7 @@ describe("[U] ast-extractors/extract-typescript - re-exports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["export"],
       },
     ]);
   });
@@ -24,6 +25,7 @@ describe("[U] ast-extractors/extract-typescript - re-exports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["export"],
         },
       ],
     );
@@ -40,6 +42,7 @@ describe("[U] ast-extractors/extract-typescript - re-exports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["export"],
       },
     ]);
   });

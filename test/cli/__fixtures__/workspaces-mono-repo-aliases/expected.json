@@ -8,11 +8,11 @@
           "module": "../../libs/aap",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "libs/aap/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -37,11 +37,16 @@
           "module": "#mies/index.js",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-subpath-import",
+            "local",
+            "import"
+          ],
           "resolved": "libs/mies/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-subpath-import", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -66,16 +71,17 @@
           "module": "libs/wim",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
-          "resolved": "libs/wim/index.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "dependencyTypes": [
             "aliased",
             "aliased-tsconfig",
             "aliased-tsconfig-base-url",
-            "local"
+            "local",
+            "import"
           ],
+          "resolved": "libs/wim/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -100,16 +106,17 @@
           "module": "@modules/zus/index.js",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
-          "resolved": "libs/zus/index.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "dependencyTypes": [
             "aliased",
             "aliased-tsconfig",
             "aliased-tsconfig-paths",
-            "local"
+            "local",
+            "import"
           ],
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -137,16 +144,17 @@
           "module": "@sister",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
-          "resolved": "libs/zus/index.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "dependencyTypes": [
             "aliased",
             "aliased-tsconfig",
             "aliased-tsconfig-paths",
-            "local"
+            "local",
+            "import"
           ],
+          "resolved": "libs/zus/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -164,11 +172,16 @@
           "module": "noot/index.js",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "libs/noot/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

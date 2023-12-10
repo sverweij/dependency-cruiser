@@ -13,6 +13,7 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["import-equals"],
         },
       ],
     );
@@ -31,18 +32,21 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
         {
           module: "legit-two",
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
         {
           module: "legit-three",
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
       ],
     );
@@ -70,18 +74,21 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
         {
           module: "slodash",
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
         {
           module: "hidash",
           moduleSystem: "cjs",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["require"],
         },
       ],
     );
@@ -94,6 +101,7 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
         moduleSystem: "cjs",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["require"],
       },
     ]);
   });
