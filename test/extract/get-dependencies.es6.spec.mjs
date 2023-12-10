@@ -8,6 +8,6 @@ const es6Fixtures = requireJSON("./__fixtures__/es6.json");
 describe("[I] extract/getDependencies - ES6 - ", () => {
   // @TODO feature/adds-more-granularity-to-dependency-types - re-enable acorn & swc when they're implemented
   // es6Fixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
-  // es6Fixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
+  es6Fixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
   es6Fixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });

@@ -25,6 +25,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
           dynamic: false,
           exoticRequire: "want",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );
@@ -43,6 +44,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
           dynamic: false,
           exoticRequire: "window.require",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );
@@ -71,6 +73,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
           dynamic: false,
           exoticRequire: "want",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
         {
           module: "./required-with-need",
@@ -78,6 +81,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
           dynamic: false,
           exoticRequire: "need",
           exoticallyRequired: true,
+          dependencyTypes: ["exotic-require"],
         },
       ],
     );
