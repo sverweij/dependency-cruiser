@@ -19,6 +19,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       },
     ]);
   });
@@ -33,6 +34,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       },
     ]);
   });
@@ -61,6 +63,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       },
     ]);
   });
@@ -104,6 +107,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
     ]);
   });
@@ -134,18 +138,21 @@ export class ReplicateIssueComponent extends React.Component {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
       {
         module: "✖",
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
       {
         module: "✖",
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
     ]);
   });

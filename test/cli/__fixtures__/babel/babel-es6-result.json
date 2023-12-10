@@ -8,11 +8,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/cli/__fixtures__/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -40,11 +40,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/cli/__fixtures__/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -67,7 +67,6 @@
       "babelConfig": {
         "fileName": "test/cli/__fixtures__/babel/es6/babelrc.valid.json"
       },
-      "baseDir": ".",
       "combinedDependencies": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",

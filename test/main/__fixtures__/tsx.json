@@ -12,7 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

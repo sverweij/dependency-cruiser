@@ -344,7 +344,7 @@
           {
             "resolved": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
             "coreModule": false,
-            "dependencyTypes": ["local"],
+            "dependencyTypes": ["local", "import"],
             "dynamic": false,
             "followable": true,
             "exoticallyRequired": false,

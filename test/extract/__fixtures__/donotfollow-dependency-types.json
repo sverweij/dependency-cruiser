@@ -9,7 +9,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./dofollowstuffinhere",
@@ -22,7 +22,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./donotfollowonceinthisfolder",
@@ -35,7 +35,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./donotfollowonceinthisfolder/meta",
@@ -48,7 +48,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["npm"],
+        "dependencyTypes": ["npm", "require"],
         "dynamic": false,
 
         "module": "in-package-json",
@@ -61,7 +61,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["npm-no-pkg"],
+        "dependencyTypes": ["npm-no-pkg", "require"],
         "dynamic": false,
 
         "module": "not-in-package-json",
@@ -76,7 +76,7 @@
     "coreModule": false,
     "couldNotResolve": false,
     "matchesDoNotFollow": true,
-    "dependencyTypes": ["npm-no-pkg"],
+    "dependencyTypes": ["npm-no-pkg", "require"],
 
     "dependencies": []
   },
@@ -90,7 +90,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "../donotfollowonceinthisfolder/meta",
@@ -103,7 +103,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./callfromlocal",
@@ -122,7 +122,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
 
         "module": "./notcalledfromoutside",
@@ -151,7 +151,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "../dofollowstuffinhere",
@@ -164,7 +164,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./notcalledfromoutside",

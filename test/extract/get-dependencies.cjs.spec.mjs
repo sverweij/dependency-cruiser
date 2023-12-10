@@ -65,8 +65,7 @@ after(() => {
 });
 
 describe("[I] extract/getDependencies - CommonJS - ", () => {
-  // @TODO feature/adds-more-granularity-to-dependency-types - re-enable acorn & swc when they're implemented
-  // cjsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
+  cjsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
@@ -89,7 +88,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
         {
           resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
           coreModule: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -119,7 +118,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
         {
           resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",
           coreModule: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,

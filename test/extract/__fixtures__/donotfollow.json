@@ -9,7 +9,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./dofollowstuffinhere",
@@ -22,7 +22,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./donotfollowonceinthisfolder",
@@ -35,7 +35,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./donotfollowonceinthisfolder/meta",
@@ -50,7 +50,7 @@
     "coreModule": false,
     "couldNotResolve": false,
     "matchesDoNotFollow": true,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "require"],
 
     "dependencies": []
   },
@@ -60,7 +60,7 @@
     "coreModule": false,
     "couldNotResolve": false,
     "matchesDoNotFollow": true,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "require"],
 
     "dependencies": []
   },
@@ -74,7 +74,7 @@
         "followable": false,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "../donotfollowonceinthisfolder/meta",
@@ -87,7 +87,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
 
         "module": "./callfromlocal",

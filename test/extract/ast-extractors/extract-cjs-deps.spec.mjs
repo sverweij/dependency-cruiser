@@ -25,6 +25,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["require"],
       },
     ]);
   });
@@ -44,6 +45,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         dynamic: false,
         exoticRequire: "need",
         exoticallyRequired: true,
+        dependencyTypes: ["exotic-require"],
       },
     ]);
   });
@@ -63,6 +65,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         dynamic: false,
         exoticRequire: "window.require",
         exoticallyRequired: true,
+        dependencyTypes: ["exotic-require"],
       },
     ]);
   });
@@ -87,6 +90,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["require"],
       },
     ]);
   });

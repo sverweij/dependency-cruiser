@@ -17,7 +17,7 @@
     {
       "dependencies": [
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "require"],
           "rules": [],
           "valid": true,
           "module": "./input",
@@ -32,7 +32,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "require"],
           "rules": [],
           "valid": true,
           "module": "./output",
@@ -47,7 +47,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "require"],
           "rules": [],
           "valid": true,
           "module": "./post-processing",
@@ -62,7 +62,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "require"],
           "rules": [],
           "valid": true,
           "module": "./pre-processing",
@@ -102,7 +102,7 @@
     {
       "dependencies": [
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "require"],
           "rules": [],
           "valid": true,
           "module": "../utl/do-interesting-things",

@@ -8,16 +8,17 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
-          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "dependencyTypes": [
             "aliased",
             "aliased-tsconfig",
             "aliased-tsconfig-base-url",
-            "local"
+            "local",
+            "require"
           ],
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -45,16 +46,17 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
-          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "dependencyTypes": [
             "aliased",
             "aliased-tsconfig",
             "aliased-tsconfig-base-url",
-            "local"
+            "local",
+            "require"
           ],
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

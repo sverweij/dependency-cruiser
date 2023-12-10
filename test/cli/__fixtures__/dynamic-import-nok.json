@@ -8,11 +8,11 @@
           "moduleSystem": "es6",
           "dynamic": true,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "dynamic-import"],
           "resolved": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_this.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

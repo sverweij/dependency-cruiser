@@ -14,9 +14,10 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
               moduleSystem: "amd",
               dynamic: false,
               exoticallyRequired: false,
+              dependencyTypes: ["amd-define"],
             });
           }
-        })
+        }),
       );
   }
 }
@@ -30,16 +31,16 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
           pArgument.params.some(
             (pParameter) =>
               pParameter.name === "require" ||
-              pExoticRequireStrings.includes(pParameter.name)
-          )
+              pExoticRequireStrings.includes(pParameter.name),
+          ),
       )
       .forEach((pFunction) =>
         extractCommonJSDependencies(
           pFunction.body,
           pDependencies,
           "amd",
-          pExoticRequireStrings
-        )
+          pExoticRequireStrings,
+        ),
       );
   }
 }
@@ -47,7 +48,7 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
 export default function extractAMDDependencies(
   pAST,
   pDependencies,
-  pExoticRequireStrings
+  pExoticRequireStrings,
 ) {
   walk_simple(
     pAST,
@@ -67,6 +68,6 @@ export default function extractAMDDependencies(
       },
     },
     // see https://github.com/acornjs/acorn/issues/746
-    walk_base
+    walk_base,
   );
 }
