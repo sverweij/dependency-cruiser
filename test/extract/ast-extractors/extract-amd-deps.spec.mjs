@@ -27,12 +27,14 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
         moduleSystem: "amd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["amd-define"],
       },
       {
         module: "./root_two",
         moduleSystem: "amd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["amd-define"],
       },
     ]);
   });
@@ -51,12 +53,14 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
         moduleSystem: "amd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["amd-require"],
       },
       {
         module: "./two-with-require",
         moduleSystem: "amd",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["amd-require"],
       },
     ]);
   });
@@ -76,6 +80,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
         dynamic: false,
         exoticRequire: "want",
         exoticallyRequired: true,
+        dependencyTypes: ["amd-exotic-require"],
       },
       {
         module: "./two-with-want",
@@ -83,6 +88,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
         dynamic: false,
         exoticRequire: "want",
         exoticallyRequired: true,
+        dependencyTypes: ["amd-exotic-require"],
       },
     ]);
   });

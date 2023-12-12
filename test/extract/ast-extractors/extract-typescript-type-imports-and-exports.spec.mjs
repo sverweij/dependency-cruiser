@@ -9,6 +9,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["type-import"],
       },
     ]);
   });
@@ -20,6 +21,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["type-import"],
       },
     ]);
   });
@@ -35,6 +37,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["type-import"],
         },
       ],
     );
@@ -51,6 +54,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["type-import"],
         },
       ],
     );
@@ -80,7 +84,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        dependencyTypes: ["type-only"],
+        dependencyTypes: ["type-only", "import"],
       },
     ]);
   });
@@ -94,7 +98,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
+          dependencyTypes: ["type-only", "import"],
         },
       ],
     );
@@ -111,7 +115,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
+          dependencyTypes: ["type-only", "import"],
         },
       ],
     );
@@ -128,7 +132,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
+          dependencyTypes: ["type-only", "import"],
         },
       ],
     );
@@ -143,6 +147,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["import"],
         },
       ],
     );
@@ -157,7 +162,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
+          dependencyTypes: ["type-only", "export"],
         },
       ],
     );
@@ -170,7 +175,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        dependencyTypes: ["type-only"],
+        dependencyTypes: ["type-only", "export"],
       },
     ]);
   });
@@ -184,7 +189,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only"],
+          dependencyTypes: ["type-only", "export"],
         },
       ],
     );
@@ -199,6 +204,7 @@ describe("[U] ast-extractors/extract-typescript - type imports and exports", () 
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["export"],
         },
       ],
     );

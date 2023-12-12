@@ -8,7 +8,7 @@
           "module": "./types",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
-          "dependencyTypes": ["local", "type-only"],
+          "dependencyTypes": ["local", "type-only", "import"],
           "resolved": "src/types.ts",
           "coreModule": false,
           "followable": true,

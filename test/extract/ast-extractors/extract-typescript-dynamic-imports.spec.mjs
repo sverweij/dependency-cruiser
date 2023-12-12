@@ -13,6 +13,7 @@ describe("[U] ast-extractors/extract-typescript - dynamic imports", () => {
           moduleSystem: "es6",
           dynamic: true,
           exoticallyRequired: false,
+          dependencyTypes: ["dynamic-import"],
         },
       ],
     );
@@ -29,6 +30,7 @@ describe("[U] ast-extractors/extract-typescript - dynamic imports", () => {
           moduleSystem: "es6",
           dynamic: true,
           exoticallyRequired: false,
+          dependencyTypes: ["dynamic-import"],
         },
       ],
     );

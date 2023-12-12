@@ -57,6 +57,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
+          dependencyTypes: ["type-import"],
         },
       ],
     );
@@ -86,6 +87,7 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
       },
     ]);
   });

@@ -9,7 +9,7 @@
         "followable": true,
         "exoticallyRequired": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "module": "./index",
         "moduleSystem": "es6",
         "dynamic": false,

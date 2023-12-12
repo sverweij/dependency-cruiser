@@ -125,7 +125,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -155,7 +155,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -167,7 +167,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -197,7 +197,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "exotic-require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: true,
@@ -250,7 +250,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "import"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -264,7 +264,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "import"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,

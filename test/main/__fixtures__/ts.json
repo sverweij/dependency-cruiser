@@ -12,7 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -26,7 +26,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -40,7 +40,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -54,7 +54,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "export"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -68,7 +68,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": ["core", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -84,7 +84,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["core"],
+      "dependencyTypes": ["core", "import"],
       "dependencies": [],
       "dependents": ["test/main/__mocks__/ts/index.ts"],
       "orphan": false,
@@ -109,7 +109,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

@@ -13,10 +13,17 @@ function pryStringsFromArguments(pArguments) {
   return lReturnValue;
 }
 
+function getRequireTypes(pModuleSystem) {
+  return pModuleSystem === "amd" ? ["amd-require"] : ["require"];
+}
+function getExoticRequireTypes(pModuleSystem) {
+  return pModuleSystem === "amd" ? ["amd-exotic-require"] : ["exotic-require"];
+}
+
 function pushRequireCallsToDependencies(
   pDependencies,
   pModuleSystem,
-  pRequireStrings
+  pRequireStrings,
 ) {
   return (pNode) => {
     for (let lName of pRequireStrings) {
@@ -28,8 +35,15 @@ function pushRequireCallsToDependencies(
             moduleSystem: pModuleSystem,
             dynamic: false,
             ...(lName === "require"
-              ? { exoticallyRequired: false }
-              : { exoticallyRequired: true, exoticRequire: lName }),
+              ? {
+                  exoticallyRequired: false,
+                  dependencyTypes: getRequireTypes(pModuleSystem),
+                }
+              : {
+                  exoticallyRequired: true,
+                  exoticRequire: lName,
+                  dependencyTypes: getExoticRequireTypes(pModuleSystem),
+                }),
           });
         }
       }
@@ -41,7 +55,7 @@ export default function extractCommonJSDependencies(
   pAST,
   pDependencies,
   pModuleSystem,
-  pExoticRequireStrings
+  pExoticRequireStrings,
 ) {
   // var/const lalala = require('./lalala');
   // require('./lalala');
@@ -58,10 +72,10 @@ export default function extractCommonJSDependencies(
       CallExpression: pushRequireCallsToDependencies(
         pDependencies,
         pModuleSystem,
-        lRequireStrings
+        lRequireStrings,
       ),
     },
     // see https://github.com/acornjs/acorn/issues/746
-    walk_base
+    walk_base,
   );
 }

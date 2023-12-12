@@ -8,11 +8,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/cli/__fixtures__/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -40,11 +40,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/cli/__fixtures__/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -64,7 +64,11 @@
     "totalCruised": 3,
     "totalDependenciesCruised": 2,
     "optionsUsed": {
+      "babelConfig": {
+        "fileName": "test/cli/__fixtures__/babel/es6/babelrc.valid.json"
+      },
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
@@ -75,10 +79,6 @@
       "webpackConfig": {
         "fileName": "test/cli/__fixtures__/babel/es6/webpack-cache-bust.config.js"
       },
-      "babelConfig": {
-        "fileName": "test/cli/__fixtures__/babel/es6/babelrc.valid.json"
-      },
-      "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/babel/es6/src"
     },
     "ruleSetUsed": {}

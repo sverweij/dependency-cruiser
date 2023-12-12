@@ -17,11 +17,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["aliased", "aliased-webpack", "local", "require"],
           "resolved": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-webpack", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -31,11 +31,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["aliased", "aliased-webpack", "local", "require"],
           "resolved": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/someconfig.json",
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-webpack", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -51,7 +51,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["aliased", "aliased-webpack", "local"],
+      "dependencyTypes": ["aliased", "aliased-webpack", "local", "require"],
       "dependencies": [],
       "dependents": [
         "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"

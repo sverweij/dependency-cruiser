@@ -42,7 +42,7 @@
             "resolved": "test/main/__mocks__/cruise-reporterless/amd/sub/local-module-in-drag.js",
             "moduleSystem": "amd",
             "coreModule": false,
-            "dependencyTypes": ["undetermined"],
+            "dependencyTypes": ["undetermined", "amd-define"],
             "dynamic": false,
             "circular": false,
             "followable": true,

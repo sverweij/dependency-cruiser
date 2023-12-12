@@ -9,7 +9,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
@@ -21,7 +21,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./oneDeep",
         "moduleSystem": "es6"
@@ -33,7 +33,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./sub/oneDeepInSub",
         "moduleSystem": "es6"
@@ -45,7 +45,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["core"],
+        "dependencyTypes": ["core", "import"],
         "dynamic": false,
         "module": "os",
         "moduleSystem": "es6"
@@ -58,7 +58,7 @@
     "matchesDoNotFollow": false,
     "coreModule": true,
     "couldNotResolve": false,
-    "dependencyTypes": ["core"],
+    "dependencyTypes": ["core", "import"],
     "dependencies": []
   },
   {

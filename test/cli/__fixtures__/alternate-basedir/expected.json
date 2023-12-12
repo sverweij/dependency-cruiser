@@ -17,6 +17,7 @@
     "totalCruised": 1,
     "totalDependenciesCruised": 0,
     "optionsUsed": {
+      "baseDir": "test/cli/__fixtures__/alternate-basedir",
       "combinedDependencies": false,
       "doNotFollow": {
         "path": "node_modules"
@@ -29,8 +30,7 @@
       "outputType": "json",
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "args": "src",
-      "baseDir": "test/cli/__fixtures__/alternate-basedir"
+      "args": "src"
     },
     "ruleSetUsed": {}
   }

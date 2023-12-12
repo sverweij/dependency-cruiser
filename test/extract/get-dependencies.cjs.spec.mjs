@@ -88,7 +88,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
         {
           resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
           coreModule: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,
@@ -118,7 +118,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
         {
           resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",
           coreModule: false,
-          dependencyTypes: ["local"],
+          dependencyTypes: ["local", "require"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,

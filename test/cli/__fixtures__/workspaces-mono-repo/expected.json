@@ -8,11 +8,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "packages/事物/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -22,11 +27,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "packages/chose/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -36,11 +46,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "packages/ding/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -50,11 +65,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "libs/books/index.mjs",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -64,11 +84,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "libs/bücher/index.mjs",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -78,11 +103,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "libs/livres/index.mjs",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -92,11 +122,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "libs/图书/index.mjs",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -106,11 +141,16 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-workspace",
+            "local",
+            "import"
+          ],
           "resolved": "packages/thing/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased", "aliased-workspace", "local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true

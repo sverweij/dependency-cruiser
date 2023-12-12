@@ -75,6 +75,7 @@ function extractExoticMemberCallExpression(pNode, pExoticRequireStrings) {
             exoticallyRequired: true,
             exoticRequire: pThing.string,
             dynamic: false,
+            dependencyTypes: ["exotic-require"],
           });
         }
         return pAll;
@@ -120,17 +121,30 @@ export default Visitor
         this.lExoticRequireStrings = pExoticRequireStrings;
       }
 
-      pushImportExportSource(pNode) {
+      pushExportSource(pNode) {
         if (pNode.source) {
           this.lResult.push({
             module: pNode.source.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
+            dependencyTypes: ["export"],
           });
         }
       }
+
+      pushImportSource(pNode) {
+        if (pNode.source) {
+          this.lResult.push({
+            module: pNode.source.value,
+            moduleSystem: "es6",
+            exoticallyRequired: false,
+            dependencyTypes: ["import"],
+          });
+        }
+      }
+
       visitImportDeclaration(pNode) {
-        this.pushImportExportSource(pNode);
+        this.pushImportSource(pNode);
         return super.visitImportDeclaration(pNode);
       }
 
@@ -140,6 +154,7 @@ export default Visitor
             module: pNode.moduleRef.expression.value,
             moduleSystem: "cjs",
             exoticallyRequired: false,
+            dependencyTypes: ["import-equals"],
           });
         }
         return super.visitTsImportEqualsDeclaration(pNode);
@@ -149,7 +164,7 @@ export default Visitor
       // To anticipate that (and to remain backward compatible when that happens)
       // also include the same method, but with the correct spelling.
       visitExportAllDeclration(pNode) {
-        this.pushImportExportSource(pNode);
+        this.pushExportSource(pNode);
         /* c8 ignore start */
         // @ts-expect-error see above
         if (super.visitExportAllDeclration) {
@@ -169,7 +184,7 @@ export default Visitor
 
       // same spelling error as the above - same solution
       visitExportNamedDeclration(pNode) {
-        this.pushImportExportSource(pNode);
+        this.pushExportSource(pNode);
         /* c8 ignore start */
         // @ts-expect-error see above
         if (super.visitExportNamedDeclration) {
@@ -195,14 +210,23 @@ export default Visitor
             module: pryStringsFromArguments(pNode.arguments),
 
             ...(isImportCallExpression(pNode)
-              ? { moduleSystem: "es6", dynamic: true }
-              : { moduleSystem: "cjs", dynamic: false }),
+              ? {
+                  moduleSystem: "es6",
+                  dynamic: true,
+                  dependencyTypes: ["dynamic-import"],
+                }
+              : {
+                  moduleSystem: "cjs",
+                  dynamic: false,
+                  dependencyTypes: ["require"],
+                }),
 
             ...(isNonExoticallyRequiredExpression(pNode)
               ? { exoticallyRequired: false }
               : {
                   exoticallyRequired: true,
                   exoticRequire: pNode.callee.value,
+                  dependencyTypes: ["exotic-require"],
                 }),
           });
         }
@@ -235,6 +259,7 @@ export default Visitor
             module: pNode.typeAnnotation.argument.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
+            dependencyTypes: ["type-import"],
           });
         return super.visitTsTypeAnnotation(pNode);
       }

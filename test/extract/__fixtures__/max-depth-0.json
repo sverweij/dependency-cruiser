@@ -9,7 +9,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
@@ -21,7 +21,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./oneDeep",
         "moduleSystem": "es6"
@@ -33,7 +33,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./sub/oneDeepInSub",
         "moduleSystem": "es6"
@@ -45,7 +45,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["core"],
+        "dependencyTypes": ["core", "import"],
         "dynamic": false,
         "module": "os",
         "moduleSystem": "es6"
@@ -58,7 +58,7 @@
     "matchesDoNotFollow": false,
     "coreModule": true,
     "couldNotResolve": false,
-    "dependencyTypes": ["core"],
+    "dependencyTypes": ["core", "import"],
     "dependencies": []
   },
   {
@@ -75,7 +75,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
@@ -87,7 +87,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./twoDeep",
         "moduleSystem": "es6"
@@ -104,7 +104,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
         "module": "./sub/threeDeepInSub",
         "moduleSystem": "cjs"
@@ -121,7 +121,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["core"],
+        "dependencyTypes": ["core", "require"],
         "dynamic": false,
         "module": "os",
         "moduleSystem": "cjs"
@@ -138,7 +138,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "import"],
         "dynamic": false,
         "module": "./twoDeepInSub",
         "moduleSystem": "es6"
@@ -155,7 +155,7 @@
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
-        "dependencyTypes": ["local"],
+        "dependencyTypes": ["local", "require"],
         "dynamic": false,
         "module": "./threeDeepInSub",
         "moduleSystem": "cjs"

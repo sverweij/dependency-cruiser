@@ -12,6 +12,7 @@ function pushImportNodeValue(pDependencies) {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       });
     } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
       pDependencies.push({
@@ -19,19 +20,32 @@ function pushImportNodeValue(pDependencies) {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       });
     }
   };
 }
 
 export default function extractES6Dependencies(pAST, pDependencies) {
-  function pushSourceValue(pNode) {
+  function pushImportSourceValue(pNode) {
     if (pNode.source && pNode.source.value) {
       pDependencies.push({
         module: pNode.source.value,
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["import"],
+      });
+    }
+  }
+  function pushExportSourceValue(pNode) {
+    if (pNode.source && pNode.source.value) {
+      pDependencies.push({
+        module: pNode.source.value,
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["export"],
       });
     }
   }
@@ -39,12 +53,12 @@ export default function extractES6Dependencies(pAST, pDependencies) {
   walk_simple(
     pAST,
     {
-      ImportDeclaration: pushSourceValue,
+      ImportDeclaration: pushImportSourceValue,
       ImportExpression: pushImportNodeValue(pDependencies),
-      ExportAllDeclaration: pushSourceValue,
-      ExportNamedDeclaration: pushSourceValue,
+      ExportAllDeclaration: pushExportSourceValue,
+      ExportNamedDeclaration: pushExportSourceValue,
     },
     // see https://github.com/acornjs/acorn/issues/746
-    walk_base
+    walk_base,
   );
 }

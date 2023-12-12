@@ -2,7 +2,7 @@
   {
     "resolved": "test/extract/__mocks__/amd-bangs/root_one.js",
     "coreModule": false,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "amd-require"],
     "dynamic": false,
     "followable": true,
     "exoticallyRequired": false,
@@ -26,7 +26,7 @@
   {
     "resolved": "test/extract/__mocks__/amd-bangs/somedata.json",
     "coreModule": false,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "amd-require"],
     "dynamic": false,
     "followable": false,
     "exoticallyRequired": false,

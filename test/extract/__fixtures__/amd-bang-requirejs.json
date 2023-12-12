@@ -14,7 +14,7 @@
   {
     "resolved": "test/extract/__mocks__/amd-bangs/hurray.js",
     "coreModule": false,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "amd-define"],
     "dynamic": false,
     "followable": true,
     "exoticallyRequired": false,
@@ -50,7 +50,7 @@
   {
     "resolved": "fs",
     "coreModule": true,
-    "dependencyTypes": ["core"],
+    "dependencyTypes": ["core", "amd-define"],
     "dynamic": false,
     "followable": false,
     "exoticallyRequired": false,
@@ -62,7 +62,7 @@
   {
     "resolved": "test/extract/__mocks__/amd-bangs/somedata.json",
     "coreModule": false,
-    "dependencyTypes": ["local"],
+    "dependencyTypes": ["local", "amd-define"],
     "dynamic": false,
     "followable": false,
     "exoticallyRequired": false,

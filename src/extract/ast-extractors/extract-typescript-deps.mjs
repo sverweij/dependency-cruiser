@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
 import tryImport from "semver-try-require";
 import meta from "#meta.js";
@@ -43,28 +44,50 @@ function isTypeOnlyExport(pStatement) {
  */
 
 /**
- * Get all import and export statements from the top level AST node
+ * Get all import statements from the top level AST node
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
- *                                  all import and export statements in the
- *                                  (top level) AST node
+ *                                  all import statements in the (top level) AST node
  */
-function extractImportsAndExports(pAST) {
+function extractImports(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        (typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" ||
-          typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration") &&
+        typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" &&
         Boolean(pStatement.moduleSpecifier),
     )
     .map((pStatement) => ({
       module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6",
       exoticallyRequired: false,
-      ...(isTypeOnlyImport(pStatement) || isTypeOnlyExport(pStatement)
-        ? { dependencyTypes: ["type-only"] }
-        : {}),
+      ...(isTypeOnlyImport(pStatement)
+        ? { dependencyTypes: ["type-only", "import"] }
+        : { dependencyTypes: ["import"] }),
+    }));
+}
+
+/**
+ * Get all export statements from the top level AST node
+ *
+ * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
+ *                                  all export statements in the (top level) AST node
+ */
+function extractExports(pAST) {
+  return pAST.statements
+    .filter(
+      (pStatement) =>
+        typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration" &&
+        Boolean(pStatement.moduleSpecifier),
+    )
+    .map((pStatement) => ({
+      module: pStatement.moduleSpecifier.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      ...(isTypeOnlyExport(pStatement)
+        ? { dependencyTypes: ["type-only", "export"] }
+        : { dependencyTypes: ["export"] }),
     }));
 }
 
@@ -92,6 +115,7 @@ function extractImportEquals(pAST) {
       module: pStatement.moduleReference.expression.text,
       moduleSystem: "cjs",
       exoticallyRequired: false,
+      dependencyTypes: ["import-equals"],
     }));
 }
 
@@ -108,12 +132,20 @@ function extractTripleSlashDirectives(pAST) {
       module: pReference.fileName,
       moduleSystem: "tsd",
       exoticallyRequired: false,
+      dependencyTypes: [
+        "triple-slash-directive",
+        "triple-slash-file-reference",
+      ],
     }))
     .concat(
       pAST.typeReferenceDirectives.map((pReference) => ({
         module: pReference.fileName,
         moduleSystem: "tsd",
         exoticallyRequired: false,
+        dependencyTypes: [
+          "triple-slash-directive",
+          "triple-slash-type-reference",
+        ],
       })),
     )
     .concat(
@@ -121,6 +153,10 @@ function extractTripleSlashDirectives(pAST) {
         module: pReference.path,
         moduleSystem: "tsd",
         exoticallyRequired: false,
+        dependencyTypes: [
+          "triple-slash-directive",
+          "triple-slash-amd-dependency",
+        ],
       })),
     );
 }
@@ -224,6 +260,7 @@ function walk(pResult, pExoticRequireStrings) {
         module: pASTNode.arguments[0].text,
         moduleSystem: "cjs",
         exoticallyRequired: false,
+        dependencyTypes: ["require"],
       });
     }
 
@@ -235,6 +272,7 @@ function walk(pResult, pExoticRequireStrings) {
           moduleSystem: "cjs",
           exoticallyRequired: true,
           exoticRequire: pExoticRequireString,
+          dependencyTypes: ["exotic-require"],
         });
       }
     });
@@ -246,6 +284,7 @@ function walk(pResult, pExoticRequireStrings) {
         moduleSystem: "es6",
         dynamic: true,
         exoticallyRequired: false,
+        dependencyTypes: ["dynamic-import"],
       });
     }
 
@@ -256,6 +295,7 @@ function walk(pResult, pExoticRequireStrings) {
         module: pASTNode.argument.literal.text,
         moduleSystem: "es6",
         exoticallyRequired: false,
+        dependencyTypes: ["type-import"],
       });
     }
     typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
@@ -287,7 +327,8 @@ export default function extractTypeScriptDependencies(
   pExoticRequireStrings,
 ) {
   return Boolean(typescript)
-    ? extractImportsAndExports(pTypeScriptAST)
+    ? extractImports(pTypeScriptAST)
+        .concat(extractExports(pTypeScriptAST))
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
