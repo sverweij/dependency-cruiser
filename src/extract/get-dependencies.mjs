@@ -191,6 +191,8 @@ function matchesPattern(pFullPathToFile, pPattern) {
  * @returns {string}
  */
 function getDependencyUniqueKey({ module, moduleSystem, dependencyTypes }) {
+  // c8: dependencyTypes is hardly ever undefined anymore since PR #884, but
+  //     we keep the `|| []` in for robustness sake
   return `${module} ${moduleSystem} ${(dependencyTypes || []).includes(
     "type-only",
   )}`;
