@@ -16,16 +16,16 @@
       "from": {
         "orphan": true,
         "pathNot": [
-          "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$",
+          "(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$",
           "[.]d[.]m?ts$",
-          "(^|/)tsconfig\\.json$",
-          "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
-          "-reporter-plugin\\.mjs$",
-          "\\.schema\\.json$",
-          "^tools/istanbul-json-summary-to-markdown\\.mjs$",
-          "^src/report/json\\.mjs",
-          "^src/report/identity\\.mjs",
-          "^src/report/null\\.mjs"
+          "(^|/)tsconfig[.]json$",
+          "(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$",
+          "-reporter-plugin[.]mjs$",
+          "[.]schema[.]json$",
+          "^tools/istanbul-json-summary-to-markdown[.]mjs$",
+          "^src/report/json[.]mjs",
+          "^src/report/identity[.]mjs",
+          "^src/report/null[.]mjs"
         ]
       }
     },
@@ -40,8 +40,8 @@
         "pathNot": [
           "^src/(main|utl|config-utl)/",
           "$1",
-          "^src/meta\\.js$",
-          "^src/extract/transpile/meta\\.mjs$"
+          "^src/meta[.]js$",
+          "^src/extract/transpile/meta[.]mjs$"
         ],
         "dependencyTypesNot": ["npm", "core", "type-only"]
       }
@@ -54,7 +54,7 @@
         "path": "(^src/report/)"
       },
       "to": {
-        "pathNot": ["$1", "^src/meta\\.js$", "^src/graph-utl", "^src/utl"],
+        "pathNot": ["$1", "^src/meta[.]js$", "^src/graph-utl", "^src/utl"],
         "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
@@ -66,7 +66,7 @@
         "path": "(^src/extract/)"
       },
       "to": {
-        "pathNot": ["$1", "^src/meta\\.js$", "^src/graph-utl", "^src/utl"],
+        "pathNot": ["$1", "^src/meta[.]js$", "^src/graph-utl", "^src/utl"],
         "dependencyTypesNot": ["npm", "core", "type-only"],
         "exoticallyRequired": false
       }
@@ -76,7 +76,7 @@
       "comment": "We don't want to depend on .json modules as long as they're still impractical to work with in ecmascript modules",
       "from": { "path": "^src/" },
       "to": {
-        "path": "\\.json$"
+        "path": "[.]json$"
       }
     },
     {
@@ -85,7 +85,7 @@
       "severity": "error",
       "from": { "path": "(^bin/)" },
       "to": {
-        "pathNot": ["^src/cli", "^src/meta\\.js$"],
+        "pathNot": ["^src/cli", "^src/meta[.]js$"],
         "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
@@ -95,7 +95,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize\\.mjs|extract/parse|extract/resolve|extract/gather-initial-sources\\.mjs|config-utl|cli|cache|utl/find-all-files\\.mjs)",
+          "^src/(main/resolve-options/normalize[.]mjs|extract/parse|extract/resolve|extract/gather-initial-sources[.]mjs|config-utl|cli|cache|utl/find-all-files[.]mjs)",
           "^test",
           "^tools"
         ]
@@ -106,22 +106,29 @@
       "name": "no-inter-module-test",
       "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
       "severity": "error",
-      "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
-      "to": { "path": "^test/[^\\/]+/.+", "pathNot": ["utl", "$1.+\\.json$"] }
+      "from": { "path": "(^test/[^\\/]+/)[^\\.]+[.]spec[.]m?js" },
+      "to": { "path": "^test/[^\\/]+/.+", "pathNot": ["utl", "$1.+[.]json$"] }
     },
     {
       "name": "prefer-lodash-individuals",
       "comment": "This module directly depends on 'lodash' as a whole. Preferably don't include lodash as a whole, but use individual lodash packages instead e.g. 'lodash/get' - this keeps the download of the package small(er)",
       "severity": "info",
       "from": {},
-      "to": { "path": "lodash\\.js$" }
+      "to": { "path": "lodash[.]js$" }
     },
     {
       "name": "no-dep-on-test",
-      "comment": "This module depends on a spec files. A spec file should have a single responsibility (testing whether a module function correctly). If there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
+      "comment": "This production (/ tools/ configuration) module depends on something in the test folder.",
       "severity": "error",
-      "from": { "path": "^(src|bin)" },
-      "to": { "path": "^test|\\.spec\\.js$" }
+      "from": { "path": "^(src|bin|tools|configs)" },
+      "to": { "path": "^test/" }
+    },
+    {
+      "name": "no-dep-on-spec-files",
+      "comment": "This module depends on a spec file. A spec file should have a single responsibility (testing whether a module function correctly). If there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
+      "severity": "error",
+      "from": {},
+      "to": { "path": "[.]spec[.]m?js$" }
     },
     {
       "name": "no-external-to-here",
@@ -140,7 +147,11 @@
       "to": {
         "dependencyTypes": ["npm-dev"],
         "exoticallyRequired": false,
-        "dependencyTypesNot": ["type-only"],
+        "dependencyTypesNot": [
+          "type-only",
+          "type-import",
+          "triple-slash-type-reference"
+        ],
         "pathNot": ["node_modules/@types/"]
       }
     },
@@ -150,7 +161,7 @@
       "comment": "The only 'exotic' requires allowed are tryRequire and requireJSON",
       "from": {},
       "to": {
-        "exoticRequireNot": "^(tryRequire|tryImport|requireJSON|proxyquire\\.load)$",
+        "exoticRequireNot": "^(tryRequire|tryImport|requireJSON|proxyquire[.]load)$",
         "exoticallyRequired": true
       }
     },
@@ -173,7 +184,7 @@
       "comment": "This module uses an external dependency that has license that's not vetted. The license itself might be OK, but bigcorp legal departments might get jittery over anything other than MIT (or ISC).",
       "severity": "error",
       "from": {},
-      "to": { "licenseNot": "MIT|ISC|Apache-2\\.0" }
+      "to": { "licenseNot": "MIT|ISC|Apache-2[.]0" }
     },
     {
       "name": "not-unreachable-from-cli",
@@ -182,7 +193,7 @@
       "from": { "path": "^bin/" },
       "to": {
         "path": "^src",
-        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$", "^src/report/"],
+        "pathNot": ["[.]schema[.]json$", "[.]d[.]ts$", "^src/report/"],
         "reachable": false
       }
     },
@@ -192,8 +203,8 @@
       "from": {
         "pathNot": [
           "^src/",
-          "^test/api\\.spec\\.mjs",
-          "^test/report/mermaid/mermaid\\.spec\\.mjs"
+          "^test/api[.]spec[.]mjs",
+          "^test/report/mermaid/mermaid[.]spec[.]mjs"
         ]
       },
       "to": {
@@ -217,10 +228,10 @@
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
       "severity": "warn",
-      "from": { "path": "\\.spec\\.m?js$" },
+      "from": { "path": "[.]spec[.]m?js$" },
       "to": {
         "path": "^src",
-        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$", "^src/report/"],
+        "pathNot": ["[.]schema[.]json$", "[.]d[.]ts$", "^src/report/"],
         "reachable": false
       }
     },
@@ -229,11 +240,11 @@
       "comment": "(sample rule to demo reachable rules with capturing groups)",
       "severity": "info",
       "from": {
-        "path": "^src/([^/]+)/index\\.js$"
+        "path": "^src/([^/]+)/index[.]js$"
       },
       "to": {
         "path": ["^src/$1/"],
-        "pathNot": "\\.d\\.ts$",
+        "pathNot": "[.]d[.]ts$",
         "reachable": false
       }
     },
@@ -262,6 +273,15 @@
       "to": {
         "path": "[.]d[.][cm]?ts$",
         "dependencyTypesNot": ["type-only"]
+      }
+    },
+    {
+      "name": "no-tsconfig-basedir-use",
+      "comment": "This module depends om something directly via a 'tsconfig.json' 'baseUrl' property. This is discouraged, unless you're still doing AMD modules - see https://www.typescriptlang.org/tsconfig#baseUrl",
+      "severity": "warn",
+      "from": {},
+      "to": {
+        "dependencyTypes": ["aliased-tsconfig-base-url"]
       }
     }
   ],
@@ -370,7 +390,7 @@
         "collapsePattern": ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
         "filters": {
           "includeOnly": { "path": "^(src|bin)" },
-          "exclude": { "path": ["^src/meta\\.js$", "^src/utl/bus.+"] }
+          "exclude": { "path": ["^src/meta[.]js$", "^src/utl/bus.+"] }
         },
         "theme": {
           "replace": false,
@@ -437,12 +457,12 @@
             },
             {
               "criteria": {
-                "source": "^src/meta\\.js$|\\.schema\\.mjs$"
+                "source": "^src/meta[.]js$|[.]schema[.]mjs$"
               },
               "attributes": { "style": "filled" }
             },
             {
-              "criteria": { "source": "\\.json$" },
+              "criteria": { "source": "[.]json$" },
               "attributes": { "shape": "cylinder" }
             }
           ],
