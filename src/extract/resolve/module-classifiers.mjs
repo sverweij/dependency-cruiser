@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { isAbsolute, resolve as path_resolve } from "node:path";
 import { join as posix_join } from "node:path/posix";
 import { isMatch } from "picomatch";
@@ -219,6 +220,8 @@ function stripIndex(pModulePath) {
  *
  * https://www.typescriptlang.org/docs/handbook/modules/reference.html#baseurl
  *
+ * Assumes the pModuleName is not relative.
+ *
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
  * @param {string} pTSConfigBaseURL
@@ -228,7 +231,13 @@ function matchesTSConfigBaseURL(
   pResolvedModuleName,
   pTSConfigBaseURL,
 ) {
-  if (!pTSConfigBaseURL) {
+  // the pModuleName === pResolvedModuleName check is there to prevent
+  // false positives for core modules ('fs' resolved === 'fs') and modules that
+  // we couldn't resolve at all (e.g. 'this/does/not/exist' => 'this/does/not/exist')
+  //
+  // we could also check whether the moduleName is relative, but that's
+  // not efficient as that was already done before this function was called.
+  if (!pTSConfigBaseURL || pModuleName === pResolvedModuleName) {
     return false;
   }
   // "If baseUrl is set, TypeScript will resolve non-relative module names

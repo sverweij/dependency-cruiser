@@ -286,7 +286,7 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
-  it("should return aliased and aliased-tsconfig for tsconfig alias", () => {
+  it("should return aliased, aliased-tsconfig and aliased-tsconfig-paths for tsconfig paths", () => {
     const lManifest = {
       name: "test",
       version: "1.0.0",
@@ -311,5 +311,52 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
       ),
       ["aliased", "aliased-tsconfig", "aliased-tsconfig-paths"],
     );
+  });
+
+  it("should return aliased, aliased-tsconfig and aliased-tsconfig-base-url when it matches tsconfig base urls", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+    };
+    const lTranspileOptions = {
+      tsConfig: {
+        options: {
+          baseUrl: "./src",
+          paths: {
+            "@tsconfig/*": ["./something-else/*"],
+          },
+        },
+      },
+    };
+    deepEqual(
+      getAliasTypes(
+        "package",
+        "src/package/index.js",
+        {},
+        lManifest,
+        lTranspileOptions,
+      ),
+      ["aliased", "aliased-tsconfig", "aliased-tsconfig-base-url"],
+    );
+  });
+
+  it("should NOT return aliased, aliased-tsconfig and aliased-tsconfig-base-url when it's a core module", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+    };
+    const lTranspileOptions = {
+      tsConfig: {
+        options: {
+          baseUrl: "./",
+          paths: {
+            "@tsconfig/*": ["./something-else/*"],
+          },
+        },
+      },
+    };
+    deepEqual(getAliasTypes("fs", "fs", {}, lManifest, lTranspileOptions), []);
   });
 });
