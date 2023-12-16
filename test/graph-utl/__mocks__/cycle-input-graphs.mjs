@@ -216,6 +216,9 @@ export default {
         {
           resolved: "b",
         },
+        {
+          resolved: "c",
+        },
       ],
     },
     {
@@ -223,14 +226,6 @@ export default {
       dependencies: [
         {
           resolved: "a",
-        },
-      ],
-    },
-    {
-      source: "a",
-      dependencies: [
-        {
-          resolved: "c",
         },
       ],
     },

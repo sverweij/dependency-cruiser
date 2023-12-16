@@ -408,7 +408,7 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
 
 function getCycle(pGraph, pFrom, pToDep) {
   const lIndexedGraph = new IndexedModuleGraph(pGraph);
-  return lIndexedGraph.getCycle(pFrom, pToDep);
+  return lIndexedGraph.getCycle(pFrom, pToDep).map(({ name }) => name);
 }
 
 describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
@@ -475,5 +475,8 @@ describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
   });
   it("just returns one cycle when querying a hub node", () => {
     deepEqual(getCycle(cycleInputGraphs.FLOWER, "a", "b"), ["b", "a"]);
+  });
+  it("if the 'to' node is not in the graph, it returns []", () => {
+    deepEqual(getCycle(cycleInputGraphs.A_B, "a", "not-in-graph"), []);
   });
 });
