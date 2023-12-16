@@ -178,9 +178,9 @@ export default class IndexedModuleGraph {
   #geldEdge(pEdge) {
     let lReturnValue = {};
     lReturnValue.name = pEdge.name;
-    if (pEdge.dependencyTypes) {
-      lReturnValue.dependencyTypes = pEdge.dependencyTypes;
-    }
+    lReturnValue.dependencyTypes = pEdge.dependencyTypes
+      ? pEdge.dependencyTypes
+      : [];
     return lReturnValue;
   }
 
@@ -250,7 +250,7 @@ export default class IndexedModuleGraph {
    *                                (source uniquely identifying a node)
    * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
    *                                be traversed
-   * @return {IGeldedDependency[]}             see description above
+   * @return {Array<IGeldedDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
     const lInitialNode = this.findVertexByName(pInitialSource);

@@ -5,6 +5,7 @@ export default {
       dependencies: [
         {
           resolved: "b",
+          dependencyTypes: ["npm"],
         },
       ],
     },
@@ -29,7 +30,14 @@ export default {
       dependencies: [
         {
           resolved: "e",
-          dependencyTypes: ["aliased", "aliased-subpath-import", "local"],
+          exoticallyRequired: false,
+          moduleSystem: "es6",
+          dependencyTypes: [
+            "aliased",
+            "aliased-subpath-import",
+            "local",
+            "import",
+          ],
         },
       ],
     },
@@ -38,6 +46,9 @@ export default {
       dependencies: [
         {
           resolved: "d",
+          exoticallyRequired: false,
+          moduleSystem: "es6",
+          dependencyTypes: ["local", "import"],
         },
       ],
     },
@@ -48,6 +59,7 @@ export default {
       dependencies: [
         {
           resolved: "r",
+          dependencyTypes: ["local"],
         },
       ],
     },
@@ -56,6 +68,7 @@ export default {
       dependencies: [
         {
           resolved: "s",
+          dependencyTypes: ["local"],
         },
       ],
     },
@@ -64,6 +77,7 @@ export default {
       dependencies: [
         {
           resolved: "q",
+          dependencyTypes: ["local"],
         },
       ],
     },
@@ -74,9 +88,11 @@ export default {
       dependencies: [
         {
           resolved: "u",
+          dependencyTypes: ["local"],
         },
         {
           resolved: "v",
+          dependencyTypes: ["npm"],
         },
       ],
     },
@@ -85,6 +101,7 @@ export default {
       dependencies: [
         {
           resolved: "t",
+          dependencyTypes: ["local"],
         },
       ],
     },
