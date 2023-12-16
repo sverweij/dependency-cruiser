@@ -20,7 +20,7 @@ function addInstabilityToDependency(pAllModules) {
   return (pDependency) => ({
     ...pDependency,
     instability:
-      (lIndexedModules.findModuleByName(pDependency.resolved) || {})
+      (lIndexedModules.findVertexByName(pDependency.resolved) || {})
         .instability || 0,
   });
 }

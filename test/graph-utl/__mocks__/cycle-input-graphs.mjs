@@ -28,7 +28,8 @@ export default {
       source: "d",
       dependencies: [
         {
-          resolved: "d",
+          resolved: "e",
+          dependencyTypes: ["aliased", "aliased-subpath-import", "local"],
         },
       ],
     },

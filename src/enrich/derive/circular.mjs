@@ -4,17 +4,13 @@ function addCircularityCheckToDependency(
   pIndexedGraph,
   pFrom,
   pToDep,
-  pDependencyName
+  pDependencyName,
 ) {
   let lReturnValue = {
     ...pToDep,
     circular: false,
   };
-  const lCycle = pIndexedGraph.getCycle(
-    pFrom,
-    pToDep[pDependencyName],
-    pDependencyName
-  );
+  const lCycle = pIndexedGraph.getCycle(pFrom, pToDep[pDependencyName]);
 
   if (lCycle.length > 0) {
     lReturnValue = {
@@ -35,7 +31,7 @@ function addCircularityCheckToDependency(
 export default function detectAndAddCycles(
   pNodes,
   pIndexedNodes,
-  { pSourceAttribute, pDependencyName }
+  { pSourceAttribute, pDependencyName },
 ) {
   return pNodes.map((pModule) => ({
     ...pModule,
@@ -44,8 +40,8 @@ export default function detectAndAddCycles(
         pIndexedNodes,
         pModule[pSourceAttribute],
         pToDep,
-        pDependencyName
-      )
+        pDependencyName,
+      ),
     ),
   }));
 }

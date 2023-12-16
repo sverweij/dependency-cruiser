@@ -1,20 +1,56 @@
+// @ts-check
 /* eslint-disable security/detect-object-injection */
+/**
+ * @typedef {import("../../types/cruise-result.d.mts").IFolderDependency} IFolderDependency
+ * @typedef {import("../../types/cruise-result.d.mts").IDependency} IDependency
+ * @typedef {import("../../types/cruise-result.d.mts").IFolder} IFolder
+ * @typedef {import("../../types/cruise-result.d.mts").IModule} IModule
+ * @typedef {import("../../types/shared-types.d.mts").DependencyType} DependencyType
+ *
+ * @typedef {(IDependency|IFolderDependency) & {name:string; dependencyTypes?: DependencyType[]}} IEdge
+ * @typedef {IModule|IFolder} IModuleOrFolder
+ * @typedef {IModuleOrFolder & {dependencies: IEdge[]}} IVertex
+ * @typedef {{name:string; dependencyTypes: string[];}} IGeldedDependency
+ */
 export default class IndexedModuleGraph {
-  init(pModules, pIndexAttribute) {
+  /**
+   * @param {IModuleOrFolder} pModule
+   * @returns {IVertex}
+   */
+  #normalizeModule(pModule) {
+    return {
+      ...pModule,
+      dependencies: (pModule?.dependencies ?? []).map((pDependency) => ({
+        ...pDependency,
+        name: pDependency.name ? pDependency.name : pDependency.resolved,
+      })),
+    };
+  }
+
+  #init(pModules, pIndexAttribute) {
     this.indexedGraph = new Map(
-      pModules.map((pModule) => [pModule[pIndexAttribute], pModule])
+      pModules.map((pModule) => [
+        pModule[pIndexAttribute],
+        this.#normalizeModule(pModule),
+      ]),
     );
   }
 
+  /**
+   * @param {import("../../types/dependency-cruiser.mjs").IModule[]} pModules
+   * @param {string} pIndexAttribute
+   */
   constructor(pModules, pIndexAttribute = "source") {
-    this.init(pModules, pIndexAttribute);
+    this.#init(pModules, pIndexAttribute);
   }
 
   /**
    * @param {string} pName
-   * @return {import("..").IModule}
+   * @return {IVertex}
    */
-  findModuleByName(pName) {
+  findVertexByName(pName) {
+    // @ts-expect-error tsc seems to think indexedGraph can be undefined. However,
+    // in the constructor it's always set to a Map, and the init method is private
     return this.indexedGraph.get(pName);
   }
 
@@ -33,16 +69,17 @@ export default class IndexedModuleGraph {
     pName,
     pMaxDepth = 0,
     pDepth = 0,
-    pVisited = new Set()
+    pVisited = new Set(),
   ) {
     /** @type {string[]} */
     let lReturnValue = [];
-    const lModule = this.findModuleByName(pName);
+    const lModule = this.findVertexByName(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
       let lDependents = lModule.dependents || [];
       const lVisited = pVisited.add(pName);
 
+      // @TODO this works for modules, but not for folders yet
       if (lDependents.length > 0) {
         lDependents
           .filter((pDependent) => !lVisited.has(pDependent))
@@ -51,8 +88,8 @@ export default class IndexedModuleGraph {
               pDependent,
               pMaxDepth,
               pDepth + 1,
-              lVisited
-            )
+              lVisited,
+            ),
           );
       }
       lReturnValue = Array.from(lVisited);
@@ -75,11 +112,11 @@ export default class IndexedModuleGraph {
     pName,
     pMaxDepth = 0,
     pDepth = 0,
-    pVisited = new Set()
+    pVisited = new Set(),
   ) {
     /** @type {string[]} */
     let lReturnValue = [];
-    const lModule = this.findModuleByName(pName);
+    const lModule = this.findVertexByName(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
       let lDependencies = lModule.dependencies;
@@ -87,15 +124,15 @@ export default class IndexedModuleGraph {
 
       if (lDependencies.length > 0) {
         lDependencies
-          .map(({ resolved }) => resolved)
+          .map(({ name }) => name)
           .filter((pDependency) => !lVisited.has(pDependency))
           .forEach((pDependency) =>
             this.findTransitiveDependencies(
               pDependency,
               pMaxDepth,
               pDepth + 1,
-              lVisited
-            )
+              lVisited,
+            ),
           );
       }
       lReturnValue = Array.from(lVisited);
@@ -111,14 +148,14 @@ export default class IndexedModuleGraph {
    */
   getPath(pFrom, pTo, pVisited = new Set()) {
     let lReturnValue = [];
-    const lFromNode = this.findModuleByName(pFrom);
+    const lFromNode = this.findVertexByName(pFrom);
 
     pVisited.add(pFrom);
 
     if (lFromNode) {
       const lDirectUnvisitedDependencies = lFromNode.dependencies
-        .filter((pDependency) => !pVisited.has(pDependency.resolved))
-        .map((pDependency) => pDependency.resolved);
+        .filter((pDependency) => !pVisited.has(pDependency.name))
+        .map((pDependency) => pDependency.name);
       if (lDirectUnvisitedDependencies.includes(pTo)) {
         lReturnValue = [pFrom, pTo];
       } else {
@@ -143,37 +180,58 @@ export default class IndexedModuleGraph {
    *                                (source uniquely identifying a node)
    * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
    *                                be traversed
-   * @param {string} pDependencyName The attribute name of the dependency to use.
-   *                                defaults to "resolved" (which is in use for
-   *                                modules). For folders pass "name"
+   * @param {Set<string>=} pVisited  Technical parameter - best to leave out of direct calls
    * @return {string[]}             see description above
    */
-  getCycle(pInitialSource, pCurrentSource, pDependencyName, pVisited) {
+  #getCycle(pInitialSource, pCurrentSource, pVisited) {
     let lVisited = pVisited || new Set();
-    const lCurrentNode = this.findModuleByName(pCurrentSource);
-    const lDependencies = lCurrentNode.dependencies.filter(
-      (pDependency) => !lVisited.has(pDependency[pDependencyName])
+    const lCurrentVertex = this.findVertexByName(pCurrentSource);
+    const lDependencies = lCurrentVertex.dependencies.filter(
+      (pDependency) => !lVisited.has(pDependency.name),
     );
-    const lMatch = lDependencies.find(
-      (pDependency) => pDependency[pDependencyName] === pInitialSource
+    const lInitialAsDependency = lDependencies.find(
+      (pDependency) => pDependency.name === pInitialSource,
     );
-    if (lMatch) {
-      return [pCurrentSource, lMatch[pDependencyName]];
+    if (lInitialAsDependency) {
+      return pInitialSource === pCurrentSource
+        ? [lInitialAsDependency.name]
+        : [pCurrentSource, lInitialAsDependency.name];
     }
-    return lDependencies.reduce((pAll, pDependency) => {
-      if (!pAll.includes(pCurrentSource)) {
-        const lCycle = this.getCycle(
-          pInitialSource,
-          pDependency[pDependencyName],
-          pDependencyName,
-          lVisited.add(pDependency[pDependencyName])
-        );
+    return lDependencies.reduce(
+      /**
+       * @param {Array<string>} pAll
+       * @param {IEdge} pDependency
+       * @returns {Array<string>}
+       */
+      (pAll, pDependency) => {
+        if (!pAll.includes(pCurrentSource)) {
+          const lCycle = this.#getCycle(
+            pInitialSource,
+            pDependency.name,
+            lVisited.add(pDependency.name),
+          );
 
-        if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
-          return pAll.concat(pCurrentSource).concat(lCycle);
+          if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
+            return pAll.concat(pCurrentSource).concat(lCycle);
+          }
         }
-      }
-      return pAll;
-    }, []);
+        return pAll;
+      },
+      [],
+    );
+  }
+
+  /**
+   * Returns the first non-zero length path from pInitialSource to pInitialSource
+   * Returns the empty array if there is no such path
+   *
+   * @param {string} pInitialSource The 'source' attribute of the node to be tested
+   *                                (source uniquely identifying a node)
+   * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
+   *                                be traversed
+   * @return {string[]}             see description above
+   */
+  getCycle(pInitialSource, pCurrentSource) {
+    return this.#getCycle(pInitialSource, pCurrentSource);
   }
 }
