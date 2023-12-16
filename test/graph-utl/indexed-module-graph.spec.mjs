@@ -5,22 +5,22 @@ import unIndexedModulesWithoutDependents from "./__mocks__/un-indexed-modules-wi
 import cycleInputGraphs from "./__mocks__/cycle-input-graphs.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
-describe("[U] graph-utl/indexed-module-graph - findModuleByName", () => {
+describe("[U] graph-utl/indexed-module-graph - findVertexByName", () => {
   it("searching any module in an empty graph yields undefined", () => {
     const graph = new IndexedModuleGraph([]);
 
-    equal(graph.findModuleByName("any-name"), undefined);
+    equal(graph.findVertexByName("any-name"), undefined);
   });
 
   it("searching a non-exiting module in a real graph yields undefined", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
 
-    equal(graph.findModuleByName("any-name"), undefined);
+    equal(graph.findVertexByName("any-name"), undefined);
   });
 
   it("searching for an existing module yields that module", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
-    deepEqual(graph.findModuleByName("src/report/dot/default-theme.js"), {
+    deepEqual(graph.findVertexByName("src/report/dot/default-theme.js"), {
       source: "src/report/dot/default-theme.js",
       dependencies: [],
       dependents: ["src/report/dot/theming.js"],
@@ -408,7 +408,7 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
 
 function getCycle(pGraph, pFrom, pToDep) {
   const lIndexedGraph = new IndexedModuleGraph(pGraph);
-  return lIndexedGraph.getCycle(pFrom, pToDep, "resolved");
+  return lIndexedGraph.getCycle(pFrom, pToDep);
 }
 
 describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
@@ -416,7 +416,7 @@ describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
     deepEqual(getCycle(cycleInputGraphs.A_B, "a", "b"), []);
   });
   it("detects self circular (c <-> c)", () => {
-    deepEqual(getCycle(cycleInputGraphs.C_C, "c", "c"), ["c", "c"]);
+    deepEqual(getCycle(cycleInputGraphs.C_C, "c", "c"), ["c"]);
   });
   it("detects 1 step circular (d <-> e)", () => {
     deepEqual(getCycle(cycleInputGraphs.D_E_D, "d", "e"), ["e", "d"]);
