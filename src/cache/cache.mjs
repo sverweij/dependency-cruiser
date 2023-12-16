@@ -30,7 +30,7 @@ const EMPTY_CACHE = {
 
 export default class Cache {
   /**
-   * @param {import("../../types/cache-options.js").cacheStrategyType=} pCacheStrategy
+   * @param {import("../../types/cache-options.mjs").cacheStrategyType=} pCacheStrategy
    * @param {boolean=} pCompress
    */
   constructor(pCacheStrategy, pCompress) {
@@ -43,9 +43,9 @@ export default class Cache {
   }
 
   /**
-   * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
-   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCachedCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
+   * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pCruiseOptions
+   * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pCachedCruiseResult
+   * @param {import("../../types/dependency-cruiser.mjs").IRevisionData=} pRevisionData
    * @returns {Promise<boolean>}
    */
   async canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
@@ -68,8 +68,6 @@ export default class Cache {
         this.revisionData,
       ) &&
       optionsAreCompatible(
-        // @ts-expect-error ts(2345) - it's indeed not strict cruise options,
-        // but it will do for now (_it works_)
         pCachedCruiseResult.summary.optionsUsed,
         pCruiseOptions,
       )
@@ -78,7 +76,7 @@ export default class Cache {
 
   /**
    * @param {string} pCacheFolder
-   * @returns {Promise<import("../../types/dependency-cruiser.js").ICruiseResult>}
+   * @returns {Promise<import("../../types/dependency-cruiser.mjs").ICruiseResult>}
    */
   async read(pCacheFolder) {
     try {
@@ -133,8 +131,8 @@ export default class Cache {
 
   /**
    * @param {string} pCacheFolder
-   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
+   * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pCruiseResult
+   * @param {import("../../types/dependency-cruiser.mjs").IRevisionData=} pRevisionData
    */
   async write(pCacheFolder, pCruiseResult, pRevisionData) {
     const lRevisionData = pRevisionData ?? this.revisionData;

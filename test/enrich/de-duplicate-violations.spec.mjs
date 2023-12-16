@@ -39,7 +39,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/not/module-utl.js", "src/report/not/index.js"],
+        cycle: [
+          {
+            name: "src/report/not/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/not/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
       {
         from: "src/report/dot/module-utl.js",
@@ -48,7 +57,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
+        cycle: [
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     deepEqual(deDuplicateViolations(lViolations), lViolations);
@@ -63,7 +81,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
+        cycle: [
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
       {
         from: "src/report/dot/module-utl.js",
@@ -72,7 +99,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
+        cycle: [
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     const lDeDuplicatedViolations = [
@@ -83,7 +119,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
+        cycle: [
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     deepEqual(deDuplicateViolations(lViolations), lDeDuplicatedViolations);
@@ -98,7 +143,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-ride-the-lightning",
         },
-        cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
+        cycle: [
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
       {
         from: "src/report/dot/module-utl.js",
@@ -107,7 +161,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
+        cycle: [
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     deepEqual(deDuplicateViolations(lViolations), lViolations);
@@ -130,7 +193,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
+        cycle: [
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
       {
         from: "src/report/dot/module-utl.js",
@@ -139,7 +211,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
+        cycle: [
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     const lDeDuplicatedViolations = [
@@ -158,7 +239,16 @@ describe("[U] enrich/de-duplicate-violations", () => {
           severity: "error",
           name: "no-circular",
         },
-        cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
+        cycle: [
+          {
+            name: "src/report/dot/module-utl.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/report/dot/index.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
     ];
     deepEqual(deDuplicateViolations(lViolations), lDeDuplicatedViolations);

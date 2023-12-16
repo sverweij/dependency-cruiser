@@ -8605,7 +8605,10 @@
           "name": "src/extract/transpile",
           "instability": 0.6153846153846154,
           "circular": true,
-          "cycle": ["src/extract/transpile", "src/extract/parse"],
+          "cycle": [
+            { "name": "src/extract/transpile", "dependencyTypes": [] },
+            { "name": "src/extract/parse", "dependencyTypes": [] }
+          ],
           "valid": true
         },
         {
@@ -8647,7 +8650,10 @@
           "name": "src/extract/parse",
           "instability": 0.46153846153846156,
           "circular": true,
-          "cycle": ["src/extract/parse", "src/extract/transpile"],
+          "cycle": [
+            { "name": "src/extract/parse", "dependencyTypes": [] },
+            { "name": "src/extract/transpile", "dependencyTypes": [] }
+          ],
           "valid": true
         }
       ],

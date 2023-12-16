@@ -98,8 +98,9 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, tsOut);
     ajv.validate(cruiseResultSchema, lResult.output);
+
+    deepEqual(lResult.output, tsOut);
   });
 
   it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", async () => {
@@ -134,7 +135,7 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, tsOutpre);
     ajv.validate(cruiseResultSchema, lResult.output);
+    deepEqual(lResult.output, tsOutpre);
   });
 });

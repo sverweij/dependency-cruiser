@@ -20,7 +20,7 @@
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": { "$ref": "#/definitions/CycleEntryType" },
           "description": "The circular path if the violation is about circularity"
         },
         "via": {
@@ -80,6 +80,60 @@
         "cycle",
         "instability",
         "folder"
+      ]
+    },
+    "CycleEntryType": {
+      "type": "object",
+      "description": "A module in a cycle",
+      "required": ["name", "dependencyTypes"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "description": "The name of the module" },
+        "dependencyTypes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DependencyTypeType" },
+          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.json ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+        }
+      }
+    },
+    "DependencyTypeType": {
+      "type": "string",
+      "enum": [
+        "aliased-subpath-import",
+        "aliased-tsconfig-base-url",
+        "aliased-tsconfig-paths",
+        "aliased-tsconfig",
+        "aliased-webpack",
+        "aliased-workspace",
+        "aliased",
+        "amd-define",
+        "amd-require",
+        "amd-exotic-require",
+        "core",
+        "deprecated",
+        "dynamic-import",
+        "exotic-require",
+        "export",
+        "import-equals",
+        "import",
+        "local",
+        "localmodule",
+        "npm-bundled",
+        "npm-dev",
+        "npm-no-pkg",
+        "npm-optional",
+        "npm-peer",
+        "npm-unknown",
+        "npm",
+        "require",
+        "triple-slash-amd-dependency",
+        "triple-slash-directive",
+        "triple-slash-file-reference",
+        "triple-slash-type-reference",
+        "type-import",
+        "type-only",
+        "undetermined",
+        "unknown"
       ]
     }
   }

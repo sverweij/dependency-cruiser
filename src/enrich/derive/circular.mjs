@@ -10,9 +10,7 @@ function addCircularityCheckToDependency(
     ...pToDep,
     circular: false,
   };
-  const lCycle = pIndexedGraph
-    .getCycle(pFrom, pToDep[pDependencyName])
-    .map(({ name }) => name);
+  const lCycle = pIndexedGraph.getCycle(pFrom, pToDep[pDependencyName]);
 
   if (lCycle.length > 0) {
     lReturnValue = {

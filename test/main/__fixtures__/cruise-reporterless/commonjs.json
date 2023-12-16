@@ -759,8 +759,14 @@
             "valid": false,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/commonjs/ralucric.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circular.js"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/ralucric.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circular.js",
+                "dependencyTypes": ["local", "require"]
+              }
             ],
             "rules": [
               {
@@ -802,8 +808,14 @@
             "valid": false,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/commonjs/circular.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/ralucric.js"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circular.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/ralucric.js",
+                "dependencyTypes": ["local", "require"]
+              }
             ],
             "rules": [
               {
@@ -866,9 +878,18 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js",
+                "dependencyTypes": ["local", "require"]
+              }
             ]
           }
         ],
@@ -897,9 +918,18 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js",
+                "dependencyTypes": ["local", "require"]
+              }
             ]
           }
         ],
@@ -926,9 +956,18 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js",
-              "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-one.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-two.js",
+                "dependencyTypes": ["local", "require"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/commonjs/circle-three.js",
+                "dependencyTypes": ["local", "require"]
+              }
             ]
           }
         ],

@@ -769,8 +769,14 @@
             "instability": 0.875,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/folder/unstable",
-              "test/main/__mocks__/cruise-reporterless/folder/stable"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+                "dependencyTypes": []
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+                "dependencyTypes": []
+              }
             ],
             "valid": false,
             "rules": [
@@ -800,8 +806,14 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/folder/stable",
-              "test/main/__mocks__/cruise-reporterless/folder/unstable"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+                "dependencyTypes": []
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+                "dependencyTypes": []
+              }
             ]
           },
           {
