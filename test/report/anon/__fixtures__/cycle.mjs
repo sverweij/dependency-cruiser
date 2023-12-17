@@ -14,7 +14,16 @@ export default {
           dynamic: false,
           matchesDoNotFollow: false,
           circular: true,
-          cycle: ["src/foo.js", "src/bar.js"],
+          cycle: [
+            {
+              name: "src/foo.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/bar.js",
+              dependencyTypes: ["local"],
+            },
+          ],
           exoticallyRequired: false,
           valid: false,
           rules: [
@@ -42,7 +51,16 @@ export default {
           dynamic: false,
           matchesDoNotFollow: false,
           circular: true,
-          cycle: ["src/bar.js", "src/foo.js"],
+          cycle: [
+            {
+              name: "src/bar.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/foo.js",
+              dependencyTypes: ["local"],
+            },
+          ],
           exoticallyRequired: false,
           valid: false,
           rules: [
@@ -78,7 +96,16 @@ export default {
           severity: "warn",
           name: "no-circular",
         },
-        cycle: ["src/foo.js", "src/bar.js"],
+        cycle: [
+          {
+            name: "src/foo.js",
+            dependencyTypes: ["local"],
+          },
+          {
+            name: "src/bar.js",
+            dependencyTypes: ["local"],
+          },
+        ],
       },
       {
         from: "src/foo.js",
@@ -87,7 +114,16 @@ export default {
           severity: "warn",
           name: "no-circular",
         },
-        cycle: ["src/bar.js", "src/foo.js"],
+        cycle: [
+          {
+            name: "src/bar.js",
+            dependencyTypes: ["local"],
+          },
+          {
+            name: "src/foo.js",
+            dependencyTypes: ["local"],
+          },
+        ],
       },
       {
         from: "src/baz.js",

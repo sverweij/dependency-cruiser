@@ -97,7 +97,11 @@ export default {
           name: "cycle-two",
           instability: 0.5,
           circular: true,
-          cycle: ["cycle-two", "cycle-three", "cycle-one"],
+          cycle: [
+            { name: "cycle-two", dependencyTypes: [] },
+            { name: "cycle-three", dependencyTypes: [] },
+            { name: "cycle-one", dependencyTypes: [] },
+          ],
           valid: false,
           rules: [
             {
@@ -124,7 +128,11 @@ export default {
           name: "cycle-three",
           instability: 0.5,
           circular: true,
-          cycle: ["cycle-three", "cycle-one", "cycle-two"],
+          cycle: [
+            { name: "cycle-three", dependencyTypes: [] },
+            { name: "cycle-one", dependencyTypes: [] },
+            { name: "cycle-two", dependencyTypes: [] },
+          ],
           valid: false,
           rules: [
             {
@@ -151,7 +159,11 @@ export default {
           name: "cycle-one",
           instability: 0.5,
           circular: true,
-          cycle: ["cycle-one", "cycle-two", "cycle-three"],
+          cycle: [
+            { name: "cycle-one", dependencyTypes: [] },
+            { name: "cycle-two", dependencyTypes: [] },
+            { name: "cycle-three", dependencyTypes: [] },
+          ],
           valid: false,
           rules: [
             {
@@ -182,7 +194,11 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["cycle-two", "cycle-three", "cycle-one"],
+        cycle: [
+          { name: "cycle-two", dependencyTypes: [] },
+          { name: "cycle-three", dependencyTypes: [] },
+          { name: "cycle-one", dependencyTypes: [] },
+        ],
       },
       {
         type: "cycle",
@@ -192,7 +208,11 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["cycle-one", "cycle-two", "cycle-three"],
+        cycle: [
+          { name: "cycle-one", dependencyTypes: [] },
+          { name: "cycle-two", dependencyTypes: [] },
+          { name: "cycle-three", dependencyTypes: [] },
+        ],
       },
       {
         type: "cycle",
@@ -202,7 +222,11 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["cycle-three", "cycle-one", "cycle-two"],
+        cycle: [
+          { name: "cycle-three", dependencyTypes: [] },
+          { name: "cycle-one", dependencyTypes: [] },
+          { name: "cycle-two", dependencyTypes: [] },
+        ],
       },
     ],
     error: 0,
