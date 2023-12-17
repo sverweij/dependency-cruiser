@@ -16,9 +16,18 @@
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
-            "src/index.js",
-            "src/dynamic-to-circular.js",
-            "src/circular.js"
+            {
+              "name": "src/index.js",
+              "dependencyTypes": ["local", "import"]
+            },
+            {
+              "name": "src/dynamic-to-circular.js",
+              "dependencyTypes": ["local", "import"]
+            },
+            {
+              "name": "src/circular.js",
+              "dependencyTypes": ["local", "dynamic-import"]
+            }
           ],
           "valid": false,
           "rules": [{ "severity": "info", "name": "no-circular" }]
@@ -44,9 +53,18 @@
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
-            "src/dynamic-to-circular.js",
-            "src/circular.js",
-            "src/index.js"
+            {
+              "name": "src/dynamic-to-circular.js",
+              "dependencyTypes": ["local", "import"]
+            },
+            {
+              "name": "src/circular.js",
+              "dependencyTypes": ["local", "dynamic-import"]
+            },
+            {
+              "name": "src/index.js",
+              "dependencyTypes": ["local", "import"]
+            }
           ],
           "valid": false,
           "rules": [{ "severity": "info", "name": "no-circular" }]
@@ -72,9 +90,18 @@
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
-            "src/circular.js",
-            "src/index.js",
-            "src/dynamic-to-circular.js"
+            {
+              "name": "src/circular.js",
+              "dependencyTypes": ["local", "dynamic-import"]
+            },
+            {
+              "name": "src/index.js",
+              "dependencyTypes": ["local", "import"]
+            },
+            {
+              "name": "src/dynamic-to-circular.js",
+              "dependencyTypes": ["local", "import"]
+            }
           ],
           "valid": false,
           "rules": [{ "severity": "warn", "name": "no-dynamic" }]
@@ -99,9 +126,18 @@
         "to": "src/index.js",
         "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
-          "src/index.js",
-          "src/dynamic-to-circular.js",
-          "src/circular.js"
+          {
+            "name": "src/index.js",
+            "dependencyTypes": ["local", "import"]
+          },
+          {
+            "name": "src/dynamic-to-circular.js",
+            "dependencyTypes": ["local", "import"]
+          },
+          {
+            "name": "src/circular.js",
+            "dependencyTypes": ["local", "dynamic-import"]
+          }
         ]
       }
     ],

@@ -161,7 +161,12 @@ describe("[U] report/error-html/utl", () => {
   it("determineTo - circular violation", () => {
     const lInputViolation = {
       type: "cycle",
-      cycle: ["thing/a", "b", "thingy/bingy/c", "a"],
+      cycle: [
+        { name: "thing/a", dependencyTypes: ["local", "import"] },
+        { name: "b", dependencyTypes: ["local", "import"] },
+        { name: "thingy/bingy/c", dependencyTypes: ["local", "import"] },
+        { name: "a", dependencyTypes: ["local", "import"] },
+      ],
       from: "a",
       to: "thing/a",
     };

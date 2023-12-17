@@ -92,7 +92,20 @@ describe("[I] enrich/summarize", () => {
             severity: "warn",
             name: "no-circular",
           },
-          cycle: ["src/domain.js", "src/market.js", "src/brand.js"],
+          cycle: [
+            {
+              name: "src/domain.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/market.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/brand.js",
+              dependencyTypes: ["local"],
+            },
+          ],
         },
         {
           type: "cycle",
@@ -102,7 +115,16 @@ describe("[I] enrich/summarize", () => {
             severity: "warn",
             name: "no-circular",
           },
-          cycle: ["src/market.js", "src/brand.js"],
+          cycle: [
+            {
+              name: "src/market.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/brand.js",
+              dependencyTypes: ["local"],
+            },
+          ],
         },
         {
           type: "cycle",
@@ -112,7 +134,16 @@ describe("[I] enrich/summarize", () => {
             severity: "warn",
             name: "no-circular",
           },
-          cycle: ["src/market.js", "src/domain.js"],
+          cycle: [
+            {
+              name: "src/market.js",
+              dependencyTypes: ["local"],
+            },
+            {
+              name: "src/domain.js",
+              dependencyTypes: ["local"],
+            },
+          ],
         },
       ],
       error: 0,
@@ -137,6 +168,7 @@ describe("[I] enrich/summarize", () => {
         ],
       },
     };
+
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
     deepEqual(lSummary, lExpected);
     ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });

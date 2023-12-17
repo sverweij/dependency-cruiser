@@ -245,7 +245,7 @@
         },
         "cycle": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": { "$ref": "#/definitions/MiniDependency" },
           "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of) the circular path(s)"
         },
         "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
@@ -326,6 +326,20 @@
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
     },
+    "MiniDependency": {
+      "type": "object",
+      "description": "A small dependency object with the uniquely identifying name of the module +the dependency types it has relative to the _previous_ module in the chain  it is part of (e.g. a cycle).",
+      "required": ["name", "dependencyTypes"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "description": "The name of the module" },
+        "dependencyTypes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DependencyTypeType" },
+          "description": "The dependency types of the module relative to the previous module in the chain it is a part of (e.g. a cycle)"
+        }
+      }
+    },
     "FoldersType": {
       "type": "array",
       "description": "A list of folders, as derived from the detected modules, with for each folder a bunch of metrics (adapted from 'Agile software development: principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5). Note: these metrics substitute 'components' and 'classes' from that book with 'folders' and 'modules'; the closest relatives that work for the most programming styles in JavaScript (and its derivative languages).",
@@ -381,7 +395,7 @@
               },
               "cycle": {
                 "type": "array",
-                "items": { "type": "string" },
+                "items": { "$ref": "#/definitions/MiniDependency" },
                 "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of) the circular path(s)"
               },
               "rules": {
@@ -468,7 +482,7 @@
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": { "$ref": "#/definitions/MiniDependency" },
           "description": "The circular path if the violation is about circularity"
         },
         "via": {

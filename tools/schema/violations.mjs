@@ -1,5 +1,6 @@
 import ruleSummary from "./rule-summary.mjs";
 import violationType from "./violation-type.mjs";
+import miniDependency from "./mini-dependency-type.mjs";
 
 export default {
   definitions: {
@@ -25,7 +26,7 @@ export default {
         rule: { $ref: "#/definitions/RuleSummaryType" },
         cycle: {
           type: "array",
-          items: { type: "string" },
+          items: { $ref: "#/definitions/MiniDependency" },
           description:
             "The circular path if the violation is about circularity",
         },
@@ -68,5 +69,6 @@ export default {
     },
     ...ruleSummary.definitions,
     ...violationType.definitions,
+    ...miniDependency.definitions,
   },
 };

@@ -15,7 +15,7 @@ function severity2teamcitySeverity(pSeverity) {
 function reportRules(pRules, pViolations) {
   return pRules
     .filter((pRule) =>
-      pViolations.some((pViolation) => pRule.name === pViolation.rule.name)
+      pViolations.some((pViolation) => pRule.name === pViolation.rule.name),
     )
     .map((pRule) =>
       tsm.inspectionType({
@@ -23,7 +23,7 @@ function reportRules(pRules, pViolations) {
         name: pRule.name,
         description: pRule.comment || pRule.name,
         category: CATEGORY,
-      })
+      }),
     );
 }
 
@@ -75,20 +75,22 @@ function formatDependencyViolation(pViolation) {
 }
 
 function formatCycleViolation(pViolation) {
-  return `${pViolation.from} -> ${pViolation.cycle.join(" -> ")}`;
+  return `${pViolation.from} -> ${pViolation.cycle
+    .map(({ name }) => name)
+    .join(" -> ")}`;
 }
 
 function formatReachabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)} ${pViolation.via.join(
-    " -> "
+    " -> ",
   )}`;
 }
 
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(
-    pViolation
+    pViolation,
   )} (instability: ${formatPercentage(
-    pViolation.metrics.from.instability
+    pViolation.metrics.from.instability,
   )} -> ${formatPercentage(pViolation.metrics.to.instability)})`;
 }
 
@@ -103,7 +105,7 @@ function bakeViolationMessage(pViolation) {
   return formatViolation(
     pViolation,
     lViolationType2Formatter,
-    formatDependencyViolation
+    formatDependencyViolation,
   );
 }
 
@@ -128,7 +130,7 @@ function reportViolations(pViolations, pIgnoredCount) {
         message: bakeViolationMessage(pViolation),
         file: pViolation.from,
         SEVERITY: severity2teamcitySeverity(pViolation.rule.severity),
-      })
+      }),
     )
     .concat(reportIgnoredViolation(pIgnoredCount));
 }
@@ -152,7 +154,7 @@ export default function teamcity(pResults) {
 
   const lRuleSet = pResults?.summary?.ruleSetUsed ?? [];
   const lViolations = (pResults?.summary?.violations ?? []).filter(
-    (pViolation) => pViolation.rule.severity !== "ignore"
+    (pViolation) => pViolation.rule.severity !== "ignore",
   );
   const lIgnoredCount = pResults?.summary?.ignore ?? 0;
 

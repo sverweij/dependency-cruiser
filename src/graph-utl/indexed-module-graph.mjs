@@ -6,12 +6,13 @@
  * @typedef {import("../../types/cruise-result.d.mts").IFolder} IFolder
  * @typedef {import("../../types/cruise-result.d.mts").IModule} IModule
  * @typedef {import("../../types/shared-types.d.mts").DependencyType} DependencyType
+ * @typedef {import("../../types/shared-types.d.mjs").IMiniDependency} IMiniDependency
  *
  * @typedef {(IDependency|IFolderDependency) & {name:string; dependencyTypes?: DependencyType[]}} IEdge
  * @typedef {IModule|IFolder} IModuleOrFolder
  * @typedef {IModuleOrFolder & {dependencies: IEdge[]}} IVertex
- * @typedef {{name:string; dependencyTypes: string[];}} IGeldedDependency
  */
+
 export default class IndexedModuleGraph {
   /**
    * @param {IModuleOrFolder} pModule
@@ -55,7 +56,6 @@ export default class IndexedModuleGraph {
   }
 
   /**
-   *
    * @param {string} pName - the name of the module to find transitive dependents of.
    * @param {number} pMaxDepth - the maximum depth to search for dependents.
    *                  Defaults to 0 (no maximum). To only get direct dependents.
@@ -98,7 +98,6 @@ export default class IndexedModuleGraph {
   }
 
   /**
-   *
    * @param {string} pName - the name of the module to find transitive dependencies of.
    * @param {number} pMaxDepth - the maximum depth to search for dependencies
    *                  Defaults to 0 (no maximum). To only get direct dependencies.
@@ -173,46 +172,69 @@ export default class IndexedModuleGraph {
   }
 
   /**
+   *
+   * @param {IEdge} pEdge
+   * @returns {IMiniDependency}
+   */
+  #geldEdge(pEdge) {
+    let lReturnValue = {};
+    lReturnValue.name = pEdge.name;
+    lReturnValue.dependencyTypes = pEdge.dependencyTypes
+      ? pEdge.dependencyTypes
+      : [];
+    return lReturnValue;
+  }
+
+  /**
    * Returns the first non-zero length path from pInitialSource to pInitialSource
    * Returns the empty array if there is no such path
    *
    * @param {string} pInitialSource The 'source' attribute of the node to be tested
    *                                (source uniquely identifying a node)
-   * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
-   *                                be traversed
+   * @param {IEdge} pCurrentDependency
+   *                                The 'to' node to be traversed as a dependency
+   *                                object of the previous 'from' traversed
    * @param {Set<string>=} pVisited  Technical parameter - best to leave out of direct calls
-   * @return {string[]}             see description above
+   * @return {Array<IMiniDependency>}             see description above
    */
-  #getCycle(pInitialSource, pCurrentSource, pVisited) {
+  #getCycleNew(pInitialSource, pCurrentDependency, pVisited) {
     let lVisited = pVisited || new Set();
-    const lCurrentVertex = this.findVertexByName(pCurrentSource);
-    const lDependencies = lCurrentVertex.dependencies.filter(
+    const lCurrentVertex = this.findVertexByName(pCurrentDependency.name);
+    const lEdges = lCurrentVertex.dependencies.filter(
       (pDependency) => !lVisited.has(pDependency.name),
     );
-    const lInitialAsDependency = lDependencies.find(
+    const lInitialAsDependency = lEdges.find(
       (pDependency) => pDependency.name === pInitialSource,
     );
     if (lInitialAsDependency) {
-      return pInitialSource === pCurrentSource
-        ? [lInitialAsDependency.name]
-        : [pCurrentSource, lInitialAsDependency.name];
+      return pInitialSource === pCurrentDependency.name
+        ? [this.#geldEdge(lInitialAsDependency)]
+        : [
+            this.#geldEdge(pCurrentDependency),
+            this.#geldEdge(lInitialAsDependency),
+          ];
     }
-    return lDependencies.reduce(
+    return lEdges.reduce(
       /**
-       * @param {Array<string>} pAll
+       * @param {Array<IMiniDependency>} pAll
        * @param {IEdge} pDependency
-       * @returns {Array<string>}
+       * @returns {Array<IMiniDependency>}
        */
       (pAll, pDependency) => {
-        if (!pAll.includes(pCurrentSource)) {
-          const lCycle = this.#getCycle(
+        if (!pAll.some((pSome) => pSome.name === pCurrentDependency.name)) {
+          const lCycle = this.#getCycleNew(
             pInitialSource,
-            pDependency.name,
+            pDependency,
             lVisited.add(pDependency.name),
           );
 
-          if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
-            return pAll.concat(pCurrentSource).concat(lCycle);
+          if (
+            lCycle.length > 0 &&
+            !lCycle.some((pSome) => pSome.name === pCurrentDependency.name)
+          ) {
+            return pAll
+              .concat(this.#geldEdge(pCurrentDependency))
+              .concat(lCycle);
           }
         }
         return pAll;
@@ -229,9 +251,17 @@ export default class IndexedModuleGraph {
    *                                (source uniquely identifying a node)
    * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
    *                                be traversed
-   * @return {string[]}             see description above
+   * @return {Array<IMiniDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
-    return this.#getCycle(pInitialSource, pCurrentSource);
+    const lInitialNode = this.findVertexByName(pInitialSource);
+    const lCurrentDependency = lInitialNode.dependencies.find(
+      (pDependency) => pDependency.name === pCurrentSource,
+    );
+
+    if (!lCurrentDependency) {
+      return [];
+    }
+    return this.#getCycleNew(pInitialSource, lCurrentDependency);
   }
 }

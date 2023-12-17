@@ -14,9 +14,9 @@ export default {
           moduleSystem: "es6",
           valid: true,
           cycle: [
-            "src/some/folder/loop-a.js",
-            "src/some/folder/loop-b.js",
-            "src/some/folder/nested/center.js",
+            { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
+            { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
+            { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
           ],
           rules: [
             {
@@ -42,9 +42,9 @@ export default {
           moduleSystem: "es6",
           valid: true,
           cycle: [
-            "src/some/folder/loop-b.js",
-            "src/some/folder/nested/center.js",
-            "src/some/folder/loop-a.js",
+            { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
+            { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
+            { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
           ],
           rules: [
             {
@@ -70,9 +70,9 @@ export default {
           moduleSystem: "es6",
           valid: false,
           cycle: [
-            "src/some/folder/nested/center.js",
-            "src/some/folder/loop-a.js",
-            "src/some/folder/loop-b.js",
+            { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
+            { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
+            { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
           ],
           rules: [
             {
@@ -96,9 +96,9 @@ export default {
           name: "no-circular",
         },
         cycle: [
-          "src/some/folder/loop-a.js",
-          "src/some/folder/loop-b.js",
-          "src/some/folder/nested/center.js",
+          { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
+          { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
+          { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
         ],
       },
       {
@@ -110,9 +110,9 @@ export default {
           name: "no-circular",
         },
         cycle: [
-          "src/some/folder/loop-b.js",
-          "src/some/folder/nested/center.js",
-          "src/some/folder/loop-a.js",
+          { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
+          { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
+          { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
         ],
       },
       {
@@ -124,9 +124,9 @@ export default {
           name: "no-circular",
         },
         cycle: [
-          "src/some/folder/nested/center.js",
-          "src/some/folder/loop-a.js",
-          "src/some/folder/loop-b.js",
+          { name: "src/some/folder/nested/center.js", dependencyTypes: [] },
+          { name: "src/some/folder/loop-a.js", dependencyTypes: [] },
+          { name: "src/some/folder/loop-b.js", dependencyTypes: [] },
         ],
       },
     ],

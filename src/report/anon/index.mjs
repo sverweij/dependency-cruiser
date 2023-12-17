@@ -2,7 +2,18 @@ import has from "lodash/has.js";
 import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
 function anonymizePathArray(pPathArray, pWordList) {
+  // the coverage ignore is here because the || [] branch isn't taken when running
+  // tests and with the current setup of the anonymize module that's not going
+  // to change. Still want to keep the branch from robustness perspective though.
+  /* c8 ignore next 1 */
   return (pPathArray || []).map((pPath) => anonymizePath(pPath, pWordList));
+}
+
+function anonymizeCycleArray(pCycleArray, pWordList, pAttribute = "name") {
+  return (pCycleArray || []).map((pCycle) => ({
+    ...pCycle,
+    [pAttribute]: anonymizePath(pCycle.name, pWordList),
+  }));
 }
 
 function anonymizeDependencies(pDependencies, pWordList) {
@@ -10,7 +21,7 @@ function anonymizeDependencies(pDependencies, pWordList) {
     ...pDependency,
     resolved: anonymizePath(pDependency.resolved, pWordList),
     module: anonymizePath(pDependency.module, pWordList),
-    cycle: anonymizePathArray(pDependency.cycle, pWordList),
+    cycle: anonymizeCycleArray(pDependency.cycle, pWordList),
   }));
 }
 
@@ -74,7 +85,7 @@ function anonymizeFolders(pFolders, pWordList) {
           name: anonymizePath(pDependency.name, pWordList),
         };
         if (lReturnDependencies.cycle) {
-          lReturnDependencies.cycle = anonymizePathArray(
+          lReturnDependencies.cycle = anonymizeCycleArray(
             pDependency.cycle,
             pWordList,
           );
@@ -98,7 +109,7 @@ function anonymizeViolations(pViolations, pWordList) {
       ...pViolation,
       from: anonymizePath(pViolation.from, pWordList),
       to: anonymizePath(pViolation.to, pWordList),
-      cycle: anonymizePathArray(pViolation.cycle, pWordList),
+      cycle: anonymizeCycleArray(pViolation.cycle, pWordList),
     };
     if (pViolation.via) {
       lReturnValue.via = anonymizePathArray(pViolation.via, pWordList);
@@ -145,7 +156,7 @@ function sanitizeWordList(pWordList) {
  * - summary.violations.to
  * - summary.violations.cycle[m]
  *
- * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
+ * (note: the algorithm _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
  * @param {import("../../../types/cruise-result.mjs").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json

@@ -2,6 +2,13 @@ import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 import validate from "#validate/index.mjs";
 
+function stringToCycleEntry(pString) {
+  return {
+    name: pString,
+    dependencyTypes: [],
+  };
+}
+
 describe("[I] validate/index dependency - cycle viaSomeNot - with group matching", () => {
   const lCycleButNotViaGroupMatchRuleSet = {
     forbidden: [
@@ -26,7 +33,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-b/bb.js",
             "src/module-b/bc.js",
             "src/module-a/a.js",
-          ],
+          ].map(stringToCycleEntry),
         },
       ),
       {
@@ -54,7 +61,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-a/ab.js",
             "src/module-b/bc.js",
             "src/module-a/a.js",
-          ],
+          ].map(stringToCycleEntry),
         },
       ),
       {
@@ -82,7 +89,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-a/ab.js",
             "src/module-a/ac.js",
             "src/module-a/a.js",
-          ],
+          ].map(stringToCycleEntry),
         },
       ),
       {
@@ -116,7 +123,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-a/ab.js",
             "src/module-a/ac.js",
             "src/module-a/a.js",
-          ],
+          ].map(stringToCycleEntry),
         },
       ),
       {

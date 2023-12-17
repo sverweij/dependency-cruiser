@@ -81,3 +81,15 @@ export type ViolationType =
   | "instability";
 
 export type RuleScopeType = "module" | "folder";
+
+export interface IMiniDependency {
+  /**
+   * The name of the module
+   */
+  name: string;
+  /**
+   * The dependency types of the module relative to the previous module " +
+   * in the chain it is a part of (e.g. a cycle)
+   */
+  dependencyTypes: DependencyType[];
+}

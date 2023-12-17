@@ -42,7 +42,7 @@ function getRandomChar(pChar) {
 
 /**
  * Returns a random string with the same length as pString
- * acii characters - respecting case & numbers + leaving separators
+ * ascii characters - respecting case & numbers + leaving separators
  * (-, _, .) in place
  *
  * hello => tbkwd

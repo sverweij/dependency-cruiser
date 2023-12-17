@@ -1,3 +1,7 @@
+function pluckName({ name }) {
+  return name;
+}
+
 export default function isSameViolation(pLeftViolation, pRightViolation) {
   let lReturnValue = false;
 
@@ -5,9 +9,11 @@ export default function isSameViolation(pLeftViolation, pRightViolation) {
     if (pRightViolation.cycle && pLeftViolation.cycle) {
       lReturnValue =
         pLeftViolation.cycle.length === pRightViolation.cycle.length &&
-        pLeftViolation.cycle.every((pModule) =>
-          pRightViolation.cycle.includes(pModule)
-        );
+        pLeftViolation.cycle
+          .map(pluckName)
+          .every((pModule) =>
+            pRightViolation.cycle.map(pluckName).includes(pModule),
+          );
     } else {
       lReturnValue =
         pLeftViolation.from === pRightViolation.from &&

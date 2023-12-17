@@ -107,14 +107,18 @@ function toDependencyTypesNot(pRule, pDependency) {
       !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
   );
 }
-
+function pluckName({ name }) {
+  return name;
+}
 function toVia(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.via ||
       (pDependency.cycle &&
-        pDependency.cycle.some((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups)),
-        )),
+        pDependency.cycle
+          .map(pluckName)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups)),
+          )),
   );
 }
 
@@ -122,9 +126,11 @@ function toViaOnly(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaOnly ||
       (pDependency.cycle &&
-        pDependency.cycle.every((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups)),
-        )),
+        pDependency.cycle
+          .map(pluckName)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups)),
+          )),
   );
 }
 
@@ -132,9 +138,11 @@ function toViaNot(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaNot ||
       (pDependency.cycle &&
-        !pDependency.cycle.some((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups)),
-        )),
+        !pDependency.cycle
+          .map(pluckName)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups)),
+          )),
   );
 }
 
@@ -142,9 +150,11 @@ function toviaSomeNot(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaSomeNot ||
       (pDependency.cycle &&
-        !pDependency.cycle.every((pVia) =>
-          pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups)),
-        )),
+        !pDependency.cycle
+          .map(pluckName)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups)),
+          )),
   );
 }
 

@@ -2,6 +2,13 @@ import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 import validate from "#validate/index.mjs";
 
+function stringToCycleEntry(pString) {
+  return {
+    name: pString,
+    dependencyTypes: [],
+  };
+}
+
 describe("[I] validate/index dependency - cycle via", () => {
   const lCycleViaRuleSet = parseRuleSet({
     forbidden: [
@@ -23,7 +30,9 @@ describe("[I] validate/index dependency - cycle via", () => {
         {
           resolved: "tmp/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
+          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -40,7 +49,9 @@ describe("[I] validate/index dependency - cycle via", () => {
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -69,7 +80,9 @@ describe("[I] validate/index dependency - cycle via", () => {
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -103,7 +116,9 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         {
           resolved: "tmp/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
+          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -120,7 +135,9 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         {
           resolved: "tmp/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "not-tmp/ab.js", "tmp/bc.js", "tmp/a.js"],
+          cycle: ["tmp/ba.js", "not-tmp/ab.js", "tmp/bc.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -137,7 +154,9 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -166,7 +185,9 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -198,7 +219,9 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         {
           resolved: "tmp/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
+          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -215,7 +238,9 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -232,7 +257,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/ab.js", "tmp/a.js"],
+          cycle: ["tmp/ab.js", "tmp/a.js"].map(stringToCycleEntry),
         },
       ),
       {
@@ -260,7 +285,9 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -293,7 +320,9 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         {
           resolved: "tmp/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
+          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -310,7 +339,9 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -327,7 +358,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/ab.js", "tmp/a.js"],
+          cycle: ["tmp/ab.js", "tmp/a.js"].map(stringToCycleEntry),
         },
       ),
       {
@@ -355,7 +386,9 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {
@@ -383,7 +416,9 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         {
           resolved: "tmp/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
+            stringToCycleEntry,
+          ),
         },
       ),
       {

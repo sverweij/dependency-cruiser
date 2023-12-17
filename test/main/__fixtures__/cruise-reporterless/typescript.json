@@ -209,8 +209,14 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
-              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+                "dependencyTypes": ["local", "import"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+                "dependencyTypes": ["local", "import"]
+              }
             ]
           }
         ],
@@ -237,8 +243,14 @@
             "valid": true,
             "circular": true,
             "cycle": [
-              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
-              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts"
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+                "dependencyTypes": ["local", "import"]
+              },
+              {
+                "name": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+                "dependencyTypes": ["local", "import"]
+              }
             ]
           }
         ],

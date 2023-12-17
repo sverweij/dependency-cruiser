@@ -14,7 +14,11 @@ export default [
         exoticallyRequired: false,
         matchesDoNotFollow: false,
         circular: true,
-        cycle: ["src/domain.js", "src/market.js", "src/brand.js"],
+        cycle: [
+          { name: "src/domain.js", dependencyTypes: ["local"] },
+          { name: "src/market.js", dependencyTypes: ["local"] },
+          { name: "src/brand.js", dependencyTypes: ["local"] },
+        ],
         valid: false,
         rules: [
           {
@@ -35,7 +39,10 @@ export default [
         exoticallyRequired: false,
         matchesDoNotFollow: false,
         circular: true,
-        cycle: ["src/market.js", "src/brand.js"],
+        cycle: [
+          { name: "src/market.js", dependencyTypes: ["local"] },
+          { name: "src/brand.js", dependencyTypes: ["local"] },
+        ],
         valid: false,
         rules: [
           {
@@ -63,7 +70,10 @@ export default [
         exoticallyRequired: false,
         matchesDoNotFollow: false,
         circular: true,
-        cycle: ["src/market.js", "src/domain.js"],
+        cycle: [
+          { name: "src/market.js", dependencyTypes: ["local"] },
+          { name: "src/domain.js", dependencyTypes: ["local"] },
+        ],
         valid: false,
         rules: [
           {
@@ -91,7 +101,10 @@ export default [
         exoticallyRequired: false,
         matchesDoNotFollow: false,
         circular: true,
-        cycle: ["src/brand.js", "src/market.js"],
+        cycle: [
+          { name: "src/brand.js", dependencyTypes: ["local"] },
+          { name: "src/market.js", dependencyTypes: ["local"] },
+        ],
         valid: false,
         rules: [
           {
@@ -112,7 +125,10 @@ export default [
         exoticallyRequired: false,
         matchesDoNotFollow: false,
         circular: true,
-        cycle: ["src/domain.js", "src/market.js"],
+        cycle: [
+          { name: "src/domain.js", dependencyTypes: ["local"] },
+          { name: "src/market.js", dependencyTypes: ["local"] },
+        ],
         valid: false,
         rules: [
           {

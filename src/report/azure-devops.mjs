@@ -42,7 +42,9 @@ function formatDependencyViolation(pViolation) {
  * @returns {string}
  */
 function formatCycleViolation(pViolation) {
-  return `${pViolation.from} -> ${pViolation.cycle.join(" -> ")}`;
+  return `${pViolation.from} -> ${pViolation.cycle
+    .map(({ name }) => name)
+    .join(" -> ")}`;
 }
 
 /**

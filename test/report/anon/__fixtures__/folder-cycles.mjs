@@ -100,7 +100,20 @@ export default {
           name: "foo",
           instability: 0.5,
           circular: true,
-          cycle: ["foo", "qux", "baz"],
+          cycle: [
+            {
+              name: "foo",
+              dependencyTypes: [],
+            },
+            {
+              name: "qux",
+              dependencyTypes: [],
+            },
+            {
+              name: "baz",
+              dependencyTypes: [],
+            },
+          ],
           valid: false,
           rules: [
             {
@@ -127,7 +140,20 @@ export default {
           name: "qux",
           instability: 0.5,
           circular: true,
-          cycle: ["qux", "baz", "foo"],
+          cycle: [
+            {
+              name: "qux",
+              dependencyTypes: [],
+            },
+            {
+              name: "baz",
+              dependencyTypes: [],
+            },
+            {
+              name: "foo",
+              dependencyTypes: [],
+            },
+          ],
           valid: false,
           rules: [
             {
@@ -154,7 +180,20 @@ export default {
           name: "baz",
           instability: 0.5,
           circular: true,
-          cycle: ["baz", "foo", "qux"],
+          cycle: [
+            {
+              name: "baz",
+              dependencyTypes: [],
+            },
+            {
+              name: "foo",
+              dependencyTypes: [],
+            },
+            {
+              name: "qux",
+              dependencyTypes: [],
+            },
+          ],
           valid: false,
           rules: [
             {
@@ -185,7 +224,20 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["foo", "qux", "baz"],
+        cycle: [
+          {
+            name: "foo",
+            dependencyTypes: [],
+          },
+          {
+            name: "qux",
+            dependencyTypes: [],
+          },
+          {
+            name: "baz",
+            dependencyTypes: [],
+          },
+        ],
       },
       {
         type: "cycle",
@@ -195,7 +247,20 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["baz", "foo", "qux"],
+        cycle: [
+          {
+            name: "baz",
+            dependencyTypes: [],
+          },
+          {
+            name: "foo",
+            dependencyTypes: [],
+          },
+          {
+            name: "qux",
+            dependencyTypes: [],
+          },
+        ],
       },
       {
         type: "cycle",
@@ -205,7 +270,20 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["qux", "baz", "foo"],
+        cycle: [
+          {
+            name: "qux",
+            dependencyTypes: [],
+          },
+          {
+            name: "baz",
+            dependencyTypes: [],
+          },
+          {
+            name: "foo",
+            dependencyTypes: [],
+          },
+        ],
       },
     ],
     error: 0,

@@ -2,7 +2,7 @@ import { anonymizePathElement } from "./anonymize-path-element.mjs";
 
 export const WHITELIST_RE =
   // eslint-disable-next-line security/detect-unsafe-regex
-  /^(|[.]+|~|bin|apps?|cli|src|libs?|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|[mc]js|d\.ts|tsx?|vue|coffee|ls)|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
+  /^(|[.]+|~|bin|apps?|cli|src|libs?|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|[mc]js|d\.ts|tsx?|vue|coffee|ls)|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?|tools)$/;
 
 /**
  * Kind of smartly anonymizes paths, by
