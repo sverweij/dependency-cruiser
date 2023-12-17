@@ -1,5 +1,5 @@
-function pluckName(pCycleEntry) {
-  return pCycleEntry.name;
+function pluckName({ name }) {
+  return name;
 }
 
 export default function isSameViolation(pLeftViolation, pRightViolation) {
