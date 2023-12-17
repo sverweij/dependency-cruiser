@@ -1,7 +1,7 @@
 import type { ICruiseOptions } from "./options.mjs";
 import type { IFlattenedRuleSet } from "./rule-set.mjs";
 import type {
-  CycleEntryType,
+  IMiniDependency,
   DependencyType,
   ModuleSystemType,
   ProtocolType,
@@ -189,7 +189,7 @@ export interface IDependency {
    * this attribute will contain an (ordered) array of module names that shows (one of) the
    * circular path(s)
    */
-  cycle?: CycleEntryType[];
+  cycle?: IMiniDependency[];
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
    * we didn't bother determining it) or one of the npm dependencies defined in a package.json
@@ -392,7 +392,7 @@ export interface IFolderDependency {
    * this attribute will contain an (ordered) array of module names that shows (one of) the
    * circular path(s)
    */
-  cycle?: CycleEntryType[];
+  cycle?: IMiniDependency[];
   /**
    * an array of rules violated by this dependency - left out if the dependency
    * is valid

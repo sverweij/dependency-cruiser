@@ -82,7 +82,7 @@ export type ViolationType =
 
 export type RuleScopeType = "module" | "folder";
 
-export interface CycleEntryType {
+export interface IMiniDependency {
   /**
    * The name of the module in the cycle
    */

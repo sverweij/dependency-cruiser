@@ -1,5 +1,5 @@
 import type { IRuleSummary } from "./rule-summary.mjs";
-import type { CycleEntryType, ViolationType } from "./shared-types.mjs";
+import type { IMiniDependency, ViolationType } from "./shared-types.mjs";
 
 export interface IMetricsSummary {
   from: {
@@ -30,7 +30,7 @@ export interface IViolation {
   /**
    * The circular path if the violation is about circularity
    */
-  cycle?: CycleEntryType[];
+  cycle?: IMiniDependency[];
   /**
    * The path from the from to the to if the violation is transitive
    */

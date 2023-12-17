@@ -6,12 +6,13 @@
  * @typedef {import("../../types/cruise-result.d.mts").IFolder} IFolder
  * @typedef {import("../../types/cruise-result.d.mts").IModule} IModule
  * @typedef {import("../../types/shared-types.d.mts").DependencyType} DependencyType
+ * @typedef {import("../../types/shared-types.d.mjs").IMiniDependency} IMiniDependency
  *
  * @typedef {(IDependency|IFolderDependency) & {name:string; dependencyTypes?: DependencyType[]}} IEdge
  * @typedef {IModule|IFolder} IModuleOrFolder
  * @typedef {IModuleOrFolder & {dependencies: IEdge[]}} IVertex
- * @typedef {{name:string; dependencyTypes: string[];}} IGeldedDependency
  */
+
 export default class IndexedModuleGraph {
   /**
    * @param {IModuleOrFolder} pModule
@@ -173,7 +174,7 @@ export default class IndexedModuleGraph {
   /**
    *
    * @param {IEdge} pEdge
-   * @returns {IGeldedDependency}
+   * @returns {IMiniDependency}
    */
   #geldEdge(pEdge) {
     let lReturnValue = {};
@@ -194,7 +195,7 @@ export default class IndexedModuleGraph {
    *                                The 'to' node to be traversed as a dependency
    *                                object of the previous 'from' traversed
    * @param {Set<string>=} pVisited  Technical parameter - best to leave out of direct calls
-   * @return {Array<IGeldedDependency>}             see description above
+   * @return {Array<IMiniDependency>}             see description above
    */
   #getCycleNew(pInitialSource, pCurrentDependency, pVisited) {
     let lVisited = pVisited || new Set();
@@ -215,9 +216,9 @@ export default class IndexedModuleGraph {
     }
     return lEdges.reduce(
       /**
-       * @param {Array<IGeldedDependency>} pAll
+       * @param {Array<IMiniDependency>} pAll
        * @param {IEdge} pDependency
-       * @returns {Array<IGeldedDependency>}
+       * @returns {Array<IMiniDependency>}
        */
       (pAll, pDependency) => {
         if (!pAll.some((pSome) => pSome.name === pCurrentDependency.name)) {
@@ -250,7 +251,7 @@ export default class IndexedModuleGraph {
    *                                (source uniquely identifying a node)
    * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
    *                                be traversed
-   * @return {Array<IGeldedDependency>}   see description above
+   * @return {Array<IMiniDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
     const lInitialNode = this.findVertexByName(pInitialSource);
