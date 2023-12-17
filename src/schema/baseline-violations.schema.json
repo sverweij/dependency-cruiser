@@ -88,7 +88,10 @@
       "required": ["name", "dependencyTypes"],
       "additionalProperties": false,
       "properties": {
-        "name": { "type": "string", "description": "The name of the module" },
+        "name": {
+          "type": "string",
+          "description": "The name of the module in the cycle"
+        },
         "dependencyTypes": {
           "type": "array",
           "items": { "$ref": "#/definitions/DependencyTypeType" },

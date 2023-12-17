@@ -20,6 +20,7 @@ SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/compound-reaches-type.mjs \
 	tools/schema/configuration.schema.mjs \
 	tools/schema/cruise-result.schema.mjs \
+	tools/schema/cycle-entry-type.mjs \
 	tools/schema/dependencies.mjs \
 	tools/schema/dependency-type.mjs \
 	tools/schema/folders.mjs \

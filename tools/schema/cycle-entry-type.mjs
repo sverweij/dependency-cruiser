@@ -10,7 +10,7 @@ export default {
       properties: {
         name: {
           type: "string",
-          description: "The name of the module",
+          description: "The name of the module in the cycle",
         },
         dependencyTypes: {
           type: "array",
