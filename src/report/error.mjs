@@ -17,14 +17,10 @@ const SEVERITY2CHALK = new Map([
 
 const EXTRA_PATH_INFORMATION_INDENT = 6;
 
-function pluckName(pCycleEntry) {
-  return pCycleEntry.name;
-}
-
 function formatExtraCycleInformation(pCycle) {
   return EOL.concat(
     wrapAndIndent(
-      pCycle.map(pluckName).join(` ${figures.arrowRight} ${EOL}`),
+      pCycle.map(({ name }) => name).join(` ${figures.arrowRight} ${EOL}`),
       EXTRA_PATH_INFORMATION_INDENT,
     ),
   );
