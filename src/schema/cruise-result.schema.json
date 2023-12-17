@@ -245,7 +245,7 @@
         },
         "cycle": {
           "type": "array",
-          "items": { "$ref": "#/definitions/CycleEntryType" },
+          "items": { "$ref": "#/definitions/MiniDependency" },
           "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of) the circular path(s)"
         },
         "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
@@ -326,20 +326,17 @@
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
     },
-    "CycleEntryType": {
+    "MiniDependency": {
       "type": "object",
-      "description": "A module in a cycle",
+      "description": "A small dependency object with the uniquely identifying name of the module +the dependency types it has relative to the _previous_ module in the chain  it is part of (e.g. a cycle).",
       "required": ["name", "dependencyTypes"],
       "additionalProperties": false,
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the module in the cycle"
-        },
+        "name": { "type": "string", "description": "The name of the module" },
         "dependencyTypes": {
           "type": "array",
           "items": { "$ref": "#/definitions/DependencyTypeType" },
-          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.json ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+          "description": "The dependency types of the module relative to the previous module in the chain it is a part of (e.g. a cycle)"
         }
       }
     },
@@ -398,7 +395,7 @@
               },
               "cycle": {
                 "type": "array",
-                "items": { "$ref": "#/definitions/CycleEntryType" },
+                "items": { "$ref": "#/definitions/MiniDependency" },
                 "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of) the circular path(s)"
               },
               "rules": {
@@ -485,7 +482,7 @@
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
-          "items": { "$ref": "#/definitions/CycleEntryType" },
+          "items": { "$ref": "#/definitions/MiniDependency" },
           "description": "The circular path if the violation is about circularity"
         },
         "via": {

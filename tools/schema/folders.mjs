@@ -1,5 +1,5 @@
 import ruleSummary from "./rule-summary.mjs";
-import cycleEntryType from "./cycle-entry-type.mjs";
+import miniDependency from "./mini-dependency-type.mjs";
 
 export default {
   definitions: {
@@ -74,7 +74,7 @@ export default {
               },
               cycle: {
                 type: "array",
-                items: { $ref: "#/definitions/CycleEntryType" },
+                items: { $ref: "#/definitions/MiniDependency" },
                 description:
                   "If following this dependency will ultimately return to the source " +
                   "(circular === true), this attribute will contain an (ordered) array " +
@@ -124,6 +124,6 @@ export default {
       },
     },
     ...ruleSummary.definitions,
-    ...cycleEntryType.definitions,
+    ...miniDependency.definitions,
   },
 };

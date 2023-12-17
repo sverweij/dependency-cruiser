@@ -84,16 +84,12 @@ export type RuleScopeType = "module" | "folder";
 
 export interface IMiniDependency {
   /**
-   * The name of the module in the cycle
+   * The name of the module
    */
   name: string;
   /**
-   * "the type of inclusion - local, core, unknown (= we honestly don't
-   * know), undetermined (= we didn't bother determining it) or one of
-   * the npm dependencies defined in a package.json ('npm' for 'dependencies',
-   * 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development,
-   * optional, peer dependencies and dependencies in node_modules but not
-   * in package.json respectively)
+   * The dependency types of the module relative to the previous module " +
+   * in the chain it is a part of (e.g. a cycle)
    */
   dependencyTypes: DependencyType[];
 }
