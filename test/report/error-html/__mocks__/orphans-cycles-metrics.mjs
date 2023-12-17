@@ -1771,7 +1771,13 @@ export default {
           name: "src/extract/transpile",
           instability: 0.25,
           circular: true,
-          cycle: ["src/extract/transpile", "src/extract/parse"],
+          cycle: [
+            {
+              name: "src/extract/transpile",
+              dependencyTypes: ["local", "import"],
+            },
+            { name: "src/extract/parse", dependencyTypes: ["local", "import"] },
+          ],
           valid: false,
           rules: [
             {
@@ -1807,7 +1813,13 @@ export default {
           name: "src/extract/parse",
           instability: 0.36363636363636365,
           circular: true,
-          cycle: ["src/extract/parse", "src/extract/transpile"],
+          cycle: [
+            { name: "src/extract/parse", dependencyTypes: ["local", "import"] },
+            {
+              name: "src/extract/transpile",
+              dependencyTypes: ["local", "import"],
+            },
+          ],
           valid: false,
           rules: [
             {
@@ -1936,7 +1948,13 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["src/extract/transpile", "src/extract/parse"],
+        cycle: [
+          {
+            name: "src/extract/transpile",
+            dependencyTypes: ["local", "import"],
+          },
+          { name: "src/extract/parse", dependencyTypes: ["local", "import"] },
+        ],
       },
       {
         type: "cycle",
@@ -1946,7 +1964,13 @@ export default {
           severity: "warn",
           name: "no-folder-cycles",
         },
-        cycle: ["src/extract/parse", "src/extract/transpile"],
+        cycle: [
+          { name: "src/extract/parse", dependencyTypes: ["local", "import"] },
+          {
+            name: "src/extract/transpile",
+            dependencyTypes: ["local", "import"],
+          },
+        ],
       },
       {
         type: "instability",

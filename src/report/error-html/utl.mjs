@@ -30,7 +30,7 @@ function mergeCountsIntoRule(pRule, pViolationCounts) {
 }
 
 function formatCycleTo(pViolation) {
-  return pViolation.cycle.join(" &rightarrow;<br/>");
+  return pViolation.cycle.map(({ name }) => name).join(" &rightarrow;<br/>");
 }
 
 function formatReachabilityTo(pViolation) {
