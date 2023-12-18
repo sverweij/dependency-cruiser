@@ -8,7 +8,8 @@ export default {
           type: "number",
           description:
             "The version of the cache format. If the version number found in " +
-            "the cache is < this number the cache is not used.",
+            "the cache is < the version number in the code, the cache is " +
+            "considered stale and won't be used (and overwritten on next run).",
         },
         SHA1: {
           type: "string",
