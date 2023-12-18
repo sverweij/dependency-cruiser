@@ -250,7 +250,7 @@ describe("[I] extract/getDependencies - include", () => {
         {
           coreModule: false,
           couldNotResolve: false,
-          dependencyTypes: ["local", "import"],
+          dependencyTypes: ["local", "import", "pre-compilation-only"],
           dynamic: false,
           followable: true,
           exoticallyRequired: false,

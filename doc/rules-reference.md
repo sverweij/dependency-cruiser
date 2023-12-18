@@ -963,6 +963,7 @@ dependency which resolves to a base url in a tsconfig.json you'll see `import`, 
 | triple-slash-file-reference | with a triple slash directive, specifically importing another module                                                   | `/// <reference path="./ts-thing" />`                                       |
 | triple-slash-type-reference | with a triple slash directive, specifically importing types                                                            | `/// <reference types="./ts-thing-types" />`                                |
 | triple-slash-amd-dependency | with a triple slash directive, specifically declaring an AMD dependency                                                | `/// <amd-dependency path="./ts-thing-types" />`                            |
+| pre-compilation-only        | but the dependency will disappear at runtime. See [preCompilationOnly](#preCompilationOnly)                            | `import { thing } from "./things"` // and continue to not use `thing`       |
 
 ### `dynamic`
 

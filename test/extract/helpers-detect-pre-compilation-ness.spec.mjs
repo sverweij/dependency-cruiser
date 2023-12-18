@@ -9,7 +9,14 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
   it("deps in the first not in the second get the isPreCompilationOnly attribute", () => {
     deepEqual(
       detectPreCompilationNess([{ module: "foo", moduleSystem: "es6" }], []),
-      [{ module: "foo", moduleSystem: "es6", preCompilationOnly: true }],
+      [
+        {
+          module: "foo",
+          moduleSystem: "es6",
+          preCompilationOnly: true,
+          dependencyTypes: ["pre-compilation-only"],
+        },
+      ],
     );
   });
 

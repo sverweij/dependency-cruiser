@@ -128,15 +128,22 @@ export default {
       attributes: { arrowhead: "normalnoneodot" },
     },
     {
-      criteria: { preCompilationOnly: true },
+      criteria: {
+        dependencyTypes: [
+          "pre-compilation-only",
+          "triple-slash-type-reference",
+          "type-import",
+          "type-only",
+        ],
+      },
       attributes: { arrowhead: "onormal", penwidth: "1.0" },
     },
     {
-      criteria: { coreModule: true },
+      criteria: { dependencyTypes: "core" },
       attributes: { style: "dashed", penwidth: "1.0" },
     },
     {
-      criteria: { "dependencyTypes[0]": "npm" },
+      criteria: { dependencyTypes: "npm" },
       attributes: { penwidth: "1.0" },
     },
   ],
