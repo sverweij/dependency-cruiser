@@ -1,0 +1,47 @@
+[
+  {
+    "type": "cycle",
+    "from": "tmp-errors/cycle-1.js",
+    "to": "tmp-errors/cycle-2.js",
+    "rule": {
+      "severity": "error",
+      "name": "no-circular"
+    },
+    "cycle": [
+      {
+        "name": "tmp-errors/cycle-2.js",
+        "dependencyTypes": ["local", "require"]
+      },
+      {
+        "name": "tmp-errors/cycle-3.js",
+        "dependencyTypes": ["local", "require"]
+      },
+      {
+        "name": "tmp-errors/cycle-4.js",
+        "dependencyTypes": ["local", "require"]
+      },
+      {
+        "name": "tmp-errors/cycle-1.js",
+        "dependencyTypes": ["local", "require"]
+      }
+    ]
+  },
+  {
+    "type": "module",
+    "from": "tmp-errors/mod.mts",
+    "to": "tmp-errors/mod.mts",
+    "rule": {
+      "severity": "error",
+      "name": "no-orphans"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "tmp-errors/call-mod.mts",
+    "to": "./mod.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  }
+]
