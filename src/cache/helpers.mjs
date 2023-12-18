@@ -7,6 +7,13 @@ import memoize from "lodash/memoize.js";
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
+ * @typedef {import("../..").IModule} IModule
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
+ * @typedef {import("../../types/filter-types.mjs").IExcludeType} IExcludeType
+ * @typedef {import("../../types/strict-filter-types.mjs").IStrictIncludeOnlyType} IStrictIncludeOnlyType
+ */
+
+/**
  * @param {string} pString
  * @returns {string}
  */
@@ -30,7 +37,7 @@ export const getFileHashSync = memoize(_getFileHashSync);
 
 /**
  * @param {import("watskeburt").IChange} pChange
- * @param {import("../../types/dependency-cruiser.js").IRevisionChange}
+ * @return {IRevisionChange}
  */
 export function addCheckSumToChangeSync(pChange) {
   return {
@@ -40,8 +47,7 @@ export function addCheckSumToChangeSync(pChange) {
 }
 
 /**
- *
- * @param {import("../../types/filter-types.js").IExcludeType} pExcludeOption
+ * @param {IExcludeType} pExcludeOption
  * @returns {(pFileName: string) => boolean}
  */
 export function excludeFilter(pExcludeOption) {
@@ -54,7 +60,7 @@ export function excludeFilter(pExcludeOption) {
 }
 
 /**
- * @param {import("../../types/strict-filter-types.js").IStrictIncludeOnlyType=} pIncludeOnlyFilter
+ * @param {IStrictIncludeOnlyType=} pIncludeOnlyFilter
  * @returns {(pFileName: string) => boolean}
  */
 export function includeOnlyFilter(pIncludeOnlyFilter) {
@@ -112,7 +118,8 @@ export function isInterestingChangeType(pInterestingChangeTypes) {
 }
 
 /**
- * @param {import("../..").IModule} pModule
+ * @param {IModule} pModule
+ * @returns {boolean}
  */
 export function moduleIsInterestingForDiff(pModule) {
   return (
