@@ -61,6 +61,7 @@ export type DependencyType =
   | "npm-peer"
   | "npm-unknown"
   | "npm"
+  | "pre-compilation-only"
   | "require"
   | "triple-slash-amd-dependency"
   | "triple-slash-directive"

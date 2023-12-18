@@ -136,7 +136,7 @@ export default {
       attributes: { style: "dashed", penwidth: "1.0" },
     },
     {
-      criteria: { "dependencyTypes[0]": "npm" },
+      criteria: { dependencyTypes: "npm" },
       attributes: { penwidth: "1.0" },
     },
   ],

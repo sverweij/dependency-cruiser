@@ -16,7 +16,13 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
   return pTSDependencies.map((pTSDependency) =>
     pJSDependencies.some(dependenciesEqual(pTSDependency))
       ? { ...pTSDependency, preCompilationOnly: false }
-      : { ...pTSDependency, preCompilationOnly: true },
+      : {
+          ...pTSDependency,
+          preCompilationOnly: true,
+          dependencyTypes: (pTSDependency.dependencyTypes || []).concat(
+            "pre-compilation-only",
+          ),
+        },
   );
 }
 
