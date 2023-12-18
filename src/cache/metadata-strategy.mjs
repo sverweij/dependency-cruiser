@@ -12,6 +12,14 @@ import {
 // @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { bus } from "#utl/bus.mjs";
 
+/**
+ * @typedef {import("../../types/dependency-cruiser.mjs").IModule} IModule
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
+ * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
+ * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ */
+
 export default class MetaDataStrategy {
   /**
    * @param {string} _pDirectory
@@ -22,7 +30,7 @@ export default class MetaDataStrategy {
    * @param {typeof getSHA=} pOptions.shaRetrievalFn
    * @param {typeof list=} pOptions.diffListFn
    * @param {typeof addCheckSumToChangeSync=} pOptions.checksumFn
-   * @returns {Promise<import("../../types/dependency-cruiser.js").IRevisionData>}
+   * @returns {Promise<IRevisionData>}
    */
   async getRevisionData(
     _pDirectory,
@@ -63,8 +71,8 @@ export default class MetaDataStrategy {
   }
 
   /**
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pExistingRevisionData
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pNewRevisionData
+   * @param {IRevisionData=} pExistingRevisionData
+   * @param {IRevisionData=} pNewRevisionData
    * @returns {boolean}
    */
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
@@ -81,9 +89,9 @@ export default class MetaDataStrategy {
   }
 
   /**
-   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
-   * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
+   * @param {ICruiseResult} pCruiseResult
+   * @param {IRevisionData=} pRevisionData
+   * @returns {ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
     return pRevisionData

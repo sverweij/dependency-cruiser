@@ -10,8 +10,16 @@ import {
 } from "./helpers.mjs";
 
 /**
+ * @typedef {import("../../types/dependency-cruiser.mjs").IModule} IModule
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
+ * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
+ * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ */
+
+/**
  * @param {string} pBaseDirectory
- * @returns {(pModule: import("../../types/dependency-cruiser.js").IModule) => import("../../types/dependency-cruiser.js").IModule}
+ * @returns {(IModule) => IModule}
  */
 function addCheckSumToModule(pBaseDirectory) {
   return (pModule) => {
@@ -26,9 +34,9 @@ function addCheckSumToModule(pBaseDirectory) {
 }
 
 /**
- * @param {import("../../types/dependency-cruiser.js").IRevisionChange[]} pChanges
- * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
- * @returns {import("../../types/dependency-cruiser.js").IRevisionChange[]}
+ * @param {IRevisionChange[]} pChanges
+ * @param {IModule[]} pModules
+ * @returns {IRevisionChange[]}
  */
 function refreshChanges(pChanges, pModules) {
   return pChanges.filter(
@@ -44,15 +52,15 @@ function refreshChanges(pChanges, pModules) {
 export default class ContentStrategy {
   /**
    * @param {string} pDirectory
-   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCachedCruiseResult
-   * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
+   * @param {ICruiseResult} pCachedCruiseResult
+   * @param {IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<import("watskeburt").changeTypeType>=} pOptions.interestingChangeTypes?
    * @param {string=} pOptions.baseDir
    * @param {typeof findContentChanges=} pOptions.diffListFn
    * @param {typeof import('watskeburt').getSHA=} pOptions.checksumFn
-   * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
+   * @returns {IRevisionData}
    */
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
     const lOptions = {
@@ -62,21 +70,20 @@ export default class ContentStrategy {
     };
     return {
       SHA1: "unknown-in-content-cache-strategy",
-      changes:
-        /** @type {import("../../types/dependency-cruiser.js").IRevisionChange[]} */ (
-          lOptions.diffListFn(pDirectory, pCachedCruiseResult, {
-            baseDir: lOptions.baseDir,
-            extensions: lOptions.extensions,
-            includeOnly: pCruiseOptions.includeOnly,
-            exclude: pCruiseOptions.exclude,
-          })
-        ).filter(isInterestingChangeType(lOptions.interestingChangeTypes)),
+      changes: /** @type {IRevisionChange[]} */ (
+        lOptions.diffListFn(pDirectory, pCachedCruiseResult, {
+          baseDir: lOptions.baseDir,
+          extensions: lOptions.extensions,
+          includeOnly: pCruiseOptions.includeOnly,
+          exclude: pCruiseOptions.exclude,
+        })
+      ).filter(isInterestingChangeType(lOptions.interestingChangeTypes)),
     };
   }
 
   /**
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pExistingRevisionData
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pNewRevisionData
+   * @param {IRevisionData=} pExistingRevisionData
+   * @param {IRevisionData=} pNewRevisionData
    * @returns {boolean}
    */
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
@@ -95,13 +102,13 @@ export default class ContentStrategy {
   }
 
   /**
-   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
-   * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
+   * @param {ICruiseResult} pCruiseResult
+   * @param {IRevisionData=} pRevisionData
+   * @returns {ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
     const lModulesWithCheckSum = pCruiseResult.modules.map(
-      addCheckSumToModule(pCruiseResult.summary.optionsUsed.baseDir),
+      addCheckSumToModule(pCruiseResult.summary.optionsUsed.baseDir || "."),
     );
     const lRevisionData = {
       ...pRevisionData,
