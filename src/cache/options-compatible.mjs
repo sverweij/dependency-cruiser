@@ -88,8 +88,8 @@ export function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
 
 /**
  *
- * @param {import("../../types/strict-options").IStrictCruiseOptions} pOldOptions
- * @param {import("../../types/strict-options").IStrictCruiseOptions} pNewOptions
+ * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pOldOptions
+ * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pNewOptions
  * @returns {boolean}
  */
 // eslint-disable-next-line complexity
@@ -105,11 +105,11 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     includeOnlyIsCompatible(pOldOptions.includeOnly, pNewOptions.includeOnly) &&
     filterOptionIsCompatible(
       pOldOptions.doNotFollow,
-      pNewOptions.doNotFollow
+      pNewOptions.doNotFollow,
     ) &&
     filterOptionIsCompatible(
       pOldOptions.moduleSystems,
-      pNewOptions.moduleSystems
+      pNewOptions.moduleSystems,
     ) &&
     filterOptionIsCompatible(pOldOptions.exclude, pNewOptions.exclude) &&
     filterOptionIsCompatible(pOldOptions.focus, pNewOptions.focus) &&
@@ -119,15 +119,15 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     limitIsCompatible(pOldOptions.maxDepth, pNewOptions.maxDepth) &&
     optionIsCompatible(
       pOldOptions.knownViolations || [],
-      pNewOptions.knownViolations || []
+      pNewOptions.knownViolations || [],
     ) &&
     optionIsCompatible(
       pOldOptions.enhancedResolveOptions,
-      pNewOptions.enhancedResolveOptions
+      pNewOptions.enhancedResolveOptions,
     ) &&
     optionIsCompatible(
       pOldOptions.exoticRequireStrings,
-      pNewOptions.exoticRequireStrings
+      pNewOptions.exoticRequireStrings,
     ) &&
     cacheOptionIsCompatible(pOldOptions.cache, pNewOptions.cache)
   );

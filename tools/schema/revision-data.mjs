@@ -4,6 +4,12 @@ export default {
       type: "object",
       required: ["SHA1", "changes"],
       properties: {
+        cacheFormatVersion: {
+          type: "number",
+          description:
+            "The version of the cache format. If the version number found in " +
+            "the cache is < this number the cache is not used.",
+        },
         SHA1: {
           type: "string",
         },

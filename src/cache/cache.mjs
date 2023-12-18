@@ -14,6 +14,13 @@ import { scannableExtensions } from "#extract/transpile/meta.mjs";
 // @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { bus } from "#utl/bus.mjs";
 
+/**
+ * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
+ * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
+ * @typedef {import("../../types/cache-options.mjs").cacheStrategyType} cacheStrategyType
+ */
+
 const CACHE_FILE_NAME = "cache.json";
 const EMPTY_CACHE = {
   modules: [],
@@ -27,10 +34,21 @@ const EMPTY_CACHE = {
     optionsUsed: {},
   },
 };
+// Bump this to the current major.minor version when the cache format changes in
+// a way that's not backwards compatible.
+// e.g. version 3.0.0 => 3
+//     version 3.1.0 => 3.1
+//     version 3.1.1 => 3.1
+//     version 3.11.0 => 3.11
+// This means we assume breaking cache format versions won't occur
+// in patch releases. If worst case scenario it _is_ necessary we could
+// add the patch version divided by 1000_000 e.g.:
+//     version 3.14.16 => 3.14 + 16/1000_000 = 3.140016
+const CACHE_FORMAT_VERSION = 16;
 
 export default class Cache {
   /**
-   * @param {import("../../types/cache-options.mjs").cacheStrategyType=} pCacheStrategy
+   * @param {cacheStrategyType=} pCacheStrategy
    * @param {boolean=} pCompress
    */
   constructor(pCacheStrategy, pCompress) {
@@ -42,10 +60,17 @@ export default class Cache {
     this.compress = pCompress ?? false;
   }
 
+  cacheFormatVersionCompatible(pCachedCruiseResult) {
+    return (
+      (pCachedCruiseResult?.revisionData?.cacheFormatVersion ?? 1) >=
+      CACHE_FORMAT_VERSION
+    );
+  }
+
   /**
-   * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pCruiseOptions
-   * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pCachedCruiseResult
-   * @param {import("../../types/dependency-cruiser.mjs").IRevisionData=} pRevisionData
+   * @param {IStrictCruiseOptions} pCruiseOptions
+   * @param {ICruiseResult} pCachedCruiseResult
+   * @param {IRevisionData=} pRevisionData
    * @returns {Promise<boolean>}
    */
   async canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
@@ -61,8 +86,10 @@ export default class Cache {
           ),
         },
       ));
+    this.revisionData.cacheFormatVersion = CACHE_FORMAT_VERSION;
     bus.debug("cache: - comparing");
     return (
+      this.cacheFormatVersionCompatible(pCachedCruiseResult) &&
       this.cacheStrategy.revisionDataEqual(
         pCachedCruiseResult.revisionData,
         this.revisionData,
@@ -76,7 +103,7 @@ export default class Cache {
 
   /**
    * @param {string} pCacheFolder
-   * @returns {Promise<import("../../types/dependency-cruiser.mjs").ICruiseResult>}
+   * @returns {Promise<ICruiseResult>}
    */
   async read(pCacheFolder) {
     try {
@@ -131,11 +158,11 @@ export default class Cache {
 
   /**
    * @param {string} pCacheFolder
-   * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.mjs").IRevisionData=} pRevisionData
+   * @param {ICruiseResult} pCruiseResult
+   * @param {IRevisionData=} pRevisionData
    */
   async write(pCacheFolder, pCruiseResult, pRevisionData) {
-    const lRevisionData = pRevisionData ?? this.revisionData;
+    let lRevisionData = pRevisionData ?? this.revisionData;
 
     await mkdir(pCacheFolder, { recursive: true });
     const lUncompressedPayload = JSON.stringify(

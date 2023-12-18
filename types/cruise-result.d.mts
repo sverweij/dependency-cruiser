@@ -22,6 +22,11 @@ export interface IRevisionChange extends IChange {
  * caching revisionData. doc and proper naming will follow
  */
 export interface IRevisionData {
+  /**
+   * The version of the cache format. If the version number found in
+   * the cache is < this number the cache is not used.
+   */
+  cacheFormatVersion?: number;
   SHA1: string;
   changes: IRevisionChange[];
 }

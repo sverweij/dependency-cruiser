@@ -114,7 +114,37 @@ describe("[I] cache/cache - canServeFromCache", () => {
         args: "src test tools",
       },
     },
+    revisionData: { cacheFormatVersion: 16, SHA1: "dummy-sha", changes: [] },
+  };
+
+  /** @type import("../..").ICruiseResult */
+  const lNoVersionCruiseResult = {
+    modules: [],
+    summary: {
+      optionsUsed: {
+        cache: {
+          folder: lOriginalCacheFolder,
+          strategy: "metadata",
+        },
+        args: "src test tools",
+      },
+    },
     revisionData: { SHA1: "dummy-sha", changes: [] },
+  };
+
+  /** @type import("../..").ICruiseResult */
+  const lOldVersionCruiseResult = {
+    modules: [],
+    summary: {
+      optionsUsed: {
+        cache: {
+          folder: lOriginalCacheFolder,
+          strategy: "metadata",
+        },
+        args: "src test tools",
+      },
+    },
+    revisionData: { cacheFormatVersion: 15, SHA1: "dummy-sha", changes: [] },
   };
 
   it("returns false when cache not written yet", async () => {
@@ -131,6 +161,42 @@ describe("[I] cache/cache - canServeFromCache", () => {
       },
     );
     equal(lResult, false);
+  });
+
+  it("returns false when the cache's format version is incompatible (no version)", async () => {
+    const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-sha-differs");
+    const lCache = new Cache();
+    const lFound = await lCache.canServeFromCache(
+      {
+        args: "src test tools",
+        cache: { folder: lCacheFolder, strategy: "metadata" },
+      },
+      lNoVersionCruiseResult,
+      {
+        SHA1: "another-sha",
+        changes: [],
+      },
+    );
+
+    equal(lFound, false);
+  });
+
+  it("returns false when the cache's format version is incompatible (old version)", async () => {
+    const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-sha-differs");
+    const lCache = new Cache();
+    const lFound = await lCache.canServeFromCache(
+      {
+        args: "src test tools",
+        cache: { folder: lCacheFolder, strategy: "metadata" },
+      },
+      lOldVersionCruiseResult,
+      {
+        SHA1: "another-sha",
+        changes: [],
+      },
+    );
+
+    equal(lFound, false);
   });
 
   it("returns false when the base SHA differs", async () => {
