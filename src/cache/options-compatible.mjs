@@ -1,6 +1,10 @@
 // @ts-check
 import { isDeepStrictEqual } from "node:util";
 
+/**
+ * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ */
+
 /*
 # command line options
 ## No influence on cache
@@ -88,8 +92,8 @@ export function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
 
 /**
  *
- * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pOldOptions
- * @param {import("../../types/strict-options.mjs").IStrictCruiseOptions} pNewOptions
+ * @param {IStrictCruiseOptions} pOldOptions
+ * @param {IStrictCruiseOptions} pNewOptions
  * @returns {boolean}
  */
 // eslint-disable-next-line complexity
