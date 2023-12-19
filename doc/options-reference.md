@@ -1649,7 +1649,7 @@ as the primary parser: the `acorn` one, which handles all things javascript
 typescript; microsoft's `tsc` or the faster and smaller (but slightly less
 feature rich) `swc`.
 
-`swc` and `tsc` only work when the compilers (respectively `@core/swc` and
+`swc` and `tsc` only work when the compilers (respectively `@swc/core` and
 `typescript`) are installed in the same spot as dependency-cruiser is. They're
 not bundled with dependency-cruiser.
 
