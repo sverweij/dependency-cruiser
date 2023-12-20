@@ -129,13 +129,23 @@ function toVia(pRule, pDependency, pGroups) {
 }
 
 function toViaOnly(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaOnly?.path ||
-      (pDependency.cycle &&
-        pDependency.cycle.every(({ name }) =>
-          name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
-        )),
-  );
+  let lReturnValue = true;
+  if (pRule.to.viaOnly && pDependency.cycle) {
+    // eslint-disable-next-line unicorn/no-lonely-if
+    if (pRule.to.viaOnly.path) {
+      lReturnValue = pDependency.cycle.every(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
+      );
+    }
+    // if (pRule.to.viaOnly.dependencyTypes) {
+    //   lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
+    //     pRule.to.viaOnly.dependencyTypes.some((pDependencyType) =>
+    //       dependencyTypes.includes(pDependencyType)
+    //     )
+    //   );
+    // }
+  }
+  return lReturnValue;
 }
 
 function toViaNot(pRule, pDependency, pGroups) {
