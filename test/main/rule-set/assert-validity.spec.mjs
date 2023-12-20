@@ -88,6 +88,13 @@ describe("[I] main/rule-set/validate - regexp safety checks", () => {
     );
   });
 
+  it("bails out on scary regexps in via", () => {
+    shouldBarfWithMessage(
+      "./test/validate/__mocks__/rules.scary-regex-in-via.json",
+      'rule {"from":{},"to":{"via":{"path":["(.+)*","this-is-ok-1","this-is-ok-2"]}}} has an unsafe regular expression. Bailing out.\n',
+    );
+  });
+
   it("bails out on scary regexps in licenses", () => {
     shouldBarfWithMessage(
       "./test/validate/__mocks__/rules.scary-regex-in-license.json",

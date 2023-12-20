@@ -1,5 +1,20 @@
 import type { DependencyType } from "./shared-types.mjs";
 
+export type MiniDependencyRestrictionType =
+  | string
+  | string[]
+  | {
+      /**
+       * The name of the module
+       */
+      path?: string | string[];
+      /**
+       * The dependency types of the module relative to the previous module " +
+       * in the chain it is a part of (e.g. a cycle)
+       */
+      dependencyTypes?: DependencyType[];
+    };
+
 export interface IBaseRestrictionType {
   /**
    * A regular expression or an array of regular expressions that select
@@ -39,7 +54,14 @@ export interface IToRestriction extends IBaseRestrictionType {
    * the regular via that already matches when only some of the modules in the
    * cycle satisfy the regular expression
    */
-  via?: string | string[];
+  via?: MiniDependencyRestrictionType;
+  /**
+   * For circular dependencies - whether or not to match cycles that include
+   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
+   * except when they go through one specific module. Typically to temporarily
+   * allow some cycles until they're removed.
+   */
+  viaNot?: MiniDependencyRestrictionType;
   /**
    * For circular dependencies - whether or not to match cycles that include
    * some modules with this regular expression. If you want to match cycles that
@@ -50,19 +72,12 @@ export interface IToRestriction extends IBaseRestrictionType {
    * disallow some cycles with a lower severity - setting up a rule with a via
    * that ignores them in an 'allowed' section.
    */
-  viaOnly?: string | string[];
-  /**
-   * For circular dependencies - whether or not to match cycles that include
-   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
-   * except when they go through one specific module. Typically to temporarily
-   * allow some cycles until they're removed.
-   */
-  viaNot?: string | string[];
+  viaOnly?: MiniDependencyRestrictionType;
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.
    */
-  viaSomeNot?: string | string[];
+  viaSomeNot?: MiniDependencyRestrictionType;
   /**
    * Whether or not to match when the dependency is a dynamic one.
    */

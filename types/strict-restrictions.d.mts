@@ -6,6 +6,12 @@ import type {
   IRequiredToRestrictionType,
   IDependentsModuleRestrictionType,
 } from "./restrictions.mjs";
+import type { DependencyType } from "./shared-types.mjs";
+
+export interface IStrictMiniDependencyRestriction {
+  path?: string;
+  dependencyType?: DependencyType[];
+}
 
 export interface IStrictBaseRestrictionType extends IBaseRestrictionType {
   path?: string;
@@ -20,9 +26,10 @@ export interface IStrictFromRestriction extends IFromRestriction {
 interface IStrictToRestriction extends IToRestriction {
   path?: string;
   pathNot?: string;
-  via?: string;
-  viaNot?: string;
-  viaSomeNot?: string;
+  via?: IStrictMiniDependencyRestriction;
+  viaNot?: IStrictMiniDependencyRestriction;
+  viaOnly?: IStrictMiniDependencyRestriction;
+  viaSomeNot?: IStrictMiniDependencyRestriction;
   exoticRequire?: string;
   exoticRequireNot?: string;
   license?: string;

@@ -67,7 +67,7 @@ describe("[I] validate/index dependency - cycle viaNot - with group matching", (
       {
         name: "no-circular-dependency-of-modules",
         from: { path: "^src/([^/]+)/.+" },
-        to: { viaNot: "^src/$1/.+", circular: true },
+        to: { viaNot: { path: "^src/$1/.+" }, circular: true },
       },
     ],
   };

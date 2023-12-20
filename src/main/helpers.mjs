@@ -9,10 +9,6 @@ const RE_PROPERTIES = [
   "licenseNot",
   "exoticRequire",
   "exoticRequireNot",
-  "via",
-  "viaNot",
-  "viaOnly",
-  "viaSomeNot",
 ];
 
 /**

@@ -16,7 +16,7 @@ describe("[I] validate/index dependency - cycle via", () => {
         from: {},
         to: {
           circular: true,
-          via: "^tmp/ab\\.js$",
+          via: { path: "^tmp/ab\\.js$" },
         },
       },
     ],
@@ -102,7 +102,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         },
         to: {
           circular: true,
-          via: "^$1/ab\\.js$",
+          via: { path: "^$1/ab\\.js$" },
         },
       },
     ],
@@ -205,7 +205,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         from: {},
         to: {
           circular: true,
-          viaOnly: "^tmp/ab\\.js$",
+          viaOnly: { path: "^tmp/ab\\.js$" },
         },
       },
     ],
@@ -297,6 +297,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
     );
   });
 });
+
 describe("[I] validate/index dependency - cycle viaOnly - with group matching", () => {
   const lCycleViaRuleSet = parseRuleSet({
     forbidden: [
@@ -306,7 +307,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         },
         to: {
           circular: true,
-          viaOnly: "^($1)/ab\\.js$",
+          viaOnly: { path: "^($1)/ab\\.js$" },
         },
       },
     ],
@@ -404,7 +405,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           from: {},
           to: {
             circular: true,
-            viaOnly: ["somethingelse", "^tmp/[^.]+\\.js$"],
+            viaOnly: { path: "somethingelse|^tmp/[^.]+\\.js$" },
           },
         },
       ],

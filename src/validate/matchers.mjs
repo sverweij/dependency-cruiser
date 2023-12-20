@@ -107,55 +107,75 @@ function toDependencyTypesNot(pRule, pDependency) {
       !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
   );
 }
-function pluckName({ name }) {
-  return name;
-}
+
 function toVia(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.via ||
-      (pDependency.cycle &&
-        pDependency.cycle
-          .map(pluckName)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups)),
-          )),
-  );
+  let lReturnValue = true;
+  if (pRule.to.via && pDependency.cycle) {
+    // eslint-disable-next-line unicorn/no-lonely-if
+    if (pRule.to.via.path) {
+      lReturnValue = pDependency.cycle.some(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.via.path, pGroups)),
+      );
+    }
+    // if (pRule.to.via.dependencyTypes) {
+    //   lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
+    //     pRule.to.via.dependencyTypes.some((pDependencyType) =>
+    //       dependencyTypes.includes(pDependencyType)
+    //     )
+    //   );
+    // }
+  }
+  return lReturnValue;
 }
 
 function toViaOnly(pRule, pDependency, pGroups) {
   return Boolean(
-    !pRule.to.viaOnly ||
+    !pRule.to.viaOnly?.path ||
       (pDependency.cycle &&
-        pDependency.cycle
-          .map(pluckName)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups)),
-          )),
+        pDependency.cycle.every(({ name }) =>
+          name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
+        )),
   );
 }
 
 function toViaNot(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaNot ||
-      (pDependency.cycle &&
-        !pDependency.cycle
-          .map(pluckName)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups)),
-          )),
-  );
+  let lReturnValue = true;
+  if (pRule.to.viaNot && pDependency.cycle) {
+    // eslint-disable-next-line unicorn/no-lonely-if
+    if (pRule.to.viaNot.path) {
+      lReturnValue = !pDependency.cycle.some(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaNot.path, pGroups)),
+      );
+    }
+    // if (pRule.to.viaNot.dependencyTypes) {
+    //   lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
+    //     pRule.to.viaNot.dependencyTypes.some((pDependencyType) =>
+    //       dependencyTypes.includes(pDependencyType)
+    //     )
+    //   );
+    // }
+  }
+  return lReturnValue;
 }
 
-function toviaSomeNot(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaSomeNot ||
-      (pDependency.cycle &&
-        !pDependency.cycle
-          .map(pluckName)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups)),
-          )),
-  );
+function toViaSomeNot(pRule, pDependency, pGroups) {
+  let lReturnValue = true;
+  if (pRule.to.viaSomeNot && pDependency.cycle) {
+    // eslint-disable-next-line unicorn/no-lonely-if
+    if (pRule.to.viaSomeNot.path) {
+      lReturnValue = !pDependency.cycle.every(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaSomeNot.path, pGroups)),
+      );
+    }
+    // if (pRule.to.viaSomeNot.dependencyTypes) {
+    //   lReturnValue &&= !pDependency.cycle.every(({ dependencyTypes }) =>
+    //     pRule.to.viaSomeNot.dependencyTypes.some((pDependencyType) =>
+    //       dependencyTypes.includes(pDependencyType)
+    //     )
+    //   );
+    // }
+  }
+  return lReturnValue;
 }
 
 function toIsMoreUnstable(pRule, pModule, pDependency) {
@@ -214,7 +234,7 @@ export default {
   toVia,
   toViaOnly,
   toViaNot,
-  toviaSomeNot,
+  toViaSomeNot,
   toIsMoreUnstable,
   matchesMoreThanOneDependencyType,
 };
