@@ -118,9 +118,9 @@ function toVia(pRule, pDependency, pGroups) {
       );
     }
     // if (pRule.to.via.dependencyTypes) {
-    //   lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
-    //     pRule.to.via.dependencyTypes.some((pDependencyType) =>
-    //       dependencyTypes.includes(pDependencyType)
+    //   lReturnValue &&= pDependency.cycle.some(({ dependencyTypes }) =>
+    //     pRule.to.via.dependencyTypes.some((pRuleDependencyType) =>
+    //       dependencyTypes.includes(pRuleDependencyType)
     //     )
     //   );
     // }
@@ -139,8 +139,8 @@ function toViaOnly(pRule, pDependency, pGroups) {
     }
     // if (pRule.to.viaOnly.dependencyTypes) {
     //   lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
-    //     pRule.to.viaOnly.dependencyTypes.some((pDependencyType) =>
-    //       dependencyTypes.includes(pDependencyType)
+    //     pRule.to.viaOnly.dependencyTypes.some((pRuleDependencyType) =>
+    //       dependencyTypes.includes(pRuleDependencyType)
     //     )
     //   );
     // }
@@ -151,19 +151,18 @@ function toViaOnly(pRule, pDependency, pGroups) {
 function toViaNot(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.viaNot && pDependency.cycle) {
-    // eslint-disable-next-line unicorn/no-lonely-if
     if (pRule.to.viaNot.path) {
       lReturnValue = !pDependency.cycle.some(({ name }) =>
         name.match(replaceGroupPlaceholders(pRule.to.viaNot.path, pGroups)),
       );
     }
-    // if (pRule.to.viaNot.dependencyTypes) {
-    //   lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
-    //     pRule.to.viaNot.dependencyTypes.some((pDependencyType) =>
-    //       dependencyTypes.includes(pDependencyType)
-    //     )
-    //   );
-    // }
+    if (pRule.to.viaNot.dependencyTypes) {
+      lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
+        pRule.to.viaNot.dependencyTypes.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
   }
   return lReturnValue;
 }

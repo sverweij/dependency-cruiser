@@ -718,8 +718,8 @@ the build. At the same time you might want to prevent any new violation going
 unnoticed because of this.
 
 One solution to this is to use dependency-cruiser's
-[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism, Another
-solution is to put restrictions on through which modules the cycles pass; the
+[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism. Another
+is to put restrictions on through which modules the cycles pass; the
 "via"'s, in a similar fashion as possible with `path` and `pathNot`. There are
 _four_ via-like restrictions in dependency-cruiser, as - different from the
 `path`/`pathNot` restrictions the `via` (and `viaNot`) ones always almost have
@@ -731,14 +731,53 @@ All these restrictions take the whole cycle into account; _including_ the tested
 'from'; if `a/aa.js` has a cycle via `a/ab.js` and `b/bb/js` back to `a/aa.js`
 the via-like restrictions also take `a/aa.js` into account.
 
-The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
+The examples below refer to this cycle: `a/aa.js` -> `a/ab.js` -> `b/bb.js` -> `a/aa.js`
 
-| restriction  | what it does                                                        | example input | match?  | because...                    |
-| ------------ | ------------------------------------------------------------------- | ------------- | ------- | ----------------------------- |
-| `via`        | **some** of the modules in the cycle **do** match the expression    | `^a/.+`       | `true`  | `a/aa.js` and `a/ab.js` match |
-| `viaOnly`    | **all** of the modules in the cycle **do** match the expression     | `^a/.+`       | `false` | `b/bb.js` doesn't match       |
-| `viaNot`     | **all** of the modules in the cycle **don't** match the expression  | `^a/.+`       | `false` | `a/aa.js` and `a/ab.js` match |
-| `viaSomeNot` | **some** of the modules in the cycle **don't** match the expression | `^a/.+`       | `true`  | `b/bb.js` doesn't match       |
+```mermaid
+flowchart LR
+
+subgraph a
+  aa.js
+  ab.js
+end
+
+subgraph b
+  bb.js
+end
+
+aa.js --> ab.js --> bb.js --> aa.js
+```
+
+| restriction  | what it does                                                        | example input   | match?  | because...                    |
+| ------------ | ------------------------------------------------------------------- | --------------- | ------- | ----------------------------- |
+| `via`        | **some** of the modules in the cycle **do** match the expression    | `path: "^a/.+"` | `true`  | `a/aa.js` and `a/ab.js` match |
+| `viaOnly`    | **all** of the modules in the cycle **do** match the expression     | `path: "^a/.+"` | `false` | `b/bb.js` doesn't match       |
+| `viaNot`     | **all** of the modules in the cycle **don't** match the expression  | `path: "^a/.+"` | `false` | `a/aa.js` and `a/ab.js` match |
+| `viaSomeNot` | **some** of the modules in the cycle **don't** match the expression | `path: "^a/.+"` | `true`  | `b/bb.js` doesn't match       |
+
+#### Usage example: allow cycles that have a type-only dependency in them
+
+```mermaid
+flowchart LR
+p.ts --> q.ts --> r.ts --> |type-only| s.ts --> p.ts
+```
+
+```javascript
+// log an error for all circular dependencies which consist of only non-`type-only`
+// dependencies
+{
+  name: 'no-circular',
+  severity: 'error',
+  from: {
+  },
+  to: {
+    circular: true,
+    viaNot: {
+      dependencyTypes: ['type-only']
+    }
+  }
+},
+```
 
 #### Usage example: prevent code from going through a 'knot'
 
@@ -755,10 +794,12 @@ are the known 'knots':
   },
   to: {
     circular: true,
-    viaNot: [
-      '^app/javascript/tables/index.ts',
-      '^app/javascript/ui/index.tsx',
-    ]
+    viaNot: {
+      path: [
+        '^app/javascript/tables/index.ts',
+        '^app/javascript/ui/index.tsx',
+      ]
+    }
   }
 },
 
@@ -771,13 +812,21 @@ are the known 'knots':
   },
   to: {
     circular: true,
-    via: [
+    via: {
+      path: [
       '^app/javascript/tables/index.ts',
       '^app/javascript/ui/index.tsx',
-    ]
+      ]
+    }
   }
 }
 ```
+
+> You can also use a shorter notation for the via\* restrictions if you want to
+>
+> ```javascript
+> via: ["^app/javascript/tables/index.ts", "^app/javascript/ui/index.tsx"];
+> ```
 
 #### Usage example: prevent cycles from going outside a folder
 
@@ -802,7 +851,9 @@ not only makes use of the `viaSomeNot`, but also displays the use of
   },
   to: {
     circular: true,
-    viaSomeNot: '^src/business-components/$1/.+',
+    viaSomeNot: {
+      path: '^src/business-components/$1/.+'
+    },
   },
 }
 ```
