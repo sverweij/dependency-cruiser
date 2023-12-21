@@ -43,8 +43,6 @@ function match(pFrom, pTo) {
       ) &&
       matchers.toVia(pRule, pTo, lGroups) &&
       matchers.toViaOnly(pRule, pTo, lGroups) &&
-      matchers.toViaNot(pRule, pTo, lGroups) &&
-      matchers.toViaSomeNot(pRule, pTo, lGroups) &&
       matchers.toIsMoreUnstable(pRule, pFrom, pTo)
     );
   };

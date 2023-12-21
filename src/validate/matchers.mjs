@@ -111,10 +111,14 @@ function toDependencyTypesNot(pRule, pDependency) {
 function toVia(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.via && pDependency.cycle) {
-    // eslint-disable-next-line unicorn/no-lonely-if
     if (pRule.to.via.path) {
       lReturnValue = pDependency.cycle.some(({ name }) =>
         name.match(replaceGroupPlaceholders(pRule.to.via.path, pGroups)),
+      );
+    }
+    if (pRule.to.via.pathNot) {
+      lReturnValue = !pDependency.cycle.every(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.via.pathNot, pGroups)),
       );
     }
     // if (pRule.to.via.dependencyTypes) {
@@ -124,17 +128,29 @@ function toVia(pRule, pDependency, pGroups) {
     //     )
     //   );
     // }
+    // if (pRule.to.via.dependencyTypesNot) {
+    //   lReturnValue &&= !pDependency.cycle.every(({ dependencyTypes }) =>
+    //     pRule.to.via.dependencyTypesNot.some((pRuleDependencyType) =>
+    //       dependencyTypes.includes(pRuleDependencyType)
+    //     )
+    //   );
+    // }
   }
   return lReturnValue;
 }
 
+// eslint-disable-next-line complexity
 function toViaOnly(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.viaOnly && pDependency.cycle) {
-    // eslint-disable-next-line unicorn/no-lonely-if
     if (pRule.to.viaOnly.path) {
       lReturnValue = pDependency.cycle.every(({ name }) =>
         name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
+      );
+    }
+    if (pRule.to.viaOnly.pathNot) {
+      lReturnValue = !pDependency.cycle.some(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups)),
       );
     }
     // if (pRule.to.viaOnly.dependencyTypes) {
@@ -144,45 +160,13 @@ function toViaOnly(pRule, pDependency, pGroups) {
     //     )
     //   );
     // }
-  }
-  return lReturnValue;
-}
-
-function toViaNot(pRule, pDependency, pGroups) {
-  let lReturnValue = true;
-  if (pRule.to.viaNot && pDependency.cycle) {
-    if (pRule.to.viaNot.path) {
-      lReturnValue = !pDependency.cycle.some(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.viaNot.path, pGroups)),
-      );
-    }
-    if (pRule.to.viaNot.dependencyTypes) {
+    if (pRule.to.viaOnly.dependencyTypesNot) {
       lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
-        pRule.to.viaNot.dependencyTypes.some((pRuleDependencyType) =>
+        pRule.to.viaOnly.dependencyTypesNot.some((pRuleDependencyType) =>
           dependencyTypes.includes(pRuleDependencyType),
         ),
       );
     }
-  }
-  return lReturnValue;
-}
-
-function toViaSomeNot(pRule, pDependency, pGroups) {
-  let lReturnValue = true;
-  if (pRule.to.viaSomeNot && pDependency.cycle) {
-    // eslint-disable-next-line unicorn/no-lonely-if
-    if (pRule.to.viaSomeNot.path) {
-      lReturnValue = !pDependency.cycle.every(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.viaSomeNot.path, pGroups)),
-      );
-    }
-    // if (pRule.to.viaSomeNot.dependencyTypes) {
-    //   lReturnValue &&= !pDependency.cycle.every(({ dependencyTypes }) =>
-    //     pRule.to.viaSomeNot.dependencyTypes.some((pDependencyType) =>
-    //       dependencyTypes.includes(pDependencyType)
-    //     )
-    //   );
-    // }
   }
   return lReturnValue;
 }
@@ -242,8 +226,6 @@ export default {
   toDependencyTypesNot,
   toVia,
   toViaOnly,
-  toViaNot,
-  toViaSomeNot,
   toIsMoreUnstable,
   matchesMoreThanOneDependencyType,
 };

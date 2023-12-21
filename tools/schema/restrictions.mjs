@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import REAsStringsType from "./re-as-strings-type.mjs";
 import dependencyType from "./dependency-type.mjs";
 
@@ -19,6 +20,7 @@ const BASE_RESTRICTION = {
 export default {
   definitions: {
     MiniDependencyRestrictionType: {
+      required: [],
       oneOf: [
         {
           $ref: "#/definitions/REAsStringsType",
@@ -29,15 +31,32 @@ export default {
           properties: {
             path: {
               description:
-                "A regular expression or an array of regular expressions an end of a " +
-                "dependency should match to be caught by this rule.",
+                "A regular expression or an array of regular expressions the  " +
+                "'via' module should match to be caught by this rule.",
+              $ref: "#/definitions/REAsStringsType",
+            },
+            pathNot: {
+              description:
+                "A regular expression or an array of regular expressions an the  " +
+                "'via' module should _not_ match to be caught by this rule.",
               $ref: "#/definitions/REAsStringsType",
             },
             dependencyTypes: {
               type: "array",
               description:
-                "Whether or not to match modules of any of these types (leaving out " +
-                "matches any of them)",
+                "Which dependency types the dependency between this via and the " +
+                "previous one in the 'via chain' should have to be caught by " +
+                "this rule.",
+              items: {
+                $ref: "#/definitions/DependencyTypeType",
+              },
+            },
+            dependencyTypesNot: {
+              type: "array",
+              description:
+                "Which dependency types the dependency between this via and the " +
+                "previous one in the 'via chain' should _not_ have to be caught by " +
+                "this rule.",
               items: {
                 $ref: "#/definitions/DependencyTypeType",
               },
@@ -181,17 +200,17 @@ export default {
         },
         viaNot: {
           description:
-            "For circular dependencies - whether or not to match cycles that include " +
-            "_only_ modules that don't satisfy these conditions. E.g. to disallow all cycles, " +
-            "except when they go through one specific module. Typically to temporarily " +
-            "allow some cycles until they're removed.",
-          $ref: "#/definitions/MiniDependencyRestrictionType",
+            "This attribute is deprecated. Use 'viaOnly' with a 'pathNot' attribute " +
+            "in stead.",
+          deprecated: true,
+          $ref: "#/definitions/REAsStringsType",
         },
         viaSomeNot: {
           description:
-            "For circular dependencies - whether or not to match cycles that include " +
-            "_some_ modules that don't satisfy these conditions. ",
-          $ref: "#/definitions/MiniDependencyRestrictionType",
+            "This attribute is deprecated. Use 'via' with a 'pathNot' attribute " +
+            "in stead.",
+          deprecated: true,
+          $ref: "#/definitions/REAsStringsType",
         },
         moreUnstable: {
           type: "boolean",

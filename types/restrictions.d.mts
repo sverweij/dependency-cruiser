@@ -5,14 +5,27 @@ export type MiniDependencyRestrictionType =
   | string[]
   | {
       /**
-       * The name of the module
+       * A regular expression or an array of regular expressions the
+       * 'via' module should match to be caught by this rule.
        */
       path?: string | string[];
       /**
-       * The dependency types of the module relative to the previous module " +
-       * in the chain it is a part of (e.g. a cycle)
+       * A regular expression or an array of regular expressions the
+       * 'via' module should match to be caught by this rule.
+       */
+      pathNot?: string | string[];
+      /**
+       * Which dependency types the dependency between this via and the
+       * previous one in the 'via chain' should have to be caught by
+       * this rule
        */
       dependencyTypes?: DependencyType[];
+      /**
+       * Which dependency types the dependency between this via and the
+       * previous one in the 'via chain' should _not_ have to be caught by
+       * this rule
+       */
+      dependencyTypesNot?: DependencyType[];
     };
 
 export interface IBaseRestrictionType {
@@ -60,8 +73,9 @@ export interface IToRestriction extends IBaseRestrictionType {
    * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
    * except when they go through one specific module. Typically to temporarily
    * allow some cycles until they're removed.
+   * @deprecated use viaOnly.pathNot in stead
    */
-  viaNot?: MiniDependencyRestrictionType;
+  viaNot?: string | string[];
   /**
    * For circular dependencies - whether or not to match cycles that include
    * some modules with this regular expression. If you want to match cycles that
@@ -76,8 +90,9 @@ export interface IToRestriction extends IBaseRestrictionType {
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.
+   * @deprecated use via.pathNot in stead
    */
-  viaSomeNot?: MiniDependencyRestrictionType;
+  viaSomeNot?: string | string[];
   /**
    * Whether or not to match when the dependency is a dynamic one.
    */

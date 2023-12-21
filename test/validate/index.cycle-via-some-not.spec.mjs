@@ -15,7 +15,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
       {
         name: "no-circular-dependency-of-modules",
         from: { path: "^src/([^/]+)/.+" },
-        to: { viaSomeNot: { path: "^src/$1/.+" }, circular: true },
+        to: { viaSomeNot: "^src/$1/.+", circular: true },
       },
     ],
   };
@@ -105,7 +105,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
           name: "no-circular-dependency-of-modules",
           from: { path: "^src/([^/]+)/.+" },
           to: {
-            viaSomeNot: { path: "something|^src/$1/.+|somethingelse" },
+            viaSomeNot: "something|^src/$1/.+|somethingelse",
             circular: true,
           },
         },

@@ -210,7 +210,19 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
       },
     ],
   });
-
+  const lCycleViaNotTypeOnlyRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-runtime-cycles",
+        from: {},
+        severity: "error",
+        to: {
+          circular: true,
+          viaOnly: { dependencyTypesNot: ["type-only"] },
+        },
+      },
+    ],
+  });
   it("a => ba => bb => bc => a doesn't get flagged when the cycle doesn't go via the viaOnly", () => {
     deepEqual(
       validate.dependency(
@@ -249,7 +261,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
     );
   });
 
-  it("a => ab a gets flagged becaue all of the via's in the cycle are in the viaOnly", () => {
+  it("a => ab a gets flagged because all of the via's in the cycle are in the viaOnly", () => {
     deepEqual(
       validate.dependency(
         lCycleViaRuleSet,
@@ -293,6 +305,55 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
       {
         valid: false,
         rules: [{ name: "unnamed", severity: "warn" }],
+      },
+    );
+  });
+  it("a => aa => ab => ac => a doesn't get flagged when one of the dependencyTypes is in a viaNot", () => {
+    deepEqual(
+      validate.dependency(
+        lCycleViaNotTypeOnlyRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import", "type-only"] },
+            { name: "tmp/ac.js", dependencyTypes: ["import"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        valid: true,
+      },
+    );
+  });
+
+  it("a => aa => ab => ac => a does get flagged when none of the dependencyTypes is in a viaNot", () => {
+    deepEqual(
+      validate.dependency(
+        lCycleViaNotTypeOnlyRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import"] },
+            { name: "tmp/ac.js", dependencyTypes: ["import"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        rules: [
+          {
+            name: "no-runtime-cycles",
+            severity: "error",
+          },
+        ],
+        valid: false,
       },
     );
   });

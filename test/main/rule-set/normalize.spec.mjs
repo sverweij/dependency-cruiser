@@ -408,10 +408,7 @@ describe("[U] main/rule-set/normalize", () => {
           {
             from: {},
             to: {
-              viaSomeNot: {
-                path: ["wim", "zus", "jet"],
-                dependencyTypes: ["type-only"],
-              },
+              viaSomeNot: ["wim", "zus", "jet"],
             },
           },
         ],
@@ -435,9 +432,8 @@ describe("[U] main/rule-set/normalize", () => {
             name: "not-in-allowed",
             from: {},
             to: {
-              viaSomeNot: {
-                path: "wim|zus|jet",
-                dependencyTypes: ["type-only"],
+              via: {
+                pathNot: "wim|zus|jet",
               },
             },
           },

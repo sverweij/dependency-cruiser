@@ -48,20 +48,33 @@ function normalizeVia(pVia) {
   return lReturnValue;
 }
 
+// eslint-disable-next-line complexity
 function normalizeVias(pRuleTo) {
   const lRuleTo = structuredClone(pRuleTo);
 
   if (has(lRuleTo, "via")) {
     lRuleTo.via = normalizeVia(lRuleTo.via);
   }
-  if (has(lRuleTo, "viaNot")) {
-    lRuleTo.viaNot = normalizeVia(lRuleTo.viaNot);
-  }
   if (has(lRuleTo, "viaOnly")) {
     lRuleTo.viaOnly = normalizeVia(lRuleTo.viaOnly);
   }
+  if (has(lRuleTo, "viaNot")) {
+    if (!has(lRuleTo, "viaOnly.pathNot")) {
+      lRuleTo.viaOnly = {
+        ...lRuleTo.viaOnly,
+        pathNot: normalizeToREAsString(lRuleTo.viaNot),
+      };
+    }
+    delete lRuleTo.viaNot;
+  }
   if (has(lRuleTo, "viaSomeNot")) {
-    lRuleTo.viaSomeNot = normalizeVia(lRuleTo.viaSomeNot);
+    if (!has(lRuleTo, "via.pathNot")) {
+      lRuleTo.via = {
+        ...lRuleTo.via,
+        pathNot: normalizeToREAsString(lRuleTo.viaSomeNot),
+      };
+    }
+    delete lRuleTo.viaSomeNot;
   }
   return lRuleTo;
 }
