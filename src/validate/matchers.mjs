@@ -154,13 +154,13 @@ function toViaOnly(pRule, pDependency, pGroups) {
         name.match(replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups)),
       );
     }
-    // if (pRule.to.viaOnly.dependencyTypes) {
-    //   lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
-    //     pRule.to.viaOnly.dependencyTypes.some((pRuleDependencyType) =>
-    //       dependencyTypes.includes(pRuleDependencyType)
-    //     )
-    //   );
-    // }
+    if (pRule.to.viaOnly.dependencyTypes) {
+      lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
+        pRule.to.viaOnly.dependencyTypes.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
     if (pRule.to.viaOnly.dependencyTypesNot) {
       lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
         pRule.to.viaOnly.dependencyTypesNot.some((pRuleDependencyType) =>
