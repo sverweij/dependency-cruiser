@@ -68,7 +68,7 @@ describe("[I] validate/index dependency - cycle via", () => {
           from: {},
           to: {
             circular: true,
-            via: "^tmp/[^.]+\\.js$",
+            via: "^tmp/[^.]+[.]js$",
           },
         },
       ],
@@ -88,6 +88,147 @@ describe("[I] validate/index dependency - cycle via", () => {
       {
         valid: false,
         rules: [{ name: "unnamed", severity: "warn" }],
+      },
+    );
+  });
+
+  it("a => aa => ab => ac => a get flagged when some of their dependencyTypes are of certain types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "no-circular-1",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["require"],
+            },
+          },
+        },
+        {
+          name: "no-circular-2",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["import"],
+            },
+          },
+        },
+        {
+          name: "no-circular-3",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["import", "require", "local"],
+            },
+          },
+        },
+        {
+          name: "no-circular-4",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["type-only", "type-import"],
+            },
+          },
+        },
+      ],
+    });
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import"] },
+            { name: "tmp/ac.js", dependencyTypes: ["require"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        valid: false,
+        rules: [
+          { name: "no-circular-1", severity: "warn" },
+          { name: "no-circular-2", severity: "warn" },
+          { name: "no-circular-3", severity: "warn" },
+        ],
+      },
+    );
+  });
+  it("a => aa => ab => ac => a get flagged when some of their dependencyTypes are NOT of certain types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "no-circular-1",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["require"],
+            },
+          },
+        },
+        {
+          name: "no-circular-2",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["import"],
+            },
+          },
+        },
+        {
+          name: "no-circular-3",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["import", "require", "local"],
+            },
+          },
+        },
+        {
+          name: "no-circular-4",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["type-only", "type-import"],
+            },
+          },
+        },
+      ],
+    });
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import"] },
+            { name: "tmp/ac.js", dependencyTypes: ["require"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        valid: false,
+        rules: [
+          { name: "no-circular-1", severity: "warn" },
+          { name: "no-circular-2", severity: "warn" },
+          { name: "no-circular-4", severity: "warn" },
+        ],
       },
     );
   });
