@@ -70,14 +70,6 @@ export interface IToRestriction extends IBaseRestrictionType {
   via?: MiniDependencyRestrictionType;
   /**
    * For circular dependencies - whether or not to match cycles that include
-   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
-   * except when they go through one specific module. Typically to temporarily
-   * allow some cycles until they're removed.
-   * @deprecated use viaOnly.pathNot in stead
-   */
-  viaNot?: string | string[];
-  /**
-   * For circular dependencies - whether or not to match cycles that include
    * some modules with this regular expression. If you want to match cycles that
    * _exclusively_ include modules satisfying the regular expression use the viaOnly
    * restriction.
@@ -87,6 +79,14 @@ export interface IToRestriction extends IBaseRestrictionType {
    * that ignores them in an 'allowed' section.
    */
   viaOnly?: MiniDependencyRestrictionType;
+  /**
+   * For circular dependencies - whether or not to match cycles that include
+   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
+   * except when they go through one specific module. Typically to temporarily
+   * allow some cycles until they're removed.
+   * @deprecated use viaOnly.pathNot in stead
+   */
+  viaNot?: string | string[];
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.

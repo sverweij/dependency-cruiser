@@ -427,6 +427,7 @@ export default {
               type: "boolean",
             },
             {
+              deprecated: true,
               type: "string",
             },
             { $ref: "#/definitions/CacheOptionsType" },

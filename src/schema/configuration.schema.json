@@ -707,7 +707,7 @@
         "cache": {
           "oneOf": [
             { "type": "boolean" },
-            { "type": "string" },
+            { "deprecated": true, "type": "string" },
             { "$ref": "#/definitions/CacheOptionsType" }
           ],
           "description": "- false: don't use caching. \n- true or empty object: use caching with the default settings \n- a string (deprecated): cache in the folder denoted by the string & use the \n  default caching strategy. This is deprecated - instead pass a cache object \n  e.g. ```{ folder: 'your/cache/location' }```.\n\nDefaults to false (no caching).\nWhen caching is switched on the default cache folder is 'node_modules/.cache/dependency-cruiser/'"
