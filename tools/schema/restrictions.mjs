@@ -20,7 +20,6 @@ const BASE_RESTRICTION = {
 export default {
   definitions: {
     MiniDependencyRestrictionType: {
-      required: [],
       oneOf: [
         {
           $ref: "#/definitions/REAsStringsType",

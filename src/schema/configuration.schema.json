@@ -173,7 +173,6 @@
       }
     },
     "MiniDependencyRestrictionType": {
-      "required": [],
       "oneOf": [
         { "$ref": "#/definitions/REAsStringsType" },
         {
