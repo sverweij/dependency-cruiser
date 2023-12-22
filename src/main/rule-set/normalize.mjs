@@ -1,5 +1,5 @@
 import has from "lodash/has.js";
-import { normalizeREProperties } from "../helpers.mjs";
+import { normalizeREProperties, normalizeToREAsString } from "../helpers.mjs";
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
@@ -23,26 +23,74 @@ function normalizeName(pRuleName) {
 }
 
 /**
- *
- * @param {import("../../../types/shared-types.js").RuleScopeType} pScope?
- * @returns {import("../../../types/shared-types.js").RuleScopeType}
+ * @param {import("../../../types/shared-types.mjs").RuleScopeType} pScope?
+ * @returns {import("../../../types/shared-types.mjs").RuleScopeType}
  */
 function normalizeScope(pScope) {
   return pScope ? pScope : DEFAULT_SCOPE;
 }
 
 /**
- *
+ * @param {import("../../../types/restrictions.mjs").MiniDependencyRestrictionType} pVia
+ * @returns {import("../../../types/strict-restrictions.mjs").IStrictMiniDependencyRestriction}
+ */
+function normalizeVia(pVia) {
+  let lReturnValue = {};
+
+  if (typeof pVia === "string" || Array.isArray(pVia)) {
+    lReturnValue.path = pVia;
+  } else {
+    lReturnValue = structuredClone(pVia);
+  }
+  if (has(lReturnValue, "path")) {
+    lReturnValue.path = normalizeToREAsString(lReturnValue.path);
+  }
+  return lReturnValue;
+}
+
+// eslint-disable-next-line complexity
+function normalizeVias(pRuleTo) {
+  const lRuleTo = structuredClone(pRuleTo);
+
+  if (has(lRuleTo, "via")) {
+    lRuleTo.via = normalizeVia(lRuleTo.via);
+  }
+  if (has(lRuleTo, "viaOnly")) {
+    lRuleTo.viaOnly = normalizeVia(lRuleTo.viaOnly);
+  }
+  if (has(lRuleTo, "viaNot")) {
+    if (!has(lRuleTo, "viaOnly.pathNot")) {
+      lRuleTo.viaOnly = {
+        ...lRuleTo.viaOnly,
+        pathNot: normalizeToREAsString(lRuleTo.viaNot),
+      };
+    }
+    delete lRuleTo.viaNot;
+  }
+  if (has(lRuleTo, "viaSomeNot")) {
+    if (!has(lRuleTo, "via.pathNot")) {
+      lRuleTo.via = {
+        ...lRuleTo.via,
+        pathNot: normalizeToREAsString(lRuleTo.viaSomeNot),
+      };
+    }
+    delete lRuleTo.viaSomeNot;
+  }
+  return lRuleTo;
+}
+
+/**
  * @param {import("../../../types/rule-set.mjs").IAnyRuleType} pRule
- * @returns {import("../../../types/strict-rule-set.js").IStrictAnyRuleType}
+ * @returns {import("../../../types/strict-rule-set.mjs").IStrictAnyRuleType}
  */
 function normalizeRule(pRule) {
+  const lRuleTo = normalizeVias(pRule.to);
   return {
     ...pRule,
     severity: normalizeSeverity(pRule.severity),
     name: normalizeName(pRule.name),
     from: normalizeREProperties(pRule.from),
-    to: normalizeREProperties(pRule.to),
+    to: normalizeREProperties(lRuleTo),
     scope: normalizeScope(pRule.scope),
     ...(pRule.module ? { module: normalizeREProperties(pRule.module) } : {}),
   };
@@ -66,12 +114,15 @@ export default function normalizeRuleSet(pRuleSet) {
       Reflect.deleteProperty(lRuleSet, "allowed");
       Reflect.deleteProperty(lRuleSet, "allowedSeverity");
     } else {
-      lRuleSet.allowed = lRuleSet.allowed.map((pRule) => ({
-        ...pRule,
-        name: "not-in-allowed",
-        from: normalizeREProperties(pRule.from),
-        to: normalizeREProperties(pRule.to),
-      }));
+      lRuleSet.allowed = lRuleSet.allowed.map((pRule) => {
+        const lRuleTo = normalizeVias(pRule.to);
+        return {
+          ...pRule,
+          name: "not-in-allowed",
+          from: normalizeREProperties(pRule.from),
+          to: normalizeREProperties(lRuleTo),
+        };
+      });
     }
   }
 

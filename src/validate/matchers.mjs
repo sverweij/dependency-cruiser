@@ -107,55 +107,69 @@ function toDependencyTypesNot(pRule, pDependency) {
       !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
   );
 }
-function pluckName({ name }) {
-  return name;
-}
+
+// eslint-disable-next-line complexity
 function toVia(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.via ||
-      (pDependency.cycle &&
-        pDependency.cycle
-          .map(pluckName)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups)),
-          )),
-  );
+  let lReturnValue = true;
+  if (pRule.to.via && pDependency.cycle) {
+    if (pRule.to.via.path) {
+      lReturnValue = pDependency.cycle.some(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.via.path, pGroups)),
+      );
+    }
+    if (pRule.to.via.pathNot) {
+      lReturnValue = !pDependency.cycle.every(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.via.pathNot, pGroups)),
+      );
+    }
+    if (pRule.to.via.dependencyTypes) {
+      lReturnValue &&= pDependency.cycle.some(({ dependencyTypes }) =>
+        pRule.to.via.dependencyTypes.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
+    if (pRule.to.via.dependencyTypesNot) {
+      lReturnValue &&= !pDependency.cycle.every(({ dependencyTypes }) =>
+        pRule.to.via.dependencyTypesNot.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
+  }
+  return lReturnValue;
 }
 
+// eslint-disable-next-line complexity
 function toViaOnly(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaOnly ||
-      (pDependency.cycle &&
-        pDependency.cycle
-          .map(pluckName)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups)),
-          )),
-  );
-}
-
-function toViaNot(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaNot ||
-      (pDependency.cycle &&
-        !pDependency.cycle
-          .map(pluckName)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups)),
-          )),
-  );
-}
-
-function toviaSomeNot(pRule, pDependency, pGroups) {
-  return Boolean(
-    !pRule.to.viaSomeNot ||
-      (pDependency.cycle &&
-        !pDependency.cycle
-          .map(pluckName)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups)),
-          )),
-  );
+  let lReturnValue = true;
+  if (pRule.to.viaOnly && pDependency.cycle) {
+    if (pRule.to.viaOnly.path) {
+      lReturnValue = pDependency.cycle.every(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
+      );
+    }
+    if (pRule.to.viaOnly.pathNot) {
+      lReturnValue = !pDependency.cycle.some(({ name }) =>
+        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups)),
+      );
+    }
+    if (pRule.to.viaOnly.dependencyTypes) {
+      lReturnValue &&= pDependency.cycle.every(({ dependencyTypes }) =>
+        pRule.to.viaOnly.dependencyTypes.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
+    if (pRule.to.viaOnly.dependencyTypesNot) {
+      lReturnValue &&= !pDependency.cycle.some(({ dependencyTypes }) =>
+        pRule.to.viaOnly.dependencyTypesNot.some((pRuleDependencyType) =>
+          dependencyTypes.includes(pRuleDependencyType),
+        ),
+      );
+    }
+  }
+  return lReturnValue;
 }
 
 function toIsMoreUnstable(pRule, pModule, pDependency) {
@@ -213,8 +227,6 @@ export default {
   toDependencyTypesNot,
   toVia,
   toViaOnly,
-  toViaNot,
-  toviaSomeNot,
   toIsMoreUnstable,
   matchesMoreThanOneDependencyType,
 };

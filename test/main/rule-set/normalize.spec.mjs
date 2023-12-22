@@ -390,4 +390,56 @@ describe("[U] main/rule-set/normalize", () => {
       },
     );
   });
+
+  it("normalizes arrays of re's in via like things to regular regular expressions", () => {
+    deepEqual(
+      normalize({
+        forbidden: [
+          {
+            name: "exotic-require-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              via: ["aap", "noot", "mies"],
+            },
+          },
+        ],
+        allowed: [
+          {
+            from: {},
+            to: {
+              viaSomeNot: ["wim", "zus", "jet"],
+            },
+          },
+        ],
+      }),
+      {
+        forbidden: [
+          {
+            scope: "module",
+            name: "exotic-require-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              via: {
+                path: "aap|noot|mies",
+              },
+            },
+          },
+        ],
+        allowed: [
+          {
+            name: "not-in-allowed",
+            from: {},
+            to: {
+              via: {
+                pathNot: "wim|zus|jet",
+              },
+            },
+          },
+        ],
+        allowedSeverity: "warn",
+      },
+    );
+  });
 });

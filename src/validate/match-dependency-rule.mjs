@@ -1,11 +1,13 @@
+// @ts-check
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
+// @ts-expect-error ts(2307) - apparently tsc doesn't understand subpath imports yet
 import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
  *
- * @param {import("../../types/dependency-cruiser.js").IModule} pFrom
- * @param {import("../../types/dependency-cruiser.js").IDependency} pTo
+ * @param {import("../../types/dependency-cruiser.mjs").IModule} pFrom
+ * @param {import("../../types/dependency-cruiser.mjs").IDependency} pTo
  * @returns {(pRule) => boolean}
  */
 function match(pFrom, pTo) {
@@ -41,15 +43,13 @@ function match(pFrom, pTo) {
       ) &&
       matchers.toVia(pRule, pTo, lGroups) &&
       matchers.toViaOnly(pRule, pTo, lGroups) &&
-      matchers.toViaNot(pRule, pTo, lGroups) &&
-      matchers.toviaSomeNot(pRule, pTo, lGroups) &&
       matchers.toIsMoreUnstable(pRule, pFrom, pTo)
     );
   };
 }
+
 /**
- *
- * @param {any} pRule
+ * @param {import("../../types/rule-set.d.mts").IAnyRuleType} pRule
  * @returns boolean
  */
 const isInteresting = (pRule) =>

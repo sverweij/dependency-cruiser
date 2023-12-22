@@ -1,0 +1,12 @@
+{
+  "forbidden": [
+    {
+      "from": {},
+      "to": {
+        "via": {
+          "path": ["(.+)*", "this-is-ok-1", "this-is-ok-2"]
+        }
+      }
+    }
+  ]
+}

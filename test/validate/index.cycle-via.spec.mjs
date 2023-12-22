@@ -16,7 +16,7 @@ describe("[I] validate/index dependency - cycle via", () => {
         from: {},
         to: {
           circular: true,
-          via: "^tmp/ab\\.js$",
+          via: { path: "^tmp/ab\\.js$" },
         },
       },
     ],
@@ -68,7 +68,7 @@ describe("[I] validate/index dependency - cycle via", () => {
           from: {},
           to: {
             circular: true,
-            via: "^tmp/[^.]+\\.js$",
+            via: "^tmp/[^.]+[.]js$",
           },
         },
       ],
@@ -91,6 +91,147 @@ describe("[I] validate/index dependency - cycle via", () => {
       },
     );
   });
+
+  it("a => aa => ab => ac => a get flagged when some of their dependencyTypes are of certain types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "no-circular-1",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["require"],
+            },
+          },
+        },
+        {
+          name: "no-circular-2",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["import"],
+            },
+          },
+        },
+        {
+          name: "no-circular-3",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["import", "require", "local"],
+            },
+          },
+        },
+        {
+          name: "no-circular-4",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypes: ["type-only", "type-import"],
+            },
+          },
+        },
+      ],
+    });
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import"] },
+            { name: "tmp/ac.js", dependencyTypes: ["require"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        valid: false,
+        rules: [
+          { name: "no-circular-1", severity: "warn" },
+          { name: "no-circular-2", severity: "warn" },
+          { name: "no-circular-3", severity: "warn" },
+        ],
+      },
+    );
+  });
+  it("a => aa => ab => ac => a get flagged when some of their dependencyTypes are NOT of certain types", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          name: "no-circular-1",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["require"],
+            },
+          },
+        },
+        {
+          name: "no-circular-2",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["import"],
+            },
+          },
+        },
+        {
+          name: "no-circular-3",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["import", "require", "local"],
+            },
+          },
+        },
+        {
+          name: "no-circular-4",
+          from: {},
+          to: {
+            circular: true,
+            via: {
+              dependencyTypesNot: ["type-only", "type-import"],
+            },
+          },
+        },
+      ],
+    });
+    deepEqual(
+      validate.dependency(
+        lRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: [
+            { name: "tmp/aa.js", dependencyTypes: ["import"] },
+            { name: "tmp/ab.js", dependencyTypes: ["import"] },
+            { name: "tmp/ac.js", dependencyTypes: ["require"] },
+            { name: "tmp/a.js", dependencyTypes: ["import"] },
+          ],
+        },
+      ),
+      {
+        valid: false,
+        rules: [
+          { name: "no-circular-1", severity: "warn" },
+          { name: "no-circular-2", severity: "warn" },
+          { name: "no-circular-4", severity: "warn" },
+        ],
+      },
+    );
+  });
 });
 
 describe("[I] validate/index dependency - cycle via - with group matching", () => {
@@ -102,7 +243,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
         },
         to: {
           circular: true,
-          via: "^$1/ab\\.js$",
+          via: { path: "^$1/ab\\.js$" },
         },
       },
     ],
@@ -198,232 +339,125 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
   });
 });
 
-describe("[I] validate/index dependency - cycle viaOnly", () => {
-  const lCycleViaRuleSet = parseRuleSet({
+describe("[I] validate/index dependency - cycle viaSomeNot (normalizes to via.pathNot) - with group matching", () => {
+  const lCycleButNotViaGroupMatchRuleSet = {
     forbidden: [
       {
-        from: {},
-        to: {
-          circular: true,
-          viaOnly: "^tmp/ab\\.js$",
-        },
+        name: "no-circular-dependency-of-modules",
+        from: { path: "^src/([^/]+)/.+" },
+        to: { viaSomeNot: "^src/$1/.+", circular: true },
       },
     ],
-  });
+  };
 
-  it("a => ba => bb => bc => a doesn't get flagged when the cycle doesn't go via the viaOnly", () => {
+  it("flags when all of the cycle (except the root) is outside the group-matched viaSomeNot", () => {
     deepEqual(
       validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
+        parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
+        { source: "src/module-a/a.js" },
         {
-          resolved: "tmp/ba.js",
+          resolved: "src/module-b/ba.js",
           circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => aa => ab => ac => does not get flagged when only some of them are not in the viaOnly", () => {
-    deepEqual(
-      validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/aa.js",
-          circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => ab a gets flagged becaue all of the via's in the cycle are in the viaOnly", () => {
-    deepEqual(
-      validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/aa.js",
-          circular: true,
-          cycle: ["tmp/ab.js", "tmp/a.js"].map(stringToCycleEntry),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => aa => ab => ac => a get flagged when all of them are in a viaOnly", () => {
-    const lRuleSet = parseRuleSet({
-      forbidden: [
-        {
-          from: {},
-          to: {
-            circular: true,
-            via: "^tmp/[^.]+\\.js$",
-          },
-        },
-      ],
-    });
-    deepEqual(
-      validate.dependency(
-        lRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/aa.js",
-          circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
+          cycle: [
+            "src/module-b/ba.js",
+            "src/module-b/bb.js",
+            "src/module-b/bc.js",
+            "src/module-a/a.js",
+          ].map(stringToCycleEntry),
         },
       ),
       {
         valid: false,
-        rules: [{ name: "unnamed", severity: "warn" }],
-      },
-    );
-  });
-});
-describe("[I] validate/index dependency - cycle viaOnly - with group matching", () => {
-  const lCycleViaRuleSet = parseRuleSet({
-    forbidden: [
-      {
-        from: {
-          path: "^([^/]+)/.+",
-        },
-        to: {
-          circular: true,
-          viaOnly: "^($1)/ab\\.js$",
-        },
-      },
-    ],
-  });
-
-  it("a => ba => bb => bc => a doesn't get flagged when the cycle doesn't go via the viaOnly", () => {
-    deepEqual(
-      validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/ba.js",
-          circular: true,
-          cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => aa => ab => ac => does not get flagged when only some of them are not in the viaOnly", () => {
-    deepEqual(
-      validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/aa.js",
-          circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => ab a gets flagged becaue all of the via's in the cycle are in the viaOnly", () => {
-    deepEqual(
-      validate.dependency(
-        lCycleViaRuleSet,
-        { source: "tmp/a.js" },
-        {
-          resolved: "tmp/aa.js",
-          circular: true,
-          cycle: ["tmp/ab.js", "tmp/a.js"].map(stringToCycleEntry),
-        },
-      ),
-      {
-        valid: true,
-      },
-    );
-  });
-
-  it("a => aa => ab => ac => a get flagged when all of them are in a viaOnly", () => {
-    const lRuleSet = parseRuleSet({
-      forbidden: [
-        {
-          from: {},
-          to: {
-            circular: true,
-            viaOnly: "^tmp/[^.]+\\.js$",
+        rules: [
+          {
+            name: "no-circular-dependency-of-modules",
+            severity: "warn",
           },
-        },
-      ],
-    });
+        ],
+      },
+    );
+  });
+
+  it("flags when only one of the cycle is outside the group-matched viaNot", () => {
     deepEqual(
       validate.dependency(
-        lRuleSet,
-        { source: "tmp/a.js" },
+        parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
+        { source: "src/module-a/a.js" },
         {
-          resolved: "tmp/aa.js",
+          resolved: "src/module-a/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
+          cycle: [
+            "src/module-a/aa.js",
+            "src/module-a/ab.js",
+            "src/module-b/bc.js",
+            "src/module-a/a.js",
+          ].map(stringToCycleEntry),
         },
       ),
       {
         valid: false,
-        rules: [{ name: "unnamed", severity: "warn" }],
+        rules: [
+          {
+            name: "no-circular-dependency-of-modules",
+            severity: "warn",
+          },
+        ],
       },
     );
   });
-  it("a => aa => ab => ac => a get flagged when all of them are in a viaOnly presented as an array", () => {
-    const lRuleSet = parseRuleSet({
-      forbidden: [
-        {
-          from: {},
-          to: {
-            circular: true,
-            viaOnly: ["somethingelse", "^tmp/[^.]+\\.js$"],
-          },
-        },
-      ],
-    });
+
+  it("does not flag when all of the cycle is inside the group-matched viaNot", () => {
     deepEqual(
       validate.dependency(
-        lRuleSet,
-        { source: "tmp/a.js" },
+        parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
+        { source: "src/module-a/a.js" },
         {
-          resolved: "tmp/aa.js",
+          resolved: "src/module-a/aa.js",
           circular: true,
-          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"].map(
-            stringToCycleEntry,
-          ),
+          cycle: [
+            "src/module-a/aa.js",
+            "src/module-a/ab.js",
+            "src/module-a/ac.js",
+            "src/module-a/a.js",
+          ].map(stringToCycleEntry),
         },
       ),
       {
-        valid: false,
-        rules: [{ name: "unnamed", severity: "warn" }],
+        valid: true,
+      },
+    );
+  });
+
+  it("does not flag when all of the cycle is inside the group-matched viaSomeNot that's represented as an array", () => {
+    const lRuleSet = {
+      forbidden: [
+        {
+          name: "no-circular-dependency-of-modules",
+          from: { path: "^src/([^/]+)/.+" },
+          to: {
+            viaSomeNot: "something|^src/$1/.+|somethingelse",
+            circular: true,
+          },
+        },
+      ],
+    };
+    deepEqual(
+      validate.dependency(
+        parseRuleSet(lRuleSet),
+        { source: "src/module-a/a.js" },
+        {
+          resolved: "src/module-a/aa.js",
+          circular: true,
+          cycle: [
+            "src/module-a/aa.js",
+            "src/module-a/ab.js",
+            "src/module-a/ac.js",
+            "src/module-a/a.js",
+          ].map(stringToCycleEntry),
+        },
+      ),
+      {
+        valid: true,
       },
     );
   });

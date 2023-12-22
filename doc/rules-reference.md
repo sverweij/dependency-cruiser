@@ -709,7 +709,69 @@ up at itself.
 }
 ```
 
-### `via` and `viaNot`, `viaOnly` and `viaSomeNot` - restricting what cycles to match
+#### `via` and `viaOnly`- restricting what cycles to match
+
+There are two attributes to put restrictions on through which modules
+cycles are allowed to pass:
+
+- `via`: matches against _some_ of the modules in the cycle
+- `viaOnly`: matches against _all_ of the modules in the cycle
+
+Both take the `path`, `pathNot` and `dependencyTypes`, `dependencyTypesNot`
+attributes that have the a meaning similar to the ones in the `from` and `to`
+parts of a rule, with dependencyTypes expressing the type of relation a
+module has with its predecessor in the cycle.
+
+With the cycle `a/aa.js` -> `a/ab.js` -> `b/bb.js` -> `a/aa.js` the restrictions
+to this:
+
+| restriction    | what it does                                             | example input   | match?  | because...                    |
+| -------------- | -------------------------------------------------------- | --------------- | ------- | ----------------------------- |
+| `via`          | **some** of the modules in the cycle match the condition | `path: "^a/.+"` | `true`  | `a/aa.js` and `a/ab.js` match |
+| `viaOnly`      | **all** of the modules in the cycle match the condition  | `path: "^a/.+"` | `false` | `b/bb.js` doesn't match       |
+| _`viaNot`_     | _deprecated - use `viaOnly.pathNot` in stead_            | `path: "^a/.+"` | `false` | `a/aa.js` and `a/ab.js` match |
+| _`viaSomeNot`_ | _deprecated - use `via.pathNot` in stead_                | `path: "^a/.+"` | `true`  | `b/bb.js` doesn't match       |
+
+##### Example: allow cycles that have a type-only dependency in them
+
+If you're only interested in cycles at run time, you might allow dependencies
+that are only used at compile time to be part of a cycle. `type-only` ones
+are a good example of that. E.g. at run time this cycle, where `r.ts` imports
+some things from `s.ts` as 'type-only':
+
+```mermaid
+flowchart LR
+p.ts --> q.ts --> r.ts --> |type-only| s.ts --> p.ts
+```
+
+... would look like this at run time (so: not a cycle):
+
+```mermaid
+flowchart LR
+p.ts --> q.ts --> r.ts
+s.ts --> p.ts
+```
+
+To express this in a rule, you can use the `viaOnly` attribute:
+
+```javascript
+// log an error for all circular dependencies which consist of only non-`type-only`
+// dependencies
+{
+  name: 'no-circular-at-runtime',
+  severity: 'error',
+  from: {
+  },
+  to: {
+    circular: true,
+    viaOnly: {
+      dependencyTypesNot: ['type-only']
+    }
+  }
+},
+```
+
+##### Example: exclude cycles from erroring when they go to a known 'knot'
 
 Some codebases include a lot of circular dependencies, sometimes with a few 'knots'
 (typically barrel files) that partake in most of them. Fixing these cycles might
@@ -717,30 +779,9 @@ take a spell, so you might want to (temporarily :-) ) exclude them from breaking
 the build. At the same time you might want to prevent any new violation going
 unnoticed because of this.
 
-One solution to this is to use dependency-cruiser's
-[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism, Another
-solution is to put restrictions on through which modules the cycles pass; the
-"via"'s, in a similar fashion as possible with `path` and `pathNot`. There are
-_four_ via-like restrictions in dependency-cruiser, as - different from the
-`path`/`pathNot` restrictions the `via` (and `viaNot`) ones always almost have
-to check against multiple paths; all the "via"'s in the cycle. The variants
-exist to enable matching against only _some_ of the modules in the cycle or
-against _all_ of them.
-
-All these restrictions take the whole cycle into account; _including_ the tested
-'from'; if `a/aa.js` has a cycle via `a/ab.js` and `b/bb/js` back to `a/aa.js`
-the via-like restrictions also take `a/aa.js` into account.
-
-The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
-
-| restriction  | what it does                                                        | example input | match?  | because...                    |
-| ------------ | ------------------------------------------------------------------- | ------------- | ------- | ----------------------------- |
-| `via`        | **some** of the modules in the cycle **do** match the expression    | `^a/.+`       | `true`  | `a/aa.js` and `a/ab.js` match |
-| `viaOnly`    | **all** of the modules in the cycle **do** match the expression     | `^a/.+`       | `false` | `b/bb.js` doesn't match       |
-| `viaNot`     | **all** of the modules in the cycle **don't** match the expression  | `^a/.+`       | `false` | `a/aa.js` and `a/ab.js` match |
-| `viaSomeNot` | **some** of the modules in the cycle **don't** match the expression | `^a/.+`       | `true`  | `b/bb.js` doesn't match       |
-
-#### Usage example: prevent code from going through a 'knot'
+The recommended solution for this is dependency-cruiser's
+[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism.
+However, you can also use the `via` attribute.
 
 In this example `app/javascript/tables/index.ts` and `app/javascript/tables/index.ts`
 are the known 'knots':
@@ -755,10 +796,12 @@ are the known 'knots':
   },
   to: {
     circular: true,
-    viaNot: [
-      '^app/javascript/tables/index.ts',
-      '^app/javascript/ui/index.tsx',
-    ]
+    via: {
+      pathNot: [
+        '^app/javascript/tables/index.ts',
+        '^app/javascript/ui/index.tsx',
+      ]
+    }
   }
 },
 
@@ -771,21 +814,22 @@ are the known 'knots':
   },
   to: {
     circular: true,
-    via: [
+    via: {
+      path: [
       '^app/javascript/tables/index.ts',
       '^app/javascript/ui/index.tsx',
-    ]
+      ]
+    }
   }
 }
 ```
 
-#### Usage example: prevent cycles from going outside a folder
+##### Example: prevent cycles from going outside a folder
 
 This example (adapted from a
 [question on GitHub](https://github.com/sverweij/dependency-cruiser/issues/585)
-by [@PetFeld-ed](https://github.com/PetFeld-ed))
-not only makes use of the `viaSomeNot`, but also displays the use of
-[group matching](#group-matching).
+by [@PetFeld-ed](https://github.com/PetFeld-ed)) not only uses the `via`, but
+also displays [group matching](#group-matching).
 
 ```javascript
 // in the `forbidden` section of a dependency-cruiser config:
@@ -802,7 +846,11 @@ not only makes use of the `viaSomeNot`, but also displays the use of
   },
   to: {
     circular: true,
-    viaSomeNot: '^src/business-components/$1/.+',
+    via: {
+      pathNot: '^src/business-components/$1/.+'
+    },
+    // previously written with the now deprecated viaSomeNot attribute:
+    // viaSomeNot: '^src/business-components/$1/.+'
   },
 }
 ```

@@ -1,6 +1,7 @@
 import Ajv from "ajv";
 import safeRegex from "safe-regex";
 import has from "lodash/has.js";
+import get from "lodash/get.js";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 import configurationSchema from "#configuration-schema";
@@ -34,7 +35,7 @@ function hasPath(pObject, pSection, pCondition) {
 function safeRule(pRule, pSection, pCondition) {
   return (
     !hasPath(pRule, pSection, pCondition) ||
-    safeRegex(normalizeToREAsString(pRule[pSection][pCondition]), {
+    safeRegex(normalizeToREAsString(get(pRule[pSection], pCondition)), {
       limit: MAX_SAFE_REGEX_STAR_REPEAT_LIMIT,
     })
   );
@@ -49,9 +50,13 @@ function assertRuleSafety(pRule) {
     { section: "to", condition: "license" },
     { section: "to", condition: "licenseNot" },
     { section: "to", condition: "via" },
+    { section: "to", condition: "via.path" },
     { section: "to", condition: "viaNot" },
+    { section: "to", condition: "viaNot.path" },
     { section: "to", condition: "viaOnly" },
+    { section: "to", condition: "viaOnly.path" },
     { section: "to", condition: "viaSomeNot" },
+    { section: "to", condition: "viaSomeNot.path" },
   ];
 
   if (

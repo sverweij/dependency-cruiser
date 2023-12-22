@@ -1,5 +1,33 @@
 import type { DependencyType } from "./shared-types.mjs";
 
+export type MiniDependencyRestrictionType =
+  | string
+  | string[]
+  | {
+      /**
+       * A regular expression or an array of regular expressions the
+       * 'via' module should match to be caught by this rule.
+       */
+      path?: string | string[];
+      /**
+       * A regular expression or an array of regular expressions the
+       * 'via' module should match to be caught by this rule.
+       */
+      pathNot?: string | string[];
+      /**
+       * Which dependency types the dependency between this via and the
+       * previous one in the 'via chain' should have to be caught by
+       * this rule
+       */
+      dependencyTypes?: DependencyType[];
+      /**
+       * Which dependency types the dependency between this via and the
+       * previous one in the 'via chain' should _not_ have to be caught by
+       * this rule
+       */
+      dependencyTypesNot?: DependencyType[];
+    };
+
 export interface IBaseRestrictionType {
   /**
    * A regular expression or an array of regular expressions that select
@@ -39,7 +67,7 @@ export interface IToRestriction extends IBaseRestrictionType {
    * the regular via that already matches when only some of the modules in the
    * cycle satisfy the regular expression
    */
-  via?: string | string[];
+  via?: MiniDependencyRestrictionType;
   /**
    * For circular dependencies - whether or not to match cycles that include
    * some modules with this regular expression. If you want to match cycles that
@@ -50,17 +78,19 @@ export interface IToRestriction extends IBaseRestrictionType {
    * disallow some cycles with a lower severity - setting up a rule with a via
    * that ignores them in an 'allowed' section.
    */
-  viaOnly?: string | string[];
+  viaOnly?: MiniDependencyRestrictionType;
   /**
    * For circular dependencies - whether or not to match cycles that include
    * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
    * except when they go through one specific module. Typically to temporarily
    * allow some cycles until they're removed.
+   * @deprecated use viaOnly.pathNot in stead
    */
   viaNot?: string | string[];
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.
+   * @deprecated use via.pathNot in stead
    */
   viaSomeNot?: string | string[];
   /**
