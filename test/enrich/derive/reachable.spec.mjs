@@ -61,6 +61,7 @@ const GRAPH_TWO = [
     dependencies: [],
   },
 ];
+
 const ANNOTATED_GRAPH_FOR_HAJOO = [
   {
     source: "./src/index.js",
@@ -138,7 +139,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         },
       ],
     };
-    const lAnnotatedGraphForHajooAllowed = [
+    const lExpected = [
       {
         source: "./src/index.js",
         dependencies: [
@@ -152,11 +153,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: [
-                  "./src/index.js",
-                  "./src/intermediate.js",
-                  "./src/hajoo.js",
-                ],
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
               },
             ],
           },
@@ -178,7 +175,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: ["./src/hajoo.js"],
               },
             ],
           },
@@ -198,7 +195,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
     deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-      lAnnotatedGraphForHajooAllowed,
+      lExpected,
     );
   });
 
@@ -211,7 +208,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         },
       ],
     };
-    const lAnnotatedGraphForHajooAllowed = [
+    const lExpected = [
       {
         source: "./src/index.js",
         dependencies: [
@@ -225,11 +222,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: [
-                  "./src/index.js",
-                  "./src/intermediate.js",
-                  "./src/hajoo.js",
-                ],
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
               },
             ],
           },
@@ -251,7 +244,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: ["./src/hajoo.js"],
               },
             ],
           },
@@ -271,7 +264,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
     deepEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-      lAnnotatedGraphForHajooAllowed,
+      lExpected,
     );
   });
 
@@ -284,7 +277,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         },
       ],
     };
-    const lAnnotatedGraphForHajooAllowed = [
+    const lExpected = [
       {
         source: "./src/index.js",
         dependencies: [
@@ -301,15 +294,11 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: [
-                  "./src/index.js",
-                  "./src/intermediate.js",
-                  "./src/hajoo.js",
-                ],
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
               },
               {
                 source: "./src/hajee.js",
-                via: ["./src/index.js", "./src/hajee.js"],
+                via: ["./src/hajee.js"],
               },
             ],
           },
@@ -331,15 +320,11 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: ["./src/hajoo.js"],
               },
               {
                 source: "./src/hajee.js",
-                via: [
-                  "./src/intermediate.js",
-                  "./src/index.js",
-                  "./src/hajee.js",
-                ],
+                via: ["./src/index.js", "./src/hajee.js"],
               },
             ],
           },
@@ -370,7 +355,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
     deepEqual(
       addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo)),
-      lAnnotatedGraphForHajooAllowed,
+      lExpected,
     );
   });
 
@@ -820,7 +805,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/index.js",
-                via: ["./src/intermediate.js", "./src/index.js"],
+                via: ["./src/index.js"],
               },
             ],
           },
@@ -829,7 +814,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: ["./src/hajoo.js"],
               },
             ],
           },

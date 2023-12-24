@@ -265,7 +265,7 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
         "./src/index.js",
         "./src/hajoo.js",
       ),
-      ["./src/index.js", "./src/hajoo.js"],
+      ["./src/hajoo.js"],
     );
   });
 
@@ -336,7 +336,7 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
         "./src/index.js",
         "./src/hajoo.js",
       ),
-      ["./src/index.js", "./src/intermediate.js", "./src/hajoo.js"],
+      ["./src/intermediate.js", "./src/hajoo.js"],
     );
   });
 
@@ -401,7 +401,7 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
         "./src/index.js",
         "./src/hajoo.js",
       ),
-      ["./src/index.js", "./src/intermediate.js", "./src/hajoo.js"],
+      ["./src/intermediate.js", "./src/hajoo.js"],
     );
   });
 });
