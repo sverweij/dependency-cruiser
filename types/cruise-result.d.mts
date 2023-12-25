@@ -301,7 +301,7 @@ export interface IReachesModule {
   /**
    * The path along which the 'to' module is reachable from this one.
    */
-  via: string[];
+  via: IMiniDependency[];
 }
 
 export interface IReaches {

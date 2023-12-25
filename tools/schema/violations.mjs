@@ -32,7 +32,7 @@ export default {
         },
         via: {
           type: "array",
-          items: { type: "string" },
+          items: { $ref: "#/definitions/MiniDependency" },
           description:
             "The path from the from to the to if the violation is transitive",
         },
