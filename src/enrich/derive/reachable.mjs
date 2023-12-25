@@ -135,9 +135,7 @@ function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
       pModule.source !== lFromModule.source &&
       isModuleInRuleTo(pReachableRule, pModule, lFromModule)
     ) {
-      const lPath = pIndexedGraph
-        .getPath(lFromModule.source, pModule.source)
-        .map(({ name }) => name);
+      const lPath = pIndexedGraph.getPath(lFromModule.source, pModule.source);
 
       lFound = lPath.length > 0;
       pModule.reachable = mergeReachableProperties(
