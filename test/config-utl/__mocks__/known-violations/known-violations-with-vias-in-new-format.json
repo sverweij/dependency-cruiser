@@ -1,0 +1,30 @@
+[
+  {
+    "from": "src/foo/index.js",
+    "to": "src/utl/quux.js",
+    "rule": {
+      "severity": "error",
+      "name": "utl-not-reachable-from-extract"
+    },
+    "via": [
+      { "name": "src/foo/index.js", "dependencyTypes": [] },
+      { "name": "src/foo/quuz.js", "dependencyTypes": [] },
+      { "name": "src/utl/quux.js", "dependencyTypes": [] }
+    ],
+    "cycle": []
+  },
+  {
+    "from": "src/foo/index.js",
+    "to": "src/utl/grault.js",
+    "rule": {
+      "severity": "error",
+      "name": "utl-not-reachable-from-extract"
+    },
+    "via": [
+      { "name": "src/foo/index.js", "dependencyTypes": [] },
+      { "name": "src/foo/corge.js", "dependencyTypes": [] },
+      { "name": "src/utl/grault.js", "dependencyTypes": [] }
+    ],
+    "cycle": []
+  }
+]
