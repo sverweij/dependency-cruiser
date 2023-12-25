@@ -226,7 +226,9 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
 describe("[U] graph-utl/indexed-module-graph - getPath", () => {
   it("does not explode when passed an empty graph", () => {
     deepEqual(
-      new IndexedModuleGraph([]).getPath("./src/index.js", "./src/hajoo.js"),
+      new IndexedModuleGraph([])
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       [],
     );
   });
@@ -240,10 +242,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/hajoo.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       [],
     );
   });
@@ -261,10 +262,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/hajoo.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       ["./src/hajoo.js"],
     );
   });
@@ -282,10 +282,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/index.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/index.js")
+        .map(({ name }) => name),
       [],
     );
   });
@@ -303,10 +302,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/hajoo.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       [],
     );
   });
@@ -332,10 +330,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/hajoo.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       ["./src/intermediate.js", "./src/hajoo.js"],
     );
   });
@@ -397,10 +394,9 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     deepEqual(
-      new IndexedModuleGraph(lGraph).getPath(
-        "./src/index.js",
-        "./src/hajoo.js",
-      ),
+      new IndexedModuleGraph(lGraph)
+        .getPath("./src/index.js", "./src/hajoo.js")
+        .map(({ name }) => name),
       ["./src/intermediate.js", "./src/hajoo.js"],
     );
   });

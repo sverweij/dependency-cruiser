@@ -154,13 +154,12 @@ export default class IndexedModuleGraph {
   }
 
   /**
-   *
    * @param {string} pFrom
    * @param {string} pTo
    * @param {Set<string>} pVisited
    * @returns {Array<IMiniDependency>}
    */
-  #getPathNew(pFrom, pTo, pVisited = new Set()) {
+  getPath(pFrom, pTo, pVisited = new Set()) {
     const lFromNode = this.findVertexByName(pFrom);
 
     pVisited.add(pFrom);
@@ -181,22 +180,13 @@ export default class IndexedModuleGraph {
     }
 
     for (const lNewFrom of lDirectUnvisitedDependencies) {
-      let lCandidatePath = this.#getPathNew(lNewFrom.name, pTo, pVisited);
+      let lCandidatePath = this.getPath(lNewFrom.name, pTo, pVisited);
 
       if (lCandidatePath.length > 0) {
         return [lNewFrom].concat(lCandidatePath);
       }
     }
     return [];
-  }
-
-  /**
-   * @param {string} pFrom
-   * @param {string} pTo
-   * @returns {string[]}
-   */
-  getPath(pFrom, pTo) {
-    return this.#getPathNew(pFrom, pTo).map(({ name }) => name);
   }
 
   /**
