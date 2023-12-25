@@ -180,7 +180,12 @@ describe("[U] report/error-html/utl", () => {
   it("determineTo - via violation", () => {
     const lInputViolation = {
       type: "reachability",
-      via: ["thing/a", "b", "thingy/bingy/c", "a"],
+      via: [
+        { name: "thing/a", dependencyTypes: [] },
+        { name: "b", dependencyTypes: [] },
+        { name: "thingy/bingy/c", dependencyTypes: [] },
+        { name: "a", dependencyTypes: [] },
+      ],
       from: "a",
       to: "thing/a",
     };

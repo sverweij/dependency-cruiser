@@ -3,6 +3,7 @@ import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
 import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
+import viaDeps from "./__mocks__/via-deps.mjs";
 import errorHTML from "#report/error-html/index.mjs";
 
 describe("[I] report/error-html", () => {
@@ -81,5 +82,20 @@ describe("[I] report/error-html", () => {
       lResult.output,
       /src\/extract\/transpile\/index\.js<\/a>&nbsp;<span class="extra">\(I: 33%\)<\/span><\/td>[^<]*<td>src\/extract\/transpile\/meta.js&nbsp;<span class="extra">\(I: 80%\)<\/span>/,
     );
+  });
+
+  it("report nicely on via's", () => {
+    const lResult = errorHTML(viaDeps);
+
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+
+    // vias as vias in the 'to' column:
+    match(
+      lResult.output,
+      /<td>src\/utl\/find-rule-by-name\.js<br\/>via-one &rightarrow;<br\/>via-two<\/td>/,
+    );
+    // vias as vias in the 'to' column:
+    // match(lResult.output, /via-one &rightarrow;<br\/>via-two/);
   });
 });

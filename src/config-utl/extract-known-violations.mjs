@@ -20,8 +20,9 @@ import makeAbsolute from "./make-absolute.mjs";
  * @returns {IViolation}
  */
 function makeForwardCompatible(pKnownViolation) {
+  let lReturnValue = pKnownViolation;
   if (Boolean(pKnownViolation.cycle)) {
-    return {
+    lReturnValue = {
       ...pKnownViolation,
       cycle: pKnownViolation.cycle.map((pModule) => {
         if (Boolean(pModule.name)) {
@@ -34,7 +35,21 @@ function makeForwardCompatible(pKnownViolation) {
       }),
     };
   }
-  return pKnownViolation;
+  if (Boolean(pKnownViolation.via)) {
+    lReturnValue = {
+      ...pKnownViolation,
+      via: pKnownViolation.via.map((pModule) => {
+        if (Boolean(pModule.name)) {
+          return pModule;
+        }
+        return {
+          name: pModule,
+          dependencyTypes: [],
+        };
+      }),
+    };
+  }
+  return lReturnValue;
 }
 
 export default async function extractKnownViolations(pKnownViolationsFileName) {

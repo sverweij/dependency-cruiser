@@ -52,9 +52,9 @@ function formatCycleViolation(pViolation) {
  * @returns {string}
  */
 function formatReachabilityViolation(pViolation) {
-  return `${pViolation.from} -> ${pViolation.to} (via ${pViolation.via.join(
-    " -> ",
-  )})`;
+  return `${pViolation.from} -> ${pViolation.to} (via ${pViolation.via
+    .map(({ name }) => name)
+    .join(" -> ")})`;
 }
 
 /**

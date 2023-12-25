@@ -162,14 +162,18 @@ export default {
           modules: [
             {
               source: "src/utl/quux.js",
-              via: ["src/foo/index.js", "src/foo/quuz.js", "src/utl/quux.js"],
+              via: [
+                { name: "src/foo/index.js", dependencyTypes: [] },
+                { name: "src/foo/quuz.js", dependencyTypes: [] },
+                { name: "src/utl/quux.js", dependencyTypes: [] },
+              ],
             },
             {
               source: "src/utl/grault.js",
               via: [
-                "src/foo/index.js",
-                "src/foo/corge.js",
-                "src/utl/grault.js",
+                { name: "src/foo/index.js", dependencyTypes: [] },
+                { name: "src/foo/corge.js", dependencyTypes: [] },
+                { name: "src/utl/grault.js", dependencyTypes: [] },
               ],
             },
           ],
@@ -237,7 +241,11 @@ export default {
           severity: "error",
           name: "utl-not-reachable-from-extract",
         },
-        via: ["src/foo/index.js", "src/foo/quuz.js", "src/utl/quux.js"],
+        via: [
+          { name: "src/foo/index.js", dependencyTypes: [] },
+          { name: "src/foo/quuz.js", dependencyTypes: [] },
+          { name: "src/utl/quux.js", dependencyTypes: [] },
+        ],
         cycle: [],
       },
       {
@@ -247,7 +255,11 @@ export default {
           severity: "error",
           name: "utl-not-reachable-from-extract",
         },
-        via: ["src/foo/index.js", "src/foo/corge.js", "src/utl/grault.js"],
+        via: [
+          { name: "src/foo/index.js", dependencyTypes: [] },
+          { name: "src/foo/corge.js", dependencyTypes: [] },
+          { name: "src/utl/grault.js", dependencyTypes: [] },
+        ],
         cycle: [],
       },
       {

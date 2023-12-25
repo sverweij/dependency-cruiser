@@ -34,19 +34,18 @@ function mergeReachableProperties(pModule, pRule, pPath, pModuleFrom) {
   const lIndexExistingReachable = lReachables.findIndex(
     (pReachable) => pReachable.asDefinedInRule === pRule.name,
   );
-  const lIsReachable = pPath.length > 1;
+  const lIsReachable = pPath.length > 0;
 
   if (lIndexExistingReachable > -1) {
     lReachables[lIndexExistingReachable].value =
       lReachables[lIndexExistingReachable].value || lIsReachable;
     return lReachables;
-  } else {
-    return lReachables.concat({
-      value: lIsReachable,
-      asDefinedInRule: pRule.name,
-      matchedFrom: pModuleFrom,
-    });
   }
+  return lReachables.concat({
+    value: lIsReachable,
+    asDefinedInRule: pRule.name,
+    matchedFrom: pModuleFrom,
+  });
 }
 
 function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
@@ -63,12 +62,11 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
       via: pPath,
     });
     return lReaches;
-  } else {
-    return lReaches.concat({
-      asDefinedInRule: pRule.name,
-      modules: [{ source: pToModule.source, via: pPath }],
-    });
   }
+  return lReaches.concat({
+    asDefinedInRule: pRule.name,
+    modules: [{ source: pToModule.source, via: pPath }],
+  });
 }
 
 function shouldAddReaches(pRule, pModule) {

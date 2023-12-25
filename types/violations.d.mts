@@ -34,7 +34,7 @@ export interface IViolation {
   /**
    * The path from the from to the to if the violation is transitive
    */
-  via?: string[];
+  via?: IMiniDependency[];
   /**
    * metrics - when the violation pertains to a violation of a metrics
    * principle

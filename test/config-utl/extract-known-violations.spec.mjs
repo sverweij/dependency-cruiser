@@ -56,7 +56,7 @@ describe("[I] config-utl/extractKnownViolations", () => {
     ]);
   });
 
-  it("Makes a forward compatible version of the known violations", async () => {
+  it("Makes a forward compatible version of the known violations (cycles)", async () => {
     process.chdir("./test/config-utl/__mocks__/known-violations");
     deepEqual(
       await extractKnownViolations(
@@ -107,6 +107,45 @@ describe("[I] config-utl/extractKnownViolations", () => {
             severity: "error",
             name: "not-to-unresolvable",
           },
+        },
+      ],
+    );
+  });
+
+  it("Makes a forward compatible version of the known violations (via)", async () => {
+    process.chdir("./test/config-utl/__mocks__/known-violations");
+    deepEqual(
+      await extractKnownViolations(
+        "known-violations-with-vias-in-old-format.json",
+      ),
+      [
+        {
+          from: "src/foo/index.js",
+          to: "src/utl/quux.js",
+          rule: {
+            severity: "error",
+            name: "utl-not-reachable-from-extract",
+          },
+          via: [
+            { name: "src/foo/index.js", dependencyTypes: [] },
+            { name: "src/foo/quuz.js", dependencyTypes: [] },
+            { name: "src/utl/quux.js", dependencyTypes: [] },
+          ],
+          cycle: [],
+        },
+        {
+          from: "src/foo/index.js",
+          to: "src/utl/grault.js",
+          rule: {
+            severity: "error",
+            name: "utl-not-reachable-from-extract",
+          },
+          via: [
+            { name: "src/foo/index.js", dependencyTypes: [] },
+            { name: "src/foo/corge.js", dependencyTypes: [] },
+            { name: "src/utl/grault.js", dependencyTypes: [] },
+          ],
+          cycle: [],
         },
       ],
     );
@@ -163,6 +202,45 @@ describe("[I] config-utl/extractKnownViolations", () => {
             severity: "error",
             name: "not-to-unresolvable",
           },
+        },
+      ],
+    );
+  });
+
+  it("Leaves new format vias alone", async () => {
+    process.chdir("./test/config-utl/__mocks__/known-violations");
+    deepEqual(
+      await extractKnownViolations(
+        "known-violations-with-vias-in-new-format.json",
+      ),
+      [
+        {
+          from: "src/foo/index.js",
+          to: "src/utl/quux.js",
+          rule: {
+            severity: "error",
+            name: "utl-not-reachable-from-extract",
+          },
+          via: [
+            { name: "src/foo/index.js", dependencyTypes: [] },
+            { name: "src/foo/quuz.js", dependencyTypes: [] },
+            { name: "src/utl/quux.js", dependencyTypes: [] },
+          ],
+          cycle: [],
+        },
+        {
+          from: "src/foo/index.js",
+          to: "src/utl/grault.js",
+          rule: {
+            severity: "error",
+            name: "utl-not-reachable-from-extract",
+          },
+          via: [
+            { name: "src/foo/index.js", dependencyTypes: [] },
+            { name: "src/foo/corge.js", dependencyTypes: [] },
+            { name: "src/utl/grault.js", dependencyTypes: [] },
+          ],
+          cycle: [],
         },
       ],
     );

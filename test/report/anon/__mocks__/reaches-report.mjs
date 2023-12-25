@@ -157,17 +157,20 @@ export default {
             {
               source: "src/utl/array-util.js",
               via: [
-                "src/extract/index.js",
-                "src/extract/get-dependencies.js",
-                "src/utl/array-util.js",
+                { name: "src/extract/index.js", dependencyTypes: [] },
+                {
+                  name: "src/extract/get-dependencies.js",
+                  dependencyTypes: [],
+                },
+                { name: "src/utl/array-util.js", dependencyTypes: [] },
               ],
             },
             {
               source: "src/utl/find-rule-by-name.js",
               via: [
-                "src/extract/index.js",
-                "src/extract/summarize.js",
-                "src/utl/find-rule-by-name.js",
+                { name: "src/extract/index.js", dependencyTypes: [] },
+                { name: "src/extract/summarize.js", dependencyTypes: [] },
+                { name: "src/utl/find-rule-by-name.js", dependencyTypes: [] },
               ],
             },
           ],
@@ -235,9 +238,9 @@ export default {
           name: "utl-not-reachable-from-extract",
         },
         via: [
-          "src/extract/index.js",
-          "src/extract/get-dependencies.js",
-          "src/utl/array-util.js",
+          { name: "src/extract/index.js", dependencyTypes: [] },
+          { name: "src/extract/get-dependencies.js", dependencyTypes: [] },
+          { name: "src/utl/array-util.js", dependencyTypes: [] },
         ],
       },
       {
@@ -248,9 +251,9 @@ export default {
           name: "utl-not-reachable-from-extract",
         },
         via: [
-          "src/extract/index.js",
-          "src/extract/summarize.js",
-          "src/utl/find-rule-by-name.js",
+          { name: "src/extract/index.js", dependencyTypes: [] },
+          { name: "src/extract/summarize.js", dependencyTypes: [] },
+          { name: "src/utl/find-rule-by-name.js", dependencyTypes: [] },
         ],
       },
       {

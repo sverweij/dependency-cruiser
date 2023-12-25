@@ -34,7 +34,9 @@ function formatCycleTo(pViolation) {
 }
 
 function formatReachabilityTo(pViolation) {
-  return `${pViolation.to}<br/>${pViolation.via.join(" &rightarrow;<br/>")}`;
+  return `${pViolation.to}<br/>${pViolation.via
+    .map(({ name }) => name)
+    .join(" &rightarrow;<br/>")}`;
 }
 
 function formatDependencyTo(pViolation) {

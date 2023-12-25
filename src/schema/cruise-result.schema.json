@@ -144,7 +144,7 @@
               "via": {
                 "type": "array",
                 "description": "The path along which the 'to' module is reachable from this one.",
-                "items": { "type": "string" }
+                "items": { "$ref": "#/definitions/MiniDependency" }
               }
             }
           },
@@ -488,7 +488,7 @@
         },
         "via": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": { "$ref": "#/definitions/MiniDependency" },
           "description": "The path from the from to the to if the violation is transitive"
         },
         "metrics": {

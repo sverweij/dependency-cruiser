@@ -81,9 +81,9 @@ function formatCycleViolation(pViolation) {
 }
 
 function formatReachabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)} ${pViolation.via.join(
-    " -> ",
-  )}`;
+  return `${formatDependencyViolation(pViolation)} ${pViolation.via
+    .map(({ name }) => name)
+    .join(" -> ")}`;
 }
 
 function formatInstabilityViolation(pViolation) {

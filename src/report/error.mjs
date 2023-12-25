@@ -17,19 +17,12 @@ const SEVERITY2CHALK = new Map([
 
 const EXTRA_PATH_INFORMATION_INDENT = 6;
 
-function formatExtraCycleInformation(pCycle) {
+function formatMiniDependency(pMiniDependency) {
   return EOL.concat(
     wrapAndIndent(
-      pCycle.map(({ name }) => name).join(` ${figures.arrowRight} ${EOL}`),
-      EXTRA_PATH_INFORMATION_INDENT,
-    ),
-  );
-}
-
-function formatExtraPathInformation(pExtra) {
-  return EOL.concat(
-    wrapAndIndent(
-      pExtra.join(` ${figures.arrowRight} ${EOL}`),
+      pMiniDependency
+        .map(({ name }) => name)
+        .join(` ${figures.arrowRight} ${EOL}`),
       EXTRA_PATH_INFORMATION_INDENT,
     ),
   );
@@ -48,13 +41,13 @@ function formatDependencyViolation(pViolation) {
 function formatCycleViolation(pViolation) {
   return `${chalk.bold(pViolation.from)} ${
     figures.arrowRight
-  } ${formatExtraCycleInformation(pViolation.cycle)}`;
+  } ${formatMiniDependency(pViolation.cycle)}`;
 }
 
 function formatReachabilityViolation(pViolation) {
   return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
     pViolation.to,
-  )}${formatExtraPathInformation(pViolation.via)}`;
+  )}${formatMiniDependency(pViolation.via)}`;
 }
 
 function formatInstabilityViolation(pViolation) {

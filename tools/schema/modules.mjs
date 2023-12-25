@@ -1,6 +1,7 @@
 import dependencies from "./dependencies.mjs";
 import dependencyType from "./dependency-type.mjs";
 import ruleSummary from "./rule-summary.mjs";
+import miniDependency from "./mini-dependency-type.mjs";
 
 export default {
   definitions: {
@@ -193,7 +194,7 @@ export default {
                 type: "array",
                 description:
                   "The path along which the 'to' module is reachable from this one.",
-                items: { type: "string" },
+                items: { $ref: "#/definitions/MiniDependency" },
               },
             },
           },
@@ -210,5 +211,6 @@ export default {
     ...dependencies.definitions,
     ...ruleSummary.definitions,
     ...dependencyType.definitions,
+    ...miniDependency.definitions,
   },
 };

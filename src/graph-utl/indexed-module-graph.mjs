@@ -140,38 +140,6 @@ export default class IndexedModuleGraph {
   }
 
   /**
-   * @param {string} pFrom
-   * @param {string} pTo
-   * @param {Set<string>} pVisited
-   * @returns {string[]}
-   */
-  getPath(pFrom, pTo, pVisited = new Set()) {
-    let lReturnValue = [];
-    const lFromNode = this.findVertexByName(pFrom);
-
-    pVisited.add(pFrom);
-
-    if (lFromNode) {
-      const lDirectUnvisitedDependencies = lFromNode.dependencies
-        .filter((pDependency) => !pVisited.has(pDependency.name))
-        .map((pDependency) => pDependency.name);
-      if (lDirectUnvisitedDependencies.includes(pTo)) {
-        lReturnValue = [pFrom, pTo];
-      } else {
-        for (const lFrom of lDirectUnvisitedDependencies) {
-          let lCandidatePath = this.getPath(lFrom, pTo, pVisited);
-          // eslint-disable-next-line max-depth
-          if (lCandidatePath.length > 0) {
-            lReturnValue = [pFrom].concat(lCandidatePath);
-            break;
-          }
-        }
-      }
-    }
-    return lReturnValue;
-  }
-
-  /**
    *
    * @param {IEdge} pEdge
    * @returns {IMiniDependency}
@@ -183,6 +151,42 @@ export default class IndexedModuleGraph {
       ? pEdge.dependencyTypes
       : [];
     return lReturnValue;
+  }
+
+  /**
+   * @param {string} pFrom
+   * @param {string} pTo
+   * @param {Set<string>} pVisited
+   * @returns {Array<IMiniDependency>}
+   */
+  getPath(pFrom, pTo, pVisited = new Set()) {
+    const lFromNode = this.findVertexByName(pFrom);
+
+    pVisited.add(pFrom);
+
+    if (!lFromNode) {
+      return [];
+    }
+
+    const lDirectUnvisitedDependencies = lFromNode.dependencies
+      .filter((pDependency) => !pVisited.has(pDependency.name))
+      .map(this.#geldEdge);
+    const lFoundDependency = lDirectUnvisitedDependencies.find(
+      (pDependency) => pDependency.name === pTo,
+    );
+
+    if (lFoundDependency) {
+      return [lFoundDependency];
+    }
+
+    for (const lNewFrom of lDirectUnvisitedDependencies) {
+      let lCandidatePath = this.getPath(lNewFrom.name, pTo, pVisited);
+
+      if (lCandidatePath.length > 0) {
+        return [lNewFrom].concat(lCandidatePath);
+      }
+    }
+    return [];
   }
 
   /**
