@@ -9,10 +9,14 @@ function anonymizePathArray(pPathArray, pWordList) {
   return (pPathArray || []).map((pPath) => anonymizePath(pPath, pWordList));
 }
 
-function anonymizeCycleArray(pCycleArray, pWordList, pAttribute = "name") {
-  return (pCycleArray || []).map((pCycle) => ({
-    ...pCycle,
-    [pAttribute]: anonymizePath(pCycle.name, pWordList),
+function anonymizeMiniDependencyArray(
+  pMiniDependencyArray,
+  pWordList,
+  pAttribute = "name",
+) {
+  return (pMiniDependencyArray || []).map((pMiniDependency) => ({
+    ...pMiniDependency,
+    [pAttribute]: anonymizePath(pMiniDependency.name, pWordList),
   }));
 }
 
@@ -21,7 +25,7 @@ function anonymizeDependencies(pDependencies, pWordList) {
     ...pDependency,
     resolved: anonymizePath(pDependency.resolved, pWordList),
     module: anonymizePath(pDependency.module, pWordList),
-    cycle: anonymizeCycleArray(pDependency.cycle, pWordList),
+    cycle: anonymizeMiniDependencyArray(pDependency.cycle, pWordList),
   }));
 }
 
@@ -29,7 +33,7 @@ function anonymizeReachesModule(pWordList) {
   return (pModule) => ({
     ...pModule,
     source: anonymizePath(pModule.source, pWordList),
-    via: anonymizePathArray(pModule.via, pWordList),
+    via: anonymizeMiniDependencyArray(pModule.via, pWordList),
   });
 }
 
@@ -85,7 +89,7 @@ function anonymizeFolders(pFolders, pWordList) {
           name: anonymizePath(pDependency.name, pWordList),
         };
         if (lReturnDependencies.cycle) {
-          lReturnDependencies.cycle = anonymizeCycleArray(
+          lReturnDependencies.cycle = anonymizeMiniDependencyArray(
             pDependency.cycle,
             pWordList,
           );
@@ -109,10 +113,13 @@ function anonymizeViolations(pViolations, pWordList) {
       ...pViolation,
       from: anonymizePath(pViolation.from, pWordList),
       to: anonymizePath(pViolation.to, pWordList),
-      cycle: anonymizeCycleArray(pViolation.cycle, pWordList),
+      cycle: anonymizeMiniDependencyArray(pViolation.cycle, pWordList),
     };
     if (pViolation.via) {
-      lReturnValue.via = anonymizePathArray(pViolation.via, pWordList);
+      lReturnValue.via = anonymizeMiniDependencyArray(
+        pViolation.via,
+        pWordList,
+      );
     }
     return lReturnValue;
   });
