@@ -203,7 +203,10 @@ export default {
           severity: "error",
           name: "some-via-rule",
         },
-        via: ["via-one", "via-another"],
+        via: [
+          { name: "via-one", dependencyTypes: [] },
+          { name: "via-another", dependencyTypes: [] },
+        ],
       },
       {
         type: "reachability",
@@ -213,7 +216,10 @@ export default {
           severity: "error",
           name: "some-via-rule",
         },
-        via: ["via-one", "via-another"],
+        via: [
+          { name: "via-one", dependencyTypes: [] },
+          { name: "via-another", dependencyTypes: [] },
+        ],
       },
       {
         type: "module",
