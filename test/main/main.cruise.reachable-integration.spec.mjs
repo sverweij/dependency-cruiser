@@ -37,7 +37,16 @@ describe("[E] main.cruise - reachable integration", () => {
           severity: "warn",
           name: "no-db-access-from-schemas",
         },
-        via: ["src/utilities/plumbing.js", "src/db/admin.js"],
+        via: [
+          {
+            name: "src/utilities/plumbing.js",
+            dependencyTypes: ["local", "require"],
+          },
+          {
+            name: "src/db/admin.js",
+            dependencyTypes: ["local", "require"],
+          },
+        ],
       },
       {
         type: "module",

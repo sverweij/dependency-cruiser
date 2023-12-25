@@ -108,9 +108,7 @@ function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
 
   for (let lToModule of lToModules) {
     if (pModule.source !== lToModule.source) {
-      const lPath = pIndexedGraph
-        .getPath(pModule.source, lToModule.source)
-        .map(({ name }) => name);
+      const lPath = pIndexedGraph.getPath(pModule.source, lToModule.source);
 
       if (lPath.length > 0) {
         pModule.reaches = mergeReachesProperties(

@@ -153,7 +153,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: [
+                  { name: "./src/intermediate.js", dependencyTypes: [] },
+                  { name: "./src/hajoo.js", dependencyTypes: [] },
+                ],
               },
             ],
           },
@@ -175,7 +178,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/hajoo.js"],
+                via: [{ name: "./src/hajoo.js", dependencyTypes: [] }],
               },
             ],
           },
@@ -222,7 +225,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: [
+                  { name: "./src/intermediate.js", dependencyTypes: [] },
+                  { name: "./src/hajoo.js", dependencyTypes: [] },
+                ],
               },
             ],
           },
@@ -244,7 +250,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/hajoo.js"],
+                via: [{ name: "./src/hajoo.js", dependencyTypes: [] }],
               },
             ],
           },
@@ -294,11 +300,14 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"],
+                via: [
+                  { name: "./src/intermediate.js", dependencyTypes: [] },
+                  { name: "./src/hajoo.js", dependencyTypes: [] },
+                ],
               },
               {
                 source: "./src/hajee.js",
-                via: ["./src/hajee.js"],
+                via: [{ name: "./src/hajee.js", dependencyTypes: [] }],
               },
             ],
           },
@@ -320,11 +329,14 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/hajoo.js"],
+                via: [{ name: "./src/hajoo.js", dependencyTypes: [] }],
               },
               {
                 source: "./src/hajee.js",
-                via: ["./src/index.js", "./src/hajee.js"],
+                via: [
+                  { name: "./src/index.js", dependencyTypes: [] },
+                  { name: "./src/hajee.js", dependencyTypes: [] },
+                ],
               },
             ],
           },
@@ -805,7 +817,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/index.js",
-                via: ["./src/index.js"],
+                via: [{ name: "./src/index.js", dependencyTypes: [] }],
               },
             ],
           },
@@ -814,7 +826,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/hajoo.js"],
+                via: [{ name: "./src/hajoo.js", dependencyTypes: [] }],
               },
             ],
           },
