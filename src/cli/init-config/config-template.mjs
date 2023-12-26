@@ -231,18 +231,15 @@ module.exports = {
 
     /* List of module systems to cruise. 
        When left out dependency-cruiser will fall back to the list of _all_ 
-       module systems it knows of. It's the safe option, but might come at a
-       performance penalty:
+       module systems it knows of. It's the default because it's the safe option
+       It might come at a performance penalty, though.
        moduleSystems: ['amd', 'cjs', 'es6', 'tsd']
       
        As in practice only commonjs ('cjs') and ecmascript modules ('es6')
-       are widely used, we set these here as default. Might you make use of 
-       asynchronous module definitions ('amd' - require.js style), or typescript's
-       legacy triple slash directives ('tsd') you can add these to the array
-       yourself or comment the moduleSystems entry out.
+       are widely used, you can limit the moduleSystems to those.
      */
     
-    moduleSystems: ['cjs', 'es6'],
+    // moduleSystems: ['cjs', 'es6'],
 
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
