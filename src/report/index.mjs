@@ -23,6 +23,7 @@ const TYPE2MODULE = new Map([
   ["null", "./null.mjs"],
   ["teamcity", "./teamcity.mjs"],
   ["text", "./text.mjs"],
+  ["x-dot-webpage", "./dot-webpage/dot-module.mjs"],
 ]);
 
 /**
