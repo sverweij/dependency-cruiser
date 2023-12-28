@@ -9,7 +9,7 @@ import deleteDammit from "./delete-dammit.utl.cjs";
 import {
   UnCalledWritableTestStream,
   WritableTestStream,
-} from "./init-config/writable-test-stream.utl.mjs";
+} from "./writable-test-stream.utl.mjs";
 import cli from "#cli/index.mjs";
 
 const OUT_DIR = "./test/cli/__output__";
