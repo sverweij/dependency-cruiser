@@ -16,14 +16,14 @@ describe("[U] cli/init-config/write-config", () => {
 
   it("writes if there's no file there yet", async () => {
     const lOutStream = new WritableTestStream(
-      /Successfully created 'depcruise[.]config[.]js'/
+      /Successfully created 'depcruise[.]config[.]js'/,
     );
     const lEmptyDirectory =
       "test/cli/__fixtures__/init-config/no-config-files-exist";
     const lCustomConfigFileName = "depcruise.config.js";
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      lCustomConfigFileName
+      lCustomConfigFileName,
     )}`;
 
     process.chdir(lEmptyDirectory);
@@ -34,7 +34,7 @@ describe("[U] cli/init-config/write-config", () => {
           wim: { zus: "jet heide", does: "hok schapen" },
         }`,
         lCustomConfigFileName,
-        lOutStream
+        lOutStream,
       );
 
       const lResult = await import(lConfigResultFileName);

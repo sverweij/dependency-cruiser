@@ -24,12 +24,12 @@ describe("[I] cli/init-config/index", () => {
 
   it("init creates a self-contained js rules file", async () => {
     const lOutStream = new WritableTestStream(
-      /Successfully created '[.]dependency-cruiser[.]js'/
+      /Successfully created '[.]dependency-cruiser[.]js'/,
     );
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -48,13 +48,13 @@ describe("[I] cli/init-config/index", () => {
 
   it("init yes creates a self-contained js rules file", async () => {
     const lOutStream = new WritableTestStream(
-      /Successfully created '[.]dependency-cruiser-self-contained[.]js'/
+      /Successfully created '[.]dependency-cruiser-self-contained[.]js'/,
     );
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfig = ".dependency-cruiser-self-contained.js";
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      lConfig
+      lConfig,
     )}`;
 
     try {
@@ -74,12 +74,12 @@ describe("[I] cli/init-config/index", () => {
 
   it("init yes in a ts project creates a self-contained js rules file with typescript things flipped to yes", async () => {
     const lOutStream = new WritableTestStream(
-      /Successfully created '[.]dependency-cruiser[.]js'/
+      /Successfully created '[.]dependency-cruiser[.]js'/,
     );
     process.chdir("test/cli/__fixtures__/init-config/ts-config-exists");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/ts-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -102,13 +102,13 @@ describe("[I] cli/init-config/index", () => {
 
   it("init yes in a webpack project creates a self-contained js rules file with webpack things flipped to yes", async () => {
     const lOutStream = new WritableTestStream(
-      /Successfully created '[.]dependency-cruiser[.]js'/
+      /Successfully created '[.]dependency-cruiser[.]js'/,
     );
 
     process.chdir("test/cli/__fixtures__/init-config/webpack-config-exists");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/webpack-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -131,13 +131,13 @@ describe("[I] cli/init-config/index", () => {
 
   it("init experimental-scripts creates a .dependency-cruiser config + updates package.json with scripts", async () => {
     const lOutStream = new WritableTestStream(
-      /(Successfully created '.dependency-cruiser.js'|Run scripts added to '[.]\/package.json':)/
+      /(Successfully created '.dependency-cruiser.js'|Run scripts added to '[.]\/package.json':)/,
     );
     process.chdir("test/cli/init-config/__fixtures__/update-manifest");
 
     const lConfigResultFileName = `./${join(
       "__fixtures__/update-manifest",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     const lManifestFilename = "package.json";
@@ -162,15 +162,15 @@ describe("[I] cli/init-config/index", () => {
 
   it("init experimental-scripts updates package.json with scripts, and leaves an existing dc config alone", async () => {
     const lOutStream = new WritableTestStream(
-      /Run scripts added to '[.]\/package.json':/
+      /Run scripts added to '[.]\/package.json':/,
     );
     process.chdir(
-      "test/cli/init-config/__fixtures__/update-manifest-dc-config-exists"
+      "test/cli/init-config/__fixtures__/update-manifest-dc-config-exists",
     );
 
     const lConfigResultFileName = `./${join(
       "__fixtures__/update-manifest-dc-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
     const lManifestFilename = "package.json";
     writeFileSync(lManifestFilename, "{}");
