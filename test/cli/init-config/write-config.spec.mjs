@@ -2,6 +2,7 @@ import { ok, equal } from "node:assert/strict";
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import deleteDammit from "../delete-dammit.utl.cjs";
+import { WritableTestStream } from "./writeable-test-stream.utl.mjs";
 import writeConfig from "#cli/init-config/write-config.mjs";
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
@@ -14,6 +15,9 @@ describe("[U] cli/init-config/write-config", () => {
   });
 
   it("writes if there's no file there yet", async () => {
+    const lOutStream = new WritableTestStream(
+      /Successfully created 'depcruise[.]config[.]js'/,
+    );
     const lEmptyDirectory =
       "test/cli/__fixtures__/init-config/no-config-files-exist";
     const lCustomConfigFileName = "depcruise.config.js";
@@ -30,6 +34,7 @@ describe("[U] cli/init-config/write-config", () => {
           wim: { zus: "jet heide", does: "hok schapen" },
         }`,
         lCustomConfigFileName,
+        lOutStream,
       );
 
       const lResult = await import(lConfigResultFileName);

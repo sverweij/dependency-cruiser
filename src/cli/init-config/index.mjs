@@ -75,8 +75,14 @@ function manifestIsUpdatable(pNormalizedInitConfig) {
 /**
  * @param {boolean|import("./types").OneShotConfigIDType} pInit
  * @param {string=} pConfigFileName
+ * @param {{stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream}=} pStreams
  */
-export default function initConfig(pInit, pConfigFileName) {
+export default function initConfig(pInit, pConfigFileName, pStreams) {
+  const lStreams = {
+    stdout: process.stdout,
+    stderr: process.stderr,
+    ...pStreams,
+  };
   /* c8 ignore start */
   if (pInit === true) {
     getUserInput()
@@ -84,7 +90,7 @@ export default function initConfig(pInit, pConfigFileName) {
       .then(buildConfig)
       .then(writeConfig)
       .catch((pError) => {
-        process.stderr.write(`\n  ERROR: ${pError.message}\n`);
+        lStreams.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
     /* c8 ignore stop */
   } else if (pInit !== false) {
@@ -92,11 +98,17 @@ export default function initConfig(pInit, pConfigFileName) {
     const lConfigFileName = pConfigFileName || getDefaultConfigFileName();
 
     if (!fileExists(lConfigFileName)) {
-      writeConfig(buildConfig(lNormalizedInitConfig), lConfigFileName);
+      writeConfig(
+        buildConfig(lNormalizedInitConfig),
+        lConfigFileName,
+        lStreams.stdout,
+      );
     }
 
     if (manifestIsUpdatable(lNormalizedInitConfig)) {
-      writeRunScriptsToManifest(lNormalizedInitConfig);
+      writeRunScriptsToManifest(lNormalizedInitConfig, {
+        outStream: lStreams.stdout,
+      });
     }
   }
 }
