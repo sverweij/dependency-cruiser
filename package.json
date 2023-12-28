@@ -214,7 +214,6 @@
     "eslint-plugin-security": "2.1.0",
     "eslint-plugin-unicorn": "^50.0.1",
     "husky": "8.0.3",
-    "intercept-stdout": "0.1.2",
     "lint-staged": "15.2.0",
     "mocha": "10.2.0",
     "normalize-newline": "4.1.0",

@@ -4,9 +4,12 @@ import { doesNotThrow, equal, throws } from "node:assert/strict";
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
 import { join, posix as path } from "node:path";
 import chalk from "chalk";
-import intercept from "intercept-stdout";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
+import {
+  UnCalledWritableTestStream,
+  WritableTestStream,
+} from "./init-config/writable-test-stream.utl.mjs";
 import cli from "#cli/index.mjs";
 
 const OUT_DIR = "./test/cli/__output__";
@@ -289,122 +292,81 @@ describe("[E] cli/index", () => {
     });
 
     it("dependency-cruise -i shows meta info about the current environment", async () => {
-      let lCapturedStdout = "";
-      const unhookIntercept = intercept((pText) => {
-        lCapturedStdout += pText;
-      });
-      const lExitCode = await cli(null, { info: true });
-
-      unhookIntercept();
+      const lExitCode = await cli(
+        null,
+        { info: true },
+        {
+          stdout: new WritableTestStream(
+            /If you need a supported, but not enabled transpiler/,
+          ),
+          stderr: new UnCalledWritableTestStream(),
+        },
+      );
 
       equal(lExitCode, 0);
-      equal(
-        lCapturedStdout.includes(
-          "If you need a supported, but not enabled transpiler",
-        ),
-        true,
-      );
     });
 
     it("dependency-cruise -f cjs.dir.wontmarch.json this-doesnot-exist - non-existing generates an error", async () => {
-      let lCapturedStderr = "";
-      const unhookInterceptStdOut = intercept(() => {
-        // This space intentionally left empty
-      });
-      const unhookInterceptStdError = intercept((pText) => {
-        lCapturedStderr += pText;
-      });
-      const lExitCode = await cli(["this-doesnot-exist"], {
-        outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json"),
-      });
-
-      unhookInterceptStdOut();
-      unhookInterceptStdError();
+      const lExitCode = await cli(
+        ["this-doesnot-exist"],
+        {
+          outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json"),
+        },
+        {
+          stdout: new UnCalledWritableTestStream(),
+          stderr: new WritableTestStream(
+            /ERROR: Can't open 'this-doesnot-exist' for reading[.] Does it exist[?]/,
+          ),
+        },
+      );
 
       equal(lExitCode, 1);
-      equal(
-        lCapturedStderr.includes(
-          "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n",
-        ),
-        true,
-      );
     });
 
     it("dependency-cruise -f file/you/cant/write/to - generates an error", async () => {
-      let lCapturedStderr = "";
-      const unhookInterceptStdOut = intercept(() => {
-        // This space intentionally left empty
-      });
-      const unhookInterceptStdError = intercept((pText) => {
-        lCapturedStderr += pText;
-      });
-      const lExitCode = await cli(["test/cli/__fixtures__"], {
-        outputTo: path.join(OUT_DIR, "file/you/cant/write/to"),
-      });
-
-      unhookInterceptStdOut();
-      unhookInterceptStdError();
-      intercept((pText) => {
-        lCapturedStderr += pText;
-      })();
+      const lExitCode = await cli(
+        ["test/cli/__fixtures__"],
+        {
+          outputTo: path.join(OUT_DIR, "file/you/cant/write/to"),
+        },
+        {
+          stdout: new UnCalledWritableTestStream(),
+          stderr: new WritableTestStream(
+            /didn't work[.] Error: ENOENT: no such file or directory, open/,
+          ),
+        },
+      );
 
       equal(lExitCode, 1);
-      equal(
-        lCapturedStderr.includes(
-          "didn't work. Error: ENOENT: no such file or directory, open",
-        ),
-        true,
-      );
     });
 
     it("dependency-cruise test/cli/__fixtures__ without rules will report no dependency violations on stdout", async () => {
-      let lCapturedStderr = "";
-      const unhookInterceptStdOut = intercept(() => {
-        // This space intentionally left empty
+      const lExitCode = await cli(["test/cli/__fixtures__"], null, {
+        stdout: new UnCalledWritableTestStream(),
+        stderr: new WritableTestStream(/no dependency violations found/),
       });
-      const unhookInterceptStdError = intercept((pText) => {
-        lCapturedStderr += pText;
-      });
-      const lExitCode = await cli(["test/cli/__fixtures__"]);
-
-      unhookInterceptStdOut();
-      unhookInterceptStdError();
-      intercept((pText) => {
-        lCapturedStderr += pText;
-      })();
 
       equal(lExitCode, 0);
-      equal(lCapturedStderr.includes("no dependency violations found"), true);
     });
 
     it("dependency-cruise --init will generate a rules file and tells that back on stdout", async () => {
-      let lCapturedStdout = "";
       const lValidationFileName = ".dependency-cruiser.js";
-      const unhookInterceptStdOut = intercept((pText) => {
-        lCapturedStdout += pText;
-      });
-      const unhookInterceptStdError = intercept(() => {
-        // This space intentionally left empty
-      });
 
       deleteDammit(lValidationFileName);
-      const lExitCode = await cli(["test/cli/__fixtures__"], {
-        init: "js",
-      });
-
-      unhookInterceptStdOut();
-      unhookInterceptStdError();
-      intercept((pText) => {
-        lCapturedStdout += pText;
-      })();
+      const lExitCode = await cli(
+        ["test/cli/__fixtures__"],
+        {
+          init: "js",
+        },
+        {
+          stderr: new UnCalledWritableTestStream(),
+          stdout: new WritableTestStream(
+            /Successfully created '[.]dependency-cruiser[.]js'/,
+          ),
+        },
+      );
 
       equal(lExitCode, 0);
-      equal(
-        lCapturedStdout.includes(
-          `Successfully created '${lValidationFileName}'`,
-        ),
-        true,
-      );
       deleteDammit(lValidationFileName);
     });
 
@@ -618,6 +580,12 @@ describe("[E] cli/index", () => {
         validate: "test/cli/__fixtures__/known-violations/config.js",
         ignoreKnown:
           "test/cli/__fixtures__/known-violations/invalid-known-violations-file.json",
+      },
+      {
+        stdout: new UnCalledWritableTestStream(),
+        stderr: new WritableTestStream(
+          /Can't open 'test\/cli\/__fixtures__\/known-violations\/invalid-known-violations-file[.]json' for reading[.] Does it exist[?]/,
+        ),
       },
     );
 
