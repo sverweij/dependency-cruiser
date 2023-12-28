@@ -138,16 +138,27 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
  *
  * @param {string[]} pFileDirectoryArray
  * @param {import("../../types/options.mjs").ICruiseOptions} lCruiseOptions
+ * @param {{stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream}=} pStreams
  * @returns {number}
  */
-export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
+// eslint-disable-next-line complexity
+export default async function executeCli(
+  pFileDirectoryArray,
+  pCruiseOptions,
+  pStreams,
+) {
+  const lStreams = {
+    stdout: process.stdout,
+    stderr: process.stderr,
+    ...(pStreams || {}),
+  };
   let lCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 
   try {
     /* c8 ignore start */
     if (isInstalledGlobally) {
-      process.stderr.write(
+      lStreams.stderr.write(
         `\n  ${chalk.yellow(
           "WARNING",
         )}: You're running a globally installed dependency-cruiser.\n\n` +
@@ -164,15 +175,15 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
       const { default: formatMetaInfo } = await import(
         "./format-meta-info.mjs"
       );
-      process.stdout.write(await formatMetaInfo());
+      lStreams.stdout.write(await formatMetaInfo());
     } else if (lCruiseOptions.init) {
       const { default: initConfig } = await import("./init-config/index.mjs");
-      initConfig(lCruiseOptions.init);
+      initConfig(lCruiseOptions.init, null, lStreams);
     } else {
       lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
     }
   } catch (pError) {
-    process.stderr.write(`\n  ${chalk.red("ERROR")}: ${pError.message}\n`);
+    lStreams.stderr.write(`\n  ${chalk.red("ERROR")}: ${pError.message}\n`);
     bus.emit("end");
     lExitCode = 1;
   }
