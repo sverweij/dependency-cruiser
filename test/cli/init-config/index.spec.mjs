@@ -6,7 +6,7 @@ import deleteDammit from "../delete-dammit.utl.cjs";
 import {
   UnCalledWritableTestStream,
   WritableTestStream,
-} from "./writeable-test-stream.utl.mjs";
+} from "./writable-test-stream.utl.mjs";
 import configurationSchema from "#configuration-schema";
 import initConfig from "#cli/init-config/index.mjs";
 
