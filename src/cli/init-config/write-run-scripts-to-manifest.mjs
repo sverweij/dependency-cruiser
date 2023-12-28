@@ -131,21 +131,30 @@ function getSuccessMessage(pDestinationManifestFileName) {
   );
 }
 
-export function writeRunScriptsToManifest(
-  pNormalizedInitOptions,
-  pManifest = readManifest(),
-  pDestinationManifestFileName = PACKAGE_MANIFEST,
-) {
+/**
+ *
+ * @param {any} pNormalizedInitOptions
+ * @param {{manifest?: string, destinationManifestFileName?: string, outStream?: NodeJS.WritableStream}} pOptions
+ */
+export function writeRunScriptsToManifest(pNormalizedInitOptions, pOptions) {
+  const lOptions = {
+    manifest: readManifest(),
+    destinationManifestFileName: PACKAGE_MANIFEST,
+    outStream: process.stdout,
+    ...pOptions,
+  };
   const lUpdatedManifest = addRunScriptsToManifest(
-    pManifest,
+    lOptions.manifest,
     compileRunScripts(pNormalizedInitOptions),
   );
 
   writeFileSync(
-    pDestinationManifestFileName,
+    lOptions.destinationManifestFileName,
     JSON.stringify(lUpdatedManifest, null, "  "),
     "utf8",
   );
 
-  process.stdout.write(getSuccessMessage(pDestinationManifestFileName));
+  lOptions.outStream.write(
+    getSuccessMessage(lOptions.destinationManifestFileName),
+  );
 }
