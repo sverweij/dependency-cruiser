@@ -255,4 +255,115 @@ export default {
       ],
     },
   ],
+  MICRO_EIGHT: [
+    {
+      source: "a",
+      dependencies: [
+        {
+          resolved: "aa",
+        },
+        {
+          resolved: "ba",
+        },
+      ],
+    },
+    {
+      source: "aa",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+    {
+      source: "ba",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+  ],
+  SHORT_EIGHT: [
+    {
+      source: "a",
+      dependencies: [
+        {
+          resolved: "aa",
+        },
+        {
+          resolved: "ba",
+        },
+      ],
+    },
+    {
+      source: "aa",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+    {
+      source: "ba",
+      dependencies: [
+        {
+          resolved: "bb",
+        },
+      ],
+    },
+    {
+      source: "bb",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+  ],
+  SLIGHTLY_LESS_SHORT_EIGHT: [
+    {
+      source: "a",
+      dependencies: [
+        {
+          resolved: "aa",
+        },
+        {
+          resolved: "ba",
+        },
+      ],
+    },
+    {
+      source: "aa",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+    {
+      source: "ba",
+      dependencies: [
+        {
+          resolved: "bb",
+        },
+      ],
+    },
+    {
+      source: "bb",
+      dependencies: [
+        {
+          resolved: "bc",
+        },
+      ],
+    },
+    {
+      source: "bc",
+      dependencies: [
+        {
+          resolved: "a",
+        },
+      ],
+    },
+  ],
 };

@@ -475,6 +475,85 @@ describe("[U] graph-utl/indexed-module-graph - getCycle (algorithm check)", () =
   it("if the 'to' node is not in the graph, it returns []", () => {
     deepEqual(getCycle(cycleInputGraphs.D_E_D, "d", "not-in-graph"), []);
   });
+  it("a minimal 'eight' - all cycles", () => {
+    /*
+        aa◄───┐
+        │     │
+        └────►a◄────┐
+              │     │
+              └───►ba
+    */
+    deepEqual(getCycle(cycleInputGraphs.MICRO_EIGHT, "a", "aa"), ["aa", "a"]);
+    deepEqual(getCycle(cycleInputGraphs.MICRO_EIGHT, "a", "ba"), ["ba", "a"]);
+    deepEqual(getCycle(cycleInputGraphs.MICRO_EIGHT, "aa", "a"), ["a", "aa"]);
+    deepEqual(getCycle(cycleInputGraphs.MICRO_EIGHT, "ba", "a"), ["a", "ba"]);
+  });
+
+  it("an 'eight' with a slightly fatter belly - all cycles", () => {
+    /*
+        aa◄────┐
+        │      │
+        └─────►a◄──────────bc
+                │           ▲
+                │           │
+                └───►ba───►bb
+    */
+    deepEqual(getCycle(cycleInputGraphs.SHORT_EIGHT, "a", "aa"), ["aa", "a"]);
+    deepEqual(getCycle(cycleInputGraphs.SHORT_EIGHT, "aa", "a"), ["a", "aa"]);
+    deepEqual(getCycle(cycleInputGraphs.SHORT_EIGHT, "a", "ba"), [
+      "ba",
+      "bb",
+      "a",
+    ]);
+    deepEqual(getCycle(cycleInputGraphs.SHORT_EIGHT, "ba", "bb"), [
+      "bb",
+      "a",
+      "ba",
+    ]);
+    deepEqual(getCycle(cycleInputGraphs.SHORT_EIGHT, "bb", "a"), [
+      "a",
+      "ba",
+      "bb",
+    ]);
+  });
+  it("an 'eight' with an even fatter belly - all cycles", () => {
+    /*
+        aa◄────┐
+        │      │
+        └─────►a◄──────────bc
+                │           ▲
+                │           │
+                └───►ba───►bb
+    */
+    deepEqual(getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "a", "aa"), [
+      "aa",
+      "a",
+    ]);
+    deepEqual(getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "aa", "a"), [
+      "a",
+      "aa",
+    ]);
+    deepEqual(getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "a", "ba"), [
+      "ba",
+      "bb",
+      "bc",
+      "a",
+    ]);
+    deepEqual(
+      getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "ba", "bb"),
+      ["bb", "bc", "a", "ba"],
+    );
+    deepEqual(
+      getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "bb", "bc"),
+      ["bc", "a", "ba", "bb"],
+    );
+    //   deepEqual(getCycle(cycleInputGraphs.SLIGHTLY_LESS_SHORT_EIGHT, "bc", "a"), [
+    //     "a",
+    //     "ba",
+    //     "bb",
+    //     "bc",
+    //   ]);
+  });
 });
 
 function getCycleRich(pGraph, pFrom, pToDep) {
