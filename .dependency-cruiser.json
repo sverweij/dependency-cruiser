@@ -263,22 +263,31 @@
         "path": "[.]d[.]m?ts$"
       },
       "to": {
-        "dependencyTypesNot": ["type-only"]
+        "dependencyTypesNot": [
+          "type-only",
+          "type-import",
+          "triple-slash-type-reference"
+        ]
       }
     },
     {
       "name": "only-type-only-to-dts",
+      "comment": "This module depends on a .d.ts file via an import that is not 'type-only'. See https://www.typescriptlang.org/docs/handbook/modules/reference.html#type-only-imports-and-exports",
       "severity": "error",
       "from": {},
       "to": {
         "path": "[.]d[.][cm]?ts$",
-        "dependencyTypesNot": ["type-only"]
+        "dependencyTypesNot": [
+          "type-only",
+          "type-import",
+          "triple-slash-type-reference"
+        ]
       }
     },
     {
       "name": "no-tsconfig-basedir-use",
       "comment": "This module depends om something directly via a 'tsconfig.json' 'baseUrl' property. This is discouraged, unless you're still doing AMD modules - see https://www.typescriptlang.org/tsconfig#baseUrl",
-      "severity": "warn",
+      "severity": "error",
       "from": {},
       "to": {
         "dependencyTypes": ["aliased-tsconfig-base-url"]
