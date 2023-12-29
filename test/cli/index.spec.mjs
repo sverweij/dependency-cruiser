@@ -1,5 +1,5 @@
 import { readFileSync, unlinkSync } from "node:fs";
-import { doesNotThrow, equal, throws } from "node:assert/strict";
+import { doesNotThrow, equal, throws, match } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
 import { join, posix as path } from "node:path";
@@ -239,12 +239,14 @@ describe("[E] cli/index", () => {
 
   describe("[E] specials", () => {
     let lChalkLevel = chalk.level;
+    const lOriginalStdoutWrite = process.stdout.write;
 
     before("disable chalk coloring", () => {
       chalk.level = 0;
     });
     after("enable chalk coloring again", () => {
       chalk.level = lChalkLevel;
+      process.stdout.write = lOriginalStdoutWrite;
     });
     it("dependency-cruises multiple files and folders in one go", async () => {
       const lOutputFileName = "multiple-in-one-go.json";
@@ -341,11 +343,17 @@ describe("[E] cli/index", () => {
     });
 
     it("dependency-cruise test/cli/__fixtures__ without rules will report no dependency violations on stdout", async () => {
-      const lExitCode = await cli(["test/cli/__fixtures__"], null, {
-        stdout: new UnCalledWritableTestStream(),
-        stderr: new WritableTestStream(/no dependency violations found/),
-      });
+      let lFeedback = "";
+      process.stdout.write = (pChunk) => {
+        lFeedback = pChunk;
+      };
+      const lExitCode = await cli(["test/cli/__fixtures__"]);
+      process.stdout.write = lOriginalStdoutWrite;
 
+      match(
+        lFeedback,
+        /no dependency violations found \(102 modules, 57 dependencies cruised\)/,
+      );
       equal(lExitCode, 0);
     });
 
