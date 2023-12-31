@@ -1,6 +1,7 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { deepEqual, equal } from "node:assert/strict";
+import { throws } from "node:assert";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import {
@@ -67,6 +68,28 @@ describe("[I] cli/init-config/index", () => {
       ajv.validate(configurationSchema, lResult.default);
       equal(lResult.default.hasOwnProperty("extends"), false);
       equal(lResult.default.options.hasOwnProperty("tsConfig"), false);
+    } finally {
+      deleteDammit(lConfig);
+    }
+  });
+
+  it("init yes borks with an error if a config file already exists", () => {
+    const lWhatEverOutStream = new WritableTestStream(/.*/);
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
+    const lConfig = ".dependency-cruiser-blabla.js";
+
+    try {
+      initConfig("yes", lConfig, {
+        stdout: lWhatEverOutStream,
+        stderr: lWhatEverOutStream,
+      });
+
+      throws(() => {
+        initConfig("yes", lConfig, {
+          stdout: lWhatEverOutStream,
+          stderr: lWhatEverOutStream,
+        });
+      }, /A '[.]dependency-cruiser-blabla[.]js' already exists here - leaving it be[.]/);
     } finally {
       deleteDammit(lConfig);
     }

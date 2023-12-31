@@ -97,18 +97,26 @@ export default function initConfig(pInit, pConfigFileName, pStreams) {
     const lNormalizedInitConfig = normalizeInitOptions(getOneShotConfig(pInit));
     const lConfigFileName = pConfigFileName || getDefaultConfigFileName();
 
-    if (!fileExists(lConfigFileName)) {
+    if (manifestIsUpdatable(lNormalizedInitConfig)) {
+      // if we're going to update the manifest, no need to complain about
+      // a .dependency-cruiser that might already exist, because writing
+      // run scripts to the manifest could still work AOK.
+      if (!fileExists(lConfigFileName)) {
+        writeConfig(
+          buildConfig(lNormalizedInitConfig),
+          lConfigFileName,
+          lStreams.stdout,
+        );
+      }
+      writeRunScriptsToManifest(lNormalizedInitConfig, {
+        outStream: lStreams.stdout,
+      });
+    } else {
       writeConfig(
         buildConfig(lNormalizedInitConfig),
         lConfigFileName,
         lStreams.stdout,
       );
-    }
-
-    if (manifestIsUpdatable(lNormalizedInitConfig)) {
-      writeRunScriptsToManifest(lNormalizedInitConfig, {
-        outStream: lStreams.stdout,
-      });
     }
   }
 }
