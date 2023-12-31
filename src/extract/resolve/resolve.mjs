@@ -1,4 +1,5 @@
-import enhancedResolve from "enhanced-resolve";
+// import enhancedResolve from "enhanced-resolve";
+import { ResolverFactory } from "oxc-resolver";
 import { stripQueryParameters } from "../helpers.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
@@ -9,8 +10,7 @@ function init(pEHResolveOptions, pCachingContext) {
   if (!gInitialized[pCachingContext] || pEHResolveOptions.bustTheCache) {
     // assuming the cached file system here
     pEHResolveOptions.fileSystem.purge();
-    gResolvers[pCachingContext] =
-      enhancedResolve.ResolverFactory.createResolver(pEHResolveOptions);
+    gResolvers[pCachingContext] = new ResolverFactory(pEHResolveOptions);
     /* eslint security/detect-object-injection:0 */
     gInitialized[pCachingContext] = true;
   }
@@ -30,18 +30,18 @@ export function resolve(
   pModuleName,
   pFileDirectory,
   pResolveOptions,
-  pCachingContext = "cruise",
+  pCachingContext = "cruise"
 ) {
   init(pResolveOptions, pCachingContext);
 
   return stripQueryParameters(
-    gResolvers[pCachingContext].resolveSync(
-      {},
+    gResolvers[pCachingContext].sync(
+      // {},
       // lookupStartPath
       pathToPosix(pFileDirectory),
       // request
-      pModuleName,
-    ),
+      pModuleName
+    )?.path
   );
 }
 
