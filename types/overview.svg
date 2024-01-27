@@ -9,6 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 333.75)">
 <title>dependency&#45;cruiser output</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-333.75 1041.25,-333.75 1041.25,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_config&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M313.5,-55.88C313.5,-55.88 473,-55.88 473,-55.88 479,-55.88 485,-61.88 485,-67.88 485,-67.88 485,-185.88 485,-185.88 485,-191.88 479,-197.88 473,-197.88 473,-197.88 313.5,-197.88 313.5,-197.88 307.5,-197.88 301.5,-191.88 301.5,-185.88 301.5,-185.88 301.5,-67.88 301.5,-67.88 301.5,-61.88 307.5,-55.88 313.5,-55.88"/>
+<text text-anchor="middle" x="393.25" y="-185.32" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_node_modules</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M505,-28.88C505,-28.88 587.25,-28.88 587.25,-28.88 593.25,-28.88 599.25,-34.88 599.25,-40.88 599.25,-40.88 599.25,-128.88 599.25,-128.88 599.25,-134.88 593.25,-140.88 587.25,-140.88 587.25,-140.88 505,-140.88 505,-140.88 499,-140.88 493,-134.88 493,-128.88 493,-128.88 493,-40.88 493,-40.88 493,-34.88 499,-28.88 505,-28.88"/>
@@ -18,11 +23,6 @@
 <title>cluster_plugins</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-179.88C20,-179.88 151.75,-179.88 151.75,-179.88 157.75,-179.88 163.75,-185.88 163.75,-191.88 163.75,-191.88 163.75,-279.88 163.75,-279.88 163.75,-285.88 157.75,-291.88 151.75,-291.88 151.75,-291.88 20,-291.88 20,-291.88 14,-291.88 8,-285.88 8,-279.88 8,-279.88 8,-191.88 8,-191.88 8,-185.88 14,-179.88 20,-179.88"/>
 <text text-anchor="middle" x="85.88" y="-279.32" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">plugins</text>
-</g>
-<g id="clust1" class="cluster">
-<title>cluster_config&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M313.5,-55.88C313.5,-55.88 473,-55.88 473,-55.88 479,-55.88 485,-61.88 485,-67.88 485,-67.88 485,-185.88 485,-185.88 485,-191.88 479,-197.88 473,-197.88 473,-197.88 313.5,-197.88 313.5,-197.88 307.5,-197.88 301.5,-191.88 301.5,-185.88 301.5,-185.88 301.5,-67.88 301.5,-67.88 301.5,-61.88 307.5,-55.88 313.5,-55.88"/>
-<text text-anchor="middle" x="393.25" y="-185.32" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
 </g>
 <!-- baseline&#45;violations.d.mts -->
 <g id="node1" class="node">
