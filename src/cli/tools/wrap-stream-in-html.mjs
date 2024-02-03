@@ -1,52 +1,19 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { getHeader, getFooter } from "#report/dot-webpage/wrap-in-html.mjs";
 
 const STYLESHEET_FILE = fileURLToPath(
-  new URL("svg-in-html-snippets/style.css", import.meta.url),
+  new URL(
+    "../../report/dot-webpage/svg-in-html-snippets/style.css",
+    import.meta.url,
+  ),
 );
 const SCRIPT_FILE = fileURLToPath(
-  new URL("svg-in-html-snippets/script.js", import.meta.url),
+  new URL(
+    "../../report/dot-webpage/svg-in-html-snippets/script.js",
+    import.meta.url,
+  ),
 );
-
-/**
- * @param {string} pStylesheet
- * @returns {string}
- */
-function getHeader(pStylesheet) {
-  return `<!doctype html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>dependency graph</title>
-    <style>
-      ${pStylesheet}
-    </style>
-  </head>
-  <body>
-    <button id="button_help">?</button>
-    <div id="hints" class="hint" style="display: none">
-      <button id="close-hints">x</button>
-      <span id="hint-text"></span>
-      <ul>
-        <li><b>Hover</b> - highlight</li>
-        <li><b>Right-click</b> - pin highlight</li>
-        <li><b>ESC</b> - clear</li>
-      </ul>
-    </div>
-`;
-}
-
-/**
- * @param {string} pScript
- * @returns {string}
- */
-function getFooter(pScript) {
-  return `    <script>
-      ${pScript}
-    </script>
-  </body>
-</html>`;
-}
 
 /**
  * Slaps the stuff in the passed stream in between the contents

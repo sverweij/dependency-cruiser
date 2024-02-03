@@ -146,6 +146,14 @@ export default {
               attributes: { fontcolor: "blue", color: "blue" },
             },
             {
+              criteria: { dependencyTypes: ["export"] },
+              attributes: {
+                fontcolor: "purple",
+                color: "pink",
+                xlabel: "this is an ex port",
+              },
+            },
+            {
               criteria: { valid: false },
               attributes: { fontcolor: "red", color: "red" },
             },

@@ -39,6 +39,7 @@
       "to": {
         "pathNot": [
           "^src/(main|utl|config-utl)/",
+          "^src/report/dot-webpage/wrap-in-html[.]mjs$",
           "$1",
           "^src/meta[.]js$",
           "^src/extract/transpile/meta[.]mjs$"
@@ -95,7 +96,10 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize[.]mjs|extract/parse|extract/resolve|extract/gather-initial-sources[.]mjs|config-utl|cli|cache|utl/find-all-files[.]mjs)",
+          "^src/main/resolve-options/normalize[.]mjs",
+          "^src/extract/(parse|resolve|gather-initial-sources[.]mjs)",
+          "^src/(config-utl|cli|cache|utl/find-all-files[.]mjs)",
+          "^src/report/dot-webpage/wrap-in-html[.]mjs",
           "^test",
           "^tools"
         ]
@@ -150,7 +154,8 @@
         "dependencyTypesNot": [
           "type-only",
           "type-import",
-          "triple-slash-type-reference"
+          "triple-slash-type-reference",
+          "npm"
         ],
         "pathNot": ["node_modules/@types/"]
       }
@@ -307,7 +312,7 @@
       "mocks",
       "fixtures",
       "test/integration",
-      "src/cli/tools/svg-in-html-snippets/script.js"
+      "src/report/dot-webpage/svg-in-html-snippets/script.js"
     ],
 
     /* list of module systems to cruise */
