@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { EOL } from "node:os";
-import { program } from "commander";
+import { program, Option } from "commander";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import cli from "#cli/index.mjs";
 import meta from "#meta.js";
@@ -22,7 +22,7 @@ try {
       true,
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--no-config",
         "do not use a configuration file. " +
           "Overrides any --config option set earlier",
@@ -34,7 +34,7 @@ try {
       "err",
     )
     .option("-m, --metrics", "calculate stability metrics", false)
-    .addOption(new program.Option("--no-metrics").hideHelp(true))
+    .addOption(new Option("--no-metrics").hideHelp(true))
     .option(
       "-f, --output-to <file>",
       "file to write output to; - for stdout",
@@ -71,21 +71,21 @@ try {
       "--ignore-known [file]",
       "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)",
     )
-    .addOption(new program.Option("--no-ignore-known").hideHelp(true))
+    .addOption(new Option("--no-ignore-known").hideHelp(true))
     .addOption(
-      new program.Option(
+      new Option(
         "--ts-config [file]",
         "use a TypeScript configuration (e.g. tsconfig.json) or it's JavaScript counterpart (e.g. jsconfig.json)",
       ).hideHelp(true),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--webpack-config [file]",
         "use a webpack configuration (e.g. webpack.config.js)",
       ).hideHelp(true),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--ts-pre-compilation-deps",
         "detect dependencies that only exist before typescript-to-javascript " +
           "compilation (off by default)",
@@ -98,25 +98,23 @@ try {
         "modules/ folders directly under your packages folder. ",
     )
     .addOption(
-      new program.Option(
+      new Option(
         "-p, --progress [type]",
         "show progress while dependency-cruiser is busy",
       ).choices(["cli-feedback", "performance-log", "ndjson", "none"]),
     )
     .addOption(
-      new program.Option("--no-progress", "Alias of --progress none").hideHelp(
-        true,
-      ),
+      new Option("--no-progress", "Alias of --progress none").hideHelp(true),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "-d, --max-depth <n>",
         "You probably want to use --collapse instead of --max-depth. " +
           "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit)).",
       ).hideHelp(true),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "-M, --module-systems <items>",
         "list of module systems (default: amd, cjs, es6, tsd)",
       ).hideHelp(true),
@@ -131,29 +129,26 @@ try {
         "The directory defaults to node_modules/.cache/dependency-cruiser",
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--cache-strategy <strategy>",
         "(experimental) strategy to use for detecting changed files in the cache.",
       ).choices(["metadata", "content"]),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--no-cache",
         "switch off caching. Overrides the 'cache' key in .dependency-cruiser.js " +
           "and --cache options set earlier on the command line",
       ).hideHelp(true),
     )
     .addOption(
-      new program.Option(
+      new Option(
         "--preserve-symlinks",
         "leave symlinks unchanged (off by default)",
       ).hideHelp(true),
     )
     .addOption(
-      new program.Option(
-        "-v, --validate [file]",
-        `alias for --config`,
-      ).hideHelp(true),
+      new Option("-v, --validate [file]", `alias for --config`).hideHelp(true),
     )
     .option(
       "-i, --info",
