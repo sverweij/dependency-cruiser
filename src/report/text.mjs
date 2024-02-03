@@ -1,10 +1,10 @@
-import { EOL } from "node:os";
 import figures from "figures";
 import chalk from "chalk";
 
 const DEFAULT_OPTIONS = {
   highlightFocused: false,
 };
+const EOL = "\n";
 
 /**
  *
@@ -30,9 +30,9 @@ function toFlatDependencies(pModules, pModulesInFocus, pHighlightFocused) {
   return pModules.reduce(
     (pAll, pModule) =>
       pAll.concat(
-        toFlatModuleDependencies(pModule, pModulesInFocus, pHighlightFocused)
+        toFlatModuleDependencies(pModule, pModulesInFocus, pHighlightFocused),
       ),
-    []
+    [],
   );
 }
 
@@ -55,7 +55,7 @@ function getModulesInFocus(pModules) {
   return new Set(
     pModules
       .filter((pModule) => pModule.matchesFocus || pModule.matchesReaches)
-      .map((pModule) => pModule.source)
+      .map((pModule) => pModule.source),
   );
 }
 
@@ -68,13 +68,15 @@ function getModulesInFocus(pModules) {
 function report(pResults, pOptions) {
   const lOptions = { ...DEFAULT_OPTIONS, ...pOptions };
 
-  return toFlatDependencies(
-    pResults.modules,
-    getModulesInFocus(pResults.modules),
-    lOptions.highlightFocused === true
-  ).reduce(
-    (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat(EOL),
-    ""
+  return (
+    toFlatDependencies(
+      pResults.modules,
+      getModulesInFocus(pResults.modules),
+      lOptions.highlightFocused === true,
+    ).reduce(
+      (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat(EOL),
+      "",
+    ) || EOL
   );
 }
 

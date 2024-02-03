@@ -181,4 +181,5 @@ export default `<!DOCTYPE html>
 <body>
   {{table-here}}
 </body>
-</html>`;
+</html>
+`;

@@ -1,7 +1,7 @@
 // @ts-check
 import { spawnSync } from "node:child_process";
 import dotModuleReporter from "../dot/dot-module.mjs";
-import { wrappapiccha } from "./wrap-in-html.mjs";
+import { wrapInHTML } from "./wrap-in-html.mjs";
 
 const CONSTANTS = {
   exec: "dot",
@@ -10,7 +10,7 @@ const CONSTANTS = {
 
 /**
  * @param {string} pDot Dot program
- * @param {IDotPictureReporterOptions} pOptions
+ * @param {IDotWebpageReporterOptions} pOptions
  * @returns {string} the dot program converted to svg, wrapped in html
  */
 function convert(pDot, pOptions) {
@@ -35,7 +35,7 @@ function convert(pDot, pOptions) {
 }
 
 /**
- * @param {IDotPictureReporterOptions} pOptions
+ * @param {IDotWebpageReporterOptions} pOptions
  * @returns {boolean}
  */
 function isAvailable(pOptions) {
@@ -51,7 +51,7 @@ function isAvailable(pOptions) {
  * @typedef {import("../../../types/cruise-result.mjs").ICruiseResult} ICruiseResult
  * @typedef {import("../../../types/reporter-options.mjs").IDotReporterOptions} IDotReporterOptions
  * @typedef {import("../../../types/dependency-cruiser.mjs").IReporterOutput} IReporterOutput
- * @typedef {IDotReporterOptions & { spawnFunction?: typeof spawnSync }} IDotPictureReporterOptions
+ * @typedef {IDotReporterOptions & { spawnFunction?: typeof spawnSync }} IDotWebpageReporterOptions
  */
 
 /**
@@ -59,19 +59,21 @@ function isAvailable(pOptions) {
  * and a system call to the GraphViz dot executable.
  *
  * @param {ICruiseResult} pResults
- * @param {IDotPictureReporterOptions} pPicchaReporterOptions
+ * @param {IDotWebpageReporterOptions} pDotWebpageReporterOptions
  * @returns {IReporterOutput}
  */
-export default function piccha(pResults, pPicchaReporterOptions) {
-  const { output } = dotModuleReporter(pResults, pPicchaReporterOptions);
+export default function dotWebpage(pResults, pDotWebpageReporterOptions) {
+  const { output } = dotModuleReporter(pResults, pDotWebpageReporterOptions);
 
-  if (!isAvailable(pPicchaReporterOptions)) {
+  if (!isAvailable(pDotWebpageReporterOptions)) {
     throw new Error(
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
+      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't " +
+        "seem to be available on this system. See the GraphViz download page for " +
+        "instruction on how to get it on your system: https://www.graphviz.org/download/",
     );
   }
   return {
-    output: wrappapiccha(convert(output, pPicchaReporterOptions)),
+    output: wrapInHTML(convert(output, pDotWebpageReporterOptions)),
     exitCode: 0,
   };
 }
