@@ -209,4 +209,5 @@ export default `<!DOCTYPE html>
       {{runDate}}</p>
   </footer>
 </body>
-</html>`;
+</html>
+`;

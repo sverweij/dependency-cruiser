@@ -40,13 +40,15 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
   }
 }
 export function write(pOutputTo, pContent) {
-  const lContentWithTrailingNewline = pContent.endsWith("\n")
-    ? pContent
-    : `${pContent}\n`;
+  // previously we checked here to ensure pContent ended on an EOL (and if it
+  // didn't we added one). As for one or two reporters we DON'T want this
+  // to happen automatically (e.g. the 'null' one) we've moved that check
+  // to the individual reporters and with a unit test ensured that all
+  // reporters (current and future) keep doing that.
   if ("-" === pOutputTo) {
-    writeToStdOut(lContentWithTrailingNewline);
+    writeToStdOut(pContent);
   } else {
-    writeToFile(pOutputTo, lContentWithTrailingNewline);
+    writeToFile(pOutputTo, pContent);
   }
 }
 

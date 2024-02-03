@@ -1,6 +1,8 @@
 import has from "lodash/has.js";
 import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
+const EOL = "\n";
+
 function anonymizePathArray(pPathArray, pWordList) {
   // the coverage ignore is here because the || [] branch isn't taken when running
   // tests and with the current setup of the anonymize module that's not going
@@ -182,11 +184,15 @@ export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
       pResults?.summary?.optionsUsed?.reporterOptions?.anon?.wordlist ?? [];
   }
   return {
-    output: JSON.stringify(
-      anonymize(pResults, sanitizeWordList(lAnonymousReporterOptions.wordlist)),
-      null,
-      "  ",
-    ),
+    output:
+      JSON.stringify(
+        anonymize(
+          pResults,
+          sanitizeWordList(lAnonymousReporterOptions.wordlist),
+        ),
+        null,
+        "  ",
+      ) + EOL,
     exitCode: 0,
   };
 }

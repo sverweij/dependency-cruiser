@@ -7,6 +7,7 @@ const SEVERITY2TEAMCITY_SEVERITY = new Map([
   ["warn", "WARNING"],
   ["info", "INFO"],
 ]);
+const EOL = "\n";
 
 function severity2teamcitySeverity(pSeverity) {
   return SEVERITY2TEAMCITY_SEVERITY.get(pSeverity) || "INFO";
@@ -159,9 +160,10 @@ export default function teamcity(pResults) {
   const lIgnoredCount = pResults?.summary?.ignore ?? 0;
 
   return {
-    output: reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)
-      .concat(reportViolations(lViolations, lIgnoredCount))
-      .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, ""),
+    output:
+      reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)
+        .concat(reportViolations(lViolations, lIgnoredCount))
+        .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, "") || EOL,
     exitCode: pResults.summary.error,
   };
 }

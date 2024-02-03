@@ -1,4 +1,5 @@
 const DEFAULT_JSON_INDENT = 2;
+const EOL = "\n";
 
 /**
  * Sample plugin
@@ -12,11 +13,12 @@ const DEFAULT_JSON_INDENT = 2;
  */
 export default function baseline(pCruiseResult) {
   return {
-    output: JSON.stringify(
-      pCruiseResult.summary.violations,
-      null,
-      DEFAULT_JSON_INDENT
-    ),
+    output:
+      JSON.stringify(
+        pCruiseResult.summary.violations,
+        null,
+        DEFAULT_JSON_INDENT,
+      ) + EOL,
     exitCode: 0,
   };
 }

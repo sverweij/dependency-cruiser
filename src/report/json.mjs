@@ -1,3 +1,4 @@
+const EOL = "\n";
 /**
  * Returns the results of a cruise in JSON
  *
@@ -6,7 +7,7 @@
  */
 export default function json(pResults) {
   return {
-    output: JSON.stringify(pResults, null, "  "),
+    output: JSON.stringify(pResults, null, "  ") + EOL,
     exitCode: 0,
   };
 }

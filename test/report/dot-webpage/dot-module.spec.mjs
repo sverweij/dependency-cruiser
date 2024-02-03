@@ -1,5 +1,4 @@
 import { throws, ok, equal, match } from "node:assert/strict";
-import { spawnSync } from "node:child_process";
 import dotModule from "#report/dot-webpage/dot-module.mjs";
 
 const MINIMAL_CRUISE_RESULT = {

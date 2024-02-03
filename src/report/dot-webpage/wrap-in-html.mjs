@@ -45,7 +45,8 @@ export function getFooter(pScript) {
       ${pScript}
     </script>
   </body>
-</html>`;
+</html>
+`;
 }
 
 /**
@@ -53,7 +54,7 @@ export function getFooter(pScript) {
  * @param {string} pSVG
  * @returns {string}
  */
-export function wrappapiccha(pSVG) {
+export function wrapInHTML(pSVG) {
   const lStylesheet = readFileSync(STYLESHEET_FILE, "utf8");
   const lScript = readFileSync(SCRIPT_FILE, "utf8");
 
