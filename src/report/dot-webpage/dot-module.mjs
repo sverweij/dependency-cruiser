@@ -66,7 +66,9 @@ export default function piccha(pResults, pPicchaReporterOptions) {
   const { output } = dotModuleReporter(pResults, pPicchaReporterOptions);
 
   if (!isAvailable(pPicchaReporterOptions)) {
-    throw new Error("Eerst dot installeren, lul.");
+    throw new Error(
+      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
+    );
   }
   return {
     output: wrappapiccha(convert(output, pPicchaReporterOptions)),
