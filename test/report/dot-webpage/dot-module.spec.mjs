@@ -24,13 +24,9 @@ describe("[I] dot-picture", () => {
       }),
     };
 
-    throws(
-      () => {
-        dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-      },
-      Error,
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
-    );
+    throws(() => {
+      dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
+    }, /GraphViz dot, which is required for the 'x-dot-webpage' reporter/);
   });
 
   it("throws an error when dot is available but isn't graphviz dot", () => {
@@ -41,18 +37,14 @@ describe("[I] dot-picture", () => {
       }),
     };
 
-    throws(
-      () => {
-        dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-      },
-      Error,
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
-    );
+    throws(() => {
+      dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
+    }, /GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't/);
   });
 
   it("throws an error when dot throws an error", () => {
     const lDotPictureReporterOptions = {
-      spawnFunction: (pString, pCommandsArray) => {
+      spawnFunction: (_pString, pCommandsArray) => {
         if (pCommandsArray[0] === "-V") {
           return {
             stderr: "dot - graphviz version 1.2.3.4",
@@ -69,18 +61,14 @@ describe("[I] dot-picture", () => {
       },
     };
 
-    throws(
-      () => {
-        dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-      },
-      Error,
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
-    );
+    throws(() => {
+      dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
+    }, /some error, doesn't really matter which/);
   });
 
   it("throws an error when dot doesn't throw an error, but nonetheless fails", () => {
     const lDotPictureReporterOptions = {
-      spawnFunction: (pString, pCommandsArray) => {
+      spawnFunction: (_pString, pCommandsArray) => {
         if (pCommandsArray[0] === "-V") {
           return {
             stderr: "dot - graphviz version 1.2.3.4",
@@ -89,25 +77,21 @@ describe("[I] dot-picture", () => {
         } else {
           return {
             stdout: "foo bar",
-            stderr: "baz quux corge grault garply waldo fred plugh xyzzy thud",
-            status: 1,
+            stderr: "baz quux corge grault garply",
+            status: 42,
           };
         }
       },
     };
 
-    throws(
-      () => {
-        dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-      },
-      Error,
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't seem to be available on this system. See the GraphViz download page for instruction on how to get it on your system: https://www.graphviz.org/download/",
-    );
+    throws(() => {
+      dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
+    }, /GraphViz' dot returned an error \(exit code 42\)/);
   });
 
   it("should return an object with output and exitCode when dot is available", () => {
     const lDotPictureReporterOptions = {
-      spawnFunction: (pString, pCommandsArray) => {
+      spawnFunction: (_pString, pCommandsArray) => {
         if (pCommandsArray[0] === "-V") {
           return {
             stderr: "dot - graphviz version 1.2.3.4",
@@ -126,9 +110,9 @@ describe("[I] dot-picture", () => {
 
     ok(result);
     ok(result.output);
+    equal(result.exitCode, 0);
     match(result.output, /<html/);
     match(result.output, /<[/]html/);
     match(result.output, /<svg/);
-    equal(result.exitCode, 0);
   });
 });

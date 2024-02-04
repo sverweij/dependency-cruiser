@@ -28,9 +28,7 @@ function convert(pDot, pOptions) {
   } else if (error) {
     throw error;
   } else {
-    throw new Error(
-      `Unexpected error occurred executing GraphViz' dot. Exit code ${status}`,
-    );
+    throw new Error(`GraphViz' dot returned an error (exit code ${status})`);
   }
 }
 
