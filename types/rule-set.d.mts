@@ -43,13 +43,10 @@ export interface IRegularForbiddenRuleType extends IBaseRuleType {
   /**
    * What to apply the rule to - modules (the default) or folders. Switching
    * the scope to 'folder' can be useful in rules where this makes a difference
-   * like those regarding circular dependencies or instability. Two things
-   * to note when you decide to use 'folder' level scope: (1) the 'scope' attribute
-   * is experimental - the way to indicate the scope of a rule can change
-   * over time without dependency-cruiser undergoing a major bump. (2) Only
-   * the to.moreUnstable, to.circular, and path (both from and to) attributes
-   * work at the moment. Other attributes will follow suit in releases
-   * after 11.6.0.
+   * like those regarding circular dependencies or instability.
+   * Only the to.moreUnstable, to.circular, and path (both from and to)
+   * attributes work at the moment. Other attributes will follow suit in later
+   * releases (depending on demand).
    */
   scope?: RuleScopeType;
 }

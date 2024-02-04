@@ -197,6 +197,23 @@ As a comparison, this is the default dot report for the same folder(s)
 This too is a reporter that shows the modules' instability metrics when they
 have been calculated ([--metrics](#--metrics) command line switch).
 
+#### x-dot-webpage
+
+Reporter that runs the dot reporter and pipes it through the GraphViz `dot`
+command and wraps the result in an html page. It's the same thing as running ...
+
+```sh
+dependency-cruise -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependencygraph.html
+```
+
+... but less typing & easier to remember.
+
+> [!NOTE]
+> The `x` in front of the name of the reporter means it is experimental and
+> might change or be removed in the future. See the
+> [pull request that introduced the reporter](https://github.com/sverweij/dependency-cruiser/pull/907)
+> for the rationale.
+
 #### mermaid
 
 Generates a graph in mermaid format - which can be convenient as e.g. GitHub and
@@ -301,7 +318,7 @@ results in a PR - potentially along with the mermaid reporter. The markdown
 reporter is fairly configurable - see the [markdown](./options-reference.md#markdown)
 section in the options reference for details.
 
-> [!note]
+> [!NOTE]
 > As compared to the `err-html` reporter this one doesn't emit links or show
 > a complete list of all run validations. If you need that: create a feature
 > request in the dependency-cruiser repo.

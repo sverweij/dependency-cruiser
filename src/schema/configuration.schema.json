@@ -110,7 +110,7 @@
         "severity": { "$ref": "#/definitions/SeverityType" },
         "scope": {
           "type": "string",
-          "description": "What to apply the rule to - modules (the default) or folders. Switching the scope to 'folder' can be useful in rules where this makes a difference like those regarding circular dependencies or instability. Two things to note when you decide to use 'folder' level scope: (1) the 'scope' attribute is experimental - the way to indicate the scope of a rule can change over time without dependency-cruiser undergoing a major bump. (2) Only the to.moreUnstable, to.circular, and path (both from and to) attributes work at the moment. Other attributes will follow suit in releases after 11.6.0.",
+          "description": "What to apply the rule to - modules (the default) or folders. Switching the scope to 'folder' can be useful in rules where this makes a difference like those regarding circular dependencies or instability. Only the to.moreUnstable, to.circular, and path (both from and to) attributes work at the moment. Other attributes will follow suit in later releases (depending on demand).",
           "enum": ["module", "folder"]
         },
         "comment": {
@@ -338,13 +338,13 @@
         },
         "numberOfDependentsLessThan": {
           "type": "integer",
-          "description": "Matches when the number of times the 'to' module is used falls below (<) this number. Caveat: only works in concert with path and pathNot restrictions in the from and to parts of the rule; other conditions will be ignored.(somewhat experimental; - syntax can change over time without a major bump)E.g. to flag modules that are used only once or not at all, use 2 here.",
+          "description": "Matches when the number of times the 'to' module is used falls below (<) this number. Caveat: only works in concert with path and pathNot restrictions in the from and to parts of the rule; other conditions will be ignored.E.g. to flag modules that are used only once or not at all, use 2 here.",
           "minimum": 0,
           "maximum": 100
         },
         "numberOfDependentsMoreThan": {
           "type": "integer",
-          "description": "Matches when the number of times the 'to' module is used raises above (>) this number. Caveat: only works in concert with path and pathNot restrictions in the from and to parts of the rule; other conditions will be ignored.(somewhat experimental; - syntax can change over time without a major bump)E.g. to flag modules that are used more than 10 times, use 10 here.",
+          "description": "Matches when the number of times the 'to' module is used raises above (>) this number. Caveat: only works in concert with path and pathNot restrictions in the from and to parts of the rule; other conditions will be ignored.E.g. to flag modules that are used more than 10 times, use 10 here.",
           "minimum": 0,
           "maximum": 100
         }
@@ -682,7 +682,7 @@
         "progress": {
           "type": "object",
           "additionalProperties": false,
-          "description": "When executing dependency-cruiser emits 'start', 'progress' and 'end' events on a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach loggers etc. We're still figuring out how to do expose this (if at all), so the listener feature is highly experimental and use in any environment outside playgrounds is discouraged. For now it's only possible to use one of the baked-in listeners.",
+          "description": "How dependency-cruiser shows progress. Defaults to 'none'.",
           "properties": {
             "type": {
               "type": "string",

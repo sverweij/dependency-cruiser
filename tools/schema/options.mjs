@@ -387,12 +387,7 @@ export default {
           type: "object",
           additionalProperties: false,
           description:
-            "When executing dependency-cruiser emits 'start', 'progress' and 'end' events on " +
-            "a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach " +
-            "loggers etc. We're still figuring out how to do expose this (if at all), so the " +
-            "listener feature is highly experimental and use in any environment outside " +
-            "playgrounds is discouraged. For now it's only possible to use one of the " +
-            "baked-in listeners.",
+            "How dependency-cruiser shows progress. Defaults to 'none'.",
           properties: {
             type: {
               type: "string",

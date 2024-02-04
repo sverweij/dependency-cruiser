@@ -50,7 +50,7 @@ function getOneShotConfig(pOneShotConfigId) {
   const lOneShotConfigs = new Map([
     ["yes", lBaseConfig],
     [
-      "experimental-scripts",
+      "x-scripts",
       {
         updateManifest: fileExists(PACKAGE_MANIFEST),
         ...lBaseConfig,

@@ -152,7 +152,7 @@ describe("[I] cli/init-config/index", () => {
     }
   });
 
-  it("init experimental-scripts creates a .dependency-cruiser config + updates package.json with scripts", async () => {
+  it("init x-scripts creates a .dependency-cruiser config + updates package.json with scripts", async () => {
     const lOutStream = new WritableTestStream(
       /(Successfully created '.dependency-cruiser.js'|Run scripts added to '[.]\/package.json':)/,
     );
@@ -167,7 +167,7 @@ describe("[I] cli/init-config/index", () => {
     writeFileSync(lManifestFilename, "{}");
 
     try {
-      initConfig("experimental-scripts", null, {
+      initConfig("x-scripts", null, {
         stdout: lOutStream,
         stderr: lErrorStream,
       });
@@ -183,7 +183,7 @@ describe("[I] cli/init-config/index", () => {
     }
   });
 
-  it("init experimental-scripts updates package.json with scripts, and leaves an existing dc config alone", async () => {
+  it("init x-scripts updates package.json with scripts, and leaves an existing dc config alone", async () => {
     const lOutStream = new WritableTestStream(
       /Run scripts added to '[.]\/package.json':/,
     );
@@ -199,7 +199,7 @@ describe("[I] cli/init-config/index", () => {
     writeFileSync(lManifestFilename, "{}");
 
     try {
-      initConfig("experimental-scripts", null, {
+      initConfig("x-scripts", null, {
         stdout: lOutStream,
         stderr: lErrorStream,
       });

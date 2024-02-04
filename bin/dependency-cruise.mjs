@@ -109,7 +109,7 @@ try {
     .addOption(
       new Option(
         "-d, --max-depth <n>",
-        "You probably want to use --collapse instead of --max-depth. " +
+        "you probably want to use --collapse instead of --max-depth. " +
           "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit)).",
       ).hideHelp(true),
     )
@@ -125,13 +125,13 @@ try {
     )
     .option(
       "-C, --cache [cache-directory]",
-      "(experimental) use a cache to speed up execution. " +
+      "use a cache to speed up execution. " +
         "The directory defaults to node_modules/.cache/dependency-cruiser",
     )
     .addOption(
       new Option(
         "--cache-strategy <strategy>",
-        "(experimental) strategy to use for detecting changed files in the cache.",
+        "strategy to use for detecting changed files in the cache.",
       ).choices(["metadata", "content"]),
     )
     .addOption(

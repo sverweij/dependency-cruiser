@@ -237,7 +237,6 @@ export default {
             "Matches when the number of times the 'to' module is used falls below (<) " +
             "this number. Caveat: only works in concert with path and pathNot restrictions " +
             "in the from and to parts of the rule; other conditions will be ignored." +
-            "(somewhat experimental; - syntax can change over time without a major bump)" +
             "E.g. to flag modules that are used only once or not at all, use 2 here.",
           minimum: 0,
           maximum: 100,
@@ -248,7 +247,6 @@ export default {
             "Matches when the number of times the 'to' module is used raises above (>) " +
             "this number. Caveat: only works in concert with path and pathNot restrictions " +
             "in the from and to parts of the rule; other conditions will be ignored." +
-            "(somewhat experimental; - syntax can change over time without a major bump)" +
             "E.g. to flag modules that are used more than 10 times, use 10 here.",
           minimum: 0,
           maximum: 100,

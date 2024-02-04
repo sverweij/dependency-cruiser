@@ -278,16 +278,12 @@ a difference:
   depends on `main/utl.js` there is no circular dependency on module level,
   but there _is_ one between the `main` and `utl` folders
 
-> - :warning: the _scope_ attribute is _experimental_. The attribute was introduced
->   to enable folder scope validations. Whether this is the best approach to
->   distinguish folder and module scope validations has to be proven over time.
->   If there's a better way dependency-cruiser will switch over to that without
->   a major version bump.
-> - :warning: at this time only the `moreUnstable`, `circular` and `path`/ `pathNot`
->   attributes (including 'group matching') work, so it is
->   possible to check the "stable dependencies principle" on folder level. Other
->   attributes (including, but not limited to _via_)
->   still have to be implemented (after release 11.7.0)
+> [!NOTE]
+> at this time only the `moreUnstable`, `circular` and `path`/ `pathNot`
+> attributes (including 'group matching') work, so it is
+> possible to check the "stable dependencies principle" on folder level. Other
+> attributes (including, but not limited to _via_)
+> still have to be implemented (after release 11.7.0)
 
 ## Conditions
 
@@ -479,7 +475,7 @@ To detect orphan guys you can add e.g. this snippet to your
 
 #### Usage notes
 
-- dependency-cruiser will typically not find orphans when you give it
+- :bulb: dependency-cruiser will typically not find orphans when you give it
   only one module to start with. Any module it finds, it finds by
   following its dependencies, so each module will have at least one
   dependency incoming or outgoing. Specify one or more folder, several
@@ -493,10 +489,10 @@ To detect orphan guys you can add e.g. this snippet to your
   depcruise -v -- src/index.ts
   ```
   probably won't (unless index.ts is an orphan itself).
-- by definition orphan modules have no dependencies. So when `orphan` is
+- :bulb: by definition orphan modules have no dependencies. So when `orphan` is
   part of a rule, the `to` part won't make sense. This is why
   dependency-cruiser will ignore the `to` part of these rules.
-- For similar reasons `orphan` is not allowed in the `to` part of rules.
+- :bulb: For similar reasons `orphan` is not allowed in the `to` part of rules.
 
 ### `reachable` - detecting dead wood and transient dependencies
 
@@ -590,10 +586,10 @@ happens:
 
 #### Usage notes
 
-- You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
+- :bulb: You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
   make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
   reachable rules apart - it will be for you as well :-).
-- Different from other rules, rules with a `reachable` attribute can only have
+- :bulb: Different from other rules, rules with a `reachable` attribute can only have
   - `path` and `pathNot` in the `from` part of the rule
   - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule  
     (these limitations might get lifted somewhere in the future)
@@ -623,11 +619,11 @@ E.g. to flag modules in the `shared` folder that are only used from the
 
 #### Usage notes
 
-- Currently rules on dependents only work within the `forbidden` context.
-- In the `from` part `path` and `pathNot` attributes work, but none other.
-- Similarly the `to` part of the rule can (next to the `numberOfDependentsLessThan`
+- :bulb: Currently rules on dependents only work within the `forbidden` context.
+- :bulb: In the `from` part `path` and `pathNot` attributes work, but none other.
+- :bulb: Similarly the `to` part of the rule can (next to the `numberOfDependentsLessThan`
   attribute) also only use `path` and `pathNot`.
-- You can't use group matching with this rule.
+- :bulb: You can't use group matching with this rule.
   <details>
   <summary>why?</summary>
 
@@ -718,7 +714,7 @@ cycles are allowed to pass:
 - `viaOnly`: matches against _all_ of the modules in the cycle
 
 Both take the `path`, `pathNot` and `dependencyTypes`, `dependencyTypesNot`
-attributes that have the a meaning similar to the ones in the `from` and `to`
+attributes that have a meaning similar to the ones in the `from` and `to`
 parts of a rule, with dependencyTypes expressing the type of relation a
 module has with its predecessor in the cycle.
 
@@ -894,9 +890,10 @@ legal department):
 > Just with _path_ and _pathNot_ you can pass an array of regular expressions
 > as well if you think that's more legible.
 
-Note: dependency-cruiser can help out a bit here, but you remain responsible
-for managing your own legal stuff. To re-iterate what is in the
-[LICENSE](../LICENSE) to dependency-cruiser:
+> [!NOTE]
+> dependency-cruiser can help out a bit here, but you remain responsible
+> for managing your own legal stuff. To re-iterate what is in the
+> [LICENSE](../LICENSE) to dependency-cruiser:
 
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 > IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -1161,8 +1158,9 @@ make it beyond the pre-compilation step:
 }
 ```
 
-:warning: This attribute only works for TypeScript sources, and only when
-[`tsPreCompilationDeps`](#tsprecompilationdeps) option is set to `"specify"`.
+> [!NOTE]
+> This attribute only works for TypeScript sources, and only when
+> [`tsPreCompilationDeps`](#tsprecompilationdeps) option is set to `"specify"`.
 
 ### `moreUnstable`
 

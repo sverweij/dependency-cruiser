@@ -1261,7 +1261,7 @@ The `markdown` reporter by default delivers a report approximately as complete a
 the `err-html` reporter, including a title, a summary section, a details section
 and a footer. It might be you don't need that in your target situation (e.g. in a
 [GitHub action job summary](https://github.blog/2022-05-09-supercharging-github-actions-with-job-summaries/)).
-This is why it is configurable. The a `markdown` section in the
+This is why it is configurable. The `markdown` section in the
 `options.reporterOptions` section of your dependency-cruiser lets you configure
 what parts to leave in or out - and even what titles and headers the report
 should show:
@@ -1371,7 +1371,7 @@ module.exports = {
 
 ### preserveSymlinks
 
-> command line option equivalent: `--preserve-symlinks`
+> :shell: command line option equivalent: `--preserve-symlinks`
 
 Whether to leave symlinks as is or resolve them to their realpath. This option
 defaults to `false` - which is also nodejs' default behaviour since release 6.
@@ -1450,6 +1450,7 @@ their extensions in an `extraExtensionsToScan` array, like so:
 }
 ```
 
+> [!WARNING]
 > dependency-cruiser will take special care not to even _read_ these files as
 > it can't parse them anyway, and skipping them saves (sometimes a lot) of
 > time. This also means that if you put an extension in the extra extensions

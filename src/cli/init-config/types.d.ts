@@ -1,4 +1,4 @@
-export type OneShotConfigIDType = "yes" | "experimental-scripts";
+export type OneShotConfigIDType = "yes" | "x-scripts";
 
 export interface IInitConfig {
   /**
