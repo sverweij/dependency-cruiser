@@ -4,8 +4,9 @@ import type { ICruiseOptions } from "../options.mjs";
  * Reads the file with name `pConfigFileName` returns the parsed cruise
  * options.
  *
- * You can safely ignore the optional parameters. Simply this should work (given
- * `.dependency-cruiser.js` exists and contains a valid dependency-cruiser config)
+ * You can safely ignore the optional parameters. This should work (given
+ * `.dependency-cruiser.js` exists and contains a valid dependency-cruiser
+ * config)
  *
  * ```javascript
  * const depcruiseConfig = extractDepcruiseConfig("./.dependency-cruiser.js")

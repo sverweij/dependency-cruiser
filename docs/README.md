@@ -9,5 +9,5 @@ In the making.
 - doc contains the documentation for dependency-cruiser (at the moment)
 - docs (note the s - this folder) is the website.
 
-Why the confusing names? _docs_ is just what github uses by default for
+Why the confusing names? _docs_ is what github uses by default for
 github pages `¯\_(ツ)_/¯`

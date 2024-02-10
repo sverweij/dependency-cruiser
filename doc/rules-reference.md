@@ -411,7 +411,7 @@ currently being matched.
 #### Using an array of regular expressions
 
 When your regular expressions grow bigger, you might want to express them
-as an array of regular expressions instead of just one regular expression to
+as an array of regular expressions instead of one regular expression to
 improve legibility.
 
 <details>
@@ -1184,7 +1184,7 @@ of 0%; as stable as it can get. Conversely a module with no dependents, but
 with one or more dependencies is 100% Instable.
 
 Instability has a bit of an unusual connotation here - it's not 'bad' to be
-an 100% Instable module - it's just the nature of the module. A CLI or GUI
+a 100% Instable module - it's only the nature of the module. A CLI or GUI
 component typically only depends on other modules and is 100% Instable. This is
 not a bad thing.
 

@@ -520,7 +520,7 @@ so it's easier to compare than the two json's):
   `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
 - (You can use any array of strings here - a good one is Sindre Sorhus'
   [mnemonic-words](https://www.npmjs.com/package/mnemonic-words), which
-  you can simply require into the option if you're using JavaScript as
+  you can require into the option if you're using JavaScript as
   the config file format):
   ```javascript
   ...
@@ -816,7 +816,7 @@ it has to them. To see how dependency-cruiser perceives its environment use
 ```
 Supported:
 
-  If you need a supported, but not enabled transpiler ('✖' below), just install
+  If you need a supported, but not enabled transpiler ('✖' below), install
   it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
   will enable livescript support if it's installed in your project folder.
 
@@ -1329,7 +1329,7 @@ bigger code bases this can save time. Cruising all code can sometimes take
 more than a minute, while formatting usually takes well below a second.
 
 For instance, to report any violations to console, create a distributable
-report _and_ generate a dependency graph. With just the `depcruise` command
+report _and_ generate a dependency graph. With only the `depcruise` command
 this would look like
 
 ```sh
@@ -1338,7 +1338,7 @@ depcruise -v -T err-html src -f violation-report.html
 depcruise -v -T dot src | dot -T svg > dependency-graph.svg
 ```
 
-With depcruise-fmt there's just one cruise and three quick depcruise-fmt commands
+With depcruise-fmt there's one cruise and three quick depcruise-fmt commands
 
 ```sh
 depcruise -v -T json src -f cruise_result.json

@@ -117,7 +117,7 @@ You realise there might be more npm packages using http too, so ...
 
 - You change the `not-to-core-http` to only generate errors for paths _outside_
   node_modules.
-- You add a new rule for node_modules, that just generate a warning. You'll
+- You add a new rule for node_modules, that generates only a warning. You'll
   still see it in the build logs, but you can go on developing for the time
   being.
 

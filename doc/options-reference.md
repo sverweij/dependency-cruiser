@@ -639,7 +639,7 @@ You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
 `tsconfig`, or are using jsx/ tsx outside of a react context.
 
 Dependency-cruiser understands the `extends` configuration in tsconfig's so
-if you have a hierarchy of configs, you just need to pass the relevant one.
+if you have a hierarchy of configs, you only need to pass the relevant one.
 
 Sample
 
@@ -701,7 +701,7 @@ That way dependency-cruiser will use the babel compiler for its transpilation
 steps, so if you're using features that are not TC39 stage 4 yet dependency-cruiser
 will happily analyze these source files for you.
 
-If you just use a `babel` key in your package.json pass `package.json` as the
+If you only use a `babel` key in your package.json pass `package.json` as the
 babelConfig - dependency-cruiser will sort it out for you.
 
 #### Usage notes
@@ -1130,7 +1130,7 @@ reporters over it. E.g.
 # dependencies. For big repos this can take a while
 depcruise src bin test -T json -c > results.json
 
-# depcruise-fmt just reads the result of a cruise and emits a report
+# depcruise-fmt reads the result of a cruise and emits a report
 # on it, so it doesn't need to do the expensive disk access & parse
 # step. These three formatting steps together will take a lot less
 # than even one cruise:
@@ -1209,7 +1209,7 @@ want to prevent random names as much as possible. There's word lists in the wild
 that work exceptionally well - in the past I have used Sindre Sorhus'
 [mnemonic-words](https://www.npmjs.com/package/mnemonic-words) list
 for this. If you use JavaScript as the configuration file format you can
-simply require it:
+require or import it.
 
 ```javascript
 const mnemonicWords = require('mnemonic-words');

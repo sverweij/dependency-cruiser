@@ -13,7 +13,7 @@ the javascript AST.
 In commonjs and AMD it's possible to either _rename_ or _wrap_ your require
 functions either to hack around a particular issue (e.g. force require cache
 to not be used, require modules that might not be there without having to
-try catch, you're using the require keyword for something else) or just for
+try catch, you're using the require keyword for something else) or for
 the lulz:
 
 ```javascript
@@ -45,7 +45,7 @@ Dynamic imports are not in the javascript standard yet, but typescript
 already has it:
 
 ```typescript
-import("aju").then(aju => aju.paraplu());
+import("aju").then((aju) => aju.paraplu());
 ```
 
 Same shortcoming as the import `yadda = require('aju')` thing when
@@ -57,18 +57,18 @@ as the typescript compiler output won't contain references to types
 nor references to modules that are unused
 
 ```typescript
-import './import-for-side-effects';
-import { SomeSingleExport } from './ts-thing';
-import { SomeSingleExport as RenamedSingleExport } from './ts-thing';
-import * as entireTsOtherThingAsVariable from './ts-other-thing';
-import type { SomeType } from './some-module';
+import "./import-for-side-effects";
+import { SomeSingleExport } from "./ts-thing";
+import { SomeSingleExport as RenamedSingleExport } from "./ts-thing";
+import * as entireTsOtherThingAsVariable from "./ts-other-thing";
+import type { SomeType } from "./some-module";
 ```
 
 ... as do (re-exports)
 
 ```typescript
-export * from './StringValidator';
-export { ReExport as RenamedReExport } from "./ts-thing-for-re-exports"
+export * from "./StringValidator";
+export { ReExport as RenamedReExport } from "./ts-thing-for-re-exports";
 export * as utilities from "./utilities.js";
 ```
 

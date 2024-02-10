@@ -123,7 +123,7 @@ though, so dependency-cruiser has a few options to get you sorted.
 
 #### High level dependency graph ('archi' reporter)
 
-If you just want to get an overview of how the main components of your application
+If you only want to get an overview of how the main components of your application
 are connected, you can aggregate dependencies to a higher level.
 
 <details>
