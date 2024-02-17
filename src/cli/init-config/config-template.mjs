@@ -199,38 +199,31 @@ module.exports = {
   ],
   options: {
 
-    /* conditions specifying which files not to follow further when encountered:
-       - path: a regular expression to match
-       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/main/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
-       for a complete list
-    */
+    /* Which modules not to follow further when encountered */
     doNotFollow: {
-      path: 'node_modules'
+      /* path: an array of regular expressions in strings to match against */
+      path: ['node_modules']
     },
 
-    /* conditions specifying which dependencies to exclude
-       - path: a regular expression to match
-       - dynamic: a boolean indicating whether to ignore dynamic (true) or static (false) dependencies.
-          leave out if you want to exclude neither (recommended!)
-    */
+    /* Which modules to exclude */
     // exclude : {
+    //   /* path: an array of regular expressions in strings to match against */
     //   path: '',
-    //   dynamic: true
     // },
 
-    /* pattern specifying which files to include (regular expression)
+    /* Which modules to exclusively include (array of regular expressions in strings)
        dependency-cruiser will skip everything not matching this pattern
     */
-    // includeOnly : '',
+    // includeOnly : [''],
 
     /* dependency-cruiser will include modules matching against the focus
-       regular expression in its output, as well as their neighbours (direct
-       dependencies and dependents)
+       regular expression in its output, as well as their direct neighbours 
+       (dependencies and dependents)
     */
     // focus : '',
 
-    /* List of module systems to cruise. 
-       When left out dependency-cruiser will fall back to the list of _all_ 
+    /* List of module systems to cruise.
+       When left out dependency-cruiser will fall back to the list of _all_
        module systems it knows of. It's the default because it's the safe option
        It might come at a performance penalty, though.
        moduleSystems: ['amd', 'cjs', 'es6', 'tsd']
@@ -245,7 +238,7 @@ module.exports = {
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),
      */
-    // prefix: '',
+    // prefix: 'vscode://file/$\{process.cwd()}/\',
 
     /* false (the default): ignore dependencies that only exist before typescript-to-javascript compilation
        true: also detect dependencies that only exist before typescript-to-javascript compilation
@@ -253,10 +246,9 @@ module.exports = {
      */
     {{tsPreCompilationDepsAttribute}}
     
-    /* 
-       list of extensions to scan that aren't javascript or compile-to-javascript. 
+    /* list of extensions to scan that aren't javascript or compile-to-javascript.
        Empty by default. Only put extensions in here that you want to take into
-       account that are _not_ parsable. 
+       account that are _not_ parsable.
     */
     // extraExtensionsToScan: [".json", ".jpg", ".png", ".svg", ".webp"],
 
@@ -293,9 +285,7 @@ module.exports = {
 
     /* Babel config ('.babelrc', '.babelrc.json', '.babelrc.json5', ...) to use
       for compilation (and whatever other naughty things babel plugins do to
-      source code). This feature is well tested and usable, but might change
-      behavior a bit over time (e.g. more precise results for used module 
-      systems) without dependency-cruiser getting a major version bump.
+      source code).
      */
     {{babelConfigAttribute}}
 
@@ -305,57 +295,37 @@ module.exports = {
        a hack.
     */
     // exoticRequireStrings: [],
+    
     /* options to pass on to enhanced-resolve, the package dependency-cruiser
-       uses to resolve module references to disk. You can set most of these
-       options in a webpack.conf.js - this section is here for those
-       projects that don't have a separate webpack config file.
+       uses to resolve module references to disk. The values below should be
+       suitable for most situations
 
-       Note: settings in webpack.conf.js override the ones specified here.
+       If you use webpack: you can also set these in webpack.conf.js. The set
+       there will override the ones specified here.
      */
     enhancedResolveOptions: {
-      /* List of strings to consider as 'exports' fields in package.json. Use
-         ['exports'] when you use packages that use such a field and your environment
-         supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
-
-         If you have an \`exportsFields\` attribute in your webpack config, that one
-         will have precedence over the one specified here.
-      */ 
+      /* What to consider as an 'exports' field in package.jsons */ 
       exportsFields: ["exports"],
-      /* List of conditions to check for in the exports field. e.g. use ['imports']
-         if you're only interested in exposed es6 modules, ['require'] for commonjs,
-         or all conditions at once \`(['import', 'require', 'node', 'default']\`)
-         if anything goes for you. Only works when the 'exportsFields' array is
-         non-empty.
-
-        If you have a 'conditionNames' attribute in your webpack config, that one will
-        have precedence over the one specified here.
+      /* List of conditions to check for in the exports field.
+         Only works when the 'exportsFields' array is non-empty.
       */
       conditionNames: ["import", "require", "node", "default", "types"],
       /*
          The extensions, by default are the same as the ones dependency-cruiser
          can access (run \`npx depcruise --info\` to see which ones that are in
-         _your_ environment. If that list is larger than what you need (e.g. 
-         it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use 
-         TypeScript you can pass just the extensions you actually use (e.g. 
-         [".js", ".jsx"]). This can speed up the most expensive step in 
-         dependency cruising (module resolution) quite a bit.
+         _your_ environment. If that list is larger than you need you can pass
+         the extensions you actually use (e.g. [".js", ".jsx"]). This can speed
+         up the most expensive step in dependency cruising (module resolution)
+          quite a bit.
        */
       {{extensionsAttribute}}
-      /* 
-         If your TypeScript project makes use of types specified in 'types'
-         fields in package.jsons of external dependencies, specify "types"
-         in addition to "main" in here, so enhanced-resolve (the resolver
-         dependency-cruiser uses) knows to also look there. You can also do
-         this if you're not sure, but still use TypeScript. In a future version
-         of dependency-cruiser this will likely become the default.
-       */
+      /* What to consider a 'main' field in package.json */
       {{mainFieldsAttribute}}
       /*
-         A list of alias fields in manifests (package.jsons).
-         Specify a field, such as browser, to be parsed according to
-         [this specification](https://github.com/defunctzombie/package-browser-field-spec).
-         Also see [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
-         in the webpack docs. 
+         A list of alias fields in package.jsons
+         See [this specification](https://github.com/defunctzombie/package-browser-field-spec) and
+         the [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
+         documentation in the webpack docs. 
          
          Defaults to an empty array (don't use any alias fields).
        */
@@ -377,70 +347,13 @@ module.exports = {
         */
         // theme: {
         //   graph: {
-        //     /* use splines: "ortho" for straight lines. Be aware though
-        //       graphviz might take a long time calculating ortho(gonal)
-        //       routings.
+        //     /* splines: "ortho" will give you straight lines at the expense of
+        //                 being slow to render on big graphs
+        //        splines: "true" will give you bezier curves which are faster
+        //                 but might not look as nice
         //    */
         //     splines: "true"
         //   },
-        //   modules: [
-        //     {
-        //       criteria: { matchesFocus: true },
-        //       attributes: {
-        //         fillcolor: "lime",
-        //         penwidth: 2,
-        //       },
-        //     },
-        //     {
-        //       criteria: { matchesFocus: false },
-        //       attributes: {
-        //         fillcolor: "lightgrey",
-        //       },
-        //     },
-        //     {
-        //       criteria: { matchesReaches: true },
-        //       attributes: {
-        //         fillcolor: "lime",
-        //         penwidth: 2,
-        //       },
-        //     },
-        //     {
-        //       criteria: { matchesReaches: false },
-        //       attributes: {
-        //         fillcolor: "lightgrey",
-        //       },
-        //     },
-        //     {
-        //       criteria: { source: "^src/model" },
-        //       attributes: { fillcolor: "#ccccff" }
-        //     },
-        //     {
-        //       criteria: { source: "^src/view" },
-        //       attributes: { fillcolor: "#ccffcc" }
-        //     },
-        //   ],
-        //   dependencies: [
-        //     {
-        //       criteria: { "rules[0].severity": "error" },
-        //       attributes: { fontcolor: "red", color: "red" }
-        //     },
-        //     {
-        //       criteria: { "rules[0].severity": "warn" },
-        //       attributes: { fontcolor: "orange", color: "orange" }
-        //     },
-        //     {
-        //       criteria: { "rules[0].severity": "info" },
-        //       attributes: { fontcolor: "blue", color: "blue" }
-        //     },
-        //     {
-        //       criteria: { resolved: "^src/model" },
-        //       attributes: { color: "#0000ff77" }
-        //     },
-        //     {
-        //       criteria: { resolved: "^src/view" },
-        //       attributes: { color: "#00770077" }
-        //     }
-        //   ]
         // }
       },
       archi: {
@@ -455,7 +368,7 @@ module.exports = {
            https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            for 'archi' dependency-cruiser will use the one specified in the
-           dot section (see above), if any, and otherwise use the default one.
+           dot section above and otherwise use the default one.
          */
         // theme: {
         // },
