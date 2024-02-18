@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { isAbsolute, resolve as path_resolve } from "node:path";
 import { join as posix_join } from "node:path/posix";
-import { isMatch } from "picomatch";
+import picomatch from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
 let gFollowableExtensionsCache = new Set();
@@ -158,7 +158,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
       (pWorkspace) =>
         pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
     );
-    if (isMatch(pResolvedModuleName, lModuleFriendlyWorkspaceGlobs)) {
+    if (picomatch.isMatch(pResolvedModuleName, lModuleFriendlyWorkspaceGlobs)) {
       return true;
     }
     // it's possible to run node with --preserve-symlinks, in which case
@@ -176,7 +176,10 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
       lModuleFriendlyWorkspaceGlobs.map(
         (pWorkspace) => `(node_modules/)?${pWorkspace}`,
       );
-    return isMatch(pModuleName, lModuleFriendlyWorkspaceGlobsWithNodeModules);
+    return picomatch.isMatch(
+      pModuleName,
+      lModuleFriendlyWorkspaceGlobsWithNodeModules,
+    );
   }
   return false;
 }
