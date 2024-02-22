@@ -49,7 +49,7 @@ export default class MetaDataStrategy {
       const lSHA = await lOptions.shaRetrievalFn();
       bus.debug("cache: - getting diff");
       const lDiff = /** @type {import("watskeburt").IChange[]} */ (
-        await lOptions.diffListFn(lSHA)
+        await lOptions.diffListFn({ oldRevision: lSHA })
       );
       const lChanges = lDiff
         .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
