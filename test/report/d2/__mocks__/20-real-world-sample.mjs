@@ -737,7 +737,7 @@ export default {
         },
         {
           dynamic: false,
-          module: "#meta.js",
+          module: "#meta.cjs",
           moduleSystem: "es6",
           exoticallyRequired: false,
           resolved: "src/meta.js",

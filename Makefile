@@ -7,7 +7,7 @@ GENERATED_SOURCES=src/schema/baseline-violations.schema.mjs \
 	src/schema/baseline-violations.schema.json \
 	src/schema/configuration.schema.json \
 	src/schema/cruise-result.schema.json \
-	src/meta.js
+	src/meta.cjs
 
 SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/cache-options.mjs \
@@ -71,6 +71,6 @@ src/%.schema.mjs: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.ut
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
 	$(NODE) ./tools/generate-schemas.utl.mjs $@
 
-src/meta.js: package.json tools/generate-meta.utl.mjs
+src/meta.cjs: package.json tools/generate-meta.utl.mjs
 	$(NODE) ./tools/generate-meta.utl.mjs < $< > $@
 	npx prettier --write $@

@@ -1,5 +1,5 @@
 import errorHtmlUtl from "./error-html/utl.mjs";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 const { aggregateViolations, determineTo, determineFromExtras } = errorHtmlUtl;
 

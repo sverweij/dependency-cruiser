@@ -10,7 +10,7 @@ const STYLESHEET_FILE = fileURLToPath(
 );
 const SCRIPT_FILE = fileURLToPath(
   new URL(
-    "../../report/dot-webpage/svg-in-html-snippets/script.js",
+    "../../report/dot-webpage/svg-in-html-snippets/script.cjs",
     import.meta.url,
   ),
 );

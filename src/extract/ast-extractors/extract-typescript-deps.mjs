@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
 import tryImport from "semver-try-require";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 /** @type {import("typescript")} */
 const typescript = await tryImport(

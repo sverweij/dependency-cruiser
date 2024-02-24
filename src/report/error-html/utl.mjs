@@ -1,6 +1,6 @@
 import has from "lodash/has.js";
 import { formatViolation, formatPercentage } from "../utl/index.mjs";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = pRuleSetUsed?.allowed ?? [];

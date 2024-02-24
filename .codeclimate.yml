@@ -17,6 +17,6 @@ exclude_patterns:
   - "test/"
   - "types/"
   - "tools/"
-  - "src/report/dot-webpage/svg-in-html-snippets/script.js"
+  - "src/report/dot-webpage/svg-in-html-snippets/script.cjs"
   - "**/node_modules/"
   - "src/**/*.schema.mjs"

@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import noOrphansRule from "../../configs/rules/no-orphans.js";
+import noOrphansRule from "../../configs/rules/no-orphans.cjs";
 import matchModuleRule from "#validate/match-module-rule.mjs";
 
 describe("[I] configs/rules/no-orphans", () => {
