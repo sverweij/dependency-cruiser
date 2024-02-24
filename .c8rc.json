@@ -12,11 +12,10 @@
     "coverage",
     "test",
     "tools",
-    "webpack.conf.js",
     "tmp*",
-    ".mocharc.js",
+    ".mocharc.cjs",
     ".eslintrc.cjs",
-    "src/cli/tools/svg-in-html-snippets/script.snippet.js",
+    "src/cli/tools/svg-in-html-snippets/script.snippet.cjs",
     "src/cli/init-config/get-user-input.mjs",
     "src/cli/listeners/*/index.mjs",
     "src/cli/listeners/{cli-feedback,ndjson}.mjs"

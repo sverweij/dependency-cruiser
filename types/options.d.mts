@@ -61,7 +61,7 @@ export interface ICruiseOptions {
    *
    * This ain't in none of the json schemas, but is used internally _instead_
    * of the rule set defined on global configuration level. Judo
-   * (a.o. flattening out extended rule sets) done in ../src/cli/normalize-options.js
+   * (a.o. flattening out extended rule sets) done in ../src/cli/normalize-cli-options.mjs
    */
   ruleSet?: IFlattenedRuleSet;
   /**
