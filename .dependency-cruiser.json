@@ -245,11 +245,11 @@
       "comment": "(sample rule to demo reachable rules with capturing groups)",
       "severity": "info",
       "from": {
-        "path": "^src/([^/]+)/index[.]js$"
+        "path": "^src/([^/]+)/index[.][cm]js$"
       },
       "to": {
         "path": ["^src/$1/"],
-        "pathNot": "[.]d[.]ts$",
+        "pathNot": ["[.]d[.]ts$", "^src/report/"],
         "reachable": false
       }
     },
@@ -365,10 +365,9 @@
       "aliasFields": ["browser"],
       "conditionNames": ["import", "require"],
       "extensions": [
-        ".js",
-        //
-        // ".cjs",
+        ".cjs",
         ".mjs",
+        ".js",
         // ".jsx",
         // ".ts",
         // ".cts",
