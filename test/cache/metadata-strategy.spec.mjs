@@ -47,7 +47,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "modified",
+        type: "modified",
         name: "file-does-not-exist.aap",
       },
     ];
@@ -55,7 +55,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "modified",
+          type: "modified",
           name: "file-does-not-exist.aap",
           checksum: "file not found",
         },
@@ -80,7 +80,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "modified",
+        type: "modified",
         name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
       },
     ];
@@ -88,7 +88,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "modified",
+          type: "modified",
           name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
@@ -132,24 +132,24 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "added",
+        type: "added",
         name: "aap-extension-hence-ignored.aap",
       },
       {
-        changeType: "added",
+        type: "added",
         name: "noot-extension-hence-returned.noot",
       },
       {
-        changeType: "renamed",
+        type: "renamed",
         name: "old-name-has-extension-wim-hence-returned.mies",
         oldName: "wim-extension-hence-returned.wim",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "zus-extension-hence-ignored.zus",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "no-extension-hence-ignored",
       },
     ];
@@ -157,12 +157,12 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "added",
+          type: "added",
           name: "noot-extension-hence-returned.noot",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "renamed",
+          type: "renamed",
           name: "old-name-has-extension-wim-hence-returned.mies",
           oldName: "wim-extension-hence-returned.wim",
           checksum: "dummy-checksum",
@@ -189,28 +189,28 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "added",
+        type: "added",
         name: "added-hence-returned.aap",
       },
       {
-        changeType: "added",
+        type: "added",
         name: "added-hence-returned.noot",
       },
       {
-        changeType: "ignored",
+        type: "ignored",
         name: "ignored-hence-ignored.aap",
       },
       {
-        changeType: "renamed",
+        type: "renamed",
         name: "renamed-hence-returned.mies",
         oldName: "old-name.wim",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "deleted-hence-ignored.aap",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "untracked-hence-ignored.aap",
       },
     ];
@@ -218,17 +218,17 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "added",
+          type: "added",
           name: "added-hence-returned.aap",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "added",
+          type: "added",
           name: "added-hence-returned.noot",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "renamed",
+          type: "renamed",
           name: "renamed-hence-returned.mies",
           oldName: "old-name.wim",
           checksum: "dummy-checksum",
@@ -255,48 +255,48 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "added",
+        type: "added",
         name: "added-hence-returned.aap",
       },
       {
-        changeType: "copied",
+        type: "copied",
         name: "copied-hence-returned.noot",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "deleted-hence-returned.aap",
       },
       {
-        changeType: "modified",
+        type: "modified",
         name: "modified-hence-returned.mies",
         oldName: "old-name.wim",
       },
       {
-        changeType: "renamed",
+        type: "renamed",
         name: "renamed-hence-returned.aap",
       },
       {
-        changeType: "unmerged",
+        type: "unmerged",
         name: "unmerged-hence-returned.aap",
       },
       {
-        changeType: "untracked",
+        type: "untracked",
         name: "untracked-hence-returned.aap",
       },
       {
-        changeType: "pairing broken",
+        type: "pairing broken",
         name: "pairing-broken-hence-ignored.aap",
       },
       {
-        changeType: "unmodified",
+        type: "unmodified",
         name: "unmodified-hence-ignored.aap",
       },
       {
-        changeType: "type changed",
+        type: "type changed",
         name: "type-changed-hence-ignored.aap",
       },
       {
-        changeType: "ignored",
+        type: "ignored",
         name: "ignored-hence-ignored.aap",
       },
     ];
@@ -304,38 +304,38 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "added",
+          type: "added",
           name: "added-hence-returned.aap",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "copied",
+          type: "copied",
           name: "copied-hence-returned.noot",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "deleted",
+          type: "deleted",
           name: "deleted-hence-returned.aap",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "modified",
+          type: "modified",
           name: "modified-hence-returned.mies",
           oldName: "old-name.wim",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "renamed",
+          type: "renamed",
           name: "renamed-hence-returned.aap",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "unmerged",
+          type: "unmerged",
           name: "unmerged-hence-returned.aap",
           checksum: "dummy-checksum",
         },
         {
-          changeType: "untracked",
+          type: "untracked",
           name: "untracked-hence-returned.aap",
           checksum: "dummy-checksum",
         },
@@ -361,17 +361,17 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
 describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   const lChanges = [
     {
-      changeType: "added",
+      type: "added",
       name: "added-hence-returned.aap",
       checksum: "dummy-checksum",
     },
     {
-      changeType: "added",
+      type: "added",
       name: "added-hence-returned.noot",
       checksum: "dummy-checksum",
     },
     {
-      changeType: "renamed",
+      type: "renamed",
       name: "renamed-hence-returned.mies",
       oldName: "old-name.wim",
       checksum: "dummy-checksum",

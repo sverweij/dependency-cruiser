@@ -36,19 +36,19 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       [
         {
           name: "consolidated",
-          changeType: "ignored",
+          type: "ignored",
         },
         {
           name: "path",
-          changeType: "ignored",
+          type: "ignored",
         },
         {
           name: "could-not-resolve.js",
-          changeType: "ignored",
+          type: "ignored",
         },
         {
           name: "node_modules/matches-do-not/follow.js",
-          changeType: "ignored",
+          type: "ignored",
         },
       ],
     );
@@ -69,7 +69,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       [
         {
           name: "only-in-cache-ends-up-as-deleted.js",
-          changeType: "deleted",
+          type: "deleted",
         },
       ],
     );
@@ -98,7 +98,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       [
         {
           name: "not-in-content-changes-as-extension.weird",
-          changeType: "ignored",
+          type: "ignored",
         },
       ],
     );
@@ -129,12 +129,12 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       [
         {
           name: "in-folder-as-well-different-checksum.js",
-          changeType: "modified",
+          type: "modified",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
         {
           name: "in-folder-as-well-no-checksum.js",
-          changeType: "modified",
+          type: "modified",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
@@ -163,7 +163,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       [
         {
           name: "in-folder-as-well-unmodified.js",
-          changeType: "unmodified",
+          type: "unmodified",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
@@ -203,7 +203,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
       [
         {
           name: "interesting-extension.js",
-          changeType: "added",
+          type: "added",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
@@ -224,7 +224,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
       [
         {
           name: "interesting-extension.js",
-          changeType: "added",
+          type: "added",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
@@ -246,7 +246,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
       [
         {
           name: "interesting-extension.js",
-          changeType: "added",
+          type: "added",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
@@ -269,12 +269,12 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
       [
         {
           name: "interesting-as-well.js",
-          changeType: "added",
+          type: "added",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
         {
           name: "interesting-extension.js",
-          changeType: "added",
+          type: "added",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],

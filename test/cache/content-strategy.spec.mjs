@@ -23,7 +23,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "modified",
+        type: "modified",
         name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
       },
     ];
@@ -31,7 +31,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
       SHA1: DUMMY_SHA,
       changes: [
         {
-          changeType: "modified",
+          type: "modified",
           name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
         },
       ],
@@ -91,7 +91,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
         SHA1: DUMMY_SHA,
         changes: [
           {
-            changeType: "added",
+            type: "added",
             name: "noot-extension-hence-returned.noot",
             checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
           },
@@ -105,28 +105,28 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
-        changeType: "added",
+        type: "added",
         name: "added-hence-returned.aap",
       },
       {
-        changeType: "added",
+        type: "added",
         name: "added-hence-returned.noot",
       },
       {
-        changeType: "ignored",
+        type: "ignored",
         name: "ignored-hence-ignored.aap",
       },
       {
-        changeType: "renamed",
+        type: "renamed",
         name: "renamed-hence-returned.mies",
         oldName: "old-name.wim",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "deleted-hence-ignored.aap",
       },
       {
-        changeType: "deleted",
+        type: "deleted",
         name: "untracked-hence-ignored.aap",
       },
     ];
@@ -147,15 +147,15 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
         SHA1: DUMMY_SHA,
         changes: [
           {
-            changeType: "added",
+            type: "added",
             name: "added-hence-returned.aap",
           },
           {
-            changeType: "added",
+            type: "added",
             name: "added-hence-returned.noot",
           },
           {
-            changeType: "renamed",
+            type: "renamed",
             name: "renamed-hence-returned.mies",
             oldName: "old-name.wim",
           },
@@ -168,17 +168,17 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
 describe("[U] cache/content-strategy - revisionDataEqual", () => {
   const lChanges = [
     {
-      changeType: "added",
+      type: "added",
       name: "added-hence-returned.aap",
       checksum: "dummy-checksum",
     },
     {
-      changeType: "added",
+      type: "added",
       name: "added-hence-returned.noot",
       checksum: "dummy-checksum",
     },
     {
-      changeType: "renamed",
+      type: "renamed",
       name: "renamed-hence-returned.mies",
       oldName: "old-name.wim",
       checksum: "dummy-checksum",
@@ -369,17 +369,17 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       SHA1: "shwoop",
       changes: [
         {
-          changeType: "modified",
+          type: "modified",
           name: "foo.js",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
         {
-          changeType: "added",
+          type: "added",
           name: "added.js",
           checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
         {
-          changeType: "modified",
+          type: "modified",
           name: "baz.js",
           checksum: "differentchecksumfromthing/=",
         },
@@ -409,12 +409,12 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
         SHA1: "shwoop",
         changes: [
           {
-            changeType: "added",
+            type: "added",
             name: "added.js",
             checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
           },
           {
-            changeType: "modified",
+            type: "modified",
             name: "baz.js",
             checksum: "differentchecksumfromthing/=",
           },
