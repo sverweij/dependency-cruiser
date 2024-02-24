@@ -238,7 +238,7 @@ module.exports = {
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),
      */
-    // prefix: 'vscode://file/$\{process.cwd()}/\',
+    // prefix: \`vscode://file/$\{process.cwd()}/\`,
 
     /* false (the default): ignore dependencies that only exist before typescript-to-javascript compilation
        true: also detect dependencies that only exist before typescript-to-javascript compilation
