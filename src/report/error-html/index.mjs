@@ -4,7 +4,7 @@ import {
   determineTo,
 } from "./utl.mjs";
 import template from "./error-html-template.mjs";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 function getViolatedRuleRowClass(pViolatedRule) {
   return pViolatedRule.unviolated ? ' class="unviolated"' : "";

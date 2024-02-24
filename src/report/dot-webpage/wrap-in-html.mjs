@@ -5,7 +5,7 @@ const STYLESHEET_FILE = fileURLToPath(
   new URL("svg-in-html-snippets/style.css", import.meta.url),
 );
 const SCRIPT_FILE = fileURLToPath(
-  new URL("svg-in-html-snippets/script.js", import.meta.url),
+  new URL("svg-in-html-snippets/script.cjs", import.meta.url),
 );
 
 /**

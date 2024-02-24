@@ -80,7 +80,7 @@ export function getWrapper(pExtension, pTranspilerOptions) {
  *
  * @see section "supportedTranspilers" in [package.json](../../../package.json)
  *      for supported versions of transpilers
- * @see [meta.js](meta.js) for the extension -> transpiler mapping
+ * @see [meta.cjs](meta.cjs) for the extension -> transpiler mapping
  *
  * @param  {{ extension:string; source:string; filename:string; }} pFileRecord      Record with source code, an extension and a filename
  * @param  {any} pTranspilerOptions (optional) object with options influencing
@@ -91,7 +91,7 @@ export function getWrapper(pExtension, pTranspilerOptions) {
  */
 export default function transpile(
   { extension, source, filename },
-  pTranspilerOptions
+  pTranspilerOptions,
 ) {
   const lWrapper = getWrapper(extension, pTranspilerOptions);
 

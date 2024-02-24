@@ -41,7 +41,7 @@
           "^src/(main|utl|config-utl)/",
           "^src/report/dot-webpage/wrap-in-html[.]mjs$",
           "$1",
-          "^src/meta[.]js$",
+          "^src/meta[.]cjs$",
           "^src/extract/transpile/meta[.]mjs$"
         ],
         "dependencyTypesNot": ["npm", "core", "type-only"]
@@ -55,7 +55,7 @@
         "path": "(^src/report/)"
       },
       "to": {
-        "pathNot": ["$1", "^src/meta[.]js$", "^src/graph-utl", "^src/utl"],
+        "pathNot": ["$1", "^src/meta[.]cjs$", "^src/graph-utl", "^src/utl"],
         "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
@@ -67,7 +67,7 @@
         "path": "(^src/extract/)"
       },
       "to": {
-        "pathNot": ["$1", "^src/meta[.]js$", "^src/graph-utl", "^src/utl"],
+        "pathNot": ["$1", "^src/meta[.]cjs$", "^src/graph-utl", "^src/utl"],
         "dependencyTypesNot": ["npm", "core", "type-only"],
         "exoticallyRequired": false
       }
@@ -86,7 +86,7 @@
       "severity": "error",
       "from": { "path": "(^bin/)" },
       "to": {
-        "pathNot": ["^src/cli", "^src/meta[.]js$"],
+        "pathNot": ["^src/cli", "^src/meta[.]cjs$"],
         "dependencyTypesNot": ["npm", "core", "type-only"]
       }
     },
@@ -312,7 +312,7 @@
       "mocks",
       "fixtures",
       "test/integration",
-      "src/report/dot-webpage/svg-in-html-snippets/script.js"
+      "src/report/dot-webpage/svg-in-html-snippets/script.cjs"
     ],
 
     /* list of module systems to cruise */
@@ -404,7 +404,7 @@
         "collapsePattern": ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
         "filters": {
           "includeOnly": { "path": "^(src|bin)" },
-          "exclude": { "path": ["^src/meta[.]js$", "^src/utl/bus.+"] }
+          "exclude": { "path": ["^src/meta[.]cjs$", "^src/utl/bus.+"] }
         },
         "theme": {
           "replace": false,
@@ -471,7 +471,7 @@
             },
             {
               "criteria": {
-                "source": "^src/meta[.]js$|[.]schema[.]mjs$"
+                "source": "^src/meta[.]cjs$|[.]schema[.]mjs$"
               },
               "attributes": { "style": "filled" }
             },

@@ -8,7 +8,7 @@
 *.ogg binary
 
 src/schema/** linguist-generated
-src/meta.js linguist-generated
+src/meta.cjs linguist-generated
 **/*.template.js linguist-generated
 doc/** linguist-documentation
 docs/** linguist-documentation

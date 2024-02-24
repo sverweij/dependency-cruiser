@@ -1,5 +1,5 @@
 import tryImport from "semver-try-require";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 const typescript = await tryImport(
   "typescript",

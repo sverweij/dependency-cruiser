@@ -1,7 +1,7 @@
 /* eslint-disable no-inline-comments */
 /* eslint-disable max-classes-per-file */
 import tryImport from "semver-try-require";
-import meta from "#meta.js";
+import meta from "#meta.cjs";
 
 /** @type {import('@swc/core/Visitor')} */
 const { Visitor } = await tryImport(
