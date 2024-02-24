@@ -56,7 +56,7 @@ export default class ContentStrategy {
    * @param {IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").type>=} pOptions.interestingChangeTypes?
+   * @param {Set<import("watskeburt").changeType>=} pOptions.interestingChangeTypes?
    * @param {string=} pOptions.baseDir
    * @param {typeof findContentChanges=} pOptions.diffListFn
    * @param {typeof import('watskeburt').getSHA=} pOptions.checksumFn
