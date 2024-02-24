@@ -1561,12 +1561,12 @@ export default {
     SHA1: "e95e9f481df42643f2b2a119d1773caa8a49e82e",
     changes: [
       {
-        changeType: "modified",
+        type: "modified",
         name: "src/report/d2.mjs",
         checksum: "aeaxFY//FK1eGFfWGhzAwMndvfw=",
       },
       {
-        changeType: "modified",
+        type: "modified",
         name: "test/report/d2/d2.spec.mjs",
         checksum: "/Y0t37YrfoM4O9Hn/nwA/S+bM3A=",
       },

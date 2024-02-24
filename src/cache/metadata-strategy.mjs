@@ -26,7 +26,7 @@ export default class MetaDataStrategy {
    * @param {import("../../types/cruise-result.mjs").ICruiseResult} _pCachedCruiseResult
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").changeTypeType>=} pOptions.interestingChangeTypes
+   * @param {Set<import("watskeburt").changeType>=} pOptions.interestingChangeTypes
    * @param {typeof getSHA=} pOptions.shaRetrievalFn
    * @param {typeof list=} pOptions.diffListFn
    * @param {typeof addCheckSumToChangeSync=} pOptions.checksumFn

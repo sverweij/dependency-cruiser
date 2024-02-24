@@ -18,12 +18,12 @@ export default {
           type: "array",
           items: {
             type: "object",
-            required: ["name", "changeType"],
+            required: ["name", "type"],
             properties: {
               name: {
                 type: "string",
               },
-              changeType: {
+              type: {
                 type: "string",
                 enum: [
                   "added",

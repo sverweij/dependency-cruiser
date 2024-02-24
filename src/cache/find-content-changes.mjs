@@ -25,11 +25,11 @@ function diffCachedModuleAgainstFileSet(
 ) {
   return (pModule) => {
     if (!moduleIsInterestingForDiff(pModule)) {
-      return { name: pModule.source, changeType: "ignored" };
+      return { name: pModule.source, type: "ignored" };
     }
 
     if (!pFileSet.has(pModule.source)) {
-      return { name: pModule.source, changeType: "deleted" };
+      return { name: pModule.source, type: "deleted" };
     }
 
     const lNewCheckSum = pFileHashFunction(
@@ -38,14 +38,14 @@ function diffCachedModuleAgainstFileSet(
     if (lNewCheckSum !== pModule.checksum) {
       return {
         name: pModule.source,
-        changeType: "modified",
+        type: "modified",
         checksum: lNewCheckSum,
       };
     }
 
     return {
       name: pModule.source,
-      changeType: "unmodified",
+      type: "unmodified",
       checksum: pModule.checksum,
     };
   };
@@ -99,7 +99,7 @@ export default function findContentChanges(
   for (let lFileName of lFileSet) {
     lDiffNewVsCached.push({
       name: lFileName,
-      changeType: /** @type import('watskeburt').changeTypeType */ ("added"),
+      type: /** @type import('watskeburt').changeType */ ("added"),
       checksum: getFileHashSync(join(pOptions.baseDir, lFileName)),
     });
   }

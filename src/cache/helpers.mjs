@@ -107,13 +107,13 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
 ]);
 
 /**
- * @param {Set<import("watskeburt").changeTypeType>=} pInterestingChangeTypes
+ * @param {Set<import("watskeburt").changeType>=} pInterestingChangeTypes
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
 export function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) =>
     (pInterestingChangeTypes ?? DEFAULT_INTERESTING_CHANGE_TYPES).has(
-      pChange.changeType,
+      pChange.type,
     );
 }
 

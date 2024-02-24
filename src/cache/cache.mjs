@@ -44,7 +44,7 @@ const EMPTY_CACHE = {
 // in patch releases. If worst case scenario it _is_ necessary we could
 // add the patch version divided by 1000_000 e.g.:
 //     version 3.14.16 => 3.14 + 16/1000_000 = 3.140016
-const CACHE_FORMAT_VERSION = 16;
+const CACHE_FORMAT_VERSION = 16.2;
 
 export default class Cache {
   /**

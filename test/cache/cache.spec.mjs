@@ -114,7 +114,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
         args: "src test tools",
       },
     },
-    revisionData: { cacheFormatVersion: 16, SHA1: "dummy-sha", changes: [] },
+    revisionData: { cacheFormatVersion: 16.2, SHA1: "dummy-sha", changes: [] },
   };
 
   /** @type import("../..").ICruiseResult */
@@ -230,7 +230,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
         SHA1: "dummy-sha",
         changes: [
           {
-            changeType: "added",
+            type: "added",
             name: "some-new-file.aap",
             checksum: "dummy-checksum",
           },
