@@ -19,6 +19,33 @@
   },
   {
     "type": "module",
+    "from": "src/cli/assert-node-environment-suitable.mjs",
+    "to": "src/cli/assert-node-environment-suitable.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "type": "module",
+    "from": "src/cli/format.mjs",
+    "to": "src/cli/format.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "type": "module",
+    "from": "src/cli/tools/wrap-stream-in-html.mjs",
+    "to": "src/cli/tools/wrap-stream-in-html.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "type": "module",
     "from": "src/utl/array-util.mjs",
     "to": "src/utl/array-util.mjs",
     "rule": {
