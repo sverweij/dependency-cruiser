@@ -123,7 +123,6 @@
     "configs/plugins/",
     "src",
     "!src/**/*.json",
-    "!src/**/*.hbs",
     "!src/**/*.md",
     "!**/*.DS_Store",
     "types/**/*.d.mts",
