@@ -2,7 +2,7 @@ const DOT_FILE_PATTERN = "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$";
 const TS_DECLARATION_FILE_PATTERN = "\\.d\\.(c|m)?ts$";
 const TS_CONFIG_FILE_PATTERN = "(^|/)tsconfig\\.json$";
 const OTHER_CONFIG_FILES_PATTERN =
-  "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$";
+  "(^|/)(?:babel|webpack)\\.config\\.(?:js|cjs|mjs|ts|json)$";
 
 const KNOWN_CONFIG_FILE_PATTERNS = [
   DOT_FILE_PATTERN,
