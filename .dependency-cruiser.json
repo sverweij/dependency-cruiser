@@ -3,6 +3,37 @@
   "extends": "./configs/recommended-strict",
   "forbidden": [
     {
+      "name": "no-deprecated-core",
+      "comment": "A module depends on a node core module that has been deprecated. Find an alternative - these are bound to exist - node doesn't deprecate lightly.",
+      "severity": "error",
+      "from": {},
+      "to": {
+        "dependencyTypes": ["core"],
+        "path": [
+          "^v8/tools/codemap$",
+          "^v8/tools/consarray$",
+          "^v8/tools/csvparser$",
+          "^v8/tools/logreader$",
+          "^v8/tools/profile_view$",
+          "^v8/tools/profile$",
+          "^v8/tools/SourceMap$",
+          "^v8/tools/splaytree$",
+          "^v8/tools/tickprocessor-driver$",
+          "^v8/tools/tickprocessor$",
+          "^node-inspect/lib/_inspect$",
+          "^node-inspect/lib/internal/inspect_client$",
+          "^node-inspect/lib/internal/inspect_repl$",
+          "^async_hooks$",
+          "^punycode$",
+          "^domain$",
+          "^constants$",
+          "^sys$",
+          "^_linklist$",
+          "^_stream_wrap$"
+        ]
+      }
+    },
+    {
       "name": "not-to-unresolvable",
       "comment": "This module tried to depend on something that can't be resolved to disk. Revise yer code",
       "from": {},
@@ -16,10 +47,10 @@
       "from": {
         "orphan": true,
         "pathNot": [
-          "(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$",
+          "(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|json)$",
           "[.]d[.]m?ts$",
           "(^|/)tsconfig[.]json$",
-          "(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$",
+          "(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|json)$",
           "-reporter-plugin[.]mjs$",
           "[.]schema[.]json$",
           "^tools/istanbul-json-summary-to-markdown[.]mjs$",

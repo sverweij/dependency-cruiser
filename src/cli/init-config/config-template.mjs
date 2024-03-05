@@ -25,10 +25,10 @@ module.exports = {
       from: {
         orphan: true,
         pathNot: [
-          '(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$', // dot files
-          '[.]d[.]ts$',                            // TypeScript declaration files
-          '(^|/)tsconfig[.]json$',                 // TypeScript config
-          '(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$' // other configs
+          '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$',                  // dot files
+          '[.]d[.]ts$',                                                       // TypeScript declaration files
+          '(^|/)tsconfig[.]json$',                                            // TypeScript config
+          '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$' // other configs
         ]
       },
       to: {},
@@ -45,26 +45,26 @@ module.exports = {
           'core'
         ],
         path: [
-          '^(v8\/tools\/codemap)$',
-          '^(v8\/tools\/consarray)$',
-          '^(v8\/tools\/csvparser)$',
-          '^(v8\/tools\/logreader)$',
-          '^(v8\/tools\/profile_view)$',
-          '^(v8\/tools\/profile)$',
-          '^(v8\/tools\/SourceMap)$',
-          '^(v8\/tools\/splaytree)$',
-          '^(v8\/tools\/tickprocessor-driver)$',
-          '^(v8\/tools\/tickprocessor)$',
-          '^(node-inspect\/lib\/_inspect)$',
-          '^(node-inspect\/lib\/internal\/inspect_client)$',
-          '^(node-inspect\/lib\/internal\/inspect_repl)$',
-          '^(async_hooks)$',
-          '^(punycode)$',
-          '^(domain)$',
-          '^(constants)$',
-          '^(sys)$',
-          '^(_linklist)$',
-          '^(_stream_wrap)$'
+          '^v8\/tools\/codemap$',
+          '^v8\/tools\/consarray$',
+          '^v8\/tools\/csvparser$',
+          '^v8\/tools\/logreader$',
+          '^v8\/tools\/profile_view$',
+          '^v8\/tools\/profile$',
+          '^v8\/tools\/SourceMap$',
+          '^v8\/tools\/splaytree$',
+          '^v8\/tools\/tickprocessor-driver$',
+          '^v8\/tools\/tickprocessor$',
+          '^node-inspect\/lib\/_inspect$',
+          '^node-inspect\/lib\/internal\/inspect_client$',
+          '^node-inspect\/lib\/internal\/inspect_repl$',
+          '^async_hooks$',
+          '^punycode$',
+          '^domain$',
+          '^constants$',
+          '^sys$',
+          '^_linklist$',
+          '^_stream_wrap$'
         ],
       }
     },
@@ -136,7 +136,7 @@ module.exports = {
       severity: 'error',
       from: {},
       to: {
-        path: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
+        path: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
       }
     },
     {
@@ -150,7 +150,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '{{sourceLocationRE}}',
-        pathNot: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
+        pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
       },
       to: {
         dependencyTypes: [
@@ -338,7 +338,7 @@ module.exports = {
            collapses everything in node_modules to one folder deep so you see
            the external modules, but not the innards your app depends upon.
          */
-        collapsePattern: 'node_modules/(@[^/]+/[^/]+|[^/]+)',
+        collapsePattern: 'node_modules/(?:@[^/]+/[^/]+|[^/]+)',
 
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
@@ -362,7 +362,7 @@ module.exports = {
           dependency graph reporter (\`archi\`) you probably want to tweak
           this collapsePattern to your situation.
         */
-        collapsePattern: '^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/(@[^/]+/[^/]+|[^/]+)',
+        collapsePattern: '^(?:packages|src|lib(s?)|app(s?)|bin|test(s?)|spec(s?))/[^/]+|node_modules/(?:@[^/]+/[^/]+|[^/]+)',
 
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
