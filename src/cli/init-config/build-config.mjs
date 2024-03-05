@@ -138,7 +138,11 @@ function buildMainFieldsAttribute(pInitOptions) {
   if (pInitOptions.isTypeModule) {
     return `mainFields: ["module", "main", "types", "typings"],`;
   }
-  return `mainFields: ["main", "types", "typings"],`;
+  return `
+      // if you migrate to ESM (or are in an ESM environment already) you will want to
+      // have "module" in the list of mainFields, like so:
+      // mainFields: ["module", "main", "types", "typings"],
+      mainFields: ["main", "types", "typings"],`;
 }
 
 /**
