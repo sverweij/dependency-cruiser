@@ -1,43 +1,88 @@
 #!/usr/bin/env node
-import { program } from "commander";
+import { parseArgs } from "node:util";
+import { EOL } from "node:os";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import cli from "#cli/index.mjs";
 import meta from "#meta.cjs";
 
-function formatError(pError) {
-  process.stderr.write(pError.message);
-  process.exitCode = 1;
+const ARGUMENTS_OFFSET = 2;
+const HELP_MESSAGE = `Usage: depcruise-baseline [options] <files-or-directories>
+
+Writes all known violations of rules in a .dependency-cruiser.js to a file.
+Details: https://github.com/sverweij/dependency-cruiser
+
+Alias for 
+  depcruise -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]
+
+  Options:
+  -c, --config [file]     read rules and options from [file] (default: true)
+  -f, --output-to [file]  file to write output to; - for stdout (default:
+                          ".dependency-cruiser-known-violations.json")
+  -V, --version           output the version number
+  -h, --help              display help`;
+
+function getOptions(pArguments) {
+  return parseArgs({
+    args: pArguments,
+    options: {
+      config: { type: "string", short: "c" },
+      "output-to": {
+        type: "string",
+        short: "f",
+        default: ".dependency-cruiser-known-violations.json",
+      },
+      help: { type: "boolean", short: "h", default: false },
+      version: { type: "boolean", short: "V", default: false },
+    },
+    strict: true,
+    allowPositionals: true,
+    tokens: false,
+  });
 }
 
-try {
-  assertNodeEnvironmentSuitable();
+function formatError(pError, pErrorStream) {
+  pErrorStream.write(`${pError.message}${EOL}`);
+}
 
-  program
-    .description(
-      "Writes all known violations of rules in a .dependency-cruiser.js to a file.\n" +
-        "Alias for depcruise -c -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]\n" +
-        "Details: https://github.com/sverweij/dependency-cruiser",
-    )
-    .option("-c, --config [file]", "read rules and options from [file]", true)
-    .option(
-      "-f, --output-to [file]",
-      "file to write output to; - for stdout",
-      ".dependency-cruiser-known-violations.json",
-    )
-    .version(meta.version)
-    .arguments("<files-or-directories>")
-    .parse(process.argv);
+function normalizeValues(pValues) {
+  return {
+    ...pValues,
+    outputTo: pValues["output-to"],
+    config: pValues.config ? pValues.config : true,
+  };
+}
 
-  if (Boolean(program.args[0])) {
-    process.exitCode = await cli(program.args, {
-      ...program.opts(),
+export async function commandLineInterface(
+  pArguments = process.argv.slice(ARGUMENTS_OFFSET),
+  pOutStream = process.stdout,
+  pErrorStream = process.stderr,
+  pErrorExitCode = 1,
+) {
+  try {
+    assertNodeEnvironmentSuitable();
+    const { values, positionals } = getOptions(pArguments);
+    const normalizedValues = normalizeValues(values);
+
+    if (normalizedValues.version) {
+      pOutStream.write(`${meta.version}${EOL}`);
+      return;
+    }
+    if (normalizedValues.help || positionals.length === 0) {
+      pOutStream.write(`${HELP_MESSAGE}${EOL}`);
+      return;
+    }
+
+    // eslint-disable-next-line require-atomic-updates
+    process.exitCode = await cli(positionals, {
+      ...normalizedValues,
       cache: false,
       outputType: "baseline",
     });
-  } else {
-    program.help();
+  } catch (pError) {
+    formatError(pError, pErrorStream);
+    // eslint-disable-next-line require-atomic-updates
+    process.exitCode = pErrorExitCode;
   }
-} catch (pError) {
-  formatError(pError);
-  process.exitCode = 1;
 }
+
+await commandLineInterface();
