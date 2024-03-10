@@ -6,7 +6,8 @@ import format from "#cli/format.mjs";
 import meta from "#meta.cjs";
 
 const ARGUMENTS_OFFSET = 2;
-const HELP_MESSAGE = `Usage: depcruise-fmt [options] <dependency-cruiser-json>
+const HELP_MESSAGE = `
+Usage: depcruise-fmt [options] <dependency-cruiser-json>
 
 Format dependency-cruiser output json.
 Details: https://github.com/sverweij/dependency-cruiser

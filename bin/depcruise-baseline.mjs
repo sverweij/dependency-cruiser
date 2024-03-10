@@ -6,7 +6,8 @@ import cli from "#cli/index.mjs";
 import meta from "#meta.cjs";
 
 const ARGUMENTS_OFFSET = 2;
-const HELP_MESSAGE = `Usage: depcruise-baseline [options] <files-or-directories>
+const HELP_MESSAGE = `
+Usage: depcruise-baseline [options] <files-or-directories>
 
 Writes all known violations of rules in a .dependency-cruiser.js to a file.
 Details: https://github.com/sverweij/dependency-cruiser
