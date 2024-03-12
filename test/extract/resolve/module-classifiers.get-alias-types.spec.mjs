@@ -219,6 +219,33 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
+  it("ignores workspaces in package.json if it's not an array", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: {
+        // apparently in use in pnpm for #things
+        nohoist: ["packages/", "foo", "bar"],
+      },
+    };
+    const lResolveOptions = {
+      baseDirectory: "over/the/rainbow",
+      alias: {
+        "@": "./src",
+      },
+    };
+    deepEqual(
+      getAliasTypes(
+        "some-workspaced-local-package",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      [],
+    );
+  });
+
   it("doesn't run aliased and aliased-workspace for when resolved matches a workspace, but module requested is relative", () => {
     const lManifest = {
       name: "test",

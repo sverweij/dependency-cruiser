@@ -131,7 +131,10 @@ function isWebPackAliased(pModuleName, pAliasObject) {
 // eslint-disable-next-line max-lines-per-function
 function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
   // reference: https://docs.npmjs.com/cli/v10/using-npm/workspaces
-  if (pManifest?.workspaces) {
+  // for pnpm the workspaces field is used for something else and actually
+  // an object. To prevent the code from borking we check whether it's an array
+  // see https://github.com/sverweij/dependency-cruiser/issues/919
+  if (pManifest?.workspaces && Array.isArray(pManifest.workspaces)) {
     // workspaces are an array of globs that match the (sub) workspace
     // folder itself only.
     //
