@@ -219,13 +219,13 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
-  it("ignores workspaces in package.json if it's not an array", () => {
+  it("ignores workspaces in package.json if it's not an array and the object doesn't contain a packages field", () => {
     const lManifest = {
       name: "test",
       version: "1.0.0",
       dependencies: {},
       workspaces: {
-        // apparently in use in pnpm for #things
+        // yarn(1) specific
         nohoist: ["packages/", "foo", "bar"],
       },
     };
@@ -243,6 +243,34 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
         lManifest,
       ),
       [],
+    );
+  });
+
+  it("returns aliased and aliased-workspace for workspace alias (for yarn 1 workspaces.packages)", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: {
+        // yarn(1) specific notation
+        packages: ["packages/"],
+        nohoist: ["foo", "bar"],
+      },
+    };
+    const lResolveOptions = {
+      baseDirectory: "over/the/rainbow",
+      alias: {
+        "@": "./src",
+      },
+    };
+    deepEqual(
+      getAliasTypes(
+        "some-workspaced-local-package",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      ["aliased", "aliased-workspace"],
     );
   });
 
