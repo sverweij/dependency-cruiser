@@ -2,6 +2,7 @@ import { writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
 import { deepEqual, ok, equal } from "node:assert/strict";
+import { randomBytes } from "node:crypto";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import configurationSchema from "#configuration-schema";
@@ -12,10 +13,10 @@ const ajv = new Ajv();
 
 const createConfigNormalized = async (pInitOptions) => {
   const lConfigAsString = buildConfig(normalizeInitOptions(pInitOptions));
-  const lBaseAbc = 36;
+  const lFileNameLength = 10;
   let lTemporaryFileName = join(
     tmpdir(),
-    `${Math.random().toString(lBaseAbc).split(".").pop()}.cjs`,
+    `${randomBytes(lFileNameLength).toString("hex")}.cjs`,
   );
   writeFileSync(lTemporaryFileName, lConfigAsString, "utf8");
   const lConfigAsModule = await import(`file:///${lTemporaryFileName}`);
