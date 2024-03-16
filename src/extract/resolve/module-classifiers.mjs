@@ -122,6 +122,16 @@ function isWebPackAliased(pModuleName, pAliasObject) {
   );
 }
 
+function getWorkspacesArray(pManifestWorkspacesField) {
+  if (Array.isArray(pManifestWorkspacesField)) {
+    return pManifestWorkspacesField;
+  }
+  if (pManifestWorkspacesField?.packages) {
+    return pManifestWorkspacesField.packages;
+  }
+  return [];
+}
+
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
@@ -131,7 +141,11 @@ function isWebPackAliased(pModuleName, pAliasObject) {
 // eslint-disable-next-line max-lines-per-function
 function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
   // reference: https://docs.npmjs.com/cli/v10/using-npm/workspaces
-  if (pManifest?.workspaces) {
+  // for yarn the workspaces field might be either an array or
+  // an object. To prevent the code from borking we check whether it's an array
+  // see https://github.com/sverweij/dependency-cruiser/issues/919
+  const lWorkspaces = getWorkspacesArray(pManifest?.workspaces);
+  if (lWorkspaces.length >= 0) {
     // workspaces are an array of globs that match the (sub) workspace
     // folder itself only.
     //
@@ -154,9 +168,8 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     // oh and: ```picomatch.isMatch('asdf', 'asdf/**') === true``` so
     // in case it's only 'asdf' that's in the resolved module name for some reason
     // we're good as well.
-    const lModuleFriendlyWorkspaceGlobs = pManifest.workspaces.map(
-      (pWorkspace) =>
-        pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
+    const lModuleFriendlyWorkspaceGlobs = lWorkspaces.map((pWorkspace) =>
+      pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
     );
     if (picomatch.isMatch(pResolvedModuleName, lModuleFriendlyWorkspaceGlobs)) {
       return true;
