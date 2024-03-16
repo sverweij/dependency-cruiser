@@ -1,4 +1,4 @@
-import random from "lodash/random.js";
+import { randomInt } from "node:crypto";
 
 const NUMBER = 0;
 const SEPARATOR = 1;
@@ -30,13 +30,13 @@ function getRandomChar(pChar) {
     case SEPARATOR:
       return pChar;
     case NUMBER:
-      return random(0, lMaxDecimalChar);
+      return randomInt(0, lMaxDecimalChar);
     case UPPERCASE:
       return lLowerCaseChars[
-        random(0, lLowerCaseChars.length - 1)
+        randomInt(0, lLowerCaseChars.length - 1)
       ].toUpperCase();
     default:
-      return lLowerCaseChars[random(0, lLowerCaseChars.length - 1)];
+      return lLowerCaseChars[randomInt(0, lLowerCaseChars.length - 1)];
   }
 }
 
