@@ -223,6 +223,10 @@ Both due to limitations in the mermaid format and to the relative newness of thi
 reporter the graph cannot be (made as) feature rich as those produced by the
 `dot` or `d2` reporters.
 
+```sh
+dependency-cruiser --output-type mermaid src --output-to dependency-graph.mmd
+```
+
 <details>
 <summary>Sample output</summary>
 
