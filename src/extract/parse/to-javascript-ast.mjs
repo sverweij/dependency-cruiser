@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { Parser as acornParser, parse as acornParse } from "acorn";
 import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import transpile from "../transpile/index.mjs";
 import getExtension from "#utl/get-extension.mjs";
 
@@ -82,13 +82,15 @@ function getAST(pFileName, pTranspileOptions) {
  * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
  * @return {acorn.Node} - a (javascript) AST
  */
-export const getASTCached = memoize(
-  getAST,
-  (pFileName, pTranspileOptions) => `${pFileName}|${pTranspileOptions}`,
-);
+// taking the transpile options into account of the memoize cache key seems like
+// a good idea. However, previously we use `${pTranspileOptions}` which always
+// serializes to [object Object], which doesn't help. So for now we're not
+// taking the transpile options into account. If we ever need to, it'll be
+// a JSON.stringify away (which _will_ be significantly slower)
+export const getASTCached = memoize(getAST);
 
 export function clearCache() {
-  getASTCached.cache.clear();
+  memoizeClear(getASTCached);
 }
 
 export default {

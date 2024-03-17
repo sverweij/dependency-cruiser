@@ -213,6 +213,7 @@
     "is-installed-globally": "1.0.0",
     "json5": "2.2.3",
     "lodash": "4.17.21",
+    "memoize": "10.0.0",
     "picomatch": "4.0.1",
     "prompts": "2.4.2",
     "rechoir": "^0.8.0",

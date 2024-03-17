@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import tryImport from "semver-try-require";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import transpile from "../transpile/index.mjs";
 import meta from "#meta.cjs";
 import getExtension from "#utl/get-extension.mjs";
@@ -56,7 +56,7 @@ function getAST(pFileName, pTranspileOptions) {
 export const getASTCached = memoize(getAST);
 
 export function clearCache() {
-  getASTCached.cache.clear();
+  memoizeClear(getASTCached);
 }
 
 export default {

@@ -1,6 +1,6 @@
 import { accessSync, R_OK } from "node:fs";
 import { relative, join } from "node:path";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import { isBuiltin } from "./is-built-in.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
@@ -63,5 +63,5 @@ export function resolveAMD(
 }
 
 export function clearCache() {
-  fileExists.cache.clear();
+  memoizeClear(fileExists);
 }

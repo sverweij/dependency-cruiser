@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import has from "lodash/has.js";
 import { resolve } from "./resolve.mjs";
 import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
@@ -97,7 +97,7 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
       // we need a separate caching context so as not to **** up the regular
       // cruise, which might actually want to utilize the exportsFields
       // and an array of extensions
-      "manifest-resolution"
+      "manifest-resolution",
     );
     lReturnValue = JSON.parse(readFileSync(lPackageJsonFilename, "utf8"));
   } catch (pError) {
@@ -106,10 +106,9 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
   return lReturnValue;
 }
 
-export const getPackageJson = memoize(
-  bareGetPackageJson,
-  (pModuleName, pBaseDirectory) => `${pBaseDirectory}|${pModuleName}`
-);
+export const getPackageJson = memoize(bareGetPackageJson, {
+  cacheKey: (pArguments) => `${pArguments[0]}|${pArguments[1]}`,
+});
 
 /**
  * Tells whether the pModule as resolved to pBaseDirectory is deprecated
@@ -122,13 +121,13 @@ export const getPackageJson = memoize(
 export function dependencyIsDeprecated(
   pModuleName,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lReturnValue = false;
   let lPackageJson = getPackageJson(
     pModuleName,
     pFileDirectory,
-    pResolveOptions
+    pResolveOptions,
   );
 
   if (Boolean(lPackageJson)) {
@@ -151,7 +150,7 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
   let lPackageJson = getPackageJson(
     pModuleName,
     pFileDirectory,
-    pResolveOptions
+    pResolveOptions,
   );
 
   if (
@@ -165,5 +164,5 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
 }
 
 export function clearCache() {
-  getPackageJson.cache.clear();
+  memoizeClear(getPackageJson);
 }

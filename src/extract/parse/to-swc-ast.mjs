@@ -1,5 +1,5 @@
 import tryImport from "semver-try-require";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import meta from "#meta.cjs";
 
 /** @type {import('@swc/core')} */
@@ -29,7 +29,7 @@ function getAST(pFileName) {
 export const getASTCached = memoize(getAST);
 
 export function clearCache() {
-  getASTCached.cache.clear();
+  memoizeClear(getASTCached);
 }
 
 export default {

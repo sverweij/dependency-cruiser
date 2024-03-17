@@ -1,4 +1,4 @@
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import randomString from "./random-string.mjs";
 
 function replace(pElement, pIndex, pWordList) {
@@ -13,7 +13,7 @@ function replaceFromWordList(pPathElement, pWordList, pCached) {
     .map((pElement, pIndex) =>
       pCached
         ? replaceCached(pElement, pIndex, pWordList)
-        : replace(pElement, pIndex, pWordList)
+        : replace(pElement, pIndex, pWordList),
     )
     .join(".");
 }
@@ -49,7 +49,7 @@ export function anonymizePathElement(
   pPathElement,
   pWordList = [],
   pWhiteListRE = /^$/g,
-  pCached = true
+  pCached = true,
 ) {
   return pWhiteListRE.test(pPathElement)
     ? pPathElement
@@ -63,5 +63,5 @@ export function anonymizePathElement(
  * @returns {void}
  */
 export function clearCache() {
-  replaceCached.cache.clear();
+  memoizeClear(replaceCached);
 }

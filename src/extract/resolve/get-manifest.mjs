@@ -1,6 +1,6 @@
 import { join, dirname, sep } from "node:path";
 import { readFileSync } from "node:fs";
-import memoize from "lodash/memoize.js";
+import memoize, { memoizeClear } from "memoize";
 import mergePackages from "./merge-manifests.mjs";
 
 /**
@@ -23,7 +23,7 @@ const getSingleManifest = memoize((pFileDirectory) => {
     // find the closest package.json from pFileDirectory
     const lPackageContent = readFileSync(
       join(pFileDirectory, "package.json"),
-      "utf8"
+      "utf8",
     );
 
     try {
@@ -48,7 +48,7 @@ function maybeReadPackage(pFileDirectory) {
   try {
     const lPackageContent = readFileSync(
       join(pFileDirectory, "package.json"),
-      "utf8"
+      "utf8",
     );
 
     try {
@@ -81,9 +81,9 @@ function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
 }
 
 // despite the two parameters there's no resolver function provided
-// to the _.memoize. This is deliberate - the pBaseDirectory will typically
-// be the same for each call in a typical cruise, so the lodash'
-// default memoize resolver (the first param) will suffice.
+// to memoize. This is deliberate - the pBaseDirectory will typically
+// be the same for each call in a typical cruise, so the default
+// memoize resolver (the first param) will suffice.
 const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
   // The way this is called, this shouldn't happen. If it is, there's
   // something gone terribly awry
@@ -94,16 +94,16 @@ const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
     throw new Error(
       `Unexpected Error: Unusual baseDir passed to package reading function: '${pBaseDirectory}'\n` +
         `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
-        `&title=Unexpected Error: Unusual baseDir passed to package reading function: '${pBaseDirectory}'`
+        `&title=Unexpected Error: Unusual baseDir passed to package reading function: '${pBaseDirectory}'`,
     );
   }
 
   const lReturnValue = getIntermediatePaths(
     pFileDirectory,
-    pBaseDirectory
+    pBaseDirectory,
   ).reduce(
     (pAll, pCurrent) => mergePackages(pAll, maybeReadPackage(pCurrent)),
-    {}
+    {},
   );
 
   return Object.keys(lReturnValue).length > 0 ? lReturnValue : null;
@@ -128,7 +128,7 @@ const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
 export function getManifest(
   pFileDirectory,
   pBaseDirectory,
-  pCombinedDependencies = false
+  pCombinedDependencies = false,
 ) {
   if (pCombinedDependencies) {
     return getCombinedManifests(pFileDirectory, pBaseDirectory);
@@ -138,6 +138,6 @@ export function getManifest(
 }
 
 export function clearCache() {
-  getCombinedManifests.cache.clear();
-  getSingleManifest.cache.clear();
+  memoizeClear(getCombinedManifests);
+  memoizeClear(getSingleManifest);
 }
