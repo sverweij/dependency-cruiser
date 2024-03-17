@@ -1,6 +1,4 @@
 /* eslint-disable security/detect-object-injection */
-import uniq from "lodash/uniq.js";
-
 function normalizeManifestKeys(pManifest) {
   let lReturnValue = pManifest;
 
@@ -21,7 +19,9 @@ function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
 }
 
 function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
-  return uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
+  return Array.from(
+    new Set(pClosestDependencyKey.concat(pFurtherDependencyKey)),
+  );
 }
 
 function isInterestingKey(pKey) {
@@ -35,9 +35,11 @@ function getDependencyKeys(pPackage) {
 }
 
 function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
-  return uniq(
-    getDependencyKeys(pClosestPackage).concat(
-      getDependencyKeys(pFurtherPackage),
+  return Array.from(
+    new Set(
+      getDependencyKeys(pClosestPackage).concat(
+        getDependencyKeys(pFurtherPackage),
+      ),
     ),
   );
 }

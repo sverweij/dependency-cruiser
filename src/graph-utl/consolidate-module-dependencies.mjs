@@ -1,13 +1,16 @@
-import _reject from "lodash/reject.js";
-import uniq from "lodash/uniq.js";
+import reject from "lodash/reject.js";
 import compare from "./compare.mjs";
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
     ...pRightDependency,
-    dependencyTypes: uniq(
-      pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes),
+    dependencyTypes: Array.from(
+      new Set(
+        pLeftDependency.dependencyTypes.concat(
+          pRightDependency.dependencyTypes,
+        ),
+      ),
     ),
     rules: pLeftDependency.rules
       .concat(pRightDependency?.rules ?? [])
@@ -30,6 +33,10 @@ function mergeDependencies(pResolvedName, pDependencies) {
     );
 }
 
+/**
+ * @param {import('../../types/dependency-cruiser.mjs').IDependency[]} pDependencies
+ * @returns {import('../../types/dependency-cruiser.mjs').IDependency[]}
+ */
 function consolidateDependencies(pDependencies) {
   let lDependencies = structuredClone(pDependencies);
   let lReturnValue = [];
@@ -38,7 +45,7 @@ function consolidateDependencies(pDependencies) {
     lReturnValue.push(
       mergeDependencies(lDependencies[0].resolved, lDependencies),
     );
-    lDependencies = _reject(lDependencies, {
+    lDependencies = reject(lDependencies, {
       resolved: lDependencies[0].resolved,
     });
   }
@@ -46,6 +53,10 @@ function consolidateDependencies(pDependencies) {
   return lReturnValue;
 }
 
+/**
+ * @param {import('../../types/dependency-cruiser.mjs').IModule} pModule
+ * @returns {import('../../types/dependency-cruiser.mjs').IModule}
+ */
 export default function consolidateModuleDependencies(pModule) {
   return {
     ...pModule,
