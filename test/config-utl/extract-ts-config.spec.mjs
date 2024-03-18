@@ -120,10 +120,14 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     const lWildCardDirectories = {};
 
     lWildCardDirectories[
-      // from TypeScript 4 the key name is lower case ¯\_(ツ)_/¯
+      // from TypeScript 4 the key name is lower case, so we toLowerCased
+      // the result. ¯\_(ツ)_/¯
+      // However.Somewhere between TypeScript 5.3.3 and 5.4.2 (inclusive)
+      // TypeScript started to leave the name alone. So we removed the
+      // toLowerCase again.
       pathToPosix(
         getFullPath("./__mocks__/typescriptconfig/override from extends here"),
-      ).toLowerCase()
+      )
     ] = 1;
 
     /* eslint no-undefined:0 */
