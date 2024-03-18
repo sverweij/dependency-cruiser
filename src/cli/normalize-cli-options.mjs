@@ -1,8 +1,6 @@
 import { accessSync, R_OK } from "node:fs";
 import { isAbsolute } from "node:path";
 import set from "lodash/set.js";
-import get from "lodash/get.js";
-import has from "lodash/has.js";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
   DEFAULT_BASELINE_FILE_NAME,
@@ -22,7 +20,7 @@ function getOptionValue(pDefault) {
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
   let lOptions = structuredClone(pCliOptions);
 
-  if (has(lOptions, pConfigWrapperName)) {
+  if (Object.hasOwn(lOptions, pConfigWrapperName)) {
     set(
       lOptions,
       `ruleSet.options.${pConfigWrapperName}.fileName`,
@@ -33,8 +31,8 @@ function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
   }
 
   if (
-    get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null) &&
-    !get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)
+    (lOptions?.ruleSet?.options?.[pConfigWrapperName] ?? null) &&
+    !(lOptions?.ruleSet?.options?.[pConfigWrapperName]?.fileName ?? null)
   ) {
     set(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, pDefault);
   }
@@ -108,7 +106,10 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
 }
 
 function normalizeKnownViolationsOption(pCliOptions) {
-  if (!has(pCliOptions, "ignoreKnown") || pCliOptions.ignoreKnown === false) {
+  if (
+    !Object.hasOwn(pCliOptions, "ignoreKnown") ||
+    pCliOptions.ignoreKnown === false
+  ) {
     return {};
   }
   return {
@@ -135,7 +136,7 @@ async function normalizeValidationOption(pCliOptions) {
 }
 
 function normalizeProgress(pCliOptions) {
-  if (!has(pCliOptions, "progress")) {
+  if (!Object.hasOwn(pCliOptions, "progress")) {
     return {};
   }
 
@@ -147,7 +148,7 @@ function normalizeProgress(pCliOptions) {
 }
 
 function normalizeCacheStrategy(pCliOptions) {
-  if (!has(pCliOptions, "cacheStrategy")) {
+  if (!Object.hasOwn(pCliOptions, "cacheStrategy")) {
     return {};
   }
   const lStrategy =
@@ -169,7 +170,7 @@ function normalizeCacheStrategy(pCliOptions) {
 }
 
 function normalizeCache(pCliOptions) {
-  if (!has(pCliOptions, "cache")) {
+  if (!Object.hasOwn(pCliOptions, "cache")) {
     return {};
   }
 
@@ -203,13 +204,13 @@ export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
     ...pOptionsAsPassedFromCommander,
   };
 
-  if (has(lOptions, "moduleSystems")) {
+  if (Object.hasOwn(lOptions, "moduleSystems")) {
     lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
       .map((pString) => pString.trim());
   }
 
-  if (has(lOptions, "config")) {
+  if (Object.hasOwn(lOptions, "config")) {
     lOptions.validate = lOptions.config;
   }
 

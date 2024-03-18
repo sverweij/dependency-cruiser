@@ -1,5 +1,3 @@
-import has from "lodash/has.js";
-
 export function isValidPlugin(pPluginFunction) {
   let lReturnValue = false;
   /** @type {import('../../types/dependency-cruiser').ICruiseResult} */
@@ -19,8 +17,8 @@ export function isValidPlugin(pPluginFunction) {
   if (typeof pPluginFunction === "function") {
     const lTestReportOutput = pPluginFunction(lMinimalCruiseResult);
     lReturnValue =
-      has(lTestReportOutput, "output") &&
-      has(lTestReportOutput, "exitCode") &&
+      Object.hasOwn(lTestReportOutput, "output") &&
+      Object.hasOwn(lTestReportOutput, "exitCode") &&
       typeof lTestReportOutput.exitCode === "number";
   }
   return lReturnValue;
@@ -34,7 +32,7 @@ async function getPluginReporter(pOutputType) {
     lReturnValue = lModule.default;
   } catch (pError) {
     throw new Error(
-      `Could not find reporter plugin '${pOutputType}' (or it isn't valid)`
+      `Could not find reporter plugin '${pOutputType}' (or it isn't valid)`,
     );
   }
   if (!isValidPlugin(lReturnValue)) {

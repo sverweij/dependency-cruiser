@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import {
   getSourceFolderCandidates,
   getTestFolderCandidates,
@@ -72,7 +71,7 @@ function populate(pInitOptions) {
  */
 export default function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);
-  if (!has(lReturnValue, "hasTestsOutsideSource")) {
+  if (!Object.hasOwn(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&
       !hasTestsWithinSource(

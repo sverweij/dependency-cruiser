@@ -1,5 +1,4 @@
 import flattenDeep from "lodash/flattenDeep.js";
-import has from "lodash/has.js";
 import uniqWith from "lodash/uniqWith.js";
 import isSameViolation from "./is-same-violation.mjs";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
@@ -14,6 +13,7 @@ function cutNonTransgressions(pModule) {
   };
 }
 
+// eslint-disable-next-line complexity
 function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   let lReturnValue = {
     type: "dependency",
@@ -23,7 +23,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   };
 
   if (
-    has(pDependency, "cycle") &&
+    Object.hasOwn(pDependency, "cycle") &&
     findRuleByName(pRuleSet, pRule.name)?.to?.circular
   ) {
     lReturnValue = {
@@ -34,9 +34,12 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   }
 
   if (
-    has(pModule, "instability") &&
-    has(pDependency, "instability") &&
-    has(findRuleByName(pRuleSet, pRule.name), "to.moreUnstable")
+    Object.hasOwn(pModule, "instability") &&
+    Object.hasOwn(pDependency, "instability") &&
+    Object.hasOwn(
+      findRuleByName(pRuleSet, pRule.name)?.to ?? {},
+      "moreUnstable",
+    )
   ) {
     lReturnValue = {
       ...lReturnValue,

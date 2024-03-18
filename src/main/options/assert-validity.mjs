@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import merge from "lodash/merge.js";
 import safeRegex from "safe-regex";
 import report from "#report/index.mjs";
@@ -100,7 +99,7 @@ export function assertCruiseOptionsValid(pOptions) {
 
     assertFocusDepthValid(pOptions.focusDepth);
 
-    if (has(pOptions, "ruleSet.options")) {
+    if (pOptions?.ruleSet?.options) {
       lReturnValue = assertCruiseOptionsValid(pOptions.ruleSet.options);
     }
     return merge({}, lReturnValue, pOptions);

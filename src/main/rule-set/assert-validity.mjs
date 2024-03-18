@@ -29,6 +29,8 @@ function assertSchemaCompliance(pSchema, pConfiguration) {
 }
 
 function hasPath(pObject, pSection, pCondition) {
+  // pCondition can be nested properties, so we use lodash.has instead
+  // of elvis operators
   return has(pObject, pSection) && has(pObject[pSection], pCondition);
 }
 
@@ -92,7 +94,7 @@ export default function assertRuleSetValid(pConfiguration) {
   assertSchemaCompliance(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(assertRuleSafety);
   (pConfiguration.forbidden || []).forEach(assertRuleSafety);
-  if (has(pConfiguration, "options")) {
+  if (pConfiguration?.options) {
     assertCruiseOptionsValid(pConfiguration.options);
   }
   return pConfiguration;

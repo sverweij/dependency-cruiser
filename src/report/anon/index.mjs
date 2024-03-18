@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
 const EOL = "\n";
@@ -179,7 +178,7 @@ function sanitizeWordList(pWordList) {
 export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
   /** @type {{wordlist?: String[]}} */
   let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
-  if (!has(lAnonymousReporterOptions, "wordlist")) {
+  if (!lAnonymousReporterOptions.wordlist) {
     lAnonymousReporterOptions.wordlist =
       pResults?.summary?.optionsUsed?.reporterOptions?.anon?.wordlist ?? [];
   }

@@ -1,5 +1,3 @@
-import has from "lodash/has.js";
-
 const SHAREABLE_OPTIONS = [
   "babelConfig",
   "baseDir",
@@ -35,22 +33,23 @@ const SHAREABLE_OPTIONS = [
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
     (pShareableOptionKey) =>
-      has(pOptions, pShareableOptionKey) && pOptions[pShareableOptionKey] !== 0
+      Object.hasOwn(pOptions, pShareableOptionKey) &&
+      pOptions?.[pShareableOptionKey] !== 0,
   )
     .filter(
       (pShareableOptionKey) =>
         pShareableOptionKey !== "doNotFollow" ||
-        Object.keys(pOptions.doNotFollow).length > 0
+        Object.keys(pOptions.doNotFollow).length > 0,
     )
     .filter(
       (pShareableOptionKey) =>
         pShareableOptionKey !== "exclude" ||
-        Object.keys(pOptions.exclude).length > 0
+        Object.keys(pOptions.exclude).length > 0,
     )
     .filter(
       (pShareableOptionKey) =>
         pShareableOptionKey !== "knownViolations" ||
-        pOptions.knownViolations.length > 0
+        pOptions.knownViolations.length > 0,
     )
     .reduce((pAll, pShareableOptionKey) => {
       pAll[pShareableOptionKey] = pOptions[pShareableOptionKey];

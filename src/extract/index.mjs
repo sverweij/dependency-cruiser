@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import getDependencies from "./get-dependencies.mjs";
 import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
@@ -123,7 +122,7 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
     ...pModule,
     dependencies: pModule.dependencies.filter(
       ({ dynamic }) =>
-        !has(pExclude, "dynamic") || pExclude.dynamic !== dynamic,
+        !Object.hasOwn(pExclude, "dynamic") || pExclude.dynamic !== dynamic,
     ),
   };
 }

@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import report from "#report/index.mjs";
 import summarize from "#enrich/summarize/index.mjs";
 import { applyFilters } from "#graph-utl/filter-bank.mjs";
@@ -15,7 +14,7 @@ import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
 function reSummarizeResults(pResult, pFormatOptions) {
   let lModules = applyFilters(pResult.modules, pFormatOptions);
 
-  if (has(pFormatOptions, "collapse")) {
+  if (Object.hasOwn(pFormatOptions, "collapse")) {
     lModules = consolidateToPattern(lModules, pFormatOptions.collapse)
       .sort(compare.modules)
       .map(stripSelfTransitions);
@@ -55,7 +54,7 @@ export default async function reportWrap(pResult, pFormatOptions) {
     reSummarizeResults(pResult, pFormatOptions),
     // passing format options here so reporters that read collapse patterns
     // from the result take the one passed in the format options instead
-    has(pFormatOptions, "collapse")
+    Object.hasOwn(pFormatOptions, "collapse")
       ? { ...lReportOptions, collapsePattern: pFormatOptions.collapse }
       : lReportOptions,
   );

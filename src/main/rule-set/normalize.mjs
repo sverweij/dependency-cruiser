@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import { normalizeREProperties, normalizeToREAsString } from "../helpers.mjs";
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
@@ -42,7 +41,7 @@ function normalizeVia(pVia) {
   } else {
     lReturnValue = structuredClone(pVia);
   }
-  if (has(lReturnValue, "path")) {
+  if (lReturnValue?.path) {
     lReturnValue.path = normalizeToREAsString(lReturnValue.path);
   }
   return lReturnValue;
@@ -52,14 +51,14 @@ function normalizeVia(pVia) {
 function normalizeVias(pRuleTo) {
   const lRuleTo = structuredClone(pRuleTo);
 
-  if (has(lRuleTo, "via")) {
+  if (lRuleTo?.via) {
     lRuleTo.via = normalizeVia(lRuleTo.via);
   }
-  if (has(lRuleTo, "viaOnly")) {
+  if (lRuleTo?.viaOnly) {
     lRuleTo.viaOnly = normalizeVia(lRuleTo.viaOnly);
   }
-  if (has(lRuleTo, "viaNot")) {
-    if (!has(lRuleTo, "viaOnly.pathNot")) {
+  if (lRuleTo?.viaNot) {
+    if (!lRuleTo?.viaOnly?.pathNot) {
       lRuleTo.viaOnly = {
         ...lRuleTo.viaOnly,
         pathNot: normalizeToREAsString(lRuleTo.viaNot),
@@ -67,8 +66,8 @@ function normalizeVias(pRuleTo) {
     }
     delete lRuleTo.viaNot;
   }
-  if (has(lRuleTo, "viaSomeNot")) {
-    if (!has(lRuleTo, "via.pathNot")) {
+  if (lRuleTo?.viaSomeNot) {
+    if (!lRuleTo?.via?.pathNot) {
       lRuleTo.via = {
         ...lRuleTo.via,
         pathNot: normalizeToREAsString(lRuleTo.viaSomeNot),
@@ -108,7 +107,7 @@ function normalizeRule(pRule) {
 export default function normalizeRuleSet(pRuleSet) {
   const lRuleSet = structuredClone(pRuleSet);
 
-  if (has(lRuleSet, "allowed")) {
+  if (lRuleSet?.allowed) {
     lRuleSet.allowedSeverity = normalizeSeverity(lRuleSet.allowedSeverity);
     if (lRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(lRuleSet, "allowed");
@@ -126,13 +125,13 @@ export default function normalizeRuleSet(pRuleSet) {
     }
   }
 
-  if (has(lRuleSet, "forbidden")) {
+  if (lRuleSet?.forbidden) {
     lRuleSet.forbidden = lRuleSet.forbidden
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");
   }
 
-  if (has(lRuleSet, "required")) {
+  if (lRuleSet?.required) {
     lRuleSet.required = lRuleSet.required
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");

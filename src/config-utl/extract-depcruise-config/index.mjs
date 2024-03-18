@@ -1,5 +1,4 @@
 import { dirname } from "node:path";
-import has from "lodash/has.js";
 import readConfig from "./read-config.mjs";
 import mergeConfigs from "./merge-configs.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
@@ -80,7 +79,7 @@ export default async function extractDepcruiseConfig(
 
   let lReturnValue = await readConfig(lResolvedFileName);
 
-  if (has(lReturnValue, "extends")) {
+  if (lReturnValue?.extends) {
     lReturnValue = await processExtends(
       lReturnValue,
       pAlreadyVisited,

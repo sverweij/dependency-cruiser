@@ -1,5 +1,4 @@
 /* eslint-disable security/detect-object-injection */
-import has from "lodash/has.js";
 import { normalizeREProperties } from "../helpers.mjs";
 import defaults from "./defaults.mjs";
 
@@ -71,8 +70,8 @@ function normalizeCollapse(pCollapse) {
 function normalizeFocusDepth(pFormatOptions) {
   /** @type  {import("../../../types/dependency-cruiser.js").IFormatOptions}*/
   let lFormatOptions = structuredClone(pFormatOptions);
-  if (has(lFormatOptions, "focusDepth")) {
-    if (has(lFormatOptions, "focus")) {
+  if (Object.hasOwn(lFormatOptions, "focusDepth")) {
+    if (lFormatOptions?.focus) {
       lFormatOptions.focus.depth = Number.parseInt(
         lFormatOptions.focusDepth,
         10,
@@ -93,7 +92,8 @@ function hasMetricsRule(pRule) {
   //       Or is it a misuse to ensure folder derivations (like cycles) get
   //       kicked off?
   return (
-    has(pRule, "to.moreUnstable") || (pRule?.scope ?? "module") === "folder"
+    Object.hasOwn(pRule?.to ?? {}, "moreUnstable") ||
+    (pRule?.scope ?? "module") === "folder"
   );
 }
 
@@ -184,7 +184,7 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
   // having two types/ interfaces
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems);
-  if (has(lReturnValue, "collapse")) {
+  if (Object.hasOwn(lReturnValue, "collapse")) {
     lReturnValue.collapse = normalizeCollapse(lReturnValue.collapse);
   }
   // TODO: further down the execution path code still relies on .doNotFollow
@@ -226,7 +226,7 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
 export function normalizeFormatOptions(pFormatOptions) {
   let lFormatOptions = structuredClone(pFormatOptions);
 
-  if (has(lFormatOptions, "collapse")) {
+  if (Object.hasOwn(lFormatOptions, "collapse")) {
     lFormatOptions.collapse = normalizeCollapse(lFormatOptions.collapse);
   }
 

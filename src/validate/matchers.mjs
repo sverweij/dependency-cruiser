@@ -1,5 +1,4 @@
 /* eslint-disable security/detect-object-injection */
-import has from "lodash/has.js";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
@@ -22,7 +21,7 @@ const DEPENDENCY_TYPE_DUPLICATES_THAT_MATTER = new Set([
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
-  if (has(pRule.to, pProperty)) {
+  if (Object.hasOwn(pRule.to, pProperty)) {
     return pDependency[pProperty] === pRule.to[pProperty];
   }
   return true;
@@ -173,7 +172,7 @@ function toViaOnly(pRule, pDependency, pGroups) {
 }
 
 function toIsMoreUnstable(pRule, pModule, pDependency) {
-  if (has(pRule, "to.moreUnstable")) {
+  if (Object.hasOwn(pRule.to, "moreUnstable")) {
     return (
       (pRule.to.moreUnstable &&
         pModule.instability < pDependency.instability) ||
@@ -198,7 +197,7 @@ function matchesMoreThanOneDependencyType(pRule, pDependency) {
    * lNotReallyDuplicates set.
    */
 
-  if (has(pRule.to, "moreThanOneDependencyType")) {
+  if (Object.hasOwn(pRule.to, "moreThanOneDependencyType")) {
     return (
       pRule.to.moreThanOneDependencyType ===
       pDependency.dependencyTypes.filter((pDependencyType) =>

@@ -1,7 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import memoize, { memoizeClear } from "memoize";
-import has from "lodash/has.js";
 import { resolve } from "./resolve.mjs";
 import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
 
@@ -131,7 +130,8 @@ export function dependencyIsDeprecated(
   );
 
   if (Boolean(lPackageJson)) {
-    lReturnValue = has(lPackageJson, "deprecated") && lPackageJson.deprecated;
+    lReturnValue =
+      Object.hasOwn(lPackageJson, "deprecated") && lPackageJson.deprecated;
   }
   return lReturnValue;
 }
@@ -155,7 +155,7 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
 
   if (
     Boolean(lPackageJson) &&
-    has(lPackageJson, "license") &&
+    Object.hasOwn(lPackageJson, "license") &&
     typeof lPackageJson.license === "string"
   ) {
     lReturnValue = lPackageJson.license;

@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
@@ -13,7 +12,7 @@ import { extractGroups } from "#utl/regex-util.mjs";
  */
 function matchesOrphanRule(pRule, pModule) {
   return (
-    has(pRule, "from.orphan") &&
+    Object.hasOwn(pRule?.from ?? {}, "orphan") &&
     // @ts-expect-error the 'has' above guarantees there's a 'from.orphan' attribute
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
@@ -31,7 +30,10 @@ function matchesOrphanRule(pRule, pModule) {
  * @returns {boolean}
  */
 function matchesReachableRule(pRule, pModule) {
-  if (has(pRule, "to.reachable") && has(pModule, "reachable")) {
+  if (
+    Object.hasOwn(pRule?.to ?? {}, "reachable") &&
+    Object.hasOwn(pModule, "reachable")
+  ) {
     // @ts-expect-error the 'has' above ensures the 'reachable' exists
     const lReachableRecord = pModule.reachable.find(
       (pReachable) =>
@@ -62,8 +64,8 @@ function matchesReachableRule(pRule, pModule) {
  */
 function matchesReachesRule(pRule, pModule) {
   return (
-    has(pRule, "to.reachable") &&
-    has(pModule, "reaches") &&
+    Object.hasOwn(pRule?.to ?? {}, "reachable") &&
+    Object.hasOwn(pModule, "reaches") &&
     // @ts-expect-error the 'has' above guarantees the .reaches exists
     pModule.reaches.some(
       (pReaches) =>
@@ -102,11 +104,12 @@ function dependentsCountsMatch(pRule, pDependents) {
  * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @returns {boolean}
  */
+// eslint-disable-next-line complexity
 function matchesDependentsRule(pRule, pModule) {
   if (
-    (has(pModule, "dependents") &&
-      has(pRule, "module.numberOfDependentsLessThan")) ||
-    has(pRule, "module.numberOfDependentsMoreThan")
+    (Object.hasOwn(pModule, "dependents") &&
+      Object.hasOwn(pRule?.module ?? {}, "numberOfDependentsLessThan")) ||
+    Object.hasOwn(pRule?.module ?? {}, "numberOfDependentsMoreThan")
   ) {
     return (
       // group matching seems like a nice idea, however, the 'from' part of the

@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import matchModuleRule from "./match-module-rule.mjs";
 import matchDependencyRule from "./match-dependency-rule.mjs";
 import violatesRequiredRule from "./violates-required-rule.mjs";
@@ -19,7 +18,7 @@ function validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo) {
 
   if (pRuleSet.allowed) {
     const lInterestingAllowedRules = pRuleSet.allowed.filter(
-      pMatchModule.isInteresting
+      pMatchModule.isInteresting,
     );
 
     if (
@@ -50,7 +49,7 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
 function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
   let lFoundRequiredRuleViolations = [];
 
-  if (has(pRuleSet, "required")) {
+  if (pRuleSet?.required) {
     lFoundRequiredRuleViolations = pRuleSet.required
       .filter(pMatchModule.isInteresting)
       .filter((pRule) => violatesRequiredRule(pRule, pModule))
@@ -78,7 +77,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
     pRuleSet,
     pMatchModule,
     pFrom,
-    pTo
+    pTo,
   )
     .concat(validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo))
     .concat(validateAgainstRequiredRules(pRuleSet, pFrom, pMatchModule))
@@ -105,7 +104,7 @@ export default {
       pRuleSet,
       pFromFolder,
       pToFolder,
-      matchFolderRule
+      matchFolderRule,
     );
   },
 };

@@ -1,5 +1,4 @@
 import { join } from "node:path/posix";
-import has from "lodash/has.js";
 import {
   isRelativeModuleName,
   isExternalModule,
@@ -17,7 +16,7 @@ function dependencyKeyHasModuleName(
 ) {
   return (pKey) =>
     pKey.includes("ependencies") &&
-    has(pPackageDependencies[pKey], join(pPrefix, pModuleName));
+    Object.hasOwn(pPackageDependencies[pKey], join(pPrefix, pModuleName));
 }
 
 const NPM2DEP_TYPE = new Map([
