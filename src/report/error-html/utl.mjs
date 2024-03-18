@@ -1,10 +1,11 @@
-import has from "lodash/has.js";
 import { formatViolation, formatPercentage } from "../utl/index.mjs";
 import meta from "#meta.cjs";
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = pRuleSetUsed?.allowed ?? [];
-  const lCommentedRule = lAllowed.find((pRule) => has(pRule, "comment"));
+  const lCommentedRule = lAllowed.find((pRule) =>
+    Object.hasOwn(pRule, "comment"),
+  );
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
   return lAllowed.length > 0

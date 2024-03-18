@@ -1,7 +1,5 @@
-// @ts-check
 import { readFileSync, readdirSync, accessSync, statSync, R_OK } from "node:fs";
 import { join } from "node:path";
-import has from "lodash/has.js";
 import { DEFAULT_CONFIG_FILE_NAME } from "../defaults.mjs";
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
@@ -47,7 +45,8 @@ function babelIsConfiguredInManifest() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = has(readManifest(), "babel");
+    // @ts-expect-error defaultly tsc doesn't know about newfangled stuff like hasOwn
+    lReturnValue = Object.hasOwn(readManifest(), "babel");
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
@@ -75,7 +74,7 @@ export function isTypeModule() {
  */
 function getFolderNames(pFolderName) {
   return readdirSync(pFolderName, "utf8").filter((pFileName) =>
-    statSync(join(pFolderName, pFileName)).isDirectory()
+    statSync(join(pFolderName, pFileName)).isDirectory(),
   );
 }
 
@@ -88,7 +87,7 @@ function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
   return readdirSync(pFolderName, "utf8").filter(
     (pFileName) =>
       statSync(join(pFolderName, pFileName)).isFile() &&
-      pFileName.match(pPattern)
+      pFileName.match(pPattern),
   );
 }
 
@@ -102,14 +101,14 @@ export function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
 
 export function hasTestsWithinSource(pTestLocations, pSourceLocations) {
   return pTestLocations.every((pTestLocation) =>
-    pSourceLocations.includes(pTestLocation)
+    pSourceLocations.includes(pTestLocation),
   );
 }
 
 export function getFolderCandidates(pCandidateFolderArray) {
   return (pFolderNames = getFolderNames(process.cwd())) => {
     return pFolderNames.filter((pFolderName) =>
-      pCandidateFolderArray.includes(pFolderName)
+      pCandidateFolderArray.includes(pFolderName),
     );
   };
 }
@@ -134,7 +133,7 @@ function getManifestFilesWithABabelConfig() {
 
 export const getBabelConfigCandidates = () =>
   getManifestFilesWithABabelConfig().concat(
-    getMatchingFileNames(BABEL_CONFIG_CANDIDATE_PATTERN)
+    getMatchingFileNames(BABEL_CONFIG_CANDIDATE_PATTERN),
   );
 export const hasBabelConfigCandidates = () =>
   getBabelConfigCandidates().length > 0;
@@ -154,12 +153,12 @@ export const hasWebpackConfigCandidates = () =>
   getWebpackConfigCandidates().length > 0;
 
 export const getSourceFolderCandidates = getFolderCandidates(
-  LIKELY_SOURCE_FOLDERS
+  LIKELY_SOURCE_FOLDERS,
 );
 export const getTestFolderCandidates = getFolderCandidates(LIKELY_TEST_FOLDERS);
 
 export const getMonoRepoPackagesCandidates = getFolderCandidates(
-  LIKELY_PACKAGES_FOLDERS
+  LIKELY_PACKAGES_FOLDERS,
 );
 
 /**

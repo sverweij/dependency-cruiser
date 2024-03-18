@@ -30,10 +30,13 @@ export function normalizeREProperties(
   let lPropertyContainer = structuredClone(pPropertyContainer);
 
   for (const lProperty of pREProperties) {
+    // lProperty can be nested properties, so we use lodash.has and lodash.get
+    // instead of elvis operators
     if (has(lPropertyContainer, lProperty)) {
       set(
         lPropertyContainer,
         lProperty,
+
         normalizeToREAsString(get(lPropertyContainer, lProperty)),
       );
     }

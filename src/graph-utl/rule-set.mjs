@@ -1,5 +1,3 @@
-import has from "lodash/has.js";
-
 /**
  * Finds the first rule in the rule set that has name pName,
  * and undefined if no such rule exists/ the rule is an 'allowed'
@@ -13,7 +11,14 @@ import has from "lodash/has.js";
  */
 export function findRuleByName(pRuleSet, pName) {
   return (pRuleSet?.forbidden ?? []).find(
-    (pForbiddenRule) => pForbiddenRule.name === pName
+    (pForbiddenRule) => pForbiddenRule.name === pName,
+  );
+}
+
+function ruleHasALicenseLikeAttribute(pRule) {
+  return (
+    Object.hasOwn(pRule?.to ?? {}, "license") ||
+    Object.hasOwn(pRule?.to ?? {}, "licenseNot")
   );
 }
 
@@ -28,12 +33,8 @@ export function findRuleByName(pRuleSet, pName) {
  */
 export function ruleSetHasLicenseRule(pRuleSet) {
   return (
-    (pRuleSet?.forbidden ?? []).some(
-      (pRule) => has(pRule, "to.license") || has(pRule, "to.licenseNot")
-    ) ||
-    (pRuleSet?.allowed ?? []).some(
-      (pRule) => has(pRule, "to.license") || has(pRule, "to.licenseNot")
-    )
+    (pRuleSet?.forbidden ?? []).some(ruleHasALicenseLikeAttribute) ||
+    (pRuleSet?.allowed ?? []).some(ruleHasALicenseLikeAttribute)
   );
 }
 /**
@@ -44,10 +45,10 @@ export function ruleSetHasLicenseRule(pRuleSet) {
 export function ruleSetHasDeprecationRule(pRuleSet) {
   return (
     (pRuleSet?.forbidden ?? []).some((pRule) =>
-      (pRule?.to?.dependencyTypes ?? []).includes("deprecated")
+      (pRule?.to?.dependencyTypes ?? []).includes("deprecated"),
     ) ||
     (pRuleSet?.allowed ?? []).some((pRule) =>
-      (pRule?.to?.dependencyTypes ?? []).includes("deprecated")
+      (pRule?.to?.dependencyTypes ?? []).includes("deprecated"),
     )
   );
 }

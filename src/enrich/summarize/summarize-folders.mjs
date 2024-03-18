@@ -1,12 +1,11 @@
-import has from "lodash/has.js";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
 
 function classifyViolation(pRule, pRuleSet) {
   const lRule = findRuleByName(pRuleSet, pRule.name);
-  if (has(lRule, "to.moreUnstable")) {
+  if (Object.hasOwn(lRule?.to ?? {}, "moreUnstable")) {
     return "instability";
   }
-  if (has(lRule, "to.circular")) {
+  if (Object.hasOwn(lRule?.to ?? {}, "circular")) {
     return "cycle";
   }
   return "folder";

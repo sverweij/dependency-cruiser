@@ -148,11 +148,11 @@ function report(
 }
 
 function pryReporterOptionsFromResults(pGranularity, pResults) {
-  const lFallbackReporterOptions = get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.dot",
-  );
+  const lFallbackReporterOptions =
+    pResults?.summary?.optionsUsed?.reporterOptions?.dot;
 
+  // using lodash.get here because the reporter options will contain nested
+  // properties, which it handles for us
   return get(
     pResults,
     GRANULARITY2REPORTER_OPTIONS.get(pGranularity),
@@ -161,26 +161,22 @@ function pryReporterOptionsFromResults(pGranularity, pResults) {
 }
 
 function pryThemeFromResults(pGranularity, pResults) {
-  const lFallbackTheme = get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.dot.theme",
-  );
-  return get(
-    pryReporterOptionsFromResults(pGranularity, pResults),
-    "theme",
-    lFallbackTheme,
+  const lFallbackTheme =
+    pResults?.summary?.optionsUsed?.reporterOptions?.dot?.theme;
+
+  return (
+    pryReporterOptionsFromResults(pGranularity, pResults)?.theme ??
+    lFallbackTheme
   );
 }
 
 function pryFiltersFromResults(pGranularity, pResults) {
-  const lFallbackFilters = get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.dot.filters",
-  );
-  return get(
-    pryReporterOptionsFromResults(pGranularity, pResults),
-    "filters",
-    lFallbackFilters,
+  const lFallbackFilters =
+    pResults?.summary?.optionsUsed?.reporterOptions?.dot?.filters;
+
+  return (
+    pryReporterOptionsFromResults(pGranularity, pResults)?.filters ??
+    lFallbackFilters
   );
 }
 
@@ -192,10 +188,9 @@ function getCollapseFallbackPattern(pGranularity) {
 }
 
 function pryCollapsePatternFromResults(pGranularity, pResults) {
-  return get(
-    pryReporterOptionsFromResults(pGranularity, pResults),
-    "collapsePattern",
-    getCollapseFallbackPattern(pGranularity),
+  return (
+    pryReporterOptionsFromResults(pGranularity, pResults)?.collapsePattern ??
+    getCollapseFallbackPattern(pGranularity)
   );
 }
 

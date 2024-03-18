@@ -19,9 +19,10 @@ export default async function cruise(
   pTranspileOptions,
 ) {
   bus.summary("parsing options", c(1));
+  const lCruiseOptionsValid = assertCruiseOptionsValid(pCruiseOptions);
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
-    assertCruiseOptionsValid(pCruiseOptions),
+    lCruiseOptionsValid,
     pFileAndDirectoryArray,
   );
   let lCache = null;

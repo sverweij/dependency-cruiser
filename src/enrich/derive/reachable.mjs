@@ -1,14 +1,15 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
-import has from "lodash/has.js";
 import matchers from "#validate/matchers.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
 
 function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])
-    .filter((pRule) => has(pRule.to, "reachable"))
+    .filter((pRule) => Object.hasOwn(pRule?.to ?? {}, "reachable"))
     .concat(
-      (pRuleSet?.allowed ?? []).filter((pRule) => has(pRule.to, "reachable")),
+      (pRuleSet?.allowed ?? []).filter((pRule) =>
+        Object.hasOwn(pRule?.to ?? {}, "reachable"),
+      ),
     );
 }
 

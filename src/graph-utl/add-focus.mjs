@@ -1,4 +1,3 @@
-import has from "lodash/has.js";
 import IndexedModuleGraph from "./indexed-module-graph.mjs";
 import { moduleMatchesFilter } from "./match-facade.mjs";
 
@@ -17,7 +16,7 @@ function scrub(pModuleNamesSet) {
   return (pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies.filter(({ resolved }) =>
-      pModuleNamesSet.has(resolved)
+      pModuleNamesSet.has(resolved),
     ),
   });
 }
@@ -29,10 +28,10 @@ function scrub(pModuleNamesSet) {
  * @returns
  */
 export default function addFocus(pModules, pFilter) {
-  if (has(pFilter, "path")) {
+  if (pFilter?.path) {
     const lDepth = typeof pFilter.depth === "undefined" ? 1 : pFilter.depth;
     const lFocusedModuleNames = getFocusModules(pModules, pFilter).map(
-      ({ source }) => source
+      ({ source }) => source,
     );
     let lReachableModuleNamesArray = [];
     let lIndexedModules = new IndexedModuleGraph(pModules);
@@ -40,10 +39,10 @@ export default function addFocus(pModules, pFilter) {
     for (let lFocusedModule of lFocusedModuleNames) {
       lReachableModuleNamesArray = lReachableModuleNamesArray
         .concat(
-          lIndexedModules.findTransitiveDependents(lFocusedModule, lDepth)
+          lIndexedModules.findTransitiveDependents(lFocusedModule, lDepth),
         )
         .concat(
-          lIndexedModules.findTransitiveDependencies(lFocusedModule, lDepth)
+          lIndexedModules.findTransitiveDependencies(lFocusedModule, lDepth),
         );
     }
 

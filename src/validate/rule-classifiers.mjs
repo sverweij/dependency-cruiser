@@ -1,15 +1,13 @@
-import has from "lodash/has.js";
-
 /**
  * @param {import("../../types/strict-rule-set").IStrictAnyRuleType} pRule a dependency-cruiser rule
  * @returns {boolean} whether or not the rule is 'module only'
  */
 export function isModuleOnlyRule(pRule) {
   return (
-    has(pRule, "from.orphan") ||
+    Object.hasOwn(pRule?.from ?? {}, "orphan") ||
     // note: the to might become optional for required rules
-    has(pRule, "to.reachable") ||
-    has(pRule, "module")
+    Object.hasOwn(pRule?.to ?? {}, "reachable") ||
+    Object.hasOwn(pRule, "module")
   );
 }
 /**
