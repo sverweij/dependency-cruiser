@@ -10,6 +10,7 @@ import {
   object2Array,
 } from "./utl.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
+import { uniq } from "#utl/array-util.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
   pNewDependents.forEach((pNewDependent) => {
@@ -53,13 +54,11 @@ function sumCounts(pAll, pCurrent) {
 }
 
 function getFolderLevelCouplings(pCouplingArray) {
-  return Array.from(
-    new Set(
-      pCouplingArray.map((pCoupling) =>
-        dirname(pCoupling.name) === "."
-          ? pCoupling.name
-          : dirname(pCoupling.name),
-      ),
+  return uniq(
+    pCouplingArray.map((pCoupling) =>
+      dirname(pCoupling.name) === "."
+        ? pCoupling.name
+        : dirname(pCoupling.name),
     ),
   ).map((pCoupling) => ({ name: pCoupling }));
 }
@@ -95,9 +94,7 @@ function deNormalizeInstability(pFolder, _, pAllFolders) {
     }),
   };
 }
-function uniq(pArray) {
-  return [...new Set(pArray)];
-}
+
 function getSinks(pFolders) {
   const lKnownFolders = new Set(pFolders.map(({ name }) => name));
   const lAllFolders = uniq(

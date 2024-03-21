@@ -1,3 +1,5 @@
+import { uniq } from "#utl/array-util.mjs";
+
 /* eslint-disable security/detect-object-injection */
 function normalizeManifestKeys(pManifest) {
   let lReturnValue = pManifest;
@@ -19,9 +21,7 @@ function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
 }
 
 function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
-  return Array.from(
-    new Set(pClosestDependencyKey.concat(pFurtherDependencyKey)),
-  );
+  return uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
 }
 
 function isInterestingKey(pKey) {
@@ -35,11 +35,9 @@ function getDependencyKeys(pPackage) {
 }
 
 function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
-  return Array.from(
-    new Set(
-      getDependencyKeys(pClosestPackage).concat(
-        getDependencyKeys(pFurtherPackage),
-      ),
+  return uniq(
+    getDependencyKeys(pClosestPackage).concat(
+      getDependencyKeys(pFurtherPackage),
     ),
   );
 }

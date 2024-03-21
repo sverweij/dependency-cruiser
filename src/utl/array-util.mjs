@@ -9,3 +9,7 @@
 export function intersects(pLeftArray, pRightArray) {
   return pLeftArray.some((pLeftItem) => pRightArray.includes(pLeftItem));
 }
+
+export function uniq(pArray) {
+  return [...new Set(pArray)];
+}

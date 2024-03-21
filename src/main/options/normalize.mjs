@@ -1,13 +1,10 @@
 /* eslint-disable security/detect-object-injection */
 import { normalizeREProperties } from "../helpers.mjs";
 import defaults from "./defaults.mjs";
+import { uniq } from "#utl/array-util.mjs";
 
 const DEFAULT_CACHE_FOLDER = "node_modules/.cache/dependency-cruiser";
 const DEFAULT_CACHE_STRATEGY = "metadata";
-
-function uniq(pArray) {
-  return [...new Set(pArray)];
-}
 
 function normalizeFilterOption(pFilterOption) {
   let lReturnValue = pFilterOption || {};

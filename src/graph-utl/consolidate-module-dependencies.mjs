@@ -1,16 +1,13 @@
 import reject from "lodash/reject.js";
 import compare from "./compare.mjs";
+import { uniq } from "#utl/array-util.mjs";
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
     ...pRightDependency,
-    dependencyTypes: Array.from(
-      new Set(
-        pLeftDependency.dependencyTypes.concat(
-          pRightDependency.dependencyTypes,
-        ),
-      ),
+    dependencyTypes: uniq(
+      pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes),
     ),
     rules: pLeftDependency.rules
       .concat(pRightDependency?.rules ?? [])
