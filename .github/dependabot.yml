@@ -7,3 +7,8 @@ updates:
     commit-message:
       prefix: "ci"
       include: scope
+    groups:
+      "minor and patch":
+        update-types:
+          - minor
+          - patch
