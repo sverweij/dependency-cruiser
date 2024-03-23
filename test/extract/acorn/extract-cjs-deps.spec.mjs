@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import extractcommonJSDeps from "#extract/acorn/extract-cjs-deps.mjs";
-import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
+import { getASTFromSource } from "#extract/acorn/parse.mjs";
 
 const extractcommonJS = (
   pJavaScriptSource,

@@ -6,9 +6,9 @@ import extractCommonJSDeps from "./acorn/extract-cjs-deps.mjs";
 import extractAMDDeps from "./acorn/extract-amd-deps.mjs";
 import extractTypeScriptDeps from "./tsc/extract-typescript-deps.mjs";
 import extractSwcDeps from "./swc/extract-swc-deps.mjs";
-import toJavascriptAST from "./parse/to-javascript-ast.mjs";
-import toTypescriptAST from "./parse/to-typescript-ast.mjs";
-import toSwcAST from "./parse/to-swc-ast.mjs";
+import toJavascriptAST from "./acorn/parse.mjs";
+import toTypescriptAST from "./tsc/parse.mjs";
+import toSwcAST from "./swc/parse.mjs";
 import {
   detectPreCompilationNess,
   extractModuleAttributes,
