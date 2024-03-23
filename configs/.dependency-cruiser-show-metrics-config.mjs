@@ -42,6 +42,7 @@ export default {
       folder: "node_modules/.cache/dependency-cruiser/show-metrics",
     },
     includeOnly: { path: "^(bin|src)" },
+    prefix: `vscode://file/${process.cwd()}/`,
     reporterOptions: {
       text: {
         highlightFocused: true,
