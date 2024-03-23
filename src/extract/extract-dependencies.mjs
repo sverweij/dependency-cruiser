@@ -1,11 +1,11 @@
 import { join, extname, dirname } from "node:path";
 import uniqBy from "lodash/uniqBy.js";
 import resolve from "./resolve/index.mjs";
-import extractES6Deps from "./ast-extractors/extract-es6-deps.mjs";
-import extractCommonJSDeps from "./ast-extractors/extract-cjs-deps.mjs";
-import extractAMDDeps from "./ast-extractors/extract-amd-deps.mjs";
-import extractTypeScriptDeps from "./ast-extractors/extract-typescript-deps.mjs";
-import extractSwcDeps from "./ast-extractors/extract-swc-deps.mjs";
+import extractES6Deps from "./acorn/extract-es6-deps.mjs";
+import extractCommonJSDeps from "./acorn/extract-cjs-deps.mjs";
+import extractAMDDeps from "./acorn/extract-amd-deps.mjs";
+import extractTypeScriptDeps from "./tsc/extract-typescript-deps.mjs";
+import extractSwcDeps from "./swc/extract-swc-deps.mjs";
 import toJavascriptAST from "./parse/to-javascript-ast.mjs";
 import toTypescriptAST from "./parse/to-typescript-ast.mjs";
 import toSwcAST from "./parse/to-swc-ast.mjs";
@@ -62,7 +62,7 @@ function shouldUseSwc({ parser }, pFileName) {
   );
 }
 
-function extractFromJavaScriptAST(
+function extractWithAcorn(
   { baseDir, moduleSystems, exoticRequireStrings },
   pFileName,
   pTranspileOptions,
@@ -104,10 +104,31 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     lDependencies = detectPreCompilationNess(
       lDependencies,
-      extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions),
+      extractWithAcorn(pCruiseOptions, pFileName, pTranspileOptions),
     );
   }
   return lDependencies;
+}
+
+/**
+ * @typedef {"acorn" | "swc" | "tsc"} TranspilerType
+ */
+/**
+ *
+ * @param {IStrictCruiseOptions} pCruiseOptions
+ * @param {string} pFileName
+ * @returns {TranspilerType}
+ */
+function determineTranspilerToUse(pCruiseOptions, pFileName) {
+  let lTranspiler = "acorn";
+
+  if (shouldUseSwc(pCruiseOptions, pFileName)) {
+    lTranspiler = "swc";
+  } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
+    lTranspiler = "tsc";
+  }
+
+  return lTranspiler;
 }
 
 /**
@@ -122,20 +143,23 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
-    if (shouldUseSwc(pCruiseOptions, pFileName)) {
-      lDependencies = extractWithSwc(pCruiseOptions, pFileName);
-    } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
-      lDependencies = extractWithTsc(
-        pCruiseOptions,
-        pFileName,
-        pTranspileOptions,
-      );
-    } else {
-      lDependencies = extractFromJavaScriptAST(
-        pCruiseOptions,
-        pFileName,
-        pTranspileOptions,
-      );
+    switch (determineTranspilerToUse(pCruiseOptions, pFileName)) {
+      case "swc":
+        lDependencies = extractWithSwc(pCruiseOptions, pFileName);
+        break;
+      case "tsc":
+        lDependencies = extractWithTsc(
+          pCruiseOptions,
+          pFileName,
+          pTranspileOptions,
+        );
+        break;
+      default:
+        lDependencies = extractWithAcorn(
+          pCruiseOptions,
+          pFileName,
+          pTranspileOptions,
+        );
     }
   }
 

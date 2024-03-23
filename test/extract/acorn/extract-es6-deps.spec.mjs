@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import extractES6Deps from "#extract/ast-extractors/extract-es6-deps.mjs";
+import extractES6Deps from "#extract/acorn/extract-es6-deps.mjs";
 import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
 
 const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
@@ -8,7 +8,7 @@ const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
     pDependencies,
   );
 
-describe("[U] ast-extractors/extract-ES6-deps", () => {
+describe("[U] acorn/extract-ES6-deps", () => {
   it("dynamic imports of strings", () => {
     let lDeps = [];
 

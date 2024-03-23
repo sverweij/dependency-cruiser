@@ -7,7 +7,7 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
-import getDependencies from "#extract/get-dependencies.mjs";
+import extractDependencies from "#extract/extract-dependencies.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
@@ -53,7 +53,7 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "test/extract/__mocks__/amd-bangs/root_one.js",
         lOptions,
         lResolveOptions,
@@ -70,7 +70,7 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "test/extract/__mocks__/amd-bangs/simplified-commonjs-wrapper.js",
         lOptions,
         lResolveOptions,

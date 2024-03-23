@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import extractcommonJSDeps from "#extract/ast-extractors/extract-cjs-deps.mjs";
+import extractcommonJSDeps from "#extract/acorn/extract-cjs-deps.mjs";
 import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
 
 const extractcommonJS = (
@@ -14,7 +14,7 @@ const extractcommonJS = (
     pExoticRequireStrings,
   );
 
-describe("[U] ast-extractors/extract-cjs-deps", () => {
+describe("[U] acorn/extract-cjs-deps", () => {
   it("require with in an assignment", () => {
     let lDeps = [];
 

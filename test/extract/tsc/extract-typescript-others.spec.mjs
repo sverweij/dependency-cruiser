@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import extractTypescriptFromAST from "#extract/ast-extractors/extract-typescript-deps.mjs";
+import extractTypescriptFromAST from "#extract/ast-extractors/tsc/extract-typescript-deps.mjs";
 
 describe("[U] ast-extractors/extract-typescript - others", () => {
   // see issue #167 - union types on tsc 2.8 and before don't deliver/
