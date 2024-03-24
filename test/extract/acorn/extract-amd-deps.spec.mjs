@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import extractAMDDeps from "#extract/ast-extractors/extract-amd-deps.mjs";
-import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
+import extractAMDDeps from "#extract/acorn/extract-amd-deps.mjs";
+import { getASTFromSource } from "#extract/acorn/parse.mjs";
 
 const extractAMD = (
   pJavaScriptSource,
@@ -13,7 +13,7 @@ const extractAMD = (
     pExoticRequireStrings,
   );
 
-describe("[U] ast-extractors/extract-AMD-deps", () => {
+describe("[U] acorn/extract-AMD-deps", () => {
   it("amd define", () => {
     let lDeps = [];
 

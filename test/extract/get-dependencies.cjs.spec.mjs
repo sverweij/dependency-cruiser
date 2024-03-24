@@ -6,7 +6,7 @@ import symlinkDir from "symlink-dir";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
-import getDependencies from "#extract/get-dependencies.mjs";
+import extractDependencies from "#extract/extract-dependencies.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
@@ -32,7 +32,7 @@ function runFixture(pFixture, pParser = "acorn") {
 
   it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
     deepEqual(
-      getDependencies(
+      extractDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
         await normalizeResolveOptions(
@@ -79,7 +79,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "test/extract/__mocks__/cjs-bangs/index.js",
         lOptions,
         lResolveOptions,
@@ -109,7 +109,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "test/extract/__mocks__/cjs-multi-bangs/index.js",
         lOptions,
         lResolveOptions,

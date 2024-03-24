@@ -35,7 +35,7 @@ export const EXTENSION2WRAPPER = new Map([
   [".cjsx", coffeeVanillaWrap],
 ]);
 
-const BABELEABLE_EXTENSIONS = [
+const BABEL_ABLE_EXTENSIONS = [
   ".js",
   ".cjs",
   ".mjs",
@@ -47,7 +47,7 @@ const BABELEABLE_EXTENSIONS = [
 
 /**
  * returns the babel wrapper if there's a babelConfig in the transpiler
- * options for babeleable extensions (javascript and typescript - currently
+ * options for babel-  able extensions (javascript and typescript - currently
  * not configurable)
  *
  * returns the wrapper module configured for the extension pExtension if
@@ -63,7 +63,7 @@ const BABELEABLE_EXTENSIONS = [
 export function getWrapper(pExtension, pTranspilerOptions) {
   if (
     Object.keys(pTranspilerOptions?.babelConfig ?? {}).length > 0 &&
-    BABELEABLE_EXTENSIONS.includes(pExtension)
+    BABEL_ABLE_EXTENSIONS.includes(pExtension)
   ) {
     return babelWrap;
   }

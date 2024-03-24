@@ -3,7 +3,7 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
-import getDependencies from "#extract/get-dependencies.mjs";
+import extractDependencies from "#extract/extract-dependencies.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
@@ -27,7 +27,7 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
 
     doesNotThrow(
       () =>
-        getDependencies(
+        extractDependencies(
           "test/extract/__mocks__/syntax-error.js",
           lOptions,
           lResolveOptions,
@@ -37,7 +37,11 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
   });
   it("Raises an exception on non-existing files", () => {
     throws(() => {
-      getDependencies("non-existing-file.md", normalizeCruiseOptions({}), {});
+      extractDependencies(
+        "non-existing-file.md",
+        normalizeCruiseOptions({}),
+        {},
+      );
     }, /Extracting dependencies ran afoul of...\n\n {2}ENOENT: no such file or directory, open /);
   });
 });
@@ -56,7 +60,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
 
   it("Just skips require(481)", () => {
     equal(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
         lResolveOptions,
@@ -67,7 +71,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
 
   it("Just skips require(a function)", () => {
     equal(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
         lResolveOptions,
@@ -78,7 +82,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
 
   it("Just skips require(an iife)", () => {
     equal(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
         {},
@@ -99,7 +103,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
@@ -116,7 +120,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
@@ -146,7 +150,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
@@ -188,7 +192,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
         lResolveOptions,
@@ -222,7 +226,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
         lResolveOptions,
@@ -241,7 +245,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
 
     deepEqual(
-      getDependencies(
+      extractDependencies(
         "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,
         lResolveOptions,

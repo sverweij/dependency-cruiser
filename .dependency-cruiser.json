@@ -128,7 +128,7 @@
       "from": {
         "pathNot": [
           "^src/main/resolve-options/normalize[.]mjs",
-          "^src/extract/(parse|resolve|gather-initial-sources[.]mjs)",
+          "^src/extract/(acorn|tsc|swc|resolve|gather-initial-sources[.]mjs)",
           "^src/(config-utl|cli|cache|utl/find-all-files[.]mjs)",
           "^src/report/dot-webpage/wrap-in-html[.]mjs",
           "^test",

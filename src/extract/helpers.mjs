@@ -1,3 +1,5 @@
+import { extname } from "node:path";
+
 export function dependenciesEqual(pLeftDependency) {
   // As we're using this to compare (typescript) pre-compilation dependencies
   // with post-compilation dependencies we do not consider the moduleSystem.
@@ -77,6 +79,23 @@ export function extractModuleAttributes(pString) {
  */
 export function stripQueryParameters(pFilenameString) {
   // url.parse(pFilenameString).pathname did this quite admirably, but it's
-  // deprecated, hence this fonky RE replace. And accompanying unit test :-/
+  // deprecated, hence this funky RE replace. And accompanying unit test :-/
   return pFilenameString.replace(/\?.+$/, "");
+}
+/**
+ * Returns true if the file name has a TypeScript compatible extension
+ * @param {string} pFileName
+ * @returns {boolean}
+ */
+export function isTypeScriptCompatible(pFileName) {
+  return [
+    ".ts",
+    ".tsx",
+    ".mts",
+    ".cts",
+    ".js",
+    ".mjs",
+    ".cjs",
+    ".vue",
+  ].includes(extname(pFileName));
 }

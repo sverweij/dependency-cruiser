@@ -1,6 +1,6 @@
 import { equal } from "node:assert/strict";
 import get from "lodash/get.js";
-import { getASTFromSource } from "#extract/parse/to-javascript-ast.mjs";
+import { getASTFromSource } from "#extract/acorn/parse.mjs";
 
 const TSCONFIG_CONSTANTS = {
   ESNEXT: 99,

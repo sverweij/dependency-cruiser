@@ -10,7 +10,7 @@ function firstArgumentIsAString(pArgumentsNode) {
   );
 }
 
-function isPlaceholderlessTemplateLiteral(pArgument) {
+function isPlaceholderLessTemplateLiteral(pArgument) {
   return (
     pArgument.type === "TemplateLiteral" &&
     pArgument.quasis.length === 1 &&
@@ -22,7 +22,7 @@ function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   return (
     Boolean(pArgumentsNode) &&
     pArgumentsNode[0] &&
-    isPlaceholderlessTemplateLiteral(pArgumentsNode[0])
+    isPlaceholderLessTemplateLiteral(pArgumentsNode[0])
   );
 }
 
@@ -70,7 +70,7 @@ export default {
   firstArgumentIsAString,
   firstArgumentIsATemplateLiteral,
   isStringLiteral,
-  isPlaceholderlessTemplateLiteral,
+  isPlaceholderlessTemplateLiteral: isPlaceholderLessTemplateLiteral,
   isMemberCallExpression,
   isCalleeIdentifier,
   isRequireOfSomeSort,

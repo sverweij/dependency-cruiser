@@ -1,117 +1,51 @@
 import { join, extname, dirname } from "node:path";
 import uniqBy from "lodash/uniqBy.js";
+import { extract as acornExtract } from "./acorn/extract.mjs";
+import {
+  extract as tscExtract,
+  shouldUse as tscShouldUse,
+} from "./tsc/extract.mjs";
+import {
+  extract as swcExtract,
+  shouldUse as swcShouldUse,
+} from "./swc/extract.mjs";
 import resolve from "./resolve/index.mjs";
-import extractES6Deps from "./ast-extractors/extract-es6-deps.mjs";
-import extractCommonJSDeps from "./ast-extractors/extract-cjs-deps.mjs";
-import extractAMDDeps from "./ast-extractors/extract-amd-deps.mjs";
-import extractTypeScriptDeps from "./ast-extractors/extract-typescript-deps.mjs";
-import extractSwcDeps from "./ast-extractors/extract-swc-deps.mjs";
-import toJavascriptAST from "./parse/to-javascript-ast.mjs";
-import toTypescriptAST from "./parse/to-typescript-ast.mjs";
-import toSwcAST from "./parse/to-swc-ast.mjs";
 import {
   detectPreCompilationNess,
   extractModuleAttributes,
 } from "./helpers.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
-function extractFromSwcAST({ baseDir, exoticRequireStrings }, pFileName) {
-  return extractSwcDeps(
-    toSwcAST.getASTCached(join(baseDir, pFileName)),
-    exoticRequireStrings,
-  );
-}
-
-function extractFromTypeScriptAST(
-  { baseDir, exoticRequireStrings },
-  pFileName,
-  pTranspileOptions,
-) {
-  return extractTypeScriptDeps(
-    toTypescriptAST.getASTCached(join(baseDir, pFileName), pTranspileOptions),
-    exoticRequireStrings,
-  );
-}
-
-function isTypeScriptCompatible(pFileName) {
-  return [
-    ".ts",
-    ".tsx",
-    ".mts",
-    ".cts",
-    ".js",
-    ".mjs",
-    ".cjs",
-    ".vue",
-  ].includes(extname(pFileName));
-}
-
-function shouldUseTsc({ tsPreCompilationDeps, parser }, pFileName) {
-  return (
-    (tsPreCompilationDeps || parser === "tsc") &&
-    toTypescriptAST.isAvailable() &&
-    isTypeScriptCompatible(pFileName)
-  );
-}
-
-function shouldUseSwc({ parser }, pFileName) {
-  return (
-    parser === "swc" &&
-    toSwcAST.isAvailable() &&
-    isTypeScriptCompatible(pFileName)
-  );
-}
-
-function extractFromJavaScriptAST(
-  { baseDir, moduleSystems, exoticRequireStrings },
-  pFileName,
-  pTranspileOptions,
-) {
-  let lDependencies = [];
-  const lAST = toJavascriptAST.getASTCached(
-    join(baseDir, pFileName),
-    pTranspileOptions,
-  );
-
-  if (moduleSystems.includes("cjs")) {
-    extractCommonJSDeps(lAST, lDependencies, "cjs", exoticRequireStrings);
-  }
-  if (moduleSystems.includes("es6")) {
-    extractES6Deps(lAST, lDependencies);
-  }
-  if (moduleSystems.includes("amd")) {
-    extractAMDDeps(lAST, lDependencies, exoticRequireStrings);
-  }
-
-  return lDependencies;
-}
-
-function extractWithSwc(pCruiseOptions, pFileName) {
-  return extractFromSwcAST(pCruiseOptions, pFileName).filter(
-    ({ moduleSystem }) => pCruiseOptions.moduleSystems.includes(moduleSystem),
-  );
-}
-
 function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
-  let lDependencies = extractFromTypeScriptAST(
-    pCruiseOptions,
-    pFileName,
-    pTranspileOptions,
-  ).filter(({ moduleSystem }) =>
-    pCruiseOptions.moduleSystems.includes(moduleSystem),
-  );
+  let lDependencies = tscExtract(pCruiseOptions, pFileName, pTranspileOptions);
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     lDependencies = detectPreCompilationNess(
       lDependencies,
-      extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions),
+      acornExtract(pCruiseOptions, pFileName, pTranspileOptions),
     );
   }
   return lDependencies;
 }
 
 /**
- *
+ * @param {IStrictCruiseOptions} pCruiseOptions
+ * @param {string} pFileName
+ * @returns {(IStrictCruiseOptions, string, any) => import("../../types/cruise-result.mjs").IDependency[]}
+ */
+function determineExtractionFunction(pCruiseOptions, pFileName) {
+  let lExtractionFunction = acornExtract;
+
+  if (swcShouldUse(pCruiseOptions, pFileName)) {
+    lExtractionFunction = swcExtract;
+  } else if (tscShouldUse(pCruiseOptions, pFileName)) {
+    lExtractionFunction = extractWithTsc;
+  }
+
+  return lExtractionFunction;
+}
+
+/**
  * @param {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
@@ -122,21 +56,15 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
-    if (shouldUseSwc(pCruiseOptions, pFileName)) {
-      lDependencies = extractWithSwc(pCruiseOptions, pFileName);
-    } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
-      lDependencies = extractWithTsc(
-        pCruiseOptions,
-        pFileName,
-        pTranspileOptions,
-      );
-    } else {
-      lDependencies = extractFromJavaScriptAST(
-        pCruiseOptions,
-        pFileName,
-        pTranspileOptions,
-      );
-    }
+    const lExtractionFunction = determineExtractionFunction(
+      pCruiseOptions,
+      pFileName,
+    );
+    lDependencies = lExtractionFunction(
+      pCruiseOptions,
+      pFileName,
+      pTranspileOptions,
+    );
   }
 
   return lDependencies.map((pDependency) => ({

@@ -1,4 +1,4 @@
-import getDependencies from "./get-dependencies.mjs";
+import extractDependencies from "./extract-dependencies.mjs";
 import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
 import { bus } from "#utl/bus.mjs";
@@ -15,7 +15,7 @@ function extractRecursive(
   pVisited.add(pFileName);
   const lDependencies =
     pCruiseOptions.maxDepth <= 0 || pDepth < pCruiseOptions.maxDepth
-      ? getDependencies(
+      ? extractDependencies(
           pFileName,
           pCruiseOptions,
           pResolveOptions,

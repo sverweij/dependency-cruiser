@@ -1,4 +1,4 @@
-import SwcDependencyVisitor from "./swc-dependency-visitor.mjs";
+import SwcDependencyVisitor from "./dependency-visitor.mjs";
 
 /**
  * @param {import('@swc/core').ModuleItem[]} pSwcAST

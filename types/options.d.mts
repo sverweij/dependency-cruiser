@@ -18,6 +18,7 @@ export type ProgressType =
   | "performance-log"
   | "ndjson"
   | "none";
+export type ParserType = "acorn" | "tsc" | "swc";
 
 export interface ITsConfig {
   fileName?: string;
@@ -261,7 +262,7 @@ export interface ICruiseOptions {
    * typically sort out what the best parser for the job is out of the ones
    * available
    */
-  parser?: "acorn" | "tsc" | "swc";
+  parser?: ParserType;
 
   /**
    * Options used in module resolution that for dependency-cruiser's
