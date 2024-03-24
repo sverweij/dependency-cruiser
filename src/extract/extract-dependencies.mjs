@@ -1,7 +1,7 @@
 import { join, extname, dirname } from "node:path";
 import uniqBy from "lodash/uniqBy.js";
 import resolve from "./resolve/index.mjs";
-import { extract as extractWithAcorn } from "./acorn/extract.mjs";
+import { extract as extractFromAcornAST } from "./acorn/extract.mjs";
 import {
   extract as extractFromTscAST,
   shouldUse as shouldUseTsc,
@@ -34,31 +34,28 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     lDependencies = detectPreCompilationNess(
       lDependencies,
-      extractWithAcorn(pCruiseOptions, pFileName, pTranspileOptions),
+      extractFromAcornAST(pCruiseOptions, pFileName, pTranspileOptions),
     );
   }
   return lDependencies;
 }
 
 /**
- * @typedef {"acorn" | "swc" | "tsc"} TranspilerType
- */
-/**
  *
  * @param {IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
- * @returns {TranspilerType}
+ * @returns {import("../../types/options.mjs").ParserType}
  */
-function determineTranspiler(pCruiseOptions, pFileName) {
-  let lTranspiler = "acorn";
+function determineParser(pCruiseOptions, pFileName) {
+  let lParser = "acorn";
 
   if (shouldUseSwc(pCruiseOptions, pFileName)) {
-    lTranspiler = "swc";
+    lParser = "swc";
   } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
-    lTranspiler = "tsc";
+    lParser = "tsc";
   }
 
-  return lTranspiler;
+  return lParser;
 }
 
 /**
@@ -73,7 +70,7 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
-    switch (determineTranspiler(pCruiseOptions, pFileName)) {
+    switch (determineParser(pCruiseOptions, pFileName)) {
       case "swc":
         lDependencies = extractWithSwc(pCruiseOptions, pFileName);
         break;
@@ -85,7 +82,7 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
         );
         break;
       default:
-        lDependencies = extractWithAcorn(
+        lDependencies = extractFromAcornAST(
           pCruiseOptions,
           pFileName,
           pTranspileOptions,
