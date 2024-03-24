@@ -1,65 +1,51 @@
 import { join, extname, dirname } from "node:path";
 import uniqBy from "lodash/uniqBy.js";
-import resolve from "./resolve/index.mjs";
-import { extract as extractFromAcornAST } from "./acorn/extract.mjs";
+import { extract as acornExtract } from "./acorn/extract.mjs";
 import {
-  extract as extractFromTscAST,
-  shouldUse as shouldUseTsc,
+  extract as tscExtract,
+  shouldUse as tscShouldUse,
 } from "./tsc/extract.mjs";
+import {
+  extract as swcExtract,
+  shouldUse as swcShouldUse,
+} from "./swc/extract.mjs";
+import resolve from "./resolve/index.mjs";
 import {
   detectPreCompilationNess,
   extractModuleAttributes,
 } from "./helpers.mjs";
-import {
-  extract as extractFromSwcAST,
-  shouldUse as shouldUseSwc,
-} from "./swc/extract.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
-function extractWithSwc(pCruiseOptions, pFileName) {
-  return extractFromSwcAST(pCruiseOptions, pFileName).filter(
-    ({ moduleSystem }) => pCruiseOptions.moduleSystems.includes(moduleSystem),
-  );
-}
-
 function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
-  let lDependencies = extractFromTscAST(
-    pCruiseOptions,
-    pFileName,
-    pTranspileOptions,
-  ).filter(({ moduleSystem }) =>
-    pCruiseOptions.moduleSystems.includes(moduleSystem),
-  );
+  let lDependencies = tscExtract(pCruiseOptions, pFileName, pTranspileOptions);
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     lDependencies = detectPreCompilationNess(
       lDependencies,
-      extractFromAcornAST(pCruiseOptions, pFileName, pTranspileOptions),
+      acornExtract(pCruiseOptions, pFileName, pTranspileOptions),
     );
   }
   return lDependencies;
 }
 
 /**
- *
  * @param {IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
- * @returns {import("../../types/options.mjs").ParserType}
+ * @returns {(IStrictCruiseOptions, string, any) => import("../../types/cruise-result.mjs").IDependency[]}
  */
-function determineParser(pCruiseOptions, pFileName) {
-  let lParser = "acorn";
+function determineExtractionFunction(pCruiseOptions, pFileName) {
+  let lExtractionFunction = acornExtract;
 
-  if (shouldUseSwc(pCruiseOptions, pFileName)) {
-    lParser = "swc";
-  } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
-    lParser = "tsc";
+  if (swcShouldUse(pCruiseOptions, pFileName)) {
+    lExtractionFunction = swcExtract;
+  } else if (tscShouldUse(pCruiseOptions, pFileName)) {
+    lExtractionFunction = extractWithTsc;
   }
 
-  return lParser;
+  return lExtractionFunction;
 }
 
 /**
- *
  * @param {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
@@ -70,24 +56,15 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
-    switch (determineParser(pCruiseOptions, pFileName)) {
-      case "swc":
-        lDependencies = extractWithSwc(pCruiseOptions, pFileName);
-        break;
-      case "tsc":
-        lDependencies = extractWithTsc(
-          pCruiseOptions,
-          pFileName,
-          pTranspileOptions,
-        );
-        break;
-      default:
-        lDependencies = extractFromAcornAST(
-          pCruiseOptions,
-          pFileName,
-          pTranspileOptions,
-        );
-    }
+    const lExtractionFunction = determineExtractionFunction(
+      pCruiseOptions,
+      pFileName,
+    );
+    lDependencies = lExtractionFunction(
+      pCruiseOptions,
+      pFileName,
+      pTranspileOptions,
+    );
   }
 
   return lDependencies.map((pDependency) => ({

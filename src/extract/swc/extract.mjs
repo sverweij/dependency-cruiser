@@ -9,9 +9,12 @@ export function shouldUse({ parser }, pFileName) {
   );
 }
 
-export function extract({ baseDir, exoticRequireStrings }, pFileName) {
+export function extract(
+  { baseDir, exoticRequireStrings, moduleSystems },
+  pFileName,
+) {
   return extractSwcDeps(
     parse.getASTCached(join(baseDir, pFileName)),
     exoticRequireStrings,
-  );
+  ).filter(({ moduleSystem }) => moduleSystems.includes(moduleSystem));
 }
