@@ -21,3 +21,11 @@ export function extract(
     exoticRequireStrings,
   ).filter(({ moduleSystem }) => moduleSystems.includes(moduleSystem));
 }
+
+export function getStats({ baseDir }, pFileName, pTranspileOptions) {
+  const lAST = parse.getASTCached(join(baseDir, pFileName), pTranspileOptions);
+  return {
+    topLevelStatementCount: lAST?.statements?.length || 0,
+    size: lAST?.end || 0,
+  };
+}

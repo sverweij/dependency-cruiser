@@ -24,3 +24,11 @@ export function extract(
 
   return lDependencies;
 }
+
+export function getStats({ baseDir }, pFileName, pTranspileOptions) {
+  const lAST = parse.getASTCached(join(baseDir, pFileName), pTranspileOptions);
+  return {
+    topLevelStatementCount: lAST?.body?.length || 0,
+    size: lAST?.end || 0,
+  };
+}
