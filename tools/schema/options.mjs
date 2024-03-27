@@ -368,8 +368,9 @@ export default {
         parser: {
           type: "string",
           description:
-            "overrides the parser dependency-cruiser will use - EXPERIMENTAL",
-          enum: ["acorn", "swc", "tsc"],
+            "overrides the parser dependency-cruiser will use - EXPERIMENTAL. The " +
+            "use of 'swc' as a parser here is deprecated.",
+          enum: ["acorn", "tsc", "swc"],
         },
         exoticRequireStrings: {
           type: "array",
@@ -409,6 +410,14 @@ export default {
           description:
             "When this flag is set to true, dependency-cruiser will calculate (stability) metrics " +
             "for all modules and folders. Defaults to false.",
+        },
+        experimentalStats: {
+          type: "boolean",
+          description:
+            "When this flag is set to true, dependency-cruiser will calculate some " +
+            "stats for each module. Has some performance impact. EXPERIMENTAL " +
+            "Will be renamed when the 'experimental' state is lifted." +
+            "Defaults to false.",
         },
         baseDir: {
           type: "string",
