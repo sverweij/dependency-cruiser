@@ -153,6 +153,24 @@ export interface IModule {
    */
   instability?: number;
   /**
+   * a collection of stats that are not part of the regular output, but
+   * might be interesting for further analysis
+   */
+  experimentalStats?: {
+    /**
+     * the number of top level statements in the module. Attribute only
+     * available when the cruise was executed with the 'experimentalStats
+     * option set to 'true'.
+     */
+    topLevelStatementCount?: number;
+    /**
+     * the size of the module in bytes. Attribute only available when
+     * the cruise was executed with the 'experimentalStats' option set to
+     * 'true'.
+     */
+    size?: number;
+  };
+  /**
    * checksum of the contents of the module. This attribute is currently only
    * available when the cruise was executed with caching and the cache strategy
    * is 'content'.
