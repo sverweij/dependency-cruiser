@@ -103,6 +103,21 @@
           "type": "number",
           "description": "number of dependents/ (number of dependents + number of dependencies)A measure for how stable the module is; ranging between 0 (completely stable module) to 1 (completely instable module). Derived from Uncle Bob's instability metric - but applied to a single module instead of to a group of them. This attribute is only present when dependency-cruiser was asked to calculate metrics."
         },
+        "experimentalStats": {
+          "type": "object",
+          "description": "a collection of stats that are not part of the regular output, but might be interesting for further analysis",
+          "additionalProperties": false,
+          "properties": {
+            "topLevelStatementCount": {
+              "type": "number",
+              "description": "the number of top level statements in the module. Attribute only available when the cruise was executed with the 'experimentalStats' option set to 'true'."
+            },
+            "size": {
+              "type": "number",
+              "description": "the size of the module in bytes. Attribute only available when the cruise was executed with the 'experimentalStats' option set to 'true'."
+            }
+          }
+        },
         "checksum": {
           "type": "string",
           "description": "checksum of the contents of the module. This attribute is currently only available when the cruise was executed with caching and the cache strategy is 'content'."
@@ -1085,8 +1100,8 @@
         },
         "parser": {
           "type": "string",
-          "description": "overrides the parser dependency-cruiser will use - EXPERIMENTAL",
-          "enum": ["acorn", "swc", "tsc"]
+          "description": "overrides the parser dependency-cruiser will use - EXPERIMENTAL. The use of 'swc' as a parser here is deprecated.",
+          "enum": ["acorn", "tsc", "swc"]
         },
         "exoticRequireStrings": {
           "type": "array",
@@ -1114,6 +1129,7 @@
           "type": "boolean",
           "description": "When this flag is set to true, dependency-cruiser will calculate (stability) metrics for all modules and folders. Defaults to false."
         },
+        "experimentalStats": { "type": "boolean" },
         "baseDir": {
           "type": "string",
           "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."

@@ -369,6 +369,14 @@ export interface ICruiseOptions {
   metrics?: boolean;
 
   /**
+   * When this flag is set to true, dependency-cruiser will calculate some " +
+   * stats for each module. Has some performance impact. EXPERIMENTAL " +
+   * Will be renamed when the 'experimental' state is lifted." +
+   * Defaults to false.",*
+   */
+  experimentalStats?: boolean;
+
+  /**
    * - false: don't use caching.
    * - true or empty object: use caching with the default settings
    * - a string (deprecated): cache in the folder denoted by the string & use the

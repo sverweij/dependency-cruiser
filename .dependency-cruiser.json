@@ -390,7 +390,9 @@
     // },
     /* Experimental: the parser to use
      */
-    "parser": "tsc", // acorn, swc, tsc
+    "parser": "tsc", // acorn, tsc
+    "experimentalStats": true,
+    "metrics": true,
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
       "aliasFields": ["browser"],
