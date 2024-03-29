@@ -3,6 +3,7 @@ import extractES6Deps from "./extract-es6-deps.mjs";
 import extractCommonJSDeps from "./extract-cjs-deps.mjs";
 import extractAMDDeps from "./extract-amd-deps.mjs";
 import parse from "./parse.mjs";
+import extractStats from "./extract-stats.mjs";
 
 export function extract(
   { baseDir, moduleSystems, exoticRequireStrings },
@@ -27,8 +28,5 @@ export function extract(
 
 export function getStats({ baseDir }, pFileName, pTranspileOptions) {
   const lAST = parse.getASTCached(join(baseDir, pFileName), pTranspileOptions);
-  return {
-    topLevelStatementCount: lAST?.body?.length || 0,
-    size: lAST?.end || 0,
-  };
+  return extractStats(lAST);
 }
