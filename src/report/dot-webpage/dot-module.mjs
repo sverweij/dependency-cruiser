@@ -24,7 +24,7 @@ function convert(pDot, pOptions) {
     },
   );
   if (status === 0) {
-    return stdout.toString("binary");
+    return stdout.toString("utf8");
   } else if (error) {
     throw error;
   } else {
@@ -61,8 +61,6 @@ function isAvailable(pOptions) {
  * @returns {IReporterOutput}
  */
 export default function dotWebpage(pResults, pDotWebpageReporterOptions) {
-  const { output } = dotModuleReporter(pResults, pDotWebpageReporterOptions);
-
   if (!isAvailable(pDotWebpageReporterOptions)) {
     throw new Error(
       "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't " +
@@ -70,6 +68,7 @@ export default function dotWebpage(pResults, pDotWebpageReporterOptions) {
         "instruction on how to get it on your system: https://www.graphviz.org/download/",
     );
   }
+  const { output } = dotModuleReporter(pResults, pDotWebpageReporterOptions);
   return {
     output: wrapInHTML(convert(output, pDotWebpageReporterOptions)),
     exitCode: 0,
