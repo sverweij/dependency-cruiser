@@ -139,6 +139,10 @@ export default {
       attributes: { arrowhead: "onormal", penwidth: "1.0" },
     },
     {
+      criteria: { dependencyTypes: ["export"] },
+      attributes: { arrowhead: "inv" },
+    },
+    {
       criteria: { dependencyTypes: "core" },
       attributes: { style: "dashed", penwidth: "1.0" },
     },
