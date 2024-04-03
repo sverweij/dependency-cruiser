@@ -139,4 +139,14 @@ describe("[E] main.format - format", () => {
     // without includeOnly it'd be 53
     equal(lJSONResult.modules.length, 33);
   });
+
+  it("uses the 'dot' reporter section for the 'x-dot-webpage' output type", async () => {
+    const lResult = await format(cruiseResult, {
+      outputType: "x-dot-webpage",
+    });
+    ok(lResult.output.includes("<html"));
+    // the color ffcccc doesn't occur in the default dot theme, but it does
+    // occur in the one we have in the cruiseResult
+    ok(lResult.output.includes('fill="#ffcccc"'));
+  });
 });

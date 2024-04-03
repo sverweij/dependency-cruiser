@@ -38,6 +38,10 @@ function reSummarizeResults(pResult, pFormatOptions) {
   };
 }
 
+function getReporterSection(pOutputType) {
+  return pOutputType === "x-dot-webpage" ? "dot" : pOutputType;
+}
+
 /**
  *
  * @param {import("../..).ICruiseResult} pResult result of a previous run of dependency-cruiser
@@ -47,8 +51,9 @@ function reSummarizeResults(pResult, pFormatOptions) {
 export default async function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = await report.getReporter(pFormatOptions.outputType);
   const lReportOptions =
-    pResult.summary.optionsUsed?.reporterOptions?.[pFormatOptions.outputType] ??
-    {};
+    pResult.summary.optionsUsed?.reporterOptions?.[
+      getReporterSection(pFormatOptions.outputType)
+    ] ?? {};
 
   return lReportFunction(
     reSummarizeResults(pResult, pFormatOptions),

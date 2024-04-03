@@ -50,6 +50,8 @@ jobs:
           node-version: ${{matrix.node-version}}
       - name: install & build
         run: |
+          sudo apt-get update
+          sudo apt-get install graphviz
           npm install
           npm run build
       - name: lint (run on node ${{env.NODE_LATEST}} only)
@@ -104,6 +106,7 @@ jobs:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
         run: |
+          choco install graphviz
           npm install
           npm run build
       - run: npm run depcruise
