@@ -47,7 +47,6 @@ function extractRecursive(
       [
         {
           source: pFileName,
-          dependencies: lDependencies,
           ...(pCruiseOptions.experimentalStats
             ? {
                 experimentalStats: extractStats(
@@ -57,6 +56,7 @@ function extractRecursive(
                 ),
               }
             : {}),
+          dependencies: lDependencies,
         },
       ],
     );
