@@ -1,0 +1,52 @@
+[
+  {
+    "source": "test/extract/__mocks__/with-stats/aap.mjs",
+    "experimentalStats": {
+      "topLevelStatementCount": 1,
+      "size": 36
+    },
+    "dependencies": [
+      {
+        "module": "./noot.mjs",
+        "moduleSystem": "es6",
+        "dynamic": false,
+        "exoticallyRequired": false,
+        "dependencyTypes": ["local", "import"],
+        "resolved": "test/extract/__mocks__/with-stats/noot.mjs",
+        "coreModule": false,
+        "followable": true,
+        "couldNotResolve": false,
+        "matchesDoNotFollow": false
+      }
+    ]
+  },
+  {
+    "source": "test/extract/__mocks__/with-stats/noot.mjs",
+    "experimentalStats": {
+      "topLevelStatementCount": 2,
+      "size": 56
+    },
+    "dependencies": [
+      {
+        "module": "./mies.mjs",
+        "moduleSystem": "es6",
+        "dynamic": false,
+        "exoticallyRequired": false,
+        "dependencyTypes": ["local", "import"],
+        "resolved": "test/extract/__mocks__/with-stats/mies.mjs",
+        "coreModule": false,
+        "followable": true,
+        "couldNotResolve": false,
+        "matchesDoNotFollow": false
+      }
+    ]
+  },
+  {
+    "source": "test/extract/__mocks__/with-stats/mies.mjs",
+    "experimentalStats": {
+      "topLevelStatementCount": 1,
+      "size": 20
+    },
+    "dependencies": []
+  }
+]
