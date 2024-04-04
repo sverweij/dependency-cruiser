@@ -33,6 +33,7 @@
   - [`builtInModules`: influencing what to consider built-in (/ core) modules](#builtinmodules-influencing-what-to-consider-built-in--core-modules)
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
+  - [experimentalStats](#experimentalstats)
   - [parser](#parser)
   - [cache](#cache)
   - [progress](#progress)
@@ -1642,13 +1643,29 @@ Dependency-cruiser will automatically determine whether it needs to derive depen
 However, if you want to force them to be derived, you can switch this variable
 to `true`.
 
+### `experimentalStats`
+
+When set to true dependency-cruiser will emit an `experimentalStats` object
+in the result for each module. This feature is not yet used by any of the
+reporters dependency-cruiser ships with. The feature is also _experimental_
+which means it might disappear or change in the future.
+
 ### `parser`
 
 With this _EXPERIMENTAL_ feature you can specify which parser you want to use
 as the primary parser: the `acorn` one, which handles all things javascript
-(commonjs, es-modules, jsx), or one of two parser that can in addition parse
-typescript; microsoft's `tsc` or the faster and smaller (but slightly less
-feature rich) `swc`.
+(commonjs, es-modules, jsx), or microsoft's `tsc` that can in addition parse
+typescript. At this time it's still possible to pass `swc` here, but that value
+is deprecated and will be removed in a future version.
+
+```javascript
+{
+  // ...
+  options: {
+    parser: "tsc";
+  }
+}
+```
 
 `swc` and `tsc` only work when the compilers (respectively `@swc/core` and
 `typescript`) are installed in the same spot as dependency-cruiser is. They're
