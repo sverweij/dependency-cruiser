@@ -104,6 +104,7 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     pOldOptions.tsPreCompilationDeps === pNewOptions.tsPreCompilationDeps &&
     pOldOptions.preserveSymlinks === pNewOptions.preserveSymlinks &&
     pOldOptions.combinedDependencies === pNewOptions.combinedDependencies &&
+    pOldOptions.experimentalStats === pNewOptions.experimentalStats &&
     metricsIsCompatible(pOldOptions.metrics, pNewOptions.metrics) &&
     // includeOnly suffers from a backwards compatibility disease
     includeOnlyIsCompatible(pOldOptions.includeOnly, pNewOptions.includeOnly) &&
