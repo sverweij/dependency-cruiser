@@ -38,6 +38,40 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
       ],
     );
   });
+  it("no dependencies no dependents, but experimentalStats", () => {
+    deepEqual(
+      aggregateToFolders([
+        {
+          source: "src/folder/index.js",
+          experimentalStats: { size: 481, topLevelStatementCount: 42 },
+          dependencies: [],
+          dependents: [],
+        },
+      ]).sort(compareFolders),
+      [
+        {
+          name: "src",
+          experimentalStats: { size: 481, topLevelStatementCount: 42 },
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          experimentalStats: { size: 481, topLevelStatementCount: 42 },
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+      ],
+    );
+  });
 
   it("dependencies no dependents", () => {
     deepEqual(
@@ -76,6 +110,63 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
         },
         {
           name: "src/other-folder",
+          moduleCount: 1,
+          dependents: [
+            {
+              name: "src/folder",
+            },
+          ],
+          dependencies: [],
+          afferentCouplings: 1,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+      ],
+    );
+  });
+
+  it("sums experimental stats", () => {
+    deepEqual(
+      aggregateToFolders([
+        {
+          source: "src/folder/index.js",
+          experimentalStats: { size: 101, topLevelStatementCount: 10 },
+          dependencies: [{ resolved: "src/other-folder/utensil.js" }],
+          dependents: [],
+        },
+        {
+          source: "src/other-folder/utensils.js",
+          experimentalStats: { size: 10000, topLevelStatementCount: 1000 },
+          dependencies: [],
+          dependents: ["src/folder/index.js"],
+        },
+      ]).sort(compareFolders),
+      [
+        {
+          name: "src",
+          experimentalStats: { size: 10101, topLevelStatementCount: 1010 },
+          moduleCount: 2,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          experimentalStats: { size: 101, topLevelStatementCount: 10 },
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [
+            { name: "src/other-folder", instability: 0, circular: false },
+          ],
+          afferentCouplings: 0,
+          efferentCouplings: 1,
+          instability: 1,
+        },
+        {
+          name: "src/other-folder",
+          experimentalStats: { size: 10000, topLevelStatementCount: 1000 },
           moduleCount: 1,
           dependents: [
             {
