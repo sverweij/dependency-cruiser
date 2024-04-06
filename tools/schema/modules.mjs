@@ -2,6 +2,7 @@ import dependencies from "./dependencies.mjs";
 import dependencyType from "./dependency-type.mjs";
 import ruleSummary from "./rule-summary.mjs";
 import miniDependency from "./mini-dependency-type.mjs";
+import experimentalStats from "./experimental-stats-type.mjs";
 
 export default {
   definitions: {
@@ -139,27 +140,7 @@ export default {
             "was asked to calculate metrics.",
         },
         experimentalStats: {
-          type: "object",
-          description:
-            "a collection of stats that are not part of the regular output, but " +
-            "might be interesting for further analysis",
-          additionalProperties: false,
-          properties: {
-            topLevelStatementCount: {
-              type: "number",
-              description:
-                "the number of top level statements in the module. Attribute only " +
-                "available when the cruise was executed with the 'experimentalStats' " +
-                "option set to 'true'.",
-            },
-            size: {
-              type: "number",
-              description:
-                "the size of the module in bytes. Attribute only available when " +
-                "the cruise was executed with the 'experimentalStats' option set to " +
-                "'true'.",
-            },
-          },
+          $ref: "#/definitions/ExperimentalStatsType",
         },
         checksum: {
           type: "string",
@@ -170,6 +151,7 @@ export default {
         },
       },
     },
+
     ReachableType: {
       type: "object",
       required: ["value", "asDefinedInRule", "matchedFrom"],
@@ -235,5 +217,6 @@ export default {
     ...ruleSummary.definitions,
     ...dependencyType.definitions,
     ...miniDependency.definitions,
+    ...experimentalStats.definitions,
   },
 };
