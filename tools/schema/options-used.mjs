@@ -61,6 +61,9 @@ export default {
         collapse: {
           type: "string",
         },
+        experimentalStats: {
+          type: "boolean",
+        },
         // for backwards compatibility reasons can be either a string, false
         // or an object in the input, but for internal processing and output
         // always put as an object

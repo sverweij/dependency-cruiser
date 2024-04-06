@@ -1,9 +1,10 @@
 import extractDependencies from "./extract-dependencies.mjs";
+import extractStats from "./extract-stats.mjs";
 import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
 import { bus } from "#utl/bus.mjs";
 
-/* eslint max-params:0 */
+/* eslint max-params:0 , max-lines-per-function:0*/
 function extractRecursive(
   pFileName,
   pCruiseOptions,
@@ -46,6 +47,15 @@ function extractRecursive(
       [
         {
           source: pFileName,
+          ...(pCruiseOptions.experimentalStats
+            ? {
+                experimentalStats: extractStats(
+                  pFileName,
+                  pCruiseOptions,
+                  pTranspileOptions,
+                ),
+              }
+            : {}),
           dependencies: lDependencies,
         },
       ],

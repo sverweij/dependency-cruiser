@@ -138,6 +138,29 @@ export default {
             "to a group of them. This attribute is only present when dependency-cruiser " +
             "was asked to calculate metrics.",
         },
+        experimentalStats: {
+          type: "object",
+          description:
+            "a collection of stats that are not part of the regular output, but " +
+            "might be interesting for further analysis",
+          additionalProperties: false,
+          properties: {
+            topLevelStatementCount: {
+              type: "number",
+              description:
+                "the number of top level statements in the module. Attribute only " +
+                "available when the cruise was executed with the 'experimentalStats' " +
+                "option set to 'true'.",
+            },
+            size: {
+              type: "number",
+              description:
+                "the size of the module in bytes. Attribute only available when " +
+                "the cruise was executed with the 'experimentalStats' option set to " +
+                "'true'.",
+            },
+          },
+        },
         checksum: {
           type: "string",
           description:

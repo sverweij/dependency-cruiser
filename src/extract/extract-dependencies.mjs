@@ -36,10 +36,10 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
 function determineExtractionFunction(pCruiseOptions, pFileName) {
   let lExtractionFunction = acornExtract;
 
-  if (swcShouldUse(pCruiseOptions, pFileName)) {
-    lExtractionFunction = swcExtract;
-  } else if (tscShouldUse(pCruiseOptions, pFileName)) {
+  if (tscShouldUse(pCruiseOptions, pFileName)) {
     lExtractionFunction = extractWithTsc;
+  } else if (swcShouldUse(pCruiseOptions, pFileName)) {
+    lExtractionFunction = swcExtract;
   }
 
   return lExtractionFunction;
