@@ -21,6 +21,14 @@ function upsertCouplings(pAllDependents, pNewDependents) {
   });
 }
 
+/**
+ *
+ * @param {any} pAllMetrics
+ * @param {import("../../../../types/cruise-result.d.mts").IModule} pModule
+ * @param {string} pDirname
+ * @returns {any}
+ */
+
 function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
   pAllMetrics[pDirname] = pAllMetrics[pDirname] || {
     dependencies: {},
@@ -39,6 +47,19 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
     ),
   );
   pAllMetrics[pDirname].moduleCount += 1;
+
+  if (pModule.experimentalStats) {
+    if (!Object.hasOwn(pAllMetrics[pDirname], "experimentalStats")) {
+      pAllMetrics[pDirname].experimentalStats = {
+        size: 0,
+        topLevelStatementCount: 0,
+      };
+    }
+    pAllMetrics[pDirname].experimentalStats.size +=
+      pModule.experimentalStats.size;
+    pAllMetrics[pDirname].experimentalStats.topLevelStatementCount +=
+      pModule.experimentalStats.topLevelStatementCount;
+  }
   return pAllMetrics;
 }
 

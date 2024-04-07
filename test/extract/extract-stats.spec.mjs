@@ -2,7 +2,7 @@ import { deepEqual, throws } from "node:assert/strict";
 import extractStats from "#extract/extract-stats.mjs";
 
 describe("[I] extract/extractStats", () => {
-  it("should return stats  for a given file containing valid javascript", () => {
+  it("should return stats for a given file containing valid javascript", () => {
     const lStats = extractStats(
       "extract-stats-testfile.mjs",
       { baseDir: "./test/extract/__mocks__" },
@@ -14,7 +14,7 @@ describe("[I] extract/extractStats", () => {
     });
   });
 
-  it("should return stats  for a given file containing valid typescript", () => {
+  it("should return stats for a given file containing valid typescript", () => {
     const lStats = extractStats(
       "extract-stats-testfile.mts",
       { baseDir: "./test/extract/tsc/__mocks__", tsPreCompilationDeps: true },
@@ -23,6 +23,18 @@ describe("[I] extract/extractStats", () => {
     deepEqual(lStats, {
       topLevelStatementCount: 5,
       size: 1045,
+    });
+  });
+
+  it("should return stats for an empty file", () => {
+    const lStats = extractStats(
+      "extract-stats-nop.mjs",
+      { baseDir: "./test/extract/__mocks__" },
+      { extension: ".mjs" },
+    );
+    deepEqual(lStats, {
+      size: 0,
+      topLevelStatementCount: 0,
     });
   });
 

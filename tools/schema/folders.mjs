@@ -1,5 +1,6 @@
 import ruleSummary from "./rule-summary.mjs";
 import miniDependency from "./mini-dependency-type.mjs";
+import experimentalStats from "./experimental-stats-type.mjs";
 
 export default {
   definitions: {
@@ -121,9 +122,13 @@ export default {
             "should be larger than the folders it depends on'. Only present when " +
             "dependency-cruiser was asked to calculate it.",
         },
+        experimentalStats: {
+          $ref: "#/definitions/ExperimentalStatsType",
+        },
       },
     },
     ...ruleSummary.definitions,
     ...miniDependency.definitions,
+    ...experimentalStats.definitions,
   },
 };

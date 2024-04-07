@@ -94,3 +94,18 @@ export interface IMiniDependency {
    */
   dependencyTypes: DependencyType[];
 }
+
+export type ExperimentalStatsType = {
+  /**
+   * the number of top level statements in the module. Attribute only
+   * available when the cruise was executed with the 'experimentalStats
+   * option set to 'true'.
+   */
+  topLevelStatementCount: number;
+  /**
+   * the size of the module in bytes. Attribute only available when
+   * the cruise was executed with the 'experimentalStats' option set to
+   * 'true'.
+   */
+  size: number;
+};

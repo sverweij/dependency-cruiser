@@ -5,6 +5,7 @@ import type {
   DependencyType,
   ModuleSystemType,
   ProtocolType,
+  ExperimentalStatsType,
 } from "./shared-types.mjs";
 import type { IViolation } from "./violations.mjs";
 import type { IRuleSummary } from "./rule-summary.mjs";
@@ -156,20 +157,7 @@ export interface IModule {
    * a collection of stats that are not part of the regular output, but
    * might be interesting for further analysis
    */
-  experimentalStats?: {
-    /**
-     * the number of top level statements in the module. Attribute only
-     * available when the cruise was executed with the 'experimentalStats
-     * option set to 'true'.
-     */
-    topLevelStatementCount?: number;
-    /**
-     * the size of the module in bytes. Attribute only available when
-     * the cruise was executed with the 'experimentalStats' option set to
-     * 'true'.
-     */
-    size?: number;
-  };
+  experimentalStats?: ExperimentalStatsType;
   /**
    * checksum of the contents of the module. This attribute is currently only
    * available when the cruise was executed with caching and the cache strategy
@@ -473,6 +461,11 @@ export interface IFolder {
    * dependency-cruiser was asked to calculate it.,
    */
   instability?: number;
+  /**
+   * a collection of stats that are not part of the regular output, but
+   * might be interesting for further analysis
+   */
+  experimentalStats?: ExperimentalStatsType;
 }
 
 export type * from "./violations.mjs";
