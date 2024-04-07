@@ -28,7 +28,32 @@ describe("[I] report/metrics", () => {
     });
 
     equal(lResult.exitCode, 0);
-    match(lResult.output, /src       1      1      1    50%/);
+    match(lResult.output, /folder  src        1      1      1    50%/);
+  });
+
+  it("emits folder metrics and experimental stats when they're in the input", () => {
+    const lResult = metrics({
+      modules: [],
+      folders: [
+        {
+          name: "src",
+          moduleCount: 1,
+          afferentCouplings: 1,
+          efferentCouplings: 1,
+          instability: 0.5,
+          experimentalStats: {
+            size: 100,
+            topLevelStatementCount: 300,
+          },
+        },
+      ],
+    });
+
+    equal(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      /folder  src        1      1      1    50%         100    300/,
+    );
   });
 
   it("does not emit folder metrics when asked to hide them", () => {
@@ -81,7 +106,7 @@ describe("[I] report/metrics", () => {
     match(
       lResult.output,
       new RegExp(
-        `src/mies.js      1      1      1    50%${EOL}src/aap.js       1      1      3    25%${EOL}src/noot.js`,
+        `module  src/mies.js       1      1      1    50%${EOL}module  src/aap.js        1      1      3    25%${EOL}module  src/noot.js`,
       ),
     );
   });
@@ -118,7 +143,142 @@ describe("[I] report/metrics", () => {
     match(
       lResult.output,
       new RegExp(
-        `src/aap.js       1      1      3    25%${EOL}src/mies.js      1      1      1    50%${EOL}src/noot.js`,
+        `module  src/aap.js        1      1      3    25%${EOL}module  src/mies.js       1      1      1    50%${EOL}module  src/noot.js`,
+      ),
+    );
+  });
+
+  it("emits module metrics (sorted by size, where size is not available)", () => {
+    const lResult = metrics(
+      {
+        modules: [
+          {
+            source: "src/noot.js",
+            dependencies: [],
+            dependents: ["two"],
+            instability: 0,
+          },
+          {
+            source: "src/aap.js",
+            dependencies: ["one", "two", "three"],
+            dependents: ["four"],
+            instability: 0.25,
+          },
+          {
+            source: "src/mies.js",
+            dependencies: ["one"],
+            dependents: ["two"],
+            instability: 0.5,
+          },
+        ],
+        folders: [],
+      },
+      { orderBy: "size" },
+    );
+
+    equal(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      new RegExp(
+        `module  src/aap.js        1      1      3    25%${EOL}module  src/mies.js       1      1      1    50%${EOL}module  src/noot.js`,
+      ),
+    );
+  });
+
+  it("emits module metrics + experimental stats when they're in the input", () => {
+    const lResult = metrics(
+      {
+        modules: [
+          {
+            source: "src/noot.js",
+            dependencies: [],
+            dependents: ["two"],
+            instability: 0,
+            experimentalStats: {
+              size: 1,
+              topLevelStatementCount: 3,
+            },
+          },
+          {
+            source: "src/aap.js",
+            dependencies: ["one", "two", "three"],
+            dependents: ["four"],
+            instability: 0.25,
+            experimentalStats: {
+              size: 10,
+              topLevelStatementCount: 30,
+            },
+          },
+          {
+            source: "src/mies.js",
+            dependencies: ["one"],
+            dependents: ["two"],
+            instability: 0.5,
+            experimentalStats: {
+              size: 100,
+              topLevelStatementCount: 300,
+            },
+          },
+        ],
+        folders: [],
+      },
+      { orderBy: "name" },
+    );
+
+    equal(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      new RegExp(
+        `module  src/aap.js        1      1      3    25%          10     30${EOL}module  src/mies.js       1      1      1    50%         100    300${EOL}module  src/noot.js`,
+      ),
+    );
+  });
+
+  it("emits module metrics + experimental stats when they're in the input & doesn't barf when one of them isn't a number", () => {
+    const lResult = metrics(
+      {
+        modules: [
+          {
+            source: "src/noot.js",
+            dependencies: [],
+            dependents: ["two"],
+            instability: 0,
+            experimentalStats: {
+              size: 1,
+              topLevelStatementCount: 3,
+            },
+          },
+          {
+            source: "src/aap.js",
+            dependencies: ["one", "two", "three"],
+            dependents: ["four"],
+            instability: 0.25,
+            experimentalStats: {
+              size: null,
+              topLevelStatementCount: 30,
+            },
+          },
+          {
+            source: "src/mies.js",
+            dependencies: ["one"],
+            dependents: ["two"],
+            instability: 0.5,
+            experimentalStats: {
+              size: 100,
+              topLevelStatementCount: 300,
+            },
+          },
+        ],
+        folders: [],
+      },
+      { orderBy: "name" },
+    );
+
+    equal(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      new RegExp(
+        `module  src/aap.js        1      1      3    25%                 30${EOL}module  src/mies.js       1      1      1    50%         100    300${EOL}module  src/noot.js`,
       ),
     );
   });

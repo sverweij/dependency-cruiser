@@ -1311,7 +1311,9 @@
             "moduleCount",
             "afferentCouplings",
             "efferentCouplings",
-            "name"
+            "name",
+            "size",
+            "topLevelStatementCount"
           ],
           "description": "By what attribute (in addition to the names of the folders/ modules) to order the metrics by. Defaults to 'instability'."
         },

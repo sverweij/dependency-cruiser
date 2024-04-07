@@ -1,7 +1,7 @@
 {
   "checkCoverage": true,
   "statements": 99.89,
-  "branches": 98.41,
+  "branches": 98.44,
   "functions": 100,
   "lines": 99.89,
   "exclude": [
