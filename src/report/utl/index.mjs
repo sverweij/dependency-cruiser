@@ -7,6 +7,9 @@ export const formatPercentage = new Intl.NumberFormat(undefined, {
   style: "percent",
 }).format;
 
+// eslint-disable-next-line no-undefined
+export const formatNumber = new Intl.NumberFormat(undefined).format;
+
 export function formatViolation(
   pViolation,
   pViolationType2Formatter,

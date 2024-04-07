@@ -55,6 +55,8 @@ export default {
             "afferentCouplings",
             "efferentCouplings",
             "name",
+            "size",
+            "topLevelStatementCount",
           ],
           description:
             "By what attribute (in addition to the names of the folders/ modules) " +
