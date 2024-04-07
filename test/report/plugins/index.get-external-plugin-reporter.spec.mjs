@@ -82,8 +82,8 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       summary: { totalCruised: 0 },
     });
 
-    equal(hasOwnProperty.call(lResults, "output"), true);
-    equal(hasOwnProperty.call(lResults, "exitCode"), true);
+    equal(Object.hasOwn(lResults, "output"), true);
+    equal(Object.hasOwn(lResults, "exitCode"), true);
     equal(lResults.exitCode, 0);
   });
 });
