@@ -22,6 +22,7 @@
   - [summarising/ `collapsePattern` (`dot` and `archi` reporters)](#summarising-collapsepattern-dot-and-archi-reporters)
   - [filtering (`dot`, `ddot` and `archi` reporters)](#filtering-dot-ddot-and-archi-reporters)
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
+  - [metrics](#metrics)
   - [markdown](#markdown)
   - [mermaid](#mermaid)
   - [text](#text)
@@ -1226,7 +1227,7 @@ module.exports = {
 }
 ```
 
-### options for the _metrics_ reporter
+### metrics
 
 By default the metrics reporter emits instability metrics for all modules and
 folders, ordered by instability (descending). If you want to see less, or
@@ -1239,7 +1240,8 @@ use a different sort order, you can tweak that with the metrics reporterOptions.
 - `orderBy`: with this you can specify how the metrics reporter orders its output.
   Defaults to `instability`.
   Possible values `name`, `moduleCount`, `afferentCouplings`, `efferentCouplings`,
-  `instability`.
+  `instability`, `size` and `topLevelStatementCount` (the latter two only
+  available when the `experimentalStats` option is set to `true`).
 
 ```javascript
 module.exports = {
