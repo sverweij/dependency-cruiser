@@ -34,6 +34,27 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
       to: {},
     });
   });
+  it("also finds 'required' types rules, provided they're named", () => {
+    const lRuleSetWithRequiredRule = {
+      ...lRuleSet,
+      required: [
+        {
+          name: "some-required-rule",
+          comment: "heide does hok schapen",
+          severity: "warn",
+          from: {},
+          to: {},
+        },
+      ],
+    };
+    deepEqual(findRuleByName(lRuleSetWithRequiredRule, "some-required-rule"), {
+      name: "some-required-rule",
+      comment: "heide does hok schapen",
+      severity: "warn",
+      from: {},
+      to: {},
+    });
+  });
 });
 
 describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {

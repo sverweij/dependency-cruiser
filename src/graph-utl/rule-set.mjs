@@ -10,9 +10,10 @@
  * @return {import("../../types/rule-set").IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
 export function findRuleByName(pRuleSet, pName) {
-  return (pRuleSet?.forbidden ?? []).find(
-    (pForbiddenRule) => pForbiddenRule.name === pName,
+  const lNamedRules = (pRuleSet?.forbidden ?? []).concat(
+    pRuleSet?.required ?? [],
   );
+  return lNamedRules.find((pRule) => pRule.name === pName);
 }
 
 function ruleHasALicenseLikeAttribute(pRule) {
