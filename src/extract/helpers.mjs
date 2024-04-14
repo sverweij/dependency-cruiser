@@ -28,8 +28,6 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
   );
 }
 
-/* eslint-disable security/detect-object-injection */
-
 /**
  * Given a module string returns in an object
  * - the module name
@@ -42,25 +40,22 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
  * (if there's a default node API that does this I'm all ears)
  *
  * @param {string} pString
- * @returns {any}
+ * @returns {{module:string; protocol?:string; mimeType?:string}}
  */
 export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex
-    /^((node:|file:|data:)(([^,]+),)?)(.+)$/,
+    /^(?:(?<protocol>node:|file:|data:)(?:(?<mimeType>[^,]+),)?)(?<module>.+)$/,
   );
-  const lProtocolPosition = 2;
-  const lMimeTypePosition = 4;
-  const lModulePosition = 5;
 
-  if (lModuleAttributes) {
-    lReturnValue.module = lModuleAttributes[lModulePosition];
-    if (lModuleAttributes[lProtocolPosition]) {
-      lReturnValue.protocol = lModuleAttributes[lProtocolPosition];
+  if (lModuleAttributes?.groups) {
+    lReturnValue.module = lModuleAttributes?.groups.module;
+    if (lModuleAttributes?.groups?.protocol) {
+      lReturnValue.protocol = lModuleAttributes.groups.protocol;
     }
-    if (lModuleAttributes[lMimeTypePosition]) {
-      lReturnValue.mimeType = lModuleAttributes[lMimeTypePosition];
+    if (lModuleAttributes?.groups?.mimeType) {
+      lReturnValue.mimeType = lModuleAttributes.groups.mimeType;
     }
   }
 

@@ -1,6 +1,6 @@
 import { normalizeREProperties, normalizeToREAsString } from "../helpers.mjs";
 
-const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
+const VALID_SEVERITIES = /^(?:error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
 const DEFAULT_RULE = "unnamed";
 const DEFAULT_SCOPE = "module";
@@ -8,9 +8,7 @@ const DEFAULT_SCOPE = "module";
 function normalizeSeverity(pSeverity) {
   const lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
 
-  return Boolean(lSeverity.match(VALID_SEVERITIES))
-    ? lSeverity
-    : DEFAULT_SEVERITY;
+  return VALID_SEVERITIES.test(lSeverity) ? lSeverity : DEFAULT_SEVERITY;
 }
 /**
  *

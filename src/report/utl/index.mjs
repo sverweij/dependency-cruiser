@@ -33,7 +33,7 @@ export function formatViolation(
  * @return {string} prefix and filename concatenated
  */
 function smartURIConcat(pPrefix, pSource) {
-  if (pPrefix.match(PROTOCOL_PREFIX_RE)) {
+  if (PROTOCOL_PREFIX_RE.test(pPrefix)) {
     return `${pPrefix}${pSource}`;
   } else {
     return join(pPrefix, pSource);

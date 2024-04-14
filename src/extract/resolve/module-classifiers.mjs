@@ -106,7 +106,7 @@ function isSubpathImport(pModuleName, pManifest) {
       const lMatchREasString = pImportLHS.replace(/\*/g, ".+");
       // eslint-disable-next-line security/detect-non-literal-regexp
       const lMatchRE = new RegExp(`^${lMatchREasString}$`);
-      return Boolean(pModuleName.match(lMatchRE));
+      return lMatchRE.test(pModuleName);
     })
   );
 }
@@ -217,7 +217,7 @@ function matchesTSConfigPaths(pModuleName, pPaths) {
   return Object.keys(pPaths).some((pPathLHS) => {
     // eslint-disable-next-line security/detect-non-literal-regexp
     const lMatchRE = new RegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`);
-    return Boolean(pModuleName.match(lMatchRE));
+    return lMatchRE.test(pModuleName);
   });
 }
 

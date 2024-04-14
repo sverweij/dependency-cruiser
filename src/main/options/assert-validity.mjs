@@ -2,7 +2,7 @@ import merge from "lodash/merge.js";
 import safeRegex from "safe-regex";
 import report from "#report/index.mjs";
 
-const MODULE_SYSTEM_LIST_RE = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
+const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
 
 function assertModuleSystemsValid(pModuleSystems) {

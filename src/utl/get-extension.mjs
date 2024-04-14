@@ -1,7 +1,7 @@
 // @ts-check
 import { extname } from "node:path";
 
-const EXTENSION_RE = /(?<extension>((\.d\.(c|m)?ts)|\.coffee\.md)$)/;
+const EXTENSION_RE = /(?<extension>(?:(?:\.d\.(?:c|m)?ts)|\.coffee\.md)$)/;
 
 /**
  * Returns the extension of the given file name path.

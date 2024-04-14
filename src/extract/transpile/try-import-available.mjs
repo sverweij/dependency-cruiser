@@ -5,7 +5,7 @@ import { coerce, satisfies } from "semver";
 const require = createRequire(import.meta.url);
 
 const PACKAGE_RE = "[^/]+";
-const SCOPED_PACKAGE_RE = "@[^/]+(/[^/]+)";
+const SCOPED_PACKAGE_RE = "@[^/]+(?:/[^/]+)";
 const ROOT_MODULE_RE = new RegExp(`^(${SCOPED_PACKAGE_RE}|${PACKAGE_RE})`, "g");
 
 function extractRootModuleName(pModuleName) {
@@ -17,10 +17,9 @@ function getVersion(pModuleName) {
   // (yo, you're import-ing 'json'!), but that's _experimental_, printing scary
   // messages to stderr so: ¯\_(ツ)_/¯
   // eslint-disable-next-line import/no-dynamic-require, security/detect-non-literal-require
-  const lManifest = require(path.join(
-    extractRootModuleName(pModuleName),
-    "package.json"
-  ));
+  const lManifest = require(
+    path.join(extractRootModuleName(pModuleName), "package.json"),
+  );
   return lManifest.version;
 }
 
