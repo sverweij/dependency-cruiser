@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_LATEST: 21.x
+  NODE_LATEST: 22.x
   PLATFORM: ubuntu-latest
   CI: true
   # the LANG (used by the Intl API, which we use for some of the number
@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x, 21.x]
+        node-version: [18.x, 22.x]
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:

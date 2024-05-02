@@ -11,7 +11,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     const fixture = await import(
       "./__mocks__/rules.sub-not-allowed-error.json",
       {
-        assert: { type: "json" },
+        with: { type: "json" },
       }
     );
     deepEqual(
@@ -22,7 +22,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
 
   it("a rule set with an extends returns that rule set, extending the mentioned base", async () => {
     const mergedFixture = await import("./__mocks__/extends/merged.json", {
-      assert: { type: "json" },
+      with: { type: "json" },
     });
     deepEqual(
       await loadConfig(join(mockDirectory, "extends/extending.json")),
@@ -51,7 +51,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     const mergedArrayOneFixture = await import(
       "./__mocks__/extends/merged-array-1.json",
       {
-        assert: { type: "json" },
+        with: { type: "json" },
       }
     );
     deepEqual(
@@ -66,7 +66,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     const mergedArrayTwoFixture = await import(
       "./__mocks__/extends/merged-array-2.json",
       {
-        assert: { type: "json" },
+        with: { type: "json" },
       }
     );
     deepEqual(
