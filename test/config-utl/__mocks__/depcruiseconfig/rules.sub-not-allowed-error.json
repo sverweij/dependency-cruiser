@@ -1,0 +1,21 @@
+{
+    "allowed": [
+        {
+            "from": {
+            },
+            "to": {
+            }
+        }
+    ],
+    "forbidden": [
+        {
+            "name": "sub-not-allowed",
+            "severity": "error",
+            "from": {
+            },
+            "to": {
+                "path": "sub"
+            }
+        }
+    ]
+}

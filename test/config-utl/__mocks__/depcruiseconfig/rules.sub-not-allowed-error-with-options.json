@@ -1,0 +1,30 @@
+{
+  "allowed": [
+    {
+      "from": {},
+      "to": {}
+    }
+  ],
+  "forbidden": [
+    {
+      "name": "sub-not-allowed",
+      "severity": "error",
+      "from": {},
+      "to": {
+        "path": "sub"
+      }
+    }
+  ],
+  "options": {
+    "includeOnly": ["src"],
+    "reporterOptions": {
+      "text": {
+        "highlightFocused": true
+      }
+    },
+    "cache": {
+      "strategy": "metadata",
+      "compress": true
+    }
+  }
+}
