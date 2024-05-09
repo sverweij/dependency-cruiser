@@ -47,7 +47,7 @@ async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
  * @param {string} pConfigFileName
  * @param {Set?} pAlreadyVisited
  * @param {string?} pBaseDirectory
- * @return {import('../../../types/options.mjs').ICruiseOptions} dependency-cruiser options
+ * @return {import('../../../types/configuration.mjs').IConfiguration} dependency-cruiser options
  * @throws {Error} when the config is not valid (/ does not exist/ isn't readable)
  */
 export default async function extractDepcruiseConfig(

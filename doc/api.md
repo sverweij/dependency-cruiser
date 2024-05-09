@@ -17,15 +17,17 @@ and between modules in folder. Here's an example that cruises all files in
 the `src` folder and prints the dependencies to stdout:
 
 ```typescript
-import { cruise, IReporterOutput } from "dependency-cruiser";
+import { cruise, type IReporterOutput } from "dependency-cruiser";
 
 const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = ["src"];
 try {
-    const cruiseResult: IReporterOutput = await cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE);
-} catch(error)
-
-
-console.dir(cruiseResult.output, { depth: 10 });
+  const cruiseResult: IReporterOutput = await cruise(
+    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
+  );
+  console.dir(cruiseResult.output, { depth: 10 });
+} catch (pError) {
+  console.error(pError);
+}
 ```
 
 You might notice a few things when you do this
@@ -52,11 +54,11 @@ const cruiseOptions: ICruiseOptions = {
 try {
   const cruiseResult: IReporterOutput = await cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
-    cruiseOptions
+    cruiseOptions,
   );
   console.dir(cruiseResult.output, { depth: 10 });
-} catch (error) {
-  console.error(error);
+} catch (pError) {
+  console.error(pError);
 }
 ```
 
@@ -86,51 +88,56 @@ try {
   const cruiseResult: IReporterOutput = await cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
     cruiseOptions,
-    webpackResolveOptions
+    webpackResolveOptions,
   );
   console.dir(cruiseResult.output, { depth: 10 });
-} catch (error) {
-  console.error(error);
+} catch (pError) {
+  console.error(pError);
 }
 ```
 
 ### Utility functions
 
 ```typescript
-import { cruise, ICruiseOptions, IReporterOutput } from "dependency-cruiser";
-import extractDepcruiseConfig from "dependency-cruiser/config-utl/extract-depcruise-config";
+import {
+  IResolveOptions,
+  cruise,
+  type ICruiseOptions,
+  type IReporterOutput,
+} from "dependency-cruiser";
+import extractDepcruiseOptions from "dependency-cruiser/config-utl/extract-depcruise-options";
 import extractTSConfig from "dependency-cruiser/config-utl/extract-ts-config";
 import extractWebpackResolveConfig from "dependency-cruiser/config-utl/extract-webpack-resolve-config";
-import extractBabelConfig from "dependency-cruiser/config-utl/extract-babel-config";
+// import extractBabelConfig from "dependency-cruiser/config-utl/extract-babel-config";
 
 try {
-  const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE = ["src"];
+  const lArrayOfFilesAndDirectoriesToCruise = ["src"];
 
-  const depcruiseConfig: ICruiseOptions = await extractDepcruiseConfig(
-    "./.dependency-cruiser.js"
+  const depcruiseOptions: ICruiseOptions = await extractDepcruiseOptions(
+    "./.dependency-cruiser.json",
   );
-  const webpackResolveConfig = await extractWebpackResolveConfig(
-    "./webpack.conf.js"
-  );
+  const lWebpackResolveConfig = (await extractWebpackResolveConfig(
+    "./webpack.config.js",
+  )) as IResolveOptions;
   const tsConfig = extractTSConfig("./tsconfig.json");
   // const babelConfig = await extractBabelConfig("./babel.conf.json");
 
   const cruiseResult: IReporterOutput = await cruise(
-    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
-    depcruiseConfig,
-    webpackResolveConfig,
+    lArrayOfFilesAndDirectoriesToCruise,
+    depcruiseOptions,
+    lWebpackResolveConfig,
     //   change since v13: in stead of passing the tsConfig directly, like so:
     // tsconfig
     //   you now pass it into an object that also supports other types of
     //   compiler options, like those for babel:
     {
-      tsConfig: tsConfig,
+      tsConfig,
       // babelConfig: babelConfig,
-    }
+    },
   );
 
   console.dir(cruiseResult.output, { depth: 10 });
-} catch (error) {
-  console.error(error);
+} catch (pError) {
+  console.error(pError);
 }
 ```

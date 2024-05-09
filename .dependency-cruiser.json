@@ -229,7 +229,12 @@
       "from": { "path": "^bin/" },
       "to": {
         "path": "^src",
-        "pathNot": ["[.]schema[.]json$", "[.]d[.]ts$", "^src/report/"],
+        "pathNot": [
+          "[.]schema[.]json$",
+          "[.]d[.]ts$",
+          "^src/report/",
+          "^src/config-utl/extract-depcruise-options.mjs$"
+        ],
         "reachable": false
       }
     },

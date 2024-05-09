@@ -90,7 +90,7 @@ export interface ITranspileOptions {
 export function cruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
-  pResolveOptions?: IResolveOptions,
+  pResolveOptions?: Partial<IResolveOptions>,
   pTranspileOptions?: ITranspileOptions,
 ): Promise<IReporterOutput>;
 

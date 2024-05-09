@@ -95,6 +95,10 @@
       "types": "./types/config-utl/extract-depcruise-config.d.mts",
       "import": "./src/config-utl/extract-depcruise-config/index.mjs"
     },
+    "./config-utl/extract-depcruise-options": {
+      "types": "./types/config-utl/extract-depcruise-options.d.mts",
+      "import": "./src/config-utl/extract-depcruise-options.mjs"
+    },
     "./config-utl/extract-ts-config": {
       "types": "./types/config-utl/extract-ts-config.d.mts",
       "import": "./src/config-utl/extract-ts-config.mjs"
