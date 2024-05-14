@@ -858,7 +858,7 @@ The criteria are evaluated top to bottom:
 - Criteria in the configuration file take precedence over the default ones.
 
 For an extensive example you can have a look at the default theme dependency-cruiser
-ships with - [default-theme.js](../src/report/dot/default-theme.js).
+ships with - [default-theme.mjs](../src/report/dot/default-theme.mjs).
 
 #### theming examples
 
