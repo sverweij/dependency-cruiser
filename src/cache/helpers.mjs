@@ -3,7 +3,6 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { extname } from "node:path";
 import memoize from "memoize";
-// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**

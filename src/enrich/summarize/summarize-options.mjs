@@ -9,6 +9,7 @@ const SHAREABLE_OPTIONS = [
   "exclude",
   "exoticallyRequired",
   "exoticRequireStrings",
+  "experimentalStats",
   "externalModuleResolutionStrategy",
   "focus",
   "focusDepth",
