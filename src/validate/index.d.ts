@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-import */
 import type {
   IDependency,
   IFolder,
@@ -37,7 +36,7 @@ export interface IValidationResult {
  */
 export function module(
   pRuleSet: IFlattenedRuleSet,
-  pModule: IModule
+  pModule: IModule,
 ): IValidationResult;
 
 /**
@@ -47,7 +46,7 @@ export function module(
 export function dependency(
   pRuleSet: IFlattenedRuleSet,
   pFrom: IModule,
-  pTo: IDependency
+  pTo: IDependency,
 ): IValidationResult;
 
 /**
@@ -57,5 +56,5 @@ export function dependency(
 export function folder(
   pRuleSet: IFlattenedRuleSet,
   pFromFolder: IFolder,
-  pToFolder: IFolderDependency
+  pToFolder: IFolderDependency,
 ): IValidationResult;
