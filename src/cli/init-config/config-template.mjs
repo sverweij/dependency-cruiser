@@ -136,7 +136,7 @@ module.exports = {
       severity: 'error',
       from: {},
       to: {
-        path: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
+        path: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$'
       }
     },
     {
@@ -150,7 +150,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '{{sourceLocationRE}}',
-        pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
+        pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$'
       },
       to: {
         dependencyTypes: [
@@ -216,12 +216,6 @@ module.exports = {
     */
     // includeOnly : [''],
 
-    /* dependency-cruiser will include modules matching against the focus
-       regular expression in its output, as well as their direct neighbours 
-       (dependencies and dependents)
-    */
-    // focus : '',
-
     /* List of module systems to cruise.
        When left out dependency-cruiser will fall back to the list of _all_
        module systems it knows of. It's the default because it's the safe option
@@ -234,7 +228,7 @@ module.exports = {
     
     // moduleSystems: ['cjs', 'es6'],
 
-    /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
+    /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/main/'
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),
      */
@@ -277,15 +271,14 @@ module.exports = {
        to dependency-cruiser's current working directory. When not provided defaults
        to './webpack.conf.js'.
 
-       The (optional) \`env\` and \`arguments\` attributes contain the parameters to be passed if
-       your webpack config is a function and takes them (see webpack documentation
-       for details)
+       The (optional) \`env\` and \`arguments\` attributes contain the parameters
+       to be passed if your webpack config is a function and takes them (see 
+        webpack documentation for details)
      */
     {{webpackConfigAttribute}}
 
     /* Babel config ('.babelrc', '.babelrc.json', '.babelrc.json5', ...) to use
-      for compilation (and whatever other naughty things babel plugins do to
-      source code).
+      for compilation
      */
     {{babelConfigAttribute}}
 
@@ -313,10 +306,9 @@ module.exports = {
       /*
          The extensions, by default are the same as the ones dependency-cruiser
          can access (run \`npx depcruise --info\` to see which ones that are in
-         _your_ environment. If that list is larger than you need you can pass
+         _your_ environment). If that list is larger than you need you can pass
          the extensions you actually use (e.g. [".js", ".jsx"]). This can speed
-         up the most expensive step in dependency cruising (module resolution)
-          quite a bit.
+         up module resolution, which is the most expensive step.
        */
       {{extensionsAttribute}}
       /* What to consider a 'main' field in package.json */
@@ -324,10 +316,10 @@ module.exports = {
       /*
          A list of alias fields in package.jsons
          See [this specification](https://github.com/defunctzombie/package-browser-field-spec) and
-         the [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
-         documentation in the webpack docs. 
+         the webpack [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
+         documentation 
          
-         Defaults to an empty array (don't use any alias fields).
+         Defaults to an empty array (= don't use alias fields).
        */
       // aliasFields: ["browser"],
     },
@@ -336,21 +328,19 @@ module.exports = {
         /* pattern of modules that can be consolidated in the detailed
            graphical dependency graph. The default pattern in this configuration
            collapses everything in node_modules to one folder deep so you see
-           the external modules, but not the innards your app depends upon.
+           the external modules, but their innards.
          */
         collapsePattern: 'node_modules/(?:@[^/]+/[^/]+|[^/]+)',
 
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
-           don't worry - dependency-cruiser will fall back to the default one.
+           dependency-cruiser falls back to a built-in one.
         */
         // theme: {
         //   graph: {
-        //     /* splines: "ortho" will give you straight lines at the expense of
-        //                 being slow to render on big graphs
-        //        splines: "true" will give you bezier curves which are faster
-        //                 but might not look as nice
+        //     /* splines: "ortho" gives straight lines, but is slow on big graphs
+        //        splines: "true" gives bezier curves (fast, not as nice as ortho)
         //    */
         //     splines: "true"
         //   },
@@ -364,14 +354,11 @@ module.exports = {
         */
         collapsePattern: '^(?:packages|src|lib(s?)|app(s?)|bin|test(s?)|spec(s?))/[^/]+|node_modules/(?:@[^/]+/[^/]+|[^/]+)',
 
-        /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
-           for details and some examples. If you don't specify a theme
-           for 'archi' dependency-cruiser will use the one specified in the
+        /* Options to tweak the appearance of your graph. If you don't specify a
+           theme for 'archi' dependency-cruiser will use the one specified in the
            dot section above and otherwise use the default one.
          */
-        // theme: {
-        // },
+        // theme: { },
       },
       "text": {
         "highlightFocused": true

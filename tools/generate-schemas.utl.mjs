@@ -2,6 +2,7 @@
 import { writeFileSync } from "node:fs";
 import { extname } from "node:path";
 import prettier from "prettier";
+import babel from "@babel/core";
 
 function stripAttribute(pObject, pAttribute) {
   const lObject = structuredClone(pObject);
@@ -19,23 +20,23 @@ function stripAttribute(pObject, pAttribute) {
 function emitConsolidatedSchema(pOutputFileName) {
   if (extname(pOutputFileName) === ".json") {
     return async (pJSONSchemaObject) => {
-      const lData = await prettier.format(
+      const lFormattedJSON = await prettier.format(
         JSON.stringify(pJSONSchemaObject.default),
         {
           parser: "json",
         },
       );
-      writeFileSync(pOutputFileName, lData, "utf8");
+      writeFileSync(pOutputFileName, lFormattedJSON, "utf8");
     };
   }
-  return (pJSONSchemaObject) => {
-    writeFileSync(
-      pOutputFileName,
-      `/* generated - don't edit */export default ${JSON.stringify(
-        stripAttribute(pJSONSchemaObject.default, "description"),
-      )}`,
-      "utf8",
-    );
+  return async (pJSONSchemaObject) => {
+    const lUnMinified = `/* generated - don't edit */export default ${JSON.stringify(
+      stripAttribute(pJSONSchemaObject.default, "description"),
+    )}`;
+    // to strip quoted attributes {"thing": 481} => {thing: 481}
+    const lFormatted = await prettier.format(lUnMinified, { parser: "babel" });
+    const lMinified = babel.transformSync(lFormatted, { minified: true }).code;
+    writeFileSync(pOutputFileName, lMinified, "utf8");
   };
 }
 

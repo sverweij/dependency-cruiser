@@ -127,6 +127,7 @@
     "configs/plugins/",
     "src",
     "!src/**/*.json",
+    "!src/**/*.ts",
     "!src/**/*.md",
     "!**/*.DS_Store",
     "types/**/*.d.mts",
