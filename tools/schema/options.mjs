@@ -416,7 +416,7 @@ export default {
           description:
             "When this flag is set to true, dependency-cruiser will calculate some " +
             "stats for each module. Has some performance impact. EXPERIMENTAL " +
-            "Will be renamed when the 'experimental' state is lifted." +
+            "Will be renamed when the 'experimental' state is lifted. " +
             "Defaults to false.",
         },
         baseDir: {
