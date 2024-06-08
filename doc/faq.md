@@ -377,7 +377,7 @@ situations without workarounds).
 
 </details>
 
-### Q: Does this work with Vue as well?
+### Q: Does this work with Vue?
 
 **A**: Yes.
 
@@ -397,7 +397,7 @@ manually.
 
 </details>
 
-### Q: Does this work with Svelte as well?
+### Q: Does this work with Svelte?
 
 **A**: Yes.
 
@@ -599,6 +599,19 @@ export default {
 
 > Newer versions of the `--init` generator automatically do this for you.
 
+</details>
+
+### Q: Does dependency-cruiser support granularity finer than modules (e.g. classes, functions, variables, ...)?
+
+**A**: No. It's unlikely to grow that in the future either.
+
+<details>
+<summary>Background</summary>
+dependency-cruiser focuses on dependencies between modules as the one thing to do
+well. Static analysis of classes, functions and methods and their dependencies
+is _very_ interesting to dive into, but it'd make dependency-cruiser a different
+tool altogether. Besides it's non-trivial to implement and labor intensive to 
+maintain both of which take time.
 </details>
 
 ## Expanding dependency-cruiser
