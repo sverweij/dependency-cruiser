@@ -173,7 +173,7 @@
     "lint:types:fix": "eslint --no-ignore --config types/.eslintrc.json --fix types/*.d.mts",
     "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' | jq '.type = \"module\"' > smaller-package.json && mv smaller-package.json package.json",
     "postpack": "git restore package.json",
-    "prepare": "husky install",
+    "prepare": "husky",
     "scm:push": "run-p --aggregate-output scm:push:*",
     "scm:push:bitbucket-mirror": "run-p --aggregate-output scm:push:bitbucket-mirror:*",
     "scm:push:bitbucket-mirror:commits": "git push bitbucket-mirror",
@@ -270,11 +270,11 @@
     "yarn": "1.22.22"
   },
   "overrides": {
-    "semver": "^7.6.1",
+    "semver": ">=7.6.2",
     "postcss": "^8.4.31"
   },
   "resolutions": {
-    "semver": "^7.6.1",
+    "semver": ">=7.6.2",
     "postcss": "^8.4.31"
   },
   "upem": {
