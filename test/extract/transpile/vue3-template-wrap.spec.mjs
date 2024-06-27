@@ -16,7 +16,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const wrap = proxyquire.load("#extract/transpile/vue-template-wrap.cjs", {
   // Force the tryRequire on "vue-template-compiler" to fail
   // so that we ensure we are using Vue 3 for this test
-  "semver-try-require": (pModuleName) =>
+  "#utl/try-require.cjs": (pModuleName) =>
     pModuleName === "vue-template-compiler"
       ? false
       : require("@vue/compiler-sfc"),

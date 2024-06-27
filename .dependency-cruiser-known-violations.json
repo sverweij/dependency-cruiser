@@ -1,5 +1,50 @@
 [
   {
+    "type": "dependency",
+    "from": "test/utl/try-import.spec.mjs",
+    "to": "test/utl/node_modules/beta/index.js",
+    "rule": {
+      "severity": "error",
+      "name": "no-non-package-json"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/utl/try-import.spec.mjs",
+    "to": "test/utl/node_modules/no-default-export/main.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "no-non-package-json"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/utl/try-import.spec.mjs",
+    "to": "test/utl/node_modules/rc/index.js",
+    "rule": {
+      "severity": "error",
+      "name": "no-non-package-json"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/utl/try-require.spec.cjs",
+    "to": "test/utl/node_modules/beta/index.js",
+    "rule": {
+      "severity": "error",
+      "name": "no-non-package-json"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/utl/try-require.spec.cjs",
+    "to": "test/utl/node_modules/rc/index.js",
+    "rule": {
+      "severity": "error",
+      "name": "no-non-package-json"
+    }
+  },
+  {
     "type": "module",
     "from": "src/graph-utl/consolidate-to-folder.mjs",
     "to": "src/graph-utl/consolidate-to-folder.mjs",
@@ -46,8 +91,8 @@
   },
   {
     "type": "module",
-    "from": "src/utl/array-util.mjs",
-    "to": "src/utl/array-util.mjs",
+    "from": "src/utl/extract-root-module-name.cjs",
+    "to": "src/utl/extract-root-module-name.cjs",
     "rule": {
       "severity": "info",
       "name": "utl-module-not-shared-enough"
@@ -57,6 +102,15 @@
     "type": "module",
     "from": "src/utl/find-all-files.mjs",
     "to": "src/utl/find-all-files.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "utl-module-not-shared-enough"
+    }
+  },
+  {
+    "type": "module",
+    "from": "src/utl/try-require.cjs",
+    "to": "src/utl/try-require.cjs",
     "rule": {
       "severity": "info",
       "name": "utl-module-not-shared-enough"

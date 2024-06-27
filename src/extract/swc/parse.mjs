@@ -1,5 +1,5 @@
-import tryImport from "semver-try-require";
 import memoize, { memoizeClear } from "memoize";
+import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 /** @type {import('@swc/core')} */

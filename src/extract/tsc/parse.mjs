@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
-import tryImport from "semver-try-require";
 import memoize, { memoizeClear } from "memoize";
 import transpile from "../transpile/index.mjs";
+import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 import getExtension from "#utl/get-extension.mjs";
 

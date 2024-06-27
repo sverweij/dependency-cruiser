@@ -59,6 +59,7 @@
     "electrovir (https://github.com/electrovir)",
     "fusheng (https://github.com/lin-hun)"
   ],
+  "type": "commonjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -224,7 +225,6 @@
     "rechoir": "^0.8.0",
     "safe-regex": "2.1.1",
     "semver": "^7.6.2",
-    "semver-try-require": "7.0.0",
     "teamcity-service-messages": "0.1.14",
     "tsconfig-paths-webpack-plugin": "4.1.0",
     "watskeburt": "4.0.2",

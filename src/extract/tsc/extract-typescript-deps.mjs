@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
-import tryImport from "semver-try-require";
+import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 /** @type {import("typescript")} */
