@@ -36,7 +36,14 @@
     {
       "name": "not-to-unresolvable",
       "comment": "This module tried to depend on something that can't be resolved to disk. Revise yer code",
-      "from": {},
+      "from": {
+        "pathNot": [
+          // those import 'local node_modules' which, on e.g. yarn berry are not
+          // resolvable. Still ok, though, as for the (test) purpose & under e.g.
+          // npm they still work 100% ok
+          "^test/utl/(?:try-require[.]spec[.]cjs|try-import[.]spec[.]mjs)$"
+        ]
+      },
       "to": {
         "couldNotResolve": true,
         "exoticallyRequired": false
