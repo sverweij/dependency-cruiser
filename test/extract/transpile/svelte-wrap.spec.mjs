@@ -11,15 +11,12 @@ describe("[I] svelte transpiler", () => {
     equal(wrap.isAvailable(), true);
   });
   [
-    ["ts", (pSource) => pSource],
     [
-      "js",
+      "ts",
       (pSource) =>
-        pSource.replace(
-          'import "./Header.svelte";',
-          'import Header from "./Header.svelte";',
-        ),
+        pSource.replace('import Header from "./Header.svelte";\n', ""),
     ],
+    ["js", (pSource) => pSource],
   ].forEach(([variant, transformExpected]) => {
     it(`'transpiles' svelte with "<script lang='${variant}'>"'`, async () => {
       const lSource = readFileSync(
@@ -30,7 +27,7 @@ describe("[I] svelte transpiler", () => {
       const lExpected = await normalizeSource(
         transformExpected(
           readFileSync(
-            "./test/extract/transpile/__fixtures__/svelte.js",
+            "./test/extract/transpile/__fixtures__/svelte-too.js",
             "utf8",
           ),
         ),

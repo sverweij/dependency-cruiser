@@ -16,6 +16,7 @@ import {
 } from "svelte/internal";
 
 import "./page.css";
+import Header from "./Header.svelte";
 
 function create_fragment(ctx) {
   let article;
