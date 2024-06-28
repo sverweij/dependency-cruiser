@@ -1,6 +1,6 @@
 /* eslint-disable no-inline-comments */
 /* eslint-disable max-classes-per-file */
-import tryImport from "semver-try-require";
+import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 /** @type {import('@swc/core/Visitor')} */

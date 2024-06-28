@@ -1,6 +1,6 @@
 const { EOL } = require("node:os");
 const isEmpty = require("lodash/isEmpty");
-const tryRequire = require("semver-try-require");
+const tryRequire = require("#utl/try-require.cjs");
 const meta = require("#meta.cjs");
 
 /*
