@@ -120,7 +120,7 @@ function report(pResults, pLong) {
   );
 
   if (lNonIgnorableViolations.length === 0) {
-    return `${EOL}${chalk.green("√")} no dependency violations found (${
+    return `${EOL}${chalk.green("✔")} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised

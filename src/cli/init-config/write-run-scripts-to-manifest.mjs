@@ -135,7 +135,7 @@ function getSuccessMessage(pDestinationManifestFileName) {
         `\n${pScript.description}\n\n`
       }`;
     },
-    `  ${chalk.green("√")} Run scripts added to '${pDestinationManifestFileName}':\n`,
+    `  ${chalk.green("✔")} Run scripts added to '${pDestinationManifestFileName}':\n`,
   );
 }
 

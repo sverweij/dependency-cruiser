@@ -29,7 +29,7 @@ export default function writeConfig(
     try {
       writeFileSync(pFileName, pConfig);
       pOutStream.write(
-        `\n  ${chalk.green("√")} Successfully created '${pFileName}'\n\n`,
+        `\n  ${chalk.green("✔")} Successfully created '${pFileName}'\n\n`,
       );
       /* c8 ignore start */
     } catch (pError) {

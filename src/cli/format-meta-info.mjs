@@ -3,7 +3,7 @@ import chalk from "chalk";
 import { getAvailableTranspilers, allExtensions } from "#main/index.mjs";
 
 function bool2Symbol(pBool) {
-  return pBool ? chalk.green("√") : chalk.red("x");
+  return pBool ? chalk.green("✔") : chalk.red("x");
 }
 
 function formatTranspilers() {
