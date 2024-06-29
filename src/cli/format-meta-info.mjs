@@ -1,10 +1,9 @@
 import chalk from "chalk";
-import figures from "figures";
 
 import { getAvailableTranspilers, allExtensions } from "#main/index.mjs";
 
 function bool2Symbol(pBool) {
-  return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);
+  return pBool ? chalk.green("√") : chalk.red("x");
 }
 
 function formatTranspilers() {
@@ -30,7 +29,7 @@ export default function formatMetaInfo() {
   Supported:
 
     If you need a supported, but not enabled transpiler ('${chalk.red(
-      figures.cross,
+      "x",
     )}' below), just install
     it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
     will enable livescript support if it's installed in your project folder.
