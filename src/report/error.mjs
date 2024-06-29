@@ -1,6 +1,5 @@
 import { EOL } from "node:os";
 import chalk from "chalk";
-import figures from "figures";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
@@ -20,9 +19,7 @@ const EXTRA_PATH_INFORMATION_INDENT = 6;
 function formatMiniDependency(pMiniDependency) {
   return EOL.concat(
     wrapAndIndent(
-      pMiniDependency
-        .map(({ name }) => name)
-        .join(` ${figures.arrowRight} ${EOL}`),
+      pMiniDependency.map(({ name }) => name).join(` → ${EOL}`),
       EXTRA_PATH_INFORMATION_INDENT,
     ),
   );
@@ -33,19 +30,15 @@ function formatModuleViolation(pViolation) {
 }
 
 function formatDependencyViolation(pViolation) {
-  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
-    pViolation.to,
-  )}`;
+  return `${chalk.bold(pViolation.from)} → ${chalk.bold(pViolation.to)}`;
 }
 
 function formatCycleViolation(pViolation) {
-  return `${chalk.bold(pViolation.from)} ${
-    figures.arrowRight
-  } ${formatMiniDependency(pViolation.cycle)}`;
+  return `${chalk.bold(pViolation.from)} → ${formatMiniDependency(pViolation.cycle)}`;
 }
 
 function formatReachabilityViolation(pViolation) {
-  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
+  return `${chalk.bold(pViolation.from)} → ${chalk.bold(
     pViolation.to,
   )}${formatMiniDependency(pViolation.via)}`;
 }
@@ -53,9 +46,7 @@ function formatReachabilityViolation(pViolation) {
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)}${EOL}${wrapAndIndent(
     chalk.dim(
-      `instability: ${formatPercentage(pViolation.metrics.from.instability)} ${
-        figures.arrowRight
-      } ${formatPercentage(pViolation.metrics.to.instability)}`,
+      `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,
     ),
     EXTRA_PATH_INFORMATION_INDENT,
   )}`;
@@ -96,7 +87,7 @@ function sumMeta(pMeta) {
 }
 
 function formatSummary(pSummary) {
-  let lMessage = `${EOL}${figures.cross} ${sumMeta(
+  let lMessage = `${EOL}x ${sumMeta(
     pSummary,
   )} dependency violations (${formatMeta(pSummary)}). ${
     pSummary.totalCruised
@@ -117,7 +108,7 @@ function addExplanation(pRuleSet, pLong) {
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`,
+      `‼ ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`,
     );
   }
   return "";
@@ -129,9 +120,7 @@ function report(pResults, pLong) {
   );
 
   if (lNonIgnorableViolations.length === 0) {
-    return `${EOL}${chalk.green(
-      figures.tick,
-    )} no dependency violations found (${
+    return `${EOL}${chalk.green("√")} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised

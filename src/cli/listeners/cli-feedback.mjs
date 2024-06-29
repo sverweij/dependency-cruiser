@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import figures from "figures";
 import { SUMMARY } from "#utl/bus.mjs";
 
 const FULL_ON = 100;
@@ -7,8 +6,8 @@ const FULL_ON = 100;
 function normalizeParameters(pParameters) {
   return {
     barSize: 10,
-    block: figures.squareSmallFilled,
-    blank: figures.squareSmall,
+    block: "■",
+    blank: "□",
     ...(pParameters || {}),
   };
 }

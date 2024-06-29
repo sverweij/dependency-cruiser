@@ -1,4 +1,3 @@
-import figures from "figures";
 import chalk from "chalk";
 
 const DEFAULT_OPTIONS = {
@@ -41,9 +40,7 @@ function stringifyModule(pModule) {
 }
 
 function stringify(pFlatDependency) {
-  return `${stringifyModule(pFlatDependency.from)} ${
-    figures.arrowRight
-  } ${stringifyModule(pFlatDependency.to)}`;
+  return `${stringifyModule(pFlatDependency.from)} → ${stringifyModule(pFlatDependency.to)}`;
 }
 
 /**

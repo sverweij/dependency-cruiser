@@ -1,5 +1,4 @@
 import * as path from "node:path";
-import figures from "figures";
 
 const TEMPLATE = `
 <html>
@@ -74,9 +73,7 @@ function formatFileName(pFileName) {
   return `${path.dirname(pFileName)}/<b>${path.basename(pFileName)}</b>`;
 }
 function formatDependency(pFrom, pTo) {
-  return `${formatFileName(pFrom)} ${figures.arrowRight}</br>${formatFileName(
-    pTo
-  )}`;
+  return `${formatFileName(pFrom)} →</br>${formatFileName(pTo)}`;
 }
 
 /**
@@ -100,14 +97,14 @@ function render3DThing(pCruiseResult) {
           source: pCurrentModule.source,
           target: pDependency.resolved,
           label: formatDependency(pCurrentModule.source, pDependency.resolved),
-        }))
+        })),
       ),
-    []
+    [],
   );
 
   return TEMPLATE.replace(/@@NODES@@/g, JSON.stringify(lNodes)).replace(
     /@@LINKS@@/g,
-    JSON.stringify(lLinks)
+    JSON.stringify(lLinks),
   );
 }
 

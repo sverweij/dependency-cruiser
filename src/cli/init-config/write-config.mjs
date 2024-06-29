@@ -1,5 +1,4 @@
 import { writeFileSync } from "node:fs";
-import figures from "figures";
 import chalk from "chalk";
 import {
   fileExists,
@@ -30,9 +29,7 @@ export default function writeConfig(
     try {
       writeFileSync(pFileName, pConfig);
       pOutStream.write(
-        `\n  ${chalk.green(
-          figures.tick,
-        )} Successfully created '${pFileName}'\n\n`,
+        `\n  ${chalk.green("√")} Successfully created '${pFileName}'\n\n`,
       );
       /* c8 ignore start */
     } catch (pError) {

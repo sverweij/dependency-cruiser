@@ -1,6 +1,5 @@
 /* eslint-disable security/detect-object-injection */
 import { writeFileSync } from "node:fs";
-import figures from "figures";
 import chalk from "chalk";
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import { readManifest } from "./environment-helpers.mjs";
@@ -121,13 +120,11 @@ function getSuccessMessage(pDestinationManifestFileName) {
   return EXPERIMENTAL_SCRIPT_DOC.reduce(
     (pAll, pScript) => {
       return `${pAll}${
-        `\n    ${chalk.green(figures.play)} ${pScript.headline}` +
+        `\n    ${chalk.green("►")} ${pScript.headline}` +
         `\n${wrapAndIndent(`${pScript.description}`, lExplanationIndent)}\n\n`
       }`;
     },
-    `  ${chalk.green(
-      figures.tick,
-    )} Run scripts added to '${pDestinationManifestFileName}':\n`,
+    `  ${chalk.green("√")} Run scripts added to '${pDestinationManifestFileName}':\n`,
   );
 }
 
