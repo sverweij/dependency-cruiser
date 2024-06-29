@@ -233,7 +233,10 @@
       "name": "not-unreachable-from-cli",
       "severity": "error",
       "comment": "This module in the src/ tree is not reachable from the cli - and is likely dead wood. Either use it or remove it. If a module is flagged for which it's logical it is not reachable from cli (i.e. a configuration file), add it to the pathNot in the 'to' of this rule.",
-      "from": { "path": "^bin/" },
+      // the exceptions for "^src/report/": the reporters are dynamically loaded;
+      // they're like internal plugins, so there is a dependency but it's determined
+      // at runtime.
+      "from": { "path": ["^bin/", "^src/report/"] },
       "to": {
         "path": "^src",
         "pathNot": [

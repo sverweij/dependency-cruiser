@@ -1,10 +1,11 @@
+/* eslint-disable prefer-template */
 /* eslint-disable security/detect-object-injection */
 import { writeFileSync } from "node:fs";
+import { EOL } from "node:os";
 import chalk from "chalk";
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import { readManifest } from "./environment-helpers.mjs";
 import { folderNameArrayToRE } from "./utl.mjs";
-import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
 const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
 
@@ -13,37 +14,47 @@ const EXPERIMENTAL_SCRIPT_DOC = [
     name: "depcruise",
     headline: "npm run depcruise",
     description:
-      "validates against the rules in .dependency-cruiser.js and writes the outcome to stdout",
+      "      validates against the rules in .dependency-cruiser.js and writes the" +
+      EOL +
+      "      outcome to stdout",
   },
   {
     name: "depcruise:html",
     headline: "npm run depcruise:html",
     description:
-      "validates against the rules in .dependency-cruiser.js and writes it to 'dependency-violation-report.html' with a friendly layout",
+      "      validates against the rules in .dependency-cruiser.js and writes it to" +
+      EOL +
+      "      'dependency-violation-report.html' with a friendly layout",
   },
   {
     name: "depcruise:graph",
     headline: "npm run depcruise:graph",
     description:
-      "writes a detailed internal graph of your app to 'dependency-graph.html'",
+      "      writes a detailed internal graph of your app to 'dependency-graph.html'",
   },
   {
     name: "depcruise:graph:dev",
     headline: "npm run depcruise:graph:dev",
     description:
-      "opens a detailed internal graph of your app in your default browser (uses the 'browser' command line program)",
+      "      opens a detailed internal graph of your app in your default browser" +
+      EOL +
+      "      (uses the 'browser' command line program)",
   },
   {
     name: "depcruise:graph:archi",
     headline: "depcruise:graph:archi",
     description:
-      "writes a high-level internal graph of your app to 'high-level-dependency-graph.html",
+      "      writes a high-level internal graph of your app to" +
+      EOL +
+      "      'high-level-dependency-graph.html",
   },
   {
     name: "depcruise:focus",
     headline: "npm run depcruise:focus <regex>",
     description:
-      "writes all dependencies to and from modules matching the given <regex> to stdout - in simple text",
+      "      writes all dependencies to and from modules matching the given <regex>" +
+      EOL +
+      "      to stdout - in simple text",
   },
   // {
   //   name: "depcruise:text",
@@ -121,7 +132,7 @@ function getSuccessMessage(pDestinationManifestFileName) {
     (pAll, pScript) => {
       return `${pAll}${
         `\n    ${chalk.green("►")} ${pScript.headline}` +
-        `\n${wrapAndIndent(`${pScript.description}`, lExplanationIndent)}\n\n`
+        `\n${pScript.description}\n\n`
       }`;
     },
     `  ${chalk.green("√")} Run scripts added to '${pDestinationManifestFileName}':\n`,
