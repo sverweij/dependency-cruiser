@@ -1,11 +1,16 @@
-import indentString from "indent-string";
 import wrapAnsi from "wrap-ansi";
 
 const DEFAULT_INDENT = 4;
 
-export default function wrapAndIndent(pString, pIndent = DEFAULT_INDENT) {
-  const lDogmaticMaxConsoleWidth = 78;
-  const lMaxWidth = lDogmaticMaxConsoleWidth - pIndent;
+function indentString(pString, pCount) {
+  const lRegex = /^(?!\s*$)/gm;
 
-  return indentString(wrapAnsi(pString, lMaxWidth), pIndent);
+  return pString.replace(lRegex, " ".repeat(pCount));
+}
+
+export default function wrapAndIndent(pString, pCount = DEFAULT_INDENT) {
+  const lDogmaticMaxConsoleWidth = 78;
+  const lMaxWidth = lDogmaticMaxConsoleWidth - pCount;
+
+  return indentString(wrapAnsi(pString, lMaxWidth), pCount);
 }
