@@ -53,7 +53,15 @@ function vue3Transpile(pSource) {
 }
 
 function vue2Transpile(pSource) {
-  return vueTemplateCompiler.parseComponent(pSource)?.script?.content ?? "";
+  const lParsedComponent = vueTemplateCompiler.parseComponent(pSource);
+  const lScriptContent = lParsedComponent?.script?.content ?? "";
+  const lScriptSetupContent = lParsedComponent?.scriptSetup?.content ?? "";
+
+  if (lScriptContent && lScriptSetupContent) {
+    return lScriptContent + EOL + lScriptSetupContent;
+  }
+
+  return lScriptContent || lScriptSetupContent;
 }
 
 module.exports = {
