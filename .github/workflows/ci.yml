@@ -92,6 +92,7 @@ jobs:
   check-windows:
     env:
       PLATFORM: windows-latest
+      NO_COLOR: 1
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
