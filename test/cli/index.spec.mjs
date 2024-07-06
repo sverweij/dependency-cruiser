@@ -3,7 +3,6 @@ import { doesNotThrow, equal, throws, match } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
 import { join, posix as path } from "node:path";
-import chalk from "chalk";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
 import {
@@ -238,16 +237,12 @@ describe("[E] cli/index", () => {
   });
 
   describe("[E] specials", () => {
-    let lChalkLevel = chalk.level;
     const lOriginalStdoutWrite = process.stdout.write;
 
-    before("disable chalk coloring", () => {
-      chalk.level = 0;
-    });
-    after("enable chalk coloring again", () => {
-      chalk.level = lChalkLevel;
+    after("enable coloring again", () => {
       process.stdout.write = lOriginalStdoutWrite;
     });
+
     it("dependency-cruises multiple files and folders in one go", async () => {
       const lOutputFileName = "multiple-in-one-go.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);

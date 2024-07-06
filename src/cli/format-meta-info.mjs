@@ -1,9 +1,9 @@
-import chalk from "chalk";
+import pc from "picocolors";
 
 import { getAvailableTranspilers, allExtensions } from "#main/index.mjs";
 
 function bool2Symbol(pBool) {
-  return pBool ? chalk.green("✔") : chalk.red("x");
+  return pBool ? pc.green("✔") : pc.red("x");
 }
 
 function formatTranspilers() {
@@ -28,7 +28,7 @@ export default function formatMetaInfo() {
   return `
   Supported:
 
-    If you need a supported, but not enabled transpiler ('${chalk.red(
+    If you need a supported, but not enabled transpiler ('${pc.red(
       "x",
     )}' below), just install
     it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'

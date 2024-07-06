@@ -1,5 +1,5 @@
 import { writeFileSync } from "node:fs";
-import chalk from "chalk";
+import pc from "picocolors";
 import {
   fileExists,
   getDefaultConfigFileName,
@@ -29,7 +29,7 @@ export default function writeConfig(
     try {
       writeFileSync(pFileName, pConfig);
       pOutStream.write(
-        `\n  ${chalk.green("✔")} Successfully created '${pFileName}'\n\n`,
+        `\n  ${pc.green("✔")} Successfully created '${pFileName}'\n\n`,
       );
       /* c8 ignore start */
     } catch (pError) {

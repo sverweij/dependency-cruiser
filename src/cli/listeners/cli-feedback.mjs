@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import { SUMMARY } from "#utl/bus.mjs";
 
 const FULL_ON = 100;
@@ -17,7 +17,7 @@ function getPercentageBar(pPercentage, pParameters) {
   const lBlocks = Math.floor(lParameters.barSize * lPercentage);
   const lBlanks = lParameters.barSize - lBlocks;
 
-  return `${chalk.green(lParameters.block.repeat(lBlocks))}${chalk.green(
+  return `${pc.green(lParameters.block.repeat(lBlocks))}${pc.green(
     lParameters.blank.repeat(lBlanks),
   )} ${Math.round(FULL_ON * lPercentage)}%`;
 }

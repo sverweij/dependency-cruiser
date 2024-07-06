@@ -2,7 +2,6 @@
 /* eslint-disable no-magic-numbers */
 import { doesNotMatch, match, equal } from "node:assert/strict";
 import { EOL } from "node:os";
-import chalk from "chalk";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import dependencies from "./__mocks__/cjs-no-dependency-valid.mjs";
 import onlyWarningDependencies from "./__mocks__/err-only-warnings.mjs";
@@ -17,14 +16,6 @@ import unknownViolationType from "./__mocks__/unknown-violation-type.mjs";
 import render from "#report/error.mjs";
 
 describe("[I] report/error", () => {
-  let chalkLevel = chalk.level;
-
-  before("disable chalk coloring", () => {
-    chalk.level = 0;
-  });
-  after("put chalk enabled back to its original value", () => {
-    chalk.level = chalkLevel;
-  });
   it("says everything fine", () => {
     const lResult = render(okdeps);
 
