@@ -1,4 +1,3 @@
-import _reject from "lodash/reject.js";
 import uniqBy from "lodash/uniqBy.js";
 import compare from "./compare.mjs";
 
@@ -39,7 +38,10 @@ export default function consolidateModules(pModules) {
 
   while (lModules.length > 0) {
     lReturnValue.push(mergeModules(lModules[0].source, lModules));
-    lModules = _reject(lModules, { source: lModules[0].source });
+    lModules = lModules.filter(
+      // eslint-disable-next-line no-loop-func
+      (pModule) => pModule.source !== lModules[0].source,
+    );
   }
   return lReturnValue;
 }

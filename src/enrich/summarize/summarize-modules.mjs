@@ -1,4 +1,3 @@
-import flattenDeep from "lodash/flattenDeep.js";
 import uniqWith from "lodash/uniqWith.js";
 import isSameViolation from "./is-same-violation.mjs";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
@@ -72,18 +71,17 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
  * @return {any} an array of violations
  */
 function extractDependencyViolations(pModules, pRuleSet) {
-  return flattenDeep(
-    pModules
-      .map(cutNonTransgressions)
-      .filter((pModule) => pModule.dependencies.length > 0)
-      .map((pModule) =>
-        pModule.dependencies.map((pDependency) =>
-          pDependency.rules.map((pRule) =>
-            toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet),
-          ),
+  return pModules
+    .map(cutNonTransgressions)
+    .filter((pModule) => pModule.dependencies.length > 0)
+    .map((pModule) =>
+      pModule.dependencies.map((pDependency) =>
+        pDependency.rules.map((pRule) =>
+          toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet),
         ),
       ),
-  );
+    )
+    .flat(Infinity);
 }
 
 function toModuleViolationSummary(pRule, pModule, pRuleSet) {
