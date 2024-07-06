@@ -1,9 +1,32 @@
-import merge from "lodash/merge.js";
+/* eslint-disable security/detect-object-injection */
 import safeRegex from "safe-regex";
 import report from "#report/index.mjs";
 
 const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
+
+function isObject(pObject) {
+  return (
+    typeof pObject === "object" && !Array.isArray(pObject) && pObject !== null
+  );
+}
+function deepMerge(pTarget, pSource) {
+  const lOutput = structuredClone(pTarget);
+
+  for (const lKey in pSource) {
+    if (isObject(pSource[lKey])) {
+      if (lKey in pTarget) {
+        lOutput[lKey] = deepMerge(pTarget[lKey], pSource[lKey]);
+      } else {
+        Object.assign(lOutput, { [lKey]: pSource[lKey] });
+      }
+    } else {
+      Object.assign(lOutput, { [lKey]: pSource[lKey] });
+    }
+  }
+
+  return lOutput;
+}
 
 function assertModuleSystemsValid(pModuleSystems) {
   if (
@@ -102,7 +125,7 @@ export function assertCruiseOptionsValid(pOptions) {
     if (pOptions?.ruleSet?.options) {
       lReturnValue = assertCruiseOptionsValid(pOptions.ruleSet.options);
     }
-    return merge({}, lReturnValue, pOptions);
+    return deepMerge(lReturnValue, pOptions);
   }
   return lReturnValue;
 }

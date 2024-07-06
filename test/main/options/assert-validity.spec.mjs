@@ -1,4 +1,5 @@
 import { doesNotThrow, equal, throws } from "node:assert/strict";
+import { deepEqual } from "node:assert";
 import { assertCruiseOptionsValid } from "#main/options/assert-validity.mjs";
 
 describe("[U] main/options/validate - module systems", () => {
@@ -183,5 +184,31 @@ describe("[U] main/options/validate - exclude", () => {
 
     equal(lOptions.exclude, "from the ruleset");
     equal(lOptions.doNotFollow, "from the commandline");
+  });
+});
+
+describe("[U] main/options/validate - enhancedResolveOptions", () => {
+  it("options passed in --validate rule-set drip down to the proper options (objects edition)", () => {
+    const lOptions = assertCruiseOptionsValid({
+      enhancedResolveOptions: {
+        exportsFields: ["exports"],
+        conditionNames: ["import", "require"],
+        extensions: [".cjs", ".mjs"],
+      },
+      ruleSet: {
+        options: {
+          enhancedResolveOptions: {
+            exportsFields: ["exports"],
+            conditionNames: ["import"],
+          },
+        },
+      },
+    });
+
+    deepEqual(lOptions.enhancedResolveOptions, {
+      exportsFields: ["exports"],
+      conditionNames: ["import", "require"],
+      extensions: [".cjs", ".mjs"],
+    });
   });
 });
