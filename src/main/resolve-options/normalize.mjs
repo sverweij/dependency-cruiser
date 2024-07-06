@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import enhancedResolve from "enhanced-resolve";
-import omit from "lodash/omit.js";
 import { scannableExtensions } from "#extract/transpile/meta.mjs";
 import {
   ruleSetHasDeprecationRule,
@@ -31,6 +30,13 @@ const DEFAULT_RESOLVE_OPTIONS = {
   // Also see https://github.com/sverweij/dependency-cruiser/issues/338
   exportsFields: [],
 };
+
+function omit(pObject, pProperty) {
+  const lObject = structuredClone(pObject);
+  // eslint-disable-next-line security/detect-object-injection
+  delete lObject[pProperty];
+  return lObject;
+}
 
 /**
  *

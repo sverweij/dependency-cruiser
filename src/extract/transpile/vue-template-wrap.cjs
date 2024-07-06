@@ -1,5 +1,4 @@
 const { EOL } = require("node:os");
-const isEmpty = require("lodash/isEmpty");
 const tryRequire = require("#utl/try-require.cjs");
 const meta = require("#meta.cjs");
 
@@ -27,6 +26,12 @@ function getVueTemplateCompiler() {
   }
 
   return { lCompiler, lIsVue3 };
+}
+
+function isEmpty(pObject) {
+  return (
+    Object.entries(pObject).length === 0 && !pObject?.length && !pObject?.size
+  );
 }
 
 const { lCompiler: vueTemplateCompiler, lIsVue3: isVue3 } =

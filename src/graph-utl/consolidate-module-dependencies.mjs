@@ -1,4 +1,3 @@
-import reject from "lodash/reject.js";
 import compare from "./compare.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
@@ -42,9 +41,10 @@ function consolidateDependencies(pDependencies) {
     lReturnValue.push(
       mergeDependencies(lDependencies[0].resolved, lDependencies),
     );
-    lDependencies = reject(lDependencies, {
-      resolved: lDependencies[0].resolved,
-    });
+    lDependencies = lDependencies.filter(
+      // eslint-disable-next-line no-loop-func
+      (pDependency) => pDependency.resolved !== lDependencies[0].resolved,
+    );
   }
 
   return lReturnValue;
