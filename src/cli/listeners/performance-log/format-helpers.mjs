@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import { INFO } from "#utl/bus.mjs";
 
 const MS_PER_SECOND = 1000;
@@ -43,7 +43,7 @@ export function formatDividerLine() {
 }
 
 export function formatHeader() {
-  return chalk
+  return pc
     .bold(
       `${
         pad("∆ rss") +
@@ -59,7 +59,7 @@ export function formatHeader() {
 }
 
 function formatMessage(pMessage, pLevel) {
-  return pLevel >= INFO ? chalk.dim(pMessage) : pMessage;
+  return pLevel >= INFO ? pc.dim(pMessage) : pMessage;
 }
 
 export function formatTime(
@@ -81,7 +81,7 @@ export function formatMemory(pBytes, pLevel) {
   );
 
   return formatMessage(
-    (pBytes < 0 ? chalk.blue(lReturnValue) : lReturnValue).concat(" "),
+    (pBytes < 0 ? pc.blue(lReturnValue) : lReturnValue).concat(" "),
     pLevel,
   );
 }

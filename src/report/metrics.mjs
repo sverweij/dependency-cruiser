@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import chalk from "chalk";
+import pc from "picocolors";
 import { formatNumber, formatPercentage } from "./utl/index.mjs";
 
 /**
@@ -224,7 +224,7 @@ function formatToTextData(pData, pMetaData) {
  * @returns {string}
  */
 function formatToTextTable(pData, pMetaData) {
-  return [chalk.bold(formatToTextHeader(pMetaData))]
+  return [pc.bold(formatToTextHeader(pMetaData))]
     .concat(formatToTextDemarcationLine(pMetaData))
     .concat(formatToTextData(pData, pMetaData))
     .join(EOL)

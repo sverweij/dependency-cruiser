@@ -1,6 +1,5 @@
 /* eslint-disable no-magic-numbers */
 import { match, equal } from "node:assert/strict";
-import chalk from "chalk";
 import {
   formatTime,
   formatMemory,
@@ -50,16 +49,6 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatTime", () => 
 });
 
 describe("[U] cli/listeners/performance-log/format-helpers - formatMemory", () => {
-  let lChalkLevel = chalk.level;
-
-  before("disable chalk coloring", () => {
-    chalk.level = 0;
-  });
-
-  after("enable chalk coloring again", () => {
-    chalk.level = lChalkLevel;
-  });
-
   it("converts to kB, left pads & adds the unit at the end", () => {
     equal(formatMemory(4033856), "     +3,939kB ");
   });
