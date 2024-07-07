@@ -1,5 +1,3 @@
-import { EOL } from "node:os";
-
 const DEFAULT_INDENT = 4;
 
 function indentString(pString, pCount) {
@@ -41,9 +39,9 @@ function wrapString(pString, pMaxWidth) {
 
       lWrappedLines.push(lCurrentLine.trimEnd());
 
-      return lWrappedLines.join(EOL);
+      return lWrappedLines.join("\n");
     })
-    .join(EOL);
+    .join("\n");
 }
 
 export default function wrapAndIndent(pString, pCount = DEFAULT_INDENT) {
