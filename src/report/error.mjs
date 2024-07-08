@@ -44,11 +44,11 @@ function formatReachabilityViolation(pViolation) {
 }
 
 function formatInstabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)}${EOL}${wrapAndIndent(
-    pc.dim(
+  return `${formatDependencyViolation(pViolation)}${EOL}${pc.dim(
+    wrapAndIndent(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,
+      EXTRA_PATH_INFORMATION_INDENT,
     ),
-    EXTRA_PATH_INFORMATION_INDENT,
   )}`;
 }
 
@@ -72,7 +72,7 @@ function formatViolation(pViolation) {
     )} ${pViolation.rule.name}: ${lFormattedViolators}` +
     `${
       pViolation.comment
-        ? `${EOL}${wrapAndIndent(pc.dim(pViolation.comment))}${EOL}`
+        ? `${EOL}${pc.dim(wrapAndIndent(pViolation.comment))}${EOL}`
         : ""
     }`
   );
