@@ -48,9 +48,9 @@ function wrapString(pString, pMaxWidth) {
     .join("\n");
 }
 
-export default function wrapAndIndent(pString, pCount = DEFAULT_INDENT) {
-  const lDogmaticMaxConsoleWidth = 78;
-  const lMaxWidth = lDogmaticMaxConsoleWidth - pCount;
+export default function wrapAndIndent(pString, pIndent = DEFAULT_INDENT) {
+  const lMaxConsoleWidth = 78;
+  const lMaxWidth = lMaxConsoleWidth - pIndent;
 
-  return indentString(wrapString(pString, lMaxWidth), pCount);
+  return indentString(wrapString(pString, lMaxWidth), pIndent);
 }
