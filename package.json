@@ -294,7 +294,7 @@
       {
         "package": "svelte",
         "policy": "pin",
-        "because": "upgrading to supporting svelte 4 will require a non-trivial amount of labour (which we are going to invest, but not right now)"
+        "because": "upgrading to supporting svelte 5 will require a non-trivial amount of labour (which we are going to invest, but not right now)"
       }
     ]
   },
