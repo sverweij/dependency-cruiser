@@ -404,7 +404,7 @@ manually.
 <details>
 <summary>Background</summary>
 
-For `.svelte` single file components it uses the `svelte` (version 3.x)
+For `.svelte` single file components it uses the `svelte` (version 4.x)
 
 - which will be in your module dependencies if you're developing with Svelte.
 - because of how svelte works, all `.svelte` files depend on `"svelte/internal"`.

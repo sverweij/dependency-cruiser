@@ -52,7 +52,7 @@ describe("[U] extract/transpile/meta", () => {
       },
       {
         name: "svelte",
-        version: ">=3.0.0 <4.0.0",
+        version: ">=3.0.0 <5.0.0",
         available: true,
       },
       {
