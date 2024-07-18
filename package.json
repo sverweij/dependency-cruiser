@@ -223,22 +223,22 @@
     "prompts": "2.4.2",
     "rechoir": "^0.8.0",
     "safe-regex": "2.1.1",
-    "semver": "^7.6.2",
+    "semver": "^7.6.3",
     "teamcity-service-messages": "0.1.14",
     "tsconfig-paths-webpack-plugin": "4.1.0",
     "watskeburt": "4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.8",
+    "@babel/core": "7.24.9",
     "@babel/plugin-transform-modules-commonjs": "7.24.8",
     "@babel/preset-typescript": "7.24.7",
-    "@swc/core": "1.7.0-nightly-20240714.1",
-    "@types/lodash": "4.17.6",
-    "@types/node": "20.14.10",
+    "@swc/core": "1.7.0",
+    "@types/lodash": "4.17.7",
+    "@types/node": "20.14.11",
     "@types/prompts": "2.4.9",
-    "@typescript-eslint/eslint-plugin": "7.16.0",
-    "@typescript-eslint/parser": "7.16.0",
-    "@vue/compiler-sfc": "3.4.31",
+    "@typescript-eslint/eslint-plugin": "7.16.1",
+    "@typescript-eslint/parser": "7.16.1",
+    "@vue/compiler-sfc": "3.4.32",
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
     "coffeescript": "2.7.0",
@@ -252,7 +252,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-unicorn": "^54.0.0",
-    "husky": "9.0.11",
+    "husky": "9.1.1",
     "lint-staged": "15.2.7",
     "mocha": "10.6.0",
     "normalize-newline": "4.1.0",
@@ -267,11 +267,11 @@
     "yarn": "1.22.22"
   },
   "overrides": {
-    "semver": "^7.6.2",
+    "semver": "^7.6.3",
     "postcss": "^8.4.31"
   },
   "resolutions": {
-    "semver": "^7.6.2",
+    "semver": "^7.6.3",
     "postcss": "^8.4.31"
   },
   "upem": {
