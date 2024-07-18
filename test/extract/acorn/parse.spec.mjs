@@ -1,5 +1,4 @@
 import { equal } from "node:assert/strict";
-import get from "lodash/get.js";
 import { getASTFromSource } from "#extract/acorn/parse.mjs";
 
 const TSCONFIG_CONSTANTS = {
@@ -38,11 +37,8 @@ describe("[U] extract/acorn/parse", () => {
       },
     );
     equal(
-      get(
-        lFoundAST,
-        "body[0].declarations[0].init.body.type",
+      lFoundAST?.body[0]?.declarations[0]?.init?.body?.type ??
         "not a jsx element",
-      ),
       "JSXElement",
     );
   });
@@ -69,30 +65,21 @@ describe("[U] extract/acorn/parse", () => {
       },
     );
 
-    const likelyTheArrowExpression = get(
-      lFoundAST,
-      "body[0].declarations.[0].init",
-      {},
-    );
-    equal(likelyTheArrowExpression.type, "ArrowFunctionExpression");
+    const lLikelyTheArrowExpression =
+      lFoundAST?.body[0]?.declarations?.[0]?.init ?? {};
+    equal(lLikelyTheArrowExpression.type, "ArrowFunctionExpression");
     equal(
-      get(
-        likelyTheArrowExpression,
-        "body.callee.type",
+      lLikelyTheArrowExpression?.body?.callee?.type ??
         "not a member expression",
-      ),
       "MemberExpression",
     );
     equal(
-      get(likelyTheArrowExpression, "body.callee.object.name", "not react"),
+      lLikelyTheArrowExpression?.body?.callee?.object?.name ?? "not react",
       "React",
     );
     equal(
-      get(
-        likelyTheArrowExpression,
-        "body.callee.property.name",
+      lLikelyTheArrowExpression?.body?.callee?.property?.name ??
         "not createElement",
-      ),
       "createElement",
     );
   });

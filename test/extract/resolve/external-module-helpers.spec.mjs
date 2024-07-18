@@ -113,11 +113,11 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   });
 
   it("returns the module name unchanged if called with a module name without a '/'", () => {
-    equal(getPackageRoot("lodash"), "lodash");
+    equal(getPackageRoot("watskeburt"), "watskeburt");
   });
 
   it("returns the 'root' of the name when called with a module name with a '/'", () => {
-    equal(getPackageRoot("lodash/fp"), "lodash");
+    equal(getPackageRoot("not-scoped/fp"), "not-scoped");
   });
 
   it("@scoped/bla => @scoped/bla", () => {

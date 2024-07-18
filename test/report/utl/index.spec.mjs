@@ -13,10 +13,10 @@ describe("[I] report/utl/index - getURLForModule", () => {
 
   it("returns the correct URL for an external module", () => {
     const lModule = {
-      source: "node_modules/lodash/yadda/yadda.js",
+      source: "node_modules/semver/functions/satisfies.js",
       dependencyTypes: ["npm"],
     };
-    const lExpectedURL = "https://www.npmjs.com/package/lodash";
+    const lExpectedURL = "https://www.npmjs.com/package/semver";
     deepEqual(getURLForModule(lModule), lExpectedURL);
   });
 

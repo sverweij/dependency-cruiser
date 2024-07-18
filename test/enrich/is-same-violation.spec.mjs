@@ -4,7 +4,7 @@ import isSameViolation from "#enrich/summarize/is-same-violation.mjs";
 
 const deDuplicateViolations = (pViolations) =>
   uniqWith(pViolations, isSameViolation);
-describe("[U] enrich/de-duplicate-violations", () => {
+describe("[U] enrich/is-same-violation", () => {
   it("no violations => no violations", () => {
     deepEqual(deDuplicateViolations([]), []);
   });

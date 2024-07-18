@@ -1,6 +1,5 @@
 import { deepEqual, ok, equal } from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import omit from "lodash/omit.js";
 import extractBabelConfig from "#config-utl/extract-babel-config.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
@@ -79,10 +78,9 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/babelrc.empty.json",
       ),
     );
-    deepEqual(
-      omit(lBabelConfig, "filename"),
-      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
-    );
+    const lBabelConfigWithoutFilename = structuredClone(lBabelConfig);
+    delete lBabelConfigWithoutFilename.filename;
+    deepEqual(lBabelConfigWithoutFilename, DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
   });
 
   it("reads the 'babel' key when a package.json is passed", async () => {
@@ -104,10 +102,9 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
       ),
     );
-    deepEqual(
-      omit(lBabelConfig, "filename"),
-      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
-    );
+    const lBabelConfigWithoutFilename = structuredClone(lBabelConfig);
+    delete lBabelConfigWithoutFilename.filename;
+    deepEqual(lBabelConfigWithoutFilename, DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
   });
 
   it("returns a babel config when a javascript file with a regular object export is passed", async () => {

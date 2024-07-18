@@ -11,7 +11,7 @@ import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
  *
  * Some samples:
  * - for unscoped packages this would be everything up to the first '/':
- *    - 'lodash/fp' => 'lodash'
+ *    - 'godash/fp' => 'godash'
  *    - 'mypackage/some/module' => 'mypackage'
  * - for scoped packages this would be everything up to the second '/',
  *   if it's there (which should normaly be the case, but nevertheless we
@@ -49,8 +49,8 @@ export function getPackageRoot(pModule) {
     return `${lPathElements[0]}/${lPathElements[1]}`;
   }
 
-  // lodash
-  // lodash/fp
+  // godash
+  // godash/fp
   return lPathElements[0];
 }
 
