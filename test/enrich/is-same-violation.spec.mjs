@@ -1,256 +1,173 @@
 import { deepEqual } from "node:assert/strict";
-import uniqWith from "lodash/uniqWith.js";
 import isSameViolation from "#enrich/summarize/is-same-violation.mjs";
 
-const deDuplicateViolations = (pViolations) =>
-  uniqWith(pViolations, isSameViolation);
 describe("[U] enrich/is-same-violation", () => {
-  it("no violations => no violations", () => {
-    deepEqual(deDuplicateViolations([]), []);
+  it("1:1 the same => same", () => {
+    const lViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+    };
+    deepEqual(isSameViolation(lViolation, lViolation), true);
   });
-  it("non-cyclic violations => same non-cyclic violations", () => {
-    const lViolations = [
-      {
-        from: "somewhere.js",
-        to: "somewhere-else.js",
-        rule: {
-          severity: "error",
-          name: "no-thi-ng-else",
-        },
+  it("different rule name => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-      {
-        from: "call.js",
-        to: "kthulu.js",
-        rule: {
-          severity: "warn",
-          name: "matters",
-        },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-other-violation",
       },
-    ];
-    deepEqual(deDuplicateViolations(lViolations), lViolations);
-  });
-
-  it("2 violations from different cycles => the 2 same violations", () => {
-    const lViolations = [
-      {
-        from: "src/report/not/index.js",
-        to: "src/report/not/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/not/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/not/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
-      },
-      {
-        from: "src/report/dot/module-utl.js",
-        to: "src/report/dot/index.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
-      },
-    ];
-    deepEqual(deDuplicateViolations(lViolations), lViolations);
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
   });
 
-  it("2 violations from the same cycle => 1 violation", () => {
-    const lViolations = [
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+  it("different from => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-      {
-        from: "src/report/dot/module-utl.js",
-        to: "src/report/dot/index.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-    ];
-    const lDeDuplicatedViolations = [
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
-      },
-    ];
-    deepEqual(deDuplicateViolations(lViolations), lDeDuplicatedViolations);
+      from: "not-somewhere.js",
+      to: "somewhere-else.js",
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
   });
 
-  it("2 violations from the same cycle, but of different name => no changes", () => {
-    const lViolations = [
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-ride-the-lightning",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+  it("different to => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-      {
-        from: "src/report/dot/module-utl.js",
-        to: "src/report/dot/index.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
-        },
-        cycle: [
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-    ];
-    deepEqual(deDuplicateViolations(lViolations), lViolations);
+      from: "somewhere.js",
+      to: "somewhere-else-altogether.js",
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
   });
 
-  it("does not mix up cyclic & non-cyclic violations when de-duplicating", () => {
-    const lViolations = [
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-fade-to-black",
-        },
+  it("same cycle => same", () => {
+    const lViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      cycle: [
+        {
+          name: "somewhere.js",
+          dependencyTypes: ["local"],
         },
-        cycle: [
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
-      },
-      {
-        from: "src/report/dot/module-utl.js",
-        to: "src/report/dot/index.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
+        {
+          name: "somewhere-else.js",
+          dependencyTypes: ["require"],
         },
-        cycle: [
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+      ],
+    };
+    deepEqual(isSameViolation(lViolation, lViolation), true);
+  });
+
+  it("different cycle length => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-    ];
-    const lDeDuplicatedViolations = [
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-fade-to-black",
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      cycle: [
+        {
+          name: "somewhere.js",
+          dependencyTypes: ["local"],
         },
-      },
-      {
-        from: "src/report/dot/index.js",
-        to: "src/report/dot/module-utl.js",
-        rule: {
-          severity: "error",
-          name: "no-circular",
+        {
+          name: "somewhere-else.js",
+          dependencyTypes: ["require"],
         },
-        cycle: [
-          {
-            name: "src/report/dot/module-utl.js",
-            dependencyTypes: ["local", "require"],
-          },
-          {
-            name: "src/report/dot/index.js",
-            dependencyTypes: ["local", "require"],
-          },
-        ],
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
       },
-    ];
-    deepEqual(deDuplicateViolations(lViolations), lDeDuplicatedViolations);
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      cycle: [
+        {
+          name: "somewhere.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
+  });
+
+  it("different cycle module => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      cycle: [
+        {
+          name: "somewhere.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "somewhere-else.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      cycle: [
+        {
+          name: "somewhere.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "somewhere-else-altogether.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
   });
 });
