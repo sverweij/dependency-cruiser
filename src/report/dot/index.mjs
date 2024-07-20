@@ -151,8 +151,8 @@ function pryReporterOptionsFromResults(pGranularity, pResults) {
   const lFallbackReporterOptions =
     pResults?.summary?.optionsUsed?.reporterOptions?.dot;
 
-  // using _.get here because the reporter options will contain nested
-  // properties, which it handles for us
+  // using a bespoke 'get' function here because the reporter options will
+  // contain nested properties, which it handles for us
   return get(
     pResults,
     GRANULARITY2REPORTER_OPTIONS.get(pGranularity),

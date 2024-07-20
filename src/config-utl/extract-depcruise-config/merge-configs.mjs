@@ -1,5 +1,4 @@
 import { isDeepStrictEqual } from "node:util";
-
 import { uniqBy, uniqWith } from "#utl/array-util.mjs";
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {

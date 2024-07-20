@@ -203,7 +203,6 @@ function setModuleType(pTestPairs, pModuleType) {
 
 function runFileBasedTests(pModuleType) {
   setModuleType(TEST_PAIRS, pModuleType).forEach((pPair) => {
-    // if (pPair.description === "regular dot with default theme")
     it(pPair.description, async () => {
       const lExitCode = await cli([pPair.dirOrFile], pPair.options);
 

@@ -3,7 +3,6 @@ import safeRegex from "safe-regex";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 import configurationSchema from "#configuration-schema";
-
 import { has, get } from "#utl/object-util.mjs";
 
 const ajv = new Ajv();
@@ -29,8 +28,8 @@ function assertSchemaCompliance(pSchema, pConfiguration) {
 }
 
 function hasPath(pObject, pSection, pCondition) {
-  // pCondition can be nested properties, so we use _.has instead
-  // of elvis operators
+  // pCondition can be nested properties, so we use a bespoke
+  // 'has' function instead of simple elvis operators
   return has(pObject, pSection) && has(pObject[pSection], pCondition);
 }
 
