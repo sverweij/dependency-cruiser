@@ -1,5 +1,4 @@
 import DEFAULT_THEME from "./default-theme.mjs";
-
 import { has, get } from "#utl/object-util.mjs";
 
 function matchesRE(pValue, pRE) {
@@ -14,10 +13,14 @@ function matchesCriterion(pModuleKey, pCriterion) {
 
 function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every((pKey) => {
+    // the keys can have paths in them like {"rules[0].severity": "info"}
+    // To get the criterion treat that key as a string and not as a path
+    // eslint-disable-next-line security/detect-object-injection
+    const lCriterion = pSchemeEntry.criteria[pKey];
     // we use _.get here because in the criteria you can enter
     // nested keys like "rules[0].severity" : "error", and _.get handles
     // that for us
-    const lCriterion = get(pSchemeEntry.criteria, pKey);
+    // console.error(pSchemeEntry.criteria, pKey, pc.bold(lCriterion));
     const lModuleKey = get(pModule, pKey);
 
     if (!(lModuleKey || has(pModule, pKey))) {
