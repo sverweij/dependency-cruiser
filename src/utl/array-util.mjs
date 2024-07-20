@@ -1,3 +1,5 @@
+export { default as uniqBy } from "lodash/uniqBy.js";
+export { default as uniqWith } from "lodash/uniqWith.js";
 /**
  * returns true if there's at least one element in pLeftArray that's also
  * in pRightArray

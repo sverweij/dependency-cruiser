@@ -1,11 +1,12 @@
 /* eslint-disable prefer-template */
-import get from "lodash/get.js";
 import theming from "./theming.mjs";
 import moduleUtl from "./module-utl.mjs";
 import prepareFolderLevel from "./prepare-folder-level.mjs";
 import prepareCustomLevel from "./prepare-custom-level.mjs";
 import prepareFlatLevel from "./prepare-flat-level.mjs";
 import { applyFilters } from "#graph-utl/filter-bank.mjs";
+
+import { get } from "#utl/object-util.mjs";
 
 // not importing EOL from "node:os" so output is the same on windows and unices
 const EOL = "\n";
@@ -151,7 +152,7 @@ function pryReporterOptionsFromResults(pGranularity, pResults) {
   const lFallbackReporterOptions =
     pResults?.summary?.optionsUsed?.reporterOptions?.dot;
 
-  // using lodash.get here because the reporter options will contain nested
+  // using _.get here because the reporter options will contain nested
   // properties, which it handles for us
   return get(
     pResults,

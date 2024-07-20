@@ -1,6 +1,5 @@
 import { join } from "node:path";
 import picomatch from "picomatch";
-import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
 import pc from "picocolors";
 
@@ -10,6 +9,7 @@ import { write } from "./utl/io.mjs";
 import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
 import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
 import setUpNDJSONListener from "./listeners/ndjson.mjs";
+import { set } from "#utl/object-util.mjs";
 import cruise from "#main/cruise.mjs";
 import { INFO, bus } from "#utl/bus.mjs";
 

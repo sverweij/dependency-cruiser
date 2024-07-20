@@ -26,7 +26,7 @@ import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
  *
  * At this time we don't take situations into account where the caller includes
  * a node module through a local path (which could make sense if you're on
- * non-commonJS and are still using node_modules) e.g. '../node_modules/lodash/fp'
+ * non-commonJS and are still using node_modules) e.g. '../node_modules/oldash/fp'
  *
  * @param  {string} pModule a module name
  * @return {string}         the module name root
@@ -58,8 +58,8 @@ export function getPackageRoot(pModule) {
  * returns the contents of the package.json of the given pModule as it would
  * resolve from pBaseDirectory
  *
- * e.g. to get the package.json of `lodash` that is required bya
- * `src/report/something.js` use `getPackageJSON('lodash', 'src/report/');`
+ * e.g. to get the package.json of `oldash` that is required bya
+ * `src/report/something.js` use `getPackageJSON('oldash', 'src/report/');`
  *
  * The pBaseDirectory parameter is necessary because dependency-cruiser/ this module
  * will have a different base dir, and will hence resolve either to the

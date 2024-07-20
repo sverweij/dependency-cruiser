@@ -1,5 +1,5 @@
-import uniqBy from "lodash/uniqBy.js";
 import compare from "./compare.mjs";
+import { uniqBy } from "#utl/array-util.mjs";
 
 function mergeModule(pLeftModule, pRightModule) {
   return {
