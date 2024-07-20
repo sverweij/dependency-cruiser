@@ -1,5 +1,4 @@
 import { join, extname, dirname } from "node:path";
-import uniqBy from "lodash/uniqBy.js";
 import { extract as acornExtract } from "./acorn/extract.mjs";
 import {
   extract as tscExtract,
@@ -14,7 +13,7 @@ import {
   detectPreCompilationNess,
   extractModuleAttributes,
 } from "./helpers.mjs";
-import { intersects } from "#utl/array-util.mjs";
+import { uniqBy, intersects } from "#utl/array-util.mjs";
 
 function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = tscExtract(pCruiseOptions, pFileName, pTranspileOptions);

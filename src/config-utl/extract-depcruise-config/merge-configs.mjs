@@ -1,6 +1,5 @@
 import { isDeepStrictEqual } from "node:util";
-import uniqBy from "lodash/uniqBy.js";
-import uniqWith from "lodash/uniqWith.js";
+import { uniqBy, uniqWith } from "#utl/array-util.mjs";
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
   return pForbiddenArrayBase

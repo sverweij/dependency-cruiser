@@ -1,7 +1,7 @@
-import uniqWith from "lodash/uniqWith.js";
 import isSameViolation from "./is-same-violation.mjs";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
 import compare from "#graph-utl/compare.mjs";
+import { uniqWith } from "#utl/array-util.mjs";
 
 function cutNonTransgressions(pModule) {
   return {

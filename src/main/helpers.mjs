@@ -1,6 +1,4 @@
-import get from "lodash/get.js";
-import has from "lodash/has.js";
-import set from "lodash/set.js";
+import { has, get, set } from "#utl/object-util.mjs";
 
 const RE_PROPERTIES = [
   "path",
@@ -30,7 +28,7 @@ export function normalizeREProperties(
   let lPropertyContainer = structuredClone(pPropertyContainer);
 
   for (const lProperty of pREProperties) {
-    // lProperty can be nested properties, so we use lodash.has and lodash.get
+    // lProperty can be nested properties, so we use _.has and _.get
     // instead of elvis operators
     if (has(lPropertyContainer, lProperty)) {
       set(

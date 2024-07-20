@@ -1,6 +1,5 @@
-import get from "lodash/get.js";
-import has from "lodash/has.js";
 import DEFAULT_THEME from "./default-theme.mjs";
+import { has, get } from "#utl/object-util.mjs";
 
 function matchesRE(pValue, pRE) {
   const lMatchResult = pValue.match && pValue.match(pRE);
@@ -14,10 +13,13 @@ function matchesCriterion(pModuleKey, pCriterion) {
 
 function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every((pKey) => {
-    // we use lodash.get here because in the criteria you can enter
-    // nested keys like "rules[0].severity" : "error", and lodash.get handles
-    // that for us
-    const lCriterion = get(pSchemeEntry.criteria, pKey);
+    // the keys can have paths in them like {"rules[0].severity": "info"}
+    // To get the criterion treat that key as a string and not as a path
+    // eslint-disable-next-line security/detect-object-injection
+    const lCriterion = pSchemeEntry.criteria[pKey];
+    // we use a bespoke 'get' here because in the criteria you can enter
+    // nested keys like "rules[0].severity" : "error", and that function
+    // handles those for us
     const lModuleKey = get(pModule, pKey);
 
     if (!(lModuleKey || has(pModule, pKey))) {

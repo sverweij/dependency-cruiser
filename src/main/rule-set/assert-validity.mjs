@@ -1,10 +1,9 @@
 import Ajv from "ajv";
 import safeRegex from "safe-regex";
-import has from "lodash/has.js";
-import get from "lodash/get.js";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 import configurationSchema from "#configuration-schema";
+import { has, get } from "#utl/object-util.mjs";
 
 const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,
@@ -29,8 +28,8 @@ function assertSchemaCompliance(pSchema, pConfiguration) {
 }
 
 function hasPath(pObject, pSection, pCondition) {
-  // pCondition can be nested properties, so we use lodash.has instead
-  // of elvis operators
+  // pCondition can be nested properties, so we use a bespoke
+  // 'has' function instead of simple elvis operators
   return has(pObject, pSection) && has(pObject[pSection], pCondition);
 }
 
