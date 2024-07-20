@@ -1,5 +1,3 @@
-export { default as uniqBy } from "lodash/uniqBy.js";
-export { default as uniqWith } from "lodash/uniqWith.js";
 /**
  * returns true if there's at least one element in pLeftArray that's also
  * in pRightArray
@@ -14,4 +12,28 @@ export function intersects(pLeftArray, pRightArray) {
 
 export function uniq(pArray) {
   return [...new Set(pArray)];
+}
+
+/**
+ * @param {any[]} pArray
+ * @param {function} pIteratee
+ * @returns {any[]}
+ */
+export function uniqBy(pArray, pIteratee) {
+  return pArray.filter(
+    (pElement, pIndex, pSelf) =>
+      pIndex === pSelf.findIndex((pY) => pIteratee(pElement) === pIteratee(pY)),
+  );
+}
+
+/**
+ * @param {any[]} pArray
+ * @param {function} pComparator
+ * @returns {any[]}
+ */
+export function uniqWith(pArray, pComparator) {
+  return pArray.filter(
+    (pElement, pIndex, pSelf) =>
+      pIndex === pSelf.findIndex((pY) => pComparator(pElement, pY)),
+  );
 }
