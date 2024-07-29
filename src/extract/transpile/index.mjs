@@ -41,8 +41,12 @@ const BABEL_ABLE_EXTENSIONS = [
   ".mjs",
   ".jsx",
   ".ts",
+  ".cts",
+  ".mts",
   ".tsx",
   ".d.ts",
+  ".d.cts",
+  ".d.mts",
 ];
 
 /**
