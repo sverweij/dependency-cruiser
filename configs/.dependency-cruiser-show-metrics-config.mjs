@@ -1,6 +1,7 @@
+import baseConfig from "../.dependency-cruiser.mjs";
 /** @type {import('../').IConfiguration} */
 export default {
-  extends: "../.dependency-cruiser.json",
+  ...baseConfig,
   forbidden: [
     {
       name: "folder-SDP",

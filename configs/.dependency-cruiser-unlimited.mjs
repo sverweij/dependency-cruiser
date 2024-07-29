@@ -1,6 +1,7 @@
+import baseConfig from "../.dependency-cruiser.mjs";
 /** @type {import('../').IConfiguration} */
 export default {
-  extends: "../.dependency-cruiser.json",
+  ...baseConfig,
   options: {
     cache: {
       folder: "node_modules/.cache/dependency-cruiser/unlimited",

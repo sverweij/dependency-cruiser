@@ -27,7 +27,7 @@
 <!-- baseline&#45;violations.d.mts -->
 <g id="node1" class="node">
 <title>baseline&#45;violations.d.mts</title>
-<g id="a_node1"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/baseline-violations.d.mts" xlink:title="baseline&#45;violations.d.mts">
+<g id="a_node1"><a xlink:href="baseline-violations.d.mts" xlink:title="baseline&#45;violations.d.mts">
 <path fill="#ddfeff" stroke="black" d="M699.83,-117.88C699.83,-117.88 594.42,-117.88 594.42,-117.88 591.46,-117.88 588.5,-114.92 588.5,-111.96 588.5,-111.96 588.5,-106.04 588.5,-106.04 588.5,-103.08 591.46,-100.12 594.42,-100.12 594.42,-100.12 699.83,-100.12 699.83,-100.12 702.79,-100.12 705.75,-103.08 705.75,-106.04 705.75,-106.04 705.75,-111.96 705.75,-111.96 705.75,-114.92 702.79,-117.88 699.83,-117.88"/>
 <text text-anchor="middle" x="647.12" y="-105.33" font-family="Helvetica,sans-Serif" font-size="9.00">baseline&#45;violations.d.mts</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- violations.d.mts -->
 <g id="node2" class="node">
 <title>violations.d.mts</title>
-<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/violations.d.mts" xlink:title="violations.d.mts">
+<g id="a_node2"><a xlink:href="violations.d.mts" xlink:title="violations.d.mts">
 <path fill="#ddfeff" stroke="black" d="M794.46,-78.88C794.46,-78.88 727.29,-78.88 727.29,-78.88 724.33,-78.88 721.38,-75.92 721.38,-72.96 721.38,-72.96 721.38,-67.04 721.38,-67.04 721.38,-64.08 724.33,-61.12 727.29,-61.12 727.29,-61.12 794.46,-61.12 794.46,-61.12 797.42,-61.12 800.38,-64.08 800.38,-67.04 800.38,-67.04 800.38,-72.96 800.38,-72.96 800.38,-75.92 797.42,-78.88 794.46,-78.88"/>
 <text text-anchor="middle" x="760.88" y="-66.33" font-family="Helvetica,sans-Serif" font-size="9.00">violations.d.mts</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- rule&#45;summary.d.mts -->
 <g id="node15" class="node">
 <title>rule&#45;summary.d.mts</title>
-<g id="a_node15"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/rule-summary.d.mts" xlink:title="rule&#45;summary.d.mts">
+<g id="a_node15"><a xlink:href="rule-summary.d.mts" xlink:title="rule&#45;summary.d.mts">
 <path fill="#ddfeff" stroke="black" d="M906.33,-65.88C906.33,-65.88 821.92,-65.88 821.92,-65.88 818.96,-65.88 816,-62.92 816,-59.96 816,-59.96 816,-54.04 816,-54.04 816,-51.08 818.96,-48.12 821.92,-48.12 821.92,-48.12 906.33,-48.12 906.33,-48.12 909.29,-48.12 912.25,-51.08 912.25,-54.04 912.25,-54.04 912.25,-59.96 912.25,-59.96 912.25,-62.92 909.29,-65.88 906.33,-65.88"/>
 <text text-anchor="middle" x="864.12" y="-53.33" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;summary.d.mts</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- shared&#45;types.d.mts -->
 <g id="node16" class="node">
 <title>shared&#45;types.d.mts</title>
-<g id="a_node16"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/shared-types.d.mts" xlink:title="shared&#45;types.d.mts">
+<g id="a_node16"><a xlink:href="shared-types.d.mts" xlink:title="shared&#45;types.d.mts">
 <path fill="#ddfeff" stroke="black" d="M1012.58,-159.88C1012.58,-159.88 931.17,-159.88 931.17,-159.88 928.21,-159.88 925.25,-156.92 925.25,-153.96 925.25,-153.96 925.25,-148.04 925.25,-148.04 925.25,-145.08 928.21,-142.12 931.17,-142.12 931.17,-142.12 1012.58,-142.12 1012.58,-142.12 1015.54,-142.12 1018.5,-145.08 1018.5,-148.04 1018.5,-148.04 1018.5,-153.96 1018.5,-153.96 1018.5,-156.92 1015.54,-159.88 1012.58,-159.88"/>
 <text text-anchor="middle" x="971.88" y="-147.32" font-family="Helvetica,sans-Serif" font-size="9.00">shared&#45;types.d.mts</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- cache&#45;options.d.mts -->
 <g id="node3" class="node">
 <title>cache&#45;options.d.mts</title>
-<g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/cache-options.d.mts" xlink:title="cache&#45;options.d.mts">
+<g id="a_node3"><a xlink:href="cache-options.d.mts" xlink:title="cache&#45;options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M690.08,-229.88C690.08,-229.88 604.17,-229.88 604.17,-229.88 601.21,-229.88 598.25,-226.92 598.25,-223.96 598.25,-223.96 598.25,-218.04 598.25,-218.04 598.25,-215.08 601.21,-212.12 604.17,-212.12 604.17,-212.12 690.08,-212.12 690.08,-212.12 693.04,-212.12 696,-215.08 696,-218.04 696,-218.04 696,-223.96 696,-223.96 696,-226.92 693.04,-229.88 690.08,-229.88"/>
 <text text-anchor="middle" x="647.12" y="-217.32" font-family="Helvetica,sans-Serif" font-size="9.00">cache&#45;options.d.mts</text>
 </a>
@@ -90,7 +90,7 @@
 <!-- config&#45;utl/extract&#45;babel&#45;config.d.mts -->
 <g id="node4" class="node">
 <title>config&#45;utl/extract&#45;babel&#45;config.d.mts</title>
-<g id="a_node4"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/config-utl/extract-babel-config.d.mts" xlink:title="extract&#45;babel&#45;config.d.mts">
+<g id="a_node4"><a xlink:href="config-utl/extract-babel-config.d.mts" xlink:title="extract&#45;babel&#45;config.d.mts">
 <path fill="#ccffcc" stroke="black" d="M318.08,-101.88C318.08,-101.88 208.92,-101.88 208.92,-101.88 205.96,-101.88 203,-98.92 203,-95.96 203,-95.96 203,-90.04 203,-90.04 203,-87.08 205.96,-84.12 208.92,-84.12 208.92,-84.12 318.08,-84.12 318.08,-84.12 321.04,-84.12 324,-87.08 324,-90.04 324,-90.04 324,-95.96 324,-95.96 324,-98.92 321.04,-101.88 318.08,-101.88"/>
 <text text-anchor="start" x="211" y="-89.33" font-family="Helvetica,sans-Serif" font-size="9.00">extract&#45;babel&#45;config.d.mts</text>
 </a>
@@ -99,7 +99,7 @@
 <!-- config&#45;utl/extract&#45;depcruise&#45;config.d.mts -->
 <g id="node5" class="node">
 <title>config&#45;utl/extract&#45;depcruise&#45;config.d.mts</title>
-<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/config-utl/extract-depcruise-config.d.mts" xlink:title="extract&#45;depcruise&#45;config.d.mts">
+<g id="a_node5"><a xlink:href="config-utl/extract-depcruise-config.d.mts" xlink:title="extract&#45;depcruise&#45;config.d.mts">
 <path fill="#ddfeff" stroke="black" d="M326.71,-191.88C326.71,-191.88 200.29,-191.88 200.29,-191.88 197.33,-191.88 194.38,-188.92 194.38,-185.96 194.38,-185.96 194.38,-180.04 194.38,-180.04 194.38,-177.08 197.33,-174.12 200.29,-174.12 200.29,-174.12 326.71,-174.12 326.71,-174.12 329.67,-174.12 332.62,-177.08 332.62,-180.04 332.62,-180.04 332.62,-185.96 332.62,-185.96 332.62,-188.92 329.67,-191.88 326.71,-191.88"/>
 <text text-anchor="start" x="202.38" y="-179.32" font-family="Helvetica,sans-Serif" font-size="9.00">extract&#45;depcruise&#45;config.d.mts</text>
 </a>
@@ -108,7 +108,7 @@
 <!-- configuration.d.mts -->
 <g id="node6" class="node">
 <title>configuration.d.mts</title>
-<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/configuration.d.mts" xlink:title="configuration.d.mts">
+<g id="a_node6"><a xlink:href="configuration.d.mts" xlink:title="configuration.d.mts">
 <path fill="#ddfeff" stroke="black" d="M455.46,-201.88C455.46,-201.88 374.04,-201.88 374.04,-201.88 371.08,-201.88 368.12,-198.92 368.12,-195.96 368.12,-195.96 368.12,-190.04 368.12,-190.04 368.12,-187.08 371.08,-184.12 374.04,-184.12 374.04,-184.12 455.46,-184.12 455.46,-184.12 458.42,-184.12 461.38,-187.08 461.38,-190.04 461.38,-190.04 461.38,-195.96 461.38,-195.96 461.38,-198.92 458.42,-201.88 455.46,-201.88"/>
 <text text-anchor="middle" x="414.75" y="-189.32" font-family="Helvetica,sans-Serif" font-size="9.00">configuration.d.mts</text>
 </a>
@@ -123,7 +123,7 @@
 <!-- options.d.mts -->
 <g id="node8" class="node">
 <title>options.d.mts</title>
-<g id="a_node8"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/options.d.mts" xlink:title="options.d.mts">
+<g id="a_node8"><a xlink:href="options.d.mts" xlink:title="options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M556.46,-229.88C556.46,-229.88 498.29,-229.88 498.29,-229.88 495.33,-229.88 492.38,-226.92 492.38,-223.96 492.38,-223.96 492.38,-218.04 492.38,-218.04 492.38,-215.08 495.33,-212.12 498.29,-212.12 498.29,-212.12 556.46,-212.12 556.46,-212.12 559.42,-212.12 562.38,-215.08 562.38,-218.04 562.38,-218.04 562.38,-223.96 562.38,-223.96 562.38,-226.92 559.42,-229.88 556.46,-229.88"/>
 <text text-anchor="middle" x="527.38" y="-217.32" font-family="Helvetica,sans-Serif" font-size="9.00">options.d.mts</text>
 </a>
@@ -138,7 +138,7 @@
 <!-- rule&#45;set.d.mts -->
 <g id="node13" class="node">
 <title>rule&#45;set.d.mts</title>
-<g id="a_node13"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/rule-set.d.mts" xlink:title="rule&#45;set.d.mts">
+<g id="a_node13"><a xlink:href="rule-set.d.mts" xlink:title="rule&#45;set.d.mts">
 <path fill="#ddfeff" stroke="black" d="M676.58,-87.88C676.58,-87.88 617.67,-87.88 617.67,-87.88 614.71,-87.88 611.75,-84.92 611.75,-81.96 611.75,-81.96 611.75,-76.04 611.75,-76.04 611.75,-73.08 614.71,-70.12 617.67,-70.12 617.67,-70.12 676.58,-70.12 676.58,-70.12 679.54,-70.12 682.5,-73.08 682.5,-76.04 682.5,-76.04 682.5,-81.96 682.5,-81.96 682.5,-84.92 679.54,-87.88 676.58,-87.88"/>
 <text text-anchor="middle" x="647.12" y="-75.33" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;set.d.mts</text>
 </a>
@@ -153,7 +153,7 @@
 <!-- config&#45;utl/extract&#45;depcruise&#45;options.d.mts -->
 <g id="node7" class="node">
 <title>config&#45;utl/extract&#45;depcruise&#45;options.d.mts</title>
-<g id="a_node7"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/config-utl/extract-depcruise-options.d.mts" xlink:title="extract&#45;depcruise&#45;options.d.mts">
+<g id="a_node7"><a xlink:href="config-utl/extract-depcruise-options.d.mts" xlink:title="extract&#45;depcruise&#45;options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M329.33,-221.88C329.33,-221.88 197.67,-221.88 197.67,-221.88 194.71,-221.88 191.75,-218.92 191.75,-215.96 191.75,-215.96 191.75,-210.04 191.75,-210.04 191.75,-207.08 194.71,-204.12 197.67,-204.12 197.67,-204.12 329.33,-204.12 329.33,-204.12 332.29,-204.12 335.25,-207.08 335.25,-210.04 335.25,-210.04 335.25,-215.96 335.25,-215.96 335.25,-218.92 332.29,-221.88 329.33,-221.88"/>
 <text text-anchor="start" x="199.75" y="-209.32" font-family="Helvetica,sans-Serif" font-size="9.00">extract&#45;depcruise&#45;options.d.mts</text>
 </a>
@@ -192,7 +192,7 @@
 <!-- filter&#45;types.d.mts -->
 <g id="node20" class="node">
 <title>filter&#45;types.d.mts</title>
-<g id="a_node20"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/filter-types.d.mts" xlink:title="filter&#45;types.d.mts">
+<g id="a_node20"><a xlink:href="filter-types.d.mts" xlink:title="filter&#45;types.d.mts">
 <path fill="#ddfeff" stroke="black" d="M795.96,-203.88C795.96,-203.88 725.79,-203.88 725.79,-203.88 722.83,-203.88 719.88,-200.92 719.88,-197.96 719.88,-197.96 719.88,-192.04 719.88,-192.04 719.88,-189.08 722.83,-186.12 725.79,-186.12 725.79,-186.12 795.96,-186.12 795.96,-186.12 798.92,-186.12 801.88,-189.08 801.88,-192.04 801.88,-192.04 801.88,-197.96 801.88,-197.96 801.88,-200.92 798.92,-203.88 795.96,-203.88"/>
 <text text-anchor="middle" x="760.88" y="-191.32" font-family="Helvetica,sans-Serif" font-size="9.00">filter&#45;types.d.mts</text>
 </a>
@@ -207,7 +207,7 @@
 <!-- reporter&#45;options.d.mts -->
 <g id="node21" class="node">
 <title>reporter&#45;options.d.mts</title>
-<g id="a_node21"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/reporter-options.d.mts" xlink:title="reporter&#45;options.d.mts">
+<g id="a_node21"><a xlink:href="reporter-options.d.mts" xlink:title="reporter&#45;options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M693.83,-199.88C693.83,-199.88 600.42,-199.88 600.42,-199.88 597.46,-199.88 594.5,-196.92 594.5,-193.96 594.5,-193.96 594.5,-188.04 594.5,-188.04 594.5,-185.08 597.46,-182.12 600.42,-182.12 600.42,-182.12 693.83,-182.12 693.83,-182.12 696.79,-182.12 699.75,-185.08 699.75,-188.04 699.75,-188.04 699.75,-193.96 699.75,-193.96 699.75,-196.92 696.79,-199.88 693.83,-199.88"/>
 <text text-anchor="middle" x="647.12" y="-187.32" font-family="Helvetica,sans-Serif" font-size="9.00">reporter&#45;options.d.mts</text>
 </a>
@@ -222,7 +222,7 @@
 <!-- config&#45;utl/extract&#45;ts&#45;config.d.mts -->
 <g id="node9" class="node">
 <title>config&#45;utl/extract&#45;ts&#45;config.d.mts</title>
-<g id="a_node9"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/config-utl/extract-ts-config.d.mts" xlink:title="extract&#45;ts&#45;config.d.mts">
+<g id="a_node9"><a xlink:href="config-utl/extract-ts-config.d.mts" xlink:title="extract&#45;ts&#45;config.d.mts">
 <path fill="#ddfeff" stroke="black" d="M309.83,-161.88C309.83,-161.88 217.17,-161.88 217.17,-161.88 214.21,-161.88 211.25,-158.92 211.25,-155.96 211.25,-155.96 211.25,-150.04 211.25,-150.04 211.25,-147.08 214.21,-144.12 217.17,-144.12 217.17,-144.12 309.83,-144.12 309.83,-144.12 312.79,-144.12 315.75,-147.08 315.75,-150.04 315.75,-150.04 315.75,-155.96 315.75,-155.96 315.75,-158.92 312.79,-161.88 309.83,-161.88"/>
 <text text-anchor="start" x="219.25" y="-149.32" font-family="Helvetica,sans-Serif" font-size="9.00">extract&#45;ts&#45;config.d.mts</text>
 </a>
@@ -249,7 +249,7 @@
 <!-- config&#45;utl/extract&#45;webpack&#45;resolve&#45;config.d.mts -->
 <g id="node11" class="node">
 <title>config&#45;utl/extract&#45;webpack&#45;resolve&#45;config.d.mts</title>
-<g id="a_node11"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/config-utl/extract-webpack-resolve-config.d.mts" xlink:title="extract&#45;webpack&#45;resolve&#45;config.d.mts">
+<g id="a_node11"><a xlink:href="config-utl/extract-webpack-resolve-config.d.mts" xlink:title="extract&#45;webpack&#45;resolve&#45;config.d.mts">
 <path fill="#ddfeff" stroke="black" d="M341.33,-131.88C341.33,-131.88 185.67,-131.88 185.67,-131.88 182.71,-131.88 179.75,-128.92 179.75,-125.96 179.75,-125.96 179.75,-120.04 179.75,-120.04 179.75,-117.08 182.71,-114.12 185.67,-114.12 185.67,-114.12 341.33,-114.12 341.33,-114.12 344.29,-114.12 347.25,-117.08 347.25,-120.04 347.25,-120.04 347.25,-125.96 347.25,-125.96 347.25,-128.92 344.29,-131.88 341.33,-131.88"/>
 <text text-anchor="start" x="187.75" y="-119.33" font-family="Helvetica,sans-Serif" font-size="9.00">extract&#45;webpack&#45;resolve&#45;config.d.mts</text>
 </a>
@@ -282,7 +282,7 @@
 <!-- restrictions.d.mts -->
 <g id="node25" class="node">
 <title>restrictions.d.mts</title>
-<g id="a_node25"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/restrictions.d.mts" xlink:title="restrictions.d.mts">
+<g id="a_node25"><a xlink:href="restrictions.d.mts" xlink:title="restrictions.d.mts">
 <path fill="#ddfeff" stroke="black" d="M797.08,-173.88C797.08,-173.88 724.67,-173.88 724.67,-173.88 721.71,-173.88 718.75,-170.92 718.75,-167.96 718.75,-167.96 718.75,-162.04 718.75,-162.04 718.75,-159.08 721.71,-156.12 724.67,-156.12 724.67,-156.12 797.08,-156.12 797.08,-156.12 800.04,-156.12 803,-159.08 803,-162.04 803,-162.04 803,-167.96 803,-167.96 803,-170.92 800.04,-173.88 797.08,-173.88"/>
 <text text-anchor="middle" x="760.88" y="-161.32" font-family="Helvetica,sans-Serif" font-size="9.00">restrictions.d.mts</text>
 </a>
@@ -297,7 +297,7 @@
 <!-- cruise&#45;result.d.mts -->
 <g id="node14" class="node">
 <title>cruise&#45;result.d.mts</title>
-<g id="a_node14"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/cruise-result.d.mts" xlink:title="cruise&#45;result.d.mts">
+<g id="a_node14"><a xlink:href="cruise-result.d.mts" xlink:title="cruise&#45;result.d.mts">
 <path fill="#ddfeff" stroke="black" d="M453.96,-31.88C453.96,-31.88 375.54,-31.88 375.54,-31.88 372.58,-31.88 369.62,-28.92 369.62,-25.96 369.62,-25.96 369.62,-20.04 369.62,-20.04 369.62,-17.08 372.58,-14.12 375.54,-14.12 375.54,-14.12 453.96,-14.12 453.96,-14.12 456.92,-14.12 459.88,-17.08 459.88,-20.04 459.88,-20.04 459.88,-25.96 459.88,-25.96 459.88,-28.92 456.92,-31.88 453.96,-31.88"/>
 <text text-anchor="middle" x="414.75" y="-19.32" font-family="Helvetica,sans-Serif" font-size="9.00">cruise&#45;result.d.mts</text>
 </a>
@@ -360,7 +360,7 @@
 <!-- dependency&#45;cruiser.d.mts -->
 <g id="node18" class="node">
 <title>dependency&#45;cruiser.d.mts</title>
-<g id="a_node18"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/dependency-cruiser.d.mts" xlink:title="dependency&#45;cruiser.d.mts">
+<g id="a_node18"><a xlink:href="dependency-cruiser.d.mts" xlink:title="dependency&#45;cruiser.d.mts">
 <path fill="#ddfeff" stroke="black" d="M318.46,-63.88C318.46,-63.88 208.54,-63.88 208.54,-63.88 205.58,-63.88 202.62,-60.92 202.62,-57.96 202.62,-57.96 202.62,-52.04 202.62,-52.04 202.62,-49.08 205.58,-46.12 208.54,-46.12 208.54,-46.12 318.46,-46.12 318.46,-46.12 321.42,-46.12 324.38,-49.08 324.38,-52.04 324.38,-52.04 324.38,-57.96 324.38,-57.96 324.38,-60.92 321.42,-63.88 318.46,-63.88"/>
 <text text-anchor="middle" x="263.5" y="-51.33" font-family="Helvetica,sans-Serif" font-size="9.00">dependency&#45;cruiser.d.mts</text>
 </a>
@@ -399,7 +399,7 @@
 <!-- resolve&#45;options.d.mts -->
 <g id="node19" class="node">
 <title>resolve&#45;options.d.mts</title>
-<g id="a_node19"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/resolve-options.d.mts" xlink:title="resolve&#45;options.d.mts">
+<g id="a_node19"><a xlink:href="resolve-options.d.mts" xlink:title="resolve&#45;options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M460.33,-90.88C460.33,-90.88 369.17,-90.88 369.17,-90.88 366.21,-90.88 363.25,-87.92 363.25,-84.96 363.25,-84.96 363.25,-79.04 363.25,-79.04 363.25,-76.08 366.21,-73.12 369.17,-73.12 369.17,-73.12 460.33,-73.12 460.33,-73.12 463.29,-73.12 466.25,-76.08 466.25,-79.04 466.25,-79.04 466.25,-84.96 466.25,-84.96 466.25,-87.92 463.29,-90.88 460.33,-90.88"/>
 <text text-anchor="middle" x="414.75" y="-78.33" font-family="Helvetica,sans-Serif" font-size="9.00">resolve&#45;options.d.mts</text>
 </a>
@@ -432,7 +432,7 @@
 <!-- plugins/3d&#45;reporter&#45;plugin.d.mts -->
 <g id="node22" class="node">
 <title>plugins/3d&#45;reporter&#45;plugin.d.mts</title>
-<g id="a_node22"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/plugins/3d-reporter-plugin.d.mts" xlink:title="3d&#45;reporter&#45;plugin.d.mts">
+<g id="a_node22"><a xlink:href="plugins/3d-reporter-plugin.d.mts" xlink:title="3d&#45;reporter&#45;plugin.d.mts">
 <path fill="#ddfeff" stroke="black" d="M137.08,-33.88C137.08,-33.88 34.67,-33.88 34.67,-33.88 31.71,-33.88 28.75,-30.92 28.75,-27.96 28.75,-27.96 28.75,-22.04 28.75,-22.04 28.75,-19.08 31.71,-16.12 34.67,-16.12 34.67,-16.12 137.08,-16.12 137.08,-16.12 140.04,-16.12 143,-19.08 143,-22.04 143,-22.04 143,-27.96 143,-27.96 143,-30.92 140.04,-33.88 137.08,-33.88"/>
 <text text-anchor="start" x="36.75" y="-21.32" font-family="Helvetica,sans-Serif" font-size="9.00">3d&#45;reporter&#45;plugin.d.mts</text>
 </a>
@@ -447,7 +447,7 @@
 <!-- plugins/mermaid&#45;reporter&#45;plugin.d.mts -->
 <g id="node23" class="node">
 <title>plugins/mermaid&#45;reporter&#45;plugin.d.mts</title>
-<g id="a_node23"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/plugins/mermaid-reporter-plugin.d.mts" xlink:title="mermaid&#45;reporter&#45;plugin.d.mts">
+<g id="a_node23"><a xlink:href="plugins/mermaid-reporter-plugin.d.mts" xlink:title="mermaid&#45;reporter&#45;plugin.d.mts">
 <path fill="#ddfeff" stroke="black" d="M149.83,-63.88C149.83,-63.88 21.92,-63.88 21.92,-63.88 18.96,-63.88 16,-60.92 16,-57.96 16,-57.96 16,-52.04 16,-52.04 16,-49.08 18.96,-46.12 21.92,-46.12 21.92,-46.12 149.83,-46.12 149.83,-46.12 152.79,-46.12 155.75,-49.08 155.75,-52.04 155.75,-52.04 155.75,-57.96 155.75,-57.96 155.75,-60.92 152.79,-63.88 149.83,-63.88"/>
 <text text-anchor="start" x="24" y="-51.33" font-family="Helvetica,sans-Serif" font-size="9.00">mermaid&#45;reporter&#45;plugin.d.mts</text>
 </a>
@@ -462,7 +462,7 @@
 <!-- plugins/stats&#45;reporter&#45;plugin.d.mts -->
 <g id="node24" class="node">
 <title>plugins/stats&#45;reporter&#45;plugin.d.mts</title>
-<g id="a_node24"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/plugins/stats-reporter-plugin.d.mts" xlink:title="stats&#45;reporter&#45;plugin.d.mts">
+<g id="a_node24"><a xlink:href="plugins/stats-reporter-plugin.d.mts" xlink:title="stats&#45;reporter&#45;plugin.d.mts">
 <path fill="#ddfeff" stroke="black" d="M141.21,-93.88C141.21,-93.88 30.54,-93.88 30.54,-93.88 27.58,-93.88 24.62,-90.92 24.62,-87.96 24.62,-87.96 24.62,-82.04 24.62,-82.04 24.62,-79.08 27.58,-76.12 30.54,-76.12 30.54,-76.12 141.21,-76.12 141.21,-76.12 144.17,-76.12 147.12,-79.08 147.12,-82.04 147.12,-82.04 147.12,-87.96 147.12,-87.96 147.12,-90.92 144.17,-93.88 141.21,-93.88"/>
 <text text-anchor="start" x="32.62" y="-81.33" font-family="Helvetica,sans-Serif" font-size="9.00">stats&#45;reporter&#45;plugin.d.mts</text>
 </a>
@@ -483,7 +483,7 @@
 <!-- strict&#45;filter&#45;types.d.mts -->
 <g id="node26" class="node">
 <title>strict&#45;filter&#45;types.d.mts</title>
-<g id="a_node26"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/strict-filter-types.d.mts" xlink:title="strict&#45;filter&#45;types.d.mts">
+<g id="a_node26"><a xlink:href="strict-filter-types.d.mts" xlink:title="strict&#45;filter&#45;types.d.mts">
 <path fill="#ddfeff" stroke="black" d="M693.08,-341.88C693.08,-341.88 601.17,-341.88 601.17,-341.88 598.21,-341.88 595.25,-338.92 595.25,-335.96 595.25,-335.96 595.25,-330.04 595.25,-330.04 595.25,-327.08 598.21,-324.12 601.17,-324.12 601.17,-324.12 693.08,-324.12 693.08,-324.12 696.04,-324.12 699,-327.08 699,-330.04 699,-330.04 699,-335.96 699,-335.96 699,-338.92 696.04,-341.88 693.08,-341.88"/>
 <text text-anchor="middle" x="647.12" y="-329.32" font-family="Helvetica,sans-Serif" font-size="9.00">strict&#45;filter&#45;types.d.mts</text>
 </a>
@@ -504,7 +504,7 @@
 <!-- strict&#45;options.d.mts -->
 <g id="node27" class="node">
 <title>strict&#45;options.d.mts</title>
-<g id="a_node27"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/strict-options.d.mts" xlink:title="strict&#45;options.d.mts">
+<g id="a_node27"><a xlink:href="strict-options.d.mts" xlink:title="strict&#45;options.d.mts">
 <path fill="#ddfeff" stroke="black" d="M454.71,-285.88C454.71,-285.88 374.79,-285.88 374.79,-285.88 371.83,-285.88 368.88,-282.92 368.88,-279.96 368.88,-279.96 368.88,-274.04 368.88,-274.04 368.88,-271.08 371.83,-268.12 374.79,-268.12 374.79,-268.12 454.71,-268.12 454.71,-268.12 457.67,-268.12 460.62,-271.08 460.62,-274.04 460.62,-274.04 460.62,-279.96 460.62,-279.96 460.62,-282.92 457.67,-285.88 454.71,-285.88"/>
 <text text-anchor="middle" x="414.75" y="-273.32" font-family="Helvetica,sans-Serif" font-size="9.00">strict&#45;options.d.mts</text>
 </a>
@@ -537,7 +537,7 @@
 <!-- strict&#45;rule&#45;set.d.mts -->
 <g id="node28" class="node">
 <title>strict&#45;rule&#45;set.d.mts</title>
-<g id="a_node28"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/strict-rule-set.d.mts" xlink:title="strict&#45;rule&#45;set.d.mts">
+<g id="a_node28"><a xlink:href="strict-rule-set.d.mts" xlink:title="strict&#45;rule&#45;set.d.mts">
 <path fill="#ddfeff" stroke="black" d="M567.71,-285.88C567.71,-285.88 487.04,-285.88 487.04,-285.88 484.08,-285.88 481.12,-282.92 481.12,-279.96 481.12,-279.96 481.12,-274.04 481.12,-274.04 481.12,-271.08 484.08,-268.12 487.04,-268.12 487.04,-268.12 567.71,-268.12 567.71,-268.12 570.67,-268.12 573.62,-271.08 573.62,-274.04 573.62,-274.04 573.62,-279.96 573.62,-279.96 573.62,-282.92 570.67,-285.88 567.71,-285.88"/>
 <text text-anchor="middle" x="527.38" y="-273.32" font-family="Helvetica,sans-Serif" font-size="9.00">strict&#45;rule&#45;set.d.mts</text>
 </a>
@@ -564,7 +564,7 @@
 <!-- strict&#45;restrictions.d.mts -->
 <g id="node29" class="node">
 <title>strict&#45;restrictions.d.mts</title>
-<g id="a_node29"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/strict-restrictions.d.mts" xlink:title="strict&#45;restrictions.d.mts">
+<g id="a_node29"><a xlink:href="strict-restrictions.d.mts" xlink:title="strict&#45;restrictions.d.mts">
 <path fill="#ddfeff" stroke="black" d="M694.21,-259.88C694.21,-259.88 600.04,-259.88 600.04,-259.88 597.08,-259.88 594.12,-256.92 594.12,-253.96 594.12,-253.96 594.12,-248.04 594.12,-248.04 594.12,-245.08 597.08,-242.12 600.04,-242.12 600.04,-242.12 694.21,-242.12 694.21,-242.12 697.17,-242.12 700.12,-245.08 700.12,-248.04 700.12,-248.04 700.12,-253.96 700.12,-253.96 700.12,-256.92 697.17,-259.88 694.21,-259.88"/>
 <text text-anchor="middle" x="647.12" y="-247.32" font-family="Helvetica,sans-Serif" font-size="9.00">strict&#45;restrictions.d.mts</text>
 </a>
