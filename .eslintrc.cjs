@@ -14,6 +14,7 @@ module.exports = {
     "security/detect-non-literal-fs-filename": "off",
     "import/exports-last": "off", // Useless remnant of the time when single pass compilers were in vogue
     "import/no-unresolved": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
+    "@typescript-eslint/no-require-imports": "off", // we 100% still need these (at least in the tests).
     "no-param-reassign": "error",
     "node/no-missing-import": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
     "node/no-missing-require": "off", // Does not recognize package.json #imports, which we use (in nodejs since v12.9.0), nor does it understand self-references to exports (e.g. dependency-cruiser/mermaid-reporter-plugin)
