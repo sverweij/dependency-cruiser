@@ -99,6 +99,12 @@ export interface ICruiseOptions {
    */
   reaches?: string | string[] | IReachesType;
   /**
+   * dependency-cruiser will mark modules that have changed since the
+   * specified revision (or 'main', when not specified) in its output,
+   * as well as _any_ module that reaches them - either directly or via via.
+   */
+  affected?: string | boolean;
+  /**
    * dependency-cruiser will mark modules matching this regular expression
    * as 'highlighted' in its output
    */

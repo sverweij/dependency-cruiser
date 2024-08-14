@@ -59,6 +59,10 @@ try {
       "only include modules matching the regex + all modules that can reach it",
     )
     .option(
+      "-A, --affected [revision]",
+      "only include modules affected by the revision + all modules that can reach them (when not specified revision defaults to 'main')",
+    )
+    .option(
       "-H, --highlight <regex>",
       "mark modules matching the regex as 'highlighted'",
     )

@@ -64,6 +64,13 @@ export default {
             { $ref: "#/definitions/CompoundReachesType" },
           ],
         },
+        affected: {
+          description:
+            "dependency-cruiser will mark modules that have changed since the " +
+            "specified revision (or 'main', when not specified) in its output, " +
+            "as well as _any_ module that reaches them - either directly or via via.",
+          oneOf: [{ type: "string" }, { type: "boolean" }],
+        },
         highlight: {
           description:
             "dependency-cruiser will mark modules matching this regular expression " +
