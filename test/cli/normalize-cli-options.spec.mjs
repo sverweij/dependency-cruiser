@@ -331,7 +331,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("translates --affected into a reaches option", async () => {
-    let lError = "none";
     try {
       const lResult = await normalizeCliOptions({ affected: true });
       deepEqual(Object.hasOwn(lResult, "reaches"), true);
@@ -341,8 +340,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       // affected: true translates to the 'main' branch. Luckily for us we
       // throw an error when the branch doesn't exist that reflects the
       // branch name we attempted to use
-      lError = pError.toString();
-      equal(lError.includes("'main'"), true);
+      equal(pError.toString().includes("'main'"), true);
     }
   });
 
