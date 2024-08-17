@@ -222,6 +222,15 @@ export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
   lOptions = normalizeConfigFileName(lOptions, "webpackConfig", WEBPACK_CONFIG);
   lOptions = normalizeConfigFileName(lOptions, "tsConfig", TYPESCRIPT_CONFIG);
   lOptions = normalizeConfigFileName(lOptions, "babelConfig", BABEL_CONFIG);
+  if (Object.hasOwn(lOptions, "affected") && lOptions.affected !== false) {
+    const { list } = await import("watskeburt");
+    lOptions.reaches = await list({
+      oldRevision: lOptions.affected === true ? "main" : lOptions.affected,
+      outputType: "regex",
+      extensions:
+        "cjs,cjsx,coffee,csx,cts,js,json,jsx,litcoffee,ls,mjs,mts,svelte,ts,tsx,vue,vuex",
+    });
+  }
 
   return lOptions;
 }

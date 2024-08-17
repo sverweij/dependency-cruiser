@@ -34,6 +34,7 @@ available in dependency-cruiser configurations.
 1. [`--focus`: show modules and their neighbours](#--focus-show-modules-and-their-neighbours)
 1. [`--focus-depth`: influence how many layers of neighbors --focus shows](#--focus-depth-influence-how-many-layers-of-neighbors---focus-shows)
 1. [`--reaches`: show modules and their transitive dependents](#--reaches-show-modules-and-their-transitive-dependents)
+1. [`--affected`: show modules and their transitive dependents since a git `revision`](#--affected-show-modules-and-their-transitive-dependents-since-a-git-revision)
 1. [`--highlight`: highlight modules](#--highlight-highlight-modules)
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
@@ -942,6 +943,10 @@ for more details
 If you want to e.g. analyze what modules will directly or indirectly be affected
 by a change you make in one or modules you can use this option.
 
+> [!NOTE]
+> If you're using `git` for revision control the `--affected` option might be
+> a better fit for you.
+
 Just like the filter options above, takes a regular expression:
 
 ```sh
@@ -950,6 +955,45 @@ dependency-cruise src --include-only "^src/report" --reaches "^src/report/utl/in
 
 See [reaches](./options-reference.md#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
 in the options reference for more details.
+
+### `--affected`: show modules and their transitive dependents since a git `revision`
+
+Only include modules changed since the revision + all modules that can reach them.
+For 'revision' you can use everything git understands as a revision (e.g. a commit
+hash, a branch name, a tag, HEAD~1, etc.).
+
+When not specified, _revision_ defaults to `main`.
+
+This can be useful when you want to see the modules that are impacted by a change
+you made.
+
+```sh
+dependency-cruise src --affected main -T dot | dot -T svg > affected-example.svg
+```
+
+In combination with the `mermaid` reporter you can use it in your github action
+workflow to generate a graph of the affected modules and put it in a PR comment
+or in the workflow summary:
+
+````yaml
+- name: on pull requests emit the affected graph to the step summary with changed modules highlighted
+  if: always() && github.event_name == 'pull_request' && github.ref_name != github.event.repository.default_branch
+  run: |
+    echo '## Modules changed and affected by this PR' >> $GITHUB_STEP_SUMMARY
+    echo Modules changed in this PR have a fluorescent green color. All other modules in the graph are those directly or indirectly affected by changes in the green modules. >> $GITHUB_STEP_SUMMARY
+    echo '```mermaid' >> $GITHUB_STEP_SUMMARY
+    npx dependency-cruiser src test --output-type mermaid --affected ${{github.event.pull_request.base.sha}}  >> $GITHUB_STEP_SUMMARY
+    echo '' >> $GITHUB_STEP_SUMMARY
+    echo '```' >> $GITHUB_STEP_SUMMARY
+````
+
+> This option is 'syntactic sugar' around the `--reaches` option. These invocations
+> are equivalent:
+>
+> ```sh
+> dependency-cruise src --affected -T dot | dot -T svg > affected-with-affectd.svg
+> dependency-cruise src --reaches "$(watskeburt main)" -T dot | dot -T svg > affected-with-reaches.svg
+> ```
 
 ### `--highlight`: highlight modules
 

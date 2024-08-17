@@ -56,7 +56,11 @@ try {
     )
     .option(
       "-R, --reaches <regex>",
-      "only include modules matching the regex + all modules that can reach it",
+      "only include modules matching the regex + all modules that can reach them",
+    )
+    .option(
+      "-A, --affected [revision]",
+      "only include modules changed since the revision + all modules that can reach them (when not specified revision defaults to 'main')",
     )
     .option(
       "-H, --highlight <regex>",

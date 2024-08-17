@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { deepEqual, equal } from "node:assert/strict";
+import { getSHA } from "watskeburt";
 import normalizeCliOptions, {
   determineRulesFileName,
 } from "#cli/normalize-cli-options.mjs";
@@ -327,6 +328,43 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cacheStrategy: "content",
     });
     deepEqual(lResult.cache, { strategy: "content" });
+  });
+
+  it("translates --affected into a reaches option", async () => {
+    try {
+      const lResult = await normalizeCliOptions({ affected: true });
+      deepEqual(Object.hasOwn(lResult, "reaches"), true);
+    } catch (pError) {
+      // on the ci the 'main' branch doesn't exist as the checkout is shallow
+      // so this test will fail there. What we want to test, though is that
+      // affected: true translates to the 'main' branch. Luckily for us we
+      // throw an error when the branch doesn't exist that reflects the
+      // branch name we attempted to use
+      equal(pError.toString().includes("'main'"), true);
+    }
+  });
+
+  it("translates --affected into a reaches option when it mentions a revision", async () => {
+    const lRevision = await getSHA();
+    const lResult = await normalizeCliOptions({ affected: lRevision });
+    deepEqual(Object.hasOwn(lResult, "reaches"), true);
+  });
+
+  it("does not translates --affected into a reaches option when it equals false", async () => {
+    const lResult = await normalizeCliOptions({ affected: false });
+    deepEqual(Object.hasOwn(lResult, "reaches"), false);
+  });
+
+  it("throws when --affected is passed a string that is not a branch name", async () => {
+    let lError = "none";
+    const lNonExistingRevisionName = "this-revision-does-not-exist-for-sure";
+
+    try {
+      await normalizeCliOptions({ affected: lNonExistingRevisionName });
+    } catch (pError) {
+      lError = pError.toString();
+    }
+    equal(lError.includes(lNonExistingRevisionName), true);
   });
 });
 
