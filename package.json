@@ -205,28 +205,28 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.12.1",
-    "acorn-jsx": "5.3.2",
-    "acorn-jsx-walk": "2.0.0",
-    "acorn-loose": "8.4.0",
-    "acorn-walk": "8.3.3",
-    "ajv": "8.17.1",
-    "commander": "12.1.0",
-    "enhanced-resolve": "5.17.1",
-    "ignore": "5.3.2",
+    "acorn": "^8.12.1",
+    "acorn-jsx": "^5.3.2",
+    "acorn-jsx-walk": "^2.0.0",
+    "acorn-loose": "^8.4.0",
+    "acorn-walk": "^8.3.3",
+    "ajv": "^8.17.1",
+    "commander": "^12.1.0",
+    "enhanced-resolve": "^5.17.1",
+    "ignore": "^5.3.2",
     "interpret": "^3.1.1",
-    "is-installed-globally": "1.0.0",
-    "json5": "2.2.3",
-    "memoize": "10.0.0",
-    "picocolors": "1.0.1",
-    "picomatch": "4.0.2",
-    "prompts": "2.4.2",
+    "is-installed-globally": "^1.0.0",
+    "json5": "^2.2.3",
+    "memoize": "^10.0.0",
+    "picocolors": "^1.0.1",
+    "picomatch": "^4.0.2",
+    "prompts": "^2.4.2",
     "rechoir": "^0.8.0",
-    "safe-regex": "2.1.1",
+    "safe-regex": "^2.1.1",
     "semver": "^7.6.3",
-    "teamcity-service-messages": "0.1.14",
-    "tsconfig-paths-webpack-plugin": "4.1.0",
-    "watskeburt": "4.1.0"
+    "teamcity-service-messages": "^0.1.14",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "watskeburt": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.25.2",
@@ -266,12 +266,10 @@
     "yarn": "1.22.22"
   },
   "overrides": {
-    "semver": "^7.6.3",
-    "postcss": "^8.4.31"
+    "semver": "^7.6.3"
   },
   "resolutions": {
-    "semver": "^7.6.3",
-    "postcss": "^8.4.31"
+    "semver": "^7.6.3"
   },
   "upem": {
     "policies": [
