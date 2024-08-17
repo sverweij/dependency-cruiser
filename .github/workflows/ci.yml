@@ -111,7 +111,7 @@ jobs:
           npm install
           npm run build
       - run: npm run depcruise
-      - run: npx mocha
+      - run: npx mocha --invert --fgrep "#do-not-run-on-windows"
 
   check-berry-integration:
     runs-on: ubuntu-latest
