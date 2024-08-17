@@ -328,6 +328,31 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     });
     deepEqual(lResult.cache, { strategy: "content" });
   });
+
+  it("translates --affected into a reaches option", async () => {
+    const lResult = await normalizeCliOptions({ affected: true });
+    deepEqual(Object.hasOwn(lResult, "reaches"), true);
+  });
+  it("translates --affected into a reaches option when it mentions a branch", async () => {
+    const lResult = await normalizeCliOptions({ affected: "main" });
+    deepEqual(Object.hasOwn(lResult, "reaches"), true);
+  });
+  it("does not translates --affected into a reaches option when it equals false", async () => {
+    const lResult = await normalizeCliOptions({ affected: false });
+    deepEqual(Object.hasOwn(lResult, "reaches"), false);
+  });
+
+  it("throws when --affected is passed a string that is not a branch name", async () => {
+    let lError = "none";
+    const lNonExistingRevisionName = "this-revision-does-not-exist-for-sure";
+
+    try {
+      await normalizeCliOptions({ affected: lNonExistingRevisionName });
+    } catch (pError) {
+      lError = pError.toString();
+    }
+    equal(lError.includes(lNonExistingRevisionName), true);
+  });
 });
 
 describe("[I] cli/normalizeCliOptions - known violations", () => {
