@@ -1,7 +1,6 @@
 // @ts-check
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
-// @ts-expect-error ts(2307) - apparently tsc doesn't understand subpath imports yet
 import { extractGroups } from "#utl/regex-util.mjs";
 
 /**

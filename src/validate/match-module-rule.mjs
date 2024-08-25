@@ -13,7 +13,7 @@ import { extractGroups } from "#utl/regex-util.mjs";
 function matchesOrphanRule(pRule, pModule) {
   return (
     Object.hasOwn(pRule?.from ?? {}, "orphan") &&
-    // @ts-expect-error the 'has' above guarantees there's a 'from.orphan' attribute
+    // @ts-expect-error the 'hasOwn' above guarantees there's a 'from.orphan' attribute
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
@@ -34,11 +34,11 @@ function matchesReachableRule(pRule, pModule) {
     Object.hasOwn(pRule?.to ?? {}, "reachable") &&
     Object.hasOwn(pModule, "reachable")
   ) {
-    // @ts-expect-error the 'has' above ensures the 'reachable' exists
+    // @ts-expect-error the 'hasOwn' above ensures the 'reachable' exists
     const lReachableRecord = pModule.reachable.find(
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
-        // @ts-expect-error the 'has' above ensures the 'to.reachable' exists
+        // @ts-expect-error the 'hasOwn' above ensures the 'to.reachable' exists
         pReachable.value === pRule.to.reachable,
     );
     if (lReachableRecord) {
@@ -66,7 +66,7 @@ function matchesReachesRule(pRule, pModule) {
   return (
     Object.hasOwn(pRule?.to ?? {}, "reachable") &&
     Object.hasOwn(pModule, "reaches") &&
-    // @ts-expect-error the 'has' above guarantees the .reaches exists
+    // @ts-expect-error the 'hasOwn' above guarantees the .reaches exists
     pModule.reaches.some(
       (pReaches) =>
         pReaches.asDefinedInRule === pRule.name &&

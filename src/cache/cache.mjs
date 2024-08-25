@@ -9,9 +9,7 @@ import {
 import { optionsAreCompatible } from "./options-compatible.mjs";
 import MetadataStrategy from "./metadata-strategy.mjs";
 import ContentStrategy from "./content-strategy.mjs";
-// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { scannableExtensions } from "#extract/transpile/meta.mjs";
-// @ts-expect-error ts(2307) - the ts compiler is not privy to the existence of #imports in package.json
 import { bus } from "#utl/bus.mjs";
 
 /**
