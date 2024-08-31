@@ -293,6 +293,44 @@ describe("[I] extract/resolve/module-classifiers - getAliasTypes", () => {
     );
   });
 
+  it("doesn't run aliased and aliased-workspace for when workspaces is an array, but the entry isn't a string", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: [{ "packages/*": "packages/*" }],
+    };
+    const lResolveOptions = {};
+    deepEqual(
+      getAliasTypes(
+        "some-workspaced-local-package",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      [],
+    );
+  });
+
+  it("skips over entries in the workspaces array that aren't string, but still uses the rest", () => {
+    const lManifest = {
+      name: "test",
+      version: "1.0.0",
+      dependencies: {},
+      workspaces: [{ "packages/*": "packages/*" }, "packages/*"],
+    };
+    const lResolveOptions = {};
+    deepEqual(
+      getAliasTypes(
+        "some-workspaced-local-package",
+        "packages/a-package/index.js",
+        lResolveOptions,
+        lManifest,
+      ),
+      ["aliased", "aliased-workspace"],
+    );
+  });
+
   it("classifies as a webpack alias if it could be both a webpack alias _and_ a workspace alias", () => {
     const lManifest = {
       name: "test",
