@@ -168,8 +168,15 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     // oh and: ```picomatch.isMatch('asdf', 'asdf/**') === true``` so
     // in case it's only 'asdf' that's in the resolved module name for some reason
     // we're good as well.
+    //
+    // workspaces is supposed to be array of strings, where each string is
+    // a glob pattern. However, in the field there's occasions where it's
+    // not a string. We'll just ignore those for now, hence the presence of
+    // the `typeof pWorkspace === "string"` check.
     const lModuleFriendlyWorkspaceGlobs = lWorkspaces.map((pWorkspace) =>
-      pWorkspace.endsWith("/") ? `${pWorkspace}**` : `${pWorkspace}/**`,
+      typeof pWorkspace === "string" && pWorkspace.endsWith("/")
+        ? `${pWorkspace}**`
+        : `${pWorkspace}/**`,
     );
     if (picomatch.isMatch(pResolvedModuleName, lModuleFriendlyWorkspaceGlobs)) {
       return true;
