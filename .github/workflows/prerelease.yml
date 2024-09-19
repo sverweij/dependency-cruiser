@@ -5,6 +5,7 @@ on:
 
 jobs:
   publish-as-beta:
+    if: github.repository == 'sverweij/dependency-cruiser'
     runs-on: ubuntu-latest
     permissions:
       contents: read
