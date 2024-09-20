@@ -1,16 +1,19 @@
 import { deepEqual } from "node:assert/strict";
-import moduleUtl from "#report/dot/module-utl.mjs";
+import {
+  extractFirstTransgression,
+  flatLabel,
+} from "#report/dot/module-utl.mjs";
 
 describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {
-    deepEqual(moduleUtl.extractFirstTransgression({ dependencies: [] }), {
+    deepEqual(extractFirstTransgression({ dependencies: [] }), {
       dependencies: [],
     });
   });
 
   it("extractFirstTransgression - adds the first module rule if there's at least one", () => {
     deepEqual(
-      moduleUtl.extractFirstTransgression({
+      extractFirstTransgression({
         dependencies: [],
         rules: [
           { name: "error-thing", severity: "error" },
@@ -30,7 +33,7 @@ describe("[U] report/dot/module-utl", () => {
 
   it("extractFirstTransgression - adds the first dependency rule if there's at least one", () => {
     deepEqual(
-      moduleUtl.extractFirstTransgression({
+      extractFirstTransgression({
         dependencies: [
           {
             rules: [
@@ -55,19 +58,16 @@ describe("[U] report/dot/module-utl", () => {
   });
 
   it("flatLabel - returns the value of source as label", () => {
-    deepEqual(
-      moduleUtl.flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" }),
-      {
-        source: "aap/noot/mies/wim/zus.jet",
-        label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
-        tooltip: "zus.jet",
-      },
-    );
+    deepEqual(flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" }), {
+      source: "aap/noot/mies/wim/zus.jet",
+      label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
+      tooltip: "zus.jet",
+    });
   });
 
   it("flatLabel - returns the value of source & instability metric as label when instability is known", () => {
     deepEqual(
-      moduleUtl.flatLabel(true)({
+      flatLabel(true)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
       }),
@@ -82,7 +82,7 @@ describe("[U] report/dot/module-utl", () => {
 
   it("flatLabel - returns the value of source when instability is known, but showMetrics is false", () => {
     deepEqual(
-      moduleUtl.flatLabel(false)({
+      flatLabel(false)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
       }),

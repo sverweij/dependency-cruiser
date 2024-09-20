@@ -20,5 +20,3 @@ export function isFolderScope(pRule) {
   // normalized away before getting here.
   return (pRule?.scope ?? "module") === "folder";
 }
-
-export default { isModuleOnlyRule, isFolderScope };

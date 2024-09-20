@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 function stringToCycleEntry(pString) {
   return {
@@ -24,7 +24,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => ba => bb => bc => a doesn't get flagged when the cycle doesn't go via the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -43,7 +43,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => aa => ab => ac => does not get flagged when only some of them are not in the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -62,7 +62,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => ab a gets flagged because all of the via's in the cycle are in the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -90,7 +90,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -124,7 +124,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => aa => ab => ac => a doesn't get flagged when one of the dependencyTypes is in a pathNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaNotTypeOnlyRuleSet,
         { source: "tmp/a.js" },
         {
@@ -146,7 +146,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => aa => ab => ac => a does get flagged when none of the dependencyTypes is in a pathNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaNotTypeOnlyRuleSet,
         { source: "tmp/a.js" },
         {
@@ -187,7 +187,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
   });
   it("a => aa => ab => ac => a does get flagged when none of the dependencyTypes is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaTypeOnlyRuleSet,
         { source: "tmp/a.js" },
         {
@@ -215,7 +215,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
 
   it("a => aa => ab => ac => a doesn't get flagged when none of the dependencyTypes is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaTypeOnlyRuleSet,
         { source: "tmp/a.js" },
         {
@@ -253,7 +253,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
 
   it("a => ba => bb => bc => a doesn't get flagged when the cycle doesn't go via the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -272,7 +272,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
 
   it("a => aa => ab => ac => does not get flagged when only some of them are not in the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -291,7 +291,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
 
   it("a => ab a gets flagged becaue all of the via's in the cycle are in the viaOnly", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -319,7 +319,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -349,7 +349,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -383,7 +383,7 @@ describe("[I] validate/index dependency - cycle viaNot (which normalizes to viaO
 
   it("a => ba => bb => bc => a get flagged when none of them is in a viaNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaNotRuleSet,
         { source: "tmp/a.js" },
         {
@@ -403,7 +403,7 @@ describe("[I] validate/index dependency - cycle viaNot (which normalizes to viaO
 
   it("a => aa => ab => ac => a doesn't get flagged when one of them is in a viaNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaNotRuleSet,
         { source: "tmp/a.js" },
         {

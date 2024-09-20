@@ -1,5 +1,5 @@
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
-import matchers from "./matchers.mjs";
+import { propertyEquals, matchesToIsMoreUnstable } from "./matchers.mjs";
 import { extractGroups, replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 
 function fromFolderPath(pRule, pFromFolder) {
@@ -44,8 +44,8 @@ function match(pFromFolder, pToFolder) {
       fromFolderPathNot(pRule, pFromFolder) &&
       toFolderPath(pRule, pToFolder, lGroups) &&
       toFolderPathNot(pRule, pToFolder, lGroups) &&
-      matchers.toIsMoreUnstable(pRule, pFromFolder, pToFolder) &&
-      matchers.propertyEquals(pRule, pToFolder, "circular")
+      matchesToIsMoreUnstable(pRule, pFromFolder, pToFolder) &&
+      propertyEquals(pRule, pToFolder, "circular")
     );
   };
 }

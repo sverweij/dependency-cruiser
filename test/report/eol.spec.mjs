@@ -1,5 +1,5 @@
 import { match, equal } from "node:assert/strict";
-import report from "#report/index.mjs";
+import { getAvailableReporters, getReporter } from "#report/index.mjs";
 
 const MINIMAL_CRUISE_RESULT = {
   modules: [],
@@ -14,7 +14,7 @@ const MINIMAL_CRUISE_RESULT = {
   },
 };
 
-const lAvailableReporters = report.getAvailableReporters();
+const lAvailableReporters = getAvailableReporters();
 const lReporters = await Promise.all(
   lAvailableReporters
     .filter(
@@ -22,7 +22,7 @@ const lReporters = await Promise.all(
         pReporterName !== "null" && pReporterName !== "x-dot-webpage",
     )
     .map(async (pReporter) => {
-      const lReporter = await report.getReporter(pReporter);
+      const lReporter = await getReporter(pReporter);
       const lResult = lReporter(MINIMAL_CRUISE_RESULT);
       return { reporter: pReporter, output: lResult.output };
     }),
@@ -50,7 +50,7 @@ describe("[I] most reporters' output ends on an EOL", () => {
   });
 
   it("the x-dot-webpage reporter output ends on an EOL", async () => {
-    const lXDotWebpageReporter = await report.getReporter("x-dot-webpage");
+    const lXDotWebpageReporter = await getReporter("x-dot-webpage");
 
     const lResult = lXDotWebpageReporter(MINIMAL_CRUISE_RESULT, {
       spawnFunction,
@@ -59,7 +59,7 @@ describe("[I] most reporters' output ends on an EOL", () => {
   });
 
   it("the null reporter output DOES NOT end on an EOL", async () => {
-    const lNullReporter = await report.getReporter("null");
+    const lNullReporter = await getReporter("null");
     const lResult = lNullReporter(MINIMAL_CRUISE_RESULT);
     equal(lResult.output, "");
   });

@@ -23,7 +23,7 @@ export function extractGroups(pFromRestriction, pActualPath) {
 
     if (lMatchResult && lMatchResult.length > 1) {
       lReturnValue = lMatchResult.filter(
-        (pResult) => typeof pResult === "string"
+        (pResult) => typeof pResult === "string",
       );
     }
   }
@@ -51,11 +51,6 @@ export function replaceGroupPlaceholders(pString, pExtractedGroups) {
     (pAll, pThis, pIndex) =>
       // eslint-disable-next-line security/detect-non-literal-regexp
       pAll.replace(new RegExp(`\\$${pIndex}`, "g"), pThis),
-    pString
+    pString,
   );
 }
-
-export default {
-  extractGroups,
-  replaceGroupPlaceholders,
-};

@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - exoticallyRequired", () => {
   const lExoticallyRequiredRuleSet = parseRuleSet({
@@ -14,7 +14,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
         {
@@ -28,7 +28,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
 
   it("does flag dependencies that are required with any exotic require", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
         {
@@ -57,7 +57,7 @@ describe("[I] validate/index - exoticRequire", () => {
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -68,7 +68,7 @@ describe("[I] validate/index - exoticRequire", () => {
 
   it("does not flag dependencies that are required with an exotic require not in the forbdidden RE", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireRuleSet,
         { source: "something" },
         {
@@ -82,7 +82,7 @@ describe("[I] validate/index - exoticRequire", () => {
 
   it("flags dependencies that are required with a forbidden exotic require", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "use" },
@@ -107,7 +107,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -118,7 +118,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
 
   it("does not flag dependencies that are required with a sanctioned exotic require", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
         {
@@ -132,7 +132,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
 
   it("flags dependencies are required with an unsanctioned exotic require", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
         {

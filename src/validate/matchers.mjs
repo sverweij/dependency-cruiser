@@ -19,7 +19,7 @@ const DEPENDENCY_TYPE_DUPLICATES_THAT_MATTER = new Set([
   "npm-unknown",
 ]);
 
-function propertyEquals(pRule, pDependency, pProperty) {
+export function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
   if (Object.hasOwn(pRule.to, pProperty)) {
     return pDependency[pProperty] === pRule.to[pProperty];
@@ -27,7 +27,7 @@ function propertyEquals(pRule, pDependency, pProperty) {
   return true;
 }
 
-function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
+export function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
       (pDependency[pProperty] &&
@@ -35,7 +35,12 @@ function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
   );
 }
 
-function propertyMatchesNot(pRule, pDependency, pRuleProperty, pProperty) {
+export function propertyMatchesNot(
+  pRule,
+  pDependency,
+  pRuleProperty,
+  pProperty,
+) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
       (pDependency[pProperty] &&
@@ -43,21 +48,21 @@ function propertyMatchesNot(pRule, pDependency, pRuleProperty, pProperty) {
   );
 }
 
-function fromPath(pRule, pModule) {
+export function matchesFromPath(pRule, pModule) {
   return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));
 }
 
-function fromPathNot(pRule, pModule) {
+export function matchesFromPathNot(pRule, pModule) {
   return Boolean(
     !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot),
   );
 }
 
-function modulePath(pRule, pModule) {
+export function matchesModulePath(pRule, pModule) {
   return Boolean(!pRule.module.path || pModule.source.match(pRule.module.path));
 }
 
-function modulePathNot(pRule, pModule) {
+export function matchesModulePathNot(pRule, pModule) {
   return Boolean(
     !pRule.module.pathNot || !pModule.source.match(pRule.module.pathNot),
   );
@@ -70,11 +75,11 @@ function _toPath(pRule, pString, pGroups = []) {
   );
 }
 
-function toPath(pRule, pDependency, pGroups) {
+export function matchesToPath(pRule, pDependency, pGroups) {
   return _toPath(pRule, pDependency.resolved, pGroups);
 }
 
-function toModulePath(pRule, pModule, pGroups) {
+export function matchToModulePath(pRule, pModule, pGroups) {
   return _toPath(pRule, pModule.source, pGroups);
 }
 
@@ -85,22 +90,22 @@ function _toPathNot(pRule, pString, pGroups = []) {
   );
 }
 
-function toPathNot(pRule, pDependency, pGroups) {
+export function matchesToPathNot(pRule, pDependency, pGroups) {
   return _toPathNot(pRule, pDependency.resolved, pGroups);
 }
 
-function toModulePathNot(pRule, pModule, pGroups) {
+export function matchToModulePathNot(pRule, pModule, pGroups) {
   return _toPathNot(pRule, pModule.source, pGroups);
 }
 
-function toDependencyTypes(pRule, pDependency) {
+export function matchesToDependencyTypes(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypes ||
       intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes),
   );
 }
 
-function toDependencyTypesNot(pRule, pDependency) {
+export function matchesToDependencyTypesNot(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypesNot ||
       !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
@@ -108,7 +113,7 @@ function toDependencyTypesNot(pRule, pDependency) {
 }
 
 // eslint-disable-next-line complexity
-function toVia(pRule, pDependency, pGroups) {
+export function matchesToVia(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.via && pDependency.cycle) {
     if (pRule.to.via.path) {
@@ -140,7 +145,7 @@ function toVia(pRule, pDependency, pGroups) {
 }
 
 // eslint-disable-next-line complexity
-function toViaOnly(pRule, pDependency, pGroups) {
+export function matchesToViaOnly(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.viaOnly && pDependency.cycle) {
     if (pRule.to.viaOnly.path) {
@@ -171,7 +176,7 @@ function toViaOnly(pRule, pDependency, pGroups) {
   return lReturnValue;
 }
 
-function toIsMoreUnstable(pRule, pModule, pDependency) {
+export function matchesToIsMoreUnstable(pRule, pModule, pDependency) {
   if (Object.hasOwn(pRule.to, "moreUnstable")) {
     return (
       (pRule.to.moreUnstable &&
@@ -182,7 +187,7 @@ function toIsMoreUnstable(pRule, pModule, pDependency) {
   return true;
 }
 
-function matchesMoreThanOneDependencyType(pRule, pDependency) {
+export function matchesMoreThanOneDependencyType(pRule, pDependency) {
   /**
    * this rule exists to weed out i.e. dependencies declared in both
    * dependencies and devDependencies. We, however, also use the dependencyTypes
@@ -208,24 +213,3 @@ function matchesMoreThanOneDependencyType(pRule, pDependency) {
   }
   return true;
 }
-
-export default {
-  replaceGroupPlaceholders,
-  propertyEquals,
-  propertyMatches,
-  propertyMatchesNot,
-  fromPath,
-  fromPathNot,
-  toPath,
-  toModulePath,
-  modulePath,
-  modulePathNot,
-  toPathNot,
-  toModulePathNot,
-  toDependencyTypes,
-  toDependencyTypesNot,
-  toVia,
-  toViaOnly,
-  toIsMoreUnstable,
-  matchesMoreThanOneDependencyType,
-};

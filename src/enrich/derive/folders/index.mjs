@@ -1,5 +1,5 @@
 import aggregateToFolders from "./aggregate-to-folders.mjs";
-import validate from "#validate/index.mjs";
+import { validateFolder } from "#validate/index.mjs";
 
 /**
  * @param {import("../../../../types/dependency-cruiser.js").IFolder} pFolder
@@ -9,7 +9,7 @@ import validate from "#validate/index.mjs";
 function validateFolderDependency(pFolder, pOptions) {
   return (pDependency) => ({
     ...pDependency,
-    ...validate.folder(pOptions.ruleSet || {}, pFolder, pDependency),
+    ...validateFolder(pOptions.ruleSet || {}, pFolder, pDependency),
   });
 }
 

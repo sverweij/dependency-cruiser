@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import matchModuleRule from "#validate/match-module-rule.mjs";
+import { matchesReachableRule } from "#validate/match-module-rule-helpers.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ANY_UNREACHABLE = {
@@ -25,22 +25,22 @@ const ANY_UNREACHABLE_IN_ALLOWED_SET = {
 
 describe("[I] validate/match-module-rule - reachable", () => {
   it("rule without reachable attribute doesn't match reachables (implicit)", () => {
-    equal(matchModuleRule.matchesReachableRule(EMPTY_RULE, {}), false);
+    equal(matchesReachableRule(EMPTY_RULE, {}), false);
   });
   it("rule without reachable attribute doesn't match reachables (explicit)", () => {
     equal(
-      matchModuleRule.matchesReachableRule(EMPTY_RULE, {
+      matchesReachableRule(EMPTY_RULE, {
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
       false,
     );
   });
   it("rule with reachable attribute doesn't match reachables (implicit)", () => {
-    equal(matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {}), false);
+    equal(matchesReachableRule(ANY_UNREACHABLE, {}), false);
   });
   it("rule with reachable attribute doesn't match reachables (explicit)", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
+      matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: true, asDefinedInRule: "no-unreachable" }],
       }),
       false,
@@ -48,7 +48,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute matches unreachables according to that rule name", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
+      matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
       true,
@@ -56,7 +56,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute does not match unreachables according to other rule name", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
+      matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: false, asDefinedInRule: "other-rule-name" }],
       }),
       false,
@@ -64,7 +64,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("nameless rule with reachable attribute does not match unreachables according to other rule name", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
+      matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "other-rule-name" }],
       }),
       false,
@@ -72,7 +72,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("nameless rule with reachable attribute matchs unreachables according to not-in-allowed", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
+      matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "not-in-allowed" }],
       }),
       true,
@@ -80,7 +80,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute & path matches unreachables according to that rule name in that path", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
+      matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
@@ -89,7 +89,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name and not in that path", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
+      matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
         source: "test/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
@@ -98,7 +98,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute & path matches reachables according to that rule name in that path", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
+      matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: true, asDefinedInRule: "no-unreachable" }],
       }),
@@ -107,7 +107,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name in that path (explicit)", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
+      matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
@@ -116,7 +116,7 @@ describe("[I] validate/match-module-rule - reachable", () => {
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name in that path (implicit)", () => {
     equal(
-      matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
+      matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
       }),
       false,

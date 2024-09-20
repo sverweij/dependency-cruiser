@@ -1,8 +1,7 @@
 import { basename, sep, dirname } from "node:path/posix";
 import { formatPercentage, getURLForModule } from "../utl/index.mjs";
-import theming from "./theming.mjs";
 
-function attributizeObject(pObject) {
+export function attributizeObject(pObject) {
   return (
     Object.keys(pObject)
       // eslint-disable-next-line security/detect-object-injection
@@ -11,7 +10,7 @@ function attributizeObject(pObject) {
   );
 }
 
-function extractFirstTransgression(pModule) {
+export function extractFirstTransgression(pModule) {
   return {
     ...(pModule?.rules?.[0]
       ? { ...pModule, tooltip: pModule.rules[0].name }
@@ -25,26 +24,6 @@ function extractFirstTransgression(pModule) {
         : pDependency,
     ),
   };
-}
-
-function applyTheme(pTheme) {
-  return (pModule) => ({
-    ...pModule,
-    dependencies: pModule.dependencies
-      .map((pDependency) => ({
-        ...pDependency,
-        themeAttrs: attributizeObject(
-          theming.determineAttributes(pDependency, pTheme.dependencies),
-        ),
-      }))
-      .map((pDependency) => ({
-        ...pDependency,
-        hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs),
-      })),
-    themeAttrs: attributizeObject(
-      theming.determineAttributes(pModule, pTheme.modules),
-    ),
-  });
 }
 
 function toFullPath(pAll, pCurrent) {
@@ -75,7 +54,7 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
   return lInstabilityString;
 }
 
-function folderify(pShowMetrics) {
+export function folderify(pShowMetrics) {
   /** @param {import("../../../types/cruise-result").IModule} pModule*/
   return (pModule) => {
     let lAdditions = {};
@@ -103,7 +82,7 @@ function folderify(pShowMetrics) {
  * @param {string} pPrefix
  * @returns {URL?: string}
  */
-function addURL(pPrefix) {
+export function addURL(pPrefix) {
   return (pModule) => {
     if (pModule.couldNotResolve) {
       return pModule;
@@ -122,19 +101,10 @@ function makeLabel(pModule, pShowMetrics) {
   )}</B>${makeInstabilityString(pModule, pShowMetrics)}>`;
 }
 
-function flatLabel(pShowMetrics) {
+export function flatLabel(pShowMetrics) {
   return (pModule) => ({
     ...pModule,
     label: makeLabel(pModule, pShowMetrics),
     tooltip: basename(pModule.source),
   });
 }
-
-export default {
-  folderify,
-  applyTheme,
-  extractFirstTransgression,
-  attributizeObject,
-  addURL,
-  flatLabel,
-};

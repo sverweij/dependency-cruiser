@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import matchModuleRule from "#validate/match-module-rule.mjs";
+import { matchesDependentsRule } from "#validate/match-module-rule-helpers.mjs";
 
 const EMPTY_RULE = { from: {}, module: {} };
 const ANY_DEPENDENTS = {
@@ -55,26 +55,20 @@ const USED_FROM_SNACKBAR_BETWEEN = {
 
 describe("[I] validate/match-module-rule - dependents", () => {
   it("rule without dependents restriction doesn't flag (implicit)", () => {
-    equal(matchModuleRule.matchesDependentsRule(EMPTY_RULE, {}), false);
+    equal(matchesDependentsRule(EMPTY_RULE, {}), false);
   });
   it("rule without dependents restriction doesn't flag (explicit)", () => {
-    equal(
-      matchModuleRule.matchesDependentsRule(EMPTY_RULE, { dependents: [] }),
-      false,
-    );
+    equal(matchesDependentsRule(EMPTY_RULE, { dependents: [] }), false);
   });
   it("rule with dependents doesn't match a module with no dependents attribute", () => {
-    equal(matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, {}), false);
+    equal(matchesDependentsRule(ANY_DEPENDENTS, {}), false);
   });
   it("rule that matches any dependents does match a module with a dependents attribute", () => {
-    equal(
-      matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, { dependents: [] }),
-      true,
-    );
+    equal(matchesDependentsRule(ANY_DEPENDENTS, { dependents: [] }), true);
   });
   it("rule that matches any dependents does match a module with a dependents attribute (>1 dependent)", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, {
+      matchesDependentsRule(ANY_DEPENDENTS, {
         dependents: ["aap", "noot", "mies", "wim"],
       }),
       true,
@@ -83,46 +77,37 @@ describe("[I] validate/match-module-rule - dependents", () => {
 
   it("must-share (>=2 dependents) rule doesn't flag when there's 2 dependents", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        MUST_BE_SHARED_DONT_CARE_FROM_WHERE,
-        {
-          source: "src/utensils/simsalabim.ts",
-          dependents: ["aap", "noot"],
-        },
-      ),
+      matchesDependentsRule(MUST_BE_SHARED_DONT_CARE_FROM_WHERE, {
+        source: "src/utensils/simsalabim.ts",
+        dependents: ["aap", "noot"],
+      }),
       false,
     );
   });
 
   it("must-share (>=2 dependents) rule flags when there's 1 dependent", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        MUST_BE_SHARED_DONT_CARE_FROM_WHERE,
-        {
-          source: "src/utensils/simsalabim.ts",
-          dependents: ["aap"],
-        },
-      ),
+      matchesDependentsRule(MUST_BE_SHARED_DONT_CARE_FROM_WHERE, {
+        source: "src/utensils/simsalabim.ts",
+        dependents: ["aap"],
+      }),
       true,
     );
   });
 
   it("must-share (>=2 dependents) rule flags when there's 0 dependents", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        MUST_BE_SHARED_DONT_CARE_FROM_WHERE,
-        {
-          source: "src/utensils/simsalabim.ts",
-          dependents: [],
-        },
-      ),
+      matchesDependentsRule(MUST_BE_SHARED_DONT_CARE_FROM_WHERE, {
+        source: "src/utensils/simsalabim.ts",
+        dependents: [],
+      }),
       true,
     );
   });
 
   it("must-share (>=2 dependents) with a from doesn't flag when there's 2 dependents from that from", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
+      matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
         source: "src/utensils/frieten.ts",
         dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
       }),
@@ -132,7 +117,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
 
   it("must-share (>=2 dependents) with a from doesn't flag when there's 2 dependents from that from (+ some others that don't matter)", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
+      matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
         source: "src/utensils/frieten.ts",
         dependents: [
           "src/snackbar/kapsalon.ts",
@@ -147,7 +132,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
 
   it("must-share (>=2 dependents) with a from path when there's only 1 dependents from that from path", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
+      matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
         source: "src/utensils/frieten.ts",
         dependents: [
           "src/snackbar/kapsalon.ts",
@@ -160,67 +145,55 @@ describe("[I] validate/match-module-rule - dependents", () => {
 
   it("must-share (>=2 dependents) with a from pathNot when there's only 1 dependents from that from pathNot", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR,
-        {
-          source: "src/utensils/frieten.ts",
-          dependents: [
-            "src/snackbar/kapsalon.ts",
-            "src/fietsenwinkel/zijspan.ts",
-          ],
-        },
-      ),
+      matchesDependentsRule(MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR, {
+        source: "src/utensils/frieten.ts",
+        dependents: [
+          "src/snackbar/kapsalon.ts",
+          "src/fietsenwinkel/zijspan.ts",
+        ],
+      }),
       true,
     );
   });
 
   it("must-share (>=2 dependents) with a from pathNot when there's 0 dependents from that from pathNot", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR,
-        {
-          source: "src/utensils/frieten.ts",
-          dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
-        },
-      ),
+      matchesDependentsRule(MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR, {
+        source: "src/utensils/frieten.ts",
+        dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
+      }),
       true,
     );
   });
 
   it("must not be used more than 3 times from snackbar - happy scenario", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES,
-        {
-          source: "src/utensils/frieten.ts",
-          dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
-        },
-      ),
+      matchesDependentsRule(CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES, {
+        source: "src/utensils/frieten.ts",
+        dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
+      }),
       false,
     );
   });
 
   it("must not be used more than 3 times from snackbar - fail scenario", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(
-        CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES,
-        {
-          source: "src/utensils/frieten.ts",
-          dependents: [
-            "src/snackbar/kapsalon.ts",
-            "src/snackbar/zijspan.ts",
-            "src/snackbar/dooierat.ts",
-            "src/snackbar/kipcorn.ts",
-          ],
-        },
-      ),
+      matchesDependentsRule(CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES, {
+        source: "src/utensils/frieten.ts",
+        dependents: [
+          "src/snackbar/kapsalon.ts",
+          "src/snackbar/zijspan.ts",
+          "src/snackbar/dooierat.ts",
+          "src/snackbar/kipcorn.ts",
+        ],
+      }),
       false,
     );
   });
 
   it("combo breaker (3 < x < 5) - happy scenario", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
+      matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
         source: "src/utensils/frieten.ts",
         dependents: [
           "src/snackbar/kapsalon.ts",
@@ -235,7 +208,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
 
   it("combo breaker (3 < x < 5) - fail scenario", () => {
     equal(
-      matchModuleRule.matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
+      matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
         source: "src/utensils/frieten.ts",
         dependents: [
           "src/snackbar/kapsalon.ts",

@@ -1,6 +1,6 @@
 /* eslint-disable prefer-template */
-import theming from "./theming.mjs";
-import moduleUtl from "./module-utl.mjs";
+import { normalizeTheme } from "./theming.mjs";
+import { attributizeObject } from "./module-utl.mjs";
 import prepareFolderLevel from "./prepare-folder-level.mjs";
 import prepareCustomLevel from "./prepare-custom-level.mjs";
 import prepareFlatLevel from "./prepare-flat-level.mjs";
@@ -25,21 +25,15 @@ const GRANULARITY2REPORTER_OPTIONS = new Map([
 ]);
 
 function buildGraphAttributes(pGraph) {
-  return Boolean(pGraph)
-    ? `    ${moduleUtl.attributizeObject(pGraph || {})}`
-    : "";
+  return Boolean(pGraph) ? `    ${attributizeObject(pGraph || {})}` : "";
 }
 
 function buildNodeAttributes(pNode) {
-  return Boolean(pNode)
-    ? `    node [${moduleUtl.attributizeObject(pNode || {})}]`
-    : "";
+  return Boolean(pNode) ? `    node [${attributizeObject(pNode || {})}]` : "";
 }
 
 function buildEdgeAttributes(pEdge) {
-  return Boolean(pEdge)
-    ? `    edge [${moduleUtl.attributizeObject(pEdge || {})}]`
-    : "";
+  return Boolean(pEdge) ? `    edge [${attributizeObject(pEdge || {})}]` : "";
 }
 
 function buildGeneralAttributes(pTheme) {
@@ -120,7 +114,7 @@ function report(
   pGranularity,
   { theme, collapsePattern, filters, showMetrics },
 ) {
-  const lTheme = theming.normalizeTheme(theme);
+  const lTheme = normalizeTheme(theme);
   const lResults = filters
     ? {
         ...pResults,

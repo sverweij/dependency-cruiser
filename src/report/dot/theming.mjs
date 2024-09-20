@@ -1,4 +1,5 @@
 import DEFAULT_THEME from "./default-theme.mjs";
+import { attributizeObject } from "./module-utl.mjs";
 import { has, get } from "#utl/object-util.mjs";
 
 function matchesRE(pValue, pRE) {
@@ -48,7 +49,7 @@ function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
   });
 }
 
-function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
+export function getThemeAttributes(pModuleOrDependency, pAttributeCriteria) {
   return (pAttributeCriteria || [])
     .filter((pSchemeEntry) =>
       moduleOrDependencyMatchesCriteria(pSchemeEntry, pModuleOrDependency),
@@ -57,7 +58,7 @@ function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
     .reduce((pAll, pCurrent) => ({ ...pCurrent, ...pAll }), {});
 }
 
-function normalizeTheme(pTheme) {
+export function normalizeTheme(pTheme) {
   let lReturnValue = structuredClone(DEFAULT_THEME);
 
   if (pTheme) {
@@ -78,7 +79,20 @@ function normalizeTheme(pTheme) {
   return lReturnValue;
 }
 
-export default {
-  normalizeTheme,
-  determineAttributes,
-};
+export function applyTheme(pTheme) {
+  return (pModule) => ({
+    ...pModule,
+    dependencies: pModule.dependencies
+      .map((pDependency) => ({
+        ...pDependency,
+        themeAttrs: attributizeObject(
+          getThemeAttributes(pDependency, pTheme.dependencies),
+        ),
+      }))
+      .map((pDependency) => ({
+        ...pDependency,
+        hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs),
+      })),
+    themeAttrs: attributizeObject(getThemeAttributes(pModule, pTheme.modules)),
+  });
+}

@@ -89,22 +89,19 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
   }
   return lReturnValue;
 }
+export function validateModule(pRuleSet, pModule) {
+  return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
+}
 
-export default {
-  module: function module(pRuleSet, pModule) {
-    return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
-  },
+export function validateDependency(pRuleSet, pFrom, pTo) {
+  return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
+}
 
-  dependency: function dependency(pRuleSet, pFrom, pTo) {
-    return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
-  },
-
-  folder: function folder(pRuleSet, pFromFolder, pToFolder) {
-    return validateAgainstRules(
-      pRuleSet,
-      pFromFolder,
-      pToFolder,
-      matchFolderRule,
-    );
-  },
-};
+export function validateFolder(pRuleSet, pFromFolder, pToFolder) {
+  return validateAgainstRules(
+    pRuleSet,
+    pFromFolder,
+    pToFolder,
+    matchFolderRule,
+  );
+}

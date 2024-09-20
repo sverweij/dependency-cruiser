@@ -1,4 +1,5 @@
-import moduleUtl from "./module-utl.mjs";
+import { folderify, addURL, extractFirstTransgression } from "./module-utl.mjs";
+import { applyTheme } from "./theming.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
 import { compareModules } from "#graph-utl/compare.mjs";
 import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
@@ -15,9 +16,9 @@ export default function prepareCustomLevel(
       : pResults.modules
   )
     .sort(compareModules)
-    .map(moduleUtl.folderify(pShowMetrics))
-    .map(moduleUtl.extractFirstTransgression)
+    .map(folderify(pShowMetrics))
+    .map(extractFirstTransgression)
     .map(stripSelfTransitions)
-    .map(moduleUtl.applyTheme(pTheme))
-    .map(moduleUtl.addURL(pResults.summary.optionsUsed?.prefix ?? ""));
+    .map(applyTheme(pTheme))
+    .map(addURL(pResults.summary.optionsUsed?.prefix ?? ""));
 }

@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index group matching - path group matched in a pathnot", () => {
   const lGroupToPathNotRuleSet = {
@@ -22,7 +22,7 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
 
   it("group-to-pathnot - Disallows dependencies between peer folders", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/noot/pinda.ts" },
@@ -41,7 +41,7 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
 
   it("group-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/shared/bananas.ts" },
@@ -52,7 +52,7 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
 
   it("group-to-pathnot - Allows dependencies within own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/oerangoetang.ts" },
@@ -63,7 +63,7 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
 
   it("group-to-pathnot - Allows dependencies to sub folders of own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -74,7 +74,7 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
 
   it("group-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/rekwisieten/touw.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -104,7 +104,7 @@ describe("[I] validate/index group matching - second path group matched in a pat
 
   it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/noot/pinda.ts" },
@@ -123,7 +123,7 @@ describe("[I] validate/index group matching - second path group matched in a pat
 
   it("group-two-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/shared/bananas.ts" },
@@ -134,7 +134,7 @@ describe("[I] validate/index group matching - second path group matched in a pat
 
   it("group-two-to-pathnot - Allows dependencies within own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/oerangoetang.ts" },
@@ -145,7 +145,7 @@ describe("[I] validate/index group matching - second path group matched in a pat
 
   it("group-two-to-pathnot - Allows dependencies to sub folders of own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -156,7 +156,7 @@ describe("[I] validate/index group matching - second path group matched in a pat
 
   it("group-two-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/rekwisieten/touw.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },

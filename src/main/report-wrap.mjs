@@ -1,4 +1,4 @@
-import report from "#report/index.mjs";
+import { getReporter } from "#report/index.mjs";
 import summarize from "#enrich/summarize/index.mjs";
 import { applyFilters } from "#graph-utl/filter-bank.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
@@ -49,7 +49,7 @@ function getReporterSection(pOutputType) {
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
 export default async function reportWrap(pResult, pFormatOptions) {
-  const lReportFunction = await report.getReporter(pFormatOptions.outputType);
+  const lReportFunction = await getReporter(pFormatOptions.outputType);
   const lReportOptions =
     pResult.summary.optionsUsed?.reporterOptions?.[
       getReporterSection(pFormatOptions.outputType)

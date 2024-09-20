@@ -1,10 +1,10 @@
-import validate from "#validate/index.mjs";
+import { validateDependency, validateModule } from "#validate/index.mjs";
 
 function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
   return {
     ...pDependency,
     ...(pValidate
-      ? validate.dependency(pRuleSet, pModule, pDependency)
+      ? validateDependency(pRuleSet, pModule, pDependency)
       : { valid: true }),
   };
 }
@@ -24,7 +24,7 @@ function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
 export default function addValidations(pModules, pRuleSet, pValidate) {
   return pModules.map((pModule) => ({
     ...pModule,
-    ...(pValidate ? validate.module(pRuleSet, pModule) : { valid: true }),
+    ...(pValidate ? validateModule(pRuleSet, pModule) : { valid: true }),
     dependencies: pModule.dependencies.map((pDependency) =>
       addDependencyViolations(pModule, pDependency, pRuleSet, pValidate),
     ),
