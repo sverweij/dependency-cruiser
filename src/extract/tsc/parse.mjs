@@ -53,30 +53,22 @@ function getAST(pFileName, pTranspileOptions) {
   );
 }
 
+/**
+ * Compiles the file identified by pFileName into a (typescript)
+ * AST and returns it. Subsequent calls for the same file name will
+ * return the result from a cache
+ *
+ * @param {string} pFileName - the name of the file to compile
+ * @return {object} - a (typescript) AST
+ */
 export const getASTCached = memoize(getAST);
+
+/**
+ * @return {boolean} - true if the typescript compiler is available,
+ *                     false in all other cases
+ */
+export const isAvailable = () => typescript !== false;
 
 export function clearCache() {
   memoizeClear(getASTCached);
 }
-
-export default {
-  getASTFromSource,
-
-  /**
-   * @return {boolean} - true if the typescript compiler is available,
-   *                     false in all other cases
-   */
-  isAvailable: () => typescript !== false,
-
-  /**
-   * Compiles the file identified by pFileName into a (typescript)
-   * AST and returns it. Subsequent calls for the same file name will
-   * return the result from a cache
-   *
-   * @param {string} pFileName - the name of the file to compile
-   * @return {object} - a (typescript) AST
-   */
-  getASTCached,
-
-  clearCache,
-};

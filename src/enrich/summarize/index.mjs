@@ -7,7 +7,7 @@ import {
   getModulesCruised,
   getDependenciesCruised,
 } from "./get-stats.mjs";
-import compare from "#graph-utl/compare.mjs";
+import { compareViolations } from "#graph-utl/compare.mjs";
 
 /**
  *
@@ -31,7 +31,7 @@ export default function summarize(
 ) {
   const lViolations = summarizeModules(pModules, pOptions.ruleSet)
     .concat(summarizeFolders(pFolders || [], pOptions.ruleSet))
-    .sort(compare.violations);
+    .sort(compareViolations);
 
   return {
     violations: lViolations,

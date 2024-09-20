@@ -1,7 +1,7 @@
 import { formatViolation, formatPercentage } from "../utl/index.mjs";
 import meta from "#meta.cjs";
 
-function getFormattedAllowedRule(pRuleSetUsed) {
+export function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = pRuleSetUsed?.allowed ?? [];
   const lCommentedRule = lAllowed.find((pRule) =>
     Object.hasOwn(pRule, "comment"),
@@ -17,7 +17,7 @@ function getFormattedAllowedRule(pRuleSetUsed) {
     : [];
 }
 
-function mergeCountsIntoRule(pRule, pViolationCounts) {
+export function mergeCountsIntoRule(pRule, pViolationCounts) {
   const lCounts = pViolationCounts[pRule.name]
     ? pViolationCounts[pRule.name]
     : { count: 0, ignoredCount: 0 };
@@ -138,12 +138,3 @@ export function aggregateViolations(pViolations, pRuleSetUsed) {
         pFirst.name.localeCompare(pSecond.name),
     );
 }
-
-export default {
-  aggregateViolations,
-  getFormattedAllowedRule,
-  mergeCountsIntoRule,
-  formatSummaryForReport,
-  determineFromExtras,
-  determineTo,
-};

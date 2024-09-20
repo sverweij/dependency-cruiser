@@ -1,4 +1,4 @@
-import compare from "./compare.mjs";
+import { compareRules } from "./compare.mjs";
 import { uniqBy } from "#utl/array-util.mjs";
 
 function mergeModule(pLeftModule, pRightModule) {
@@ -11,7 +11,7 @@ function mergeModule(pLeftModule, pRightModule) {
     ),
     rules: pLeftModule.rules
       .concat(pRightModule?.rules ?? [])
-      .sort(compare.rules),
+      .sort(compareRules),
     valid: pLeftModule.valid && pRightModule.valid,
     consolidated:
       Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated),

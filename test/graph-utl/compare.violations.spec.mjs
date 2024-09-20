@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import { violations } from "#graph-utl/compare.mjs";
+import { compareViolations } from "#graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - violations", () => {
   const lViolation = {
@@ -48,26 +48,26 @@ describe("[U] graph-utl/compare - violations", () => {
   };
 
   it("returns 0 for identical violations", () => {
-    equal(violations(lViolation, lViolation), 0);
+    equal(compareViolations(lViolation, lViolation), 0);
   });
 
   it("returns -1 when severity > the one compared against", () => {
-    equal(violations(lViolation, lLessSevereViolation), -1);
+    equal(compareViolations(lViolation, lLessSevereViolation), -1);
   });
 
   it("returns 1 when severity < the one compared against", () => {
-    equal(violations(lLessSevereViolation, lViolation), 1);
+    equal(compareViolations(lLessSevereViolation, lViolation), 1);
   });
 
   it("returns -1 when rule name < the one compared against", () => {
-    equal(violations(lViolation, lLaterNameViolation), -1);
+    equal(compareViolations(lViolation, lLaterNameViolation), -1);
   });
 
   it("returns -1 when rule 'from' < the one compared against", () => {
-    equal(violations(lViolation, lLaterFromViolation), -1);
+    equal(compareViolations(lViolation, lLaterFromViolation), -1);
   });
 
   it("returns -1 when rule 'to' < the one compared against", () => {
-    equal(violations(lViolation, lLaterToViolation), -1);
+    equal(compareViolations(lViolation, lLaterToViolation), -1);
   });
 });

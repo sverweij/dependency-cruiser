@@ -1,6 +1,6 @@
 import isSameViolation from "./is-same-violation.mjs";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
-import compare from "#graph-utl/compare.mjs";
+import { compareViolations } from "#graph-utl/compare.mjs";
 import { uniqWith } from "#utl/array-util.mjs";
 
 function cutNonTransgressions(pModule) {
@@ -135,7 +135,7 @@ export default function summarizeModules(pModules, pRuleSet) {
   return uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
-      .sort(compare.violations),
+      .sort(compareViolations),
     isSameViolation,
   );
 }

@@ -10,35 +10,35 @@ function severity2number(pSeverity) {
   return lSeverity2Number.get(pSeverity) || -1;
 }
 
-export function severities(pFirstSeverity, pSecondSeverity) {
+export function compareSeverities(pFirstSeverity, pSecondSeverity) {
   return Math.sign(
-    severity2number(pFirstSeverity) - severity2number(pSecondSeverity)
+    severity2number(pFirstSeverity) - severity2number(pSecondSeverity),
   );
 }
 
-export function violations(pFirstViolation, pSecondViolation) {
+export function compareViolations(pFirstViolation, pSecondViolation) {
   return (
-    severities(pFirstViolation.rule.severity, pSecondViolation.rule.severity) ||
+    compareSeverities(
+      pFirstViolation.rule.severity,
+      pSecondViolation.rule.severity,
+    ) ||
     pFirstViolation.rule.name.localeCompare(pSecondViolation.rule.name) ||
     pFirstViolation.from.localeCompare(pSecondViolation.from) ||
     pFirstViolation.to.localeCompare(pSecondViolation.to)
   );
 }
 
-export function rules(pLeftRule, pRightRule) {
+export function compareRules(pLeftRule, pRightRule) {
   return (
-    severities(pLeftRule.severity, pRightRule.severity) ||
+    compareSeverities(pLeftRule.severity, pRightRule.severity) ||
     pLeftRule.name.localeCompare(pRightRule.name)
   );
 }
 
-export function modules(pLeftModule, pRightModule) {
+export function compareModules(pLeftModule, pRightModule) {
   return pLeftModule.source > pRightModule.source ? 1 : -1;
 }
 
 export default {
-  modules,
-  rules,
-  severities,
-  violations,
+  violations: compareViolations,
 };

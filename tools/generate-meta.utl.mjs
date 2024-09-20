@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import prettier from "prettier";
+import { format } from "prettier";
 
 function getStream(pStream) {
   return new Promise((pResolve, pReject) => {
@@ -30,4 +30,4 @@ const lGeneratedSource = `/* generated - don't edit */
     supportedTranspilers: ${JSON.stringify($package.supportedTranspilers)}
   }`;
 
-console.log(await prettier.format(lGeneratedSource, { parser: "babel" }));
+console.log(await format(lGeneratedSource, { parser: "babel" }));

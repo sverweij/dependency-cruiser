@@ -1,4 +1,4 @@
-import compare from "./compare.mjs";
+import { compareRules } from "./compare.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
 function mergeDependency(pLeftDependency, pRightDependency) {
@@ -10,7 +10,7 @@ function mergeDependency(pLeftDependency, pRightDependency) {
     ),
     rules: pLeftDependency.rules
       .concat(pRightDependency?.rules ?? [])
-      .sort(compare.rules),
+      .sort(compareRules),
     valid: pLeftDependency.valid && pRightDependency.valid,
   };
 }

@@ -1,7 +1,7 @@
-import prettier from "prettier";
+import { format } from "prettier";
 import normalizeNewline from "normalize-newline";
 
 export default async function normalizeSource(pSource) {
-  const lData = await prettier.format(pSource, { parser: "babel" });
+  const lData = await format(pSource, { parser: "babel" });
   return normalizeNewline(lData);
 }

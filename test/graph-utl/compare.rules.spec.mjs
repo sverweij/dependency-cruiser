@@ -1,10 +1,10 @@
 import { equal } from "node:assert/strict";
-import { rules } from "#graph-utl/compare.mjs";
+import { compareRules } from "#graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - rules", () => {
   it("samesies yield 0", () => {
     equal(
-      rules(
+      compareRules(
         { severity: "error", name: "thing" },
         { severity: "error", name: "thing" },
       ),
@@ -14,7 +14,7 @@ describe("[U] graph-utl/compare - rules", () => {
 
   it("unknown severity > error", () => {
     equal(
-      rules(
+      compareRules(
         { severity: "not defined", name: "thing" },
         { severity: "error", name: "thing" },
       ),
@@ -24,7 +24,7 @@ describe("[U] graph-utl/compare - rules", () => {
 
   it("same name, different severity sorts on severity", () => {
     equal(
-      rules(
+      compareRules(
         { severity: "info", name: "thing" },
         { severity: "warn", name: "thing" },
       ),
@@ -34,7 +34,7 @@ describe("[U] graph-utl/compare - rules", () => {
 
   it("differnt name, different severity sorts on severity", () => {
     equal(
-      rules(
+      compareRules(
         { severity: "info", name: "aaa" },
         { severity: "warn", name: "zzz" },
       ),
@@ -44,7 +44,7 @@ describe("[U] graph-utl/compare - rules", () => {
 
   it("same severity, different name sorts on name", () => {
     equal(
-      rules(
+      compareRules(
         { severity: "info", name: "thing" },
         { severity: "info", name: "thang" },
       ),

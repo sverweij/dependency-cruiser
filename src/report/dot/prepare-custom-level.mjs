@@ -1,6 +1,6 @@
 import moduleUtl from "./module-utl.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
-import compare from "#graph-utl/compare.mjs";
+import { compareModules } from "#graph-utl/compare.mjs";
 import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
 
 export default function prepareCustomLevel(
@@ -14,7 +14,7 @@ export default function prepareCustomLevel(
       ? consolidateToPattern(pResults.modules, pCollapsePattern)
       : pResults.modules
   )
-    .sort(compare.modules)
+    .sort(compareModules)
     .map(moduleUtl.folderify(pShowMetrics))
     .map(moduleUtl.extractFirstTransgression)
     .map(stripSelfTransitions)

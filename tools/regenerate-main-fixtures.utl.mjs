@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
-import prettier from "prettier";
+import { format } from "prettier";
 import main from "../src/main/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -14,7 +14,7 @@ async function barfTheJSON(
   pResult,
   pTargetDirectory = MAIN_MOCKS_DIR,
 ) {
-  const lFormatted = await prettier.format(JSON.stringify(pResult.output), {
+  const lFormatted = await format(JSON.stringify(pResult.output), {
     parser: "json",
   });
   writeFileSync(join(pTargetDirectory, pTargetFileName), lFormatted, {

@@ -1,7 +1,9 @@
-import errorHtmlUtl from "./error-html/utl.mjs";
+import {
+  aggregateViolations,
+  determineTo,
+  determineFromExtras,
+} from "./error-html/utl.mjs";
 import meta from "#meta.cjs";
-
-const { aggregateViolations, determineTo, determineFromExtras } = errorHtmlUtl;
 
 const REPORT_DEFAULTS = {
   showTitle: true,

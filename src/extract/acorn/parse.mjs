@@ -92,9 +92,3 @@ export const getASTCached = memoize(getAST);
 export function clearCache() {
   memoizeClear(getASTCached);
 }
-
-export default {
-  getASTFromSource,
-  getASTCached,
-  clearCache,
-};

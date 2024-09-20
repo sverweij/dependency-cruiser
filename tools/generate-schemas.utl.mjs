@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-object-injection */
 import { writeFileSync } from "node:fs";
 import { extname } from "node:path";
-import prettier from "prettier";
+import { format } from "prettier";
 import babel from "@babel/core";
 
 function stripAttribute(pObject, pAttribute) {
@@ -20,7 +20,7 @@ function stripAttribute(pObject, pAttribute) {
 function emitConsolidatedSchema(pOutputFileName) {
   if (extname(pOutputFileName) === ".json") {
     return async (pJSONSchemaObject) => {
-      const lFormattedJSON = await prettier.format(
+      const lFormattedJSON = await format(
         JSON.stringify(pJSONSchemaObject.default),
         {
           parser: "json",
@@ -34,7 +34,7 @@ function emitConsolidatedSchema(pOutputFileName) {
       stripAttribute(pJSONSchemaObject.default, "description"),
     )}`;
     // to strip quoted attributes {"thing": 481} => {thing: 481}
-    const lFormatted = await prettier.format(lUnMinified, { parser: "babel" });
+    const lFormatted = await format(lUnMinified, { parser: "babel" });
     const lMinified = babel.transformSync(lFormatted, { minified: true }).code;
     writeFileSync(pOutputFileName, lMinified, "utf8");
   };

@@ -26,31 +26,23 @@ function getAST(pFileName) {
   return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
+/**
+ * Compiles the file identified by pFileName into an (swc)
+ * AST and returns it. Subsequent calls for the same file name will
+ * return the result from a cache
+ *
+ * @param {string} pFileName - the name of the file to compile
+ * @return {import('@swc/core').ModuleItem[]} - an (swc) AST
+ */
 export const getASTCached = memoize(getAST);
 
 export function clearCache() {
   memoizeClear(getASTCached);
 }
 
-export default {
-  getASTFromSource,
-
-  /**
-   * @return {boolean} - true if the swc compiler is available,
-   *                     false in all other cases
-   */
-  // @ts-expect-error dfdfd
-  isAvailable: () => swc !== false,
-
-  /**
-   * Compiles the file identified by pFileName into an (swc)
-   * AST and returns it. Subsequent calls for the same file name will
-   * return the result from a cache
-   *
-   * @param {string} pFileName - the name of the file to compile
-   * @return {import('@swc/core').ModuleItem[]} - an (swc) AST
-   */
-  getASTCached,
-
-  clearCache,
-};
+/**
+ * @return {boolean} - true if the swc compiler is available,
+ *                     false in all other cases
+ */
+// @ts-expect-error dfdfd
+export const isAvailable = () => swc !== false;
