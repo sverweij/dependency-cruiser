@@ -1,5 +1,8 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
-import matchers from "#validate/matchers.mjs";
+import {
+  matchToModulePath,
+  matchToModulePathNot,
+} from "#validate/matchers.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
 
@@ -25,8 +28,8 @@ function isModuleInRuleTo(pRule, pModuleTo, pModuleFrom) {
     : [];
 
   return (
-    matchers.toModulePath(pRule, pModuleTo, lGroups) &&
-    matchers.toModulePathNot(pRule, pModuleTo, lGroups)
+    matchToModulePath(pRule, pModuleTo, lGroups) &&
+    matchToModulePathNot(pRule, pModuleTo, lGroups)
   );
 }
 

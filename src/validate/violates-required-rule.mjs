@@ -1,4 +1,8 @@
-import matchers from "./matchers.mjs";
+import {
+  matchesToPath,
+  matchesModulePath,
+  matchesModulePathNot,
+} from "./matchers.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
@@ -13,13 +17,13 @@ export default function violatesRequiredRule(pRule, pModule) {
   let lReturnValue = false;
 
   if (
-    matchers.modulePath(pRule, pModule) &&
-    matchers.modulePathNot(pRule, pModule)
+    matchesModulePath(pRule, pModule) &&
+    matchesModulePathNot(pRule, pModule)
   ) {
     const lGroups = extractGroups(pRule.module, pModule.source);
 
     lReturnValue = !pModule.dependencies.some((pDependency) =>
-      matchers.toPath(pRule, pDependency, lGroups),
+      matchesToPath(pRule, pDependency, lGroups),
     );
   }
   return lReturnValue;

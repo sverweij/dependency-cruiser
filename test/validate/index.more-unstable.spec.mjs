@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - stability checks", () => {
   const lForbiddenRuleSet = parseRuleSet({
@@ -29,7 +29,7 @@ describe("[I] validate/index - stability checks", () => {
 
   it("moreUnstable: flags when depending on a module that is more unstable (moreUnstable=true, forbidden)", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lForbiddenRuleSet,
         { source: "something", instability: 0 },
         {
@@ -46,7 +46,7 @@ describe("[I] validate/index - stability checks", () => {
 
   it("moreUnstable: does not flag when depending on a module that is more stable (moreUnstable=true, forbidden)", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lForbiddenRuleSet,
         { source: "something", instability: 1 },
         {
@@ -62,7 +62,7 @@ describe("[I] validate/index - stability checks", () => {
 
   it("moreUnstable: flags when depending on a module that is more unstable (moreUnstable=false, allowed)", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lAllowedRuleSet,
         { source: "something", instability: 0 },
         {
@@ -79,7 +79,7 @@ describe("[I] validate/index - stability checks", () => {
 
   it("moreUnstable: does not flag when depending on a module that is more stable (moreUnstable=false, allowed)", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lAllowedRuleSet,
         { source: "something", instability: 1 },
         {

@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - couldNotResolve", () => {
   const lNotToUnresolvableRuleSet = parseRuleSet({
@@ -18,7 +18,7 @@ describe("[I] validate/index - couldNotResolve", () => {
 
   it("not to unresolvable - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: false },
@@ -29,7 +29,7 @@ describe("[I] validate/index - couldNotResolve", () => {
 
   it("not to unresolvable - violation", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: true },

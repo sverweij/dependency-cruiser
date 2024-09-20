@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 import safeRegex from "safe-regex";
-import report from "#report/index.mjs";
+import { getAvailableReporters } from "#report/index.mjs";
 
 const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
@@ -53,7 +53,7 @@ function assertRegExpSafety(pPattern) {
 function assertOutputTypeValid(pOutputType) {
   if (
     Boolean(pOutputType) &&
-    !report.getAvailableReporters().includes(pOutputType) &&
+    !getAvailableReporters().includes(pOutputType) &&
     !pOutputType.startsWith("plugin:")
   ) {
     throw new Error(`'${pOutputType}' is not a valid output type.\n`);

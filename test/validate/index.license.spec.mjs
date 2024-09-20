@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - license", () => {
   const lLicenseRuleSet = parseRuleSet({
@@ -15,7 +15,7 @@ describe("[I] validate/index - license", () => {
 
   it("Skips dependencies that have no license attached", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -26,7 +26,7 @@ describe("[I] validate/index - license", () => {
 
   it("does not flag dependencies that do not match the license expression", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseRuleSet,
         { source: "something" },
         {
@@ -40,7 +40,7 @@ describe("[I] validate/index - license", () => {
 
   it("flags dependencies that match the license expression", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseRuleSet,
         { source: "something" },
         {
@@ -69,7 +69,7 @@ describe("[I] validate/index - licenseNot", () => {
 
   it("Skips dependencies that have no license attached", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
@@ -80,7 +80,7 @@ describe("[I] validate/index - licenseNot", () => {
 
   it("does not flag dependencies that do match the license expression", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseNotRuleSet,
         { source: "something" },
         {
@@ -94,7 +94,7 @@ describe("[I] validate/index - licenseNot", () => {
 
   it("flags dependencies that do not match the license expression", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lLicenseNotRuleSet,
         { source: "something" },
         {

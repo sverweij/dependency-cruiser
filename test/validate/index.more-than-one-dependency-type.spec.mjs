@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] index/validate - moreThanOneDependencyType", () => {
   it(`no relations with modules of > 1 dep type (e.g. specified 2x in package.json)`, () => {
@@ -16,7 +16,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
@@ -50,7 +50,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
@@ -83,7 +83,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
@@ -110,7 +110,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {

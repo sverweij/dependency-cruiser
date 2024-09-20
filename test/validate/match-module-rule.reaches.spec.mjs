@@ -1,5 +1,5 @@
 import { equal } from "node:assert/strict";
-import matchModuleRule from "#validate/match-module-rule.mjs";
+import { matchesReachesRule } from "#validate/match-module-rule-helpers.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ANY_REACHABLE = {
@@ -15,11 +15,11 @@ const ANY_REACHES_IN_ALLOWED = {
 
 describe("[I] validate/match-module-rule - reaches", () => {
   it("rule without reachable attribute doesn't match modules with a reaches (implicit)", () => {
-    equal(matchModuleRule.matchesReachesRule(EMPTY_RULE, {}), false);
+    equal(matchesReachesRule(EMPTY_RULE, {}), false);
   });
   it("rule without reachable attribute doesn't match modules with a reaches (explicit)", () => {
     equal(
-      matchModuleRule.matchesReachesRule(EMPTY_RULE, {
+      matchesReachesRule(EMPTY_RULE, {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],
@@ -32,7 +32,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
   });
   it("rule without reachable attribute matches modules with a reaches (explicit)", () => {
     equal(
-      matchModuleRule.matchesReachesRule(ANY_REACHABLE, {
+      matchesReachesRule(ANY_REACHABLE, {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],
@@ -45,7 +45,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
   });
   it("rule without reachable attribute matches modules with a reaches (explicit, nameless rule)", () => {
     equal(
-      matchModuleRule.matchesReachesRule(ANY_REACHES_IN_ALLOWED, {
+      matchesReachesRule(ANY_REACHES_IN_ALLOWED, {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],

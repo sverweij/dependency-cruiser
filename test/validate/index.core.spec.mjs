@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - core", () => {
   const lNotToCoreRuleSet = parseRuleSet({
@@ -55,7 +55,7 @@ describe("[I] validate/index - core", () => {
 
   it("not to core - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["npm"] },
@@ -66,7 +66,7 @@ describe("[I] validate/index - core", () => {
 
   it("not to core - violation", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] },
@@ -80,7 +80,7 @@ describe("[I] validate/index - core", () => {
 
   it("not to core fs os - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] },
@@ -91,7 +91,7 @@ describe("[I] validate/index - core", () => {
 
   it("not to core fs os - violation", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
@@ -116,7 +116,7 @@ describe("[I] validate/index - core", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
@@ -140,7 +140,7 @@ describe("[I] validate/index - core", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
 
         { source: "koos koets" },
@@ -165,7 +165,7 @@ describe("[I] validate/index - core", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robbie kerkhof", dependencyTypes: ["local"] },
@@ -195,7 +195,7 @@ describe("[I] validate/index - core", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["npm"] },
@@ -209,7 +209,7 @@ describe("[I] validate/index - core", () => {
 
   it("only to core - via 'forbidden' - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
@@ -220,7 +220,7 @@ describe("[I] validate/index - core", () => {
 
   it("only to core - via 'forbidden' - violation", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["local"] },

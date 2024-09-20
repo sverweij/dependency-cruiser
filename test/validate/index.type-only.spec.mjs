@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 describe("[I] validate/index - type-only", () => {
   const lTypeOnlyRuleSet = parseRuleSet({
@@ -18,7 +18,7 @@ describe("[I] validate/index - type-only", () => {
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
         {
@@ -32,7 +32,7 @@ describe("[I] validate/index - type-only", () => {
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - nok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
         { resolved: "src/ger-hekking.ts", dependencyTypes: ["local"] },

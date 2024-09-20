@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency } from "#validate/index.mjs";
 
 function stringToCycleEntry(pString) {
   return {
@@ -24,7 +24,7 @@ describe("[I] validate/index dependency - cycle via", () => {
 
   it("a => ba => bb => bc => a doesn't get flagged when none of them is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -43,7 +43,7 @@ describe("[I] validate/index dependency - cycle via", () => {
 
   it("a => aa => ab => ac => a get flagged when one of them is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -74,7 +74,7 @@ describe("[I] validate/index dependency - cycle via", () => {
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -138,7 +138,7 @@ describe("[I] validate/index dependency - cycle via", () => {
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -208,7 +208,7 @@ describe("[I] validate/index dependency - cycle via", () => {
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -251,7 +251,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
 
   it("a => ba => bb => bc => a doesn't get flagged when none of them is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -270,7 +270,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
 
   it("a => ba => bb => bc => a doesn't get flagged when none of them is in a via (group match)", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -289,7 +289,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
 
   it("a => aa => ab => ac => a get flagged when one of them is in a via", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
@@ -320,7 +320,7 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "tmp/a.js" },
         {
@@ -352,7 +352,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot (normalizes to via.pa
 
   it("flags when all of the cycle (except the root) is outside the group-matched viaSomeNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
         {
@@ -380,7 +380,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot (normalizes to via.pa
 
   it("flags when only one of the cycle is outside the group-matched viaNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
         {
@@ -408,7 +408,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot (normalizes to via.pa
 
   it("does not flag when all of the cycle is inside the group-matched viaNot", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
         {
@@ -442,7 +442,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot (normalizes to via.pa
       ],
     };
     deepEqual(
-      validate.dependency(
+      validateDependency(
         parseRuleSet(lRuleSet),
         { source: "src/module-a/a.js" },
         {

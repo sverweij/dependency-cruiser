@@ -38,7 +38,3 @@ export function compareRules(pLeftRule, pRightRule) {
 export function compareModules(pLeftModule, pRightModule) {
   return pLeftModule.source > pRightModule.source ? 1 : -1;
 }
-
-export default {
-  violations: compareViolations,
-};

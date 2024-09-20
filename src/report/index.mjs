@@ -35,7 +35,7 @@ const TYPE2MODULE = new Map([
  *                       an options object (specific to that function)
  *                       and returns an IReporterOutput
  */
-async function getReporter(pOutputType) {
+export async function getReporter(pOutputType) {
   let lReturnValue = {};
   if (pOutputType?.startsWith("plugin:")) {
     lReturnValue = await getExternalPluginReporter(pOutputType);
@@ -52,11 +52,6 @@ async function getReporter(pOutputType) {
  *
  * @returns {import("../../types/shared-types.js").OutputType[]} -
  */
-function getAvailableReporters() {
+export function getAvailableReporters() {
   return Array.from(TYPE2MODULE.keys());
 }
-
-export default {
-  getAvailableReporters,
-  getReporter,
-};

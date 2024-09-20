@@ -1,12 +1,12 @@
 import { deepEqual } from "node:assert/strict";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
-import validate from "#validate/index.mjs";
+import { validateDependency, validateModule } from "#validate/index.mjs";
 
 describe("[I] validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {
     const lEmptyRuleSet = parseRuleSet({});
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lEmptyRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -25,7 +25,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lEverythingAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -51,7 +51,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    deepEqual(validate.module(lRuleSet, { source: "koos koets" }), {
+    deepEqual(validateModule(lRuleSet, { source: "koos koets" }), {
       valid: true,
     });
   });
@@ -71,7 +71,7 @@ describe("[I] validate/index dependency - generic tests", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -99,7 +99,7 @@ describe("[I] validate/index dependency - generic tests", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -124,7 +124,7 @@ describe("[I] validate/index dependency - generic tests", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -156,7 +156,7 @@ describe("[I] validate/index dependency - generic tests", () => {
     });
 
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lRuleSet,
         { source: "something" },
         {
@@ -233,7 +233,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("node_modules inhibition - ok", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
@@ -244,7 +244,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("node_modules inhibition - violation", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "./node_modules/evil-module" },
@@ -258,7 +258,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to sub except sub itself - ok - sub to sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToSubExceptSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
@@ -269,7 +269,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to sub except sub itself - ok - not sub to not sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
         { resolved: "./rochebrune.js", coreModule: false },
@@ -280,7 +280,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to sub except sub itself - ok - sub to not sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/sub/clavan.js" },
         { resolved: "./rochebrune.js", coreModule: false },
@@ -291,7 +291,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to sub except sub itself  - violation - not sub to sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
         { resolved: "./keek/op/de/sub/week.js", coreModule: false },
@@ -305,7 +305,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToNotSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
@@ -316,7 +316,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToNotSubRuleSet,
         { source: "./amber.js" },
         { resolved: "./jade.js", coreModule: false },
@@ -330,7 +330,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not-to-dev-dep disallows relations to develop dependencies", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
@@ -353,7 +353,7 @@ describe("[I] validate/index - specific tests", () => {
 
   it("not-to-dev-dep does allow relations to regular dependencies", () => {
     deepEqual(
-      validate.dependency(
+      validateDependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
