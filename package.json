@@ -237,7 +237,7 @@
     "@types/prompts": "2.4.9",
     "@typescript-eslint/eslint-plugin": "8.6.0",
     "@typescript-eslint/parser": "8.6.0",
-    "@vue/compiler-sfc": "3.5.7",
+    "@vue/compiler-sfc": "3.5.8",
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
     "coffeescript": "2.7.0",
