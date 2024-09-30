@@ -1108,20 +1108,23 @@ in the options reference for details.
 
 ### `--max-depth`
 
+> [!NOTE]
+>
+> Using max-depth is typically a terrible idea. It only exists for
+> backwards compatibility. Instead consider one of these
+> options; they serve the same goal, look better and are more accurate:
+>
+> - the [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option
+> - use a [collapsePattern](./options-reference#summarising-collapsepattern-dot-and-archi-reporters)
+>   in conjunction with your dot reporter to hide details you don't want to see
+>   right now
+> - use filters like --include-only and --focus to only show a relevant part of your graph
+> - use the `archi` reporter that produces a high level dependency-graph based on
+>   heuristics.
+
 Only cruise the specified depth, counting from the specified root-module(s). This
 command was mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
-
-You probably don't want to use these as today better options exist that serve the
-same goal and give better looking and more accurate results. E.g.:
-
-- use the [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option
-- use a [collapsePattern](./options-reference#summarising-collapsepattern-dot-and-archi-reporters)
-  in conjunction with your dot reporter to hide details you don't want to see
-  right now
-- use filters like --include-only and --focus to only show a relevant part of your graph
-- use the `archi` reporter that produces a high level dependency-graph based on
-  heuristics.
 
 ```sh
 dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-limited-dependency-graph.svg
