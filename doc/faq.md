@@ -634,7 +634,7 @@ maintain both of which take time.
 - before executing the plugin dependency-cruiser checks whether the function
   has the correct signature and whether it can handle minimal input.
 
-> See the basic [stats-reporter-plugin](../configs/plugins/stats-reporter-plugin.js)
+> See the basic [stats-reporter-plugin](../configs/plugins/stats-reporter-plugin.mjs)
 > for an example.
 
 #### directly in dependency-cruiser
