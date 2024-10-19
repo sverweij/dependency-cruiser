@@ -6,14 +6,22 @@ function bool2Symbol(pBool) {
   return pBool ? pc.green("✔") : pc.red("x");
 }
 
+const MAX_VERSION_RANGE_STRING_LENGTH = 19;
+const MAX_TRANSPILER_NAME_LENGTH = 22;
+const MAX_VERSION_STRING_LENGTH = 24;
+
 function formatTranspilers() {
-  return getAvailableTranspilers().reduce(
-    (pAll, pThis) =>
-      `${pAll}    ${bool2Symbol(pThis.available)} ${pThis.name} (${
-        pThis.version
-      })\n`,
-    `    ${bool2Symbol(true)} javascript (>es1)\n`,
+  let lTranspilerTableHeader = pc.bold(
+    `    ✔ ${"transpiler".padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${"supported versions".padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} version found here`,
   );
+  let lTranspilerTableDivider = `    - ${"-".repeat(MAX_TRANSPILER_NAME_LENGTH)} ${"-".repeat(MAX_VERSION_RANGE_STRING_LENGTH)} ${"-".repeat(MAX_VERSION_STRING_LENGTH)}`;
+  let lTranspilerTable = getAvailableTranspilers()
+    .map(
+      (pTranspiler) =>
+        `    ${bool2Symbol(pTranspiler.available)} ${pTranspiler.name.padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${pTranspiler.version.padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} ${pTranspiler.currentVersion}`,
+    )
+    .join("\n");
+  return `${lTranspilerTableHeader}\n${lTranspilerTableDivider}\n${lTranspilerTable}\n`;
 }
 
 function formatExtensions(pExtensions) {
@@ -34,11 +42,9 @@ export default function formatMetaInfo() {
     it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
     will enable livescript support if it's installed in your project folder.
 
-  Transpilers:
-
 ${formatTranspilers()}
-  Extensions:
-
+    ${pc.bold("✔ extension")}
+    - ---------
 ${formatExtensions(allExtensions)}
 `;
 }

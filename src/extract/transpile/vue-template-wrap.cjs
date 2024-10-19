@@ -71,6 +71,10 @@ function vue2Transpile(pSource) {
 
 module.exports = {
   isAvailable: () => vueTemplateCompiler !== false,
+  version: () =>
+    vueTemplateCompiler.version
+      ? `@vue/compiler-sfc@${vueTemplateCompiler.version}`
+      : "vue-template-compiler",
   transpile: (pSource) =>
     isVue3 ? vue3Transpile(pSource) : vue2Transpile(pSource),
 };

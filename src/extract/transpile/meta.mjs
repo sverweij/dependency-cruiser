@@ -1,6 +1,25 @@
 /* eslint security/detect-object-injection : 0*/
+import {
+  isAvailable as swcIsAvailable,
+  version as swcVersion,
+} from "../swc/parse.mjs";
 import tryAvailable from "./try-import-available.mjs";
+import javascriptWrap from "./javascript-wrap.mjs";
+import babelWrap from "./babel-wrap.mjs";
+import coffeeScriptWrapFunction from "./coffeescript-wrap.mjs";
+import livescriptWrap from "./livescript-wrap.mjs";
+import svelteWrapFunction from "./svelte-wrap.mjs";
+import typescriptWrapFunction from "./typescript-wrap.mjs";
+import vueTemplateWrap from "./vue-template-wrap.cjs";
 import meta from "#meta.cjs";
+
+const swcWrap = {
+  isAvailable: () => swcIsAvailable(),
+  version: () => swcVersion(),
+};
+const coffeeScriptWrap = coffeeScriptWrapFunction(false);
+const svelteWrap = svelteWrapFunction(javascriptWrap);
+const typescriptWrap = typescriptWrapFunction("esm");
 
 function gotCoffee() {
   return (
@@ -26,6 +45,19 @@ const TRANSPILER2AVAILABLE = {
     "@vue/compiler-sfc",
     meta.supportedTranspilers["@vue/compiler-sfc"],
   ),
+};
+
+const TRANSPILER2WRAPPER = {
+  babel: babelWrap,
+  javascript: javascriptWrap,
+  "coffee-script": coffeeScriptWrap,
+  coffeescript: coffeeScriptWrap,
+  livescript: livescriptWrap,
+  svelte: svelteWrap,
+  swc: swcWrap,
+  typescript: typescriptWrap,
+  "vue-template-compiler": vueTemplateWrap,
+  "@vue/compiler-sfc": vueTemplateWrap,
 };
 
 export const EXTENSION2AVAILABLE = new Map([
@@ -81,6 +113,11 @@ export const allExtensions = Array.from(EXTENSION2AVAILABLE.keys()).map(
   }),
 );
 
+function getCurrentVersion(pTranspiler) {
+  const lTranspiler = TRANSPILER2WRAPPER[pTranspiler];
+  return lTranspiler.isAvailable() ? lTranspiler.version() : "-";
+}
+
 /**
  * an array of extensions that are 'scannable' (have a valid transpiler
  * available for) in the current environment.
@@ -99,9 +136,12 @@ export const scannableExtensions = Array.from(
  * @return {IAvailableTranspiler[]} an array of supported transpilers
  */
 export function getAvailableTranspilers() {
-  return Object.keys(meta.supportedTranspilers).map((pTranspiler) => ({
-    name: pTranspiler,
-    version: meta.supportedTranspilers[pTranspiler],
-    available: TRANSPILER2AVAILABLE[pTranspiler],
-  }));
+  return ["javascript"]
+    .concat(Object.keys(meta.supportedTranspilers))
+    .map((pTranspiler) => ({
+      name: pTranspiler,
+      version: meta.supportedTranspilers[pTranspiler] || "*",
+      available: TRANSPILER2AVAILABLE[pTranspiler],
+      currentVersion: getCurrentVersion(pTranspiler),
+    }));
 }

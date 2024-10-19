@@ -28,6 +28,9 @@ const coffeeScript = await getCoffeeScriptModule();
 export default function coffeeScriptWrap(pLiterate) {
   return {
     isAvailable: () => coffeeScript !== false,
+
+    version: () => `coffeescript@${coffeeScript.VERSION}`,
+
     transpile: (pSource) => {
       const lOptions = pLiterate ? { literate: true } : {};
 
