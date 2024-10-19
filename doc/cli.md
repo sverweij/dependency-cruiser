@@ -22,7 +22,7 @@ available in dependency-cruiser configurations.
 1. [`--init`](#--init)
 1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--no-metrics`: do not calculate stability metrics](#--no-metrics)
-1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+1. [`--info`: show what alt-js are supported](#--info-show-what-alt-js-are-supported)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--no-ignore-known`: don't ignore known violations](#--no-ignore-known)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
@@ -749,7 +749,7 @@ Do not calculate metrics. You can use this to override an earlier set `--metrics
 command line option or `metrics` option in a .dependency-cruiser.js configuration
 file.
 
-### `--info` showing what alt-js are supported
+### `--info` show what alt-js are supported
 
 Which alt-js languages dependency-cruiser supports depends on the availability
 it has to them. To see how dependency-cruiser perceives its environment use
@@ -759,35 +759,50 @@ it has to them. To see how dependency-cruiser perceives its environment use
 <summary>Typical output</summary>
 
 ```
-Supported:
+    dependency-cruiser@16.4.2
 
-  If you need a supported, but not enabled transpiler ('✖' below), install
-  it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
-  will enable livescript support if it's installed in your project folder.
+    node version supported : ^18.17||>=20
+    node version found     : v22.8.0
+    os version found       : x64 darwin@21.6.0
 
-Transpilers:
+    If you need a supported, but not enabled transpiler ('x' below), just install
+    it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
+    will enable livescript support if it's installed in your project folder.
 
-  ✔ javascript (>es1)
-  ✔ coffee-script (>=1.0.0 <2.0.0)
-  ✔ coffeescript (>=1.0.0 <3.0.0)
-  ✖ livescript (>=1.0.0 <2.0.0)
-  ✔ typescript (>=2.0.0 <4.0.0)
+    ✔ transpiler             versions supported  version found
+    - ---------------------- ------------------- ------------------------
+    ✔ javascript             *                   acorn@8.12.1
+    ✔ babel                  >=7.0.0 <8.0.0      @babel/core@7.25.2
+    ✔ coffee-script          >=1.0.0 <2.0.0      coffeescript@2.7.0
+    ✔ coffeescript           >=1.0.0 <3.0.0      coffeescript@2.7.0
+    x livescript             >=1.0.0 <2.0.0      -
+    ✔ svelte                 >=3.0.0 <5.0.0      svelte/compiler@4.2.19
+    ✔ swc                    >=1.0.0 <2.0.0      @swc/core@1.7.26
+    ✔ typescript             >=2.0.0 <6.0.0      typescript@5.6.2
+    ✔ vue-template-compiler  >=2.0.0 <3.0.0      vue-template-compiler
+    ✔ @vue/compiler-sfc      >=3.0.0 <4.0.0      vue-template-compiler
 
-Extensions:
-
-  ✔ .js
-  ✔ .mjs
-  ✔ .jsx
-  ✔ .vue
-  ✔ .ts
-  ✔ .tsx
-  ✔ .d.ts
-  ✖ .ls
-  ✔ .coffee
-  ✔ .litcoffee
-  ✔ .coffee.md
-  ✔ .csx
-  ✔ .cjsx
+    ✔ extension
+    - ---------
+    ✔ .js
+    ✔ .cjs
+    ✔ .mjs
+    ✔ .jsx
+    ✔ .ts
+    ✔ .tsx
+    ✔ .d.ts
+    ✔ .cts
+    ✔ .d.cts
+    ✔ .mts
+    ✔ .d.mts
+    ✔ .vue
+    ✔ .svelte
+    x .ls
+    ✔ .coffee
+    ✔ .litcoffee
+    ✔ .coffee.md
+    ✔ .csx
+    ✔ .cjsx
 ```
 
 </details>
