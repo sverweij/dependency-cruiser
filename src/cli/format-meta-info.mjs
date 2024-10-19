@@ -1,6 +1,8 @@
+import { release, platform, arch } from "node:os";
 import pc from "picocolors";
 
 import { getAvailableTranspilers, allExtensions } from "#main/index.mjs";
+import meta from "#meta.cjs";
 
 function bool2Symbol(pBool) {
   return pBool ? pc.green("✔") : pc.red("x");
@@ -12,7 +14,7 @@ const MAX_VERSION_STRING_LENGTH = 24;
 
 function formatTranspilers() {
   let lTranspilerTableHeader = pc.bold(
-    `    ✔ ${"transpiler".padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${"supported versions".padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} version found here`,
+    `    ✔ ${"transpiler".padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${"versions supported".padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} version found`,
   );
   let lTranspilerTableDivider = `    - ${"-".repeat(MAX_TRANSPILER_NAME_LENGTH)} ${"-".repeat(MAX_VERSION_RANGE_STRING_LENGTH)} ${"-".repeat(MAX_VERSION_STRING_LENGTH)}`;
   let lTranspilerTable = getAvailableTranspilers()
@@ -34,7 +36,11 @@ function formatExtensions(pExtensions) {
 
 export default function formatMetaInfo() {
   return `
-  Supported:
+    ${pc.bold("dependency-cruiser")}@${meta.version}
+
+    node version supported : ${meta.engines.node}
+    node version found     : ${process.version}
+    os version found       : ${arch()} ${platform()}@${release()}
 
     If you need a supported, but not enabled transpiler ('${pc.red(
       "x",
