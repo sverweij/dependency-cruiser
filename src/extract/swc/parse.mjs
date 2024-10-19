@@ -46,3 +46,5 @@ export function clearCache() {
  */
 // @ts-expect-error dfdfd
 export const isAvailable = () => swc !== false;
+
+export const version = () => `@swc/core@${swc.version}`;

@@ -2,7 +2,7 @@ import preProcess from "./svelte-preprocess.mjs";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-const { compile } = await tryImport(
+const { compile, VERSION } = await tryImport(
   "svelte/compiler",
   meta.supportedTranspilers.svelte,
 );
@@ -21,6 +21,7 @@ function getTranspiler(pTranspilerWrapper) {
 export default function svelteWrap(pTranspilerWrapper) {
   return {
     isAvailable: () => Boolean(compile),
+    version: () => `svelte/compiler@${VERSION}`,
     transpile: getTranspiler(pTranspilerWrapper),
   };
 }

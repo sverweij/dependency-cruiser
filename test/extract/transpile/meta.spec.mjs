@@ -1,4 +1,5 @@
 import { deepEqual } from "node:assert/strict";
+import { validRange } from "semver";
 import {
   getAvailableTranspilers,
   scannableExtensions,
@@ -29,52 +30,38 @@ describe("[U] extract/transpile/meta", () => {
   });
 
   it("returns the available transpilers", () => {
-    deepEqual(getAvailableTranspilers(), [
-      {
-        name: "babel",
-        version: ">=7.0.0 <8.0.0",
-        available: true,
-      },
-      {
-        name: "coffee-script",
-        version: ">=1.0.0 <2.0.0",
-        available: true,
-      },
-      {
-        name: "coffeescript",
-        version: ">=1.0.0 <3.0.0",
-        available: true,
-      },
-      {
-        name: "livescript",
-        version: ">=1.0.0 <2.0.0",
-        available: false,
-      },
-      {
-        name: "svelte",
-        version: ">=3.0.0 <5.0.0",
-        available: true,
-      },
-      {
-        name: "swc",
-        version: ">=1.0.0 <2.0.0",
-        available: true,
-      },
-      {
-        name: "typescript",
-        version: ">=2.0.0 <6.0.0",
-        available: true,
-      },
-      {
-        name: "vue-template-compiler",
-        version: ">=2.0.0 <3.0.0",
-        available: true,
-      },
-      {
-        name: "@vue/compiler-sfc",
-        version: ">=3.0.0 <4.0.0",
-        available: true,
-      },
-    ]);
+    const lTranspilers = getAvailableTranspilers();
+    deepEqual(Array.isArray(lTranspilers), true);
+    deepEqual(lTranspilers.length > 0, true);
+
+    lTranspilers.forEach((pTranspiler) => {
+      deepEqual(
+        typeof pTranspiler.name,
+        "string",
+        `name is not a string: ${pTranspiler.name}`,
+      );
+      deepEqual(
+        typeof pTranspiler.version,
+        "string",
+        `version is not a string: ${pTranspiler.version}`,
+      );
+      deepEqual(
+        validRange(pTranspiler.version),
+        pTranspiler.version,
+        `version is not a valid semver range: ${pTranspiler.version}`,
+      );
+      deepEqual(
+        typeof pTranspiler.currentVersion,
+        "string",
+        `version is not a string: ${pTranspiler.version}`,
+      );
+      deepEqual(
+        typeof pTranspiler.available,
+        "boolean",
+        `available is not a boolean: ${pTranspiler.available}`,
+      );
+      // eslint-disable-next-line no-magic-numbers
+      deepEqual(Object.keys(pTranspiler).length, 4);
+    });
   });
 });

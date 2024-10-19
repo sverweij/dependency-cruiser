@@ -36,6 +36,8 @@ export default function typescriptWrap(pFlavor) {
   return {
     isAvailable: () => typescript !== false,
 
+    version: () => `typescript@${typescript.version}`,
+
     transpile: (pSource, _pFileName, pTranspileOptions = {}) =>
       typescript.transpileModule(pSource, {
         ...(pTranspileOptions.tsConfig || {}),

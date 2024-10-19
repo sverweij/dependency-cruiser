@@ -10,6 +10,8 @@ const livescript = await tryImport(
 export default {
   isAvailable: () => livescript !== false,
 
+  version: () => `livescript@${livescript.VERSION}`,
+
   transpile: (pSource) => livescript.compile(pSource),
 };
 /* c8 ignore stop */
