@@ -4,6 +4,7 @@ import {
   propertyEquals,
   propertyMatches,
   propertyMatchesNot,
+  matchesAncestor,
   matchesFromPath,
   matchesFromPathNot,
   matchesToPath,
@@ -55,7 +56,8 @@ function match(pFrom, pTo) {
       propertyMatchesNot(pRule, pTo, "exoticRequireNot", "exoticRequire") &&
       matchesToVia(pRule, pTo, lGroups) &&
       matchesToViaOnly(pRule, pTo, lGroups) &&
-      matchesToIsMoreUnstable(pRule, pFrom, pTo)
+      matchesToIsMoreUnstable(pRule, pFrom, pTo) &&
+      matchesAncestor(pRule, pFrom, pTo)
     );
   };
 }

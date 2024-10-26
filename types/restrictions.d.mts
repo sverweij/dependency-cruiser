@@ -151,6 +151,11 @@ export interface IToRestriction extends IBaseRestrictionType {
    * Leave this out when you don't care either way.
    */
   moreUnstable?: boolean;
+  /**
+   * When set to true, matches when the dependency is in a folder above the " +
+   * folder of the module.
+   */
+  ancestor?: boolean;
 }
 
 export interface IReachabilityToRestrictionType extends IBaseRestrictionType {

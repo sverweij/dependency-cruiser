@@ -1,4 +1,5 @@
 /* eslint-disable security/detect-object-injection */
+import { dirname, resolve, sep } from "node:path/posix";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
@@ -197,7 +198,7 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
    *
    * Something similar goes for dependencies that are imported as 'type-only' -
    * which are some sort of regular dependency as well. Hence the use of the
-   * lNotReallyDuplicates set.
+   * DEPENDENCY_TYPE_DUPLICATES_THAT_MATTER set.
    */
 
   if (Object.hasOwn(pRule.to, "moreThanOneDependencyType")) {
@@ -207,6 +208,23 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
         DEPENDENCY_TYPE_DUPLICATES_THAT_MATTER.has(pDependencyType),
       ).length >
         1
+    );
+  }
+  return true;
+}
+
+export function matchesAncestor(pRule, pModule, pDependency) {
+  if (Object.hasOwn(pRule.to, "ancestor") && pRule.to.ancestor) {
+    if (pDependency.coreModule || pDependency.couldNotResolve) {
+      return false;
+    }
+    const lModulePath = dirname(resolve(pModule.source)) + sep;
+    const lDependencyPath = dirname(resolve(pDependency.resolved)) + sep;
+
+    // Ensure the child path starts with the parent path followed by a separator
+    return (
+      lModulePath.startsWith(lDependencyPath) &&
+      lModulePath.length > lDependencyPath.length
     );
   }
   return true;

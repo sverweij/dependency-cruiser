@@ -373,6 +373,30 @@ export default {
         dependencyTypes: ["aliased-tsconfig-base-url"],
       },
     },
+    {
+      name: "not-to-ancestor-folders",
+      severity: "info",
+      from: {
+        path: "^src",
+      },
+      to: {
+        ancestor: true,
+        pathNot: "^src/meta[.]cjs$",
+      },
+    },
+    {
+      name: "not-outside",
+      severity: "ignore",
+      from: {
+        path: "^src/([^/]+/).+",
+        pathNot: "^src/(?:main|cli)/",
+      },
+      to: {
+        pathNot: ["^src/$1", "^src/(?:utl|graph-utl)/", "^src/meta[.]cjs$"],
+        dependencyTypesNot: ["npm", "core", "exotic-require", "type-only"],
+        couldNotResolve: false,
+      },
+    },
   ],
   options: {
     /* pattern specifying which files not to follow further when encountered
