@@ -46,7 +46,7 @@ export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex
-    /^(?:(?<protocol>node:|file:|data:)(?:(?<mimeType>[^,]+),)?)(?<module>.+)$/,
+    /^(?<protocol>node:|file:|data:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,
   );
 
   if (lModuleAttributes?.groups) {
