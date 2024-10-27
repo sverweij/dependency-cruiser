@@ -90,6 +90,132 @@
     }
   },
   {
+    "type": "dependency",
+    "from": "src/cli/init-config/environment-helpers.mjs",
+    "to": "src/cli/defaults.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/cli/init-config/index.mjs",
+    "to": "src/cli/defaults.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/cli/init-config/write-run-scripts-to-manifest.mjs",
+    "to": "src/cli/defaults.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/enrich/derive/dependents/get-dependents.mjs",
+    "to": "src/enrich/derive/module-utl.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/enrich/derive/folders/aggregate-to-folders.mjs",
+    "to": "src/enrich/derive/circular.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/enrich/derive/folders/aggregate-to-folders.mjs",
+    "to": "src/enrich/derive/module-utl.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/enrich/derive/metrics/get-module-metrics.mjs",
+    "to": "src/enrich/derive/module-utl.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/enrich/derive/orphan/is-orphan.mjs",
+    "to": "src/enrich/derive/module-utl.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/extract/resolve/resolve.mjs",
+    "to": "src/extract/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/extract/swc/extract.mjs",
+    "to": "src/extract/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/extract/tsc/extract.mjs",
+    "to": "src/extract/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/main/options/normalize.mjs",
+    "to": "src/main/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/main/rule-set/assert-validity.mjs",
+    "to": "src/main/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/main/rule-set/normalize.mjs",
+    "to": "src/main/helpers.mjs",
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
     "type": "module",
     "from": "src/utl/extract-root-module-name.cjs",
     "to": "src/utl/extract-root-module-name.cjs",
