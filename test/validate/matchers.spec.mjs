@@ -14,7 +14,7 @@ function doMagic(pFrom, pTo, pToProperties = {}) {
   );
 }
 
-describe("[I] validate/matchers - matchesAncestor", () => {
+describe("[U] validate/matchers - matchesAncestor", () => {
   it("matches when dependency is in a folder above the sources folder", () => {
     deepEqual(
       doMagic("src/aap/noot/pinda.mjs", "src/aap/chimpansee.mjs"),
@@ -36,6 +36,9 @@ describe("[I] validate/matchers - matchesAncestor", () => {
 
   it("does not match when the dependency is a core module", () => {
     deepEqual(doMagic("src/index.mjs", "fs", { coreModule: true }), false);
+  });
+  it("does not match when the dependency could not be resolved", () => {
+    deepEqual(doMagic("src/index.mjs", "fs", { couldNotResolve: true }), false);
   });
 
   it("does not match when dependency is in the same folder", () => {
@@ -60,7 +63,7 @@ describe("[I] validate/matchers - matchesAncestor", () => {
     );
   });
 
-  it("does not match when the dependency is in different tree", () => {
+  it("does not match when the dependency is in a different tree", () => {
     deepEqual(
       doMagic("src/aap/chimpansee.ts", "node_modules/slodash/index.js"),
       false,
