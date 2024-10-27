@@ -214,18 +214,21 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
 }
 
 export function matchesAncestor(pRule, pModule, pDependency) {
-  if (Object.hasOwn(pRule.to, "ancestor") && pRule.to.ancestor) {
+  if (Object.hasOwn(pRule.to, "ancestor")) {
     if (pDependency.coreModule || pDependency.couldNotResolve) {
       return false;
     }
     const lModulePath = dirname(resolve(pModule.source)) + sep;
     const lDependencyPath = dirname(resolve(pDependency.resolved)) + sep;
-
-    // Ensure the child path starts with the parent path followed by a separator
-    return (
+    const lDoesMatchAncestor =
       lModulePath.startsWith(lDependencyPath) &&
-      lModulePath.length > lDependencyPath.length
-    );
+      lModulePath.length > lDependencyPath.length;
+
+    if (pRule.to.ancestor) {
+      return lDoesMatchAncestor;
+    } else {
+      return !lDoesMatchAncestor;
+    }
   }
   return true;
 }
