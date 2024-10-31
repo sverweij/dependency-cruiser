@@ -14,7 +14,7 @@ function getTranspiler(pTranspilerWrapper) {
       pTranspilerWrapper,
       pTranspilerOptions,
     );
-    return compile(lPreProcessedSource).js.code;
+    return compile(lPreProcessedSource, {}).js.code;
   };
 }
 
