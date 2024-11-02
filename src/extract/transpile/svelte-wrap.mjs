@@ -14,7 +14,11 @@ function getTranspiler(pTranspilerWrapper) {
       pTranspilerWrapper,
       pTranspilerOptions,
     );
-    return compile(lPreProcessedSource).js.code;
+    // in svelte 5 one must provide the second argument
+    // lest it throws because it's accessing a property
+    // in it. In svelte 4 (which also takes compiler
+    // options there) this isn't necessary.
+    return compile(lPreProcessedSource, {}).js.code;
   };
 }
 

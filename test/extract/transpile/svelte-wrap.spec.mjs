@@ -32,7 +32,6 @@ describe("[I] svelte transpiler", () => {
           ),
         ),
       );
-
       equal(lObserved, lExpected);
     });
   });
