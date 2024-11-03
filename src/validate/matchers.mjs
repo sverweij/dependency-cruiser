@@ -69,7 +69,7 @@ export function matchesModulePathNot(pRule, pModule) {
   );
 }
 
-function _toPath(pRule, pString, pGroups = []) {
+function _matchesToPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
       pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
@@ -77,14 +77,14 @@ function _toPath(pRule, pString, pGroups = []) {
 }
 
 export function matchesToPath(pRule, pDependency, pGroups) {
-  return _toPath(pRule, pDependency.resolved, pGroups);
+  return _matchesToPath(pRule, pDependency.resolved, pGroups);
 }
 
 export function matchToModulePath(pRule, pModule, pGroups) {
-  return _toPath(pRule, pModule.source, pGroups);
+  return _matchesToPath(pRule, pModule.source, pGroups);
 }
 
-function _toPathNot(pRule, pString, pGroups = []) {
+function _matchesToPathNot(pRule, pString, pGroups = []) {
   return (
     !pRule.to.pathNot ||
     !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
@@ -92,11 +92,11 @@ function _toPathNot(pRule, pString, pGroups = []) {
 }
 
 export function matchesToPathNot(pRule, pDependency, pGroups) {
-  return _toPathNot(pRule, pDependency.resolved, pGroups);
+  return _matchesToPathNot(pRule, pDependency.resolved, pGroups);
 }
 
 export function matchToModulePathNot(pRule, pModule, pGroups) {
-  return _toPathNot(pRule, pModule.source, pGroups);
+  return _matchesToPathNot(pRule, pModule.source, pGroups);
 }
 
 export function matchesToDependencyTypes(pRule, pDependency) {
