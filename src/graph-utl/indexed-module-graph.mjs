@@ -201,7 +201,7 @@ export default class IndexedModuleGraph {
    * @param {Set<string>=} pVisited  Technical parameter - best to leave out of direct calls
    * @return {Array<IMiniDependency>}             see description above
    */
-  #getCycleNew(pInitialSource, pCurrentDependency, pVisited) {
+  #getCycle(pInitialSource, pCurrentDependency, pVisited) {
     let lVisited = pVisited || new Set();
     const lCurrentVertex = this.findVertexByName(pCurrentDependency.name);
     const lEdges = lCurrentVertex.dependencies.filter(
@@ -226,7 +226,7 @@ export default class IndexedModuleGraph {
        */
       (pAll, pDependency) => {
         if (!pAll.some((pSome) => pSome.name === pCurrentDependency.name)) {
-          const lCycle = this.#getCycleNew(
+          const lCycle = this.#getCycle(
             pInitialSource,
             pDependency,
             lVisited.add(pDependency.name),
@@ -266,6 +266,6 @@ export default class IndexedModuleGraph {
     if (!lCurrentDependency) {
       return [];
     }
-    return this.#getCycleNew(pInitialSource, lCurrentDependency);
+    return this.#getCycle(pInitialSource, lCurrentDependency);
   }
 }
