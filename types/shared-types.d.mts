@@ -52,6 +52,7 @@ export type DependencyType =
   | "export"
   | "import-equals"
   | "import"
+  | "jsdoc-import"
   | "local"
   | "localmodule"
   | "npm-bundled"

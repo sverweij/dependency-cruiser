@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
 import tryImport from "#utl/try-import.mjs";
@@ -24,7 +25,7 @@ function isTypeOnlyImport(pStatement) {
 function isTypeOnlyExport(pStatement) {
   return (
     // for some reason the isTypeOnly indicator is on _statement_ level
-    // and not in exportClause as it is in the importClause ¯\_ (ツ)_/¯.
+    // and not in exportClause as it is in the importClause ¯\_(ツ)_/¯.
     // Also in the case of the omission of an alias the exportClause
     // is not there entirely. So regardless whether there is a
     // pStatement.exportClause or not, we can directly test for the
@@ -252,7 +253,33 @@ function isTypeImport(pASTNode) {
         "FirstTemplateToken")
   );
 }
+
+function extractJSDocImportTags(pJSDocTags) {
+  return pJSDocTags
+    .filter(
+      (pTag) =>
+        pTag.tagName.escapedText === "import" &&
+        pTag.moduleSpecifier?.kind &&
+        typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
+        Boolean(pTag.moduleSpecifier.text),
+    )
+    .map((pTag) => ({
+      module: pTag.moduleSpecifier.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-only", "import", "jsdoc-import"],
+    }));
+}
+
+function extractJSDocImports(pJSDocNodes) {
+  return pJSDocNodes
+    .filter((pJSDocLine) => Boolean(pJSDocLine.tags))
+    .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
+}
+
+// eslint-disable-next-line max-lines-per-function
 function walk(pResult, pExoticRequireStrings) {
+  // eslint-disable-next-line max-lines-per-function
   return (pASTNode) => {
     // require('a-string'), require(`a-template-literal`)
     if (isRequireCallExpression(pASTNode)) {
@@ -298,6 +325,24 @@ function walk(pResult, pExoticRequireStrings) {
         dependencyTypes: ["type-import"],
       });
     }
+
+    // /** @import thing from './module' */
+    // /** @import {thing} from './module' */
+    // /** @import * as thing from './module' */
+    // devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
+    //
+    // TODO: all the kinds of tags that can have import statements as type declarations
+    //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
+    // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
+    if (pASTNode.jsDoc) {
+      const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
+
+      // pResult = pResult.concat(lJSDocImports) looks like the more obvious
+      // way to do this, but it re-assigns the pResult parameter
+      lJSDocImports.forEach((pImport) => {
+        pResult.push(pImport);
+      });
+    }
     typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
   };
 }
@@ -326,6 +371,7 @@ export default function extractTypeScriptDependencies(
   pTypeScriptAST,
   pExoticRequireStrings,
 ) {
+  // console.dir(pTypeScriptAST, { depth: 100 });
   return Boolean(typescript)
     ? extractImports(pTypeScriptAST)
         .concat(extractExports(pTypeScriptAST))

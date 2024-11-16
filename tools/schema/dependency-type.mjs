@@ -20,6 +20,7 @@ export default {
         "export",
         "import-equals",
         "import",
+        "jsdoc-import",
         "local",
         "localmodule",
         "npm-bundled",
