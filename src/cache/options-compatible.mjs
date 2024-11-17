@@ -2,7 +2,7 @@
 import { isDeepStrictEqual } from "node:util";
 
 /**
- * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ * @import { IStrictCruiseOptions } from "../../types/strict-options.mjs"
  */
 
 /*

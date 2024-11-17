@@ -12,11 +12,8 @@ import {
 import { bus } from "#utl/bus.mjs";
 
 /**
- * @typedef {import("../../types/dependency-cruiser.mjs").IModule} IModule
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
- * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
- * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ * @import {IModule, IRevisionChange, IRevisionData, ICruiseResult } from "../../types/dependency-cruiser.mjs"
+ * @import { IStrictCruiseOptions } from "../../types/strict-options.mjs"
  */
 
 export default class MetaDataStrategy {

@@ -6,10 +6,9 @@ import memoize from "memoize";
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
- * @typedef {import("../..").IModule} IModule
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
- * @typedef {import("../../types/filter-types.mjs").IExcludeType} IExcludeType
- * @typedef {import("../../types/strict-filter-types.mjs").IStrictIncludeOnlyType} IStrictIncludeOnlyType
+ * @import { IModule, IRevisionChange, } from "../../types/dependency-cruiser.mjs"
+ * @import { IExcludeType } from "../../types/filter-types.mjs"
+ * @import { IStrictIncludeOnlyType } from "../../types/strict-filter-types.mjs"
  */
 
 /**
