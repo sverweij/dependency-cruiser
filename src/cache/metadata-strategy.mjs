@@ -12,20 +12,18 @@ import {
 import { bus } from "#utl/bus.mjs";
 
 /**
- * @typedef {import("../../types/dependency-cruiser.mjs").IModule} IModule
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
- * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
- * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
+ * @import {IModule, IRevisionChange, IRevisionData, ICruiseResult } from "../../types/dependency-cruiser.mjs"
+ * @import { IStrictCruiseOptions } from "../../types/strict-options.mjs"
+ * @import { changeType, IChange } from "watskeburt"
  */
 
 export default class MetaDataStrategy {
   /**
    * @param {string} _pDirectory
-   * @param {import("../../types/cruise-result.mjs").ICruiseResult} _pCachedCruiseResult
+   * @param {ICruiseResult} _pCachedCruiseResult
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").changeType>=} pOptions.interestingChangeTypes
+   * @param {Set<changeType>=} pOptions.interestingChangeTypes
    * @param {typeof getSHA=} pOptions.shaRetrievalFn
    * @param {typeof list=} pOptions.diffListFn
    * @param {typeof addCheckSumToChangeSync=} pOptions.checksumFn
@@ -47,7 +45,7 @@ export default class MetaDataStrategy {
       bus.debug("cache: - getting sha");
       const lSHA = await lOptions.shaRetrievalFn();
       bus.debug("cache: - getting diff");
-      const lDiff = /** @type {import("watskeburt").IChange[]} */ (
+      const lDiff = /** @type {IChange[]} */ (
         await lOptions.diffListFn({ oldRevision: lSHA })
       );
       const lChanges = lDiff

@@ -4,6 +4,9 @@ import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 import configurationSchema from "#configuration-schema";
 import { has, get } from "#utl/object-util.mjs";
+/**
+ * @import { IConfiguration } from "../../../types/configuration.mjs";
+ */
 
 const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,
@@ -84,8 +87,8 @@ function assertRuleSafety(pRule) {
  * - the rule set adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
- * @param  {import("../../../types/configuration.js").IConfiguration} pConfiguration The configuration to validate
- * @return {import("../../../types/configuration.js").IConfiguration}  The configuration as passed
+ * @param  {IConfiguration} pConfiguration The configuration to validate
+ * @return {IConfiguration}  The configuration as passed
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message
  */

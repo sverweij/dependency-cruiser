@@ -10,6 +10,7 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "args": "whatever",
+      "detectJSDocImports": false,
       "outputTo": "empty.json",
       "metrics": false,
       "moduleSystems": ["amd", "cjs", "es6"],

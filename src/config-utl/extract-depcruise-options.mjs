@@ -1,9 +1,13 @@
 import extractDepcruiseConfig from "./extract-depcruise-config/index.mjs";
 
 /**
- *
- * @param {import('../../../types/configuration.mjs').IConfiguration}} pConfiguration
- * @returns {import('../../../types/configuration.mjs').ICruiseOptions}
+ * @import { IConfiguration } from "../../types/configuration.mjs";
+ * @import { ICruiseOptions } from "../../types/options.mjs";
+ */
+
+/**
+ * @param {IConfiguration} pConfiguration
+ * @returns {ICruiseOptions}
  */
 function configuration2options(pConfiguration) {
   /* c8 ignore next 1 */
@@ -20,7 +24,7 @@ function configuration2options(pConfiguration) {
 /**
  *
  * @param {string} pConfigFileName
- * @returns {Promise<import('../../../types/configuration.mjs').ICruiseOptions>}
+ * @returns {Promise<ICruiseOptions>}
  */
 export default async function extractDepcruiseOptions(pConfigFileName) {
   const lReturnValue = await extractDepcruiseConfig(pConfigFileName);

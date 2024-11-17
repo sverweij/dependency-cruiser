@@ -145,6 +145,11 @@ export interface ICruiseOptions {
    */
   moduleSystems?: ModuleSystemType[];
   /**
+   * When true, dependency-cruiser will detect dependencies in JSDoc-style
+   * import statements. Implies `"parser": "tsc"`. Defaults to false.'
+   */
+  detectJSDocImports?: boolean;
+  /**
    * one of "json", "html", "dot", "csv" or "err". When left
    * out the function will return a javascript object as dependencies
    */

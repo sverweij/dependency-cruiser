@@ -9,11 +9,17 @@ import { getManifest } from "./get-manifest.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
 /**
+ * @import { IModule, IResolveOptions } from "../../../types/dependency-cruiser.mjs";
+ * @import { IResolveOptions } from "../../../types/resolve-options.mjs";
+ * @import { IDependency } from "../../../types/cruise-result.mjs";
+ */
+
+/**
  *
- * @param {import("../../../types/dependency-cruiser.js").IModule} pModule
+ * @param {IModule} pModule
  * @param {string} pBaseDirectory
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser.js").IResolveOptions} pResolveOptions
+ * @param {IResolveOptions} pResolveOptions
  * @returns {any}
  */
 function resolveModule(
@@ -154,14 +160,14 @@ function resolveWithRetry(
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {Partial <import("../../../types/cruise-result.mjs").IDependency>} pDependency
+ * @param  {Partial <IDependency>} pDependency
  * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
- * @param  {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @param  {IResolveOptions} pResolveOptions
  * @param  {any} pTranspileOptions
- * @return {Partial <import("../../../types/cruise-result.mjs").IDependency>}
+ * @return {Partial <IDependency>}
  *
  *
  */

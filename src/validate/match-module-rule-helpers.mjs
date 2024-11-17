@@ -7,12 +7,18 @@ import {
   matchesModulePathNot,
 } from "./matchers.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
+
+/**
+ * @import { IModule } from "../../types/cruise-result.mjs";
+ * @import { IAnyRuleType } from "../../types/rule-set.mjs";
+ */
+
 /**
  * Returns true if pRule is an orphan rule and pModule is an orphan.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.mjs").IModule} pModule
+ * @param {IAnyRuleType} pRule
+ * @param {IModule} pModule
  * @returns {boolean}
  */
 export function matchesOrphanRule(pRule, pModule) {
@@ -30,8 +36,8 @@ export function matchesOrphanRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.mjs").IModule} pModule
+ * @param {IAnyRuleType} pRule
+ * @param {IModule} pModule
  * @returns {boolean}
  */
 export function matchesReachableRule(pRule, pModule) {
@@ -63,8 +69,8 @@ export function matchesReachableRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.mjs").IModule} pModule
+ * @param {IAnyRuleType} pRule
+ * @param {IModule} pModule
  * @returns {boolean}
  */
 export function matchesReachesRule(pRule, pModule) {
@@ -85,7 +91,7 @@ export function matchesReachesRule(pRule, pModule) {
 }
 /**
  *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {IAnyRuleType} pRule
  * @param {string[]} pDependents
  * @returns {boolean}
  */
@@ -105,8 +111,8 @@ function dependentsCountsMatch(pRule, pDependents) {
 
 /**
  *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result.mjs").IModule} pModule
+ * @param {IAnyRuleType} pRule
+ * @param {IModule} pModule
  * @returns {boolean}
  */
 // eslint-disable-next-line complexity

@@ -3,8 +3,8 @@ import json5 from "json5";
 import makeAbsolute from "./make-absolute.mjs";
 
 /**
- * @typedef {import("../../types/violations.d.mjs").IViolation} IViolation
- * @typedef {import("../../types/shared-types.d.mts").DependencyType} DependencyType
+ * @import { IViolation } from "../../types/violations.mjs"
+ * @import { DependencyType } from "../../types/shared-types.mjs"
  *
  * @typedef {IViolation & {cycle: Array<{name: string, dependencyTypes: Array<DependencyType>}>} | {cycle: Array<DependencyType>}} IMaybeOldFormatViolation
  */

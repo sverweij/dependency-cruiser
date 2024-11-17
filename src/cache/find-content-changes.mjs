@@ -12,9 +12,15 @@ import { bus } from "#utl/bus.mjs";
 import findAllFiles from "#utl/find-all-files.mjs";
 
 /**
+ * @import { IModule, IRevisionChange } from "../../types/dependency-cruiser.mjs"
+ * @import { ICruiseResult } from "../../types/cruise-result.mjs"
+ * @import { IStrictExcludeType, IStrictIncludeOnlyType } from "../../types/strict-filter-types.mjs"
+ */
+
+/**
  * @param {Set<string>} pFileSet
  * @param {typeof getFileHashSync} pFileHashFunction
- * @returns {(pModule:import("../..").IModule) => import('../..').IRevisionChange}
+ * @returns {(pModule:IModule) => IRevisionChange}
  */
 function diffCachedModuleAgainstFileSet(
   pFileSet,
@@ -63,13 +69,13 @@ function diffCachedModuleAgainstFileSet(
   - there is a cache, but it doesn't contain checksums => same as before, except
     all files will be marked as 'modified'
  * @param {string} pDirectory
- * @param {import("../..").ICruiseResult} pCachedCruiseResult
+ * @param {ICruiseResult} pCachedCruiseResult
  * @param {Object} pOptions
  * @param {Set<string>} pOptions.extensions
  * @param {string} pOptions.baseDir
- * @param {import("../../types/strict-filter-types.mjs").IStrictExcludeType} pOptions.exclude
- * @param {import("../../types/strict-filter-types.mjs").IStrictIncludeOnlyType=} pOptions.includeOnly
- * @returns {import("../..").IRevisionChange[]}
+ * @param {IStrictExcludeType} pOptions.exclude
+ * @param {IStrictIncludeOnlyType=} pOptions.includeOnly
+ * @returns {IRevisionChange[]}
  */
 export default function findContentChanges(
   pDirectory,

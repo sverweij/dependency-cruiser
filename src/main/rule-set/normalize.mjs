@@ -1,5 +1,15 @@
 import { normalizeREProperties, normalizeToREAsString } from "../helpers.mjs";
 
+/**
+ * @import { RuleScopeType } from "../../../types/shared-types.mjs";
+ * @import { MiniDependencyRestrictionType } from "../../../types/restrictions.mjs";
+ * @import { IStrictMiniDependencyRestriction } from "../../../types/strict-restrictions.mjs";
+ * @import { IAnyRuleType } from "../../../types/rule-set.mjs";
+ * @import { IStrictAnyRuleType } from "../../../types/strict-rule-set.mjs";
+ * @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs";
+ * @import { IStrictRuleSet } from "../../../types/strict-rule-set.mjs";
+ */
+
 const VALID_SEVERITIES = /^(?:error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
 const DEFAULT_RULE = "unnamed";
@@ -20,16 +30,16 @@ function normalizeName(pRuleName) {
 }
 
 /**
- * @param {import("../../../types/shared-types.mjs").RuleScopeType} pScope?
- * @returns {import("../../../types/shared-types.mjs").RuleScopeType}
+ * @param {RuleScopeType} pScope?
+ * @returns {RuleScopeType}
  */
 function normalizeScope(pScope) {
   return pScope ? pScope : DEFAULT_SCOPE;
 }
 
 /**
- * @param {import("../../../types/restrictions.mjs").MiniDependencyRestrictionType} pVia
- * @returns {import("../../../types/strict-restrictions.mjs").IStrictMiniDependencyRestriction}
+ * @param {MiniDependencyRestrictionType} pVia
+ * @returns {IStrictMiniDependencyRestriction}
  */
 function normalizeVia(pVia) {
   let lReturnValue = {};
@@ -77,8 +87,8 @@ function normalizeVias(pRuleTo) {
 }
 
 /**
- * @param {import("../../../types/rule-set.mjs").IAnyRuleType} pRule
- * @returns {import("../../../types/strict-rule-set.mjs").IStrictAnyRuleType}
+ * @param {IAnyRuleType} pRule
+ * @returns {IStrictAnyRuleType}
  */
 function normalizeRule(pRule) {
   const lRuleTo = normalizeVias(pRule.to);
@@ -99,8 +109,8 @@ function normalizeRule(pRule) {
  * - rule name (default 'unnamed')
  * - severity (default 'warn')
  *
- * @param  {import("../../../types/dependency-cruiser.js").IFlattenedRuleSet} pRuleSet
- * @return {import("../../../types/strict-rule-set.js").IStrictRuleSet}
+ * @param  {IFlattenedRuleSet} pRuleSet
+ * @return {IStrictRuleSet}
  */
 export default function normalizeRuleSet(pRuleSet) {
   const lRuleSet = structuredClone(pRuleSet);

@@ -13,13 +13,14 @@ export function shouldUse({ tsPreCompilationDeps, parser }, pFileName) {
 }
 
 export function extract(
-  { baseDir, exoticRequireStrings, moduleSystems },
+  { baseDir, exoticRequireStrings, moduleSystems, detectJSDocImports },
   pFileName,
   pTranspileOptions,
 ) {
   return extractTypeScriptDeps(
     getASTCached(join(baseDir, pFileName), pTranspileOptions),
     exoticRequireStrings,
+    detectJSDocImports,
   ).filter(({ moduleSystem }) => moduleSystems.includes(moduleSystem));
 }
 

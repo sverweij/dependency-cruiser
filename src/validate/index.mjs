@@ -3,6 +3,10 @@ import matchDependencyRule from "./match-dependency-rule.mjs";
 import violatesRequiredRule from "./violates-required-rule.mjs";
 import matchFolderRule from "./match-folder-dependency-rule.mjs";
 
+/**
+ * @import { IValidationResult } from "./index.d.ts";
+ */
+
 function compareSeverity(pFirst, pSecond) {
   const lSeverity2Int = {
     error: 1,
@@ -67,10 +71,10 @@ function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
  * @param {*} pFrom
  * @param {*} pTo
  * @param {*} pMatchModule
- * @returns {import("./index.js").IValidationResult}
+ * @returns {IValidationResult}
  */
 function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
-  /** @type {import("./index.js").IValidationResult} */
+  /** @type {IValidationResult} */
   let lReturnValue = { valid: true };
 
   const lFoundRuleViolations = validateAgainstAllowedRules(

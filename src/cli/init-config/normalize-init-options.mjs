@@ -8,7 +8,11 @@ import findExtensions from "./find-extensions.mjs";
 import meta from "#meta.cjs";
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @import { IInitConfig, IPartialInitConfig } from "./types.js";
+ */
+
+/**
+ * @param {IInitConfig} pInitOptions
  * @param {string[]} pExtensions
  * @returns {boolean}
  */
@@ -25,7 +29,7 @@ function usesTypeScript(pInitOptions, pExtensions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string[]}
  */
 function getExtensions(pInitOptions) {
@@ -38,8 +42,8 @@ function getExtensions(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IPartialInitConfig} pInitOptions
- * @return {import("./types.js").IPartialInitConfig}
+ * @param {IPartialInitConfig} pInitOptions
+ * @return {IPartialInitConfig}
  */
 function populate(pInitOptions) {
   const lReturnValue = {
@@ -66,8 +70,8 @@ function populate(pInitOptions) {
 
 /**
  *
- * @param {import("./types.js").IPartialInitConfig} pInitOptions
- * @return {import("./types.js").IInitConfig}
+ * @param {IPartialInitConfig} pInitOptions
+ * @return {IInitConfig}
  */
 export default function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);

@@ -13,10 +13,9 @@ import { scannableExtensions } from "#extract/transpile/meta.mjs";
 import { bus } from "#utl/bus.mjs";
 
 /**
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionData} IRevisionData
- * @typedef {import("../../types/strict-options.mjs").IStrictCruiseOptions} IStrictCruiseOptions
- * @typedef {import("../../types/dependency-cruiser.mjs").ICruiseResult} ICruiseResult
- * @typedef {import("../../types/cache-options.mjs").cacheStrategyType} cacheStrategyType
+ * @import { IRevisionData, ICruiseResult } from "../../types/dependency-cruiser.mjs";
+ * @import { IStrictCruiseOptions } from "../../types/strict-options.mjs";
+ * @import { cacheStrategyType } from "../../types/cache-options.mjs";
  */
 
 const CACHE_FILE_NAME = "cache.json";

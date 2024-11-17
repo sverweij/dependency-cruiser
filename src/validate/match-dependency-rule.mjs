@@ -18,9 +18,13 @@ import {
 import { extractGroups } from "#utl/regex-util.mjs";
 
 /**
- *
- * @param {import("../../types/dependency-cruiser.mjs").IModule} pFrom
- * @param {import("../../types/dependency-cruiser.mjs").IDependency} pTo
+ * @import { IDependency, IModule } from "../../types/cruise-result.mjs";
+ * @import { IAnyRuleType } from "../../types/rule-set.mjs";
+ */
+
+/**
+ * @param {IModule} pFrom
+ * @param {IDependency} pTo
  * @returns {(pRule) => boolean}
  */
 function match(pFrom, pTo) {
@@ -57,7 +61,7 @@ function match(pFrom, pTo) {
 }
 
 /**
- * @param {import("../../types/rule-set.d.mts").IAnyRuleType} pRule
+ * @param {IAnyRuleType} pRule
  * @returns boolean
  */
 const isInteresting = (pRule) =>

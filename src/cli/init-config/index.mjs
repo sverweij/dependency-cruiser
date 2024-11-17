@@ -20,17 +20,21 @@ import {
 } from "./environment-helpers.mjs";
 import { writeRunScriptsToManifest } from "./write-run-scripts-to-manifest.mjs";
 
+/**
+ * @import { IInitConfig, IPartialInitConfig, OneShotConfigIDType } from "./types.js";
+ */
+
 const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
 
 /**
  * Create a initialization configuration based on guessed defaults
  * (e.g. a tsconfig exists => use it and assume typescript is used)
  *
- * @param {import("./types").OneShotConfigIDType} pOneShotConfigId
- * @return {import("./types").IPartialInitConfig} an initialization configuration
+ * @param {OneShotConfigIDType} pOneShotConfigId
+ * @return {IPartialInitConfig} an initialization configuration
  */
 function getOneShotConfig(pOneShotConfigId) {
-  /** @type {import("./types").IPartialInitConfig} */
+  /** @type {IPartialInitConfig} */
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     isTypeModule: isTypeModule(),
@@ -46,7 +50,7 @@ function getOneShotConfig(pOneShotConfigId) {
     babelConfig: getBabelConfigCandidates().shift(),
     specifyResolutionExtensions: true,
   };
-  /** @type {Map<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
+  /** @type {Map<OneShotConfigIDType, IPartialInitConfig>} */
   const lOneShotConfigs = new Map([
     ["yes", lBaseConfig],
     [
@@ -63,7 +67,7 @@ function getOneShotConfig(pOneShotConfigId) {
 
 /**
  *
- * @param {import("./types").IInitConfig} pNormalizedInitConfig
+ * @param {IInitConfig} pNormalizedInitConfig
  */
 function manifestIsUpdatable(pNormalizedInitConfig) {
   return (
@@ -73,7 +77,7 @@ function manifestIsUpdatable(pNormalizedInitConfig) {
 }
 
 /**
- * @param {boolean|import("./types").OneShotConfigIDType} pInit
+ * @param {boolean|OneShotConfigIDType} pInit
  * @param {string=} pConfigFileName
  * @param {{stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream}=} pStreams
  */

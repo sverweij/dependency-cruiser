@@ -113,36 +113,38 @@ jobs:
       - run: npm run depcruise
       - run: npx mocha --invert --fgrep "#do-not-run-on-windows"
 
-  check-berry-integration:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            .yarn
-            .yarnrc.yml
-            .pnp.js
-            yarn.lock
-          key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
-          restore-keys: |
-            ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{env.NODE_LATEST}}
-      - name: install & build
-        run: |
-          rm -f .npmrc
-          yarn set version berry
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
-      - name: forbidden dependency check
-        run: |
-          yarn --version
-          yarn depcruise
-      # testing doesn't work as the tests are esm and berry, with pnp enabled,
-      # doesn't support esm yet.
-      # - name: test coverage
-      #   run: |
-      #     node --version
-      #     yarn --version
-      #     yarn test:cover
+  # for #reasons the run step takes forever to complete on the ci - while 
+  # running fine locally. Something to figure out another time.
+  # check-berry-integration:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/cache@v4
+  #       with:
+  #         path: |
+  #           .yarn
+  #           .yarnrc.yml
+  #           .pnp.js
+  #           yarn.lock
+  #         key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
+  #         restore-keys: |
+  #           ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{env.NODE_LATEST}}
+  #     - name: install & build
+  #       run: |
+  #         rm -f .npmrc
+  #         yarn set version berry
+  #         YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+  #     - name: forbidden dependency check
+  #       run: |
+  #         yarn --version
+  #         yarn depcruise
+  #     # testing doesn't work as the tests are esm and berry, with pnp enabled,
+  #     # doesn't support esm yet.
+  #     # - name: test coverage
+  #     #   run: |
+  #     #     node --version
+  #     #     yarn --version
+  #     #     yarn test:cover

@@ -15,6 +15,11 @@ import {
 } from "./helpers.mjs";
 import { uniqBy, intersects } from "#utl/array-util.mjs";
 
+/**
+ * @import { IDependency } from "../../types/cruise-result.mjs";
+ * @import { IResolveOptions, IStrictCruiseOptions, ITranspileOptions } from "../../types/dependency-cruiser.mjs";
+ */
+
 function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = tscExtract(pCruiseOptions, pFileName, pTranspileOptions);
 
@@ -30,7 +35,7 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
 /**
  * @param {IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
- * @returns {(IStrictCruiseOptions, string, any) => import("../../types/cruise-result.mjs").IDependency[]}
+ * @returns {(IStrictCruiseOptions, string, any) => IDependency[]}
  */
 function determineExtractionFunction(pCruiseOptions, pFileName) {
   let lExtractionFunction = acornExtract;
@@ -45,13 +50,13 @@ function determineExtractionFunction(pCruiseOptions, pFileName) {
 }
 
 /**
- * @param {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pCruiseOptions
+ * @param {IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
- * @returns {import('../../types/cruise-result.mjs').IDependency[]}
+ * @returns {IDependency[]}
  */
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
-  /** @type import('../../types/cruise-result.mjs').IDependency[] */
+  /** @type IDependency[] */
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
@@ -114,7 +119,7 @@ function matchesPattern(pFullPathToFile, pPattern) {
 
 /**
  *
- * @param {import("../../types/dependency-cruiser.js").IDependency} pDependency
+ * @param {IDependency} pDependency
  * @returns {string}
  */
 function getDependencyUniqueKey({ module, moduleSystem, dependencyTypes }) {
@@ -143,12 +148,12 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../types/dependency-cruiser.js").IStrictCruiseOptions} pCruiseOptions cruise options
- * @param {import("../../types/dependency-cruiser.js").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
- * @param  {import("../../types/dependency-cruiser.js").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
+ * @param  {IStrictCruiseOptions} pCruiseOptions cruise options
+ * @param {IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
+ * @param  {ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {import("../../types/dependency-cruiser.js").IDependency[]} an array of dependency objects (see above)
+ * @return {IDependency[]} an array of dependency objects (see above)
  */
 export default function getDependencies(
   pFileName,

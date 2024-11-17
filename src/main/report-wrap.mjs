@@ -6,10 +6,15 @@ import { compareModules } from "#graph-utl/compare.mjs";
 import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
 
 /**
- *
- * @param {import('../../types/dependency-cruiser.js').ICruiseResult} pResult
- * @param {import('../../types/dependency-cruiser.js').IFormatOptions} pFormatOptions
- * @returns {import('../../types/dependency-cruiser.js').ICruiseResult}
+ * @import { ICruiseResult } from "../../types/cruise-result.mjs";
+ * @import { IFormatOptions } from "../../types/options.mjs";
+ * @import { IReporterOutput } from "../../types/dependency-cruiser.mjs";
+ */
+
+/**
+ * @param {ICruiseResult} pResult
+ * @param {IFormatOptions} pFormatOptions
+ * @returns {ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
   let lModules = applyFilters(pResult.modules, pFormatOptions);
@@ -44,9 +49,9 @@ function getReporterSection(pOutputType) {
 
 /**
  *
- * @param {import("../..).ICruiseResult} pResult result of a previous run of dependency-cruiser
- * @param {import("../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
+ * @param {ICruiseResult} pResult result of a previous run of dependency-cruiser
+ * @param {IFormatOptions} pFormatOptions
+ * @returns {IReporterOutput}
  */
 export default async function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = await getReporter(pFormatOptions.outputType);

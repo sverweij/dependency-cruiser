@@ -1,6 +1,10 @@
 import { compareRules } from "./compare.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
+/**
+ * @import { IDependency, IModule } from "../../types/cruise-result.mjs";
+ */
+
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
@@ -30,8 +34,8 @@ function mergeDependencies(pResolvedName, pDependencies) {
 }
 
 /**
- * @param {import('../../types/dependency-cruiser.mjs').IDependency[]} pDependencies
- * @returns {import('../../types/dependency-cruiser.mjs').IDependency[]}
+ * @param {IDependency[]} pDependencies
+ * @returns {IDependency[]}
  */
 function consolidateDependencies(pDependencies) {
   let lDependencies = structuredClone(pDependencies);
@@ -51,8 +55,8 @@ function consolidateDependencies(pDependencies) {
 }
 
 /**
- * @param {import('../../types/dependency-cruiser.mjs').IModule} pModule
- * @returns {import('../../types/dependency-cruiser.mjs').IModule}
+ * @param {IModule} pModule
+ * @returns {IModule}
  */
 export default function consolidateModuleDependencies(pModule) {
   return {

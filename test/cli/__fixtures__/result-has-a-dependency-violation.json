@@ -9263,6 +9263,7 @@
     "totalDependenciesCruised": 298,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "doNotFollow": {
         "path": "node_modules",
         "dependencyTypes": [

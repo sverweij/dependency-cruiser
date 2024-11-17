@@ -6,10 +6,10 @@ import memoize from "memoize";
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
- * @typedef {import("../..").IModule} IModule
- * @typedef {import("../../types/dependency-cruiser.mjs").IRevisionChange} IRevisionChange
- * @typedef {import("../../types/filter-types.mjs").IExcludeType} IExcludeType
- * @typedef {import("../../types/strict-filter-types.mjs").IStrictIncludeOnlyType} IStrictIncludeOnlyType
+ * @import { IModule, IRevisionChange, } from "../../types/dependency-cruiser.mjs"
+ * @import { IExcludeType } from "../../types/filter-types.mjs"
+ * @import { IStrictIncludeOnlyType } from "../../types/strict-filter-types.mjs"
+ * @import { changeType, IChange } from "watskeburt"
  */
 
 /**
@@ -35,7 +35,7 @@ function _getFileHashSync(pFileName) {
 export const getFileHashSync = memoize(_getFileHashSync);
 
 /**
- * @param {import("watskeburt").IChange} pChange
+ * @param {IChange} pChange
  * @return {IRevisionChange}
  */
 export function addCheckSumToChangeSync(pChange) {
@@ -80,7 +80,7 @@ export function hasInterestingExtension(pExtensions) {
 
 /**
  * @param {Set<string>} pExtensions
- * @returns {(pChange: import("watskeburt").IChange) => boolean}
+ * @returns {(pChange: IChange) => boolean}
  */
 export function changeHasInterestingExtension(pExtensions) {
   return (pChange) => {
@@ -106,8 +106,8 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
 ]);
 
 /**
- * @param {Set<import("watskeburt").changeType>=} pInterestingChangeTypes
- * @returns {(pChange: import("watskeburt").IChange) => boolean}
+ * @param {Set<changeType>=} pInterestingChangeTypes
+ * @returns {(pChange: IChange) => boolean}
  */
 export function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) =>

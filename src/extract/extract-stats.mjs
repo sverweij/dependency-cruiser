@@ -5,9 +5,14 @@ import {
 import { getStats as acornStats } from "./acorn/extract.mjs";
 
 /**
+ * @import { IStrictCruiseOptions, ITranspileOptions } from "../../types/dependency-cruiser.mjs";
+ * @import { IDependency } from "../../types/cruise-result.mjs";
+ */
+
+/**
  * @param {IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
- * @returns {(IStrictCruiseOptions, string, any) => import("../../types/cruise-result.mjs").IDependency[]}
+ * @returns {(IStrictCruiseOptions, string, any) => IDependency[]}
  */
 function determineExtractionFunction(pCruiseOptions, pFileName) {
   let lExtractionFunction = acornStats;
@@ -23,11 +28,11 @@ function determineExtractionFunction(pCruiseOptions, pFileName) {
  * Returns some stats for the module in pFileName
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../types/dependency-cruiser.js").IStrictCruiseOptions} pCruiseOptions cruise options
- * @param  {import("../../types/dependency-cruiser.js").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
+ * @param  {IStrictCruiseOptions} pCruiseOptions cruise options
+ * @param  {ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {import("../../types/dependency-cruiser.js").IDependency[]} an array of dependency objects (see above)
+ * @return {IDependency[]} an array of dependency objects (see above)
  */
 export default function extractStats(
   pFileName,

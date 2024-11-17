@@ -1,19 +1,24 @@
 {
   "modules": [
     {
-      "source": "src/use-maybe.ts",
+      "source": "src/index.mjs",
       "dependencies": [
         {
           "dynamic": false,
-          "module": "graphql/tsutils/Maybe",
+          "module": "./types.mjs",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
-          "resolved": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
+          "dependencyTypes": [
+            "local",
+            "type-only",
+            "import",
+            "jsdoc",
+            "jsdoc-import-tag"
+          ],
+          "resolved": "src/types.d.mts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "license": "MIT",
-          "dependencyTypes": ["npm-no-pkg", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -24,9 +29,9 @@
       "valid": true
     },
     {
-      "source": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
+      "source": "src/types.d.mts",
       "dependencies": [],
-      "dependents": ["src/use-maybe.ts"],
+      "dependents": ["src/index.mjs"],
       "orphan": false,
       "valid": true
     }
@@ -40,16 +45,23 @@
     "totalCruised": 2,
     "totalDependenciesCruised": 1,
     "optionsUsed": {
+      "baseDir": "",
       "combinedDependencies": false,
-      "detectJSDocImports": false,
+      "detectJSDocImports": true,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "outputTo": "../../__output__/jsdoc-import-tags.json",
+      "outputType": "json",
+      "parser": "tsc",
       "preserveSymlinks": false,
-      "tsPreCompilationDeps": true,
-      "args": "src",
-      "baseDir": "test/main/__mocks__/type-only-module-references"
+      "rulesFile": "dependency-cruiser-config.mjs",
+      "tsPreCompilationDeps": false,
+      "args": "src/index.mjs"
+    },
+    "ruleSetUsed": {
+      "forbidden": []
     }
   }
 }

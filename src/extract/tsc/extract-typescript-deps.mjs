@@ -1,9 +1,14 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-/** @type {import("typescript")} */
+/**
+ * @import typescript, {Node} from "typescript"
+ */
+
+/** @type {typescript} */
 const typescript = await tryImport(
   "typescript",
   meta.supportedTranspilers.typescript,
@@ -24,7 +29,7 @@ function isTypeOnlyImport(pStatement) {
 function isTypeOnlyExport(pStatement) {
   return (
     // for some reason the isTypeOnly indicator is on _statement_ level
-    // and not in exportClause as it is in the importClause ¯\_ (ツ)_/¯.
+    // and not in exportClause as it is in the importClause ¯\_(ツ)_/¯.
     // Also in the case of the omission of an alias the exportClause
     // is not there entirely. So regardless whether there is a
     // pStatement.exportClause or not, we can directly test for the
@@ -46,7 +51,7 @@ function isTypeOnlyExport(pStatement) {
 /**
  * Get all import statements from the top level AST node
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all import statements in the (top level) AST node
  */
@@ -70,7 +75,7 @@ function extractImports(pAST) {
 /**
  * Get all export statements from the top level AST node
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all export statements in the (top level) AST node
  */
@@ -98,7 +103,7 @@ function extractExports(pAST) {
  * Ignores import equals of variables (e.g. import protocol = ts.server.protocol
  * which happens in typescript/lib/protocol.d.ts)
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string, moduleSystem: string;exoticallyRequired: boolean;}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
@@ -123,7 +128,7 @@ function extractImportEquals(pAST) {
  * might be wise to distinguish the three types of /// directive that
  * can come out of this as the resolution algorithm might differ
  *
- * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @param {Node} pAST - typescript syntax tree
  * @returns {{module: string, moduleSystem: string}[]} - 'tripple slash' dependencies
  */
 function extractTripleSlashDirectives(pAST) {
@@ -252,7 +257,41 @@ function isTypeImport(pASTNode) {
         "FirstTemplateToken")
   );
 }
-function walk(pResult, pExoticRequireStrings) {
+
+function extractJSDocImportTags(pJSDocTags) {
+  return pJSDocTags
+    .filter(
+      (pTag) =>
+        pTag.tagName.escapedText === "import" &&
+        pTag.moduleSpecifier?.kind &&
+        typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
+        Boolean(pTag.moduleSpecifier.text),
+    )
+    .map((pTag) => ({
+      module: pTag.moduleSpecifier.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-import-tag"],
+    }));
+}
+
+function extractJSDocImports(pJSDocNodes) {
+  return pJSDocNodes
+    .filter((pJSDocLine) => Boolean(pJSDocLine.tags))
+    .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
+}
+
+/**
+ * Walks the AST and collects all dependencies
+ *
+ * @param {Node} pASTNode - the AST node to start from
+ * @param {string[]} pExoticRequireStrings - exotic require strings to look for
+ * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
+ * @returns {(pASTNode: Node) => void} - the walker function
+ */
+// eslint-disable-next-line max-lines-per-function
+function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
+  // eslint-disable-next-line max-lines-per-function
   return (pASTNode) => {
     // require('a-string'), require(`a-template-literal`)
     if (isRequireCallExpression(pASTNode)) {
@@ -298,7 +337,28 @@ function walk(pResult, pExoticRequireStrings) {
         dependencyTypes: ["type-import"],
       });
     }
-    typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
+
+    // /** @import thing from './module' */
+    // /** @import {thing} from './module' */
+    // /** @import * as thing from './module' */
+    // see https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
+    //
+    // TODO: all the kinds of tags that can have import statements as type declarations
+    //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
+    // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
+    if (pDetectJSDocImports && Boolean(pASTNode.jsDoc)) {
+      const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
+
+      // pResult = pResult.concat(lJSDocImports) looks like the more obvious
+      // way to do this, but it re-assigns the pResult parameter
+      lJSDocImports.forEach((pImport) => {
+        pResult.push(pImport);
+      });
+    }
+    typescript.forEachChild(
+      pASTNode,
+      walk(pResult, pExoticRequireStrings, pDetectJSDocImports),
+    );
   };
 }
 
@@ -306,13 +366,19 @@ function walk(pResult, pExoticRequireStrings) {
  * returns an array of dependencies that come potentially nested within
  * a source file, like commonJS or dynamic imports
  *
- * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @param {Node} pAST - typescript syntax tree
+ * @param {string[]} pExoticRequireStrings - exotic require strings to look for
+ * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
  * @returns {{module: string, moduleSystem: string}[]} - all commonJS dependencies
  */
-function extractNestedDependencies(pAST, pExoticRequireStrings) {
+function extractNestedDependencies(
+  pAST,
+  pExoticRequireStrings,
+  pDetectJSDocImports,
+) {
   let lResult = [];
 
-  walk(lResult, pExoticRequireStrings)(pAST);
+  walk(lResult, pExoticRequireStrings, pDetectJSDocImports)(pAST);
 
   return lResult;
 }
@@ -320,19 +386,25 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 /**
  * returns all dependencies in the AST
  *
- * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {module: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (Node), pExoticRequireStrings: string[], pDetectJSDocImports: boolean) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */
 export default function extractTypeScriptDependencies(
   pTypeScriptAST,
   pExoticRequireStrings,
+  pDetectJSDocImports,
 ) {
+  // console.dir(pTypeScriptAST, { depth: 100 });
   return Boolean(typescript)
     ? extractImports(pTypeScriptAST)
         .concat(extractExports(pTypeScriptAST))
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
-          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings),
+          extractNestedDependencies(
+            pTypeScriptAST,
+            pExoticRequireStrings,
+            pDetectJSDocImports,
+          ),
         )
         .map((pModule) => ({ dynamic: false, ...pModule }))
     : /* c8 ignore next */ [];
