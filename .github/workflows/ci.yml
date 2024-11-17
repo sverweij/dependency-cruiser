@@ -13,7 +13,7 @@ env:
   CI: true
   # the LANG (used by the Intl API, which we use for some of the number
   # formatting) is set in the run scripts. This works everywhere, except on
-  # windows. So, especinodeally for windows ...
+  # windows. So, especially for windows ...
   LANG: en_US.UTF-8
   # Same for NODE_OPTIONS, just for windows:
   NODE_OPTIONS: --no-warnings
