@@ -791,8 +791,9 @@ you can provide the parameters like so:
 
 If you have dependencies in JSDoc comments that you want to take into account
 you can set this option to `true`. This will make dependency-cruiser look at
-TypeScript 5.5+ [`@import` tags](https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag)
-as well as to bracket style imports (e.g. `/** @type {import('./thing').SomeType} */`)
+TypeScript 5.5+ [`@import` tags](https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag).
+
+In the near future it will also look to bracket style imports (e.g. `/** @type {import('./thing').SomeType} */`)
 in all JSDoc tags they can occur in (e.g. `@param`, `@returns`, `@type`, `@typedef` etc).
 
 As currently on the TypeScript compiler (`tsc`) can detect these imports, switching
@@ -801,7 +802,7 @@ it uses the TypeScript compiler to parse not only TypeScript but also JavaScript
 
 ```javascript
 options: {
-  detectJSDocImports: true // implies `parser: "tsc"`
+  detectJSDocImports: true; // implies `parser: "tsc"`
 }
 ```
 
