@@ -1,14 +1,10 @@
 // @ts-check
 /* eslint-disable security/detect-object-injection */
 /**
- * @typedef {import("../../types/cruise-result.d.mts").IFolderDependency} IFolderDependency
- * @typedef {import("../../types/cruise-result.d.mts").IDependency} IDependency
- * @typedef {import("../../types/cruise-result.d.mts").IFolder} IFolder
- * @typedef {import("../../types/cruise-result.d.mts").IModule} IModule
- * @typedef {import("../../types/shared-types.d.mts").DependencyType} DependencyType
- * @typedef {import("../../types/shared-types.d.mjs").IMiniDependency} IMiniDependency
- *
- * @typedef {(IDependency|IFolderDependency) & {name:string; dependencyTypes?: DependencyType[]}} IEdge
+ * @import { IFolderDependency, IDependency, IFolder, IModule } from "../../types/cruise-result.mjs"
+ * @import { DependencyType, IMiniDependency } from "../../types/shared-types.mjs"
+ 
+* @typedef {(IDependency|IFolderDependency) & {name:string; dependencyTypes?: DependencyType[]}} IEdge
  * @typedef {IModule|IFolder} IModuleOrFolder
  * @typedef {IModuleOrFolder & {dependencies: IEdge[]}} IVertex
  */

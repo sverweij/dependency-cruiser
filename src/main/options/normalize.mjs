@@ -3,6 +3,14 @@ import { normalizeREProperties } from "../helpers.mjs";
 import defaults from "./defaults.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
+/**
+ * @import { ICruiseResult } from "../../../types/cruise-result.mjs";
+ * @import { ICruiseOptions, IFormatOptions } from "../../../types/options.mjs";
+ * @import { IStrictCruiseOptions, IStrictFormatOptions } from "../../../types/strict-options.mjs";
+ * @import { IForbiddenRuleType, IFlattenedRuleSet } from "../../../types/rule-set.mjs";
+ * @import { ICacheOptions } from "../../../types/cache-options.mjs";
+ */
+
 const DEFAULT_CACHE_FOLDER = "node_modules/.cache/dependency-cruiser";
 const DEFAULT_CACHE_STRATEGY = "metadata";
 
@@ -65,7 +73,7 @@ function normalizeCollapse(pCollapse) {
 }
 
 function normalizeFocusDepth(pFormatOptions) {
-  /** @type  {import("../../../types/dependency-cruiser.js").IFormatOptions}*/
+  /** @type {IFormatOptions}*/
   let lFormatOptions = structuredClone(pFormatOptions);
   if (Object.hasOwn(lFormatOptions, "focusDepth")) {
     if (lFormatOptions?.focus) {
@@ -81,7 +89,7 @@ function normalizeFocusDepth(pFormatOptions) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser.js").IForbiddenRuleType} pRule
+ * @param {IForbiddenRuleType} pRule
  * @returns {boolean}
  */
 function hasMetricsRule(pRule) {
@@ -96,7 +104,7 @@ function hasMetricsRule(pRule) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser.js").IFlattenedRuleSet} pRuleSet
+ * @param {IFlattenedRuleSet} pRuleSet
  * @returns {boolean}
  */
 function ruleSetHasMetricsRule(pRuleSet) {
@@ -109,7 +117,7 @@ function ruleSetHasMetricsRule(pRuleSet) {
 
 /**
  *
- * @param {import('../../../types/dependency-cruiser.js').ICruiseOptions} pOptions
+ * @param {ICruiseOptions} pOptions
  * @returns Boolean
  */
 function reporterShowsMetrics(pOptions) {
@@ -122,7 +130,7 @@ function reporterShowsMetrics(pOptions) {
 /**
  * Determines whether (instability) metrics should be calculated
  *
- * @param {import('../../../types/dependency-cruiser.js').ICruiseOptions} pOptions
+ * @param {ICruiseOptions} pOptions
  * @returns Boolean
  */
 function shouldCalculateMetrics(pOptions) {
@@ -135,8 +143,8 @@ function shouldCalculateMetrics(pOptions) {
 }
 
 /**
- * @param {string|boolean|Partial<import("../../../types/cache-options.js").ICacheOptions>} pCacheOptions
- * @returns {import("../../../types/cache-options.js").ICacheOptions}
+ * @param {string|boolean|Partial<ICacheOptions>} pCacheOptions
+ * @returns {ICacheOptions}
  */
 function normalizeCacheOptions(pCacheOptions) {
   let lNormalizedCacheOptions = pCacheOptions;
@@ -163,12 +171,12 @@ function normalizeCacheOptions(pCacheOptions) {
 
 /**
  *
- * @param {import('../../../types/options.mjs').ICruiseOptions} pOptions
+ * @param {ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
- * @returns {import('../../../types/strict-options.js').IStrictCruiseOptions}
+ * @returns {IStrictCruiseOptions}
  */
 export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
-  /** @type {import('../../../types/strict-options.js').IStrictCruiseOptions} */
+  /** @type {IStrictCruiseOptions} */
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
@@ -219,9 +227,8 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
 }
 
 /**
- *
- * @param {import("../../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
- * @returns {import("../../../types/strict-options.js").IStrictFormatOptions}
+ * @param {IFormatOptions} pFormatOptions
+ * @returns {IStrictFormatOptions}
  */
 export function normalizeFormatOptions(pFormatOptions) {
   let lFormatOptions = structuredClone(pFormatOptions);

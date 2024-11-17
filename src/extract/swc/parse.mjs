@@ -2,10 +2,14 @@ import memoize, { memoizeClear } from "memoize";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-/** @type {import('@swc/core')} */
+/**
+ * @import swcCore, { ParseOptions, ModuleItem } from "@swc/core";
+ */
+
+/** @type {swcCore} */
 const swc = await tryImport("@swc/core", meta.supportedTranspilers.swc);
 
-/** @type {import('@swc/core').ParseOptions} */
+/** @type {ParseOptions} */
 const SWC_PARSE_OPTIONS = {
   dynamicImport: true,
   // typescript is a superset of ecmascript, so we use typescript always
@@ -22,7 +26,7 @@ export function getASTFromSource(pSource) {
 }
 
 function getAST(pFileName) {
-  /** @type {import('@swc/core')} swc */
+  /** @type {swcCore swc} */
   return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
@@ -32,7 +36,7 @@ function getAST(pFileName) {
  * return the result from a cache
  *
  * @param {string} pFileName - the name of the file to compile
- * @return {import('@swc/core').ModuleItem[]} - an (swc) AST
+ * @return {ModuleItem[]} - an (swc) AST
  */
 export const getASTCached = memoize(getAST);
 

@@ -10,8 +10,9 @@ import {
 } from "./helpers.mjs";
 
 /**
- * @import {IModule, IRevisionChange, IRevisionData, ICruiseResult } from "../../types/dependency-cruiser.mjs"
+ * @import { IModule, IRevisionChange, IRevisionData, ICruiseResult } from "../../types/dependency-cruiser.mjs"
  * @import { IStrictCruiseOptions } from "../../types/strict-options.mjs"
+ * @import { changeType, getSHA } from "watskeburt"
  */
 
 /**
@@ -53,10 +54,10 @@ export default class ContentStrategy {
    * @param {IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
-   * @param {Set<import("watskeburt").changeType>=} pOptions.interestingChangeTypes?
+   * @param {Set<changeType>=} pOptions.interestingChangeTypes?
    * @param {string=} pOptions.baseDir
    * @param {typeof findContentChanges=} pOptions.diffListFn
-   * @param {typeof import('watskeburt').getSHA=} pOptions.checksumFn
+   * @param {typeof getSHA=} pOptions.checksumFn
    * @returns {IRevisionData}
    */
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {

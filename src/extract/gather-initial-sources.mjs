@@ -8,8 +8,11 @@ import getExtension from "#utl/get-extension.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
 /**
- *
- * @param {import('../../types/options.mjs').IStrictCruiseOptions} pOptions
+ * @import {IStrictCruiseOptions} from "../../types/options.mjs";
+ */
+
+/**
+ * @param {IStrictCruiseOptions} pOptions
  * @returns {string[]}
  */
 function getScannableExtensions(pOptions) {
@@ -37,9 +40,8 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
 }
 
 /**
- *
  * @param {string} pDirectoryName
- * @param  {import('../../types/options.mjs').IStrictCruiseOptions} pOptions options that
+ * @param {IStrictCruiseOptions} pOptions options that
  * @returns {string[]}
  */
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
@@ -90,7 +92,7 @@ function expandGlob(pBaseDirectory, pScannedGlob) {
  *
  * @param  {string[]} pFileDirectoryAndGlobArray globs and/ or paths to files or
  *                               directories to be gathered
- * @param  {import('../../types/dependency-cruiser.js').IStrictCruiseOptions} pOptions options that
+ * @param  {IStrictCruiseOptions} pOptions options that
  *                               influence what needs to be gathered/ scanned
  *                               notably useful attributes:
  *                               - exclude - regexp of what to exclude

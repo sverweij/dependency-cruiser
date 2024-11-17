@@ -434,8 +434,8 @@ export default {
     // },
     /* Experimental: the parser to use
      */
-    parser: "tsc", // acorn, tsc
-    // detectJSDocImports: true, // implies parser: "tsc"
+    // parser: "tsc", // acorn, tsc
+    detectJSDocImports: true, // implies parser: "tsc"
     experimentalStats: true,
     metrics: true,
     enhancedResolveOptions: {

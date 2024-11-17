@@ -9,6 +9,13 @@ import {
   getPackageRoot,
 } from "./external-module-helpers.mjs";
 
+/**
+ * @import { DependencyType } from "../../../types/shared-types.mjs"
+ * @import { IResolveOptions, ITranspileOptions } from "../../../types/dependency-cruiser.mjs"
+ * @import { IDependency } from "../../../types/cruise-result.mjs"
+ * @import { IResolveOptions } from "../../../types/resolve-options.mjs"
+ */
+
 function dependencyKeyHasModuleName(
   pPackageDependencies,
   pModuleName,
@@ -49,7 +56,7 @@ function determineManifestDependencyTypes(
   pPackageDependencies,
   pResolverModulePaths,
 ) {
-  /** @type {import("../../../types/shared-types.js").DependencyType[]} */
+  /** @type {DependencyType[]} */
   let lReturnValue = ["npm-unknown"];
 
   if (Boolean(pPackageDependencies)) {
@@ -98,8 +105,8 @@ function dependencyIsBundled(pModule, pPackageDeps) {
  * @param {string} pModuleName
  * @param {string} pPackageDeps
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser.js").IResolveOptions} pResolveOptions
- * @returns {import("../../../types/shared-types.js").DependencyType[]}
+ * @param {IResolveOptions} pResolveOptions
+ * @returns {DependencyType[]}
  */
 function determineNodeModuleDependencyTypes(
   pModuleName,
@@ -107,7 +114,7 @@ function determineNodeModuleDependencyTypes(
   pFileDirectory,
   pResolveOptions,
 ) {
-  /** @type {import("../../../types/shared-types.js").DependencyType[]} */
+  /** @type { DependencyType[] } */
   let lReturnValue = determineManifestDependencyTypes(
     getPackageRoot(pModuleName),
     pPackageDeps,
@@ -127,13 +134,13 @@ function determineNodeModuleDependencyTypes(
 
 /**
  *
- * @param {import("../../../types/cruise-result.mjs").IDependency} pDependency
+ * @param {IDependency} pDependency
  * @param {string} pModuleName
  * @param {any} pPackageDeps
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser.js").IResolveOptions} pResolveOptions
+ * @param {IResolveOptions} pResolveOptions
  * @param {string} pBaseDirectory
- * @returns {import("../../../types/shared-types.js").DependencyType[]}
+ * @returns {DependencyType[]}
  */
 function determineExternalModuleDependencyTypes(
   pDependency,
@@ -143,7 +150,7 @@ function determineExternalModuleDependencyTypes(
   pResolveOptions,
   pBaseDirectory,
 ) {
-  /** @type {import("../../../types/shared-types.js").DependencyType[]} */
+  /** @type { DependencyType[] } */
   let lReturnValue = [];
 
   if (
@@ -164,15 +171,15 @@ function determineExternalModuleDependencyTypes(
 /* eslint max-params:0, complexity:0 */
 /**
  *
- * @param {import("../../../types/cruise-result.mjs").IDependency} pDependency the dependency object with all information found hitherto
+ * @param {IDependency} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
- * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
+ * @param {IResolveOptions} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
- * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
+ * @param {ITranspileOptions} pTranspileOptions
  *
- * @return {import("../../../types/shared-types.js").DependencyType[]} an array of dependency types for the dependency
+ * @return { DependencyType[] }an array of dependency types for the dependency
  */
 // eslint-disable-next-line max-lines-per-function
 export default function determineDependencyTypes(
@@ -184,7 +191,7 @@ export default function determineDependencyTypes(
   pBaseDirectory,
   pTranspileOptions,
 ) {
-  /** @type {import("../../../types/shared-types.js").DependencyType[]}*/
+  /** @type {DependencyType[]}*/
   let lReturnValue = [];
   const lResolveOptions = pResolveOptions || {};
 

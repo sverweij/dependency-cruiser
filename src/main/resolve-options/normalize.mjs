@@ -6,8 +6,13 @@ import {
   ruleSetHasLicenseRule,
 } from "#graph-utl/rule-set.mjs";
 
+/**
+ * @import { IResolveOptions } from "../../../types/resolve-options.mjs";
+ * @import { ICruiseOptions } from "../../../types/options.mjs";
+ */
+
 const DEFAULT_CACHE_DURATION = 4000;
-/** @type {Partial<import("../../../types/dependency-cruiser").IResolveOptions>} */
+/** @type {Partial<IResolveOptions>} */
 const DEFAULT_RESOLVE_OPTIONS = {
   symlinks: true,
   // if a webpack config overrides extensions, there's probably
@@ -41,7 +46,7 @@ function omit(pObject, pProperty) {
 /**
  *
  * @param {Number} pCacheDuration
- * @returns {Partial<import("../../../types/dependency-cruiser").IResolveOptions>}
+ * @returns {Partial<IResolveOptions>}
  */
 function getNonOverridableResolveOptions(pCacheDuration) {
   return {
@@ -129,8 +134,8 @@ async function compileResolveOptions(
 }
 
 /**
- * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
- * @param {import("../../../types/dependency-cruiser").ICruiseOptions} pOptions
+ * @param {IResolveOptions} pResolveOptions
+ * @param {ICruiseOptions} pOptions
  * @param {import("typescript").ParsedTsconfig} pTSConfig
  * @returns
  */

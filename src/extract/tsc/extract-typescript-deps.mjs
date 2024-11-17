@@ -4,7 +4,11 @@
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-/** @type {import("typescript")} */
+/**
+ * @import typescript, {Node} from "typescript"
+ */
+
+/** @type {typescript} */
 const typescript = await tryImport(
   "typescript",
   meta.supportedTranspilers.typescript,
@@ -47,7 +51,7 @@ function isTypeOnlyExport(pStatement) {
 /**
  * Get all import statements from the top level AST node
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all import statements in the (top level) AST node
  */
@@ -71,7 +75,7 @@ function extractImports(pAST) {
 /**
  * Get all export statements from the top level AST node
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all export statements in the (top level) AST node
  */
@@ -99,7 +103,7 @@ function extractExports(pAST) {
  * Ignores import equals of variables (e.g. import protocol = ts.server.protocol
  * which happens in typescript/lib/protocol.d.ts)
  *
- * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @param {Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string, moduleSystem: string;exoticallyRequired: boolean;}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
@@ -124,7 +128,7 @@ function extractImportEquals(pAST) {
  * might be wise to distinguish the three types of /// directive that
  * can come out of this as the resolution algorithm might differ
  *
- * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @param {Node} pAST - typescript syntax tree
  * @returns {{module: string, moduleSystem: string}[]} - 'tripple slash' dependencies
  */
 function extractTripleSlashDirectives(pAST) {
@@ -280,10 +284,10 @@ function extractJSDocImports(pJSDocNodes) {
 /**
  * Walks the AST and collects all dependencies
  *
- * @param {import("typescript").Node} pASTNode - the AST node to start from
+ * @param {Node} pASTNode - the AST node to start from
  * @param {string[]} pExoticRequireStrings - exotic require strings to look for
  * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
- * @returns {(pASTNode: import("typescript").Node) => void} - the walker function
+ * @returns {(pASTNode: Node) => void} - the walker function
  */
 // eslint-disable-next-line max-lines-per-function
 function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
@@ -362,7 +366,7 @@ function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
  * returns an array of dependencies that come potentially nested within
  * a source file, like commonJS or dynamic imports
  *
- * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @param {Node} pAST - typescript syntax tree
  * @param {string[]} pExoticRequireStrings - exotic require strings to look for
  * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
  * @returns {{module: string, moduleSystem: string}[]} - all commonJS dependencies
@@ -382,7 +386,7 @@ function extractNestedDependencies(
 /**
  * returns all dependencies in the AST
  *
- * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[], pDetectJSDocImports: boolean) => {module: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (Node), pExoticRequireStrings: string[], pDetectJSDocImports: boolean) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */
 export default function extractTypeScriptDependencies(
   pTypeScriptAST,

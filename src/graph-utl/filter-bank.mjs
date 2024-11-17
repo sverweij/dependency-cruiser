@@ -5,6 +5,11 @@ import {
   dependencyMatchesFilter,
 } from "./match-facade.mjs";
 
+/**
+ * @import { IModule } from "../../types/cruise-result.mjs";
+ * @import { IStrictReachesType } from "../../types/strict-filter-types.mjs";
+ */
+
 function includeOnly(pModules, pIncludeFilter) {
   return pIncludeFilter.path
     ? pModules
@@ -33,9 +38,9 @@ function exclude(pModules, pExcludeFilter) {
 }
 /**
  *
- * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
- * @param {import("../../types/strict-filter-types.js").IStrictReachesType} pReachesFilter
- * @returns {import("../../types/cruise-result.mjs").IModule[]}
+ * @param {IModule[]} pModules
+ * @param {IStrictReachesType} pReachesFilter
+ * @returns {IModule[]}
  */
 function filterReaches(pModules, pReachesFilter) {
   const lModuleNamesToReach = pModules

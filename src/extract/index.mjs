@@ -4,6 +4,11 @@ import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
 import { bus } from "#utl/bus.mjs";
 
+/**
+ * @import {IStrictCruiseOptions} from "../../types/options.mjs";
+ * @import { IModule, IResolveOptions, ITranspileOptions } from "../../types/dependency-cruiser.mjs";
+ */
+
 /* eslint max-params:0 , max-lines-per-function:0*/
 function extractRecursive(
   pFileName,
@@ -142,10 +147,10 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
  * returns an array of all the modules it finds that way.
  *
  * @param {string[]} pFileDirectoryArray
- * @param {import("../../types/dependency-cruiser.js").IStrictCruiseOptions} pCruiseOptions
- * @param {import("../../types/dependency-cruiser.js").IResolveOptions} pResolveOptions
- * @param {import("../../types/dependency-cruiser.js").ITranspileOptions} pTranspileOptions
- * @returns {Partial<import("../../types/dependency-cruiser.js").IModule[]>}
+ * @param {IStrictCruiseOptions} pCruiseOptions
+ * @param {IResolveOptions} pResolveOptions
+ * @param {ITranspileOptions} pTranspileOptions
+ * @returns {Partial<IModule[]>}
  */
 export default function extract(
   pFileDirectoryArray,

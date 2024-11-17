@@ -3,6 +3,10 @@ import { folderNameArrayToRE } from "./utl.mjs";
 import configTemplate from "./config-template.mjs";
 
 /**
+ * @import { IInitConfig } from "./types.js";
+ */
+
+/**
  * @param {string} pString
  * @returns {string}
  */
@@ -22,7 +26,7 @@ function extensionsToString(pExtensions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildNotToTestRule(pInitOptions) {
@@ -49,7 +53,7 @@ function buildNotToTestRule(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildTsPreCompilationDepsAttribute(pInitOptions) {
@@ -59,7 +63,7 @@ function buildTsPreCompilationDepsAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildCombinedDependenciesAttribute(pInitOptions) {
@@ -69,7 +73,7 @@ function buildCombinedDependenciesAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildTsOrJsConfigAttribute(pInitOptions) {
@@ -89,7 +93,7 @@ function buildTsOrJsConfigAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildWebpackConfigAttribute(pInitOptions) {
@@ -107,7 +111,7 @@ function buildWebpackConfigAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildBabelConfigAttribute(pInitOptions) {
@@ -121,7 +125,7 @@ function buildBabelConfigAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildExtensionsAttribute(pInitOptions) {
@@ -131,7 +135,7 @@ function buildExtensionsAttribute(pInitOptions) {
 }
 
 /**
- * @param {import("./types.js").IInitConfig} pInitOptions
+ * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
 function buildMainFieldsAttribute(pInitOptions) {
@@ -149,7 +153,7 @@ function buildMainFieldsAttribute(pInitOptions) {
  * Creates a .dependency-cruiser config with a set of basic validations
  * to the current directory.
  *
- * @param {import("./types.js").IInitConfig} pInitOptions ('Normalized') options that influence the shape of
+ * @param {IInitConfig} pInitOptions ('Normalized') options that influence the shape of
  *                  the configuration
  * @returns {string} the configuration as a string
  */

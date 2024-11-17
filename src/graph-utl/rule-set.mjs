@@ -1,13 +1,17 @@
 /**
+ * @import {IFlattenedRuleSet, IForbiddenRuleType} from '../../types/rule-set.mjs';
+ */
+
+/**
  * Finds the first rule in the rule set that has name pName,
  * and undefined if no such rule exists/ the rule is an 'allowed'
  * rule.
  *
  * (this thing probably belongs in a model-like folder and not in utl)
  *
- * @param {import("../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet - The rule set to search in
+ * @param {IFlattenedRuleSet} pRuleSet - The rule set to search in
  * @param {string} pName - The rule name to look for
- * @return {import("../../types/rule-set").IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
+ * @return {IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
 export function findRuleByName(pRuleSet, pName) {
   const lNamedRules = (pRuleSet?.forbidden ?? []).concat(
@@ -29,7 +33,7 @@ function ruleHasALicenseLikeAttribute(pRule) {
  *
  * Returns false in all other cases
  *
- * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
+ * @param {IFlattenedRuleSet} pRuleSet
  * @return {boolean}
  */
 export function ruleSetHasLicenseRule(pRuleSet) {
@@ -38,9 +42,9 @@ export function ruleSetHasLicenseRule(pRuleSet) {
     (pRuleSet?.allowed ?? []).some(ruleHasALicenseLikeAttribute)
   );
 }
+
 /**
- *
- * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
+ * @param {IFlattenedRuleSet} pRuleSet
  * @return {boolean}
  */
 export function ruleSetHasDeprecationRule(pRuleSet) {

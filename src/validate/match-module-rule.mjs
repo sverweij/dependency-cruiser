@@ -7,9 +7,13 @@ import {
 } from "./match-module-rule-helpers.mjs";
 
 /**
- *
- * @param {import("../../types/cruise-result.mjs").IModule} pModule
- * @returns {(pRule:import("../../types/rule-set.mjs").IAnyRuleType) => boolean}
+ * @import { IModule } from "../../types/cruise-result.mjs";
+ * @import { IAnyRuleType } from "../../types/rule-set.mjs";
+ */
+
+/**
+ * @param {IModule} pModule
+ * @returns {(pRule:IAnyRuleType) => boolean}
  */
 function match(pModule) {
   return (pRule) =>
@@ -20,8 +24,7 @@ function match(pModule) {
 }
 
 /**
- *
- * @param {import("../../types/rule-set.mjs").IAnyRuleType} pRule
+ * @param {IAnyRuleType} pRule
  * @returns boolean
  */
 const isInteresting = (pRule) =>

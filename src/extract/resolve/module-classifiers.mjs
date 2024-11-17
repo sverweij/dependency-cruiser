@@ -4,6 +4,11 @@ import { join as posix_join } from "node:path/posix";
 import picomatch from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
 
+/**
+ * @import { IResolveOptions } from "../../../types/resolve-options.mjs"
+ * @import { ITranspileOptions } from "../../../types/dependency-cruiser.mjs"
+ */
+
 let gFollowableExtensionsCache = new Set();
 let gFollowableExtensionsCacheInitialized = false;
 
@@ -278,9 +283,9 @@ function matchesTSConfigBaseURL(
 /**
  * @param {string} pModuleName
  * @param {string} pResolvedModuleName
- * @param {import("../../../types/resolve-options.mjs").IResolveOptions} pResolveOptions
+ * @param {importIResolveOptions} pResolveOptions
  * @param {any} pManifest
- * @param {import("../../../types/dependency-cruiser.mjs").ITranspileOptions} pTranspileOptions
+ * @param {ITranspileOptions} pTranspileOptions
  * @returns {string[]}
  */
 // eslint-disable-next-line max-params, complexity

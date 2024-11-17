@@ -2,6 +2,10 @@
 import safeRegex from "safe-regex";
 import { getAvailableReporters } from "#report/index.mjs";
 
+/**
+ * @import { ICruiseOptions, IFormatOptions } from "../../../types/options.mjs";
+ */
+
 const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
 
@@ -96,7 +100,7 @@ function assertPathsSafety(pFilterOption) {
 /**
  * @param {any} pOptions
  * @throws {Error}
- * @returns {import("../../../types/dependency-cruiser.js").ICruiseOptions}
+ * @returns {ICruiseOptions}
  */
 export function assertCruiseOptionsValid(pOptions) {
   let lReturnValue = {};
@@ -132,7 +136,7 @@ export function assertCruiseOptionsValid(pOptions) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
+ * @param {IFormatOptions} pFormatOptions
  * @throws {Error}
  */
 export function assertFormatOptionsValid(pFormatOptions) {
