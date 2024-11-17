@@ -799,11 +799,10 @@ As currently on the TypeScript compiler (`tsc`) can detect these imports, switch
 on this option implies dependency-cruiser will set `options.parser` to `tsc` so
 it uses the TypeScript compiler to parse not only TypeScript but also JavaScript.
 
-```json
-"options": {
-  "detectJSDocImports": true // implies `parser: "tsc"`
+```javascript
+options: {
+  detectJSDocImports: true // implies `parser: "tsc"`
 }
-```
 
 #### Usage notes
 
