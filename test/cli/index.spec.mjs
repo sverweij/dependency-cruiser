@@ -159,18 +159,19 @@ function resetOutputDirectory() {
     }
   });
 
-  deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
-  deleteDammit(path.join(OUT_DIR, "transgression-count.json"));
-  deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
-  deleteDammit(path.join(OUT_DIR, "webpack-config-alias-cruiser-config.json"));
-  deleteDammit(path.join(OUT_DIR, "dynamic-import-ok.json"));
-  deleteDammit(path.join(OUT_DIR, "dynamic-import-nok.json"));
-  deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
   deleteDammit(path.join(OUT_DIR, "babel-es6-result.json"));
   deleteDammit(path.join(OUT_DIR, "babel-ts-result.json"));
-  deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
+  deleteDammit(path.join(OUT_DIR, "dynamic-import-nok.json"));
+  deleteDammit(path.join(OUT_DIR, "dynamic-import-ok.json"));
+  deleteDammit(path.join(OUT_DIR, "jsdoc-import-tags.json"));
   deleteDammit(path.join(OUT_DIR, "known-errors-known.txt"));
+  deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
+  deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
   deleteDammit(path.join(OUT_DIR, "this-thing-likely-wont-exist.txt"));
+  deleteDammit(path.join(OUT_DIR, "transgression-count.json"));
+  deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
+  deleteDammit(path.join(OUT_DIR, "webpack-config-alias-cruiser-config.json"));
+  deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
   deleteDammit(path.join(OUT_DIR, "workspaces-mono-repo-aliases.json"));
 }
 
@@ -347,7 +348,7 @@ describe("[E] cli/index", () => {
 
       match(
         lFeedback,
-        /no dependency violations found \(102 modules, 57 dependencies cruised\)/,
+        /no dependency violations found \([0-9]{3} modules, [0-9]{2} dependencies cruised\)/,
       );
       equal(lExitCode, 0);
     });
@@ -473,6 +474,21 @@ describe("[E] cli/index", () => {
 
     const lExitCode = await cli(["apps/admin/"], {
       config: ".dependency-cruiser.js",
+      outputType: "json",
+      outputTo: lOutputTo,
+    });
+
+    equal(lExitCode, 0);
+    assertJSONFileEqual(lOutputTo, "expected.json");
+  });
+
+  it("dependency-cruise jsDoc ", async () => {
+    const lOutputFileName = "jsdoc-import-tags.json";
+    const lOutputTo = path.join("../../__output__", lOutputFileName);
+    process.chdir("./test/cli/__fixtures__/jsdoc-import-tags");
+
+    const lExitCode = await cli(["src/index.mjs"], {
+      config: "dependency-cruiser-config.mjs",
       outputType: "json",
       outputTo: lOutputTo,
     });

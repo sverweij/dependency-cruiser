@@ -1,0 +1,67 @@
+{
+  "modules": [
+    {
+      "source": "src/index.mjs",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "./types.mjs",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "dependencyTypes": [
+            "local",
+            "type-only",
+            "import",
+            "jsdoc",
+            "jsdoc-import-tag"
+          ],
+          "resolved": "src/types.d.mts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/types.d.mts",
+      "dependencies": [],
+      "dependents": ["src/index.mjs"],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 2,
+    "totalDependenciesCruised": 1,
+    "optionsUsed": {
+      "baseDir": "",
+      "combinedDependencies": false,
+      "detectJSDocImports": true,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "outputTo": "../../__output__/jsdoc-import-tags.json",
+      "outputType": "json",
+      "parser": "tsc",
+      "preserveSymlinks": false,
+      "rulesFile": "dependency-cruiser-config.mjs",
+      "tsPreCompilationDeps": false,
+      "args": "src/index.mjs"
+    },
+    "ruleSetUsed": {
+      "forbidden": []
+    }
+  }
+}
