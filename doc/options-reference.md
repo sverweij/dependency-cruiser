@@ -803,6 +803,7 @@ it uses the TypeScript compiler to parse not only TypeScript but also JavaScript
 options: {
   detectJSDocImports: true // implies `parser: "tsc"`
 }
+```
 
 #### Usage notes
 
