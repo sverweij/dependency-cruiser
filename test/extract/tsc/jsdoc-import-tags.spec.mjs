@@ -9,7 +9,7 @@ describe("[U] ast-extractors/extract-typescript - jsdoc @imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        dependencyTypes: ["type-only", "import", "jsdoc-import"],
+        dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-import-tag"],
       },
     ]);
   });
@@ -23,7 +23,7 @@ describe("[U] ast-extractors/extract-typescript - jsdoc @imports", () => {
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
-          dependencyTypes: ["type-only", "import", "jsdoc-import"],
+          dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-import-tag"],
         },
       ],
     );
@@ -36,7 +36,7 @@ describe("[U] ast-extractors/extract-typescript - jsdoc @imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        dependencyTypes: ["type-only", "import", "jsdoc-import"],
+        dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-import-tag"],
       },
     ]);
   });
@@ -58,5 +58,19 @@ describe("[U] ast-extractors/extract-typescript - jsdoc @imports", () => {
 
   it("does not extract imports where the module name isn't a string (nothing variant) ", () => {
     deepEqual(extractTypescript("/** @import {thing} from  */"), []);
+  });
+
+  it("does not extract imports with dynamic looking imports (@import {import('./ting.mjs')})", () => {
+    deepEqual(
+      extractTypescript("/** @import {import('./thing.mjs').thing} */"),
+      [],
+    );
+  });
+
+  it("does not extract imports with dynamic looking imports (@type {import('./ting.mjs')})", () => {
+    deepEqual(
+      extractTypescript("/** @type {import('./thing.mjs').thing} */"),
+      [],
+    );
   });
 });

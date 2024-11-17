@@ -267,7 +267,7 @@ function extractJSDocImportTags(pJSDocTags) {
       module: pTag.moduleSpecifier.text,
       moduleSystem: "es6",
       exoticallyRequired: false,
-      dependencyTypes: ["type-only", "import", "jsdoc-import"],
+      dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-import-tag"],
     }));
 }
 
@@ -329,7 +329,7 @@ function walk(pResult, pExoticRequireStrings) {
     // /** @import thing from './module' */
     // /** @import {thing} from './module' */
     // /** @import * as thing from './module' */
-    // devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
+    // see https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
     //
     // TODO: all the kinds of tags that can have import statements as type declarations
     //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
