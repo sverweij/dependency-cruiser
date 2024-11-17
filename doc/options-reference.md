@@ -15,6 +15,7 @@
   - [`tsConfig`: use a TypeScript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
   - [`babelConfig`: use a babel configuration file](#babelconfig-use-a-babel-configuration-file)
   - [`webpackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+  - [`detectJSDocImports`: detect dependencies in JSDoc comments](#detectjsdocimports-detect-dependencies-in-jsdoc-comments)
   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
 - [`reporterOptions`](#reporteroptions)
@@ -783,6 +784,33 @@ you can provide the parameters like so:
   the first place, so that _should_ hardly be an issue.
 - :bulb: For more information check out the the [webpack resolve](https://webpack.js.org/configuration/resolve/)
   documentation.
+
+### `detectJSDocImports`: detect dependencies in JSDoc comments
+
+> :shell: there is no command line equivalent for this
+
+If you have dependencies in JSDoc comments that you want to take into account
+you can set this option to `true`. This will make dependency-cruiser look at
+TypeScript 5.5+ [`@import` tags](https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag)
+as well as to bracket style imports (e.g. `/** @type {import('./thing').SomeType} */`)
+in all JSDoc tags they can occur in (e.g. `@param`, `@returns`, `@type`, `@typedef` etc).
+
+As currently on the TypeScript compiler (`tsc`) can detect these imports, switching
+on this option implies dependency-cruiser will set `options.parser` to `tsc` so
+it uses the TypeScript compiler to parse not only TypeScript but also JavaScript.
+
+```json
+"options": {
+  "detectJSDocImports": true // implies `parser: "tsc"`
+}
+```
+
+#### Usage notes
+
+- :bulb: Only TypeScript compilers 5.5 and up can detect `@import` tags.
+- :bulb: If you want to take imports in JSDoc comments in consideration you
+  will need the `typescript` compiler in your (dev-)dependencies as it's currently
+  the only parser that supports these.
 
 ### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
 
