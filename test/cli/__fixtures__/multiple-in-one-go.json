@@ -155,6 +155,7 @@
     "totalDependenciesCruised": 5,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],

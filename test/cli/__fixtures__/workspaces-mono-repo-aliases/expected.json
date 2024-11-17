@@ -211,6 +211,7 @@
       "baseDir": ".",
       "cache": false,
       "combinedDependencies": true,
+      "detectJSDocImports": false,
       "doNotFollow": {
         "path": "node_modules"
       },

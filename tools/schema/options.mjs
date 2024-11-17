@@ -114,6 +114,12 @@ export default {
             "options offer better, more reliable and more understandable results.",
         },
         moduleSystems: { $ref: "#/definitions/ModuleSystemsType" },
+        detectJSDocImports: {
+          type: "boolean",
+          description:
+            "When true, dependency-cruiser will detect dependencies in JSDoc-style " +
+            'import statements. Implies `"parser": "tsc"`. Defaults to false.',
+        },
         prefix: {
           type: "string",
         },

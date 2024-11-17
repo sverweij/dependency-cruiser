@@ -970,6 +970,10 @@
           "description": "The maximum cruise depth specified. 0 means no maximum specified. While it might look attractive to regulate the size of the output, this is not the best option to do so. Filters (exclude, includeOnly, focus), the dot and archi reporter's collapsePattern and the collapse options offer better, more reliable and more understandable results."
         },
         "moduleSystems": { "$ref": "#/definitions/ModuleSystemsType" },
+        "detectJSDocImports": {
+          "type": "boolean",
+          "description": "When true, dependency-cruiser will detect dependencies in JSDoc-style import statements. Implies `\"parser\": \"tsc\"`. Defaults to false."
+        },
         "prefix": { "type": "string" },
         "preserveSymlinks": {
           "type": "boolean",

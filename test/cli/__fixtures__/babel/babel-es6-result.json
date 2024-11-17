@@ -68,6 +68,7 @@
         "fileName": "test/cli/__fixtures__/babel/es6/babelrc.valid.json"
       },
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

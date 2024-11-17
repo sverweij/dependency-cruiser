@@ -3,6 +3,7 @@ export default {
   validate: false,
   maxDepth: 0,
   moduleSystems: ["es6", "cjs", "tsd", "amd"],
+  detectJSDocImports: false,
   tsPreCompilationDeps: false,
   preserveSymlinks: false,
   combinedDependencies: false,

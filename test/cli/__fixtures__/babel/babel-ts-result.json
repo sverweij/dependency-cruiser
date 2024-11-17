@@ -194,6 +194,7 @@
         "fileName": "test/cli/__fixtures__/babel/ts/babelrc.json"
       },
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

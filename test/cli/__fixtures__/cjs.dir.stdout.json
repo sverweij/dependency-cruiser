@@ -381,6 +381,7 @@
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputType": "json",
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules"
     }

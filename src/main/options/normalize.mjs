@@ -211,6 +211,9 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
   if (lReturnValue.cache) {
     lReturnValue.cache = normalizeCacheOptions(lReturnValue.cache);
   }
+  if (lReturnValue.detectJSDocImports) {
+    lReturnValue.parser = "tsc";
+  }
 
   return normalizeFocusDepth(lReturnValue);
 }

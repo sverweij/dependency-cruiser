@@ -147,6 +147,7 @@
     "totalDependenciesCruised": 6,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectJSDocImports": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

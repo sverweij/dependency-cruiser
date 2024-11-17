@@ -228,6 +228,17 @@ module.exports = {
     
     // moduleSystems: ['cjs', 'es6'],
 
+    /* 
+      false: don't look at JSDoc imports
+      true: dependency-cruiser will detect dependencies in JSDoc-style
+      import statements. Implies "parser": "tsc", so the dependency-cruiser
+      will use the typescript parser for JavaScript files.
+     
+      For this to work the typescript compiler will need to be installed in the
+      same spot as you're running dependency-cruiser from.
+     */
+    // detectJSDocImports: true,
+
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/main/'
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),

@@ -277,8 +277,16 @@ function extractJSDocImports(pJSDocNodes) {
     .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
 }
 
+/**
+ * Walks the AST and collects all dependencies
+ *
+ * @param {import("typescript").Node} pASTNode - the AST node to start from
+ * @param {string[]} pExoticRequireStrings - exotic require strings to look for
+ * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
+ * @returns {(pASTNode: import("typescript").Node) => void} - the walker function
+ */
 // eslint-disable-next-line max-lines-per-function
-function walk(pResult, pExoticRequireStrings) {
+function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
   // eslint-disable-next-line max-lines-per-function
   return (pASTNode) => {
     // require('a-string'), require(`a-template-literal`)
@@ -334,7 +342,7 @@ function walk(pResult, pExoticRequireStrings) {
     // TODO: all the kinds of tags that can have import statements as type declarations
     //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
     // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
-    if (pASTNode.jsDoc) {
+    if (pDetectJSDocImports && Boolean(pASTNode.jsDoc)) {
       const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
 
       // pResult = pResult.concat(lJSDocImports) looks like the more obvious
@@ -343,7 +351,10 @@ function walk(pResult, pExoticRequireStrings) {
         pResult.push(pImport);
       });
     }
-    typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
+    typescript.forEachChild(
+      pASTNode,
+      walk(pResult, pExoticRequireStrings, pDetectJSDocImports),
+    );
   };
 }
 
@@ -352,12 +363,18 @@ function walk(pResult, pExoticRequireStrings) {
  * a source file, like commonJS or dynamic imports
  *
  * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @param {string[]} pExoticRequireStrings - exotic require strings to look for
+ * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
  * @returns {{module: string, moduleSystem: string}[]} - all commonJS dependencies
  */
-function extractNestedDependencies(pAST, pExoticRequireStrings) {
+function extractNestedDependencies(
+  pAST,
+  pExoticRequireStrings,
+  pDetectJSDocImports,
+) {
   let lResult = [];
 
-  walk(lResult, pExoticRequireStrings)(pAST);
+  walk(lResult, pExoticRequireStrings, pDetectJSDocImports)(pAST);
 
   return lResult;
 }
@@ -365,11 +382,12 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 /**
  * returns all dependencies in the AST
  *
- * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {module: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[], pDetectJSDocImports: boolean) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */
 export default function extractTypeScriptDependencies(
   pTypeScriptAST,
   pExoticRequireStrings,
+  pDetectJSDocImports,
 ) {
   // console.dir(pTypeScriptAST, { depth: 100 });
   return Boolean(typescript)
@@ -378,7 +396,11 @@ export default function extractTypeScriptDependencies(
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
-          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings),
+          extractNestedDependencies(
+            pTypeScriptAST,
+            pExoticRequireStrings,
+            pDetectJSDocImports,
+          ),
         )
         .map((pModule) => ({ dynamic: false, ...pModule }))
     : /* c8 ignore next */ [];

@@ -189,6 +189,9 @@ describe("[I] normalize cache options", () => {
   it("passed no cache - no cache property", () => {
     ok(!normalizeCruiseOptions({}).hasOwnProperty("cache"));
   });
+  it("sets parser to tsc when detectJSDocImports is set to true", () => {
+    equal(normalizeCruiseOptions({ detectJSDocImports: true }).parser, "tsc");
+  });
 });
 
 /* eslint no-magic-numbers: 0*/
