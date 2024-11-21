@@ -18,7 +18,7 @@ function getHoverHandler(pTitle2ElementMap) {
     var closestTitleText = getTitleText(closestNodeOrEdge);
 
     if (
-      !(currentHighlightedTitle === closestTitleText) &&
+      currentHighlightedTitle !== closestTitleText &&
       gMode.get() === gMode.HOVER
     ) {
       resetNodesAndEdges();
@@ -40,12 +40,12 @@ function getSelectHandler(pTitle2ElementMap) {
     var closestNodeOrEdge = pMouseEvent.target.closest(".edge, .node");
     var closestTitleText = getTitleText(closestNodeOrEdge);
 
-    if (!!closestNodeOrEdge) {
+    if (closestNodeOrEdge) {
       gMode.setToSelect();
     } else {
       gMode.setToHover();
     }
-    if (!(currentHighlightedTitle === closestTitleText)) {
+    if (currentHighlightedTitle !== closestTitleText) {
       resetNodesAndEdges();
       addHighlight(closestNodeOrEdge);
       pTitle2ElementMap.get(closestTitleText).forEach(addHighlight);
@@ -216,7 +216,7 @@ function addHighlight(pGroup) {
 var gHints = {
   HIDDEN: 1,
   SHOWN: 2,
-  state: this.HIDDEN,
+  state: 1, // === HIDDEN
   show: function () {
     document.getElementById("hints").removeAttribute("style");
     gHints.state = gHints.SHOWN;

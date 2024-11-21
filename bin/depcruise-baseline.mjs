@@ -28,7 +28,7 @@ try {
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
-  if (Boolean(program.args[0])) {
+  if (program.args[0]) {
     process.exitCode = await cli(program.args, {
       ...program.opts(),
       cache: false,

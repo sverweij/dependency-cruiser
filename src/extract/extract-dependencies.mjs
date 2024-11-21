@@ -78,10 +78,10 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
 }
 
 function matchesDoNotFollow({ resolved, dependencyTypes }, pDoNotFollow) {
-  const lMatchesPath = Boolean(pDoNotFollow.path)
+  const lMatchesPath = pDoNotFollow.path
     ? RegExp(pDoNotFollow.path, "g").test(resolved)
     : false;
-  const lMatchesDependencyTypes = Boolean(pDoNotFollow.dependencyTypes)
+  const lMatchesDependencyTypes = pDoNotFollow.dependencyTypes
     ? intersects(dependencyTypes, pDoNotFollow.dependencyTypes)
     : false;
 

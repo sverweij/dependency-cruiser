@@ -65,7 +65,7 @@ export default async function cruise(
     import("#enrich/index.mjs"),
   ]);
 
-  if (Boolean(lCruiseOptions.ruleSet)) {
+  if (lCruiseOptions.ruleSet) {
     bus.summary("parsing rule set", c(4));
     lCruiseOptions.ruleSet = normalizeRuleSet(
       assertRuleSetValid(lCruiseOptions.ruleSet),

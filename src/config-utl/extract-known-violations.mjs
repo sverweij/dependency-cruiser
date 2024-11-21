@@ -21,11 +21,11 @@ import makeAbsolute from "./make-absolute.mjs";
  */
 function makeForwardCompatible(pKnownViolation) {
   let lReturnValue = pKnownViolation;
-  if (Boolean(pKnownViolation.cycle)) {
+  if (pKnownViolation.cycle) {
     lReturnValue = {
       ...pKnownViolation,
       cycle: pKnownViolation.cycle.map((pModule) => {
-        if (Boolean(pModule.name)) {
+        if (pModule.name) {
           return pModule;
         }
         return {
@@ -35,11 +35,11 @@ function makeForwardCompatible(pKnownViolation) {
       }),
     };
   }
-  if (Boolean(pKnownViolation.via)) {
+  if (pKnownViolation.via) {
     lReturnValue = {
       ...pKnownViolation,
       via: pKnownViolation.via.map((pModule) => {
-        if (Boolean(pModule.name)) {
+        if (pModule.name) {
           return pModule;
         }
         return {

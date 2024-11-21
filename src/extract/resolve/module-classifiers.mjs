@@ -150,7 +150,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
   // an object. To prevent the code from borking we check whether it's an array
   // see https://github.com/sverweij/dependency-cruiser/issues/919
   const lWorkspaces = getWorkspacesArray(pManifest?.workspaces);
-  if (lWorkspaces.length >= 0) {
+  if (lWorkspaces.length > 0) {
     // workspaces are an array of globs that match the (sub) workspace
     // folder itself only.
     //
@@ -193,7 +193,7 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     // of the workspace, not the path of the workspace itself. So if it's
     // in node_modules we need to check against the unresolved modulename.
     //
-    // Other then the detection for when symlinks are resolved to their realpath
+    // Other than the detection for when symlinks are resolved to their realpath
     // (the if above), this is a 'best effort' detection only for now; there's
     // guaranteed to be scenarios where this will fail. How often is the
     // --preserve-symlinks flag used in practice, though?

@@ -59,7 +59,7 @@ function determineManifestDependencyTypes(
   /** @type {DependencyType[]} */
   let lReturnValue = ["npm-unknown"];
 
-  if (Boolean(pPackageDependencies)) {
+  if (pPackageDependencies) {
     lReturnValue = findModuleInPackageDependencies(
       pPackageDependencies,
       pModuleName,
@@ -89,7 +89,7 @@ function determineManifestDependencyTypes(
 function dependencyIsBundled(pModule, pPackageDeps) {
   let lReturnValue = false;
 
-  if (Boolean(pPackageDeps)) {
+  if (pPackageDeps) {
     const lBundledDependencies =
       pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
 

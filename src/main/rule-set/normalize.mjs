@@ -16,7 +16,7 @@ const DEFAULT_RULE = "unnamed";
 const DEFAULT_SCOPE = "module";
 
 function normalizeSeverity(pSeverity) {
-  const lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
+  const lSeverity = pSeverity ?? DEFAULT_SEVERITY;
 
   return VALID_SEVERITIES.test(lSeverity) ? lSeverity : DEFAULT_SEVERITY;
 }
@@ -26,7 +26,7 @@ function normalizeSeverity(pSeverity) {
  * @returns {string}
  */
 function normalizeName(pRuleName) {
-  return pRuleName ? pRuleName : DEFAULT_RULE;
+  return pRuleName ?? DEFAULT_RULE;
 }
 
 /**
@@ -34,7 +34,7 @@ function normalizeName(pRuleName) {
  * @returns {RuleScopeType}
  */
 function normalizeScope(pScope) {
-  return pScope ? pScope : DEFAULT_SCOPE;
+  return pScope ?? DEFAULT_SCOPE;
 }
 
 /**

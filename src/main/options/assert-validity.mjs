@@ -34,10 +34,10 @@ function deepMerge(pTarget, pSource) {
 
 function assertModuleSystemsValid(pModuleSystems) {
   if (
-    Boolean(pModuleSystems) &&
+    pModuleSystems &&
     Array.isArray(pModuleSystems) &&
     !pModuleSystems.every((pModuleSystem) =>
-      Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE)),
+      pModuleSystem.match(MODULE_SYSTEM_LIST_RE),
     )
   ) {
     throw new Error(
@@ -47,7 +47,7 @@ function assertModuleSystemsValid(pModuleSystems) {
 }
 
 function assertRegExpSafety(pPattern) {
-  if (Boolean(pPattern) && !safeRegex(pPattern)) {
+  if (pPattern && !safeRegex(pPattern)) {
     throw new Error(
       `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`,
     );
@@ -56,7 +56,7 @@ function assertRegExpSafety(pPattern) {
 
 function assertOutputTypeValid(pOutputType) {
   if (
-    Boolean(pOutputType) &&
+    pOutputType &&
     !getAvailableReporters().includes(pOutputType) &&
     !pOutputType.startsWith("plugin:")
   ) {
@@ -65,7 +65,7 @@ function assertOutputTypeValid(pOutputType) {
 }
 
 function assertMaxDepthValid(pDepth) {
-  if (Boolean(pDepth) && !pDepth.toString().match(VALID_DEPTH_RE)) {
+  if (pDepth && !pDepth.toString().match(VALID_DEPTH_RE)) {
     throw new Error(
       `'${pDepth}' is not a valid depth - use an integer between 0 and 99`,
     );
@@ -77,7 +77,7 @@ function assertFocusDepthValid(pFocusDepth) {
   const lMaxFocusDepth = 99;
 
   if (
-    Boolean(pFocusDepth) &&
+    pFocusDepth &&
     (Number.isNaN(lFocusDepth) ||
       lFocusDepth < 0 ||
       lFocusDepth > lMaxFocusDepth)
@@ -105,7 +105,7 @@ function assertPathsSafety(pFilterOption) {
 export function assertCruiseOptionsValid(pOptions) {
   let lReturnValue = {};
 
-  if (Boolean(pOptions)) {
+  if (pOptions) {
     // necessary because can slip through the cracks when passed as a cli parameter
     assertModuleSystemsValid(pOptions.moduleSystems);
 

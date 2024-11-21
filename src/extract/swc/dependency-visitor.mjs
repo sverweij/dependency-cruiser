@@ -41,7 +41,7 @@ function argumentsAreUsable(pArguments) {
     ["StringLiteral", "TemplateLiteral"].includes(
       pArguments[0].expression.type,
     ) &&
-    (!(pArguments[0].expression.type === "TemplateLiteral") ||
+    (pArguments[0].expression.type !== "TemplateLiteral" ||
       isPlaceholderlessTemplateLiteral(pArguments[0]))
   );
 }
@@ -250,11 +250,7 @@ export default Visitor
         // as visitors for some shapes of type annotations aren't completely
         // implemented yet (1.2.51) pNode can come in as null (also see
         // comments in accompanying unit test)
-        if (
-          Boolean(pNode) &&
-          Boolean(pNode.typeAnnotation) &&
-          Boolean(pNode.typeAnnotation.argument)
-        )
+        if (pNode && pNode.typeAnnotation && pNode.typeAnnotation.argument)
           this.lResult.push({
             module: pNode.typeAnnotation.argument.value,
             moduleSystem: "es6",

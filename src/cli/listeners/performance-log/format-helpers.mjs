@@ -65,7 +65,7 @@ function formatMessage(pMessage, pLevel) {
 export function formatTime(
   pNumber,
   pConversionMultiplier = MS_PER_SECOND,
-  pLevel,
+  pLevel = INFO,
 ) {
   return formatMessage(
     gTimeFormat(pConversionMultiplier * pNumber)

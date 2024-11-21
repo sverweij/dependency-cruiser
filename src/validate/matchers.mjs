@@ -85,7 +85,7 @@ export function matchToModulePath(pRule, pModule, pGroups) {
 
 function _toPathNot(pRule, pString, pGroups = []) {
   return (
-    !Boolean(pRule.to.pathNot) ||
+    !pRule.to.pathNot ||
     !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
   );
 }

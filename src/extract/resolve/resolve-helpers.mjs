@@ -5,7 +5,7 @@ export function addLicenseAttribute(
   pModuleName,
   pResolvedModuleName,
   { baseDirectory, fileDirectory },
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lReturnValue = {};
   if (
@@ -13,12 +13,12 @@ export function addLicenseAttribute(
     isExternalModule(
       pResolvedModuleName,
       pResolveOptions.modules,
-      baseDirectory
+      baseDirectory,
     )
   ) {
     const lLicense = getLicense(pModuleName, fileDirectory, pResolveOptions);
 
-    if (Boolean(lLicense)) {
+    if (lLicense) {
       lReturnValue.license = lLicense;
     }
   }

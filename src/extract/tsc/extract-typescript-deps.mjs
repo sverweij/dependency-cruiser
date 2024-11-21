@@ -60,7 +60,7 @@ function extractImports(pAST) {
     .filter(
       (pStatement) =>
         typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" &&
-        Boolean(pStatement.moduleSpecifier),
+        pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
       module: pStatement.moduleSpecifier.text,
@@ -84,7 +84,7 @@ function extractExports(pAST) {
     .filter(
       (pStatement) =>
         typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration" &&
-        Boolean(pStatement.moduleSpecifier),
+        pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
       module: pStatement.moduleSpecifier.text,
@@ -265,7 +265,7 @@ function extractJSDocImportTags(pJSDocTags) {
         pTag.tagName.escapedText === "import" &&
         pTag.moduleSpecifier?.kind &&
         typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
-        Boolean(pTag.moduleSpecifier.text),
+        pTag.moduleSpecifier.text,
     )
     .map((pTag) => ({
       module: pTag.moduleSpecifier.text,
@@ -277,7 +277,7 @@ function extractJSDocImportTags(pJSDocTags) {
 
 function extractJSDocImports(pJSDocNodes) {
   return pJSDocNodes
-    .filter((pJSDocLine) => Boolean(pJSDocLine.tags))
+    .filter((pJSDocLine) => pJSDocLine.tags)
     .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
 }
 
@@ -346,7 +346,7 @@ function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
     // TODO: all the kinds of tags that can have import statements as type declarations
     //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
     // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
-    if (pDetectJSDocImports && Boolean(pASTNode.jsDoc)) {
+    if (pDetectJSDocImports && pASTNode.jsDoc) {
       const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
 
       // pResult = pResult.concat(lJSDocImports) looks like the more obvious
@@ -394,7 +394,7 @@ export default function extractTypeScriptDependencies(
   pDetectJSDocImports,
 ) {
   // console.dir(pTypeScriptAST, { depth: 100 });
-  return Boolean(typescript)
+  return typescript
     ? extractImports(pTypeScriptAST)
         .concat(extractExports(pTypeScriptAST))
         .concat(extractImportEquals(pTypeScriptAST))

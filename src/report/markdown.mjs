@@ -105,13 +105,50 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
     }, lTableHead);
 }
 
+function details(pResults, pOptions) {
+  let lReturnValue = "";
+  if (pResults.summary.violations.length > 0) {
+    if (pOptions.showDetailsHeader) {
+      lReturnValue += `${pOptions.detailsHeader}\n\n`;
+    }
+    if (pOptions.collapseDetails) {
+      lReturnValue += `<details><summary>${pOptions.collapsedMessage}</summary>\n\n`;
+    }
+    lReturnValue += `${formatViolations(
+      pResults.summary.violations,
+      pOptions.includeIgnoredInDetails,
+    )}\n\n`;
+    if (pOptions.collapseDetails) {
+      lReturnValue += "</details>\n\n";
+    }
+  } else {
+    lReturnValue += `${pOptions.noViolationsMessage}\n\n`;
+  }
+  return lReturnValue;
+}
+
+function summary(pResults, pOptions) {
+  let lReturnValue = "";
+
+  if (pOptions.showSummaryHeader) {
+    lReturnValue += `${pOptions.summaryHeader}\n\n`;
+  }
+  lReturnValue += `${formatStatsSummary(pResults.summary)}\n\n`;
+
+  if (pResults.summary.violations.length > 0 && pOptions.showRulesSummary) {
+    lReturnValue += `${formatRulesSummary(
+      pResults,
+      pOptions.includeIgnoredInSummary,
+    )}\n\n`;
+  }
+  return lReturnValue;
+}
+
 /**
- *
  * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
  * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
  * @returns {string}
  */
-// eslint-disable-next-line complexity, max-statements
 function report(pResults, pOptions) {
   const lOptions = { ...REPORT_DEFAULTS, ...(pOptions || {}) };
   let lReturnValue = "";
@@ -121,37 +158,11 @@ function report(pResults, pOptions) {
   }
 
   if (lOptions.showSummary) {
-    if (lOptions.showSummaryHeader) {
-      lReturnValue += `${lOptions.summaryHeader}\n\n`;
-    }
-    lReturnValue += `${formatStatsSummary(pResults.summary)}\n\n`;
-
-    if (pResults.summary.violations.length > 0 && lOptions.showRulesSummary) {
-      lReturnValue += `${formatRulesSummary(
-        pResults,
-        lOptions.includeIgnoredInSummary,
-      )}\n\n`;
-    }
+    lReturnValue += summary(pResults, lOptions);
   }
 
   if (lOptions.showDetails) {
-    if (pResults.summary.violations.length > 0) {
-      if (lOptions.showDetailsHeader) {
-        lReturnValue += `${lOptions.detailsHeader}\n\n`;
-      }
-      if (lOptions.collapseDetails) {
-        lReturnValue += `<details><summary>${lOptions.collapsedMessage}</summary>\n\n`;
-      }
-      lReturnValue += `${formatViolations(
-        pResults.summary.violations,
-        lOptions.includeIgnoredInDetails,
-      )}\n\n`;
-      if (lOptions.collapseDetails) {
-        lReturnValue += "</details>\n\n";
-      }
-    } else {
-      lReturnValue += `${lOptions.noViolationsMessage}\n\n`;
-    }
+    lReturnValue += details(pResults, lOptions);
   }
 
   if (lOptions.showFooter) {

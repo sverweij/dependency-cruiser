@@ -28,10 +28,9 @@ function writeToFile(pOutputTo, pDependencyString) {
  */
 function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
   const lNumberOfChunks = Math.ceil(pString.length / pBufferSize);
-  let lIndex = 0;
 
   /* eslint no-plusplus: 0 */
-  for (lIndex = 0; lIndex < lNumberOfChunks; lIndex++) {
+  for (let lIndex = 0; lIndex < lNumberOfChunks; lIndex++) {
     const lChunkStart = lIndex * pBufferSize;
     process.stdout.write(
       pString.substring(lChunkStart, lChunkStart + pBufferSize),

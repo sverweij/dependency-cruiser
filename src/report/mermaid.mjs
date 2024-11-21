@@ -37,7 +37,7 @@ function convertEdgeSources(pCruiseResult, pNamesHashMap) {
   });
 }
 
-const indent = (pDepth = 0, pMinify) => (pMinify ? "" : "  ".repeat(pDepth));
+const indent = (pDepth, pMinify) => (pMinify ? "" : "  ".repeat(pDepth));
 
 const renderSubgraph = (pNode, pText, pChildren, pIndent) =>
   `${pIndent}subgraph ${renderNode(pNode, pText)}
@@ -96,7 +96,7 @@ function focusHighlights(pModules, pNamesHashMap) {
       (pModule) =>
         pModule.matchesFocus ||
         pModule.matchesReaches ||
-        pModule.matchesHighlight
+        pModule.matchesHighlight,
     )
     .reduce((pAll, pModule) => {
       const lSource = pNamesHashMap.get(pModule.source);

@@ -25,15 +25,15 @@ const GRANULARITY2REPORTER_OPTIONS = new Map([
 ]);
 
 function buildGraphAttributes(pGraph) {
-  return Boolean(pGraph) ? `    ${attributizeObject(pGraph || {})}` : "";
+  return pGraph ? `    ${attributizeObject(pGraph || {})}` : "";
 }
 
 function buildNodeAttributes(pNode) {
-  return Boolean(pNode) ? `    node [${attributizeObject(pNode || {})}]` : "";
+  return pNode ? `    node [${attributizeObject(pNode || {})}]` : "";
 }
 
 function buildEdgeAttributes(pEdge) {
-  return Boolean(pEdge) ? `    edge [${attributizeObject(pEdge || {})}]` : "";
+  return pEdge ? `    edge [${attributizeObject(pEdge || {})}]` : "";
 }
 
 function buildGeneralAttributes(pTheme) {

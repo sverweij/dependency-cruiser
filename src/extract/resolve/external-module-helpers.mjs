@@ -32,7 +32,7 @@ import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
  * @return {string}         the module name root
  */
 export function getPackageRoot(pModule) {
-  if (!Boolean(pModule) || isRelativeModuleName(pModule)) {
+  if (!pModule || isRelativeModuleName(pModule)) {
     return pModule;
   }
 
@@ -78,7 +78,7 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
   try {
     const lPackageJsonFilename = resolve(
       join(getPackageRoot(pModuleName), "package.json"),
-      pFileDirectory ? pFileDirectory : process.cwd(),
+      pFileDirectory ?? process.cwd(),
       {
         ...pResolveOptions,
         // if a module has exports fields _and_ does not expose package.json
@@ -129,7 +129,7 @@ export function dependencyIsDeprecated(
     pResolveOptions,
   );
 
-  if (Boolean(lPackageJson)) {
+  if (lPackageJson) {
     lReturnValue =
       Object.hasOwn(lPackageJson, "deprecated") && lPackageJson.deprecated;
   }
@@ -154,7 +154,7 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
   );
 
   if (
-    Boolean(lPackageJson) &&
+    lPackageJson &&
     Object.hasOwn(lPackageJson, "license") &&
     typeof lPackageJson.license === "string"
   ) {
