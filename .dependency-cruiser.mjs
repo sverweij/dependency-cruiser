@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { fileURLToPath } from "node:url";
 
 const defaultStrictRules = fileURLToPath(
