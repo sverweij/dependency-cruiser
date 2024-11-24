@@ -174,7 +174,7 @@
     "lint:types:tsc": "tsc --project types/tsconfig.json",
     "lint:types:lint": "eslint --no-ignore --config types/eslint.config.mjs types/*.d.mts",
     "lint:types:fix": "eslint --no-ignore --config types/eslint.config.mjs --fix types/*.d.mts",
-    "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' | jq '.type = \"module\"' > smaller-package.json && mv smaller-package.json package.json",
+    "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo see github for test, build and analysis scripts\"}' | jq '.type = \"module\"' > smaller-package.json && mv smaller-package.json package.json",
     "postpack": "git restore package.json",
     "prepare": "husky",
     "scm:push": "run-p --aggregate-output scm:push:*",
