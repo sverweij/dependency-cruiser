@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 
 const defaultStrictRules = fileURLToPath(
-  new URL("./configs/recommended-strict.cjs", import.meta.url),
+  new URL("configs/recommended-strict.cjs", import.meta.url),
 );
 /** @type {import('./').IConfiguration} */
 export default {
@@ -203,7 +203,7 @@ export default {
       comment:
         "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used during development, adapt the 'from' of the rule in the dependency-cruiser configuration.",
       from: {
-        pathNot: ["^test/", "^tools/"],
+        pathNot: ["^test/", "^tools/", "^types/eslint[.]config[.]mjs"],
       },
       to: {
         dependencyTypes: ["npm-dev"],
@@ -214,7 +214,6 @@ export default {
           "triple-slash-type-reference",
           "npm",
         ],
-        pathNot: ["node_modules/@types/"],
       },
     },
     {
@@ -246,12 +245,12 @@ export default {
       to: { dependencyTypes: ["npm-peer"] },
     },
     {
-      name: "no-unvetted-license",
+      name: "no-non-vetted-license",
       comment:
         "This module uses an external dependency that has license that's not vetted. The license itself might be OK, but bigcorp legal departments might get jittery over anything other than MIT (or ISC).",
       severity: "error",
       from: {},
-      to: { licenseNot: "MIT|ISC|Apache-2[.]0" },
+      to: { licenseNot: "MIT|ISC|Apache-2[.]0|BSD-2-Clause" },
     },
     {
       name: "not-unreachable-from-cli",
