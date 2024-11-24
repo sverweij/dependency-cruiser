@@ -275,10 +275,43 @@ function extractJSDocImportTags(pJSDocTags) {
     }));
 }
 
+function extractJSDocBracketImports(pJSDocTags) {
+  return pJSDocTags
+    .filter(
+      (pTag) =>
+        pTag.tagName.escapedText !== "import" &&
+        /* c8 ignore start */
+        typescript.SyntaxKind[pTag.typeExpression?.kind ?? -1] ===
+          "FirstJSDocNode" &&
+        typescript.SyntaxKind[pTag.typeExpression.type?.kind ?? -1] ===
+          "LastTypeNode" &&
+        typescript.SyntaxKind[pTag.typeExpression.type.argument?.kind ?? -1] ===
+          "LiteralType" &&
+        typescript.SyntaxKind[
+          pTag.typeExpression.type.argument?.literal?.kind ?? -1
+        ] === "StringLiteral" &&
+        /* c8 ignore stop*/
+        pTag.typeExpression.type.argument.literal.text,
+    )
+    .map((pTag) => ({
+      module: pTag.typeExpression.type.argument.literal.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-bracket-import"],
+    }));
+}
+
 function extractJSDocImports(pJSDocNodes) {
-  return pJSDocNodes
-    .filter((pJSDocLine) => pJSDocLine.tags)
-    .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
+  const lJSDocNodesWithTags = pJSDocNodes.filter(
+    (pJSDocLine) => pJSDocLine.tags,
+  );
+  const lJSDocImportTags = lJSDocNodesWithTags.flatMap((pJSDocLine) =>
+    extractJSDocImportTags(pJSDocLine.tags),
+  );
+  const lJSDocBracketImports = lJSDocNodesWithTags.flatMap((pJSDocLine) =>
+    extractJSDocBracketImports(pJSDocLine.tags),
+  );
+  return lJSDocImportTags.concat(lJSDocBracketImports);
 }
 
 /**

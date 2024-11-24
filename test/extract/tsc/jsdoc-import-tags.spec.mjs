@@ -93,11 +93,4 @@ describe("[U] ast-extractors/extract-typescript - jsdoc @imports", () => {
       [],
     );
   });
-
-  it("does not extract imports with dynamic looking imports (@type {import('./ting.mjs')})", () => {
-    deepEqual(
-      extractTypescript("/** @type {import('./thing.mjs').thing} */", [], true),
-      [],
-    );
-  });
 });

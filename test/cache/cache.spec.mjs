@@ -82,7 +82,7 @@ describe("[I] cache/cache - writeCache", () => {
   });
 
   it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet) - content based cached strategy", async () => {
-    /** @type {import("../..").ICruiseResult} */
+    /** @type {import("../../types/cruise-result.mjs").ICruiseResult} */
     const lDummyCacheContents = {
       modules: [],
       summary: { optionsUsed: { baseDir: "test/cache/__mocks__/cache" } },
@@ -102,7 +102,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
     OUTPUTS_FOLDER,
     "serve-from-cache-compatible",
   );
-  /** @type import("../..").ICruiseResult */
+  /** @type import("../../types/cruise-result.mjs").ICruiseResult */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {
@@ -117,7 +117,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
     revisionData: { cacheFormatVersion: 16.2, SHA1: "dummy-sha", changes: [] },
   };
 
-  /** @type import("../..").ICruiseResult */
+  /** @type import("../../types/cruise-result.mjs").ICruiseResult */
   const lNoVersionCruiseResult = {
     modules: [],
     summary: {
@@ -132,7 +132,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
     revisionData: { SHA1: "dummy-sha", changes: [] },
   };
 
-  /** @type import("../..").ICruiseResult */
+  /** @type import("../../types/cruise-result.mjs").ICruiseResult */
   const lOldVersionCruiseResult = {
     modules: [],
     summary: {
