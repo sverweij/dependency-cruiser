@@ -53,4 +53,4 @@ describe("[I] extract/index - exclude", () => {
   });
 });
 
-/* eslint node/global-require: 0*/
+/* eslint n/global-require: 0*/

@@ -3,9 +3,9 @@ const { join } = require("node:path");
 const { unlinkSync } = require("node:fs");
 const symlinkDir = require("symlink-dir");
 const semver = require("semver");
-// eslint-disable-next-line node/no-extraneous-require
+// eslint-disable-next-line n/no-extraneous-require
 const rcMock = require("rc");
-// eslint-disable-next-line node/no-extraneous-require
+// eslint-disable-next-line n/no-extraneous-require
 const betaMock = require("beta");
 const tryRequire = require("#utl/try-require.cjs");
 

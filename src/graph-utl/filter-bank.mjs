@@ -74,7 +74,6 @@ function tagHighlight(pModules, pHighlightFilter) {
   }));
 }
 
-// eslint-disable-next-line complexity
 export function applyFilters(pModules, pFilters) {
   if (pFilters) {
     let lReturnValue = structuredClone(pModules);

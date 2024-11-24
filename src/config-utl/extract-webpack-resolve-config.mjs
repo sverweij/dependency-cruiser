@@ -90,7 +90,7 @@ async function attemptImport(pAbsoluteWebpackConfigFileName) {
        * module system. If we'd use a dynamic import, these monkey-patches wouldn't
        * be used.
        */
-      /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+      /* eslint n/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       return require(pAbsoluteWebpackConfigFileName);
     }
   } catch (pError) {

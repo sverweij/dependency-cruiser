@@ -45,7 +45,6 @@ function getVersion(pModuleName) {
  * @returns {Promise<NodeModule | false>} - The imported module or false if the import fails or the version does not satisfy the provided semantic version.
  */
 
-// eslint-disable-next-line complexity
 export default async function tryImport(pModuleName, pSemanticVersion) {
   try {
     if (pSemanticVersion) {

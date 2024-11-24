@@ -172,8 +172,8 @@
     "lint:fix": "npm-run-all lint:eslint:fix format lint:types:fix",
     "lint:types": "npm-run-all lint:types:tsc lint:types:lint",
     "lint:types:tsc": "tsc --project types/tsconfig.json",
-    "lint:types:lint": "eslint --no-ignore --config types/.eslintrc.json types/*.d.mts",
-    "lint:types:fix": "eslint --no-ignore --config types/.eslintrc.json --fix types/*.d.mts",
+    "lint:types:lint": "eslint --no-ignore --config types/eslint.config.mjs types/*.d.mts",
+    "lint:types:fix": "eslint --no-ignore --config types/eslint.config.mjs --fix types/*.d.mts",
     "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' | jq '.type = \"module\"' > smaller-package.json && mv smaller-package.json package.json",
     "postpack": "git restore package.json",
     "prepare": "husky",
@@ -232,25 +232,28 @@
     "@babel/core": "7.26.0",
     "@babel/plugin-transform-modules-commonjs": "7.25.9",
     "@babel/preset-typescript": "7.26.0",
+    "@eslint/eslintrc": "3.2.0",
+    "@eslint/js": "9.15.0",
     "@swc/core": "1.7.42",
     "@types/node": "22.8.7",
     "@types/prompts": "2.4.9",
-    "@typescript-eslint/eslint-plugin": "8.12.2",
-    "@typescript-eslint/parser": "8.12.2",
+    "@typescript-eslint/eslint-plugin": "8.15.0",
+    "@typescript-eslint/parser": "8.15.0",
     "@vue/compiler-sfc": "3.5.12",
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
     "coffeescript": "2.7.0",
-    "eslint": "^8.57.1",
-    "eslint-config-moving-meadow": "4.0.2",
+    "eslint": "9.15.0",
+    "eslint-config-moving-meadow": "5.0.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-budapestian": "6.0.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-mocha": "10.5.0",
-    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-n": "17.14.0",
     "eslint-plugin-security": "3.0.1",
-    "eslint-plugin-unicorn": "^56.0.0",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "globals": "15.12.0",
     "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "mocha": "10.8.2",
@@ -267,18 +270,15 @@
     "yarn": "1.22.22"
   },
   "overrides": {
-    "semver": "^7.6.3"
+    "semver": "^7.6.3",
+    "cross-spawn": ">=6.0.6"
   },
   "resolutions": {
-    "semver": "^7.6.3"
+    "semver": "^7.6.3",
+    "cross-spawn": ">=6.0.6"
   },
   "upem": {
     "policies": [
-      {
-        "package": "eslint",
-        "policy": "wanted",
-        "because": "@typescript-eslint/parser 7.5.0 (currently _latest_) isn't on eslint 9 yet (it peer requires ^8.56.0)"
-      },
       {
         "package": "interpret",
         "policy": "wanted",

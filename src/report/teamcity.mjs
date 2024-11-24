@@ -144,6 +144,7 @@ function reportViolations(pViolations, pIgnoredCount) {
  * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
+// eslint-disable-next-line complexity
 export default function teamcity(pResults) {
   // this is the documented way to get tsm to emit strings
   // Alternatively we could've used the 'low level API', which

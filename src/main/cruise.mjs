@@ -1,4 +1,4 @@
-/* eslint-disable no-return-await, no-magic-numbers */
+/* eslint-disable no-magic-numbers */
 import { assertCruiseOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";

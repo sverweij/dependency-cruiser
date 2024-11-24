@@ -12,7 +12,7 @@ function getVersion(pModuleName) {
   // @ts-expect-error TS2345 extractRootModuleName can return either a string or
   // undefined. If undefined this function will throw. Which is _fine_, even
   // _expected_ in the context it's currently used
-  // eslint-disable-next-line import/no-dynamic-require, node/global-require, security/detect-non-literal-require
+  // eslint-disable-next-line import/no-dynamic-require, n/global-require, security/detect-non-literal-require
   return require(join(extractRootModuleName(pModuleName), "package.json"))
     .version;
 }
@@ -41,7 +41,7 @@ function tryRequire(pModuleName, pSemanticVersion) {
         return false;
       }
     }
-    // eslint-disable-next-line import/no-dynamic-require, node/global-require, security/detect-non-literal-require
+    // eslint-disable-next-line import/no-dynamic-require, n/global-require, security/detect-non-literal-require
     return require(pModuleName);
   } catch (pError) {
     return false;

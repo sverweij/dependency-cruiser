@@ -17,6 +17,7 @@ function getOptionValue(pDefault) {
   return (pValue) => (typeof pValue === "string" ? pValue : pDefault);
 }
 
+// eslint-disable-next-line complexity
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
   let lOptions = structuredClone(pCliOptions);
 

@@ -51,7 +51,7 @@ function getVertexName(pSource) {
  * @param {import("../../types/cruise-result").IOptions} pOptions
  * @returns {string}
  */
-// eslint-disable-next-line complexity
+
 function getModuleAttributes(pModule, pOptions) {
   let lReturnValue = "class: module";
   if (pModule.consolidated) {
@@ -90,7 +90,7 @@ function getModuleAttributes(pModule, pOptions) {
  * @param {import("../../types/cruise-result").IDependency} pDependency
  * @returns {string}
  */
-// eslint-disable-next-line complexity
+
 function getDependencyAttributes(pDependency) {
   let lThing = "";
   if (pDependency.valid === false) {

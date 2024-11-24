@@ -146,7 +146,7 @@ export default async function normalizeResolveOptions(
   pTSConfig,
 ) {
   const lRuleSet = pOptions?.ruleSet ?? {};
-  // eslint-disable-next-line no-return-await
+
   return await compileResolveOptions(
     {
       // EnhancedResolve's symlinks:

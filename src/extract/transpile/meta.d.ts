@@ -1,3 +1,4 @@
+/* eslint n/file-extension-in-import: 0, no-unused-vars:0 */
 import type {
   IAvailableExtension,
   IAvailableTranspiler,
@@ -8,7 +9,7 @@ export interface ITranspilerWrapper {
   transpile: (
     pSource: string,
     pFileName?: string,
-    pTranspilerOptions?: any
+    pTranspilerOptions?: any,
   ) => string;
 }
 

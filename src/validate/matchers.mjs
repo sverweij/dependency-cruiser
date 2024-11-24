@@ -112,7 +112,6 @@ export function matchesToDependencyTypesNot(pRule, pDependency) {
   );
 }
 
-// eslint-disable-next-line complexity
 export function matchesToVia(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.via && pDependency.cycle) {
@@ -144,7 +143,6 @@ export function matchesToVia(pRule, pDependency, pGroups) {
   return lReturnValue;
 }
 
-// eslint-disable-next-line complexity
 export function matchesToViaOnly(pRule, pDependency, pGroups) {
   let lReturnValue = true;
   if (pRule.to.viaOnly && pDependency.cycle) {
