@@ -1,6 +1,5 @@
 import { equal } from "node:assert/strict";
 // if eslint flags the next line, it's a bug in  eslint-plugin-node
-// eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
 import normalizeNewline from "normalize-newline";
 import thing from "#extract/transpile/typescript-wrap.mjs";

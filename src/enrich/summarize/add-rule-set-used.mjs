@@ -7,6 +7,7 @@ function removeNames(pRule) {
   return lReturnValue;
 }
 
+// eslint-disable-next-line complexity
 export default function addRuleSetUsed(pOptions) {
   const lForbidden = pOptions?.ruleSet?.forbidden;
   const lAllowed = pOptions?.ruleSet?.allowed;

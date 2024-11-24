@@ -115,7 +115,7 @@ function dependentsCountsMatch(pRule, pDependents) {
  * @param {IModule} pModule
  * @returns {boolean}
  */
-// eslint-disable-next-line complexity
+
 export function matchesDependentsRule(pRule, pModule) {
   if (
     (Object.hasOwn(pModule, "dependents") &&

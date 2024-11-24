@@ -3,11 +3,12 @@ import { join } from "node:path";
 import { unlinkSync } from "node:fs";
 import semver from "semver";
 import symlinkDir from "symlink-dir";
+// eslint-disable-next-line n/no-extraneous-import
 import * as noDefaultExportMock from "no-default-export";
 
-// eslint-disable-next-line node/no-extraneous-import
+// eslint-disable-next-line n/no-extraneous-import
 import betaMock from "beta";
-// eslint-disable-next-line node/no-extraneous-import
+// eslint-disable-next-line n/no-extraneous-import
 import rcMock from "rc";
 import tryImport from "#utl/try-import.mjs";
 

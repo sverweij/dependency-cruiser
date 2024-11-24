@@ -13,6 +13,7 @@ import { set } from "#utl/object-util.mjs";
 import cruise from "#main/cruise.mjs";
 import { INFO, bus } from "#utl/bus.mjs";
 
+// eslint-disable-next-line complexity
 async function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
   const lWebPackConfigFileName =
@@ -78,6 +79,7 @@ async function extractBabelConfigOptions(pCruiseOptions) {
   return lReturnValue;
 }
 
+// eslint-disable-next-line complexity
 function setUpListener(pCruiseOptions) {
   const lString2Listener = new Map([
     ["cli-feedback", setUpCliFeedbackListener],
@@ -141,7 +143,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @param {{stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream}=} pStreams
  * @returns {number}
  */
-// eslint-disable-next-line complexity
+
 export default async function executeCli(
   pFileDirectoryArray,
   pCruiseOptions,

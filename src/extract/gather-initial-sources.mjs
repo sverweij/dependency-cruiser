@@ -1,5 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
 import { join, normalize } from "node:path";
+// eslint-disable-next-line n/prefer-global/process
 import { platform } from "node:process";
 import picomatch from "picomatch";
 import { scannableExtensions } from "./transpile/meta.mjs";

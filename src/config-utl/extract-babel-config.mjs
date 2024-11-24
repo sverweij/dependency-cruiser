@@ -68,7 +68,6 @@ async function getConfig(pBabelConfigFileName) {
       `${`The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n`}         dependency-cruiser doesn't support yet.\n`,
     );
   }
-  // eslint-disable-next-line no-return-await
   return await lExtensionToParseFunction.get(lExtension)(pBabelConfigFileName);
 }
 

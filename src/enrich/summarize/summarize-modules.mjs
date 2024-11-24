@@ -12,7 +12,6 @@ function cutNonTransgressions(pModule) {
   };
 }
 
-// eslint-disable-next-line complexity
 function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   let lReturnValue = {
     type: "dependency",
