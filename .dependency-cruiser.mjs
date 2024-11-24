@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 const defaultStrictRules = fileURLToPath(
   new URL("configs/recommended-strict.cjs", import.meta.url),
 );
-/** @type {import('./').IConfiguration} */
+/** @type {import('./types/configuration.mjs').IConfiguration} */
 export default {
   extends: defaultStrictRules,
   forbidden: [

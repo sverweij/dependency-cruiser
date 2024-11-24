@@ -1,6 +1,6 @@
 import baseConfig from "../.dependency-cruiser.mjs";
 
-/** @type {import('../').IConfiguration} */
+/** @type {import('./configuration.mjs').IConfiguration} */
 export default {
   ...baseConfig,
   options: {

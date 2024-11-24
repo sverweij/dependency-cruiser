@@ -254,7 +254,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
         violations: [],
       },
     };
-    /** @type {import("../..").IRevisionData} */
+    /** @type {import("../../types/cruise-result.mjs").IRevisionData} */
     const lEmptyRevisionData = {
       SHA1: "shwoop",
       changes: [],
@@ -284,7 +284,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
   });
 
   it("adds checksums to modules in the cruise result", () => {
-    /** @type {import("../..").ICruiseResult} */
+    /** @type {import("../../types/cruise-result.mjs").ICruiseResult} */
     const lEmptyCruiseResult = {
       modules: [
         { source: "foo.js" },
@@ -305,7 +305,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
         violations: [],
       },
     };
-    /** @type {import("../..").IRevisionData} */
+    /** @type {import("../../types/cruise-result.mjs").IRevisionData} */
     const lEmptyRevisionData = {
       SHA1: "shwoop",
       changes: [],
@@ -343,7 +343,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
   });
 
   it("removes changes from the revision data that aren't different anymore from the cruise result", () => {
-    /** @type {import("../..").ICruiseResult} */
+    /** @type {import("../../types/cruise-result.mjs").ICruiseResult} */
     const lCruiseResult = {
       modules: [
         { source: "foo.js" },
@@ -364,7 +364,7 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
         violations: [],
       },
     };
-    /** @type {import("../..").IRevisionData} */
+    /** @type {import("../../types/cruise-result.mjs").IRevisionData} */
     const lRevisionData = {
       SHA1: "shwoop",
       changes: [
