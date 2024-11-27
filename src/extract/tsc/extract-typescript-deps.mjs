@@ -263,7 +263,7 @@ function extractJSDocImportTags(pJSDocTags) {
     .filter(
       (pTag) =>
         pTag.tagName.escapedText === "import" &&
-        pTag.moduleSpecifier?.kind &&
+        pTag.moduleSpecifier &&
         typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
         pTag.moduleSpecifier.text,
     )
@@ -276,21 +276,19 @@ function extractJSDocImportTags(pJSDocTags) {
 }
 
 function extractJSDocBracketImports(pJSDocTags) {
+  // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
   return pJSDocTags
     .filter(
       (pTag) =>
         pTag.tagName.escapedText !== "import" &&
-        /* c8 ignore start */
-        typescript.SyntaxKind[pTag.typeExpression?.kind ?? -1] ===
-          "FirstJSDocNode" &&
-        typescript.SyntaxKind[pTag.typeExpression.type?.kind ?? -1] ===
+        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode" &&
+        typescript.SyntaxKind[pTag.typeExpression.type?.kind] ===
           "LastTypeNode" &&
-        typescript.SyntaxKind[pTag.typeExpression.type.argument?.kind ?? -1] ===
+        typescript.SyntaxKind[pTag.typeExpression.type.argument?.kind] ===
           "LiteralType" &&
         typescript.SyntaxKind[
-          pTag.typeExpression.type.argument?.literal?.kind ?? -1
+          pTag.typeExpression.type.argument?.literal?.kind
         ] === "StringLiteral" &&
-        /* c8 ignore stop*/
         pTag.typeExpression.type.argument.literal.text,
     )
     .map((pTag) => ({
@@ -302,6 +300,7 @@ function extractJSDocBracketImports(pJSDocTags) {
 }
 
 function extractJSDocImports(pJSDocNodes) {
+  // https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
   const lJSDocNodesWithTags = pJSDocNodes.filter(
     (pJSDocLine) => pJSDocLine.tags,
   );
@@ -371,14 +370,8 @@ function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
       });
     }
 
-    // /** @import thing from './module' */
-    // /** @import {thing} from './module' */
-    // /** @import * as thing from './module' */
-    // see https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
-    //
-    // TODO: all the kinds of tags that can have import statements as type declarations
-    //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
-    // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
+    // /** @import thing from './module' */ etc
+    // /** @type {import('module').thing}*/ etc
     if (pDetectJSDocImports && pASTNode.jsDoc) {
       const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
 
