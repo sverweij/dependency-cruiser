@@ -112,7 +112,7 @@ const QUESTIONS = [
   {
     name: "detectJSDocImports",
     type: () => (tscIsAvailable() ? "confirm" : false),
-    message: "Do you want to detect JSDoc imports?",
+    message: "Do you want to detect JSDoc imports as well (slower)?",
     initial: false,
   },
   {

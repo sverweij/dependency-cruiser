@@ -56,11 +56,6 @@ const EXPERIMENTAL_SCRIPT_DOC = [
       EOL +
       "      to stdout - in simple text",
   },
-  // {
-  //   name: "depcruise:text",
-  //   headline: "",
-  //   description: "",
-  // },
 ];
 
 /**
