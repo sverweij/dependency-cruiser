@@ -18,6 +18,7 @@ import {
   getWebpackConfigCandidates,
 } from "./environment-helpers.mjs";
 import { validateLocation } from "./validators.mjs";
+import { isAvailable as tscIsAvailable } from "#extract/tsc/parse.mjs";
 
 function toPromptChoice(pString) {
   return {
@@ -107,6 +108,12 @@ const QUESTIONS = [
     type: (_, pAnswers) => (pAnswers.useTsConfig ? "select" : false),
     message: "Full path to your 'tsconfig.json",
     choices: getTSConfigCandidates().map(toPromptChoice),
+  },
+  {
+    name: "detectJSDocImports",
+    type: () => (tscIsAvailable() ? "confirm" : false),
+    message: "Do you want to detect JSDoc imports as well (slower)?",
+    initial: false,
   },
   {
     name: "tsPreCompilationDeps",

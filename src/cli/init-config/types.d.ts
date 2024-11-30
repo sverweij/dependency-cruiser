@@ -33,6 +33,10 @@ export interface IInitConfig {
    */
   tsConfig?: string;
   /**
+   * Whether or not to detect JSDoc imports
+   */
+  detectJSDocImports?: boolean;
+  /**
    * Whether or not to take dependencies into account that only exist before
    * compilation to javascript
    */

@@ -63,6 +63,17 @@ function buildTsPreCompilationDepsAttribute(pInitOptions) {
 }
 
 /**
+ *
+ * @param {IInitConfig} pInitOptions
+ * @returns {string}
+ */
+function buildDetectJSDocumentImportsAttribute(pInitOptions) {
+  return pInitOptions.detectJSDocImports
+    ? "detectJSDocImports: true,"
+    : "// detectJSDocImports: true,";
+}
+
+/**
  * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
@@ -168,6 +179,10 @@ export default function buildConfig(pInitOptions) {
       extensionsToString(pInitOptions.resolutionExtensions),
     )
     .replace("{{notToTestRule}}", buildNotToTestRule(pInitOptions))
+    .replace(
+      "{{detectJSDocImportsAttribute}}",
+      buildDetectJSDocumentImportsAttribute(pInitOptions),
+    )
     .replace(
       "{{tsPreCompilationDepsAttribute}}",
       buildTsPreCompilationDepsAttribute(pInitOptions),

@@ -43,6 +43,7 @@ function getOneShotConfig(pOneShotConfigId) {
     jsConfig: getJSConfigCandidates().shift(),
     useTsConfig: hasTSConfigCandidates(),
     tsConfig: getTSConfigCandidates().shift(),
+    detectJSDocImports: false,
     tsPreCompilationDeps: hasTSConfigCandidates(),
     useWebpackConfig: hasWebpackConfigCandidates(),
     webpackConfig: getWebpackConfigCandidates().shift(),

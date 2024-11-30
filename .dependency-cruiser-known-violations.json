@@ -1,6 +1,15 @@
 [
   {
     "type": "dependency",
+    "from": "src/cli/init-config/get-user-input.mjs",
+    "to": "src/extract/tsc/parse.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "cli-to-main-only"
+    }
+  },
+  {
+    "type": "dependency",
     "from": "test/utl/try-import.spec.mjs",
     "to": "test/utl/node_modules/beta/index.js",
     "rule": {
