@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
@@ -275,24 +276,68 @@ function extractJSDocImportTags(pJSDocTags) {
     }));
 }
 
+function isJSDocImport(pTypeNode) {
+  // import('./hello.mjs') within jsdoc
+  return (
+    typescript.SyntaxKind[pTypeNode?.kind] === "LastTypeNode" &&
+    typescript.SyntaxKind[pTypeNode.argument?.kind] === "LiteralType" &&
+    typescript.SyntaxKind[pTypeNode.argument?.literal?.kind] ===
+      "StringLiteral" &&
+    pTypeNode.argument.literal.text
+  );
+}
+
+function keyIsBoring(pKey) {
+  return [
+    "parent",
+    "pos",
+    "end",
+    "flags",
+    "emitNode",
+    "modifierFlagsCache",
+    "transformFlags",
+    "id",
+    "flowNode",
+    "symbol",
+    "original",
+  ].includes(pKey);
+}
+
+/**
+ * Walks the given object, that can have both arrays and objects as values, and returns a new object with the same structure, but with all the values replaced by the result of the given function.
+ * @param {Object} obj The object to walk.
+ */
+export function walkJSDoc(pObject, pCollection = new Set()) {
+  if (isJSDocImport(pObject)) {
+    pCollection.add(pObject.argument.literal.text);
+  } else if (Array.isArray(pObject)) {
+    pObject.forEach((pValue) => walkJSDoc(pValue, pCollection));
+  } else if (typeof pObject === "object") {
+    for (const lKey in pObject) {
+      if (!keyIsBoring(lKey) && pObject[lKey]) {
+        walkJSDoc(pObject[lKey], pCollection);
+      }
+    }
+  }
+}
+
+export function getJSDocImports(pObject) {
+  const lCollection = new Set();
+  walkJSDoc(pObject, lCollection);
+  return Array.from(lCollection);
+}
+
 function extractJSDocBracketImports(pJSDocTags) {
   // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
   return pJSDocTags
     .filter(
       (pTag) =>
         pTag.tagName.escapedText !== "import" &&
-        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode" &&
-        typescript.SyntaxKind[pTag.typeExpression.type?.kind] ===
-          "LastTypeNode" &&
-        typescript.SyntaxKind[pTag.typeExpression.type.argument?.kind] ===
-          "LiteralType" &&
-        typescript.SyntaxKind[
-          pTag.typeExpression.type.argument?.literal?.kind
-        ] === "StringLiteral" &&
-        pTag.typeExpression.type.argument.literal.text,
+        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode",
     )
-    .map((pTag) => ({
-      module: pTag.typeExpression.type.argument.literal.text,
+    .flatMap((pTag) => getJSDocImports(pTag))
+    .map((pImportName) => ({
+      module: pImportName,
       moduleSystem: "es6",
       exoticallyRequired: false,
       dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-bracket-import"],

@@ -115,7 +115,7 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
   });
 
   /* eslint mocha/no-skipped-tests: "off" */
-  xit("extracts @type whole module even when wrapped in type shenanigans (Partial)", () => {
+  it("extracts @type whole module even when wrapped in type shenanigans (Partial)", () => {
     deepEqual(
       extractTypescript(
         "/** @type {Partial<import('./hello.mjs')>} */",
@@ -138,7 +138,44 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
       ],
     );
   });
-  xit("extracts @type whole module even when wrapped in type shenanigans (Map)", () => {
+
+  it("extracts @type whole module even when wrapped in type shenanigans (union)", () => {
+    deepEqual(
+      extractTypescript(
+        "/** @type {import('./hello.mjs')|import('./goodbye.mjs')} */",
+        [],
+        true,
+      ),
+      [
+        {
+          module: "./hello.mjs",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: [
+            "type-only",
+            "import",
+            "jsdoc",
+            "jsdoc-bracket-import",
+          ],
+        },
+        {
+          module: "./goodbye.mjs",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: [
+            "type-only",
+            "import",
+            "jsdoc",
+            "jsdoc-bracket-import",
+          ],
+        },
+      ],
+    );
+  });
+
+  it("extracts @type whole module even when wrapped in type shenanigans (Map)", () => {
     deepEqual(
       extractTypescript(
         "/** @type {Map<string,import('./hello.mjs')>} */",
@@ -161,10 +198,11 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
       ],
     );
   });
-  xit("extracts @type whole module even when wrapped in type shenanigans (Map & Parital)", () => {
+
+  it("extracts @type whole module even when wrapped in type shenanigans (Map & Partial)", () => {
     deepEqual(
       extractTypescript(
-        "/** @type {string, Partial<import('./hello.mjs')>} */",
+        "/** @type {Map<string, Partial<import('./hello.mjs')>>} */",
         [],
         true,
       ),
