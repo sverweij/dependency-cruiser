@@ -114,7 +114,6 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
     );
   });
 
-  /* eslint mocha/no-skipped-tests: "off" */
   it("extracts @type whole module even when wrapped in type shenanigans (Partial)", () => {
     deepEqual(
       extractTypescript(
@@ -209,6 +208,29 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
       [
         {
           module: "./hello.mjs",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: [
+            "type-only",
+            "import",
+            "jsdoc",
+            "jsdoc-bracket-import",
+          ],
+        },
+      ],
+    );
+  });
+  it("extracts @return wrapped in type shenanigans)", () => {
+    deepEqual(
+      extractTypescript(
+        "/** @return {Promise<import('./types.js').IPartialInitConfig>} */",
+        [],
+        true,
+      ),
+      [
+        {
+          module: "./types.js",
           moduleSystem: "es6",
           dynamic: false,
           exoticallyRequired: false,
