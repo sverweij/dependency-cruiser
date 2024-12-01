@@ -576,9 +576,23 @@ _teamcity_ reporters (he _dot_ and _ddot_ reporters already did before).
 **A**: From version 5.4.0 or higher you can add an _exoticRequireStrings_ key in
 your configuration with the wrapper(s) and/ or re-definitions of require:
 
-```json
-"exoticRequireStrings": ["window.require", "need", "tryRequire"]
+```javascript
+exoticRequireStrings: ["window.require", "need", "tryRequire"];
 ```
+
+### Q: I'm using jsdoc/ tsdoc comments to declare dependencies - how do I make sure dependency-cruiser picks those up?
+
+**A** From version 16.7.0 you can add this to your configuration:
+
+```javascript
+//...
+detectJSDocImports: true; // implies `parser: tsc`
+// ...
+```
+
+As only the `tsc` TypeScript parser supports this, it will need `typescript`
+to be installed (dependency-cruiser will automatically use it). For more
+information see [detectJSDocImports in the options reference](./options-reference#detectjsdocimports-detect-dependencies-in-jsdoc-comments)
 
 ### Q: Can I get code completion for .dependency-cruiser.js?
 

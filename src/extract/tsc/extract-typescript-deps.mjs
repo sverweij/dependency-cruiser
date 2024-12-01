@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
@@ -263,7 +264,7 @@ function extractJSDocImportTags(pJSDocTags) {
     .filter(
       (pTag) =>
         pTag.tagName.escapedText === "import" &&
-        pTag.moduleSpecifier?.kind &&
+        pTag.moduleSpecifier &&
         typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
         pTag.moduleSpecifier.text,
     )
@@ -275,10 +276,82 @@ function extractJSDocImportTags(pJSDocTags) {
     }));
 }
 
+function isJSDocImport(pTypeNode) {
+  // import('./hello.mjs') within jsdoc
+  return (
+    typescript.SyntaxKind[pTypeNode?.kind] === "LastTypeNode" &&
+    typescript.SyntaxKind[pTypeNode.argument?.kind] === "LiteralType" &&
+    typescript.SyntaxKind[pTypeNode.argument?.literal?.kind] ===
+      "StringLiteral" &&
+    pTypeNode.argument.literal.text
+  );
+}
+
+function keyInJSDocIsIgnorable(pKey) {
+  return [
+    "parent",
+    "pos",
+    "end",
+    "flags",
+    "emitNode",
+    "modifierFlagsCache",
+    "transformFlags",
+    "id",
+    "flowNode",
+    "symbol",
+    "original",
+  ].includes(pKey);
+}
+
+export function walkJSDoc(pObject, pCollection = new Set()) {
+  if (isJSDocImport(pObject)) {
+    pCollection.add(pObject.argument.literal.text);
+  } else if (Array.isArray(pObject)) {
+    pObject.forEach((pValue) => walkJSDoc(pValue, pCollection));
+  } else if (typeof pObject === "object") {
+    for (const lKey in pObject) {
+      if (!keyInJSDocIsIgnorable(lKey) && pObject[lKey]) {
+        walkJSDoc(pObject[lKey], pCollection);
+      }
+    }
+  }
+}
+
+export function getJSDocImports(pTagNode) {
+  const lCollection = new Set();
+  walkJSDoc(pTagNode, lCollection);
+  return Array.from(lCollection);
+}
+
+function extractJSDocBracketImports(pJSDocTags) {
+  // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
+  return pJSDocTags
+    .filter(
+      (pTag) =>
+        pTag.tagName.escapedText !== "import" &&
+        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode",
+    )
+    .flatMap((pTag) => getJSDocImports(pTag))
+    .map((pImportName) => ({
+      module: pImportName,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-only", "import", "jsdoc", "jsdoc-bracket-import"],
+    }));
+}
+
 function extractJSDocImports(pJSDocNodes) {
-  return pJSDocNodes
-    .filter((pJSDocLine) => pJSDocLine.tags)
-    .flatMap((pJSDocLine) => extractJSDocImportTags(pJSDocLine.tags));
+  // https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
+  const lJSDocNodesWithTags = pJSDocNodes.filter(
+    (pJSDocLine) => pJSDocLine.tags,
+  );
+  const lJSDocImportTags = lJSDocNodesWithTags.flatMap((pJSDocLine) =>
+    extractJSDocImportTags(pJSDocLine.tags),
+  );
+  const lJSDocBracketImports = lJSDocNodesWithTags.flatMap((pJSDocLine) =>
+    extractJSDocBracketImports(pJSDocLine.tags),
+  );
+  return lJSDocImportTags.concat(lJSDocBracketImports);
 }
 
 /**
@@ -338,14 +411,8 @@ function walk(pResult, pExoticRequireStrings, pDetectJSDocImports) {
       });
     }
 
-    // /** @import thing from './module' */
-    // /** @import {thing} from './module' */
-    // /** @import * as thing from './module' */
-    // see https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-jsdoc-import-tag
-    //
-    // TODO: all the kinds of tags that can have import statements as type declarations
-    //      (e.g. @type, @param, @returns, @typedef, @property, @prop, @arg, ...)
-    // https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
+    // /** @import thing from './module' */ etc
+    // /** @type {import('module').thing}*/ etc
     if (pDetectJSDocImports && pASTNode.jsDoc) {
       const lJSDocImports = extractJSDocImports(pASTNode.jsDoc);
 
