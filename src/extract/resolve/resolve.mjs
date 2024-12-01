@@ -2,17 +2,19 @@ import enhancedResolve from "enhanced-resolve";
 import { stripQueryParameters } from "../helpers.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
-let gResolvers = {};
-let gInitialized = {};
+let gResolvers = new Map();
+let gInitialized = new Map();
 
 function init(pEHResolveOptions, pCachingContext) {
-  if (!gInitialized[pCachingContext] || pEHResolveOptions.bustTheCache) {
+  if (!gInitialized.get(pCachingContext) || pEHResolveOptions.bustTheCache) {
     // assuming the cached file system here
     pEHResolveOptions.fileSystem.purge();
-    gResolvers[pCachingContext] =
-      enhancedResolve.ResolverFactory.createResolver(pEHResolveOptions);
+    gResolvers.set(
+      pCachingContext,
+      enhancedResolve.ResolverFactory.createResolver(pEHResolveOptions),
+    );
     /* eslint security/detect-object-injection:0 */
-    gInitialized[pCachingContext] = true;
+    gInitialized.set(pCachingContext, true);
   }
 }
 
@@ -35,7 +37,7 @@ export function resolve(
   init(pResolveOptions, pCachingContext);
 
   return stripQueryParameters(
-    gResolvers[pCachingContext].resolveSync(
+    gResolvers.get(pCachingContext).resolveSync(
       {},
       // lookupStartPath
       pathToPosix(pFileDirectory),
@@ -46,6 +48,6 @@ export function resolve(
 }
 
 export function clearCache() {
-  gInitialized = {};
-  gResolvers = {};
+  gInitialized.clear();
+  gResolvers.clear();
 }
