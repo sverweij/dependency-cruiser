@@ -221,6 +221,12 @@ export default {
             "stable dependency principle. See online documentation for examples and details. " +
             "Leave this out when you don't care either way.",
         },
+        ancestor: {
+          type: "boolean",
+          description:
+            "When set to true, matches when the dependency is in a folder above the " +
+            "folder of the module.",
+        },
       },
     },
     DependentsModuleRestrictionType: {
