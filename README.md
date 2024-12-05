@@ -56,7 +56,7 @@ cruiser with output type `dot` and run _GraphViz dot_[^3] on the result. In
 a one liner:
 
 ```shell
-npx depcruise src --include-only "^src" --output-type dot | dot -T svg > dependency-graph.svg
+npx dependency-cruiser src --include-only "^src" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
 > <details>
@@ -67,7 +67,7 @@ npx depcruise src --include-only "^src" --output-type dot | dot -T svg > depende
 > configuration file:
 >
 > ```shell
-> npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg > dependency-graph.svg
+> npx dependency-cruiser src --include-only "^src" --config --output-type dot | dot -T svg > dependency-graph.svg
 > ```
 
 </details>
@@ -90,7 +90,7 @@ npx depcruise src --include-only "^src" --output-type dot | dot -T svg > depende
 
 #### Declare some rules
 
-When you ran `depcruise --init` above, the command also added some rules
+When you ran `dependency-cruiser --init` above, the command also added some rules
 to `.dependency-cruiser.js` that make sense in most projects, like detecting
 **circular dependencies**, dependencies **missing** in package.json, **orphans**,
 and production code relying on dev- or optionalDependencies.
@@ -120,7 +120,7 @@ Sample rule:
 #### Report them
 
 ```sh
-npx depcruise src
+npx dependency-cruiser src
 ```
 
 > <details>
@@ -131,7 +131,7 @@ npx depcruise src
 > configuration file:
 >
 > ```shell
-> npx depcruise --config .dependency-cruiser.js src
+> npx dependency-cruiser --config .dependency-cruiser.js src
 > ```
 
 </details>
