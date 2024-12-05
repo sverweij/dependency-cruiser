@@ -30,7 +30,7 @@ pnpm add -D dependency-cruiser
 ### ... and generate a config
 
 ```shell
-npx depcruise --init
+npx dependency-cruiser --init
 ```
 
 This will look around in your environment a bit, ask you some questions and create
