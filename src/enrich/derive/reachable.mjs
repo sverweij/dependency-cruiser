@@ -81,11 +81,11 @@ function shouldAddReaches(pRule, pModule) {
 }
 
 function hasCapturingGroups(pRule) {
-  const lCapturingGroupPlaceholderRe = "\\$[0-9]+";
+  const lCapturingGroupPlaceholderRe = /\$[0-9]+/;
 
-  return Boolean(
-    (pRule?.to?.path ?? "").match(lCapturingGroupPlaceholderRe) ||
-      (pRule?.to?.pathNot ?? "").match(lCapturingGroupPlaceholderRe),
+  return (
+    lCapturingGroupPlaceholderRe.test(pRule?.to?.path ?? "") ||
+    lCapturingGroupPlaceholderRe.test(pRule?.to?.pathNot ?? "")
   );
 }
 function shouldAddReachable(pRule, pModuleTo, pGraph) {

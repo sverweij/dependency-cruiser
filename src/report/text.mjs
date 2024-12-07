@@ -16,7 +16,7 @@ function toFlatModuleDependencies(pModule, pModulesInFocus, pHighlightFocused) {
   return pModule.dependencies.map((pDependency) => ({
     from: {
       name: pModule.source,
-      highlight: pHighlightFocused && Boolean(pModule.matchesFocus),
+      highlight: pHighlightFocused && pModule.matchesFocus,
     },
     to: {
       name: pDependency.resolved,

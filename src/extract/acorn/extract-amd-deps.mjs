@@ -8,7 +8,7 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
       .filter((pArgument) => pArgument.type === "ArrayExpression")
       .forEach((pArgument) =>
         pArgument.elements.forEach((pElement) => {
-          if (Boolean(pElement.value) && typeof pElement.value === "string") {
+          if (pElement.value && typeof pElement.value === "string") {
             pDependencies.push({
               module: pElement.value,
               moduleSystem: "amd",

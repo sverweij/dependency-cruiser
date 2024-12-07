@@ -13,8 +13,7 @@ function mergeModule(pLeftModule, pRightModule) {
       .concat(pRightModule?.rules ?? [])
       .sort(compareRules),
     valid: pLeftModule.valid && pRightModule.valid,
-    consolidated:
-      Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated),
+    consolidated: pLeftModule.consolidated || pRightModule.consolidated,
   };
 }
 

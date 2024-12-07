@@ -4,9 +4,7 @@ function isStringLiteral(pArgument) {
 
 function firstArgumentIsAString(pArgumentsNode) {
   return (
-    Boolean(pArgumentsNode) &&
-    pArgumentsNode[0] &&
-    isStringLiteral(pArgumentsNode[0])
+    pArgumentsNode && pArgumentsNode[0] && isStringLiteral(pArgumentsNode[0])
   );
 }
 
@@ -20,7 +18,7 @@ function isPlaceholderLessTemplateLiteral(pArgument) {
 
 function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   return (
-    Boolean(pArgumentsNode) &&
+    pArgumentsNode &&
     pArgumentsNode[0] &&
     isPlaceholderLessTemplateLiteral(pArgumentsNode[0])
   );

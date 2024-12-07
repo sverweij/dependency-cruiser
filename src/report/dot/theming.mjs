@@ -5,7 +5,7 @@ import { has, get } from "#utl/object-util.mjs";
 function matchesRE(pValue, pRE) {
   const lMatchResult = pValue.match && pValue.match(pRE);
 
-  return Boolean(lMatchResult) && lMatchResult.length > 0;
+  return lMatchResult && lMatchResult.length > 0;
 }
 
 function matchesCriterion(pModuleKey, pCriterion) {
