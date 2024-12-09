@@ -3,6 +3,8 @@ import baseConfig from "../.dependency-cruiser.mjs";
 export default {
   ...baseConfig,
   options: {
+    ...baseConfig.options,
+    exclude: [],
     cache: {
       folder: "node_modules/.cache/dependency-cruiser/unlimited",
     },
