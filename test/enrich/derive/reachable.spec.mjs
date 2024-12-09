@@ -114,7 +114,17 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     deepEqual(addReachability(GRAPH, normalize({})), GRAPH);
   });
 
-  it('returns the reachability annotated graph when a rule set with forbidden "reachable" in it', () => {
+  it("returns the input graph when passed a rule set with only a rul that doesn't have a 'from' or a 'module'", () => {
+    deepEqual(
+      addReachability(
+        GRAPH,
+        normalize({ required: [{ thing: {}, to: { reachable: true } }] }),
+      ),
+      GRAPH,
+    );
+  });
+
+  it('returns the reachability annotated graph when a rule set with forbidden "reachable" in it (forbidden rule)', () => {
     const lForbiddenReachabilityRuleSetHajoo = {
       forbidden: [
         {
@@ -134,8 +144,8 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     const lForbiddenReachabilityRuleSetHajoo = {
       allowed: [
         {
-          from: { path: "src/[^.]+\\.js" },
-          to: { path: "./src/hajoo\\.js$", reachable: true },
+          from: { path: "src/[^.]+[.]js" },
+          to: { path: "./src/hajoo[.]js$", reachable: true },
         },
       ],
     };
@@ -272,6 +282,78 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
       lExpected,
     );
+  });
+
+  it('returns the reachability annotated graph when a rule set with allowed "reachable" in it ("required" rules)', () => {
+    const lRequiredReachabilityRuleSetHajoo = {
+      required: [
+        {
+          name: "must-reach-hajoo-somehow",
+          module: { path: "src/[^.]+[.]js" },
+          to: { path: "./src/hajoo[.]js$", reachable: true },
+        },
+      ],
+    };
+    const lExpected = [
+      {
+        source: "./src/index.js",
+        dependencies: [
+          {
+            resolved: "./src/intermediate.js",
+          },
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "must-reach-hajoo-somehow",
+            modules: [
+              {
+                source: "./src/hajoo.js",
+                via: [
+                  { name: "./src/intermediate.js", dependencyTypes: [] },
+                  { name: "./src/hajoo.js", dependencyTypes: [] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        source: "./src/intermediate.js",
+        dependencies: [
+          {
+            resolved: "./src/index.js",
+          },
+          {
+            resolved: "./src/hajoo.js",
+          },
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "must-reach-hajoo-somehow",
+            modules: [
+              {
+                source: "./src/hajoo.js",
+                via: [{ name: "./src/hajoo.js", dependencyTypes: [] }],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        source: "./src/hajoo.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            matchedFrom: "./src/index.js",
+            asDefinedInRule: "must-reach-hajoo-somehow",
+          },
+        ],
+      },
+    ];
+    const lNormalizedGraph = normalize(lRequiredReachabilityRuleSetHajoo);
+    const lResult = addReachability(GRAPH, lNormalizedGraph);
+    deepEqual(lResult, lExpected);
   });
 
   it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (without a rule name - multiple matches)', () => {
