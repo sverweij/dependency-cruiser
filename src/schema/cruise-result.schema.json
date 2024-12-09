@@ -928,6 +928,10 @@
         "path": {
           "description": "Criteria at least one dependency of each matching module must adhere to.",
           "$ref": "#/definitions/REAsStringsType"
+        },
+        "reachable": {
+          "type": "boolean",
+          "description": "Whether or not to match transitive ('indirect') dependencies as well as direct ones."
         }
       }
     },
