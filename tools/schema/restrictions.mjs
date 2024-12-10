@@ -303,6 +303,11 @@ export default {
             "adhere to.",
           $ref: "#/definitions/REAsStringsType",
         },
+        reachable: {
+          type: "boolean",
+          description:
+            "Whether or not to match transitive ('indirect') dependencies as well as direct ones.",
+        },
       },
     },
     ...dependencyType.definitions,

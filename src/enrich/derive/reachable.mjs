@@ -13,18 +13,30 @@ function getReachableRules(pRuleSet) {
       (pRuleSet?.allowed ?? []).filter((pRule) =>
         Object.hasOwn(pRule?.to ?? {}, "reachable"),
       ),
+    )
+    .concat(
+      (pRuleSet?.required ?? []).filter((pRule) =>
+        Object.hasOwn(pRule?.to ?? {}, "reachable"),
+      ),
     );
 }
 
 function isModuleInRuleFrom(pRule) {
-  return (pModule) =>
-    (!pRule.from.path || pModule.source.match(pRule.from.path)) &&
-    (!pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot));
+  return (pModule) => {
+    const lRuleFrom = pRule.from ?? pRule.module;
+    if (lRuleFrom) {
+      return (
+        (!lRuleFrom.path || pModule.source.match(lRuleFrom.path)) &&
+        (!lRuleFrom.pathNot || !pModule.source.match(lRuleFrom.pathNot))
+      );
+    }
+    return false;
+  };
 }
 
 function isModuleInRuleTo(pRule, pModuleTo, pModuleFrom) {
   const lGroups = pModuleFrom
-    ? extractGroups(pRule.from, pModuleFrom.source)
+    ? extractGroups(pRule.from ?? pRule.module, pModuleFrom.source)
     : [];
 
   return (
@@ -91,7 +103,11 @@ function hasCapturingGroups(pRule) {
 function shouldAddReachable(pRule, pModuleTo, pGraph) {
   let lReturnValue = false;
 
-  if (pRule.to.reachable === false || pRule.name === "not-in-allowed") {
+  if (
+    pRule.to.reachable === false ||
+    pRule.name === "not-in-allowed" ||
+    pRule.module
+  ) {
     if (hasCapturingGroups(pRule)) {
       const lModulesFrom = pGraph.filter(isModuleInRuleFrom(pRule));
 

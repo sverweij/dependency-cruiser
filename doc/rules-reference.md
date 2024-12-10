@@ -93,6 +93,9 @@ controller _must depend on_ the base controller'.
 modules the rule applies to and the `to` describes what dependencies that module
 should exactly have.
 
+To check for _direct_ dependencies (controllers must directly depend on the
+base controller):
+
 ```javascript
 {
   required: [
@@ -102,12 +105,39 @@ should exactly have.
         "Each controller should inherit from the framework's base controller",
       module: {
         // every module that matches the pattern specified in path & pathNot ...
-        path: "-controller\\.js$",
-        pathNot: "framework/base-controller\\.js$",
+        path: "-controller[.]js$",
+        pathNot: "framework/base-controller[.]js$",
       },
       to: {
         // ... must depend at least once on the framework's base controller
-        path: "^src/framework/base-controller\\.js$",
+        path: "^src/framework/base-controller[.]js$",
+      },
+    },
+  ];
+}
+```
+
+To check for _indirect_ ('transitive') dependencies (controllers must depend
+on the base controller, either directly or via other modules) add the `reachable`
+attribute to `to` part of the rule, like so:
+
+```javascript
+{
+  required: [
+    {
+      name: "controllers-transitively-inherit-from-base",
+      comment:
+        "Each controller should inherit from the framework's base controller",
+      module: {
+        // every module that matches the pattern specified in path & pathNot ...
+        path: "-controller[.]js$",
+        pathNot: "framework/base-controller[.]js$",
+      },
+      to: {
+        // ... must depend at least once on the framework's base controller
+        path: "^src/framework/base-controller[.]js$",
+        // ... either directly or indirectly
+        reachable: true,
       },
     },
   ];
