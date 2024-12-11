@@ -2,6 +2,7 @@ import {
   matchesToPath,
   matchesModulePath,
   matchesModulePathNot,
+  matchToModulePath,
 } from "./matchers.mjs";
 import { matchesReachesRule } from "./match-module-rule-helpers.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
@@ -27,9 +28,12 @@ export default function violatesRequiredRule(pRule, pModule) {
 
     if (lReturnValue || !pRule.to.reachable) {
       const lGroups = extractGroups(pRule.module, pModule.source);
-      lReturnValue = !pModule.dependencies.some((pDependency) =>
-        matchesToPath(pRule, pDependency, lGroups),
-      );
+      const lMatchesSelf = matchToModulePath(pRule, pModule, lGroups);
+      lReturnValue =
+        !lMatchesSelf &&
+        !pModule.dependencies.some((pDependency) =>
+          matchesToPath(pRule, pDependency, lGroups),
+        );
     }
   }
   return lReturnValue;

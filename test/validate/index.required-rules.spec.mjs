@@ -108,11 +108,11 @@ describe("[I] validate/index - required rules - transitive dependencies ('reacha
       {
         name: "thou-shalt-inherit-from-base",
         module: {
-          path: ".+-controller\\.ts$",
+          path: ".+-controller[.]ts$",
           pathNot: "random-trials",
         },
         to: {
-          path: "src/base-controller/index\\.ts$",
+          path: "src/base-controller/index[.]ts$",
           reachable: true,
         },
       },
@@ -169,9 +169,6 @@ describe("[I] validate/index - required rules - transitive dependencies ('reacha
           {
             resolved: "src/not-the-base-controller.ts",
           },
-          // {
-          //   resolved: "src/base-controller/index.ts",
-          // },
           {
             resolved: "src/not-the-base-controller-either.ts",
           },
@@ -192,6 +189,33 @@ describe("[I] validate/index - required rules - transitive dependencies ('reacha
             ],
           },
         ],
+      }),
+      {
+        valid: true,
+      },
+    );
+  });
+
+  it("the module itself doesn't get flagged as a transgression", () => {
+    const lRuleSet = parseRuleSet({
+      required: [
+        {
+          name: "do-depend-on-the-base-controller",
+          module: {
+            path: "src/",
+          },
+          to: {
+            path: "src/base-controller/index[.]ts$",
+            reachable: true,
+          },
+        },
+      ],
+    });
+    deepEqual(
+      validateModule(lRuleSet, {
+        source: "src/base-controller/index.ts",
+        dependencies: [],
+        reaches: [],
       }),
       {
         valid: true,
