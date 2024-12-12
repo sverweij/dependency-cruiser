@@ -144,6 +144,9 @@ attribute to `to` part of the rule, like so:
 }
 ```
 
+> `reachable: false` is the same as leaving the reachable attribute out; so it
+> does 'nothing'.
+
 ### `extends`
 
 This takes one or more file path to other dependency-cruiser-configs. When
