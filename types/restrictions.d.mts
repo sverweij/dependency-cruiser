@@ -166,6 +166,10 @@ export interface IRequiredToRestrictionType {
    * one of the dependencies of the module should adhere to.
    */
   path?: string | string[];
+  /**
+   * Whether or not to match transitive ('indirect') dependencies as well as direct ones.
+   */
+  reachable?: boolean;
 }
 
 export interface IDependentsModuleRestrictionType extends IBaseRestrictionType {
