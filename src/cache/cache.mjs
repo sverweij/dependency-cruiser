@@ -44,17 +44,20 @@ const EMPTY_CACHE = {
 const CACHE_FORMAT_VERSION = 16.2;
 
 export default class Cache {
+  #revisionData;
+  #cacheStrategy;
+  #compress;
   /**
    * @param {cacheStrategyType=} pCacheStrategy
    * @param {boolean=} pCompress
    */
   constructor(pCacheStrategy, pCompress) {
-    this.revisionData = null;
-    this.cacheStrategy =
+    this.#revisionData = null;
+    this.#cacheStrategy =
       pCacheStrategy === "content"
         ? new ContentStrategy()
         : new MetadataStrategy();
-    this.compress = pCompress ?? false;
+    this.#compress = pCompress ?? false;
   }
 
   cacheFormatVersionCompatible(pCachedCruiseResult) {
@@ -71,9 +74,9 @@ export default class Cache {
    * @returns {Promise<boolean>}
    */
   async canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
-    this.revisionData =
+    this.#revisionData =
       pRevisionData ??
-      (await this.cacheStrategy.getRevisionData(
+      (await this.#cacheStrategy.getRevisionData(
         ".",
         pCachedCruiseResult,
         pCruiseOptions,
@@ -83,13 +86,13 @@ export default class Cache {
           ),
         },
       ));
-    this.revisionData.cacheFormatVersion = CACHE_FORMAT_VERSION;
+    this.#revisionData.cacheFormatVersion = CACHE_FORMAT_VERSION;
     bus.debug("cache: - comparing");
     return (
       this.cacheFormatVersionCompatible(pCachedCruiseResult) &&
-      this.cacheStrategy.revisionDataEqual(
+      this.#cacheStrategy.revisionDataEqual(
         pCachedCruiseResult.revisionData,
-        this.revisionData,
+        this.#revisionData,
       ) &&
       optionsAreCompatible(
         pCachedCruiseResult.summary.optionsUsed,
@@ -105,7 +108,7 @@ export default class Cache {
   async read(pCacheFolder) {
     try {
       let lPayload = "";
-      if (this.compress === true) {
+      if (this.#compress === true) {
         const lCompressedPayload = await readFile(
           join(pCacheFolder, CACHE_FILE_NAME),
         );
@@ -159,16 +162,16 @@ export default class Cache {
    * @param {IRevisionData=} pRevisionData
    */
   async write(pCacheFolder, pCruiseResult, pRevisionData) {
-    let lRevisionData = pRevisionData ?? this.revisionData;
+    let lRevisionData = pRevisionData ?? this.#revisionData;
 
     await mkdir(pCacheFolder, { recursive: true });
     const lUncompressedPayload = JSON.stringify(
-      this.cacheStrategy.prepareRevisionDataForSaving(
+      this.#cacheStrategy.prepareRevisionDataForSaving(
         pCruiseResult,
         lRevisionData,
       ),
     );
-    let lPayload = this.#compact(lUncompressedPayload, this.compress);
+    let lPayload = this.#compact(lUncompressedPayload, this.#compress);
 
     // relying on writeFile defaults to 'do the right thing' (i.e. utf8
     // when the payload is a string; raw buffer otherwise)

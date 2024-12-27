@@ -116,14 +116,17 @@ function isInterestingCallExpression(pExoticRequireStrings, pNode) {
 
 export default Visitor
   ? class SwcDependencyVisitor extends Visitor {
+      #exoticRequireStrings;
+      #result;
+
       constructor(pExoticRequireStrings) {
         super();
-        this.lExoticRequireStrings = pExoticRequireStrings;
+        this.#exoticRequireStrings = pExoticRequireStrings;
       }
 
-      pushExportSource(pNode) {
+      #pushExportSource(pNode) {
         if (pNode.source) {
-          this.lResult.push({
+          this.#result.push({
             module: pNode.source.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
@@ -132,9 +135,9 @@ export default Visitor
         }
       }
 
-      pushImportSource(pNode) {
+      #pushImportSource(pNode) {
         if (pNode.source) {
-          this.lResult.push({
+          this.#result.push({
             module: pNode.source.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
@@ -144,13 +147,13 @@ export default Visitor
       }
 
       visitImportDeclaration(pNode) {
-        this.pushImportSource(pNode);
+        this.#pushImportSource(pNode);
         return super.visitImportDeclaration(pNode);
       }
 
       visitTsImportEqualsDeclaration(pNode) {
         if (pNode.moduleRef.type === "TsExternalModuleReference") {
-          this.lResult.push({
+          this.#result.push({
             module: pNode.moduleRef.expression.value,
             moduleSystem: "cjs",
             exoticallyRequired: false,
@@ -164,7 +167,7 @@ export default Visitor
       // To anticipate that (and to remain backward compatible when that happens)
       // also include the same method, but with the correct spelling.
       visitExportAllDeclration(pNode) {
-        this.pushExportSource(pNode);
+        this.#pushExportSource(pNode);
         /* c8 ignore start */
         // @ts-expect-error see above
         if (super.visitExportAllDeclration) {
@@ -184,7 +187,7 @@ export default Visitor
 
       // same spelling error as the above - same solution
       visitExportNamedDeclration(pNode) {
-        this.pushExportSource(pNode);
+        this.#pushExportSource(pNode);
         /* c8 ignore start */
         // @ts-expect-error see above
         if (super.visitExportNamedDeclration) {
@@ -203,10 +206,10 @@ export default Visitor
 
       visitCallExpression(pNode) {
         if (
-          isInterestingCallExpression(this.lExoticRequireStrings, pNode) &&
+          isInterestingCallExpression(this.#exoticRequireStrings, pNode) &&
           argumentsAreUsable(pNode.arguments)
         ) {
-          this.lResult.push({
+          this.#result.push({
             module: pryStringsFromArguments(pNode.arguments),
 
             ...(isImportCallExpression(pNode)
@@ -232,8 +235,8 @@ export default Visitor
         }
 
         // using "window.require" as an exotic require string...
-        this.lResult = this.lResult.concat(
-          extractExoticMemberCallExpression(pNode, this.lExoticRequireStrings),
+        this.#result = this.#result.concat(
+          extractExoticMemberCallExpression(pNode, this.#exoticRequireStrings),
         );
 
         return super.visitCallExpression(pNode);
@@ -251,7 +254,7 @@ export default Visitor
         // implemented yet (1.2.51) pNode can come in as null (also see
         // comments in accompanying unit test)
         if (pNode && pNode.typeAnnotation && pNode.typeAnnotation.argument)
-          this.lResult.push({
+          this.#result.push({
             module: pNode.typeAnnotation.argument.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
@@ -264,9 +267,9 @@ export default Visitor
       // visitTrippleSlashDirective(pNode)) {}
 
       getDependencies(pAST) {
-        this.lResult = [];
+        this.#result = [];
         this.visitModule(pAST);
-        return this.lResult;
+        return this.#result;
       }
     }
   : /* c8 ignore start */

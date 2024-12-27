@@ -10,6 +10,7 @@
  */
 
 export default class IndexedModuleGraph {
+  #indexedGraph;
   /**
    * @param {IModuleOrFolder} pModule
    * @returns {IVertex}
@@ -25,7 +26,7 @@ export default class IndexedModuleGraph {
   }
 
   #init(pModules, pIndexAttribute) {
-    this.indexedGraph = new Map(
+    this.#indexedGraph = new Map(
       pModules.map((pModule) => [
         pModule[pIndexAttribute],
         this.#normalizeModule(pModule),
@@ -46,9 +47,7 @@ export default class IndexedModuleGraph {
    * @return {IVertex}
    */
   findVertexByName(pName) {
-    // @ts-expect-error tsc seems to think indexedGraph can be undefined. However,
-    // in the constructor it's always set to a Map, and the init method is private
-    return this.indexedGraph.get(pName);
+    return this.#indexedGraph.get(pName);
   }
 
   /**
