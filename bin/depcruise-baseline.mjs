@@ -25,7 +25,7 @@ try {
       ".dependency-cruiser-known-violations.json",
     )
     .version(meta.version)
-    .arguments("<files-or-directories>")
+    .argument("<files-or-directories...>")
     .parse(process.argv);
 
   if (program.args[0]) {

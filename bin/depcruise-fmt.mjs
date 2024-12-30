@@ -52,7 +52,7 @@ try {
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option(
       "-S, --collapse <regex>",
-      "collapse a to a folder depth by passing a single digit (e.g. 2). Or pass a " +
+      "collapse to a folder depth by passing a single digit (e.g. 2). Or pass a " +
         "regex to collapse to a pattern E.g. ^packages/[^/]+/ would collapse to " +
         "modules/ folders directly under your packages folder. ",
     )
@@ -66,7 +66,7 @@ try {
         "dependency violations. Works for err, err-long and teamcity output types",
     )
     .version(meta.version)
-    .arguments("<dependency-cruiser-json>")
+    .argument("<dependency-cruiser-json>")
     .parse(process.argv);
 
   if (program.args[0]) {

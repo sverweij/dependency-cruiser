@@ -164,7 +164,8 @@ try {
         `${EOL}  see https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md${EOL}`,
     )
     .version(meta.version)
-    .arguments("[files-or-directories]")
+    .argument("[files-or-directories...]")
+    .allowExcessArguments()
     .parse(process.argv);
 
   if (Boolean(program.args[0]) || program.opts().info || program.opts().init) {
