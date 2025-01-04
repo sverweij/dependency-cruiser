@@ -36,6 +36,7 @@
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
   - [experimentalStats](#experimentalstats)
+  - [skipAnalysisNotInRules](#skipanalysisnotinrules)
   - [parser](#parser)
   - [cache](#cache)
   - [progress](#progress)
@@ -1678,6 +1679,19 @@ When set to true dependency-cruiser will emit an `experimentalStats` object
 in the result for each module. This feature is not yet used by any of the
 reporters dependency-cruiser ships with. The feature is also _experimental_
 which means it might disappear or change in the future.
+
+### `skipAnalysisNotInRules`
+
+When this flag is set to `true`, dependency-cruiser will skip all analysis that 
+don't serve a rule. E.g. if there's no 'circular' rule in the rule set it won't 
+analyse cycles. This flag affects cycle, dependents, orphan, and reachability 
+analysis. If you have a rule set that doesn't use one of these features, 
+switching it to true will make cruises faster. 
+
+Defaults to `false` for backwards compatibility. However, we recommend to switch 
+this option to `true`, unless you have a specific use case (i.e. use the json
+output for further analysis, using the API).
+
 
 ### `parser`
 
