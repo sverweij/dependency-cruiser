@@ -30,6 +30,7 @@
       "outputTo": "test/cli/__output__/alternate-basedir.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "src"
     },

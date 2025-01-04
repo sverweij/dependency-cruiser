@@ -24,6 +24,7 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "src",
       "baseDir": "test/main/__mocks__/type-only-module-references"

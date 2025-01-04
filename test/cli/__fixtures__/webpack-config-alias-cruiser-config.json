@@ -78,6 +78,7 @@
       "outputType": "json",
       "preserveSymlinks": false,
       "rulesFile": "test/cli/__fixtures__/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "webpackConfig": {
         "fileName": "test/cli/__fixtures__/webpackconfig/aliassy/webpack.regularexport.config.js"

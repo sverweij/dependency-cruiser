@@ -9287,6 +9287,7 @@
       "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
       "preserveSymlinks": false,
       "rulesFile": ".dependency-cruiser.json",
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": true,
       "exoticRequireStrings": ["tryRequire", "requireJSON"],
       "reporterOptions": {

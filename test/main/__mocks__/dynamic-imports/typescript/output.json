@@ -8,18 +8,15 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "src/index.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
-            {
-              "name": "src/index.ts",
-              "dependencyTypes": ["local", "import"]
-            },
+            { "name": "src/index.ts", "dependencyTypes": ["local", "import"] },
             {
               "name": "src/dynamic-to-circular.ts",
               "dependencyTypes": ["local", "import"]
@@ -45,11 +42,11 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "src/dynamic-to-circular.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -61,10 +58,7 @@
               "name": "src/circular.ts",
               "dependencyTypes": ["local", "dynamic-import"]
             },
-            {
-              "name": "src/index.ts",
-              "dependencyTypes": ["local", "import"]
-            }
+            { "name": "src/index.ts", "dependencyTypes": ["local", "import"] }
           ],
           "valid": false,
           "rules": [{ "severity": "info", "name": "no-circular" }]
@@ -82,11 +76,11 @@
           "moduleSystem": "es6",
           "dynamic": true,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "dynamic-import"],
           "resolved": "src/circular.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "dynamic-import"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -94,10 +88,7 @@
               "name": "src/circular.ts",
               "dependencyTypes": ["local", "dynamic-import"]
             },
-            {
-              "name": "src/index.ts",
-              "dependencyTypes": ["local", "import"]
-            },
+            { "name": "src/index.ts", "dependencyTypes": ["local", "import"] },
             {
               "name": "src/dynamic-to-circular.ts",
               "dependencyTypes": ["local", "import"]
@@ -126,10 +117,7 @@
         "to": "src/index.ts",
         "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
-          {
-            "name": "src/index.ts",
-            "dependencyTypes": ["local", "import"]
-          },
+          { "name": "src/index.ts", "dependencyTypes": ["local", "import"] },
           {
             "name": "src/dynamic-to-circular.ts",
             "dependencyTypes": ["local", "import"]
@@ -155,6 +143,7 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "src",
       "baseDir": "test/main/__mocks__/dynamic-imports/typescript"

@@ -318,6 +318,7 @@
       "outputTo": "test/cli/__output__/cjs.file.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/cjs/root_one.js"

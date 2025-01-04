@@ -49,6 +49,7 @@
       "outputTo": "test/cli/__output__/dynamic-import-nok.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsConfig": {
         "fileName": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json"
       },

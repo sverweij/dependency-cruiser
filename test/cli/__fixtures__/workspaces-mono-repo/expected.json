@@ -239,6 +239,7 @@
       "outputTo": "test/cli/__output__/workspaces-mono-repo.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "apps"
     },

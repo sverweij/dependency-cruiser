@@ -33,11 +33,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/main/__mocks__/ts-precompilation-deps-off-cjs/also-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "require"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -47,11 +47,11 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/main/__mocks__/ts-precompilation-deps-off-cjs/definitely-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "require"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -78,12 +78,10 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
-      "tsConfig": {
-        "fileName": "test/main/__mocks__/tsconfig.targetcjs.json"
-      },
+      "skipAnalysisNotInRules": false,
+      "tsConfig": { "fileName": "test/main/__mocks__/tsconfig.targetcjs.json" },
       "tsPreCompilationDeps": false,
-      "args": "test/main/__mocks__/ts-precompilation-deps-off-cjs",
-      "baseDir": ""
+      "args": "test/main/__mocks__/ts-precompilation-deps-off-cjs"
     }
   }
 }

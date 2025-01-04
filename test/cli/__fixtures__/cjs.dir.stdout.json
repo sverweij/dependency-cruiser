@@ -383,7 +383,8 @@
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "exoticRequireStrings": [],
-      "externalModuleResolutionStrategy": "node_modules"
+      "externalModuleResolutionStrategy": "node_modules",
+      "skipAnalysisNotInRules": false
     }
   }
 }
