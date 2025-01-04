@@ -106,6 +106,7 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     pOldOptions.combinedDependencies === pNewOptions.combinedDependencies &&
     pOldOptions.experimentalStats === pNewOptions.experimentalStats &&
     pOldOptions.detectJSDocImports === pNewOptions.detectJSDocImports &&
+    pOldOptions.skipAnalysisNotInRules === pNewOptions.skipAnalysisNotInRules &&
     metricsIsCompatible(pOldOptions.metrics, pNewOptions.metrics) &&
     // includeOnly suffers from a backwards compatibility disease
     includeOnlyIsCompatible(pOldOptions.includeOnly, pNewOptions.includeOnly) &&

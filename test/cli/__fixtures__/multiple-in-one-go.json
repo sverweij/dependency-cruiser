@@ -162,6 +162,7 @@
       "outputTo": "test/cli/__output__/multiple-in-one-go.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/cjs/sub test/cli/__fixtures__/duplicate-subs/sub/more-in-sub.js test/cli/__fixtures__/unresolvable-in-sub"

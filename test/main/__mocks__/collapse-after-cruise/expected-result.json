@@ -182,6 +182,7 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "test/main/__mocks__/collapse-after-cruise"
     },

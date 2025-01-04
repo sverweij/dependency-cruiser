@@ -35,11 +35,11 @@
           "module": "./also-used",
           "moduleSystem": "cjs",
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "require"],
           "resolved": "test/main/__mocks__/ts-precompilation-deps-on-es/also-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "require"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -49,11 +49,11 @@
           "module": "./definitely-used",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "test/main/__mocks__/ts-precompilation-deps-on-es/definitely-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -63,11 +63,11 @@
           "module": "./imported-from-index-but-not-used",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "test/main/__mocks__/ts-precompilation-deps-on-es/imported-from-index-but-not-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -94,9 +94,8 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
-      "tsConfig": {
-        "fileName": "test/main/__mocks__/tsconfig.targetes.json"
-      },
+      "skipAnalysisNotInRules": false,
+      "tsConfig": { "fileName": "test/main/__mocks__/tsconfig.targetes.json" },
       "tsPreCompilationDeps": true,
       "args": "test/main/__mocks__/ts-precompilation-deps-on-es"
     }

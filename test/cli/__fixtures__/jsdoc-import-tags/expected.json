@@ -56,6 +56,7 @@
       "outputType": "json",
       "parser": "tsc",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "rulesFile": "dependency-cruiser-config.mjs",
       "tsPreCompilationDeps": false,
       "args": "src/index.mjs"
