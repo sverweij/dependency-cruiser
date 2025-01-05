@@ -17,7 +17,7 @@ import { bus } from "#utl/bus.mjs";
  * @returns {IModule[]}
  */
 export default function enrichModules(pModules, pOptions) {
-  bus.info("analyzing: cycles (if needed)");
+  bus.info("analyzing: cycles");
   const lIndexedModules = new IndexedModuleGraph(pModules);
   let lModules = deriveCycles(pModules, lIndexedModules, {
     pSourceAttribute: "source",
@@ -25,15 +25,15 @@ export default function enrichModules(pModules, pOptions) {
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,
     pRuleSet: pOptions.ruleSet,
   });
-  bus.info("analyzing: dependents (if needed)");
+  bus.info("analyzing: dependents");
   lModules = addDependents(lModules, pOptions);
-  bus.info("analyzing: orphans (if needed)");
+  bus.info("analyzing: orphans");
   lModules = deriveOrphans(lModules, pOptions);
   bus.info("analyzing: reachables");
   lModules = deriveReachable(lModules, pOptions.ruleSet);
   bus.info("analyzing: module metrics");
   lModules = deriveModuleMetrics(lModules, pOptions);
-  bus.info("analyzing: add focus (if any)");
+  bus.info("analyzing: focus");
   lModules = addFocus(lModules, pOptions.focus);
 
   // when validate === false we might want to skip the addValidations.

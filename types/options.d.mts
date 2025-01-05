@@ -227,8 +227,15 @@ export interface ICruiseOptions {
     add: string[];
   };
   /**
-   * When true includes denormalized dependents in the cruise-result, even
-   * though there's no rule in the rule set that requires them. Defaults to false.
+   * @deprecated
+   *
+   * Hasn't had any effect on dependency-cruiser's behaviour since a few major
+   * versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules`
+   * option in stead.
+   *
+   * Previously documented behavior:
+   * > When true includes denormalized dependents in the cruise-result, even
+   * > though there's no rule in the rule set that requires them. Defaults to false.
    */
   forceDeriveDependents?: boolean;
   /**

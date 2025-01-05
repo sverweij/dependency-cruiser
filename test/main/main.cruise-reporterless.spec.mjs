@@ -37,7 +37,7 @@ function runFixture(pFixture) {
     it(pFixture.title, async () => {
       let lResult = await cruise(
         [pFixture.input.fileName],
-        { forceDeriveDependents: true, ...pFixture.input.options },
+        pFixture.input.options,
         {
           bustTheCache: true,
           resolveLicenses: true,

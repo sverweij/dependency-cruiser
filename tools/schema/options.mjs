@@ -219,7 +219,12 @@ export default {
         },
         forceDeriveDependents: {
           type: "boolean",
+          deprecated: true,
           description:
+            "Hasn't had any effect on dependency-cruiser's behaviour since a few major " +
+            "versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules` " +
+            "option in stead." +
+            "Previously documented behaviour: " +
             "When true includes de-normalized dependents in the cruise-result, even " +
             "though there's no rule in the rule set that requires them. Defaults to false.",
         },
@@ -439,8 +444,8 @@ export default {
           description:
             "When this flag is set to true, dependency-cruiser will skip all analysis " +
             "that don't serve a rule. E.g. if there's no 'circular' rule in the rule set " +
-            "it won't analyse cycles. This flag affects cycle, dependents, orphan, and " +
-            "reachability analysis. If you have a rule set that doesn't use one of these " +
+            "it won't analyse cycles. This flag affects cycle, dependents and orphan " +
+            "analysis. If you have a rule set that doesn't use one of these " +
             "features, switching it to true will make cruises faster. " +
             "Defaults to false for backwards compatibility. For most uses of dependency-cruiser " +
             "we recommend to switch this option to true, though.",
