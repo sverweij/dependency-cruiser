@@ -1,5 +1,28 @@
 /* eslint-disable security/detect-object-injection */
 
+/** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
+/**
+ *
+ * @param {IFlattenedRuleSet} pRuleSet
+ * @returns {boolean}
+ */
+export function hasCycleRule(pRuleSet) {
+  return (
+    (pRuleSet?.forbidden ?? []).some(
+      (pRule) =>
+        /* c8 ignore start */
+        Object.hasOwn(pRule?.to ?? {}, "circular"),
+      /* c8 ignore stop */
+    ) ||
+    (pRuleSet?.allowed ?? []).some(
+      (pRule) =>
+        /* c8 ignore start */
+        Object.hasOwn(pRule?.to ?? {}, "circular"),
+      /* c8 ignore stop */
+    )
+  );
+}
+
 function addCircularityCheckToDependency(
   pIndexedGraph,
   pFrom,
@@ -31,17 +54,26 @@ function addCircularityCheckToDependency(
 export default function detectAndAddCycles(
   pNodes,
   pIndexedNodes,
-  { pSourceAttribute, pDependencyName },
+  { pSourceAttribute, pDependencyName, pSkipAnalysisNotInRules, pRuleSet },
 ) {
+  if (!pSkipAnalysisNotInRules || hasCycleRule(pRuleSet)) {
+    return pNodes.map((pModule) => ({
+      ...pModule,
+      dependencies: pModule.dependencies.map((pToDep) =>
+        addCircularityCheckToDependency(
+          pIndexedNodes,
+          pModule[pSourceAttribute],
+          pToDep,
+          pDependencyName,
+        ),
+      ),
+    }));
+  }
   return pNodes.map((pModule) => ({
     ...pModule,
-    dependencies: pModule.dependencies.map((pToDep) =>
-      addCircularityCheckToDependency(
-        pIndexedNodes,
-        pModule[pSourceAttribute],
-        pToDep,
-        pDependencyName,
-      ),
-    ),
+    dependencies: pModule.dependencies.map((pToDep) => ({
+      ...pToDep,
+      circular: false,
+    })),
   }));
 }

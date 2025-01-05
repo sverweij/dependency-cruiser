@@ -2,8 +2,8 @@ import aggregateToFolders from "./aggregate-to-folders.mjs";
 import { validateFolder } from "#validate/index.mjs";
 
 /**
- * @param {import("../../../../types/dependency-cruiser.js").IFolder} pFolder
- * @param {import('../../../../types/dependency-cruiser.js').IOptions} pOptions
+ * @param {import("../../../../types/dependency-cruiser.mjs").IFolder} pFolder
+ * @param {import('../../../../types/dependency-cruiser.mjs').IOptions} pOptions
  * @returns
  */
 function validateFolderDependency(pFolder, pOptions) {
@@ -25,15 +25,15 @@ function addFolderDependencyViolations(pOptions) {
 
 /**
  *
- * @param {import('../../../../types/dependency-cruiser.js').IModule[]} pModules
- * @param {import('../../../../types/dependency-cruiser.js').IOptions} pOptions
+ * @param {import('../../../../types/dependency-cruiser.mjs').IModule[]} pModules
+ * @param {import('../../../../types/dependency-cruiser.mjs').IOptions} pOptions
  * @returns {any}
  */
 export default function deriveFolderMetrics(pModules, pOptions) {
   let lReturnValue = {};
   if (pOptions.metrics) {
     lReturnValue = {
-      folders: aggregateToFolders(pModules).map(
+      folders: aggregateToFolders(pModules, pOptions).map(
         addFolderDependencyViolations(pOptions),
       ),
     };
