@@ -437,6 +437,7 @@ export default {
     // parser: "tsc", // acorn, tsc
     detectJSDocImports: true, // implies parser: "tsc"
     experimentalStats: true,
+    skipAnalysisNotInRules: true,
     metrics: true,
     enhancedResolveOptions: {
       exportsFields: ["exports"],
