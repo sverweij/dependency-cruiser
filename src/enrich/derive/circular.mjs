@@ -2,7 +2,6 @@
 
 /** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
 /**
- *
  * @param {IFlattenedRuleSet} pRuleSet
  * @returns {boolean}
  */

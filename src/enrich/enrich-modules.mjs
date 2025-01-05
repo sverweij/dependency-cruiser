@@ -26,7 +26,7 @@ export default function enrichModules(pModules, pOptions) {
     pRuleSet: pOptions.ruleSet,
   });
   bus.info("analyzing: dependents");
-  lModules = addDependents(lModules);
+  lModules = addDependents(lModules, pOptions);
   bus.info("analyzing: orphans");
   lModules = deriveOrphans(lModules);
   bus.info("analyzing: reachables");
