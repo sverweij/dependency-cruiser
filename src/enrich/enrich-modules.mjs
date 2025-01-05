@@ -9,12 +9,21 @@ import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import addFocus from "#graph-utl/add-focus.mjs";
 import { bus } from "#utl/bus.mjs";
 
+/** @import { IModule, IOptions } from "../../types/dependency-cruiser.mjs" */
+
+/**
+ * @param {IModule[]} pModules
+ * @param {IOptions} pOptions
+ * @returns {IModule[]}
+ */
 export default function enrichModules(pModules, pOptions) {
   bus.info("analyzing: cycles");
   const lIndexedModules = new IndexedModuleGraph(pModules);
   let lModules = deriveCycles(pModules, lIndexedModules, {
     pSourceAttribute: "source",
     pDependencyName: "resolved",
+    pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,
+    pRuleSet: pOptions.ruleSet,
   });
   bus.info("analyzing: dependents");
   lModules = addDependents(lModules);

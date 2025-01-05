@@ -134,7 +134,13 @@ function getSinks(pFolders) {
   return lReturnValue;
 }
 
-export default function aggregateToFolders(pModules) {
+/**
+ *
+ * @param {import("../../../../types/cruise-result.d.mts").IModule} pModules
+ * @param {import("../../../../types/cruise-result.d.mts").IOptions} pOptions
+ * @returns
+ */
+export default function aggregateToFolders(pModules, pOptions = {}) {
   let lFolders = object2Array(
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {}),
   )
@@ -145,5 +151,7 @@ export default function aggregateToFolders(pModules) {
   return detectCycles(lFolders, new IndexedModuleGraph(lFolders, "name"), {
     pSourceAttribute: "name",
     pDependencyName: "name",
+    pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,
+    pRuleSet: pOptions.ruleSet,
   });
 }
