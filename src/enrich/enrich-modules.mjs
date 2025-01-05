@@ -17,7 +17,7 @@ import { bus } from "#utl/bus.mjs";
  * @returns {IModule[]}
  */
 export default function enrichModules(pModules, pOptions) {
-  bus.info("analyzing: cycles");
+  bus.info("analyzing: cycles (if needed)");
   const lIndexedModules = new IndexedModuleGraph(pModules);
   let lModules = deriveCycles(pModules, lIndexedModules, {
     pSourceAttribute: "source",
@@ -25,10 +25,10 @@ export default function enrichModules(pModules, pOptions) {
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,
     pRuleSet: pOptions.ruleSet,
   });
-  bus.info("analyzing: dependents");
+  bus.info("analyzing: dependents (if needed)");
   lModules = addDependents(lModules, pOptions);
-  bus.info("analyzing: orphans");
-  lModules = deriveOrphans(lModules);
+  bus.info("analyzing: orphans (if needed)");
+  lModules = deriveOrphans(lModules, pOptions);
   bus.info("analyzing: reachables");
   lModules = deriveReachable(lModules, pOptions.ruleSet);
   bus.info("analyzing: module metrics");
