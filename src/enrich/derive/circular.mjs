@@ -1,24 +1,22 @@
 /* eslint-disable security/detect-object-injection */
 
 /** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
+
+function isCycleRule(pRule) {
+  return (
+    /* c8 ignore start */
+    Object.hasOwn(pRule?.to ?? {}, "circular")
+    /* c8 ignore stop */
+  );
+}
 /**
  * @param {IFlattenedRuleSet} pRuleSet
  * @returns {boolean}
  */
 export function hasCycleRule(pRuleSet) {
   return (
-    (pRuleSet?.forbidden ?? []).some(
-      (pRule) =>
-        /* c8 ignore start */
-        Object.hasOwn(pRule?.to ?? {}, "circular"),
-      /* c8 ignore stop */
-    ) ||
-    (pRuleSet?.allowed ?? []).some(
-      (pRule) =>
-        /* c8 ignore start */
-        Object.hasOwn(pRule?.to ?? {}, "circular"),
-      /* c8 ignore stop */
-    )
+    (pRuleSet?.forbidden ?? []).some(isCycleRule) ||
+    (pRuleSet?.allowed ?? []).some(isCycleRule)
   );
 }
 
