@@ -193,12 +193,15 @@ function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
 
 export default function deriveReachables(pGraph, pRuleSet) {
   const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
-  const lIndexedGraph =
-    lReachableRules.length > 0 ? new IndexedModuleGraph(pGraph) : {};
 
-  return lReachableRules.reduce(
-    (pReturnGraph, pRule) =>
-      addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
-    structuredClone(pGraph),
-  );
+  if (lReachableRules.length > 0) {
+    const lIndexedGraph = new IndexedModuleGraph(pGraph);
+
+    return lReachableRules.reduce(
+      (pReturnGraph, pRule) =>
+        addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
+      structuredClone(pGraph),
+    );
+  }
+  return pGraph;
 }
