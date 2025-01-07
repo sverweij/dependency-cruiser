@@ -18,6 +18,7 @@
       "tsPreCompilationDeps": false,
       "combinedDependencies": false,
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "externalModuleResolutionStrategy": "node_modules"
     }
   }

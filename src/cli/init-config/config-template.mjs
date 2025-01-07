@@ -334,6 +334,16 @@ module.exports = {
        */
       // aliasFields: ["browser"],
     },
+
+    /*
+      skipAnalysisNotInRules will make dependency-cruiser execute 
+      analysis strictly necessary for checking the rule set only. 
+
+      See https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#skipanalysisnotinrules
+      for details
+     */
+    skipAnalysisNotInRules: true,
+
     reporterOptions: {
       dot: {
         /* pattern of modules that can be consolidated in the detailed

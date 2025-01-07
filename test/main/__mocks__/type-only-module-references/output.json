@@ -8,12 +8,12 @@
           "module": "graphql/tsutils/Maybe",
           "moduleSystem": "es6",
           "exoticallyRequired": false,
+          "dependencyTypes": ["npm-no-pkg", "import"],
           "resolved": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
           "license": "MIT",
-          "dependencyTypes": ["npm-no-pkg", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -47,6 +47,7 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": true,
       "args": "src",
       "baseDir": "test/main/__mocks__/type-only-module-references"

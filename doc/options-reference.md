@@ -36,6 +36,7 @@
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
   - [experimentalStats](#experimentalstats)
+  - [skipAnalysisNotInRules](#skipanalysisnotinrules)
   - [parser](#parser)
   - [cache](#cache)
   - [progress](#progress)
@@ -1668,9 +1669,17 @@ The cacheDuration used here overrides any that might be set in webpack configs.
 
 ### `forceDeriveDependents`
 
-Dependency-cruiser will automatically determine whether it needs to derive dependents.
-However, if you want to force them to be derived, you can switch this variable
-to `true`.
+> [!WARNING]
+> Deprecated. This optiton hasnt had any effect on dependency-cruiser's behaviour
+> since a few major versions. I there's a need to maniuplate whether or not 
+> dependendents get derived independent of any rule (/ metric/ report) needing
+> them use the [`skipAnalysisNotInRules`](#skipanalysisnotinrules) option as 
+> documented below. 
+> 
+> #### Previously documented behaviour
+>> Dependency-cruiser will automatically determine whether it needs to derive dependents.
+>> However, if you want to force them to be derived, you can switch this variable
+>> to `true`.
 
 ### `experimentalStats`
 
@@ -1678,6 +1687,22 @@ When set to true dependency-cruiser will emit an `experimentalStats` object
 in the result for each module. This feature is not yet used by any of the
 reporters dependency-cruiser ships with. The feature is also _experimental_
 which means it might disappear or change in the future.
+
+### `skipAnalysisNotInRules`
+
+When this flag is set to `true`, dependency-cruiser will skip all analysis that 
+don't serve a rule. E.g. if there's no 'circular' rule in the rule set it won't 
+analyse cycles. This flag affects cycle, dependents and orphan analysis. If you
+have a rule set that doesn't use one of these features, switching it to true 
+will make cruises faster. 
+
+Dependency-cruiser skips other analyses (reachable, folder, metrics, focus) 
+automatically when they're not needed, without the need to set this flag.
+
+Defaults to `false` for backwards compatibility. However, we recommend to switch 
+this option to `true`, unless you have a specific use case (i.e. use the json
+output for further analysis, using the API).
+
 
 ### `parser`
 

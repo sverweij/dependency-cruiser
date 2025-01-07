@@ -8,11 +8,11 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["local", "import"],
           "resolved": "test/main/__mocks__/tsx/sub/render.tsx",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local", "import"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -30,11 +30,11 @@
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "dependencyTypes": ["unknown"],
           "resolved": "react-dom",
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -73,6 +73,7 @@
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "test/main/__mocks__/tsx"
     }

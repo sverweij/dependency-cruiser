@@ -6,19 +6,15 @@ import {
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { extractGroups } from "#utl/regex-util.mjs";
 
+function isReachableRule(pRule) {
+  return Object.hasOwn(pRule?.to ?? {}, "reachable");
+}
+
 function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])
-    .filter((pRule) => Object.hasOwn(pRule?.to ?? {}, "reachable"))
-    .concat(
-      (pRuleSet?.allowed ?? []).filter((pRule) =>
-        Object.hasOwn(pRule?.to ?? {}, "reachable"),
-      ),
-    )
-    .concat(
-      (pRuleSet?.required ?? []).filter((pRule) =>
-        Object.hasOwn(pRule?.to ?? {}, "reachable"),
-      ),
-    );
+    .filter(isReachableRule)
+    .concat((pRuleSet?.allowed ?? []).filter(isReachableRule))
+    .concat((pRuleSet?.required ?? []).filter(isReachableRule));
 }
 
 function isModuleInRuleFrom(pRule) {

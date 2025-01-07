@@ -4,7 +4,6 @@
     "input": {
       "fileName": "test/main/__mocks__/cruise-reporterless/metrics/root.js",
       "options": {
-        "forceDeriveDependents": false,
         "metrics": true
       }
     },

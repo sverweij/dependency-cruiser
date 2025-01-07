@@ -76,6 +76,7 @@
       "outputTo": "test/cli/__output__/babel-es6-result.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "webpackConfig": {
         "fileName": "test/cli/__fixtures__/babel/es6/webpack-cache-bust.config.js"

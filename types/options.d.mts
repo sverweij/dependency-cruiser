@@ -227,8 +227,15 @@ export interface ICruiseOptions {
     add: string[];
   };
   /**
-   * When true includes denormalized dependents in the cruise-result, even
-   * though there's no rule in the rule set that requires them. Defaults to false.
+   * @deprecated
+   *
+   * Hasn't had any effect on dependency-cruiser's behaviour since a few major
+   * versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules`
+   * option in stead.
+   *
+   * Previously documented behavior:
+   * > When true includes denormalized dependents in the cruise-result, even
+   * > though there's no rule in the rule set that requires them. Defaults to false.
    */
   forceDeriveDependents?: boolean;
   /**
@@ -383,12 +390,25 @@ export interface ICruiseOptions {
   metrics?: boolean;
 
   /**
-   * When this flag is set to true, dependency-cruiser will calculate some " +
-   * stats for each module. Has some performance impact. EXPERIMENTAL " +
-   * Will be renamed when the 'experimental' state is lifted." +
-   * Defaults to false.",*
+   * When this flag is set to true, dependency-cruiser will calculate some
+   * stats for each module. Has some performance impact. EXPERIMENTAL
+   * Will be renamed when the 'experimental' state is lifted.
+   *
+   * Defaults to false.
    */
   experimentalStats?: boolean;
+
+  /**
+   * When this flag is set to true, dependency-cruiser will skip all analysis
+   * that don't serve a rule. E.g. if there's no 'circular' rule in the rule set
+   * it won't analyse cycles. This flag affects cycle, dependents, orphan, and
+   * reachability analysis. If you have a rule set that doesn't use one of these
+   * features, switching it to true will make cruises faster.
+   *
+   * Defaults to false for backwards compatibility - for most uses of
+   * dependency-cruiser we recommend to switch this option to true, though.
+   */
+  skipAnalysisNotInRules?: boolean;
 
   /**
    * - false: don't use caching.

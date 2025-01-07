@@ -2,7 +2,7 @@ import { deepEqual } from "node:assert/strict";
 
 import getDependents from "#enrich/derive/dependents/get-dependents.mjs";
 
-describe("[U] enrich/derive/dependents/get-dependents", () => {
+describe("[U] enrich/derive/dependents - get-dependents", () => {
   it("empty module without a source name & no modules yield no modules", () => {
     deepEqual(getDependents({}, []), []);
   });

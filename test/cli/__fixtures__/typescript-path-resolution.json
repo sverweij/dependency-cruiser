@@ -84,6 +84,7 @@
       "outputTo": "test/cli/__output__/typescript-path-resolution.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "tsConfig": {
         "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/tsconfig.json"

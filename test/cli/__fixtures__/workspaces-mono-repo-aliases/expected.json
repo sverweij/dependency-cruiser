@@ -223,6 +223,7 @@
       "outputType": "json",
       "preserveSymlinks": false,
       "rulesFile": ".dependency-cruiser.js",
+      "skipAnalysisNotInRules": false,
       "tsConfig": {
         "fileName": "tsconfig.json"
       },

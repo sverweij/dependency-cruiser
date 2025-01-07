@@ -1034,7 +1034,8 @@
         },
         "forceDeriveDependents": {
           "type": "boolean",
-          "description": "When true includes de-normalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
+          "deprecated": true,
+          "description": "Hasn't had any effect on dependency-cruiser's behaviour since a few major versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules` option in stead.Previously documented behaviour: When true includes de-normalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
         },
         "webpackConfig": {
           "type": "object",
@@ -1147,6 +1148,7 @@
           "description": "When this flag is set to true, dependency-cruiser will calculate (stability) metrics for all modules and folders. Defaults to false."
         },
         "experimentalStats": { "type": "boolean" },
+        "skipAnalysisNotInRules": { "type": "boolean" },
         "baseDir": {
           "type": "string",
           "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."

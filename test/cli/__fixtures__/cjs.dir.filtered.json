@@ -371,6 +371,7 @@
       "outputTo": "test/cli/__output__/cjs.dir.filtered.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "test/cli/__fixtures__/cjs"
     }
