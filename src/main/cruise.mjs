@@ -18,7 +18,7 @@ export default async function cruise(
   pResolveOptions,
   pTranspileOptions,
 ) {
-  bus.summary("parsing options", c(1));
+  bus.summary("parse options", c(1));
   const lCruiseOptionsValid = assertCruiseOptionsValid(pCruiseOptions);
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
@@ -29,7 +29,7 @@ export default async function cruise(
 
   if (lCruiseOptions.cache) {
     bus.summary(
-      `cache: checking freshness with ${lCruiseOptions.cache.strategy}`,
+      `cache: check freshness with ${lCruiseOptions.cache.strategy}`,
       c(2),
     );
 
@@ -41,12 +41,12 @@ export default async function cruise(
     const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
     if (await lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
-      bus.summary("cache: reporting from cache", c(8));
+      bus.summary("cache: report from cache", c(8));
       return await reportWrap(lCachedResults, lCruiseOptions);
     }
   }
 
-  bus.summary("importing analytical modules", c(3));
+  bus.summary("import analytical modules", c(3));
   const [
     { default: normalizeRuleSet },
     { default: assertRuleSetValid },
@@ -66,7 +66,7 @@ export default async function cruise(
   ]);
 
   if (lCruiseOptions.ruleSet) {
-    bus.summary("parsing rule set", c(4));
+    bus.summary("parse rule set", c(4));
     lCruiseOptions.ruleSet = normalizeRuleSet(
       assertRuleSetValid(lCruiseOptions.ruleSet),
     );
@@ -76,14 +76,14 @@ export default async function cruise(
     pFileAndDirectoryArray,
   );
 
-  bus.summary("determining how to resolve", c(5));
+  bus.summary("determine how to resolve", c(5));
   const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig,
   );
 
-  bus.summary("reading files", c(6));
+  bus.summary("read files", c(6));
   const lExtractionResult = extract(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
@@ -91,7 +91,7 @@ export default async function cruise(
     pTranspileOptions,
   );
 
-  bus.summary("analyzing", c(7));
+  bus.summary("analyze", c(7));
   const lCruiseResult = enrich(
     lExtractionResult,
     lCruiseOptions,
@@ -99,10 +99,10 @@ export default async function cruise(
   );
 
   if (lCruiseOptions.cache) {
-    bus.summary("cache: saving", c(8));
+    bus.summary("cache: save", c(8));
     await lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
   }
 
-  bus.summary("reporting", c(9));
+  bus.summary("report", c(9));
   return await reportWrap(lCruiseResult, lCruiseOptions);
 }

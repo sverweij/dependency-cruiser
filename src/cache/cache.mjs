@@ -87,7 +87,7 @@ export default class Cache {
         },
       ));
     this.#revisionData.cacheFormatVersion = CACHE_FORMAT_VERSION;
-    bus.debug("cache: - comparing");
+    bus.debug("cache: - compare");
     return (
       this.cacheFormatVersionCompatible(pCachedCruiseResult) &&
       this.#cacheStrategy.revisionDataEqual(

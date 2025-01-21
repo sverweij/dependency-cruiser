@@ -1,6 +1,7 @@
 import enrichModules from "./enrich-modules.mjs";
 import aggregateToFolders from "./derive/folders/index.mjs";
 import summarize from "./summarize/index.mjs";
+import { bus } from "#utl/bus.mjs";
 
 /**
  * Enriches the passed modules with things like cycle detection, validations,
@@ -17,8 +18,10 @@ import summarize from "./summarize/index.mjs";
  */
 export default function enrich(pModules, pOptions, pFileAndDirectoryArray) {
   const lModules = enrichModules(pModules, pOptions);
+  bus.info("analyze: aggregate to folders");
   const lFolders = aggregateToFolders(lModules, pOptions);
 
+  bus.info("analyze: summary");
   const lReturnValue = {
     modules: lModules,
     ...lFolders,
@@ -26,7 +29,7 @@ export default function enrich(pModules, pOptions, pFileAndDirectoryArray) {
       lModules,
       pOptions,
       pFileAndDirectoryArray,
-      lFolders.folders
+      lFolders.folders,
     ),
   };
 

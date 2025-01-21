@@ -82,7 +82,7 @@ export default function findContentChanges(
   pCachedCruiseResult,
   pOptions,
 ) {
-  bus.debug("cache: - getting revision data");
+  bus.debug("cache: - get revision data");
   const lFileSet = new Set(
     findAllFiles(pDirectory, {
       baseDir: pOptions.baseDir,
@@ -91,12 +91,12 @@ export default function findContentChanges(
     }).filter(hasInterestingExtension(pOptions.extensions)),
   );
 
-  bus.debug("cache: - getting (cached - new)");
+  bus.debug("cache: - get (cached - new)");
   const lDiffCachedVsNew = pCachedCruiseResult.modules.map(
     diffCachedModuleAgainstFileSet(lFileSet, pOptions.baseDir),
   );
 
-  bus.debug("cache: - getting (new - cached)");
+  bus.debug("cache: - get (new - cached)");
   lDiffCachedVsNew.forEach(({ name }) => lFileSet.delete(name));
 
   const lDiffNewVsCached = [];
@@ -108,6 +108,6 @@ export default function findContentChanges(
     });
   }
 
-  bus.debug("cache: - returning revision data");
+  bus.debug("cache: - return revision data");
   return lDiffCachedVsNew.concat(lDiffNewVsCached);
 }

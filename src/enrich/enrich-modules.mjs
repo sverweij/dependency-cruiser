@@ -17,7 +17,7 @@ import { bus } from "#utl/bus.mjs";
  * @returns {IModule[]}
  */
 export default function enrichModules(pModules, pOptions) {
-  bus.info("analyzing: cycles");
+  bus.info("analyze: cycles");
   const lIndexedModules = new IndexedModuleGraph(pModules);
   let lModules = deriveCycles(pModules, lIndexedModules, {
     pSourceAttribute: "source",
@@ -25,21 +25,21 @@ export default function enrichModules(pModules, pOptions) {
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,
     pRuleSet: pOptions.ruleSet,
   });
-  bus.info("analyzing: dependents");
+  bus.info("analyze: dependents");
   lModules = addDependents(lModules, pOptions);
-  bus.info("analyzing: orphans");
+  bus.info("analyze: orphans");
   lModules = deriveOrphans(lModules, pOptions);
-  bus.info("analyzing: reachables");
+  bus.info("analyze: reachables");
   lModules = deriveReachable(lModules, pOptions.ruleSet);
-  bus.info("analyzing: module metrics");
+  bus.info("analyze: module metrics");
   lModules = deriveModuleMetrics(lModules, pOptions);
-  bus.info("analyzing: focus");
+  bus.info("analyze: focus");
   lModules = addFocus(lModules, pOptions.focus);
 
   // when validate === false we might want to skip the addValidations.
   // We don't at this time, however, as "valid" is a mandatory
   // attribute (to simplify reporter logic)
-  bus.info("analyzing: validations");
+  bus.info("analyze: validations");
   lModules = addValidations(lModules, pOptions.ruleSet, pOptions.validate);
 
   lModules = softenKnownViolations(lModules, pOptions.knownViolations);

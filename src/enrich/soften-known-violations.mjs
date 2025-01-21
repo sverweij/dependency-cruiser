@@ -117,7 +117,7 @@ export default function softenKnownViolations(
   pSoftenedSeverity = "ignore",
 ) {
   if (pKnownViolations) {
-    bus.info("analyzing: comparing against known errors");
+    bus.info("analyze: compare to known errors");
     return pModules.map((pModule) =>
       softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity),
     );
