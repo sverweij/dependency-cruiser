@@ -33,6 +33,21 @@ describe("[U] extract/resolve/is-built-in - isBuiltIn", () => {
     equal(lResult, true);
   });
 
+  it("should override default built-ins with custom built-ins", () => {
+    const lModuleName = "overridden";
+    const lResolveOptions = {
+      builtInModules: {
+        override: [lModuleName],
+      },
+    };
+
+    const lResultOverridden = isBuiltin(lModuleName, lResolveOptions);
+    const lResultForFs = isBuiltin("fs", lResolveOptions);
+
+    equal(lResultOverridden, true);
+    equal(lResultForFs, false);
+  });
+
   it("should override default built-ins with custom built-ins if both are provided", () => {
     const lModuleName = "overridden";
     const lResolveOptions = {

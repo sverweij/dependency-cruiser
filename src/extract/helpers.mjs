@@ -42,15 +42,18 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
  * @param {string} pString
  * @returns {{module:string; protocol?:string; mimeType?:string}}
  */
+// eslint-disable-next-line complexity
 export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex
-    /^(?<protocol>node:|file:|data:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,
+    /^(?<protocol>node:|file:|data:|bun:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,
   );
 
   if (lModuleAttributes?.groups) {
-    lReturnValue.module = lModuleAttributes?.groups.module;
+    lReturnValue.module =
+      String(lModuleAttributes?.groups?.protocol ?? "") +
+      lModuleAttributes?.groups.module;
     if (lModuleAttributes?.groups?.protocol) {
       lReturnValue.protocol = lModuleAttributes.groups.protocol;
     }

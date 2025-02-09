@@ -10,8 +10,15 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("extracts the protocol if there is one", () => {
     deepEqual(extractModuleAttributes("node:fs"), {
-      module: "fs",
+      module: "node:fs",
       protocol: "node:",
+    });
+  });
+
+  it("extracts the protocol if there is one (bun)", () => {
+    deepEqual(extractModuleAttributes("bun:ffi"), {
+      module: "bun:ffi",
+      protocol: "bun:",
     });
   });
 
@@ -29,7 +36,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("extracts both protocol and mimeType when they're in the URI", () => {
     deepEqual(extractModuleAttributes("data:application/json,gegevens.json"), {
-      module: "gegevens.json",
+      module: "data:gegevens.json",
       protocol: "data:",
       mimeType: "application/json",
     });
@@ -37,7 +44,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("handles emtpy mimeTypes gracefulley", () => {
     deepEqual(extractModuleAttributes("data:,gegevens.json"), {
-      module: ",gegevens.json",
+      module: "data:,gegevens.json",
       protocol: "data:",
     });
   });
@@ -50,7 +57,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("when protocol separator is mistyped, returns it as part of the module name", () => {
     deepEqual(extractModuleAttributes("data:application/json;gegevens.json"), {
-      module: "application/json;gegevens.json",
+      module: "data:application/json;gegevens.json",
       protocol: "data:",
     });
   });
