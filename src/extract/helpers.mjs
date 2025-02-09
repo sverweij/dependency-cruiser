@@ -42,6 +42,7 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
  * @param {string} pString
  * @returns {{module:string; protocol?:string; mimeType?:string}}
  */
+// eslint-disable-next-line complexity
 export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
