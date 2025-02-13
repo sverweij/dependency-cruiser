@@ -10,19 +10,33 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("extracts the protocol if there is one", () => {
     deepEqual(extractModuleAttributes("node:fs"), {
-      module: "node:fs",
+      module: "fs",
       protocol: "node:",
     });
   });
 
   it("extracts the protocol if there is one (bun)", () => {
+    deepEqual(extractModuleAttributes("bun:fs"), {
+      module: "fs",
+      protocol: "bun:",
+    });
+  });
+
+  it("extracts the protocol if there is one and leaves protocol in the name if no protocol-less variant exists (node)", () => {
+    deepEqual(extractModuleAttributes("node:sea"), {
+      module: "node:sea",
+      protocol: "node:",
+    });
+  });
+
+  it("extracts the protocol if there is one and leaves protocol in the name if no protocol-less variant exists (bun)", () => {
     deepEqual(extractModuleAttributes("bun:ffi"), {
       module: "bun:ffi",
       protocol: "bun:",
     });
   });
 
-  it("leaves things alone the protocol is unknown", () => {
+  it("leaves things alone when the protocol is unknown", () => {
     deepEqual(extractModuleAttributes("nod:fs"), {
       module: "nod:fs",
     });

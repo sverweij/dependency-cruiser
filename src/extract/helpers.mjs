@@ -28,6 +28,37 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
   );
 }
 
+const PROTOCOL_ONLY_BUILTINS = new Set([
+  // module.builtinModules.filter(m=>m.startsWith('node:'))
+  "node:sea",
+  "node:sqlite",
+  "node:test",
+  "node:test/reporters",
+  // module.builtinModules.filter(m=>m.startsWith('bun:'))
+  "bun:ffi",
+  "bun:jsc",
+  "bun:sqlite",
+  "bun:test",
+  "bun:wrap",
+]);
+
+/**
+ * Given a module name returns the canonical module name.
+ * @param {string} pProtocol
+ * @param {string} pModuleName
+ * @returns {string}
+ */
+function getCanonicalModuleName(pModuleName, pProtocol) {
+  const lModuleWithProtocol = pProtocol + pModuleName;
+  const lIsJsIshModule = pProtocol === "node:" || pProtocol === "bun:";
+  const lIsProtocolOnlyModule = PROTOCOL_ONLY_BUILTINS.has(lModuleWithProtocol);
+
+  if (!lIsJsIshModule || lIsProtocolOnlyModule) {
+    return lModuleWithProtocol;
+  }
+  return pModuleName;
+}
+
 /**
  * Given a module string returns in an object
  * - the module name
@@ -51,9 +82,10 @@ export function extractModuleAttributes(pString) {
   );
 
   if (lModuleAttributes?.groups) {
-    lReturnValue.module =
-      String(lModuleAttributes?.groups?.protocol ?? "") +
-      lModuleAttributes?.groups.module;
+    lReturnValue.module = getCanonicalModuleName(
+      lModuleAttributes?.groups.module,
+      lModuleAttributes?.groups.protocol,
+    );
     if (lModuleAttributes?.groups?.protocol) {
       lReturnValue.protocol = lModuleAttributes.groups.protocol;
     }
@@ -80,6 +112,7 @@ export function stripQueryParameters(pFilenameString) {
   // deprecated, hence this funky RE replace. And accompanying unit test :-/
   return pFilenameString.replace(/\?.+$/, "");
 }
+
 /**
  * Returns true if the file name has a TypeScript compatible extension
  * @param {string} pFileName
