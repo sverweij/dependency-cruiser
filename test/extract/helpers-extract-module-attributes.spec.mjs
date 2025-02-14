@@ -15,7 +15,28 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
     });
   });
 
-  it("leaves things alone the protocol is unknown", () => {
+  it("extracts the protocol if there is one (bun)", () => {
+    deepEqual(extractModuleAttributes("bun:fs"), {
+      module: "fs",
+      protocol: "bun:",
+    });
+  });
+
+  it("extracts the protocol if there is one and leaves protocol in the name if no protocol-less variant exists (node)", () => {
+    deepEqual(extractModuleAttributes("node:sea"), {
+      module: "node:sea",
+      protocol: "node:",
+    });
+  });
+
+  it("extracts the protocol if there is one and leaves protocol in the name if no protocol-less variant exists (bun)", () => {
+    deepEqual(extractModuleAttributes("bun:ffi"), {
+      module: "bun:ffi",
+      protocol: "bun:",
+    });
+  });
+
+  it("leaves things alone when the protocol is unknown", () => {
     deepEqual(extractModuleAttributes("nod:fs"), {
       module: "nod:fs",
     });
@@ -29,7 +50,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("extracts both protocol and mimeType when they're in the URI", () => {
     deepEqual(extractModuleAttributes("data:application/json,gegevens.json"), {
-      module: "gegevens.json",
+      module: "data:gegevens.json",
       protocol: "data:",
       mimeType: "application/json",
     });
@@ -37,7 +58,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("handles emtpy mimeTypes gracefulley", () => {
     deepEqual(extractModuleAttributes("data:,gegevens.json"), {
-      module: ",gegevens.json",
+      module: "data:,gegevens.json",
       protocol: "data:",
     });
   });
@@ -50,7 +71,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("when protocol separator is mistyped, returns it as part of the module name", () => {
     deepEqual(extractModuleAttributes("data:application/json;gegevens.json"), {
-      module: "application/json;gegevens.json",
+      module: "data:application/json;gegevens.json",
       protocol: "data:",
     });
   });

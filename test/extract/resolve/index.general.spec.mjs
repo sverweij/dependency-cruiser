@@ -74,11 +74,13 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves the 'test'  core module as core module", () => {
+  it("resolves the 'node:test'  core module as core module", () => {
+    // 'test' is not a core module. node:test is and it's not an alias or something for 'test'
+    // issue is the same in bun with bun:test
     deepEqual(
       resolve(
         {
-          module: "test",
+          module: "node:test",
           moduleSystem: "es6",
         },
         join(__dirname, "__mocks__"),
@@ -90,7 +92,7 @@ describe("[I] extract/resolve/index - general", () => {
         couldNotResolve: false,
         dependencyTypes: ["core"],
         followable: false,
-        resolved: "test",
+        resolved: "node:test",
       },
     );
   });

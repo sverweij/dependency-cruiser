@@ -28,6 +28,37 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
   );
 }
 
+const PROTOCOL_ONLY_BUILTINS = new Set([
+  // module.builtinModules.filter(m=>m.startsWith('node:'))
+  "node:sea",
+  "node:sqlite",
+  "node:test",
+  "node:test/reporters",
+  // module.builtinModules.filter(m=>m.startsWith('bun:'))
+  "bun:ffi",
+  "bun:jsc",
+  "bun:sqlite",
+  "bun:test",
+  "bun:wrap",
+]);
+
+/**
+ * Given a module name returns the canonical module name.
+ * @param {string} pProtocol
+ * @param {string} pModuleName
+ * @returns {string}
+ */
+function getCanonicalModuleName(pModuleName, pProtocol) {
+  const lModuleWithProtocol = pProtocol + pModuleName;
+  const lIsJsIshProtocol = pProtocol === "node:" || pProtocol === "bun:";
+  const lIsProtocolOnlyModule = PROTOCOL_ONLY_BUILTINS.has(lModuleWithProtocol);
+
+  if (!lIsJsIshProtocol || lIsProtocolOnlyModule) {
+    return lModuleWithProtocol;
+  }
+  return pModuleName;
+}
+
 /**
  * Given a module string returns in an object
  * - the module name
@@ -42,15 +73,19 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
  * @param {string} pString
  * @returns {{module:string; protocol?:string; mimeType?:string}}
  */
+// eslint-disable-next-line complexity
 export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex
-    /^(?<protocol>node:|file:|data:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,
+    /^(?<protocol>node:|file:|data:|bun:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,
   );
 
   if (lModuleAttributes?.groups) {
-    lReturnValue.module = lModuleAttributes?.groups.module;
+    lReturnValue.module = getCanonicalModuleName(
+      lModuleAttributes?.groups.module,
+      lModuleAttributes?.groups.protocol,
+    );
     if (lModuleAttributes?.groups?.protocol) {
       lReturnValue.protocol = lModuleAttributes.groups.protocol;
     }
@@ -77,6 +112,7 @@ export function stripQueryParameters(pFilenameString) {
   // deprecated, hence this funky RE replace. And accompanying unit test :-/
   return pFilenameString.replace(/\?.+$/, "");
 }
+
 /**
  * Returns true if the file name has a TypeScript compatible extension
  * @param {string} pFileName
