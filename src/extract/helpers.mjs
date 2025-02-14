@@ -50,10 +50,10 @@ const PROTOCOL_ONLY_BUILTINS = new Set([
  */
 function getCanonicalModuleName(pModuleName, pProtocol) {
   const lModuleWithProtocol = pProtocol + pModuleName;
-  const lIsJsIshModule = pProtocol === "node:" || pProtocol === "bun:";
+  const lIsJsIshProtocol = pProtocol === "node:" || pProtocol === "bun:";
   const lIsProtocolOnlyModule = PROTOCOL_ONLY_BUILTINS.has(lModuleWithProtocol);
 
-  if (!lIsJsIshModule || lIsProtocolOnlyModule) {
+  if (!lIsJsIshProtocol || lIsProtocolOnlyModule) {
     return lModuleWithProtocol;
   }
   return pModuleName;
