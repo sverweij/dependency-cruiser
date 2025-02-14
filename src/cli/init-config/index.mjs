@@ -16,6 +16,7 @@ import {
   getDefaultConfigFileName,
   hasJSConfigCandidates,
   getJSConfigCandidates,
+  likelyUsesBun,
   isTypeModule,
 } from "./environment-helpers.mjs";
 import { writeRunScriptsToManifest } from "./write-run-scripts-to-manifest.mjs";
@@ -50,6 +51,7 @@ function getOneShotConfig(pOneShotConfigId) {
     useBabelConfig: hasBabelConfigCandidates(),
     babelConfig: getBabelConfigCandidates().shift(),
     specifyResolutionExtensions: true,
+    usesBun: likelyUsesBun(),
   };
   /** @type {Map<OneShotConfigIDType, IPartialInitConfig>} */
   const lOneShotConfigs = new Map([

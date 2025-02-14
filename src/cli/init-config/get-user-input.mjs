@@ -16,6 +16,7 @@ import {
   getBabelConfigCandidates,
   hasWebpackConfigCandidates,
   getWebpackConfigCandidates,
+  likelyUsesBun,
 } from "./environment-helpers.mjs";
 import { validateLocation } from "./validators.mjs";
 import { isAvailable as tscIsAvailable } from "#extract/tsc/parse.mjs";
@@ -145,6 +146,12 @@ const QUESTIONS = [
     type: (_, pAnswers) => (pAnswers.useWebpackConfig ? "select" : false),
     message: "Full path to your webpack config:",
     choices: getWebpackConfigCandidates().map(toPromptChoice),
+  },
+  {
+    name: "usesBun",
+    type: () => (likelyUsesBun() ? "confirm" : false),
+    message: "It looks like this project uses bun. Is that correct?",
+    initial: true,
   },
 ];
 

@@ -1499,6 +1499,9 @@ In contexts that are not nodejs this might be not (entirely) right:
 - when targeting a platform built on top of nodejs, like electron, you might
   want to specify the packages built into that platform as built-in/ core
   as well.
+- when targeting a platform that is compatible with nodejs, but extends it
+  (e.g. bun) - you might want to add the packages it adds. If `--init`, during
+  setup, detects you're using bun, it'll add the bun builtins with this option.
 
 To override the default behaviour you can pass a `builtInModules` object in
 the options section of your dependency-cruiser configuration. The object has two

@@ -314,8 +314,7 @@ module.exports = {
          Only works when the 'exportsFields' array is non-empty.
       */
       conditionNames: ["import", "require", "node", "default", "types"],
-      /*
-         The extensions, by default are the same as the ones dependency-cruiser
+      /* The extensions, by default are the same as the ones dependency-cruiser
          can access (run \`npx depcruise --info\` to see which ones that are in
          _your_ environment). If that list is larger than you need you can pass
          the extensions you actually use (e.g. [".js", ".jsx"]). This can speed
@@ -324,26 +323,25 @@ module.exports = {
       {{extensionsAttribute}}
       /* What to consider a 'main' field in package.json */
       {{mainFieldsAttribute}}
-      /*
-         A list of alias fields in package.jsons
+      /* A list of alias fields in package.jsons
+        
          See [this specification](https://github.com/defunctzombie/package-browser-field-spec) and
          the webpack [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
-         documentation 
+         documentation.
          
          Defaults to an empty array (= don't use alias fields).
        */
       // aliasFields: ["browser"],
     },
 
-    /*
-      skipAnalysisNotInRules will make dependency-cruiser execute 
-      analysis strictly necessary for checking the rule set only. 
+    /* skipAnalysisNotInRules will make dependency-cruiser execute 
+       analysis strictly necessary for checking the rule set only. 
 
-      See https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#skipanalysisnotinrules
-      for details
+       See https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#skipanalysisnotinrules
+       for details
      */
     skipAnalysisNotInRules: true,
-
+    {{builtInModulesAttribute}}
     reporterOptions: {
       dot: {
         /* pattern of modules that can be consolidated in the detailed
@@ -369,9 +367,9 @@ module.exports = {
       },
       archi: {
         /* pattern of modules that can be consolidated in the high level
-          graphical dependency graph. If you use the high level graphical
-          dependency graph reporter (\`archi\`) you probably want to tweak
-          this collapsePattern to your situation.
+           graphical dependency graph. If you use the high level graphical
+           dependency graph reporter (\`archi\`) you probably want to tweak
+           this collapsePattern to your situation.
         */
         collapsePattern: '^(?:packages|src|lib(s?)|app(s?)|bin|test(s?)|spec(s?))/[^/]+|node_modules/(?:@[^/]+/[^/]+|[^/]+)',
 
