@@ -150,7 +150,7 @@ const QUESTIONS = [
   {
     name: "usesBun",
     type: () => (likelyUsesBun() ? "confirm" : false),
-    message: "It looks like this project uses bun. Is that correct?",
+    message: "Looks like you're using bun. Detect its builtins?",
     initial: true,
   },
 ];
