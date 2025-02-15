@@ -10,8 +10,8 @@ jobs:
       - uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          days-before-stale: 9
-          days-before-close: 3
+          days-before-stale: 16
+          days-before-close: 6
           stale-issue-message: "This issue has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs."
           stale-issue-label: "stale"
           exempt-issue-labels: "bug,enhancement,good first issue,needs_fix_upstream,PR welcome,question"
