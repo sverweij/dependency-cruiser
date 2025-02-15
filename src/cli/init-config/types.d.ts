@@ -100,6 +100,10 @@ export interface IInitConfig {
    * (Formatted) date this config is created
    */
   date: string;
+  /**
+   * bun is used as package manager cq runtime
+   */
+  usesBun: boolean;
 }
 
 export type IPartialInitConfig = Partial<IInitConfig>;

@@ -161,6 +161,36 @@ function buildMainFieldsAttribute(pInitOptions) {
 }
 
 /**
+ * @param {IInitConfig} pInitOptions
+ * @returns {string}
+ */
+function buildBuiltInModulesAttribute(pInitOptions) {
+  if (pInitOptions.usesBun) {
+    return `
+    /* List of built-in modules to use on top of the ones node declares.
+
+       See https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#builtinmodules-influencing-what-to-consider-built-in--core-modules
+       for details
+    */
+    builtInModules: { 
+      add: [
+        "bun",
+        "bun:ffi",
+        "bun:jsc",
+        "bun:sqlite",
+        "bun:test",
+        "bun:wrap",
+        "detect-libc",
+        "undici",
+        "ws"
+      ]
+    },
+`;
+  }
+  return "";
+}
+
+/**
  * Creates a .dependency-cruiser config with a set of basic validations
  * to the current directory.
  *
@@ -202,6 +232,10 @@ export default function buildConfig(pInitOptions) {
     .replace(
       "{{babelConfigAttribute}}",
       buildBabelConfigAttribute(pInitOptions),
+    )
+    .replace(
+      "{{builtInModulesAttribute}}",
+      buildBuiltInModulesAttribute(pInitOptions),
     )
     .replace("{{extensionsAttribute}}", buildExtensionsAttribute(pInitOptions))
     .replace("{{mainFieldsAttribute}}", buildMainFieldsAttribute(pInitOptions))

@@ -99,6 +99,30 @@ export function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
   return pFolderNames.includes("packages");
 }
 
+function getPackageManager(pManifest) {
+  let lReturnValue = "";
+  try {
+    const lManifest = pManifest ?? readManifest();
+    if (Object.hasOwn(lManifest, "packageManager")) {
+      lReturnValue = lManifest.packageManager;
+    }
+  } catch (pError) {
+    // silently ignore - we'll return the empty string anyway then
+  }
+  return lReturnValue;
+}
+
+/**
+ * @param {Record<string,any>} pManifest
+ * @returns {boolean}
+ */
+export function likelyUsesBun(pManifest) {
+  const bunIsPackageManager = getPackageManager(pManifest).startsWith("bun");
+  return (
+    bunIsPackageManager || fileExists("bun.lockb") || fileExists("bunfig.toml")
+  );
+}
+
 export function hasTestsWithinSource(pTestLocations, pSourceLocations) {
   return pTestLocations.every((pTestLocation) =>
     pSourceLocations.includes(pTestLocation),

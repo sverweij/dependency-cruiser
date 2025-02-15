@@ -10,13 +10,13 @@ import buildConfig from "#cli/init-config/build-config.mjs";
 import normalizeInitOptions from "#cli/init-config/normalize-init-options.mjs";
 
 const ajv = new Ajv();
+const RANDOM_TMP_FILENAME_LENGTH = 10;
 
 const createConfigNormalized = async (pInitOptions) => {
   const lConfigAsString = buildConfig(normalizeInitOptions(pInitOptions));
-  const lFileNameLength = 10;
   let lTemporaryFileName = join(
     tmpdir(),
-    `${randomBytes(lFileNameLength).toString("hex")}.cjs`,
+    `${randomBytes(RANDOM_TMP_FILENAME_LENGTH).toString("hex")}.cjs`,
   );
   writeFileSync(lTemporaryFileName, lConfigAsString, "utf8");
   const lConfigAsModule = await import(`file:///${lTemporaryFileName}`);
@@ -125,6 +125,24 @@ describe("[I] cli/init-config/build-config", () => {
       "main",
       "types",
       "typings",
+    ]);
+  });
+
+  it("generates a builtins property with additional bun builtins when we use bun", async () => {
+    const lResult = await createConfigNormalized({ usesBun: true });
+
+    ajv.validate(configurationSchema, lResult);
+    ok(lResult.hasOwnProperty("options"));
+    deepEqual(lResult.options.builtInModules.add, [
+      "bun",
+      "bun:ffi",
+      "bun:jsc",
+      "bun:sqlite",
+      "bun:test",
+      "bun:wrap",
+      "detect-libc",
+      "undici",
+      "ws",
     ]);
   });
 });

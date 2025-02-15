@@ -3,6 +3,7 @@ import {
   isLikelyMonoRepo,
   hasTestsWithinSource,
   getFolderCandidates,
+  likelyUsesBun,
 } from "#cli/init-config/environment-helpers.mjs";
 
 describe("[U] cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
@@ -57,5 +58,28 @@ describe("[U] cli/init-config/environment-helpers - getFolderCandidates", () => 
     const lRealFolders = ["src", "lib", "node_modules"];
 
     deepEqual(getFolderCandidates(lCandidates)(lRealFolders), ["src"]);
+  });
+});
+
+describe("[U] cli/init-config/environment-helpers - likelyUsesBun ", () => {
+  const WORKINGDIR = process.cwd();
+
+  afterEach("tear down", () => {
+    process.chdir(WORKINGDIR);
+  });
+  it("returns false when there's no sign of bun", () => {
+    equal(likelyUsesBun({}), false);
+  });
+
+  it("returns true when bun is the package manager", () => {
+    equal(likelyUsesBun({ packageManager: "bun@4.8.1" }), true);
+  });
+  it("returns true when there's a bun lockfile (bun.lockb)", () => {
+    process.chdir("test/cli/init-config/__fixtures__/bun-lockfile");
+    equal(likelyUsesBun({}), true);
+  });
+  it("returns true when there's a bun config file (bunfig.toml)", () => {
+    process.chdir("test/cli/init-config/__fixtures__/bun-config");
+    equal(likelyUsesBun({}), true);
   });
 });
