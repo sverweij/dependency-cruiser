@@ -139,13 +139,11 @@ describe("[I] transpile/wrapper", () => {
   });
 
   it("returns the 'svelte' wrapper for svelte even when the babel config is not empty", () => {
-    ok(
-      getWrapper(".svelte", {
-        babelConfig: { babelrc: false },
-      })
-        .transpile("")
-        .toString()
-        .includes('import * as $ from "svelte/internal/client";'),
-    );
+    const lTheThing = getWrapper(".svelte", {
+      babelConfig: { babelrc: false },
+    })
+      .transpile("")
+      .toString();
+    ok(lTheThing.includes("import * as $ from 'svelte/internal/client';"));
   });
 });
