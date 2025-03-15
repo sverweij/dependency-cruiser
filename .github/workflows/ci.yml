@@ -70,7 +70,7 @@ jobs:
         # run: npm run test:cover
         run: |
           find node_modules/@swc
-          node -e "console.dir(require('@swc/core'))"
+          # node -e "console.dir(require('@swc/core'))"
           npm test
       # - name: emit coverage results & depcruise result to step summary
       #   if: always() && matrix.node-version == env.NODE_LATEST
