@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import memoize, { memoizeClear } from "memoize";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
@@ -7,7 +8,7 @@ import meta from "#meta.cjs";
  */
 
 /** @type {swcCore} */
-const swc = await tryImport("@swc/core", meta.supportedTranspilers.swc);
+const swc = await tryImport("@swc/wasm", meta.supportedTranspilers.swc);
 
 /** @type {ParseOptions} */
 const SWC_PARSE_OPTIONS = {
@@ -27,7 +28,9 @@ export function getASTFromSource(pSource) {
 
 function getAST(pFileName) {
   /** @type {swcCore swc} */
-  return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
+  const lSource = readFileSync(pFileName, "utf8");
+  return getASTFromSource(lSource);
+  // return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
 /**

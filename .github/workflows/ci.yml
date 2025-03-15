@@ -39,12 +39,12 @@ jobs:
       #   with:
       #     fetch-depth: 1
       #   if: github.event_name != 'pull_request' || matrix.node-version != env.NODE_LATEST
-      # - uses: actions/cache@v4
-      #   with:
-      #     path: node_modules
-      #     key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package-lock.json')}}
-      #     restore-keys: |
-      #       ${{matrix.node-version}}@${{matrix.platform}}-build-
+      - uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package-lock.json')}}
+          restore-keys: |
+            ${{matrix.node-version}}@${{matrix.platform}}-build-
       - uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
