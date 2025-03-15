@@ -235,6 +235,7 @@
     "@eslint/eslintrc": "3.3.0",
     "@eslint/js": "9.22.0",
     "@swc/core": "1.11.9",
+    "@swc/wasm": "1.11.9",
     "@types/node": "22.13.10",
     "@types/prompts": "2.4.9",
     "@typescript-eslint/eslint-plugin": "8.26.1",
