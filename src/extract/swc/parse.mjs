@@ -8,7 +8,9 @@ import meta from "#meta.cjs";
  */
 
 /** @type {swcCore} */
-const swc = await tryImport("@swc/wasm", meta.supportedTranspilers.swc);
+const swc =
+  (await tryImport("@swc/core", meta.supportedTranspilers.swc)) ??
+  (await tryImport("@swc/wasm", meta.supportedTranspilers.swc));
 
 /** @type {ParseOptions} */
 const SWC_PARSE_OPTIONS = {
@@ -54,4 +56,5 @@ export function clearCache() {
 // @ts-expect-error dfdfd
 export const isAvailable = () => swc !== false;
 
-export const version = () => `@swc/core@${swc.version}`;
+export const version = () =>
+  swc.version ? `@swc/core@${swc.version}` : `@swc/wasm`;
