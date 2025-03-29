@@ -37,6 +37,7 @@
    - [rules on dependents - `numberOfDependentsLessThan`](#rules-on-dependents---numberOfDependentsLessThan)
    - [rules on dependents - `numberOfDependentsMoreThan`](#rules-on-dependents---numberOfDependentsMoreThan)
    - [`circular`](#circular)
+   - [`ancestor`](#ancestor)
    - [`license` and `licenseNot`](#license-and-licensenot)
    - [`dependencyTypes` and `dependencyTypesNot`](#dependencytypes-and-dependencytypesnot)
    - [`dynamic`](#dynamic)
@@ -883,6 +884,27 @@ also displays [group matching](#group-matching).
   },
 }
 ```
+
+### `ancestor`
+
+Whether or not to match modules that are in a folder above the folder of the
+module. This can be useful to prevent modules in a 'lower' folder to depend on
+modules in a 'higher' folder.
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: "no-ancestor",
+  comment: "don't allow importing from folders above the current one",
+  severity: "error",
+  from: {},
+  to: { "ancestor": true }
+}
+```
+
+For example, applied to the following dependency graph:
+
+![ancestor](assets/sample-ancestor.svg)
 
 ### `license` and `licenseNot`
 
