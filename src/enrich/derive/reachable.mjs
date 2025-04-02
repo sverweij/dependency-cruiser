@@ -143,11 +143,11 @@ function addReachableToModule(
   pModule,
   pIndexedGraph,
   pReachableRule,
-  pFromModules,
+  pFilteredFromModules,
 ) {
   let lFound = false;
 
-  for (let lFromModule of pFromModules) {
+  for (let lFromModule of pFilteredFromModules) {
     if (
       !lFound &&
       pModule.source !== lFromModule.source &&
