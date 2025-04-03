@@ -139,11 +139,15 @@ function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
   return pModule;
 }
 
-function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
-  const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
+function addReachableToModule(
+  pModule,
+  pIndexedGraph,
+  pReachableRule,
+  pFilteredFromModules,
+) {
   let lFound = false;
 
-  for (let lFromModule of lFromModules) {
+  for (let lFromModule of pFilteredFromModules) {
     if (
       !lFound &&
       pModule.source !== lFromModule.source &&
@@ -164,6 +168,8 @@ function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
 }
 
 function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
+  const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
+
   return pGraph.map((pModule) => {
     let lClonedModule = structuredClone(pModule);
 
@@ -178,9 +184,9 @@ function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
     if (shouldAddReachable(pReachableRule, lClonedModule, pGraph)) {
       lClonedModule = addReachableToModule(
         lClonedModule,
-        pGraph,
         pIndexedGraph,
         pReachableRule,
+        lFromModules,
       );
     }
     return lClonedModule;
