@@ -1,0 +1,6 @@
+name: 'CodeQL config for GitHub actions'
+
+paths:
+  - .github/workflows
+queries:
+  - uses: security-and-quality

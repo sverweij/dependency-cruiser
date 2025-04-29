@@ -8,6 +8,20 @@ on:
 jobs:
   analyze:
     name: CodeQL
+    strategy:
+      fail-fast: false
+      matrix:
+        lingos:
+          [
+            {
+              language: javascript,
+              config-file: ./.github/codeql/codeql-config-javascript.yml,
+            },
+            {
+              language: actions,
+              config-file: ./.github/codeql/codeql-config-actions.yml,
+            },
+          ]
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -18,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
         with:
-          languages: javascript
+          languages: ${{matrix.lingos.language}}
           # See https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-          config-file: ./.github/codeql/codeql-config.yml
+          config-file: ${{matrix.lingos.config-file}}
       - uses: github/codeql-action/analyze@v3

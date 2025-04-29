@@ -1,4 +1,4 @@
-name: 'CodeQL config'
+name: 'CodeQL config for javascript'
 
 paths:
   - bin/
