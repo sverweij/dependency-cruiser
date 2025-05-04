@@ -49,11 +49,23 @@ describe("[U] utl/tryImport", () => {
   });
 
   it("returns false for unresolvable modules", async () => {
-    equal(await tryImport("thispackage-is-not-there", ">=0.0.0"), false);
+    equal(
+      await tryImport("thispackage-is-not-there", {
+        semanticVersion: ">=0.0.0",
+      }),
+      false,
+    );
   });
 
   it("returns the module if it is resolvable", async () => {
-    deepEqual(await tryImport("semver", ">=0.0.0"), semver);
+    deepEqual(
+      await tryImport("semver", { semanticVersion: ">=0.0.0" }),
+      semver,
+    );
+  });
+
+  it("returns the module if it is resolvable (no semanticVersion range provided)", async () => {
+    deepEqual(await tryImport("semver"), semver);
   });
 
   it("returns the module if it is resolvable and doesn't have a default export", async () => {
@@ -61,26 +73,38 @@ describe("[U] utl/tryImport", () => {
   });
 
   it("returns the module if it is resolvable and satisfies specified semver", async () => {
-    deepEqual(await tryImport("semver", ">=5.0.0 <8.0.0"), semver);
+    deepEqual(
+      await tryImport("semver", { semanticVersion: ">=5.0.0 <8.0.0" }),
+      semver,
+    );
   });
 
   it("returns the module if it is resolvable and satisfies specified semver (with rc postfix)", async () => {
-    deepEqual(await tryImport("rc", ">=2.0.0 <4.0.0"), rcMock);
+    deepEqual(
+      await tryImport("rc", { semanticVersion: ">=2.0.0 <4.0.0" }),
+      rcMock,
+    );
   });
 
   it("returns false if it is resolvable but does not satisfy specified semver (with rc postfix)", async () => {
-    equal(await tryImport("rc", ">=2.0.0 <3.0.0"), false);
+    equal(await tryImport("rc", { semanticVersion: ">=2.0.0 <3.0.0" }), false);
   });
 
   it("returns the module if it is resolvable and satisfies specified semver (with beta postfix)", async () => {
-    deepEqual(await tryImport("beta", ">=2.0.0 <4.0.0"), betaMock);
+    deepEqual(
+      await tryImport("beta", { semanticVersion: ">=2.0.0 <4.0.0" }),
+      betaMock,
+    );
   });
 
   it("returns false if it is resolvable but does not satisfy specified semver (with beta postfix)", async () => {
-    equal(await tryImport("beta", ">=2.0.0 <3.0.0"), false);
+    equal(
+      await tryImport("beta", { semanticVersion: ">=2.0.0 <3.0.0" }),
+      false,
+    );
   });
 
   it("returns false if it is resolvable but doesn't satisfy the specified semver", async () => {
-    equal(await tryImport("semver", "<5.0.0"), false);
+    equal(await tryImport("semver", { semanticVersion: "<5.0.0" }), false);
   });
 });

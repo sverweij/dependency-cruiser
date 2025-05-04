@@ -7,7 +7,9 @@ import meta from "#meta.cjs";
  */
 
 /** @type {swcCore} */
-const swc = await tryImport("@swc/core", meta.supportedTranspilers.swc);
+const swc = await tryImport("@swc/core", {
+  semanticVersion: meta.supportedTranspilers.swc,
+});
 
 /** @type {ParseOptions} */
 const SWC_PARSE_OPTIONS = {

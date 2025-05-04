@@ -85,7 +85,9 @@ async function getConfig(pBabelConfigFileName) {
  */
 export default async function extractBabelConfig(pBabelConfigFileName) {
   let lReturnValue = {};
-  const babel = await tryImport("@babel/core", meta.supportedTranspilers.babel);
+  const babel = await tryImport("@babel/core", {
+    semanticVersion: meta.supportedTranspilers.babel,
+  });
 
   if (babel) {
     const lConfig = {

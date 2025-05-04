@@ -4,10 +4,9 @@ import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 /** @type {import('@swc/core/Visitor')} */
-const { Visitor } = await tryImport(
-  "@swc/core/Visitor.js",
-  meta.supportedTranspilers.swc,
-);
+const { Visitor } = await tryImport("@swc/core/Visitor.js", {
+  semanticVersion: meta.supportedTranspilers.swc,
+});
 
 function pryStringsFromArguments(pArguments) {
   let lReturnValue = null;

@@ -6,10 +6,9 @@ import meta from "#meta.cjs";
 import getExtension from "#utl/get-extension.mjs";
 
 /** @type {import('typescript')} */
-const typescript = await tryImport(
-  "typescript",
-  meta.supportedTranspilers.typescript,
-);
+const typescript = await tryImport("typescript", {
+  semanticVersion: meta.supportedTranspilers.typescript,
+});
 
 /**
  * Compiles pTypescriptSource into a (typescript) AST

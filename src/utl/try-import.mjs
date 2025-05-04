@@ -41,19 +41,20 @@ function getVersion(pModuleName) {
  * Tries to import a module and optionally checks its version.
  *
  * @param {string} pModuleName - The name of the module to import.
- * @param {string} [pSemanticVersion] - An semantic version to check against.
+ * @param {object} [pOptions] - Options object.
+ * @param {string} [pOptions.semanticVersion] - An semantic version range to check against.
  * @returns {Promise<NodeModule | false>} - The imported module or false if the import fails or the version does not satisfy the provided semantic version.
  */
 
-export default async function tryImport(pModuleName, pSemanticVersion) {
+export default async function tryImport(pModuleName, pOptions = {}) {
   try {
-    if (pSemanticVersion) {
+    if (pOptions.semanticVersion) {
       const lVersion = getVersion(pModuleName);
       const lCoerced = coerce(lVersion);
       if (
         lVersion &&
         lCoerced &&
-        !satisfies(lCoerced.version, pSemanticVersion)
+        !satisfies(lCoerced.version, pOptions.semanticVersion)
       ) {
         return false;
       }

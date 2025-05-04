@@ -1,10 +1,9 @@
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-const livescript = await tryImport(
-  "livescript",
-  meta.supportedTranspilers.livescript,
-);
+const livescript = await tryImport("livescript", {
+  semanticVersion: meta.supportedTranspilers.livescript,
+});
 
 /* c8 ignore start */
 export default {

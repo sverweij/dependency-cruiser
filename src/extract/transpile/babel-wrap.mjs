@@ -1,7 +1,9 @@
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-const babel = await tryImport("@babel/core", meta.supportedTranspilers.babel);
+const babel = await tryImport("@babel/core", {
+  semanticVersion: meta.supportedTranspilers.babel,
+});
 
 export default {
   isAvailable: () => babel !== false,

@@ -7,17 +7,15 @@ import meta from "#meta.cjs";
  * As long as that is happening: first try coffeescript, then coffee-script.
  */
 async function getCoffeeScriptModule() {
-  let lReturnValue = await tryImport(
-    "coffeescript",
-    meta.supportedTranspilers.coffeescript,
-  );
+  let lReturnValue = await tryImport("coffeescript", {
+    semanticVersion: meta.supportedTranspilers.coffeescript,
+  });
 
   /* c8 ignore start */
   if (lReturnValue === false) {
-    lReturnValue = await tryImport(
-      "coffee-script",
-      meta.supportedTranspilers["coffee-script"],
-    );
+    lReturnValue = await tryImport("coffee-script", {
+      semanticVersion: meta.supportedTranspilers["coffee-script"],
+    });
   }
   /* c8 ignore stop */
   return lReturnValue;

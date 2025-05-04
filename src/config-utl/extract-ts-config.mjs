@@ -2,10 +2,9 @@ import { dirname, resolve } from "node:path";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
-const typescript = await tryImport(
-  "typescript",
-  meta.supportedTranspilers.typescript,
-);
+const typescript = await tryImport("typescript", {
+  semanticVersion: meta.supportedTranspilers.typescript,
+});
 
 const FORMAT_DIAGNOSTICS_HOST = {
   getCanonicalFileName(pFileName) {

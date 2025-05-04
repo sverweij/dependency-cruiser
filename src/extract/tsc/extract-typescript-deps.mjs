@@ -10,10 +10,9 @@ import meta from "#meta.cjs";
  */
 
 /** @type {typescript} */
-const typescript = await tryImport(
-  "typescript",
-  meta.supportedTranspilers.typescript,
-);
+const typescript = await tryImport("typescript", {
+  semanticVersion: meta.supportedTranspilers.typescript,
+});
 
 function isTypeOnlyImport(pStatement) {
   return (
