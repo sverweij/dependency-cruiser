@@ -1,4 +1,4 @@
-import { accessSync, R_OK } from "node:fs";
+import { accessSync, constants } from "node:fs";
 import { relative, join } from "node:path";
 import memoize, { memoizeClear } from "memoize";
 import { isBuiltin } from "./is-built-in.mjs";
@@ -6,7 +6,7 @@ import pathToPosix from "#utl/path-to-posix.mjs";
 
 const fileExists = memoize((pFile) => {
   try {
-    accessSync(pFile, R_OK);
+    accessSync(pFile, constants.R_OK);
   } catch (pError) {
     return false;
   }

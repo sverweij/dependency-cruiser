@@ -1,4 +1,10 @@
-import { readFileSync, readdirSync, accessSync, statSync, R_OK } from "node:fs";
+import {
+  readFileSync,
+  readdirSync,
+  accessSync,
+  statSync,
+  constants,
+} from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_CONFIG_FILE_NAME } from "../defaults.mjs";
 
@@ -31,7 +37,7 @@ export function readManifest(pManifestFileName = "./package.json") {
  */
 export function fileExists(pFile) {
   try {
-    accessSync(pFile, R_OK);
+    accessSync(pFile, constants.R_OK);
   } catch (pError) {
     return false;
   }
