@@ -1,4 +1,4 @@
-import { accessSync, R_OK } from "node:fs";
+import { accessSync, constants } from "node:fs";
 import { isAbsolute } from "node:path";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
@@ -43,7 +43,7 @@ function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
 
 function fileExists(pFileName) {
   try {
-    accessSync(pFileName, R_OK);
+    accessSync(pFileName, constants.R_OK);
     return true;
   } catch (pError) {
     return false;
