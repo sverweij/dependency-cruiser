@@ -250,7 +250,7 @@
     "eslint-plugin-budapestian": "6.0.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-mocha": "10.5.0",
+    "eslint-plugin-mocha": "^10.5.0",
     "eslint-plugin-n": "17.17.0",
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
@@ -289,6 +289,11 @@
         "package": "rechoir",
         "policy": "wanted",
         "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/master/packages/webpack-cli/package.json"
+      },
+      {
+        "package": "eslint-plugin-mocha",
+        "policy": "wanted",
+        "because": "in the next version (11) some things incompatible with the current setup happen (probably esm related)"
       },
       {
         "package": "eslint-plugin-unicorn",
