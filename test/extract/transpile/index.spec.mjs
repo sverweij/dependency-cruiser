@@ -41,7 +41,6 @@ describe("[I] transpile", () => {
     const lExpectedOutput = await normalizeSource(
       readFileSync(join(__dirname, "__fixtures__", "svelte.js"), "utf8"),
     );
-
     equal(lObservedOutput, lExpectedOutput);
   });
 

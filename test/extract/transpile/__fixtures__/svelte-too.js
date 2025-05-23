@@ -4,8 +4,8 @@ import * as $ from "svelte/internal/client";
 import "./page.css";
 import Header from "./Header.svelte";
 
-var root = $.template(
-  `<article><!> <section><h2>Pages in Storybook</h2> <img src="./my.png" alt="my alt"></section></article>`,
+var root = $.from_html(
+  `<article><!> <section><h2>Pages in Storybook</h2> <img src="./my.png" alt="my alt"/></section></article>`,
 );
 
 export default function _unknown_($$anchor, $$props) {
