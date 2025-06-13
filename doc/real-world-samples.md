@@ -6,7 +6,7 @@
 
 [tj/commander.js](https://github.com/tj/commander.js) - For command line parsing - and cooking command line interfaces.
 
-<img width="242" alt="commander" src="real-world-samples/commander.png">
+<img alt="commander" src="real-world-samples/commander.svg">
 
 ### Chalk
 
