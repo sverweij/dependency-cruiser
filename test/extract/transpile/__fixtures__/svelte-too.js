@@ -24,7 +24,9 @@ export default function _unknown_($$anchor, $$props) {
     get onLogin() {
       return onLogin();
     },
-    onLogout,
+    get onLogout() {
+      return onLogout;
+    },
   });
 
   $.next(2);
