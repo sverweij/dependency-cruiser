@@ -1,4 +1,5 @@
 /* eslint-disable security/detect-object-injection */
+import { dirname, resolve, sep } from "node:path/posix";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
@@ -68,7 +69,7 @@ export function matchesModulePathNot(pRule, pModule) {
   );
 }
 
-function _toPath(pRule, pString, pGroups = []) {
+function _matchesToPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
       pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
@@ -76,14 +77,14 @@ function _toPath(pRule, pString, pGroups = []) {
 }
 
 export function matchesToPath(pRule, pDependency, pGroups) {
-  return _toPath(pRule, pDependency.resolved, pGroups);
+  return _matchesToPath(pRule, pDependency.resolved, pGroups);
 }
 
 export function matchToModulePath(pRule, pModule, pGroups) {
-  return _toPath(pRule, pModule.source, pGroups);
+  return _matchesToPath(pRule, pModule.source, pGroups);
 }
 
-function _toPathNot(pRule, pString, pGroups = []) {
+function _matchesToPathNot(pRule, pString, pGroups = []) {
   return (
     !pRule.to.pathNot ||
     !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
@@ -91,11 +92,11 @@ function _toPathNot(pRule, pString, pGroups = []) {
 }
 
 export function matchesToPathNot(pRule, pDependency, pGroups) {
-  return _toPathNot(pRule, pDependency.resolved, pGroups);
+  return _matchesToPathNot(pRule, pDependency.resolved, pGroups);
 }
 
 export function matchToModulePathNot(pRule, pModule, pGroups) {
-  return _toPathNot(pRule, pModule.source, pGroups);
+  return _matchesToPathNot(pRule, pModule.source, pGroups);
 }
 
 export function matchesToDependencyTypes(pRule, pDependency) {
@@ -197,7 +198,7 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
    *
    * Something similar goes for dependencies that are imported as 'type-only' -
    * which are some sort of regular dependency as well. Hence the use of the
-   * lNotReallyDuplicates set.
+   * DEPENDENCY_TYPE_DUPLICATES_THAT_MATTER set.
    */
 
   if (Object.hasOwn(pRule.to, "moreThanOneDependencyType")) {
@@ -208,6 +209,26 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
       ).length >
         1
     );
+  }
+  return true;
+}
+
+export function matchesAncestor(pRule, pModule, pDependency) {
+  if (Object.hasOwn(pRule.to, "ancestor")) {
+    if (pDependency.coreModule || pDependency.couldNotResolve) {
+      return false;
+    }
+    const lModulePath = dirname(resolve(pModule.source)) + sep;
+    const lDependencyPath = dirname(resolve(pDependency.resolved)) + sep;
+    const lDoesMatchAncestor =
+      lModulePath.startsWith(lDependencyPath) &&
+      lModulePath.length > lDependencyPath.length;
+
+    if (pRule.to.ancestor) {
+      return lDoesMatchAncestor;
+    } else {
+      return !lDoesMatchAncestor;
+    }
   }
   return true;
 }
