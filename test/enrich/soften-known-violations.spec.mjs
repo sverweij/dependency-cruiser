@@ -195,6 +195,65 @@ describe("[U] enrich/soften-known-violations - reachability violations", () => {
   });
 });
 
+describe("[U] enrich/soften-known-violations - module dependency instability violations", () => {
+  /** @type import("../../types/baseline-violations").IBaselineViolations */
+  const lKnownInstabilityViolations = [
+    {
+      type: "instability",
+      from: "src/cache/content-strategy.mjs",
+      to: "src/cache/find-content-changes.mjs",
+      rule: {
+        severity: "info",
+        name: "SDP",
+      },
+      metrics: {
+        from: {
+          instability: 0.6666666666666666,
+        },
+        to: {
+          instability: 0.75,
+        },
+      },
+    },
+  ];
+
+  it("invalid modules dependencies that are in known violations are softened (default to 'ignore')", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "src/cache/content-strategy.mjs",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "src/cache/find-content-changes.mjs",
+            valid: false,
+            rules: [{ name: "SDP", severity: "info" }],
+          },
+        ],
+      },
+    ];
+
+    const lSoftenedModules = [
+      {
+        source: "src/cache/content-strategy.mjs",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "src/cache/find-content-changes.mjs",
+            valid: false,
+            rules: [{ name: "SDP", severity: "ignore" }],
+          },
+        ],
+      },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownInstabilityViolations),
+      lSoftenedModules,
+    );
+  });
+});
+
 describe("[U] enrich/soften-known-violations - dependency violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownDependencyViolations = [
