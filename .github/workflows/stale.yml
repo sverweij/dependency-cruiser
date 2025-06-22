@@ -1,4 +1,6 @@
 name: "Mark or close stale issues"
+permissions:
+  issues: write
 on:
   schedule:
     - cron: "19 4 * * 0,2,4,6"
