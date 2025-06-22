@@ -9,12 +9,11 @@ function softenModuleViolation(
 ) {
   return {
     ...pRule,
-    severity: pKnownModuleViolations.some((pKnownError) => {
-      return (
+    severity: pKnownModuleViolations.some(
+      (pKnownError) =>
         pKnownError.from === pModuleSource &&
-        pKnownError.rule.name === pRule.name
-      );
-    })
+        pKnownError.rule.name === pRule.name,
+    )
       ? pSoftenedSeverity
       : pRule.severity,
   };
