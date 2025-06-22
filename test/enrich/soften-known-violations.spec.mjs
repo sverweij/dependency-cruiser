@@ -5,6 +5,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownModuleViolations = [
     {
+      type: "module",
       from: "./remi.js",
       to: "./remi.js",
       rule: {
@@ -100,10 +101,105 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
   });
 });
 
+describe("[U] enrich/soften-known-violations - reachability violations", () => {
+  /** @type import("../../types/baseline-violations").IBaselineViolations */
+  const lKnownReachabilityViolations = [
+    {
+      type: "reachability",
+      from: "src/app/layout.tsx",
+      to: "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/noop.js",
+      rule: {
+        severity: "error",
+        name: "no-disallowed-dependency-in-root-layout",
+      },
+      via: [
+        {
+          name: "src/app/providers.tsx",
+          dependencyTypes: ["local", "import"],
+        },
+        {
+          name: "src/context/theme-context.tsx",
+          dependencyTypes: ["local", "import"],
+        },
+        {
+          name: "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/noop.js",
+          dependencyTypes: ["npm", "import"],
+        },
+      ],
+    },
+  ];
+  it("no violations => no violations", () => {
+    deepEqual(softenKnownViolations([], lKnownReachabilityViolations), []);
+  });
+  it("valid modules are kept alone", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      { source: "alez-houpe.js", valid: true, dependencies: [] },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownReachabilityViolations),
+      lModules,
+    );
+  });
+  it("invalid modules that are not in known violations are kept alone", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "alez-houpe.js",
+        valid: false,
+        rules: [{ name: "no-orphans", severity: "error" }],
+        dependencies: [],
+      },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownReachabilityViolations),
+      lModules,
+    );
+  });
+  it("invalid modules that are in known violations are softened (default to 'ignore')", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "src/app/layout.tsx",
+        valid: false,
+        rules: [
+          {
+            name: "no-disallowed-dependency-in-root-layout",
+            severity: "error",
+          },
+        ],
+        dependencies: [],
+      },
+    ];
+
+    const lSoftenedModules = [
+      {
+        source: "src/app/layout.tsx",
+        valid: false,
+        rules: [
+          {
+            name: "no-disallowed-dependency-in-root-layout",
+            severity: "ignore",
+          },
+        ],
+        dependencies: [],
+      },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownReachabilityViolations),
+      lSoftenedModules,
+    );
+  });
+});
+
 describe("[U] enrich/soften-known-violations - dependency violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownDependencyViolations = [
     {
+      type: "dependency",
       from: "./from.js",
       to: "./forbidden-fruit/apple.js",
       rule: {
@@ -114,6 +210,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
   ];
   const lKnownCyclicViolations = [
     {
+      type: "cycle",
       from: "./cycle-1.js",
       to: "./cycle-2.js",
       rule: {
@@ -367,6 +464,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     /** @type import("../../types/baseline-violations").IBaselineViolations */
     const lKnownSelfReferenceViolation = [
       {
+        type: "cycle",
         from: "packages/react-dom/src/events/forks/EventListener-www.js",
         to: "packages/react-dom/src/events/forks/EventListener-www.js",
         rule: {

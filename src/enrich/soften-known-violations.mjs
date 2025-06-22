@@ -9,11 +9,12 @@ function softenModuleViolation(
 ) {
   return {
     ...pRule,
-    severity: pKnownModuleViolations.some(
-      (pKnownError) =>
+    severity: pKnownModuleViolations.some((pKnownError) => {
+      return (
         pKnownError.from === pModuleSource &&
-        pKnownError.rule.name === pRule.name,
-    )
+        pKnownError.rule.name === pRule.name
+      );
+    })
       ? pSoftenedSeverity
       : pRule.severity,
   };
@@ -59,11 +60,12 @@ function softenDependencyViolations(
   }
   return pDependency;
 }
+
 /**
  *
  * @param {import("../../types/cruise-result.mjs").IModule} pModule
- * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
- * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
+ * @param {import("../../types/baseline-violations.mjs").IBaselineViolations} pKnownViolations
+ * @param {import("../../types/shared-types.mjs").SeverityType} pSoftenedSeverity
  * @returns {import("../../types/cruise-result.mjs").IModule}
  */
 function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
@@ -76,9 +78,8 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
         softenModuleViolation(
           pRule,
           pModule.source,
-          pKnownViolations.filter(
-            (pKnownError) =>
-              pKnownError.from === pKnownError.to && !pKnownError.cycle,
+          pKnownViolations.filter((pKnownViolation) =>
+            ["module", "reachability"].includes(pKnownViolation.type),
           ),
           pSoftenedSeverity,
         ),
@@ -92,14 +93,17 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
       softenDependencyViolations(
         pDependency,
         pModule.source,
-        pKnownViolations.filter(
-          (pKnownError) =>
-            pKnownError.from !== pKnownError.to || pKnownError.cycle,
+        pKnownViolations.filter((pKnownViolation) =>
+          ["dependency", "cycle", "instability"].includes(pKnownViolation.type),
         ),
         pSoftenedSeverity,
       ),
     ),
   };
+
+  // TODO: folder level violations (e.g. with 'instability' rules - these need
+  // to be softened within the "folders" node, which lives next to the "modules"
+  // one)
 
   return lReturnValue;
 }
@@ -107,8 +111,8 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
 /**
  *
  * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
- * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
- * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
+ * @param {import("../../types/baseline-violations.mjs").IBaselineViolations} pKnownViolations
+ * @param {import("../../types/shared-types.mjs").SeverityType} pSoftenedSeverity
  * @returns {import("../../types/cruise-result.mjs").IModule[]}
  */
 export default function softenKnownViolations(

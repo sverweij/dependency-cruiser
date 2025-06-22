@@ -1,5 +1,6 @@
 [
   {
+    "type": "dependency",
     "from": "test/cli/__fixtures__/known-violations/src/aap.js",
     "to": "test/cli/__fixtures__/known-violations/src/forbidden-fruit/apple.js",
     "comment": "because we want to test whether comments work",
