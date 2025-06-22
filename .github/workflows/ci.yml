@@ -1,4 +1,8 @@
 name: ci
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
 
 on:
   push:
