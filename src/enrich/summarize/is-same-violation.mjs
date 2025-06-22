@@ -3,22 +3,31 @@ function pluckName({ name }) {
 }
 
 export default function isSameViolation(pLeftViolation, pRightViolation) {
-  let lReturnValue = false;
-
   if (pLeftViolation.rule.name === pRightViolation.rule.name) {
     if (pRightViolation.cycle && pLeftViolation.cycle) {
-      lReturnValue =
+      return (
         pLeftViolation.cycle.length === pRightViolation.cycle.length &&
         pLeftViolation.cycle
           .map(pluckName)
           .every((pModule) =>
             pRightViolation.cycle.map(pluckName).includes(pModule),
-          );
-    } else {
-      lReturnValue =
-        pLeftViolation.from === pRightViolation.from &&
-        pLeftViolation.to === pRightViolation.to;
+          )
+      );
     }
+    if (pRightViolation.via && pLeftViolation.via) {
+      return (
+        pLeftViolation.via.length === pRightViolation.via.length &&
+        pLeftViolation.via
+          .map(pluckName)
+          .every((pModule) =>
+            pRightViolation.via.map(pluckName).includes(pModule),
+          )
+      );
+    }
+    return (
+      pLeftViolation.from === pRightViolation.from &&
+      pLeftViolation.to === pRightViolation.to
+    );
   }
-  return lReturnValue;
+  return false;
 }
