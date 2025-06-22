@@ -76,7 +76,7 @@ export default (pCruiseResult) => ({
   output: JSON.stringify(
     samplePluginReporter(pCruiseResult),
     null,
-    DEFAULT_JSON_INDENT
+    DEFAULT_JSON_INDENT,
   ),
   exitCode: 0,
 });

@@ -26,7 +26,7 @@ function fileIsDirectory(pFullPathToFile, pBaseDirectory) {
  */
 function walk(
   pDirectoryName,
-  { baseDir, ignoreFilterFn, excludeFilterFn, includeOnlyFilterFn }
+  { baseDir, ignoreFilterFn, excludeFilterFn, includeOnlyFilterFn },
 ) {
   return readdirSync(join(baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
@@ -51,12 +51,12 @@ function walk(
               ignoreFilterFn,
               excludeFilterFn,
               includeOnlyFilterFn,
-            })
+            }),
           );
         }
         return pSum.concat(fullPathToFile);
       },
-      []
+      [],
     )
     .map((pFullPathToFile) => pathToPosix(pFullPathToFile));
 }
@@ -90,7 +90,7 @@ export default function findAllFiles(
     additionalIgnorePatterns,
     excludeFilterFn,
     includeOnlyFilterFn,
-  }
+  },
 ) {
   const lIgnoreFileContents =
     ignoreFileContents ?? readIgnoreFile(join(baseDir, ".gitignore"));

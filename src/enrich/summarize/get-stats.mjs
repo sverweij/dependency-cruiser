@@ -9,7 +9,7 @@ export function getViolationStats(pViolations) {
       warn: 0,
       info: 0,
       ignore: 0,
-    }
+    },
   );
 }
 
@@ -20,6 +20,6 @@ export function getModulesCruised(pModules) {
 export function getDependenciesCruised(pModules) {
   return pModules.reduce(
     (pAll, pModule) => pAll + pModule.dependencies.length,
-    0
+    0,
   );
 }

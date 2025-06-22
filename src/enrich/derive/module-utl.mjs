@@ -1,7 +1,7 @@
 export function isDependent(pResolvedName) {
   return (pModule) =>
     pModule.dependencies.some(
-      (pDependency) => pDependency.resolved === pResolvedName
+      (pDependency) => pDependency.resolved === pResolvedName,
     );
 }
 
@@ -23,7 +23,7 @@ export function metricsAreCalculable(pModule) {
  */
 export function calculateInstability(
   pEfferentCouplingCount,
-  pAfferentCouplingCount
+  pAfferentCouplingCount,
 ) {
   // when both afferentCouplings and efferentCouplings equal 0 instability will
   // yield NaN. Judging Bob Martin's intention, a component with no outgoing

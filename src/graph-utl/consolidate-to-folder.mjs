@@ -19,6 +19,6 @@ function squashModuleToDirectory(pModule) {
 
 export default function consolidateToFolder(pModules) {
   return consolidateModules(pModules.map(squashModuleToDirectory)).map(
-    consolidateModuleDependencies
+    consolidateModuleDependencies,
   );
 }

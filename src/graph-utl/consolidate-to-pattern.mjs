@@ -35,10 +35,10 @@ function squashModuleToPattern(pCollapsePattern) {
       consolidated: determineConsolidatedness(
         pModule.consolidated,
         lCollapseMatch,
-        pModule.source
+        pModule.source,
       ),
       dependencies: pModule.dependencies.map(
-        squashDependencyToPattern(pCollapsePattern)
+        squashDependencyToPattern(pCollapsePattern),
       ),
     };
   };
@@ -46,6 +46,6 @@ function squashModuleToPattern(pCollapsePattern) {
 
 export default function consolidateToPattern(pModules, pCollapsePattern) {
   return consolidateModules(
-    pModules.map(squashModuleToPattern(pCollapsePattern))
+    pModules.map(squashModuleToPattern(pCollapsePattern)),
   ).map(consolidateModuleDependencies);
 }
