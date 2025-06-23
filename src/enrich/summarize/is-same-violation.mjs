@@ -2,6 +2,7 @@ function pluckName({ name }) {
   return name;
 }
 
+// eslint-disable-next-line complexity
 export default function isSameViolation(pLeftViolation, pRightViolation) {
   if (pLeftViolation.rule.name === pRightViolation.rule.name) {
     if (pRightViolation.cycle && pLeftViolation.cycle) {
@@ -16,6 +17,8 @@ export default function isSameViolation(pLeftViolation, pRightViolation) {
     }
     if (pRightViolation.via && pLeftViolation.via) {
       return (
+        pLeftViolation.from === pRightViolation.from &&
+        pLeftViolation.to === pRightViolation.to &&
         pLeftViolation.via.length === pRightViolation.via.length &&
         pLeftViolation.via
           .map(pluckName)
