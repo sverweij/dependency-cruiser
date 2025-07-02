@@ -20,9 +20,11 @@ export default function _unknown_($$anchor, $$props) {
     get user() {
       return user();
     },
+
     get onLogin() {
       return onLogin();
     },
+
     get onLogout() {
       return onLogout;
     },
@@ -32,5 +34,6 @@ export default function _unknown_($$anchor, $$props) {
   $.reset(article);
   $.append($$anchor, article);
   $.bind_prop($$props, "onLogout", onLogout);
+
   return $.pop({ onLogout });
 }
