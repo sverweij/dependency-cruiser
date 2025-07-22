@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { styleText } from "node:util";
 import { SUMMARY } from "#utl/bus.mjs";
 
 const FULL_ON = 100;
@@ -17,9 +17,13 @@ function getPercentageBar(pPercentage, pParameters) {
   const lBlocks = Math.floor(lParameters.barSize * lPercentage);
   const lBlanks = lParameters.barSize - lBlocks;
 
-  return `${pc.green(lParameters.block.repeat(lBlocks))}${pc.green(
+  return `${styleText(["green"], lParameters.block.repeat(lBlocks))}${styleText(
+    ["green"],
     lParameters.blank.repeat(lBlanks),
   )} ${Math.round(FULL_ON * lPercentage)}%`;
+  // return `${pc.green(lParameters.block.repeat(lBlocks))}${pc.green(
+  //   lParameters.blank.repeat(lBlanks),
+  // )} ${Math.round(FULL_ON * lPercentage)}%`;
 }
 
 function getProgressMessageWriter(pStream, pState, pMaxLogLevel) {
