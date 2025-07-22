@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import pc from "picocolors";
+import { styleText } from "node:util";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
@@ -7,11 +7,11 @@ import {
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
 import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
-const SEVERITY2COLOR_FN = new Map([
-  ["error", pc.red],
-  ["warn", pc.yellow],
-  ["info", pc.cyan],
-  ["ignore", pc.gray],
+const SEVERITY2COLOR = new Map([
+  ["error", "red"],
+  ["warn", "yellow"],
+  ["info", "cyan"],
+  ["ignore", "gray"],
 ]);
 
 const EXTRA_PATH_INFORMATION_INDENT = 6;
@@ -26,25 +26,24 @@ function formatMiniDependency(pMiniDependency) {
 }
 
 function formatModuleViolation(pViolation) {
-  return pc.bold(pViolation.from);
+  return styleText(["bold"], pViolation.from);
 }
 
 function formatDependencyViolation(pViolation) {
-  return `${pc.bold(pViolation.from)} → ${pc.bold(pViolation.to)}`;
+  return `${styleText(["bold"], pViolation.from)} → ${styleText(["bold"], pViolation.to)}`;
 }
 
 function formatCycleViolation(pViolation) {
-  return `${pc.bold(pViolation.from)} → ${formatMiniDependency(pViolation.cycle)}`;
+  return `${styleText(["bold"], pViolation.from)} → ${formatMiniDependency(pViolation.cycle)}`;
 }
 
 function formatReachabilityViolation(pViolation) {
-  return `${pc.bold(pViolation.from)} → ${pc.bold(
-    pViolation.to,
-  )}${formatMiniDependency(pViolation.via)}`;
+  return `${styleText(["bold"], pViolation.from)} → ${styleText(["bold"], pViolation.to)}${formatMiniDependency(pViolation.via)}`;
 }
 
 function formatInstabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)}${EOL}${pc.dim(
+  return `${formatDependencyViolation(pViolation)}${EOL}${styleText(
+    ["dim"],
     wrapAndIndent(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,
       EXTRA_PATH_INFORMATION_INDENT,
@@ -67,12 +66,13 @@ function formatViolation(pViolation) {
   );
 
   return (
-    `${SEVERITY2COLOR_FN.get(pViolation.rule.severity)(
+    `${styleText(
+      [SEVERITY2COLOR.get(pViolation.rule.severity)],
       pViolation.rule.severity,
     )} ${pViolation.rule.name}: ${lFormattedViolators}` +
     `${
       pViolation.comment
-        ? `${EOL}${pc.dim(wrapAndIndent(pViolation.comment))}${EOL}`
+        ? `${EOL}${styleText(["dim"], wrapAndIndent(pViolation.comment))}${EOL}`
         : ""
     }`
   );
@@ -93,7 +93,7 @@ function formatSummary(pSummary) {
     pSummary.totalCruised
   } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.${EOL}`;
 
-  return pSummary.error > 0 ? pc.red(lMessage) : lMessage;
+  return pSummary.error > 0 ? styleText(["red"], lMessage) : lMessage;
 }
 
 function addExplanation(pRuleSet, pLong) {
@@ -107,7 +107,8 @@ function addExplanation(pRuleSet, pLong) {
 
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
-    return pc.yellow(
+    return styleText(
+      ["yellow"],
       `‼ ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`,
     );
   }
@@ -120,7 +121,7 @@ function report(pResults, pLong) {
   );
 
   if (lNonIgnorableViolations.length === 0) {
-    return `${EOL}${pc.green("✔")} no dependency violations found (${
+    return `${EOL}${styleText(["green"], "✔")} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised

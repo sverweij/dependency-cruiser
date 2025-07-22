@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { styleText } from "node:util";
 
 const DEFAULT_OPTIONS = {
   highlightFocused: false,
@@ -36,7 +36,9 @@ function toFlatDependencies(pModules, pModulesInFocus, pHighlightFocused) {
 }
 
 function stringifyModule(pModule) {
-  return pModule.highlight ? pc.underline(pModule.name) : pModule.name;
+  return pModule.highlight
+    ? styleText(["underline"], pModule.name)
+    : pModule.name;
 }
 
 function stringify(pFlatDependency) {

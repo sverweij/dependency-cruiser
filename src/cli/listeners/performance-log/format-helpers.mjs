@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { styleText } from "node:util";
 import { INFO } from "#utl/bus.mjs";
 
 const MS_PER_SECOND = 1000;
@@ -43,23 +43,22 @@ export function formatDividerLine() {
 }
 
 export function formatHeader() {
-  return pc
-    .bold(
-      `${
-        pad("∆ rss") +
-        pad("∆ heapTotal") +
-        pad("∆ heapUsed") +
-        pad("∆ external") +
-        pad("⏱  system") +
-        pad("⏱  user") +
-        pad("⏱  real")
-      }after step...\n`,
-    )
-    .concat(formatDividerLine());
+  return styleText(
+    ["bold"],
+    `${
+      pad("∆ rss") +
+      pad("∆ heapTotal") +
+      pad("∆ heapUsed") +
+      pad("∆ external") +
+      pad("⏱  system") +
+      pad("⏱  user") +
+      pad("⏱  real")
+    }after step...\n`,
+  ).concat(formatDividerLine());
 }
 
 function formatMessage(pMessage, pLevel) {
-  return pLevel >= INFO ? pc.dim(pMessage) : pMessage;
+  return pLevel >= INFO ? styleText(["dim"], pMessage) : pMessage;
 }
 
 export function formatTime(
@@ -81,7 +80,7 @@ export function formatMemory(pBytes, pLevel) {
   );
 
   return formatMessage(
-    (pBytes < 0 ? pc.blue(lReturnValue) : lReturnValue).concat(" "),
+    (pBytes < 0 ? styleText(["blue"], lReturnValue) : lReturnValue).concat(" "),
     pLevel,
   );
 }
