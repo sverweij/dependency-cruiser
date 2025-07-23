@@ -21,9 +21,6 @@ function getPercentageBar(pPercentage, pParameters) {
     ["green"],
     lParameters.blank.repeat(lBlanks),
   )} ${Math.round(FULL_ON * lPercentage)}%`;
-  // return `${pc.green(lParameters.block.repeat(lBlocks))}${pc.green(
-  //   lParameters.blank.repeat(lBlanks),
-  // )} ${Math.round(FULL_ON * lPercentage)}%`;
 }
 
 function getProgressMessageWriter(pStream, pState, pMaxLogLevel) {
