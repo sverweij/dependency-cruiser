@@ -163,7 +163,7 @@ export default async function executeCli(
     if (isInstalledGlobally) {
       lStreams.stderr.write(
         `\n  ${styleText(
-          ["yellow"],
+          "yellow",
           "WARNING",
         )}: You're running a globally installed dependency-cruiser.\n\n` +
           `           We recommend to ${styleText(
