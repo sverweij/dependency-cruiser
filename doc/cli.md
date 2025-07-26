@@ -759,11 +759,11 @@ it has to them. To see how dependency-cruiser perceives its environment use
 <summary>Typical output</summary>
 
 ```
-    dependency-cruiser@16.4.2
+    dependency-cruiser@17.0.0
 
-    node version supported : ^18.17||>=20
-    node version found     : v22.8.0
-    os version found       : x64 darwin@21.6.0
+    node version supported : ^20.12||^22||>=24
+    node version found     : v24.4.0
+    os version found       : arm64 darwin@24.5.0
 
     If you need a supported, but not enabled transpiler ('x' below), just install
     it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
@@ -771,14 +771,14 @@ it has to them. To see how dependency-cruiser perceives its environment use
 
     ✔ transpiler             versions supported  version found
     - ---------------------- ------------------- ------------------------
-    ✔ javascript             *                   acorn@8.12.1
-    ✔ babel                  >=7.0.0 <8.0.0      @babel/core@7.25.2
+    ✔ javascript             *                   acorn@8.15.0
+    ✔ babel                  >=7.0.0 <8.0.0      @babel/core@7.28.0
     ✔ coffee-script          >=1.0.0 <2.0.0      coffeescript@2.7.0
     ✔ coffeescript           >=1.0.0 <3.0.0      coffeescript@2.7.0
     x livescript             >=1.0.0 <2.0.0      -
-    ✔ svelte                 >=3.0.0 <5.0.0      svelte/compiler@4.2.19
-    ✔ swc                    >=1.0.0 <2.0.0      @swc/core@1.7.26
-    ✔ typescript             >=2.0.0 <6.0.0      typescript@5.6.2
+    ✔ svelte                 >=3.0.0 <6.0.0      svelte/compiler@5.36.13
+    ✔ swc                    >=1.0.0 <2.0.0      @swc/core@1.13.1
+    ✔ typescript             >=2.0.0 <6.0.0      typescript@5.8.3
     ✔ vue-template-compiler  >=2.0.0 <3.0.0      vue-template-compiler
     ✔ @vue/compiler-sfc      >=3.0.0 <4.0.0      vue-template-compiler
 
