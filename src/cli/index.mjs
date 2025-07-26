@@ -144,6 +144,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @returns {number}
  */
 
+// eslint-disable-next-line max-lines-per-function
 export default async function executeCli(
   pFileDirectoryArray,
   pCruiseOptions,
@@ -188,7 +189,7 @@ export default async function executeCli(
     }
   } catch (pError) {
     lStreams.stderr.write(
-      `\n  ${styleText(["yellow"], "ERROR")}: ${pError.message}\n`,
+      `\n  ${styleText("yellow", "ERROR")}: ${pError.message}\n`,
     );
     bus.emit("end");
     lExitCode = 1;

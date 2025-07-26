@@ -58,7 +58,7 @@ export function formatHeader() {
 }
 
 function formatMessage(pMessage, pLevel) {
-  return pLevel >= INFO ? styleText(["dim"], pMessage) : pMessage;
+  return pLevel >= INFO ? styleText("dim", pMessage) : pMessage;
 }
 
 export function formatTime(
@@ -80,7 +80,7 @@ export function formatMemory(pBytes, pLevel) {
   );
 
   return formatMessage(
-    (pBytes < 0 ? styleText(["blue"], lReturnValue) : lReturnValue).concat(" "),
+    (pBytes < 0 ? styleText("blue", lReturnValue) : lReturnValue).concat(" "),
     pLevel,
   );
 }

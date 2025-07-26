@@ -124,11 +124,11 @@ function getSuccessMessage(pDestinationManifestFileName) {
   return EXPERIMENTAL_SCRIPT_DOC.reduce(
     (pAll, pScript) => {
       return `${pAll}${
-        `\n    ${styleText(["green"], "►")} ${pScript.headline}` +
+        `\n    ${styleText("green", "►")} ${pScript.headline}` +
         `\n${pScript.description}\n\n`
       }`;
     },
-    `  ${styleText(["green"], "✔")} Run scripts added to '${pDestinationManifestFileName}':\n`,
+    `  ${styleText("green", "✔")} Run scripts added to '${pDestinationManifestFileName}':\n`,
   );
 }
 

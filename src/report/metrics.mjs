@@ -224,7 +224,7 @@ function formatToTextData(pData, pMetaData) {
  * @returns {string}
  */
 function formatToTextTable(pData, pMetaData) {
-  return [styleText(["bold"], formatToTextHeader(pMetaData))]
+  return [styleText("bold", formatToTextHeader(pMetaData))]
     .concat(formatToTextDemarcationLine(pMetaData))
     .concat(formatToTextData(pData, pMetaData))
     .join(EOL)
