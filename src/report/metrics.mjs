@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import pc from "picocolors";
+import { styleText } from "node:util";
 import { formatNumber, formatPercentage } from "./utl/index.mjs";
 
 /**
@@ -224,7 +224,7 @@ function formatToTextData(pData, pMetaData) {
  * @returns {string}
  */
 function formatToTextTable(pData, pMetaData) {
-  return [pc.bold(formatToTextHeader(pMetaData))]
+  return [styleText("bold", formatToTextHeader(pMetaData))]
     .concat(formatToTextDemarcationLine(pMetaData))
     .concat(formatToTextData(pData, pMetaData))
     .join(EOL)

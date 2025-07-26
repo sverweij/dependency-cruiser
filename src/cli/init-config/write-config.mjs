@@ -1,5 +1,5 @@
 import { writeFileSync } from "node:fs";
-import pc from "picocolors";
+import { styleText } from "node:util";
 import {
   fileExists,
   getDefaultConfigFileName,
@@ -29,7 +29,7 @@ export default function writeConfig(
     try {
       writeFileSync(pFileName, pConfig);
       pOutStream.write(
-        `\n  ${pc.green("✔")} Successfully created '${pFileName}'\n\n`,
+        `\n  ${styleText("green", "✔")} Successfully created '${pFileName}'\n\n`,
       );
       /* c8 ignore start */
     } catch (pError) {

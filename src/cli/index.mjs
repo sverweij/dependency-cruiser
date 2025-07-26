@@ -1,7 +1,7 @@
 import { join } from "node:path";
+import { styleText } from "node:util";
 import picomatch from "picomatch";
 import isInstalledGlobally from "is-installed-globally";
-import pc from "picocolors";
 
 import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
@@ -144,6 +144,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @returns {number}
  */
 
+// eslint-disable-next-line max-lines-per-function
 export default async function executeCli(
   pFileDirectoryArray,
   pCruiseOptions,
@@ -161,13 +162,13 @@ export default async function executeCli(
     /* c8 ignore start */
     if (isInstalledGlobally) {
       lStreams.stderr.write(
-        `\n  ${pc.yellow(
+        `\n  ${styleText(
+          "yellow",
           "WARNING",
         )}: You're running a globally installed dependency-cruiser.\n\n` +
-          `           We recommend to ${pc.bold(
-            pc.italic(
-              pc.underline("install and run it as a local devDependency"),
-            ),
+          `           We recommend to ${styleText(
+            "underline",
+            "install and run it as a local devDependency",
           )} in\n` +
           `           your project instead. There it has your project's environment and\n` +
           `           transpilers at its disposal. That will ensure it can find e.g.\n` +
@@ -187,7 +188,9 @@ export default async function executeCli(
       lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
     }
   } catch (pError) {
-    lStreams.stderr.write(`\n  ${pc.red("ERROR")}: ${pError.message}\n`);
+    lStreams.stderr.write(
+      `\n  ${styleText("red", "ERROR")}: ${pError.message}\n`,
+    );
     bus.emit("end");
     lExitCode = 1;
   }
