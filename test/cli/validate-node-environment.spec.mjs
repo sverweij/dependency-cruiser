@@ -40,7 +40,7 @@ describe("[U] cli/validateNodeEnv", () => {
 
   it("doesn't throw when a supported node version is passed", () => {
     doesNotThrow(() => {
-      assertNodeEnvironmentSuitable("20.0.0");
+      assertNodeEnvironmentSuitable("22.0.0");
     });
   });
 });
