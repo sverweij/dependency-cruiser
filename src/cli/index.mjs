@@ -167,7 +167,7 @@ export default async function executeCli(
           "WARNING",
         )}: You're running a globally installed dependency-cruiser.\n\n` +
           `           We recommend to ${styleText(
-            ["bold", "italic", "underline"],
+            "underline",
             "install and run it as a local devDependency",
           )} in\n` +
           `           your project instead. There it has your project's environment and\n` +
