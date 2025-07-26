@@ -189,7 +189,7 @@ export default async function executeCli(
     }
   } catch (pError) {
     lStreams.stderr.write(
-      `\n  ${styleText("yellow", "ERROR")}: ${pError.message}\n`,
+      `\n  ${styleText("red", "ERROR")}: ${pError.message}\n`,
     );
     bus.emit("end");
     lExitCode = 1;
