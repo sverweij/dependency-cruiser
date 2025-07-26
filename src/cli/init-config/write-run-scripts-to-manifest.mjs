@@ -1,8 +1,8 @@
 /* eslint-disable prefer-template */
 /* eslint-disable security/detect-object-injection */
 import { writeFileSync } from "node:fs";
+import { styleText } from "node:util";
 import { EOL } from "node:os";
-import pc from "picocolors";
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import { readManifest } from "./environment-helpers.mjs";
 import { folderNameArrayToRE } from "./utl.mjs";
@@ -124,11 +124,11 @@ function getSuccessMessage(pDestinationManifestFileName) {
   return EXPERIMENTAL_SCRIPT_DOC.reduce(
     (pAll, pScript) => {
       return `${pAll}${
-        `\n    ${pc.green("►")} ${pScript.headline}` +
+        `\n    ${styleText("green", "►")} ${pScript.headline}` +
         `\n${pScript.description}\n\n`
       }`;
     },
-    `  ${pc.green("✔")} Run scripts added to '${pDestinationManifestFileName}':\n`,
+    `  ${styleText("green", "✔")} Run scripts added to '${pDestinationManifestFileName}':\n`,
   );
 }
 
