@@ -17,8 +17,8 @@ function getPercentageBar(pPercentage, pParameters) {
   const lBlocks = Math.floor(lParameters.barSize * lPercentage);
   const lBlanks = lParameters.barSize - lBlocks;
 
-  return `${styleText(["green"], lParameters.block.repeat(lBlocks))}${styleText(
-    ["green"],
+  return `${styleText("green", lParameters.block.repeat(lBlocks))}${styleText(
+    "green",
     lParameters.blank.repeat(lBlanks),
   )} ${Math.round(FULL_ON * lPercentage)}%`;
 }

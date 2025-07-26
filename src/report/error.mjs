@@ -26,24 +26,24 @@ function formatMiniDependency(pMiniDependency) {
 }
 
 function formatModuleViolation(pViolation) {
-  return styleText(["bold"], pViolation.from);
+  return styleText("bold", pViolation.from);
 }
 
 function formatDependencyViolation(pViolation) {
-  return `${styleText(["bold"], pViolation.from)} → ${styleText(["bold"], pViolation.to)}`;
+  return `${styleText("bold", pViolation.from)} → ${styleText("bold", pViolation.to)}`;
 }
 
 function formatCycleViolation(pViolation) {
-  return `${styleText(["bold"], pViolation.from)} → ${formatMiniDependency(pViolation.cycle)}`;
+  return `${styleText("bold", pViolation.from)} → ${formatMiniDependency(pViolation.cycle)}`;
 }
 
 function formatReachabilityViolation(pViolation) {
-  return `${styleText(["bold"], pViolation.from)} → ${styleText(["bold"], pViolation.to)}${formatMiniDependency(pViolation.via)}`;
+  return `${styleText("bold", pViolation.from)} → ${styleText("bold", pViolation.to)}${formatMiniDependency(pViolation.via)}`;
 }
 
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)}${EOL}${styleText(
-    ["dim"],
+    "dim",
     wrapAndIndent(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,
       EXTRA_PATH_INFORMATION_INDENT,
@@ -67,12 +67,12 @@ function formatViolation(pViolation) {
 
   return (
     `${styleText(
-      [SEVERITY2COLOR.get(pViolation.rule.severity)],
+      SEVERITY2COLOR.get(pViolation.rule.severity),
       pViolation.rule.severity,
     )} ${pViolation.rule.name}: ${lFormattedViolators}` +
     `${
       pViolation.comment
-        ? `${EOL}${styleText(["dim"], wrapAndIndent(pViolation.comment))}${EOL}`
+        ? `${EOL}${styleText("dim", wrapAndIndent(pViolation.comment))}${EOL}`
         : ""
     }`
   );
@@ -93,7 +93,7 @@ function formatSummary(pSummary) {
     pSummary.totalCruised
   } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.${EOL}`;
 
-  return pSummary.error > 0 ? styleText(["red"], lMessage) : lMessage;
+  return pSummary.error > 0 ? styleText("red", lMessage) : lMessage;
 }
 
 function addExplanation(pRuleSet, pLong) {
@@ -108,7 +108,7 @@ function addExplanation(pRuleSet, pLong) {
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return styleText(
-      ["yellow"],
+      "yellow",
       `‼ ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`,
     );
   }
@@ -121,7 +121,7 @@ function report(pResults, pLong) {
   );
 
   if (lNonIgnorableViolations.length === 0) {
-    return `${EOL}${styleText(["green"], "✔")} no dependency violations found (${
+    return `${EOL}${styleText("green", "✔")} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised

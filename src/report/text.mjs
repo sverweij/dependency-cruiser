@@ -37,7 +37,7 @@ function toFlatDependencies(pModules, pModulesInFocus, pHighlightFocused) {
 
 function stringifyModule(pModule) {
   return pModule.highlight
-    ? styleText(["underline"], pModule.name)
+    ? styleText("underline", pModule.name)
     : pModule.name;
 }
 

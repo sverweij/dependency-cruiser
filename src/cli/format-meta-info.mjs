@@ -5,7 +5,7 @@ import { getAvailableTranspilers, allExtensions } from "#main/index.mjs";
 import meta from "#meta.cjs";
 
 function bool2Symbol(pBool) {
-  return pBool ? styleText(["green"], "✔") : styleText(["red"], "x");
+  return pBool ? styleText("green", "✔") : styleText("red", "x");
 }
 
 const MAX_VERSION_RANGE_STRING_LENGTH = 19;
@@ -14,7 +14,7 @@ const MAX_VERSION_STRING_LENGTH = 24;
 
 function formatTranspilers() {
   let lTranspilerTableHeader = styleText(
-    ["bold"],
+    "bold",
     `    ✔ ${"transpiler".padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${"versions supported".padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} version found`,
   );
   let lTranspilerTableDivider = `    - ${"-".repeat(MAX_TRANSPILER_NAME_LENGTH)} ${"-".repeat(MAX_VERSION_RANGE_STRING_LENGTH)} ${"-".repeat(MAX_VERSION_STRING_LENGTH)}`;
@@ -37,7 +37,7 @@ function formatExtensions(pExtensions) {
 
 export default function formatMetaInfo() {
   return `
-    ${styleText(["bold"], "dependency-cruiser")}@${meta.version}
+    ${styleText("bold", "dependency-cruiser")}@${meta.version}
 
     node version supported : ${meta.engines.node}
     node version found     : ${process.version}
@@ -51,7 +51,7 @@ export default function formatMetaInfo() {
     will enable livescript support if it's installed in your project folder.
 
 ${formatTranspilers()}
-    ${styleText(["bold"], "✔ extension")}
+    ${styleText("bold", "✔ extension")}
     - ---------
 ${formatExtensions(allExtensions)}
 `;
