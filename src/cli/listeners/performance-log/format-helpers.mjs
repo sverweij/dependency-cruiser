@@ -44,7 +44,7 @@ export function formatDividerLine() {
 
 export function formatHeader() {
   return styleText(
-    ["bold"],
+    "bold",
     `${
       pad("∆ rss") +
       pad("∆ heapTotal") +
