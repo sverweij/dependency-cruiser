@@ -44,7 +44,7 @@ export default function formatMetaInfo() {
     os version found       : ${arch()} ${platform()}@${release()}
 
     If you need a supported, but not enabled transpiler ('${styleText(
-      ["red"],
+      "red",
       "x",
     )}' below), just install
     it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
