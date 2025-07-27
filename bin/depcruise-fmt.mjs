@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
+
 import { parseArgs } from "node:util";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import format from "#cli/format.mjs";
