@@ -29,7 +29,7 @@ export type OutputType =
   | "null"
   // for plugins: string. TODO: research whether it's possible to
   // tie this down to the `^plugin:[^:]+-reporter-plugin.[cm]?js$` regex
-  | string;
+  | (string & {}); // autocompletion hack
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
 
