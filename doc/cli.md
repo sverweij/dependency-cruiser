@@ -224,6 +224,10 @@ Both due to limitations in the mermaid format and to the relative newness of thi
 reporter the graph cannot be (made as) feature rich as those produced by the
 `dot` or `d2` reporters.
 
+By default the mermaid reporter 'minifies' its output to circumvent mermaid's 
+input size limits. There's an [option](./options-reference.md#mermaid) to make it
+emit fully named nodes, though, might you need them for legibility.
+
 ```sh
 dependency-cruiser --output-type mermaid src --output-to dependency-graph.mmd
 ```
@@ -297,7 +301,7 @@ dependency-cruise src/cache --include-only "^src/cache" -T d2 | d2 --layout elk 
 <details>
 <summary>Sample output</summary>
 
-![d2 representation of dependency-cruiser's caching feature, with d2 set to use the 'ELK' layout](./assets/d2.svg)]
+![d2 representation of dependency-cruiser's caching feature, with d2 set to use the 'ELK' layout](./assets/d2.svg)
 
 </details>
 
@@ -400,7 +404,8 @@ line with the number of modules and dependencies cruised.
 #### text
 
 This reporter makes a straight, flat dump of all dependencies found in a cruise.
-Useful for grepping.
+Useful for grepping. There's an [option](./options-reference.md#text) to highlight
+'focused' modules by underlining them.
 
 ```sh
 dependency-cruise -T text --include-only src/report src/report
@@ -522,7 +527,8 @@ so it's easier to compare than the two json's):
 - It uses the list of words you pass in `options.reporterOptions.anon.wordlist`
   to replace non-common path elements
   with (`src/search/dragonfly-algorithm.js` -> `src/animal/announce.js`,
-  `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
+  `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`) 
+  (see [options](/options-reference.md#wordlist---anon-reporter)
 - (You can use any array of strings here - a good one is Sindre Sorhus'
   [mnemonic-words](https://www.npmjs.com/package/mnemonic-words), which
   you can require into the option if you're using JavaScript as
@@ -609,6 +615,13 @@ module  src/utl/path-to-posix.mjs                            1      1      0    
 
 </details>
 
+#### null - no output, just an exit code
+
+This dummy 'reporter' will print _nothing_, not even when there are errors. It
+will exit with the exit code _number of violations with severity `error` found_,
+though. This reporter primarily exists to help in the development of
+dependency-cruiser.
+
 ### `--config`/ `--validate`
 
 Validates against a list of rules in a configuration file. This defaults to a file
@@ -674,13 +687,6 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 [options reference](options-reference.md).
 
 For an easy set up of both use [--init](#--init)
-
-#### null - no output, just an exit code
-
-This dummy 'reporter' will print _nothing_, not even when there are errors. It
-will exit with the exit code _number of violations with severity `error` found_,
-though. This reporter primarily exists to help in the development of
-dependency-cruiser.
 
 ### `--no-config`
 
