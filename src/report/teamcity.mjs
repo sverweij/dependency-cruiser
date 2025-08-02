@@ -1,5 +1,85 @@
-import tsm from "teamcity-service-messages";
+import { randomInt } from "node:crypto";
+import memoize, { memoizeClear } from "memoize";
+
 import { formatPercentage, formatViolation } from "./utl/index.mjs";
+
+/**
+ * Escape string for TeamCity output.
+ * @see https://confluence.jetbrains.com/display/TCD65/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-servMsgsServiceMessages
+ * Copied from https://github.com/pifantastic/teamcity-service-messages/blob/master/lib/message.js#L72
+ *
+ * @param  {String} pMessageString the string to escape
+ * @return {String}
+ */
+function escape(pMessageString) {
+  if (pMessageString === null) {
+    return "";
+  }
+
+  return (
+    pMessageString
+      .toString()
+      .replace(/\|/g, "||")
+      .replace(/\n/g, "|n")
+      .replace(/\r/g, "|r")
+      .replace(/\[/g, "|[")
+      .replace(/\]/g, "|]")
+      // next line
+      .replace(/\u0085/g, "|x")
+      // line separator
+      .replace(/\u2028/g, "|l")
+      // paragraph separator
+      .replace(/\u2029/g, "|p")
+      .replace(/'/g, "|'")
+  );
+}
+
+/**
+ * @return {string} a random flowId consisting of 10 numeric digits
+ */
+function getRandomFlowIdBare() {
+  const lFlowIdMax = 1e10;
+  const lFlowIdLength = 10;
+
+  return randomInt(1, lFlowIdMax).toString().padStart(lFlowIdLength, "0");
+}
+
+const getRandomFlowId = memoize(getRandomFlowIdBare);
+
+function getTimeStamp() {
+  return new Date().toISOString().slice(0, -1);
+}
+
+function inspectionType(pData) {
+  let lAttributes = [];
+  lAttributes.push(
+    `id='${pData.id}'`,
+    `name='${pData.name}'`,
+    `description='${escape(pData.description)}'`,
+    `category='${pData.category}'`,
+    `flowId='${getRandomFlowId()}'`,
+    `timestamp='${getTimeStamp()}'`,
+  );
+  return `##teamcity[inspectionType ${lAttributes.join(" ")}]`;
+}
+
+function inspection(pData) {
+  let lAttributes = [];
+  lAttributes.push(
+    `typeId='${pData.typeId}'`,
+    `message='${escape(pData.message)}'`,
+  );
+  if (pData.file) {
+    lAttributes.push(`file='${pData.file}'`);
+  }
+  lAttributes.push(
+    `SEVERITY='${pData.SEVERITY}'`,
+    `flowId='${getRandomFlowId()}'`,
+    `timestamp='${getTimeStamp()}'`,
+  );
+
+  return `##teamcity[inspection ${lAttributes.join(" ")}]`;
+}
 
 const CATEGORY = "dependency-cruiser";
 const SEVERITY2TEAMCITY_SEVERITY = new Map([
@@ -19,7 +99,7 @@ function reportRules(pRules, pViolations) {
       pViolations.some((pViolation) => pRule.name === pViolation.rule.name),
     )
     .map((pRule) =>
-      tsm.inspectionType({
+      inspectionType({
         id: pRule.name,
         name: pRule.name,
         description: pRule.comment || pRule.name,
@@ -35,7 +115,7 @@ function reportAllowedRule(pAllowedRule, pViolations) {
     pAllowedRule.length > 0 &&
     pViolations.some((pViolation) => pViolation.rule.name === "not-in-allowed")
   ) {
-    lReturnValue = tsm.inspectionType({
+    lReturnValue = inspectionType({
       id: "not-in-allowed",
       name: "not-in-allowed",
       description: "dependency is not in the 'allowed' set of rules",
@@ -49,7 +129,7 @@ function reportIgnoredRules(pIgnoredCount) {
   let lReturnValue = [];
 
   if (pIgnoredCount > 0) {
-    lReturnValue = tsm.inspectionType({
+    lReturnValue = inspectionType({
       id: "ignored-known-violations",
       name: "ignored-known-violations",
       description:
@@ -114,7 +194,7 @@ function reportIgnoredViolation(pIgnoredCount) {
   let lReturnValue = [];
 
   if (pIgnoredCount > 0) {
-    lReturnValue = tsm.inspection({
+    lReturnValue = inspection({
       typeId: "ignored-known-violations",
       message: `${pIgnoredCount} known violations ignored. Run with --no-ignore-known to see them.`,
       SEVERITY: "WARNING",
@@ -126,7 +206,7 @@ function reportIgnoredViolation(pIgnoredCount) {
 function reportViolations(pViolations, pIgnoredCount) {
   return pViolations
     .map((pViolation) =>
-      tsm.inspection({
+      inspection({
         typeId: pViolation.rule.name,
         message: bakeViolationMessage(pViolation),
         file: pViolation.from,
@@ -146,13 +226,7 @@ function reportViolations(pViolations, pIgnoredCount) {
  */
 // eslint-disable-next-line complexity
 export default function teamcity(pResults) {
-  // this is the documented way to get tsm to emit strings
-  // Alternatively we could've used the 'low level API', which
-  // involves creating new `Message`s and stringifying those.
-  // The abstraction of the 'higher level API' makes this
-  // reporter more easy to implement and maintain, despite
-  // setting this property directly
-  tsm.stdout = false;
+  memoizeClear(getRandomFlowId);
 
   const lRuleSet = pResults?.summary?.ruleSetUsed ?? [];
   const lViolations = (pResults?.summary?.violations ?? []).filter(
