@@ -38,8 +38,8 @@ function escape(pMessageString) {
  * @return {string} a random flowId consisting of 10 numeric digits
  */
 function getRandomFlowIdBare() {
-  const lFlowIdMax = 1e10;
   const lFlowIdLength = 10;
+  const lFlowIdMax = 10 ** lFlowIdLength;
 
   return randomInt(1, lFlowIdMax).toString().padStart(lFlowIdLength, "0");
 }
@@ -51,7 +51,7 @@ function getTimeStamp() {
 }
 
 function inspectionType(pData) {
-  let lAttributes = [];
+  const lAttributes = [];
   lAttributes.push(
     `id='${pData.id}'`,
     `name='${pData.name}'`,
@@ -64,7 +64,7 @@ function inspectionType(pData) {
 }
 
 function inspection(pData) {
-  let lAttributes = [];
+  const lAttributes = [];
   lAttributes.push(
     `typeId='${pData.typeId}'`,
     `message='${escape(pData.message)}'`,
