@@ -2,10 +2,6 @@
 export type ModuleSystemType = "cjs" | "amd" | "es6" | "tsd";
 
 // cruise options, dependency-cruiser
-/* as we don't care about types beyond code completion, we ignore the
- * eslint warning that the 'string' type is redundant here.
- */
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 export type OutputType =
   | "json"
   | "html"
