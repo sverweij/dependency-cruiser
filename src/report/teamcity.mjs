@@ -35,6 +35,11 @@ function escape(pMessageString) {
 }
 
 /**
+ * Returns a random flowId consisting of 10 numeric digits. TeamCity doesn't
+ * currently seem to have demands on the format (it's just a string as far
+ * as I can tell), but this is what teamcity-service-messages used, so as
+ * per the rule of least surprise, this is what we use.
+ *
  * @return {string} a random flowId consisting of 10 numeric digits
  */
 function getRandomFlowIdBare() {
@@ -47,6 +52,14 @@ function getRandomFlowIdBare() {
 
 const getRandomFlowId = memoize(getRandomFlowIdBare);
 
+/**
+ * Returns a timestamp in ISO format without the trailing 'Z'. It used to be
+ * an issue with TeamCity that it didn't use the trailing 'Z' (this is
+ * documented in the teamcity-service-messages source code) - not sure whether
+ * this is still the case, but this is what we do to be on the safe side.
+ *
+ * @returns {string} a timestamp in ISO format without the trailing 'Z'
+ */
 function getTimeStamp() {
   return new Date().toISOString().slice(0, -1);
 }
@@ -219,8 +232,10 @@ function reportViolations(pViolations, pIgnoredCount) {
 
 /**
  * Returns a bunch of TeamCity service messages:
- * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
- * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
+ * - for each violated rule in the passed results: an `inspectionType` with the
+ *   name and comment of that rule
+ * - for each violation in the passed results: an `inspection` with the
+ *   violated rule name and the tos and froms
  *
  * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
