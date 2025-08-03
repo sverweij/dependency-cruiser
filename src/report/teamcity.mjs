@@ -39,6 +39,7 @@ function escape(pMessageString) {
  */
 function getRandomFlowIdBare() {
   const lFlowIdLength = 10;
+  // eslint-disable-next-line no-magic-numbers
   const lFlowIdMax = 10 ** lFlowIdLength;
 
   return randomInt(1, lFlowIdMax).toString().padStart(lFlowIdLength, "0");
