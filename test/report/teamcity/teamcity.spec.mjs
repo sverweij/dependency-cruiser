@@ -115,6 +115,26 @@ describe("[I] report/teamcity", () => {
     equal(lResult.exitCode, 5);
   });
 
+  it("writes flowIds, and writes them as 10 digit numbers", () => {
+    const lResult = render(moduleErrs);
+    const lFlowIdRegex = / flowId='\d{10}'/;
+    const lFlowIdMatch = lResult.output.match(lFlowIdRegex);
+    equal(lFlowIdMatch.length, 1);
+    // eslint-disable-next-line no-magic-numbers
+    equal(lFlowIdMatch[0].length, 20);
+  });
+
+  it("writes timestamps in the team city specific format omitting the 'Z' at the end", () => {
+    const lResult = render(moduleErrs);
+    // 2025-08-02T19:43:28.893
+    const lTimestampRegex =
+      / timestamp='\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[.]\d{3}'/;
+    const lTimestampMatch = lResult.output.match(lTimestampRegex);
+    equal(lTimestampMatch.length, 1);
+    // eslint-disable-next-line no-magic-numbers
+    equal(lTimestampMatch[0].length, 36);
+  });
+
   it("renders known errors in a single warning", () => {
     const lFixture = readFixture(
       "__mocks__/known-violations-teamcity-format.txt",
