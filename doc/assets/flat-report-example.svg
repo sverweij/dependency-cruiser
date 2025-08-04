@@ -16,7 +16,7 @@
 <text xml:space="preserve" x="241.85" y="-341.31" font-family="Helvetica,sans-Serif" font-size="9" font-weight="bold">compare.mjs</text>
 </a></g><g class="node"><title>src/graph-utl/consolidate-module-dependencies.mjs</title><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/src/graph-utl/consolidate-module-dependencies.mjs" xlink:title="consolidate-module-dependencies.mjs">
 <path fill="#fcc" stroke="#000" d="M172.33-378.75H8.67c-4.34 0-8.67 4.33-8.67 8.66v8.67c0 4.33 4.33 8.67 8.67 8.67h163.66c4.34 0 8.67-4.34 8.67-8.67v-8.67c0-4.33-4.33-8.66-8.67-8.66"/>
-<text xml:space="preserve" x="63.87" y="-367.2" font-family="Helvetica,sans-Serif" font-size="9">src/graph-utl/</text>
+<text xml:space="preserve" x="63.88" y="-367.2" font-family="Helvetica,sans-Serif" font-size="9">src/graph-utl/</text>
 <text xml:space="preserve" x="8" y="-358.2" font-family="Helvetica,sans-Serif" font-size="9" font-weight="bold">consolidate-module-dependencies.mjs</text>
 </a></g><g class="edge"><title>src/graph-utl/consolidate-module-dependencies.mjs-&gt;src/graph-utl/compare.mjs</title><path fill="none" stroke="#700" stroke-opacity=".467" stroke-width="2" d="M181.29-356h43.41"/><path fill="#700" fill-opacity=".467" stroke="#700" stroke-opacity=".467" stroke-width="2" d="m224.7-358.1 6 2.1-6 2.1z"/></g><g class="node"><title>src/utl/array-util.mjs</title><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/main/src/utl/array-util.mjs" xlink:title="utl-module-not-shared-enough">
 <path fill="#ccc" stroke="#00f" d="M109.78-305.8H54.12c-4.34 0-8.67 4.34-8.67 8.67v8.67c0 4.33 4.33 8.66 8.67 8.66h55.66c4.34 0 8.67-4.33 8.67-8.66v-8.67c0-4.33-4.33-8.67-8.67-8.67"/>
