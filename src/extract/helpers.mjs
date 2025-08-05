@@ -128,5 +128,6 @@ export function isTypeScriptCompatible(pFileName) {
     ".mjs",
     ".cjs",
     ".vue",
+    ".astro",
   ].includes(extname(pFileName));
 }

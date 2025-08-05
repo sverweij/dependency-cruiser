@@ -5,6 +5,7 @@ import coffeeWrap from "./coffeescript-wrap.mjs";
 import vueWrap from "./vue-template-wrap.cjs";
 import babelWrap from "./babel-wrap.mjs";
 import svelteDingus from "./svelte-wrap.mjs";
+import astroWrap from "./astro-wrap.mjs";
 
 const typeScriptVanillaWrap = typeScriptWrap();
 const typeScriptESMWrap = typeScriptWrap("esm");
@@ -33,6 +34,7 @@ export const EXTENSION2WRAPPER = new Map([
   [".coffee.md", litCoffeeWrap],
   [".csx", coffeeVanillaWrap],
   [".cjsx", coffeeVanillaWrap],
+  [".astro", astroWrap],
 ]);
 
 const BABEL_ABLE_EXTENSIONS = [
