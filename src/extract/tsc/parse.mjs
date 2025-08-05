@@ -22,7 +22,7 @@ const CACHE = new Map();
  */
 export function getASTFromSource(pFileRecord, pTranspileOptions) {
   let lSource = pFileRecord.source;
-  if (pFileRecord.extension === ".vue") {
+  if (pFileRecord.extension === ".vue" || pFileRecord.extension === ".astro") {
     lSource = transpile(pFileRecord, pTranspileOptions);
   }
 

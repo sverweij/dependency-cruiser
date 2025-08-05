@@ -122,6 +122,7 @@ const TS_COMPATIBLE_EXTENSIONS = new Set([
   ".mjs",
   ".cjs",
   ".vue",
+  ".astro",
 ]);
 
 /**
