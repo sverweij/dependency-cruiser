@@ -229,6 +229,7 @@
     "watskeburt": "^4.2.3"
   },
   "devDependencies": {
+    "@astrojs/compiler": "2.12.2",
     "@babel/core": "7.28.0",
     "@babel/plugin-transform-modules-commonjs": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
@@ -310,6 +311,7 @@
     "node": "^20.12||^22||>=24"
   },
   "supportedTranspilers": {
+    "@astrojs/compiler": ">=2.0.0 <3.0.0",
     "babel": ">=7.0.0 <8.0.0",
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
