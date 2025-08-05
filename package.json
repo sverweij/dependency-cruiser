@@ -238,6 +238,7 @@
     "@eslint/js": "^9.39.4",
     "@swc/core": "1.15.41",
     "@types/node": "25.9.3",
+    "@astrojs/compiler": "2.13.0",
     "@types/prompts": "2.4.9",
     "@typescript-eslint/eslint-plugin": "8.61.0",
     "@typescript-eslint/parser": "8.61.0",
@@ -364,6 +365,7 @@
     "node": "^22||^24||>=26"
   },
   "supportedTranspilers": {
+    "@astrojs/compiler": ">=2.0.0 <3.0.0",
     "babel": ">=7.0.0 <8.0.0",
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
