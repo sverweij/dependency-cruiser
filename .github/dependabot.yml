@@ -8,7 +8,8 @@ updates:
       prefix: "ci"
       include: scope
     groups:
-      "minor and patch":
+      "all the things":
         update-types:
+          - major
           - minor
           - patch
