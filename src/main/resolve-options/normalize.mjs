@@ -116,7 +116,9 @@ async function compileResolveOptions(
         // so we do it ourselves - either with the extensions passed
         // or with the supported ones.
         extensions:
-          pResolveOptions.extensions || DEFAULT_RESOLVE_OPTIONS.extensions,
+          pResolveOptionsFromDCConfig.extensions ||
+          pResolveOptions.extensions ||
+          DEFAULT_RESOLVE_OPTIONS.extensions,
       }),
     );
   }
