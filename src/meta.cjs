@@ -6,6 +6,7 @@ module.exports = {
     node: "^20.12||^22||>=24",
   },
   supportedTranspilers: {
+    "@astrojs/compiler": ">=2.0.0 <3.0.0",
     babel: ">=7.0.0 <8.0.0",
     "coffee-script": ">=1.0.0 <2.0.0",
     coffeescript: ">=1.0.0 <3.0.0",
