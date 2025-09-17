@@ -13,6 +13,7 @@ export default function _unknown_($$anchor, $$props) {
   let user = $.prop($$props, "user", 8, null);
   let onLogin = $.prop($$props, "onLogin", 8);
   const onLogout = {};
+  var $$exports = { onLogout };
   var article = root();
   var node = $.child(article);
 
@@ -35,5 +36,5 @@ export default function _unknown_($$anchor, $$props) {
   $.append($$anchor, article);
   $.bind_prop($$props, "onLogout", onLogout);
 
-  return $.pop({ onLogout });
+  return $.pop($$exports);
 }

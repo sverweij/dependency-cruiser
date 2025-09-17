@@ -58,6 +58,7 @@ export default [
       "no-param-reassign": "error",
       "n/no-missing-import": "off",
       "n/no-missing-require": "off",
+      "n/no-unsupported-features/node-builtins": "off",
       "unicorn/no-empty-file": "off",
       "unicorn/no-useless-fallback-in-spread": "off",
       // eslint-disable-next-line no-magic-numbers
