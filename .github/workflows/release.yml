@@ -1,10 +1,15 @@
 name: publish to npmjs
 on:
   release:
-    types: [released]
+    # it is simpler to have separate release.yml and prerelease.yml workflows,
+    # however, on npm you can only associate one workflow as trusted (or however
+    # it's called exactly) - so we need to combine both in one workflow, with
+    # the if conditions on the steps.
+    types: [released, prereleased]
 
 jobs:
-  publish-as-latest:
+  publish:
+    environment: npm
     if: github.repository == 'sverweij/dependency-cruiser'
     runs-on: ubuntu-latest
     permissions:
@@ -17,6 +22,9 @@ jobs:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
       - run: npm clean-install
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: publish as latest
+        run: npm publish --provenance --access public
+        if: github.event.release.prerelease == false
+      - name: publish as beta
+        run: npm publish --provenance --access public --tag beta
+        if: github.event.release.prerelease == true
