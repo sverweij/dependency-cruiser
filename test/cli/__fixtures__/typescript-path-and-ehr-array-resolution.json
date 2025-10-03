@@ -1,0 +1,141 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/index.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "dependencyTypes": [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-base-url",
+            "local",
+            "import"
+          ],
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "matchesDoNotFollow": false,
+          "circular": true,
+          "cycle": [
+            {
+              "name": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/index.ts",
+              "dependencyTypes": [
+                "aliased",
+                "aliased-tsconfig",
+                "aliased-tsconfig-base-url",
+                "local",
+                "import"
+              ]
+            }
+          ],
+          "valid": true
+        },
+        {
+          "dynamic": false,
+          "module": "shared/asneeze",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "dependencyTypes": [
+            "undetermined",
+            "import"
+          ],
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/shared/asneeze.borky.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/index.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/shared/asneeze.borky.ts",
+      "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/index.ts",
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/something/else.ts"
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/something/else.ts",
+      "dependencies": [
+        {
+          "dynamic": false,
+          "module": "shared/asneeze",
+          "moduleSystem": "es6",
+          "exoticallyRequired": false,
+          "dependencyTypes": [
+            "undetermined",
+            "import"
+          ],
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src/shared/asneeze.borky.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "dependents": [],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 3,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "detectJSDocImports": false,
+      "enhancedResolveOptions": {
+        "extensions": [
+          ".borky.ts",
+          ".ts",
+          ".js"
+        ]
+      },
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
+      "outputTo": "test/cli/__output__/typescript-path-and-ehr-array-resolution.json",
+      "outputType": "json",
+      "parser": "tsc",
+      "preserveSymlinks": false,
+      "skipAnalysisNotInRules": false,
+      "tsConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/tsconfig.json"
+      },
+      "tsPreCompilationDeps": false,
+      "webpackConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/webpack.config.js"
+      },
+      "args": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src"
+    },
+    "ruleSetUsed": {}
+  }
+}

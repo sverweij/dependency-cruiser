@@ -173,6 +173,9 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "webpack-config-alias-cruiser-config.json"));
   deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
   deleteDammit(path.join(OUT_DIR, "workspaces-mono-repo-aliases.json"));
+  deleteDammit(
+    path.join(OUT_DIR, "typescript-path-and-ehr-array-resolution.json"),
+  );
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -612,6 +615,32 @@ describe("[E] cli/index", () => {
     throws(() => {
       readFileSync(lOutputTo, { encoding: "utf8" });
     });
+  });
+
+  it("dependency-cruise with a --ts-config with a path and ehr extensions array will resolve 'path' things correctly", async () => {
+    const lOutputFileName = "typescript-path-and-ehr-array-resolution.json";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+
+    const lExitCode = await cli(
+      [
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/src",
+      ],
+      {
+        outputTo: lOutputTo,
+        outputType: "json",
+        parser: "tsc",
+        enhancedResolveOptions: {
+          extensions: [".borky.ts", ".ts", ".js"],
+        },
+        tsConfig:
+          "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/tsconfig.json",
+        webpackConfig:
+          "test/cli/__fixtures__/typescriptconfig/cli-config-with-path-and-extensions/webpack.config.js",
+      },
+    );
+
+    equal(lExitCode, 0);
+    assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
   describe("[I] file based tests - commonJS", () => {
