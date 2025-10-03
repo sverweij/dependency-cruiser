@@ -1,7 +1,7 @@
 import * as shared from 'shared/asneeze';
 
 console.log(
-    'from someting else', shared.version
+    'from something else', shared.version
 )
 
 export default 'else';
