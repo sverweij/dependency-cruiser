@@ -157,7 +157,7 @@ export default async function normalizeResolveOptions(
       // - true => symlinks are NOT followed (vv)
       // => symlinks = !preserveSymlinks
       symlinks: !pOptions?.preserveSymlinks,
-      tsConfig: pOptions?.ruleSet?.options?.tsConfig?.fileName ?? null,
+      tsConfig: pOptions?.tsConfig?.fileName ?? pOptions?.ruleSet?.options?.tsConfig?.fileName ?? null,
 
       /* squirrel the externalModuleResolutionStrategy and combinedDependencies
          thing into the resolve options
