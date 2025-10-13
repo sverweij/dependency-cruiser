@@ -73,9 +73,18 @@ function deriveCorePackageName(pSource) {
 export function getURLForModule(pModule, pPrefix, pSuffix) {
   // TODO: derive the URLs from configuration
   if (pModule.dependencyTypes?.some((pType) => pType === "core")) {
+    const lPackageName = deriveCorePackageName(pModule.source);
+    // Check if it's a Bun core module (starts with bun:)
+    if (lPackageName.startsWith("bun:")) {
+      return "https://bun.sh/docs/api/{{packageName}}".replace(
+        "{{packageName}}",
+        lPackageName.replace(/^bun:/, ""),
+      );
+    }
+    // Default to Node.js API documentation
     return "https://nodejs.org/api/{{packageName}}.html".replace(
       "{{packageName}}",
-      deriveCorePackageName(pModule.source),
+      lPackageName,
     );
   } else if (
     pModule.dependencyTypes?.some((pType) => pType.startsWith("npm"))

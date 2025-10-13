@@ -20,6 +20,15 @@ describe("[U] extract/resolve/is-built-in - isBuiltIn", () => {
     equal(lResult, false);
   });
 
+  it("should return true for Bun built-in modules with bun: protocol", () => {
+    const lModuleName = "bun:test";
+    const lResolveOptions = {};
+
+    const lResult = isBuiltin(lModuleName, lResolveOptions);
+
+    equal(lResult, true);
+  });
+
   it("should use additional built-ins if provided", () => {
     const lModuleName = "electron";
     const lResolveOptions = {
