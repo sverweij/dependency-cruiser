@@ -82,6 +82,7 @@ function getModuleAttributes(pModule, pOptions) {
   lReturnValue = `${lReturnValue}; link: "${getURLForModule(
     pModule,
     pOptions?.prefix,
+    pOptions?.suffix,
   )}"`;
   return lReturnValue;
 }

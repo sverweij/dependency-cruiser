@@ -8,5 +8,10 @@ export default function prepareFlatLevel(pResults, pTheme, _, pShowMetrics) {
     .map(flatLabel(pShowMetrics))
     .map(extractFirstTransgression)
     .map(applyTheme(pTheme))
-    .map(addURL(pResults.summary.optionsUsed?.prefix ?? ""));
+    .map(
+      addURL(
+        pResults.summary.optionsUsed?.prefix ?? "",
+        pResults.summary.optionsUsed?.suffix ?? "",
+      ),
+    );
 }

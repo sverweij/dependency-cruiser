@@ -547,6 +547,7 @@
           "description": "When true, dependency-cruiser will detect dependencies in JSDoc-style import statements. Implies `\"parser\": \"tsc\"`. Defaults to false."
         },
         "prefix": { "type": "string" },
+        "suffix": { "type": "string" },
         "preserveSymlinks": {
           "type": "boolean",
           "description": "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"

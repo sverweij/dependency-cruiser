@@ -128,6 +128,10 @@ try {
       `prefix to use for links in the dot and err-html reporters${EOL}${EOL}`,
     )
     .option(
+      "--suffix <suffix>",
+      `suffix to use for links in the dot and err-html reporters${EOL}${EOL}`,
+    )
+    .option(
       "-C, --cache [cache-directory]",
       "use a cache to speed up execution. " +
         "The directory defaults to node_modules/.cache/dependency-cruiser",

@@ -28,6 +28,7 @@ const SHAREABLE_OPTIONS = [
   "reporterOptions",
   "rulesFile",
   "skipAnalysisNotInRules",
+  "suffix",
   "tsConfig",
   "tsPreCompilationDeps",
   "webpackConfig",

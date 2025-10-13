@@ -26,6 +26,7 @@ Options:
                               pass a regex to collapse to a pattern E.g. ^packages/[^/]+/ would 
                               collapse to modules/ folders directly under your packages folder.
   -P, --prefix <prefix>       prefix to use for links in the dot and err-html reporters
+      --suffix <suffix>       suffix to use for links in the dot and err-html reporters
   -e, --exit-code             exit with a non-zero exit code when the input json contains error 
                               level dependency violations. Works for err, err-long and teamcity 
                               output types
@@ -80,6 +81,9 @@ try {
       prefix: {
         type: "string",
         short: "P",
+      },
+      suffix: {
+        type: "string",
       },
       "exit-code": {
         type: "boolean",
