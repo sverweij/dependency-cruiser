@@ -30,9 +30,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@v4
         with:
           languages: ${{matrix.lingos.language}}
           # See https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
           config-file: ${{matrix.lingos.config-file}}
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@v4
