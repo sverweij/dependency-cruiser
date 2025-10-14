@@ -48,6 +48,16 @@ describe("[I] report/utl/index - getURLForModule", () => {
     deepEqual(getURLForModule(lModule, lPrefix), lExpectedURL);
   });
 
+  it("returns an URL with prefix, filePath and suffix", () => {
+    const lModule = {
+      source: "src/index.js",
+    };
+    const lPrefix = "coverage/";
+    const lSuffix = ".gcov.html";
+    const lExpectedURL = "coverage/src/index.js.gcov.html";
+    deepEqual(getURLForModule(lModule, lPrefix, lSuffix), lExpectedURL);
+  });
+
   it("returns the source when no URL can be derived", () => {
     const lModule = {
       source: "src/index.js",

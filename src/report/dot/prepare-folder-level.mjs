@@ -12,5 +12,10 @@ export default function prepareFolderLevel(pResults, pTheme, _, pShowMetrics) {
     .map(folderify(pShowMetrics))
     .map(stripSelfTransitions)
     .map(applyTheme(pTheme))
-    .map(addURL(pResults.summary.optionsUsed?.prefix ?? ""));
+    .map(
+      addURL(
+        pResults.summary.optionsUsed?.prefix ?? "",
+        pResults.summary.optionsUsed?.suffix ?? "",
+      ),
+    );
 }

@@ -123,6 +123,9 @@ export default {
         prefix: {
           type: "string",
         },
+        suffix: {
+          type: "string",
+        },
         preserveSymlinks: {
           type: "boolean",
           description:

@@ -80,9 +80,10 @@ export function folderify(pShowMetrics) {
 
 /**
  * @param {string} pPrefix
+ * @param {string} pSuffix
  * @returns {URL?: string}
  */
-export function addURL(pPrefix) {
+export function addURL(pPrefix, pSuffix) {
   return (pModule) => {
     if (pModule.couldNotResolve) {
       return pModule;
@@ -90,7 +91,7 @@ export function addURL(pPrefix) {
 
     return {
       ...pModule,
-      URL: getURLForModule(pModule, pPrefix),
+      URL: getURLForModule(pModule, pPrefix, pSuffix),
     };
   };
 }

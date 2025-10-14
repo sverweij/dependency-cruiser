@@ -850,6 +850,23 @@ favorite editor. Here's an example for visual studio code:
 
 > :bulb: Make sure the prefix ends on a `/`.
 
+### `suffix`: suffix links in reports
+
+> :shell: command line option equivalent: `--suffix`
+
+If you want the links in the svg output to have a suffix (e.g. `.gcov.html` for
+coverage reports), you can pass that in the `suffix` option. This works together
+with the `prefix` option to construct complete URLs.
+
+```javascript
+...
+  prefix: "coverage/",
+  suffix: ".gcov.html"
+...
+```
+
+This would transform a module `src/index.js` into the URL `coverage/src/index.js.gcov.html`.
+
 ### `baseDir`: specify a directory to cruise from
 
 > :shell: there is no command line equivalent for this at the moment

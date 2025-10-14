@@ -93,6 +93,27 @@ describe("[E] cli/format", () => {
     deleteDammit(lOutFile);
   });
 
+  it("formats a cruise result --suffix is reflected into the summary", async () => {
+    const lOutFile = "thing.json";
+    const lAlternateSuffix = ".gcov.html";
+
+    deleteDammit(lOutFile);
+
+    await format(
+      relative("__fixtures__/result-has-a-dependency-violation.json"),
+      {
+        outputTo: lOutFile,
+        outputType: "json",
+        suffix: lAlternateSuffix,
+      },
+    );
+    const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
+
+    equal(lResult.summary.optionsUsed.suffix, lAlternateSuffix);
+
+    deleteDammit(lOutFile);
+  });
+
   it("returns a non-zero exit code when there's error level dependency violations in the output (regardless the value of exitCode)", async () => {
     const lOutFile = "otherthing";
 

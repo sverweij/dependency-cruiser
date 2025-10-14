@@ -67,9 +67,10 @@ function deriveCorePackageName(pSource) {
  *
  * @param {import("../../../types/cruise-result").IModule} pModule
  * @param {string} pPrefix
+ * @param {string} pSuffix
  * @returns {string}
  */
-export function getURLForModule(pModule, pPrefix) {
+export function getURLForModule(pModule, pPrefix, pSuffix) {
   // TODO: derive the URLs from configuration
   if (pModule.dependencyTypes?.some((pType) => pType === "core")) {
     return "https://nodejs.org/api/{{packageName}}.html".replace(
@@ -83,8 +84,15 @@ export function getURLForModule(pModule, pPrefix) {
       "{{packageName}}",
       deriveExternalPackageName(pModule.source),
     );
-  } else if (pPrefix) {
-    return smartURIConcat(pPrefix, pModule.source);
+  } else if (pPrefix || pSuffix) {
+    let lURL = pModule.source;
+    if (pPrefix) {
+      lURL = smartURIConcat(pPrefix, lURL);
+    }
+    if (pSuffix) {
+      lURL = `${lURL}${pSuffix}`;
+    }
+    return lURL;
   }
   return pModule.source;
 }
