@@ -23,8 +23,12 @@ export function isBuiltin(pModuleName, pResolveOptions) {
   // - add the bun builtins in dependency-cruiser.js
   //   Current approach. The --init command will try to detect whether it's
   //   in a bun repo and add the bun builtins to the config.
+  //
+  // Update: We now also detect modules with the 'bun:' protocol prefix as built-ins
+  // automatically, as they're unambiguous (unlike bare module names like 'undici').
   return (
     moduleIsBuiltin(pModuleName) ||
+    pModuleName.startsWith("bun:") ||
     (pResolveOptions?.builtInModules?.add ?? []).includes(pModuleName)
   );
 }

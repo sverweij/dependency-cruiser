@@ -33,12 +33,12 @@ export default {
         },
         protocol: {
           type: "string",
-          enum: ["data:", "file:", "node:"],
+          enum: ["data:", "file:", "node:", "bun:"],
           description:
             "If the module specification is an URI with a protocol in it (e.g. " +
             "`import * as fs from 'node:fs'` or " +
             "`import stuff from 'data:application/json,some-thing'`) - this attribute " +
-            "holds the protocol part (e.g. 'node:', 'data:', 'file:'). Also see " +
+            "holds the protocol part (e.g. 'node:', 'data:', 'file:', 'bun:'). Also see " +
             "https://nodejs.org/api/esm.html#esm_urls",
         },
         mimeType: {

@@ -11,6 +11,15 @@ describe("[I] report/utl/index - getURLForModule", () => {
     deepEqual(getURLForModule(lModule), lExpectedURL);
   });
 
+  it("returns the correct URL for a Bun core module", () => {
+    const lModule = {
+      source: "bun:test",
+      dependencyTypes: ["core"],
+    };
+    const lExpectedURL = "https://bun.sh/docs/api/test";
+    deepEqual(getURLForModule(lModule), lExpectedURL);
+  });
+
   it("returns the correct URL for an external module", () => {
     const lModule = {
       source: "node_modules/semver/functions/satisfies.js",
