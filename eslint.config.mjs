@@ -61,7 +61,6 @@ export default [
       "n/no-unsupported-features/node-builtins": "off",
       "unicorn/no-empty-file": "off",
       "unicorn/no-useless-fallback-in-spread": "off",
-      // eslint-disable-next-line no-magic-numbers
       complexity: ["warn", { max: 10, variant: "classic" }],
     },
   },
