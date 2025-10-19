@@ -7,7 +7,10 @@
  * @return {boolean} true if there's at least one element in pLeftArray also in pRightArray
  */
 export function intersects(pLeftArray, pRightArray) {
-  return pLeftArray.some((pLeftItem) => pRightArray.includes(pLeftItem));
+  if (pRightArray.length < pLeftArray.length) {
+    return pRightArray.some((pItem) => pLeftArray.includes(pItem));
+  }
+  return pLeftArray.some((pItem) => pRightArray.includes(pItem));
 }
 
 export function uniq(pArray) {
@@ -20,10 +23,18 @@ export function uniq(pArray) {
  * @returns {any[]}
  */
 export function uniqBy(pArray, pIteratee) {
-  return pArray.filter(
-    (pElement, pIndex, pSelf) =>
-      pIndex === pSelf.findIndex((pY) => pIteratee(pElement) === pIteratee(pY)),
-  );
+  const lSeen = new Map();
+  const lResult = [];
+
+  for (const lElement of pArray) {
+    const lKey = pIteratee(lElement);
+    if (!lSeen.has(lKey)) {
+      lSeen.set(lKey, true);
+      lResult.push(lElement);
+    }
+  }
+
+  return lResult;
 }
 
 /**
@@ -32,8 +43,13 @@ export function uniqBy(pArray, pIteratee) {
  * @returns {any[]}
  */
 export function uniqWith(pArray, pComparator) {
-  return pArray.filter(
-    (pElement, pIndex, pSelf) =>
-      pIndex === pSelf.findIndex((pY) => pComparator(pElement, pY)),
-  );
+  const lResult = [];
+
+  for (const lElement of pArray) {
+    if (!lResult.some((pY) => pComparator(lElement, pY))) {
+      lResult.push(lElement);
+    }
+  }
+
+  return lResult;
 }
