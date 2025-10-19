@@ -188,16 +188,13 @@ export default class IndexedModuleGraph {
    * Returns the first non-zero length path from pInitialSource to pInitialSource
    * Returns the empty array if there is no such path
    *
-   * @param {string} pInitialSource The 'source' attribute of the node to be tested
-   *                                (source uniquely identifying a node)
-   * @param {IEdge} pCurrentDependency
-   *                                The 'to' node to be traversed as a dependency
-   *                                object of the previous 'from' traversed
-   * @param {Set<string>=} pVisited  Technical parameter - best to leave out of direct calls
-   * @return {Array<IMiniDependency>}             see description above
+   * @param {string} pInitialSource The 'source' attribute of the node to be tested (source uniquely identifying a node)
+   * @param {IEdge} pCurrentDependency The 'to' node to be traversed as a dependency object of the previous 'from' traversed
+   * @param {Set<string>=} pVisited Technical parameter - best to leave out of direct calls
+   * @return {Array<IMiniDependency>} see description above
    */
   #getCycle(pInitialSource, pCurrentDependency, pVisited) {
-    let lVisited = pVisited || new Set();
+    const lVisited = pVisited || new Set();
     const lCurrentVertex = this.findVertexByName(pCurrentDependency.name);
     const lEdges = lCurrentVertex.dependencies.filter(
       (pDependency) => !lVisited.has(pDependency.name),
@@ -205,6 +202,7 @@ export default class IndexedModuleGraph {
     const lInitialAsDependency = lEdges.find(
       (pDependency) => pDependency.name === pInitialSource,
     );
+
     if (lInitialAsDependency) {
       return pInitialSource === pCurrentDependency.name
         ? [this.#geldEdge(lInitialAsDependency)]
@@ -213,33 +211,27 @@ export default class IndexedModuleGraph {
             this.#geldEdge(lInitialAsDependency),
           ];
     }
-    return lEdges.reduce(
-      /**
-       * @param {Array<IMiniDependency>} pAll
-       * @param {IEdge} pDependency
-       * @returns {Array<IMiniDependency>}
-       */
-      (pAll, pDependency) => {
-        if (!pAll.some((pSome) => pSome.name === pCurrentDependency.name)) {
-          const lCycle = this.#getCycle(
-            pInitialSource,
-            pDependency,
-            lVisited.add(pDependency.name),
-          );
 
-          if (
-            lCycle.length > 0 &&
-            !lCycle.some((pSome) => pSome.name === pCurrentDependency.name)
-          ) {
-            return pAll
-              .concat(this.#geldEdge(pCurrentDependency))
-              .concat(lCycle);
-          }
+    /** @type {Array<IMiniDependency>} */
+    const lResult = [];
+    for (const lDependency of lEdges) {
+      if (!lResult.some((pSome) => pSome.name === pCurrentDependency.name)) {
+        const lCycle = this.#getCycle(
+          pInitialSource,
+          lDependency,
+          lVisited.add(lDependency.name),
+        );
+
+        if (
+          lCycle.length > 0 &&
+          !lCycle.some((pSome) => pSome.name === pCurrentDependency.name)
+        ) {
+          lResult.push(this.#geldEdge(pCurrentDependency), ...lCycle);
+          return lResult;
         }
-        return pAll;
-      },
-      [],
-    );
+      }
+    }
+    return lResult;
   }
 
   /**
