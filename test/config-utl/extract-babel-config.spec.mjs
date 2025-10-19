@@ -114,6 +114,24 @@ describe("[I] config-utl/extract-babel-config", () => {
     equal(lModule.plugins.length, 1);
   });
 
+  it("throws when a javascript file with a syntax error is passed", async () => {
+    let lThrown = false;
+    let lErrorMessage = "";
+    try {
+      await extractBabelConfig(
+        getFullPath("./__mocks__/babelconfig-js/babel.syntax-error.config.js"),
+      );
+    } catch (pError) {
+      lThrown = true;
+      lErrorMessage = pError.message;
+    }
+    equal(lThrown, true);
+    ok(
+      lErrorMessage.includes("Encountered an error while parsing babel config"),
+    );
+    ok(lErrorMessage.includes("babel.syntax-error.config.js"));
+  });
+
   it("returns a babel config _including_ the array of plugins when a config with presets is passed", async () => {
     const lFoundConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json"),

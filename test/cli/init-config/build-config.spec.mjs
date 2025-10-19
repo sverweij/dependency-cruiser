@@ -103,6 +103,36 @@ describe("[I] cli/init-config/build-config", () => {
     });
   });
 
+  it("generates a valid config - jsConfig", async () => {
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
+
+    const lResult = await createConfigNormalized({
+      useJsConfig: true,
+      jsConfig: "./jsconfig.json",
+    });
+
+    ajv.validate(configurationSchema, lResult);
+    ok(lResult.hasOwnProperty("options"));
+    deepEqual(lResult.options.tsConfig, {
+      fileName: "./jsconfig.json",
+    });
+  });
+
+  it("generates a valid config - babelConfig", async () => {
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
+
+    const lResult = await createConfigNormalized({
+      useBabelConfig: true,
+      babelConfig: "./.babelrc.json",
+    });
+
+    ajv.validate(configurationSchema, lResult);
+    ok(lResult.hasOwnProperty("options"));
+    deepEqual(lResult.options.babelConfig, {
+      fileName: "./.babelrc.json",
+    });
+  });
+
   it("generates mainFields including 'module' for package.json with a type: module field", async () => {
     const lResult = await createConfigNormalized({ isTypeModule: true });
 
