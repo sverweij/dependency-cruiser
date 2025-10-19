@@ -170,4 +170,166 @@ describe("[U] enrich/is-same-violation", () => {
     };
     deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
   });
+
+  it("same via (reachability) => same", () => {
+    const lViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "another-intermediate.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lViolation, lViolation), true);
+  });
+
+  it("different via length => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "another-intermediate.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
+  });
+
+  it("different via module => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "another-intermediate.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+        {
+          name: "different-intermediate.js",
+          dependencyTypes: ["require"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
+  });
+
+  it("via with different from => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "different-somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
+  });
+
+  it("via with different to => not same", () => {
+    const lLeftViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    const lRightViolation = {
+      rule: {
+        severity: "error",
+        name: "some-reachability-violation",
+      },
+      from: "somewhere.js",
+      to: "different-somewhere-else.js",
+      via: [
+        {
+          name: "intermediate.js",
+          dependencyTypes: ["local"],
+        },
+      ],
+    };
+    deepEqual(isSameViolation(lLeftViolation, lRightViolation), false);
+  });
 });

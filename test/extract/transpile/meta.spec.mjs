@@ -1,11 +1,36 @@
 import { deepEqual } from "node:assert/strict";
 import { validRange } from "semver";
 import {
+  allExtensions,
   getAvailableTranspilers,
   scannableExtensions,
 } from "#extract/transpile/meta.mjs";
 
 describe("[U] extract/transpile/meta", () => {
+  it("returns all extensions with their availability", () => {
+    const lExtensions = allExtensions;
+    deepEqual(Array.isArray(lExtensions), true);
+    deepEqual(lExtensions.length > 0, true);
+
+    lExtensions.forEach((pExtension) => {
+      deepEqual(
+        typeof pExtension.extension,
+        "string",
+        `extension is not a string: ${pExtension.extension}`,
+      );
+      deepEqual(
+        typeof pExtension.available,
+        "boolean",
+        `available is not a boolean: ${pExtension.available}`,
+      );
+      deepEqual(
+        pExtension.extension.startsWith("."),
+        true,
+        `extension should start with a dot: ${pExtension.extension}`,
+      );
+    });
+  });
+
   it("tells which extensions can be scanned", () => {
     deepEqual(scannableExtensions, [
       ".js",
