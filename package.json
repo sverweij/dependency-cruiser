@@ -224,7 +224,7 @@
     "prompts": "^2.4.2",
     "rechoir": "^0.8.0",
     "safe-regex": "^2.1.1",
-    "semver": "^7.7.2",
+    "semver": "^7.7.3",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "watskeburt": "^4.2.3"
   },
