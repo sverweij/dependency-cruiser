@@ -49,7 +49,7 @@ jobs:
           key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package-lock.json')}}
           restore-keys: |
             ${{matrix.node-version}}@${{matrix.platform}}-build-
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{matrix.node-version}}
       - name: install & build
@@ -106,7 +106,7 @@ jobs:
           key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
@@ -133,7 +133,7 @@ jobs:
   #         key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
   #         restore-keys: |
   #           ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-  #     - uses: actions/setup-node@v5
+  #     - uses: actions/setup-node@v6
   #       with:
   #         node-version: ${{env.NODE_LATEST}}
   #     - name: install & build
