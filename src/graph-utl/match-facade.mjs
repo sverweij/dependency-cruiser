@@ -1,5 +1,7 @@
+import { testCachedRegex } from "#utl/regex-cache.mjs";
+
 export function filenameMatchesPattern(pFullPathToFile, pPattern) {
-  return RegExp(pPattern, "g").test(pFullPathToFile);
+  return testCachedRegex(pFullPathToFile, pPattern);
 }
 
 export function moduleMatchesFilter(pModule, pFilter) {

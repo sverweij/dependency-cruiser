@@ -5,8 +5,10 @@ import { clearCache as externalModuleHelpers_clearCache } from "./resolve/extern
 import { clearCache as getManifest_clearCache } from "./resolve/get-manifest.mjs";
 import { clearCache as resolveAMD_clearCache } from "./resolve/resolve-amd.mjs";
 import { clearCache as resolve_clearCache } from "./resolve/resolve.mjs";
+import { clearCache as regex_clearCache } from "#utl/regex-cache.mjs";
 
 export default function clearCaches() {
+  regex_clearCache();
   tscClearCache();
   acornClearCache();
   swcClearCache();
