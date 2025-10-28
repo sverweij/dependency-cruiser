@@ -11,7 +11,7 @@ import livescriptWrap from "./livescript-wrap.mjs";
 import svelteWrapFunction from "./svelte-wrap.mjs";
 import typescriptWrapFunction from "./typescript-wrap.mjs";
 import vueTemplateWrap from "./vue-template-wrap.cjs";
-import astroWrap from "./astro-wrap.mjs";
+import astroWrapFunction from "./astro-wrap.mjs";
 import meta from "#meta.cjs";
 
 const swcWrap = {
@@ -21,6 +21,8 @@ const swcWrap = {
 const coffeeScriptWrap = coffeeScriptWrapFunction(false);
 const svelteWrap = svelteWrapFunction(javascriptWrap);
 const typescriptWrap = typescriptWrapFunction("esm");
+const typescriptTsxWrap = typescriptWrapFunction("tsx");
+const astroWrap = astroWrapFunction(typescriptTsxWrap);
 
 function gotCoffee() {
   return (

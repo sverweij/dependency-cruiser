@@ -10,19 +10,56 @@ const astro = await tryImport(
 );
 
 /**
- * @type {import("./meta".ITranspilerWrapper)}
+ * @type {Record<string, string | Record<string,string>> | false}
  */
-export default {
-  isAvailable: () => astro !== false,
+const astroPackageInfo = await tryImport(
+  "@astrojs/compiler/package.json",
+  meta.supportedTranspilers["@astrojs/compiler"],
+);
 
-  version: () => "@astrojs/compiler/sync",
-
-  transpile: (pSource, pFileName) => {
-    // @astrojs/compiler/sync does not support sync version of `transform`
-    // so using `convertToTSX` instead
-    return astro.convertToTSX(pSource, {
+/**
+ *
+ * @param {import("./meta").ITranspilerWrapper} pTsxWrapper
+ *
+ * @returns {import("./meta").ITranspilerWrapper["transpile"]}
+ */
+function getTranspiler(pTsxWrapper) {
+  return (pSource, pFileName, pTranspilerOptions) => {
+    const lTSXCode = astro.convertToTSX(pSource, {
       filename: pFileName,
+      sourcemap: false,
       includeStyles: false,
     }).code;
-  },
-};
+
+    let lJSCode = lTSXCode;
+    if (pTsxWrapper.isAvailable()) {
+      lJSCode = pTsxWrapper.transpile(lTSXCode, "dummy.tsx", {
+        ...pTranspilerOptions,
+        tsConfig: {
+          ...(pTranspilerOptions?.tsConfig || {}),
+          options: {
+            ...(pTranspilerOptions?.tsConfig?.options || {}),
+            // https://github.com/withastro/astro/blob/dacebaf8df6293558091a18123aed966e4e57415/packages/astro/tsconfigs/base.json#L28-L29
+            jsx: "preserve",
+          },
+        },
+      });
+    }
+    return lJSCode;
+  };
+}
+
+/**
+ *
+ * @param {import("./meta").ITranspilerWrapper} pTsxWrapper
+ *
+ * @returns {import("./meta").ITranspilerWrapper}
+ */
+export default function astroWrap(pTsxWrapper) {
+  return {
+    isAvailable: () => astro !== false,
+    version: () =>
+      `@astrojs/compiler@${astroPackageInfo?.version ?? "unknown"}`,
+    transpile: getTranspiler(pTsxWrapper),
+  };
+}

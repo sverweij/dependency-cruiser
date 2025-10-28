@@ -13,6 +13,7 @@ const typeScriptTsxWrap = typeScriptWrap("tsx");
 const coffeeVanillaWrap = coffeeWrap();
 const litCoffeeWrap = coffeeWrap(true);
 const svelteWrap = svelteDingus(typeScriptVanillaWrap);
+const astroWrapInstance = astroWrap(typeScriptTsxWrap);
 
 export const EXTENSION2WRAPPER = new Map([
   [".js", javaScriptWrap],
@@ -34,7 +35,7 @@ export const EXTENSION2WRAPPER = new Map([
   [".coffee.md", litCoffeeWrap],
   [".csx", coffeeVanillaWrap],
   [".cjsx", coffeeVanillaWrap],
-  [".astro", astroWrap],
+  [".astro", astroWrapInstance],
 ]);
 
 const BABEL_ABLE_EXTENSIONS = [
