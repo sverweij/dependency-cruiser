@@ -1,5 +1,5 @@
 import { deepEqual, ok, equal } from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import normalizeSource from "../normalize-source.utl.mjs";
@@ -40,6 +40,24 @@ describe("[I] transpile", () => {
     );
     const lExpectedOutput = await normalizeSource(
       readFileSync(join(__dirname, "__fixtures__", "svelte.js"), "utf8"),
+    );
+    equal(lObservedOutput, lExpectedOutput);
+  });
+
+  it("Returns astro with imports compiled to javascript, preserving import statements", async () => {
+    const lInput = readFileSync(
+      join(__dirname, "__mocks__", "astro-with-imports.astro"),
+      "utf8",
+    );
+    const lObservedOutput = await normalizeSource(
+      transpile({ extension: ".astro", source: lInput }),
+    );
+    writeFileSync("hoge.js", lObservedOutput);
+    const lExpectedOutput = await normalizeSource(
+      readFileSync(
+        join(__dirname, "__fixtures__", "astro-with-imports.jsx"),
+        "utf8",
+      ),
     );
     equal(lObservedOutput, lExpectedOutput);
   });
