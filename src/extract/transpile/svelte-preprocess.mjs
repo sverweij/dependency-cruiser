@@ -81,7 +81,7 @@ export default function preProcess(
   // eslint-disable-next-line security/detect-unsafe-regex
   const lStyleRegex = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 
-  if (pTranspilerWrapper.isAvailable) {
+  if (pTranspilerWrapper.isAvailable && pTranspilerWrapper.isAvailable()) {
     return (
       pSource
         .replace(
