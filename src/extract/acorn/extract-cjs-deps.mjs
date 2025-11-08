@@ -24,6 +24,27 @@ function getExoticRequireTypes(pModuleSystem) {
   return pModuleSystem === "amd" ? ["amd-exotic-require"] : ["exotic-require"];
 }
 
+function getDependencyTypeAttributes(pName, pModuleSystem) {
+  switch (pName) {
+    case "require":
+      return {
+        exoticallyRequired: false,
+        dependencyTypes: getRequireTypes(pModuleSystem),
+      };
+    case "process.getBuiltinModule":
+      return {
+        exoticallyRequired: false,
+        dependencyTypes: ["process-get-builtin-module"],
+      };
+    default:
+      return {
+        exoticallyRequired: true,
+        exoticRequire: pName,
+        dependencyTypes: getExoticRequireTypes(pModuleSystem),
+      };
+  }
+}
+
 function pushRequireCallsToDependencies(
   pDependencies,
   pModuleSystem,
@@ -38,16 +59,7 @@ function pushRequireCallsToDependencies(
             module: lModuleName,
             moduleSystem: pModuleSystem,
             dynamic: false,
-            ...(lName === "require"
-              ? {
-                  exoticallyRequired: false,
-                  dependencyTypes: getRequireTypes(pModuleSystem),
-                }
-              : {
-                  exoticallyRequired: true,
-                  exoticRequire: lName,
-                  dependencyTypes: getExoticRequireTypes(pModuleSystem),
-                }),
+            ...getDependencyTypeAttributes(lName, pModuleSystem),
           });
         }
       }
@@ -68,7 +80,9 @@ export default function extractCommonJSDependencies(
   // require(`./withatemplateliteral`)
   // as well as renamed requires/ require wrappers
   // as passed in pExoticRequireStrings ("need", "window.require")
-  const lRequireStrings = ["require"].concat(pExoticRequireStrings);
+  const lRequireStrings = ["require", "process.getBuiltinModule"].concat(
+    pExoticRequireStrings,
+  );
 
   walk_simple(
     pAST,
