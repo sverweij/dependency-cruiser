@@ -216,6 +216,66 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
+  it("recognizes process.getBuiltinModule & anotates it", async () => {
+    const lOptions = normalizeCruiseOptions({});
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/process-only.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [
+        {
+          coreModule: true,
+          couldNotResolve: false,
+          dependencyTypes: ["core", "process-get-builtin-module"],
+          dynamic: false,
+          followable: true,
+          matchesDoNotFollow: false,
+          module: "path",
+          protocol: "node:",
+          moduleSystem: "cjs",
+          resolved: "path",
+        },
+      ],
+    );
+  });
+
+  it("recognizes globalThis.process.getBuiltinModule & anotates it", async () => {
+    const lOptions = normalizeCruiseOptions({});
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/with-global-this.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [
+        {
+          coreModule: true,
+          couldNotResolve: false,
+          dependencyTypes: ["core", "process-get-builtin-module"],
+          dynamic: false,
+          followable: true,
+          matchesDoNotFollow: false,
+          module: "path",
+          protocol: "node:",
+          moduleSystem: "cjs",
+          resolved: "path",
+        },
+      ],
+    );
+  });
+
   it("does not parse files matching extensions in the extraExtensionsToScan array", async () => {
     const lOptions = normalizeCruiseOptions({
       extraExtensionsToScan: [".bentknee", ".yolo"],
