@@ -1,9 +1,12 @@
 import { simple as walk_simple, base as walk_base } from "acorn-walk";
 import extractCommonJSDependencies from "./extract-cjs-deps.mjs";
-import estreeHelpers from "./estree-helpers.mjs";
+import {
+  isLikelyAMDDefineOrRequire,
+  isLikelyAMDDefine,
+} from "./estree-helpers.mjs";
 
 function extractRegularAMDDependencies(pNode, pDependencies) {
-  if (estreeHelpers.isLikelyAMDDefineOrRequire(pNode)) {
+  if (isLikelyAMDDefineOrRequire(pNode)) {
     pNode.expression.arguments
       .filter((pArgument) => pArgument.type === "ArrayExpression")
       .forEach((pArgument) =>
@@ -23,7 +26,7 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
 }
 
 function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
-  if (estreeHelpers.isLikelyAMDDefine(pNode)) {
+  if (isLikelyAMDDefine(pNode)) {
     pNode.expression.arguments
       .filter(
         (pArgument) =>

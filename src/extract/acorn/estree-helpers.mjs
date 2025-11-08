@@ -1,14 +1,14 @@
-function isStringLiteral(pArgument) {
+export function isStringLiteral(pArgument) {
   return pArgument.type === "Literal" && typeof pArgument.value === "string";
 }
 
-function firstArgumentIsAString(pArgumentsNode) {
+export function firstArgumentIsAString(pArgumentsNode) {
   return (
     pArgumentsNode && pArgumentsNode[0] && isStringLiteral(pArgumentsNode[0])
   );
 }
 
-function isPlaceholderLessTemplateLiteral(pArgument) {
+export function isPlaceholderLessTemplateLiteral(pArgument) {
   return (
     pArgument.type === "TemplateLiteral" &&
     pArgument.quasis.length === 1 &&
@@ -16,7 +16,7 @@ function isPlaceholderLessTemplateLiteral(pArgument) {
   );
 }
 
-function firstArgumentIsATemplateLiteral(pArgumentsNode) {
+export function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   return (
     pArgumentsNode &&
     pArgumentsNode[0] &&
@@ -39,7 +39,7 @@ function isCalleeIdentifier(pNode, pName) {
   return "Identifier" === pNode?.callee?.type && pName === pNode?.callee?.name;
 }
 
-function isRequireOfSomeSort(pNode, pName) {
+export function isRequireOfSomeSort(pNode, pName) {
   const lRequireStringElements = pName.split(".");
 
   return lRequireStringElements.length > 1
@@ -47,7 +47,7 @@ function isRequireOfSomeSort(pNode, pName) {
     : isCalleeIdentifier(pNode, pName);
 }
 
-function isLikelyAMDDefineOrRequire(pNode) {
+export function isLikelyAMDDefineOrRequire(pNode) {
   return (
     pNode.expression.type === "CallExpression" &&
     pNode.expression.callee.type === "Identifier" &&
@@ -56,22 +56,10 @@ function isLikelyAMDDefineOrRequire(pNode) {
   );
 }
 
-function isLikelyAMDDefine(pNode) {
+export function isLikelyAMDDefine(pNode) {
   return (
     pNode.expression.type === "CallExpression" &&
     pNode.expression.callee.type === "Identifier" &&
     pNode.expression.callee.name === "define"
   );
 }
-
-export default {
-  firstArgumentIsAString,
-  firstArgumentIsATemplateLiteral,
-  isStringLiteral,
-  isPlaceholderlessTemplateLiteral: isPlaceholderLessTemplateLiteral,
-  isMemberCallExpression,
-  isCalleeIdentifier,
-  isRequireOfSomeSort,
-  isLikelyAMDDefineOrRequire,
-  isLikelyAMDDefine,
-};

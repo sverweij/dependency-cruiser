@@ -1,12 +1,16 @@
 import { simple as walk_simple, base as walk_base } from "acorn-walk";
-import estreeHelpers from "./estree-helpers.mjs";
+import {
+  firstArgumentIsAString,
+  firstArgumentIsATemplateLiteral,
+  isRequireOfSomeSort,
+} from "./estree-helpers.mjs";
 
 function pryStringsFromArguments(pArguments) {
   let lReturnValue = null;
 
-  if (estreeHelpers.firstArgumentIsAString(pArguments)) {
+  if (firstArgumentIsAString(pArguments)) {
     lReturnValue = pArguments[0].value;
-  } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pArguments)) {
+  } else if (firstArgumentIsATemplateLiteral(pArguments)) {
     lReturnValue = pArguments[0].quasis[0].value.cooked;
   }
 
@@ -27,7 +31,7 @@ function pushRequireCallsToDependencies(
 ) {
   return (pNode) => {
     for (let lName of pRequireStrings) {
-      if (estreeHelpers.isRequireOfSomeSort(pNode, lName)) {
+      if (isRequireOfSomeSort(pNode, lName)) {
         const lModuleName = pryStringsFromArguments(pNode.arguments);
         if (lModuleName) {
           pDependencies.push({
