@@ -60,6 +60,11 @@ function isCalleeIdentifier(pNode, pName) {
 }
 
 export function isRequireOfSomeSort(pNode, pName) {
+  // prevent doing the pName.split for the common case
+  if (pName === "require") {
+    return isCalleeIdentifier(pNode, pName);
+  }
+
   const lRequireStringElements = pName.split(".");
 
   switch (lRequireStringElements.length) {

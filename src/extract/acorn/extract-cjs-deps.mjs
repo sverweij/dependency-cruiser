@@ -79,6 +79,9 @@ export default function extractCommonJSDependencies(
   // require('./lalala').doFunkyStuff();
   // require('zoinks!./wappie')
   // require(`./withatemplateliteral`)
+  // when feature switched as such it will also detect
+  //   process.getBuiltinModule('fs')
+  //   globalThis.process.getBuiltinModule('path')
   // as well as renamed requires/ require wrappers
   // as passed in pExoticRequireStrings ("need", "window.require")
   const lRequireStrings = [
