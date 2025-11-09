@@ -9264,6 +9264,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {
         "path": "node_modules",
         "dependencyTypes": [

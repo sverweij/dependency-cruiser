@@ -11,6 +11,7 @@
     "optionsUsed": {
       "args": "whatever",
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "outputTo": "empty.json",
       "metrics": false,
       "moduleSystems": ["amd", "cjs", "es6"],

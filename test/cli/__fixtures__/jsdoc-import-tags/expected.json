@@ -48,6 +48,7 @@
       "baseDir": "",
       "combinedDependencies": false,
       "detectJSDocImports": true,
+      "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

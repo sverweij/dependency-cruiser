@@ -106,6 +106,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "enhancedResolveOptions": {
         "extensions": [
           ".borky.ts",

@@ -20,6 +20,7 @@
       "baseDir": "test/cli/__fixtures__/alternate-basedir",
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {
         "path": "node_modules"
       },

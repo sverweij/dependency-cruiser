@@ -382,6 +382,7 @@
       "outputType": "json",
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "skipAnalysisNotInRules": false

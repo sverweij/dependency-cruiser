@@ -361,6 +361,7 @@
       "baseDir": ".",
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "exclude": {
         "path": "node_modules"
       },

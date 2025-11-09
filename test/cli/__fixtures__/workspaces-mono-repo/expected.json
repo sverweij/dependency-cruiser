@@ -229,6 +229,7 @@
       "baseDir": "test/cli/__fixtures__/workspaces-mono-repo",
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {
         "path": "node_modules"
       },
