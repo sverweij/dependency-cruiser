@@ -238,7 +238,9 @@ describe("[I] extract/getDependencies - include", () => {
   });
 
   it("recognizes process.getBuiltinModule & anotates it", async () => {
-    const lOptions = normalizeCruiseOptions({});
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: true,
+    });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
@@ -267,9 +269,29 @@ describe("[I] extract/getDependencies - include", () => {
       ],
     );
   });
+  it("does not recognize process.getBuiltinModule when the detectProcessBuiltinModuleCalls is off", async () => {
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: false,
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/process-only.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [],
+    );
+  });
 
   it("recognizes globalThis.process.getBuiltinModule & anotates it", async () => {
-    const lOptions = normalizeCruiseOptions({});
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: true,
+    });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,

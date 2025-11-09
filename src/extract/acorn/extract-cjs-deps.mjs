@@ -68,11 +68,13 @@ function pushRequireCallsToDependencies(
   };
 }
 
+// eslint-disable-next-line max-params
 export default function extractCommonJSDependencies(
   pAST,
   pDependencies,
   pModuleSystem,
   pExoticRequireStrings,
+  pDetectProcessBuiltinModuleCalls,
 ) {
   // var/const lalala = require('./lalala');
   // require('./lalala');
@@ -84,11 +86,13 @@ export default function extractCommonJSDependencies(
   //   globalThis.process.getBuiltinModule('path')
   // as well as renamed requires/ require wrappers
   // as passed in pExoticRequireStrings ("need", "window.require")
-  const lRequireStrings = [
-    "require",
-    "process.getBuiltinModule",
-    "globalThis.process.getBuiltinModule",
-  ].concat(pExoticRequireStrings);
+  const lRequireStrings = ["require"]
+    .concat(
+      pDetectProcessBuiltinModuleCalls
+        ? ["process.getBuiltinModule", "globalThis.process.getBuiltinModule"]
+        : [],
+    )
+    .concat(pExoticRequireStrings);
 
   walk_simple(
     pAST,
