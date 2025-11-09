@@ -812,6 +812,29 @@ options: {
   will need the `typescript` compiler in your (dev-)dependencies as it's currently
   the only parser that supports these.
 
+### `detectProcessBuiltinModuleCalls`: detect core module imports done with process.getBuiltinModule
+
+> :shell: there is no command line equivalent for this
+
+Since node v20.16.0/ v22.3.0 there's an alternate way of importing core (or 'builtin')
+node modules to support conditionally loading them. See nodejs' 
+[process.getBuiltinModule](https://nodejs.org/api/process.html#processgetbuiltinmoduleid) 
+documentation for details. Dependency-cruiser >=17.3.0 supports detecting this - 
+but to prevent a breaking change put it behind a feature switch. If you want it
+(recommended) set the `detectProcessBuiltinModuleCalls` to true.
+
+```javascript
+options: {
+  detectProcessBuiltinModuleCalls: true; 
+}
+```
+
+#### Notes
+- dependency-cruiser's `--init` configuration scaffolding tool defaults this
+  to true, so new installations have it out of the box
+- in a future (semver-major) version of dependency-cruiser it might become the 
+  default. 
+
 ### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
 
 > :shell: there is no command line equivalent for this
