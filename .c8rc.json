@@ -1,9 +1,9 @@
 {
   "checkCoverage": true,
-  "statements": 99.95,
-  "branches": 98.68,
+  "statements": 99.96,
+  "branches": 98.7,
   "functions": 100,
-  "lines": 99.95,
+  "lines": 99.96,
   "exclude": [
     "bin",
     "configs",
