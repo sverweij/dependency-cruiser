@@ -216,6 +216,27 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
+  it("does not support nested exotic requires deeper than 3 (reallyGlobal.globalThis.process.getBuiltinModule)", async () => {
+    const lOptions = normalizeCruiseOptions({
+      exoticRequireStrings: [
+        "reallyGlobal.globalThis.process.getBuiltinModule",
+      ],
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/exotic-require/index.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [],
+    );
+  });
+
   it("recognizes process.getBuiltinModule & anotates it", async () => {
     const lOptions = normalizeCruiseOptions({});
     const lResolveOptions = await normalizeResolveOptions(

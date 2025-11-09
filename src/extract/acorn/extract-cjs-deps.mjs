@@ -32,6 +32,7 @@ function getDependencyTypeAttributes(pName, pModuleSystem) {
         dependencyTypes: getRequireTypes(pModuleSystem),
       };
     case "process.getBuiltinModule":
+    case "globalThis.process.getBuiltinModule":
       return {
         exoticallyRequired: false,
         dependencyTypes: ["process-get-builtin-module"],
@@ -80,9 +81,11 @@ export default function extractCommonJSDependencies(
   // require(`./withatemplateliteral`)
   // as well as renamed requires/ require wrappers
   // as passed in pExoticRequireStrings ("need", "window.require")
-  const lRequireStrings = ["require", "process.getBuiltinModule"].concat(
-    pExoticRequireStrings,
-  );
+  const lRequireStrings = [
+    "require",
+    "process.getBuiltinModule",
+    "globalThis.process.getBuiltinModule",
+  ].concat(pExoticRequireStrings);
 
   walk_simple(
     pAST,
