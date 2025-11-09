@@ -113,8 +113,15 @@ const QUESTIONS = [
   {
     name: "detectJSDocImports",
     type: () => (tscIsAvailable() ? "confirm" : false),
-    message: "Do you want to detect JSDoc imports as well (slower)?",
+    message: "Do you want to detect JSDoc imports (slightly slower)?",
     initial: false,
+  },
+  {
+    name: "detectProcessBuiltinModuleCalls",
+    type: "confirm",
+    message:
+      "Do you want to detect process.getBuiltinModule imports (slightly slower)?",
+    initial: true,
   },
   {
     name: "tsPreCompilationDeps",

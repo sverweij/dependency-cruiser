@@ -120,6 +120,13 @@ export default {
             "When true, dependency-cruiser will detect dependencies in JSDoc-style " +
             'import statements. Implies `"parser": "tsc"`. Defaults to false.',
         },
+        detectProcessBuiltinModuleCalls: {
+          type: "boolean",
+          description:
+            "When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/ " +
+            "`globalThis.process.getBuiltinModule` imports." +
+            "Defaults to false.",
+        },
         prefix: {
           type: "string",
         },

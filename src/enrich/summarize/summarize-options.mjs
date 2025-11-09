@@ -5,6 +5,7 @@ const SHAREABLE_OPTIONS = [
   "collapse",
   "combinedDependencies",
   "detectJSDocImports",
+  "detectProcessBuiltinModuleCalls",
   "doNotFollow",
   "enhancedResolveOptions",
   "exclude",

@@ -150,6 +150,12 @@ export interface ICruiseOptions {
    */
   detectJSDocImports?: boolean;
   /**
+   * When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/
+   * `globalThis.process.getBuiltinModule` as imports.
+   * Defaults to false.
+   */
+  detectProcessBuiltinModuleCalls?: boolean;
+  /**
    * one of "json", "html", "dot", "csv" or "err". When left
    * out the function will return a javascript object as dependencies
    */

@@ -460,6 +460,7 @@ export default {
      */
     // parser: "tsc", // acorn, tsc
     detectJSDocImports: true, // implies parser: "tsc"
+    detectProcessBuiltinModuleCalls: true,
     experimentalStats: true,
     skipAnalysisNotInRules: true,
     metrics: true,
