@@ -52,6 +52,7 @@ function getVertexName(pSource) {
  * @returns {string}
  */
 
+// eslint-disable-next-line complexity
 function getModuleAttributes(pModule, pOptions) {
   let lReturnValue = "class: module";
   if (pModule.consolidated) {
