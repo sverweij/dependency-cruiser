@@ -1,12 +1,15 @@
 import { simple as walk_simple, base as walk_base } from "acorn-walk";
 import { extend } from "acorn-jsx-walk";
-import estreeHelpers from "./estree-helpers.mjs";
+import {
+  isStringLiteral,
+  isPlaceholderLessTemplateLiteral,
+} from "./estree-helpers.mjs";
 
 extend(walk_base);
 
 function pushImportNodeValue(pDependencies) {
   return (pNode) => {
-    if (estreeHelpers.isStringLiteral(pNode.source)) {
+    if (isStringLiteral(pNode.source)) {
       pDependencies.push({
         module: pNode.source.value,
         moduleSystem: "es6",
@@ -14,7 +17,7 @@ function pushImportNodeValue(pDependencies) {
         exoticallyRequired: false,
         dependencyTypes: ["dynamic-import"],
       });
-    } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
+    } else if (isPlaceholderLessTemplateLiteral(pNode.source)) {
       pDependencies.push({
         module: pNode.source.quasis[0].value.cooked,
         moduleSystem: "es6",

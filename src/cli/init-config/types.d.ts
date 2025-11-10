@@ -37,6 +37,11 @@ export interface IInitConfig {
    */
   detectJSDocImports?: boolean;
   /**
+   * Whether or not to detect calls to `process.getBuiltinModule`/
+   * `globalThis.process.getBuiltinModule` as imports
+   */
+  detectProcessBuiltinModuleCalls?: boolean;
+  /**
    * Whether or not to take dependencies into account that only exist before
    * compilation to javascript
    */

@@ -212,6 +212,7 @@
       "cache": false,
       "combinedDependencies": true,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {
         "path": "node_modules"
       },

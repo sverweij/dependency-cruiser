@@ -239,6 +239,13 @@ module.exports = {
      */
     {{detectJSDocImportsAttribute}}
 
+    /*
+      false: don't look at process.getBuiltinModule calls (the default)
+      true: dependency-cruiser will detect calls to process.getBuiltinModule/
+      globalThis.process.getBuiltinModule as imports.
+     */
+    {{detectProcessBuiltinModuleCalls}}
+
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/main/'
        to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),

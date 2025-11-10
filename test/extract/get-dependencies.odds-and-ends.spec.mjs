@@ -216,6 +216,111 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
+  it("does not support nested exotic requires deeper than 3 (reallyGlobal.globalThis.process.getBuiltinModule)", async () => {
+    const lOptions = normalizeCruiseOptions({
+      exoticRequireStrings: [
+        "reallyGlobal.globalThis.process.getBuiltinModule",
+      ],
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/exotic-require/index.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [],
+    );
+  });
+
+  it("recognizes process.getBuiltinModule & annotates it", async () => {
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: true,
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/process-only.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [
+        {
+          coreModule: true,
+          couldNotResolve: false,
+          dependencyTypes: ["core", "process-get-builtin-module"],
+          dynamic: false,
+          followable: false,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "path",
+          protocol: "node:",
+          moduleSystem: "cjs",
+          resolved: "path",
+        },
+      ],
+    );
+  });
+  it("does not recognize process.getBuiltinModule when the detectProcessBuiltinModuleCalls is off", async () => {
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: false,
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/process-only.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [],
+    );
+  });
+
+  it("recognizes globalThis.process.getBuiltinModule & annotates it", async () => {
+    const lOptions = normalizeCruiseOptions({
+      detectProcessBuiltinModuleCalls: true,
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
+
+    deepEqual(
+      extractDependencies(
+        "./test/extract/__mocks__/process-get-builtin-module/with-global-this.js",
+        lOptions,
+        lResolveOptions,
+      ),
+      [
+        {
+          coreModule: true,
+          couldNotResolve: false,
+          dependencyTypes: ["core", "process-get-builtin-module"],
+          dynamic: false,
+          followable: false,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "path",
+          protocol: "node:",
+          moduleSystem: "cjs",
+          resolved: "path",
+        },
+      ],
+    );
+  });
+
   it("does not parse files matching extensions in the extraExtensionsToScan array", async () => {
     const lOptions = normalizeCruiseOptions({
       extraExtensionsToScan: [".bentknee", ".yolo"],

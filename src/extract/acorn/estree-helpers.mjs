@@ -1,14 +1,15 @@
-function isStringLiteral(pArgument) {
+/* eslint-disable no-inline-comments */
+export function isStringLiteral(pArgument) {
   return pArgument.type === "Literal" && typeof pArgument.value === "string";
 }
 
-function firstArgumentIsAString(pArgumentsNode) {
+export function firstArgumentIsAString(pArgumentsNode) {
   return (
     pArgumentsNode && pArgumentsNode[0] && isStringLiteral(pArgumentsNode[0])
   );
 }
 
-function isPlaceholderLessTemplateLiteral(pArgument) {
+export function isPlaceholderLessTemplateLiteral(pArgument) {
   return (
     pArgument.type === "TemplateLiteral" &&
     pArgument.quasis.length === 1 &&
@@ -16,7 +17,7 @@ function isPlaceholderLessTemplateLiteral(pArgument) {
   );
 }
 
-function firstArgumentIsATemplateLiteral(pArgumentsNode) {
+export function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   return (
     pArgumentsNode &&
     pArgumentsNode[0] &&
@@ -35,19 +36,52 @@ function isMemberCallExpression(pNode, pObjectName, pPropertyName) {
   );
 }
 
+function isNestedMemberCallExpression(
+  pNode,
+  pObjectName,
+  pSecondObjectName,
+  pPropertyName,
+) {
+  return (
+    pNode.type === "CallExpression" &&
+    pNode.callee.type === "MemberExpression" &&
+    pNode.callee.object.type === "MemberExpression" &&
+    pNode.callee.object.object.type === "Identifier" &&
+    pNode.callee.object.object.name === pObjectName && // i.e. globalThis
+    pNode.callee.object.property.type === "Identifier" &&
+    pNode.callee.object.property.name === pSecondObjectName && // i.e. process
+    pNode.callee.property.type === "Identifier" &&
+    pNode.callee.property.name === pPropertyName // i.e. getBuiltinModule
+  );
+}
+
 function isCalleeIdentifier(pNode, pName) {
   return "Identifier" === pNode?.callee?.type && pName === pNode?.callee?.name;
 }
 
-function isRequireOfSomeSort(pNode, pName) {
+export function isRequireOfSomeSort(pNode, pName) {
+  // prevent doing the pName.split for the common case
+  if (pName === "require") {
+    return isCalleeIdentifier(pNode, pName);
+  }
+
   const lRequireStringElements = pName.split(".");
 
-  return lRequireStringElements.length > 1
-    ? isMemberCallExpression(pNode, ...lRequireStringElements)
-    : isCalleeIdentifier(pNode, pName);
+  switch (lRequireStringElements.length) {
+    case 1:
+      return isCalleeIdentifier(pNode, pName);
+    // eslint-disable-next-line no-magic-numbers
+    case 2:
+      return isMemberCallExpression(pNode, ...lRequireStringElements);
+    // eslint-disable-next-line no-magic-numbers
+    case 3:
+      return isNestedMemberCallExpression(pNode, ...lRequireStringElements);
+    default:
+      return false;
+  }
 }
 
-function isLikelyAMDDefineOrRequire(pNode) {
+export function isLikelyAMDDefineOrRequire(pNode) {
   return (
     pNode.expression.type === "CallExpression" &&
     pNode.expression.callee.type === "Identifier" &&
@@ -56,22 +90,10 @@ function isLikelyAMDDefineOrRequire(pNode) {
   );
 }
 
-function isLikelyAMDDefine(pNode) {
+export function isLikelyAMDDefine(pNode) {
   return (
     pNode.expression.type === "CallExpression" &&
     pNode.expression.callee.type === "Identifier" &&
     pNode.expression.callee.name === "define"
   );
 }
-
-export default {
-  firstArgumentIsAString,
-  firstArgumentIsATemplateLiteral,
-  isStringLiteral,
-  isPlaceholderlessTemplateLiteral: isPlaceholderLessTemplateLiteral,
-  isMemberCallExpression,
-  isCalleeIdentifier,
-  isRequireOfSomeSort,
-  isLikelyAMDDefineOrRequire,
-  isLikelyAMDDefine,
-};

@@ -6,7 +6,12 @@ import { getASTCached } from "./parse.mjs";
 import extractStats from "./extract-stats.mjs";
 
 export function extract(
-  { baseDir, moduleSystems, exoticRequireStrings },
+  {
+    baseDir,
+    moduleSystems,
+    exoticRequireStrings,
+    detectProcessBuiltinModuleCalls,
+  },
   pFileName,
   pTranspileOptions,
 ) {
@@ -14,7 +19,13 @@ export function extract(
   const lAST = getASTCached(join(baseDir, pFileName), pTranspileOptions);
 
   if (moduleSystems.includes("cjs")) {
-    extractCommonJSDeps(lAST, lDependencies, "cjs", exoticRequireStrings);
+    extractCommonJSDeps(
+      lAST,
+      lDependencies,
+      "cjs",
+      exoticRequireStrings,
+      detectProcessBuiltinModuleCalls,
+    );
   }
   if (moduleSystems.includes("es6")) {
     extractES6Deps(lAST, lDependencies);

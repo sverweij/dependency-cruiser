@@ -195,6 +195,7 @@
       },
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

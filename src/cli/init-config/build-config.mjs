@@ -74,6 +74,17 @@ function buildDetectJSDocumentImportsAttribute(pInitOptions) {
 }
 
 /**
+ *
+ * @param {IInitConfig} pInitOptions
+ * @returns {string}
+ */
+function buildDetectProcessBuiltinModuleCalls(pInitOptions) {
+  return pInitOptions.detectProcessBuiltinModuleCalls
+    ? "detectProcessBuiltinModuleCalls: true,"
+    : "// detectProcessBuiltinModuleCalls: true,";
+}
+
+/**
  * @param {IInitConfig} pInitOptions
  * @returns {string}
  */
@@ -212,6 +223,10 @@ export default function buildConfig(pInitOptions) {
     .replace(
       "{{detectJSDocImportsAttribute}}",
       buildDetectJSDocumentImportsAttribute(pInitOptions),
+    )
+    .replace(
+      "{{detectProcessBuiltinModuleCalls}}",
+      buildDetectProcessBuiltinModuleCalls(pInitOptions),
     )
     .replace(
       "{{tsPreCompilationDepsAttribute}}",

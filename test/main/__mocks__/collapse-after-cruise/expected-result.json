@@ -177,6 +177,7 @@
       "collapse": "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
       "combinedDependencies": false,
       "detectJSDocImports": false,
+      "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,

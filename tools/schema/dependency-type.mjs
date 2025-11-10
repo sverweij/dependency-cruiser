@@ -33,6 +33,7 @@ export default {
         "npm-unknown",
         "npm",
         "pre-compilation-only",
+        "process-get-builtin-module",
         "require",
         "triple-slash-amd-dependency",
         "triple-slash-directive",

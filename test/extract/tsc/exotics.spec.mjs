@@ -76,4 +76,62 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
       ],
     );
   });
+
+  it("detects dependencies declared with process.getBuiltinModule", () => {
+    deepEqual(
+      extractTypescript(
+        "const path = process.getBuiltinModule('node:path');",
+        [],
+        // detectJSDocImports:
+        false,
+        // detectProcessBuiltinModuleCalls:
+        true,
+      ),
+      [
+        {
+          module: "node:path",
+          moduleSystem: "cjs",
+          exoticallyRequired: false,
+          dynamic: false,
+          dependencyTypes: ["process-get-builtin-module"],
+        },
+      ],
+    );
+  });
+
+  it("detects dependencies declared with globalThis.process.getBuiltinModule", () => {
+    deepEqual(
+      extractTypescript(
+        "const path = globalThis.process.getBuiltinModule('node:path');",
+        [],
+        // detectJSDocImports:
+        false,
+        // detectProcessBuiltinModuleCalls:
+        true,
+      ),
+      [
+        {
+          module: "node:path",
+          moduleSystem: "cjs",
+          exoticallyRequired: false,
+          dynamic: false,
+          dependencyTypes: ["process-get-builtin-module"],
+        },
+      ],
+    );
+  });
+
+  it("doesn't detect dependencies declared with process.getBuiltinModule when the feature switch is off", () => {
+    deepEqual(
+      extractTypescript(
+        "const path = process.getBuiltinModule('node:path');",
+        [],
+        // detectJSDocImports:
+        false,
+        // detectProcessBuiltinModuleCalls:
+        false,
+      ),
+      [],
+    );
+  });
 });
