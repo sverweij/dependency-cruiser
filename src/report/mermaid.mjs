@@ -65,8 +65,8 @@ function renderSubgraphs(pSource, pOptions, pDepth = 0) {
 function convertSubgraphSources(pCruiseResult, pNamesHashMap) {
   let lTree = {};
 
-  pCruiseResult.modules.forEach((pModule) => {
-    const lPaths = pModule.source.split("/");
+  for (const lModule of pCruiseResult.modules) {
+    const lPaths = lModule.source.split("/");
 
     lPaths.reduce((pChildren, pCurrentPath, pIndex) => {
       if (!pChildren[pCurrentPath]) {
@@ -79,7 +79,7 @@ function convertSubgraphSources(pCruiseResult, pNamesHashMap) {
       }
       return pChildren[pCurrentPath].children;
     }, lTree);
-  });
+  }
 
   return lTree;
 }
@@ -121,12 +121,13 @@ function hashModuleNames(pModules, pMinify) {
   const lNamesHashMap = new Map();
   let lCount = 0;
 
-  pModules.forEach((pModule) => {
-    const lPaths = pModule.source.split("/");
+  for (const lModule of pModules) {
+    const lPaths = lModule.source.split("/");
 
     for (let lIndex = 0; lIndex < lPaths.length; lIndex += 1) {
       const lName = lPaths.slice(0, lIndex + 1).join("/");
       if (!lNamesHashMap.has(lName)) {
+        // eslint-disable-next-line max-depth
         if (pMinify) {
           // toUpperCase because otherwise we generate e.g. o-->a and x-->a
           // which are ambiguous in mermaid (o--> and x--> are edge shapes
@@ -145,7 +146,7 @@ function hashModuleNames(pModules, pMinify) {
         }
       }
     }
-  });
+  }
 
   return lNamesHashMap;
 }

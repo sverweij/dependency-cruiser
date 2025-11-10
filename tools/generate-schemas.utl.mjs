@@ -8,11 +8,11 @@ function stripAttribute(pObject, pAttribute) {
   const lObject = structuredClone(pObject);
   delete lObject[pAttribute];
 
-  Object.keys(pObject).forEach((pKey) => {
-    if (typeof pObject[pKey] === "object") {
-      lObject[pKey] = stripAttribute(pObject[pKey], pAttribute);
+  for (const lKey of Object.keys(pObject)) {
+    if (typeof pObject[lKey] === "object") {
+      lObject[lKey] = stripAttribute(pObject[lKey], pAttribute);
     }
-  });
+  }
 
   return lObject;
 }

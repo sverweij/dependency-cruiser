@@ -7,21 +7,24 @@ import {
 
 function extractRegularAMDDependencies(pNode, pDependencies) {
   if (isLikelyAMDDefineOrRequire(pNode)) {
-    pNode.expression.arguments
-      .filter((pArgument) => pArgument.type === "ArrayExpression")
-      .forEach((pArgument) =>
-        pArgument.elements.forEach((pElement) => {
-          if (pElement.value && typeof pElement.value === "string") {
-            pDependencies.push({
-              module: pElement.value,
-              moduleSystem: "amd",
-              dynamic: false,
-              exoticallyRequired: false,
-              dependencyTypes: ["amd-define"],
-            });
-          }
-        }),
-      );
+    const lArrayExpressionArguments = pNode.expression.arguments.filter(
+      (pArgument) => pArgument.type === "ArrayExpression",
+    );
+
+    for (const lArgument of lArrayExpressionArguments) {
+      for (const lElement of lArgument.elements) {
+        // eslint-disable-next-line max-depth
+        if (lElement.value && typeof lElement.value === "string") {
+          pDependencies.push({
+            module: lElement.value,
+            moduleSystem: "amd",
+            dynamic: false,
+            exoticallyRequired: false,
+            dependencyTypes: ["amd-define"],
+          });
+        }
+      }
+    }
   }
 }
 

@@ -338,7 +338,9 @@ export function walkJSDoc(pObject, pCollection = new Set()) {
   if (isJSDocImport(pObject)) {
     pCollection.add(pObject.argument.literal.text);
   } else if (Array.isArray(pObject)) {
-    pObject.forEach((pValue) => walkJSDoc(pValue, pCollection));
+    for (const lValue of pObject) {
+      walkJSDoc(lValue, pCollection);
+    }
   } else if (typeof pObject === "object") {
     for (const lKey in pObject) {
       if (!keyInJSDocIsIgnorable(lKey) && pObject[lKey]) {
@@ -473,9 +475,9 @@ function walk(
 
       // pResult = pResult.concat(lJSDocImports) looks like the more obvious
       // way to do this, but it re-assigns the pResult parameter
-      lJSDocImports.forEach((pImport) => {
-        pResult.push(pImport);
-      });
+      for (const lImport of lJSDocImports) {
+        pResult.push(lImport);
+      }
     }
     typescript.forEachChild(
       pASTNode,

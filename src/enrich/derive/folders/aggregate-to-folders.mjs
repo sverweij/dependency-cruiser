@@ -13,12 +13,12 @@ import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
-  pNewDependents.forEach((pNewDependent) => {
-    pAllDependents[pNewDependent] = pAllDependents[pNewDependent] || {
+  for (const lNewDependent of pNewDependents) {
+    pAllDependents[lNewDependent] = pAllDependents[lNewDependent] || {
       count: 0,
     };
-    pAllDependents[pNewDependent].count += 1;
-  });
+    pAllDependents[lNewDependent].count += 1;
+  }
 }
 
 /**
@@ -64,9 +64,9 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
 }
 
 function aggregateToFolder(pAllFolders, pModule) {
-  getParentFolders(dirname(pModule.source)).forEach((pParentDirectory) =>
-    upsertFolderAttributes(pAllFolders, pModule, pParentDirectory),
-  );
+  for (const lParentDirectory of getParentFolders(dirname(pModule.source))) {
+    upsertFolderAttributes(pAllFolders, pModule, lParentDirectory);
+  }
   return pAllFolders;
 }
 

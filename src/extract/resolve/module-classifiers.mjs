@@ -74,9 +74,9 @@ function determineFollowableExtensions(pResolveOptions) {
     ".less",
   ];
 
-  lKnownUnfollowables.forEach((pUnfollowable) => {
-    lReturnValue.delete(pUnfollowable);
-  });
+  for (const lUnfollowable of lKnownUnfollowables) {
+    lReturnValue.delete(lUnfollowable);
+  }
   return lReturnValue;
 }
 
