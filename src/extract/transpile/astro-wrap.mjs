@@ -1,3 +1,4 @@
+import { preProcess } from "./astro-preprocess.mjs";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
@@ -25,7 +26,8 @@ const astroPackageInfo = await tryImport(
  */
 function getTranspiler(pTsxWrapper) {
   return (pSource, pFileName, pTranspilerOptions) => {
-    const lTSXCode = astro.convertToTSX(pSource, {
+    const lPreparedSource = preProcess(pSource);
+    const lTSXCode = astro.convertToTSX(lPreparedSource, {
       filename: pFileName,
       sourcemap: false,
       includeStyles: false,
