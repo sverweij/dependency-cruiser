@@ -229,7 +229,7 @@ function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
   );
 }
 
-function isTrippleCursedCompositeExoticRequire(
+function isTripleCursedCompositeExoticRequire(
   pASTNode,
   pObjectName1,
   pObjectName2,
@@ -252,6 +252,7 @@ function isTrippleCursedCompositeExoticRequire(
     typescript.SyntaxKind[pASTNode.expression.expression.name.kind] ===
       "Identifier" &&
     pASTNode.expression.expression.name.escapedText === pObjectName2 &&
+    // getBuiltinModule
     pASTNode.expression.name &&
     typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
     pASTNode.expression.name.escapedText === pPropertyName &&
@@ -428,7 +429,7 @@ function walk(
     if (
       pDetectProcessBuiltinModuleCalls &&
       (isCompositeExoticRequire(pASTNode, "process", "getBuiltinModule") ||
-        isTrippleCursedCompositeExoticRequire(
+        isTripleCursedCompositeExoticRequire(
           pASTNode,
           "globalThis",
           "process",

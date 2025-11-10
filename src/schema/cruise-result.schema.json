@@ -985,7 +985,7 @@
         },
         "detectProcessBuiltinModuleCalls": {
           "type": "boolean",
-          "description": "When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/ `globalThis.process.getBuiltinModule` imports.Defaults to false."
+          "description": "When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/ `globalThis.process.getBuiltinModule` imports. Defaults to false."
         },
         "prefix": { "type": "string" },
         "suffix": { "type": "string" },

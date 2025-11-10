@@ -237,7 +237,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("recognizes process.getBuiltinModule & anotates it", async () => {
+  it("recognizes process.getBuiltinModule & annotates it", async () => {
     const lOptions = normalizeCruiseOptions({
       detectProcessBuiltinModuleCalls: true,
     });
@@ -288,7 +288,7 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("recognizes globalThis.process.getBuiltinModule & anotates it", async () => {
+  it("recognizes globalThis.process.getBuiltinModule & annotates it", async () => {
     const lOptions = normalizeCruiseOptions({
       detectProcessBuiltinModuleCalls: true,
     });

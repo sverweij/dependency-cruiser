@@ -124,7 +124,7 @@ export default {
           type: "boolean",
           description:
             "When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/ " +
-            "`globalThis.process.getBuiltinModule` imports." +
+            "`globalThis.process.getBuiltinModule` imports. " +
             "Defaults to false.",
         },
         prefix: {
