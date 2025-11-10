@@ -235,7 +235,6 @@ function isTrippleCursedCompositeExoticRequire(
   pObjectName2,
   pPropertyName,
 ) {
-  // my brain hurts
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
