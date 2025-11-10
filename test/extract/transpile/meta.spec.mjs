@@ -51,6 +51,7 @@ describe("[U] extract/transpile/meta", () => {
       ".coffee.md",
       ".csx",
       ".cjsx",
+      ".astro",
     ]);
   });
 
