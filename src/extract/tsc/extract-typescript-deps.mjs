@@ -236,7 +236,28 @@ function isTrippleCursedCompositeExoticRequire(
   pPropertyName,
 ) {
   // my brain hurts
-  return false;
+  return (
+    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.expression &&
+    typescript.SyntaxKind[pASTNode.expression.kind] ===
+      "PropertyAccessExpression" &&
+    pASTNode.expression.expression &&
+    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
+      "PropertyAccessExpression" &&
+    // globalThis
+    pASTNode.expression.expression.expression &&
+    typescript.SyntaxKind[pASTNode.expression.expression.expression.kind] ===
+      "Identifier" &&
+    pASTNode.expression.expression.expression.escapedText === pObjectName1 &&
+    // process
+    typescript.SyntaxKind[pASTNode.expression.expression.name.kind] ===
+      "Identifier" &&
+    pASTNode.expression.expression.name.escapedText === pObjectName2 &&
+    pASTNode.expression.name &&
+    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.escapedText === pPropertyName &&
+    firstArgumentIsAString(pASTNode)
+  );
 }
 
 function isExoticRequire(pASTNode, pString) {

@@ -82,7 +82,9 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
       extractTypescript(
         "const path = process.getBuiltinModule('node:path');",
         [],
+        // detectJSDocImports:
         false,
+        // detectProcessBuiltinModuleCalls:
         true,
       ),
       [
@@ -102,7 +104,9 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
       extractTypescript(
         "const path = globalThis.process.getBuiltinModule('node:path');",
         [],
+        // detectJSDocImports:
         false,
+        // detectProcessBuiltinModuleCalls:
         true,
       ),
       [
@@ -122,7 +126,9 @@ describe("[U] ast-extractors/extract-typescript - exotics", () => {
       extractTypescript(
         "const path = process.getBuiltinModule('node:path');",
         [],
+        // detectJSDocImports:
         false,
+        // detectProcessBuiltinModuleCalls:
         false,
       ),
       [],
