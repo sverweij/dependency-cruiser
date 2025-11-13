@@ -38,17 +38,14 @@ function mergeDependencies(pResolvedName, pDependencies) {
  * @returns {IDependency[]}
  */
 function consolidateDependencies(pDependencies) {
-  let lDependencies = structuredClone(pDependencies);
+  const lProcessed = new Set();
   let lReturnValue = [];
 
-  while (lDependencies.length > 0) {
-    lReturnValue.push(
-      mergeDependencies(lDependencies[0].resolved, lDependencies),
-    );
-    lDependencies = lDependencies.filter(
-      // eslint-disable-next-line no-loop-func
-      (pDependency) => pDependency.resolved !== lDependencies[0].resolved,
-    );
+  for (const lDependency of pDependencies) {
+    if (!lProcessed.has(lDependency.resolved)) {
+      lReturnValue.push(mergeDependencies(lDependency.resolved, pDependencies));
+      lProcessed.add(lDependency.resolved);
+    }
   }
 
   return lReturnValue;

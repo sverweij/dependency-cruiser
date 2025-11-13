@@ -32,15 +32,14 @@ function mergeModules(pSourceString, pModules) {
 }
 
 export default function consolidateModules(pModules) {
-  let lModules = structuredClone(pModules);
-  let lReturnValue = [];
+  const lProcessed = new Set();
+  const lReturnValue = [];
 
-  while (lModules.length > 0) {
-    lReturnValue.push(mergeModules(lModules[0].source, lModules));
-    lModules = lModules.filter(
-      // eslint-disable-next-line no-loop-func
-      (pModule) => pModule.source !== lModules[0].source,
-    );
+  for (const lModule of pModules) {
+    if (!lProcessed.has(lModule.source)) {
+      lReturnValue.push(mergeModules(lModule.source, pModules));
+      lProcessed.add(lModule.source);
+    }
   }
   return lReturnValue;
 }
