@@ -82,12 +82,13 @@ function extractFileDirectoryArray(
   );
 
   bus.info("read files: visit dependencies");
-  return lInitialSources.reduce((pDependencies, pFilename) => {
-    if (!lVisited.has(pFilename)) {
-      lVisited.add(pFilename);
-      return pDependencies.concat(
-        extractRecursive(
-          pFilename,
+  const lResult = [];
+  for (const lFilename of lInitialSources) {
+    if (!lVisited.has(lFilename)) {
+      lVisited.add(lFilename);
+      lResult.push(
+        ...extractRecursive(
+          lFilename,
           pCruiseOptions,
           lVisited,
           0,
@@ -96,8 +97,8 @@ function extractFileDirectoryArray(
         ),
       );
     }
-    return pDependencies;
-  }, []);
+  }
+  return lResult;
 }
 
 function isNotFollowable({ followable }) {
