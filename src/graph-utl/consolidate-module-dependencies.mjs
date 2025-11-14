@@ -39,7 +39,7 @@ function mergeDependencies(pResolvedName, pDependencies) {
  */
 function consolidateDependencies(pDependencies) {
   const lProcessed = new Set();
-  let lReturnValue = [];
+  const lReturnValue = [];
 
   for (const lDependency of pDependencies) {
     if (!lProcessed.has(lDependency.resolved)) {
