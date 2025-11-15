@@ -18,17 +18,18 @@ function mergeModule(pLeftModule, pRightModule) {
 }
 
 function mergeModules(pSourceString, pModules) {
-  return pModules
-    .filter((pModule) => pModule.source === pSourceString)
-    .reduce(
-      (pMergedModule, pCurrentModule) =>
-        mergeModule(pMergedModule, pCurrentModule),
-      {
-        dependencies: [],
-        rules: [],
-        valid: true,
-      },
-    );
+  let lReturnValue = {
+    dependencies: [],
+    rules: [],
+    valid: true,
+  };
+
+  for (const lModule of pModules) {
+    if (lModule.source === pSourceString) {
+      lReturnValue = mergeModule(lReturnValue, lModule);
+    }
+  }
+  return lReturnValue;
 }
 
 export default function consolidateModules(pModules) {

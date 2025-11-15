@@ -20,17 +20,17 @@ function mergeDependency(pLeftDependency, pRightDependency) {
 }
 
 function mergeDependencies(pResolvedName, pDependencies) {
-  return pDependencies
-    .filter((pDependency) => pDependency.resolved === pResolvedName)
-    .reduce(
-      (pAllDependencies, pCurrentDependency) =>
-        mergeDependency(pAllDependencies, pCurrentDependency),
-      {
-        dependencyTypes: [],
-        rules: [],
-        valid: true,
-      },
-    );
+  let lReturnValue = {
+    dependencyTypes: [],
+    rules: [],
+    valid: true,
+  };
+  for (const lDependency of pDependencies) {
+    if (lDependency.resolved === pResolvedName) {
+      lReturnValue = mergeDependency(lReturnValue, lDependency);
+    }
+  }
+  return lReturnValue;
 }
 
 /**
