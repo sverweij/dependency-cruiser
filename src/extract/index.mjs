@@ -28,43 +28,38 @@ function extractRecursive(
           pTranspileOptions,
         )
       : [];
-
-  return lDependencies
-    .filter(
-      ({ followable, matchesDoNotFollow }) => followable && !matchesDoNotFollow,
-    )
-    .reduce(
-      (pAll, { resolved }) => {
-        if (!pVisited.has(resolved)) {
-          return pAll.concat(
-            extractRecursive(
-              resolved,
+  const lReturnValue = [
+    {
+      source: pFileName,
+      ...(pCruiseOptions.experimentalStats
+        ? {
+            experimentalStats: extractStats(
+              pFileName,
               pCruiseOptions,
-              pVisited,
-              pDepth + 1,
-              pResolveOptions,
               pTranspileOptions,
             ),
-          );
-        }
-        return pAll;
-      },
-      [
-        {
-          source: pFileName,
-          ...(pCruiseOptions.experimentalStats
-            ? {
-                experimentalStats: extractStats(
-                  pFileName,
-                  pCruiseOptions,
-                  pTranspileOptions,
-                ),
-              }
-            : {}),
-          dependencies: lDependencies,
-        },
-      ],
-    );
+          }
+        : {}),
+      dependencies: lDependencies,
+    },
+  ];
+
+  // eslint-disable-next-line budapestian/local-variable-pattern
+  for (const { resolved, followable, matchesDoNotFollow } of lDependencies) {
+    if (followable && !matchesDoNotFollow && !pVisited.has(resolved)) {
+      lReturnValue.push(
+        ...extractRecursive(
+          resolved,
+          pCruiseOptions,
+          pVisited,
+          pDepth + 1,
+          pResolveOptions,
+          pTranspileOptions,
+        ),
+      );
+    }
+  }
+  return lReturnValue;
 }
 
 function extractFileDirectoryArray(
