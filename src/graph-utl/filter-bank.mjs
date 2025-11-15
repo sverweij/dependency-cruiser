@@ -49,7 +49,7 @@ function filterReaches(pModules, pReachesFilter) {
 
   /** @type {Set<string>} */
   const lReachingModules = new Set();
-  let lIndexedModules = new IndexedModuleGraph(pModules);
+  const lIndexedModules = new IndexedModuleGraph(pModules);
 
   for (let lModuleToReach of lModuleNamesToReach) {
     for (let lDependent of lIndexedModules.findTransitiveDependents(
