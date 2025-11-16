@@ -18,29 +18,29 @@ function mergeModule(pLeftModule, pRightModule) {
 }
 
 function mergeModules(pSourceString, pModules) {
-  return pModules
-    .filter((pModule) => pModule.source === pSourceString)
-    .reduce(
-      (pMergedModule, pCurrentModule) =>
-        mergeModule(pMergedModule, pCurrentModule),
-      {
-        dependencies: [],
-        rules: [],
-        valid: true,
-      },
-    );
+  let lReturnValue = {
+    dependencies: [],
+    rules: [],
+    valid: true,
+  };
+
+  for (const lModule of pModules) {
+    if (lModule.source === pSourceString) {
+      lReturnValue = mergeModule(lReturnValue, lModule);
+    }
+  }
+  return lReturnValue;
 }
 
 export default function consolidateModules(pModules) {
-  let lModules = structuredClone(pModules);
-  let lReturnValue = [];
+  const lProcessed = new Set();
+  const lReturnValue = [];
 
-  while (lModules.length > 0) {
-    lReturnValue.push(mergeModules(lModules[0].source, lModules));
-    lModules = lModules.filter(
-      // eslint-disable-next-line no-loop-func
-      (pModule) => pModule.source !== lModules[0].source,
-    );
+  for (const lModule of pModules) {
+    if (!lProcessed.has(lModule.source)) {
+      lReturnValue.push(mergeModules(lModule.source, pModules));
+      lProcessed.add(lModule.source);
+    }
   }
   return lReturnValue;
 }

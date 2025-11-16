@@ -47,22 +47,25 @@ function filterReaches(pModules, pReachesFilter) {
     .filter((pModule) => moduleMatchesFilter(pModule, pReachesFilter))
     .map(({ source }) => source);
 
-  /** @type {Array<string>} */
-  let lReachingModules = [];
-  let lIndexedModules = new IndexedModuleGraph(pModules);
+  /** @type {Set<string>} */
+  const lReachingModules = new Set();
+  const lIndexedModules = new IndexedModuleGraph(pModules);
 
   for (let lModuleToReach of lModuleNamesToReach) {
-    lReachingModules = lReachingModules.concat(
-      lIndexedModules.findTransitiveDependents(lModuleToReach),
-    );
+    for (let lDependent of lIndexedModules.findTransitiveDependents(
+      lModuleToReach,
+    )) {
+      lReachingModules.add(lDependent);
+    }
   }
+
   return pModules
-    .filter(({ source }) => lReachingModules.includes(source))
+    .filter(({ source }) => lReachingModules.has(source))
     .map((pModule) => ({
       ...pModule,
       matchesReaches: lModuleNamesToReach.includes(pModule.source),
       dependencies: pModule.dependencies.filter(({ resolved }) =>
-        lReachingModules.includes(resolved),
+        lReachingModules.has(resolved),
       ),
     }));
 }

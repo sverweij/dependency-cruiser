@@ -20,17 +20,17 @@ function mergeDependency(pLeftDependency, pRightDependency) {
 }
 
 function mergeDependencies(pResolvedName, pDependencies) {
-  return pDependencies
-    .filter((pDependency) => pDependency.resolved === pResolvedName)
-    .reduce(
-      (pAllDependencies, pCurrentDependency) =>
-        mergeDependency(pAllDependencies, pCurrentDependency),
-      {
-        dependencyTypes: [],
-        rules: [],
-        valid: true,
-      },
-    );
+  let lReturnValue = {
+    dependencyTypes: [],
+    rules: [],
+    valid: true,
+  };
+  for (const lDependency of pDependencies) {
+    if (lDependency.resolved === pResolvedName) {
+      lReturnValue = mergeDependency(lReturnValue, lDependency);
+    }
+  }
+  return lReturnValue;
 }
 
 /**
@@ -38,17 +38,14 @@ function mergeDependencies(pResolvedName, pDependencies) {
  * @returns {IDependency[]}
  */
 function consolidateDependencies(pDependencies) {
-  let lDependencies = structuredClone(pDependencies);
-  let lReturnValue = [];
+  const lProcessed = new Set();
+  const lReturnValue = [];
 
-  while (lDependencies.length > 0) {
-    lReturnValue.push(
-      mergeDependencies(lDependencies[0].resolved, lDependencies),
-    );
-    lDependencies = lDependencies.filter(
-      // eslint-disable-next-line no-loop-func
-      (pDependency) => pDependency.resolved !== lDependencies[0].resolved,
-    );
+  for (const lDependency of pDependencies) {
+    if (!lProcessed.has(lDependency.resolved)) {
+      lReturnValue.push(mergeDependencies(lDependency.resolved, pDependencies));
+      lProcessed.add(lDependency.resolved);
+    }
   }
 
   return lReturnValue;
