@@ -270,14 +270,6 @@
     "vue-template-compiler": "2.7.16",
     "yarn": "1.22.22"
   },
-  "overrides": {
-    "cross-spawn": ">=6.0.6",
-    "nanoid": "^3.3.8"
-  },
-  "resolutions": {
-    "cross-spawn": ">=6.0.6",
-    "nanoid": "^3.3.8"
-  },
   "upem": {
     "policies": [
       {
