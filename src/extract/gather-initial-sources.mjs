@@ -31,12 +31,12 @@ function shouldBeIncluded(pFullPathToFile, pOptions) {
   );
 }
 
-function shouldNotBeExcluded(pFullPathToFile, pOptions) {
+function shouldBeExcluded(pFullPathToFile, pOptions) {
   return (
-    (!pOptions?.exclude?.path ||
-      !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) &&
-    (!pOptions?.doNotFollow?.path ||
-      !filenameMatchesPattern(pFullPathToFile, pOptions.doNotFollow.path))
+    (pOptions?.exclude?.path &&
+      filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) ||
+    (pOptions?.doNotFollow?.path &&
+      filenameMatchesPattern(pFullPathToFile, pOptions.doNotFollow.path))
   );
 }
 
@@ -48,11 +48,12 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return readdirSync(join(pOptions.baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
-    .filter((pFullPathToFile) =>
-      shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions),
-    )
     .flatMap((pFullPathToFile) => {
-      let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
+      const lPosixPath = pathToPosix(pFullPathToFile);
+      if (shouldBeExcluded(lPosixPath, pOptions)) {
+        return [];
+      }
+      const lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
         throwIfNoEntry: false,
       });
 
@@ -60,14 +61,15 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
         if (lStat.isDirectory()) {
           return gatherScannableFilesFromDirectory(pFullPathToFile, pOptions);
         }
-        if (fileIsScannable(pOptions, pFullPathToFile)) {
-          return pFullPathToFile;
+        if (
+          fileIsScannable(pOptions, pFullPathToFile) &&
+          shouldBeIncluded(lPosixPath, pOptions)
+        ) {
+          return lPosixPath;
         }
       }
       return [];
-    })
-    .map((pFullPathToFile) => pathToPosix(pFullPathToFile))
-    .filter((pFullPathToFile) => shouldBeIncluded(pFullPathToFile, pOptions));
+    });
 }
 
 function expandGlob(pBaseDirectory, pScannedGlob) {
