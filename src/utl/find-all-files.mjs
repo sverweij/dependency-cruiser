@@ -28,37 +28,29 @@ function walk(
   pDirectoryName,
   { baseDir, ignoreFilterFn, excludeFilterFn, includeOnlyFilterFn },
 ) {
-  return readdirSync(join(baseDir, pDirectoryName))
+  const lFilesInCurrentDirectory = readdirSync(join(baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
     .filter(ignoreFilterFn)
     .filter(excludeFilterFn)
-    .filter(includeOnlyFilterFn)
-    .map((pFullPathToFile) => ({
-      fullPathToFile: pFullPathToFile,
-      isDirectory: fileIsDirectory(pFullPathToFile, baseDir),
-    }))
-    .reduce(
-      /**
-       * @param {string[]} pSum
-       * @param {{fullPathToFile: string; isDirectory: boolean}} pCurrentValue
-       * @returns {string[]}
-       */
-      (pSum, { fullPathToFile, isDirectory }) => {
-        if (isDirectory) {
-          return pSum.concat(
-            walk(fullPathToFile, {
-              baseDir,
-              ignoreFilterFn,
-              excludeFilterFn,
-              includeOnlyFilterFn,
-            }),
-          );
-        }
-        return pSum.concat(fullPathToFile);
-      },
-      [],
-    )
-    .map((pFullPathToFile) => pathToPosix(pFullPathToFile));
+    .filter(includeOnlyFilterFn);
+
+  const lFiles = [];
+  for (const lFile of lFilesInCurrentDirectory) {
+    if (fileIsDirectory(lFile, baseDir)) {
+      lFiles.push(
+        ...walk(lFile, {
+          baseDir,
+          ignoreFilterFn,
+          excludeFilterFn,
+          includeOnlyFilterFn,
+        }),
+      );
+    } else {
+      lFiles.push(pathToPosix(lFile));
+    }
+  }
+
+  return lFiles;
 }
 
 function readIgnoreFile(pFileName) {
