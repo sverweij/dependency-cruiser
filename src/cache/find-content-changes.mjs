@@ -19,6 +19,7 @@ import findAllFiles from "#utl/find-all-files.mjs";
 
 /**
  * @param {Set<string>} pFileSet
+ * @param {string} pBaseDirectory
  * @param {typeof getFileHashSync} pFileHashFunction
  * @returns {(pModule:IModule) => IRevisionChange}
  */
