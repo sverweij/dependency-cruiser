@@ -1,6 +1,6 @@
-import getDependents from "./get-dependents.mjs";
+import { isDependent } from "./module-utl.mjs";
 
-/** @import { IFlattenedRuleSet } from "../../../../types/rule-set.mjs" */
+/** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
 
 function isDependentsRule(pRule) {
   // used in folder rules and when moreUnstable is in the 'to' => governed by
@@ -14,6 +14,13 @@ function isDependentsRule(pRule) {
     Object.hasOwn(pRule?.module ?? {}, "numberOfDependentsMoreThan")
     /* c8 ignore stop */
   );
+}
+
+export function getDependents(pModule, pModules) {
+  // perf between O(n) in an unconnected graph and O(n^2) in a fully connected one
+  return pModules
+    .filter(isDependent(pModule.source))
+    .map((pDependentModule) => pDependentModule.source);
 }
 
 /**

@@ -1,6 +1,6 @@
 import deriveCycles from "./derive/circular.mjs";
 import deriveOrphans from "./derive/orphan/index.mjs";
-import addDependents from "./derive/dependents/index.mjs";
+import addDependents from "./derive/dependents.mjs";
 import deriveReachable from "./derive/reachable.mjs";
 import addValidations from "./add-validations.mjs";
 import softenKnownViolations from "./soften-known-violations.mjs";
