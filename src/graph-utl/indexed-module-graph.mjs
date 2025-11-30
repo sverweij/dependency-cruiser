@@ -1,4 +1,3 @@
-// @ts-check
 /* eslint-disable security/detect-object-injection */
 /**
  * @import { IFolderDependency, IDependency, IFolder, IModule } from "../../types/cruise-result.mjs"
@@ -68,7 +67,7 @@ export default class IndexedModuleGraph {
   ) {
     /** @type {string[]} */
     let lReturnValue = [];
-    const lModule = this.findVertexByName(pName);
+    const lModule = this.#indexedGraph.get(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
       let lDependents = lModule.dependents || [];
@@ -110,24 +109,26 @@ export default class IndexedModuleGraph {
   ) {
     /** @type {string[]} */
     let lReturnValue = [];
-    const lModule = this.findVertexByName(pName);
+    /** @type {IVertex} */
+    const lModule = this.#indexedGraph.get(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
       let lDependencies = lModule.dependencies;
       const lVisited = pVisited.add(pName);
 
       if (lDependencies.length > 0) {
-        lDependencies
-          .map(({ name }) => name)
-          .filter((pDependency) => !lVisited.has(pDependency))
-          .forEach((pDependency) =>
+        // eslint-disable-next-line budapestian/local-variable-pattern
+        for (const { name } of lDependencies) {
+          // eslint-disable-next-line max-depth
+          if (!lVisited.has(name)) {
             this.findTransitiveDependencies(
-              pDependency,
+              name,
               pMaxDepth,
               pDepth + 1,
               lVisited,
-            ),
-          );
+            );
+          }
+        }
       }
       lReturnValue = Array.from(lVisited);
     }
@@ -140,12 +141,10 @@ export default class IndexedModuleGraph {
    * @returns {IMiniDependency}
    */
   #geldEdge(pEdge) {
-    let lReturnValue = {};
-    lReturnValue.name = pEdge.name;
-    lReturnValue.dependencyTypes = pEdge.dependencyTypes
-      ? pEdge.dependencyTypes
-      : [];
-    return lReturnValue;
+    return {
+      name: pEdge.name,
+      dependencyTypes: pEdge.dependencyTypes ?? [],
+    };
   }
 
   /**
@@ -155,7 +154,8 @@ export default class IndexedModuleGraph {
    * @returns {Array<IMiniDependency>}
    */
   getPath(pFrom, pTo, pVisited = new Set()) {
-    const lFromNode = this.findVertexByName(pFrom);
+    /** @type {IVertex} */
+    const lFromNode = this.#indexedGraph.get(pFrom);
 
     pVisited.add(pFrom);
 
@@ -195,7 +195,8 @@ export default class IndexedModuleGraph {
    */
   #getCycle(pInitialSource, pCurrentDependency, pVisited) {
     const lVisited = pVisited || new Set();
-    const lCurrentVertex = this.findVertexByName(pCurrentDependency.name);
+    /** @type {IVertex} */
+    const lCurrentVertex = this.#indexedGraph.get(pCurrentDependency.name);
     const lEdges = lCurrentVertex.dependencies.filter(
       (pDependency) => !lVisited.has(pDependency.name),
     );
@@ -245,7 +246,8 @@ export default class IndexedModuleGraph {
    * @return {Array<IMiniDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
-    const lInitialNode = this.findVertexByName(pInitialSource);
+    /** @type {IVertex} */
+    const lInitialNode = this.#indexedGraph.get(pInitialSource);
     const lCurrentDependency = lInitialNode.dependencies.find(
       (pDependency) => pDependency.name === pCurrentSource,
     );
