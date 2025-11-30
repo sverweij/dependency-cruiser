@@ -18,8 +18,7 @@ export interface IStrictFromRestriction extends IFromRestriction {
   pathNot?: string;
 }
 
-export interface IStrictMiniDependencyRestriction
-  extends IStrictBaseRestrictionType {
+export interface IStrictMiniDependencyRestriction extends IStrictBaseRestrictionType {
   dependencyTypes?: DependencyType[];
   dependencyTypesNot?: DependencyType[];
 }
@@ -35,19 +34,16 @@ interface IStrictToRestriction extends IToRestriction {
   licenseNot?: string;
 }
 
-export interface IStrictReachabilityToRestrictionType
-  extends IReachabilityToRestrictionType {
+export interface IStrictReachabilityToRestrictionType extends IReachabilityToRestrictionType {
   path?: string;
   pathNot?: string;
 }
 
-export interface IStrictRequiredToRestrictionType
-  extends IRequiredToRestrictionType {
+export interface IStrictRequiredToRestrictionType extends IRequiredToRestrictionType {
   path?: string;
 }
 
-export interface IStrictDependentsModuleRestrictionType
-  extends IDependentsModuleRestrictionType {
+export interface IStrictDependentsModuleRestrictionType extends IDependentsModuleRestrictionType {
   path?: string;
   pathNot?: string;
 }

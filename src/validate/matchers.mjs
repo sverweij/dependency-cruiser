@@ -31,8 +31,8 @@ export function propertyEquals(pRule, pDependency, pProperty) {
 export function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
-      (pDependency[pProperty] &&
-        pDependency[pProperty].match(pRule.to[pRuleProperty])),
+    (pDependency[pProperty] &&
+      pDependency[pProperty].match(pRule.to[pRuleProperty])),
   );
 }
 
@@ -44,8 +44,8 @@ export function propertyMatchesNot(
 ) {
   return Boolean(
     !pRule.to[pRuleProperty] ||
-      (pDependency[pProperty] &&
-        !pDependency[pProperty].match(pRule.to[pRuleProperty])),
+    (pDependency[pProperty] &&
+      !pDependency[pProperty].match(pRule.to[pRuleProperty])),
   );
 }
 
@@ -72,7 +72,7 @@ export function matchesModulePathNot(pRule, pModule) {
 function _matchesToPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
-      pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
+    pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
   );
 }
 
@@ -102,14 +102,14 @@ export function matchToModulePathNot(pRule, pModule, pGroups) {
 export function matchesToDependencyTypes(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypes ||
-      intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes),
+    intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes),
   );
 }
 
 export function matchesToDependencyTypesNot(pRule, pDependency) {
   return Boolean(
     !pRule.to.dependencyTypesNot ||
-      !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
+    !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
   );
 }
 

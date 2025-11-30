@@ -87,15 +87,15 @@ export default class ContentStrategy {
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
     return Boolean(
       pExistingRevisionData &&
-        pNewRevisionData &&
-        // Even though we don't really have a SHA1, it might be the previous version
-        // of the cache did, e.g. because it was rendered with the metadata cache
-        // strategy. In that case the SHA1 comparison is a reliable, fast bailout.
-        pExistingRevisionData.SHA1 === pNewRevisionData.SHA1 &&
-        isDeepStrictEqual(
-          pExistingRevisionData.changes,
-          pNewRevisionData.changes,
-        ),
+      pNewRevisionData &&
+      // Even though we don't really have a SHA1, it might be the previous version
+      // of the cache did, e.g. because it was rendered with the metadata cache
+      // strategy. In that case the SHA1 comparison is a reliable, fast bailout.
+      pExistingRevisionData.SHA1 === pNewRevisionData.SHA1 &&
+      isDeepStrictEqual(
+        pExistingRevisionData.changes,
+        pNewRevisionData.changes,
+      ),
     );
   }
 

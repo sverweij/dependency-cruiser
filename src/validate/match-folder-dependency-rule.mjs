@@ -15,16 +15,14 @@ function fromFolderPathNot(pRule, pFromFolder) {
 function toFolderPath(pRule, pToFolder, pGroups) {
   return Boolean(
     !pRule.to.path ||
-      pToFolder.name.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
+    pToFolder.name.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
   );
 }
 
 function toFolderPathNot(pRule, pToFolder, pGroups) {
   return Boolean(
     !pRule.to.pathNot ||
-      !pToFolder.name.match(
-        replaceGroupPlaceholders(pRule.to.pathNot, pGroups),
-      ),
+    !pToFolder.name.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)),
   );
 }
 

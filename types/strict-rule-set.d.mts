@@ -24,14 +24,12 @@ export interface IStrictRegularForbiddenRuleType extends IStrictBaseRuleType {
   scope: RuleScopeType;
 }
 
-export interface IStrictReachabilityForbiddenRuleType
-  extends IStrictBaseRuleType {
+export interface IStrictReachabilityForbiddenRuleType extends IStrictBaseRuleType {
   from: IStrictBaseRestrictionType;
   to: IStrictReachabilityToRestrictionType;
 }
 
-export interface IStrictDependentsForbiddenRuleType
-  extends IStrictBaseRuleType {
+export interface IStrictDependentsForbiddenRuleType extends IStrictBaseRuleType {
   module: IStrictDependentsModuleRestrictionType;
   from: IStrictBaseRestrictionType;
 }

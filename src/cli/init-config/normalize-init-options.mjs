@@ -19,12 +19,12 @@ import meta from "#meta.cjs";
 function usesTypeScript(pInitOptions, pExtensions) {
   return Boolean(
     pInitOptions.tsConfig ||
-      pInitOptions.tsPreCompilationDeps ||
-      (pExtensions || []).some((pExtension) =>
-        [".ts", ".tsx", ".d.ts", ".mts", ".d.mts", ".cts", ".d.cts"].includes(
-          pExtension,
-        ),
+    pInitOptions.tsPreCompilationDeps ||
+    (pExtensions || []).some((pExtension) =>
+      [".ts", ".tsx", ".d.ts", ".mts", ".d.mts", ".cts", ".d.cts"].includes(
+        pExtension,
       ),
+    ),
   );
 }
 
