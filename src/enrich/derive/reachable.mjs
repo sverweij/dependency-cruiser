@@ -199,11 +199,11 @@ export default function deriveReachables(pGraph, pRuleSet) {
   if (lReachableRules.length > 0) {
     const lIndexedGraph = new IndexedModuleGraph(pGraph);
 
-    return lReachableRules.reduce(
-      (pReturnGraph, pRule) =>
-        addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
-      structuredClone(pGraph),
-    );
+    let lResultGraph = structuredClone(pGraph);
+    for (const lRule of lReachableRules) {
+      lResultGraph = addReachabilityToGraph(lResultGraph, lIndexedGraph, lRule);
+    }
+    return lResultGraph;
   }
   return pGraph;
 }
