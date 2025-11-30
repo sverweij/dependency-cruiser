@@ -266,7 +266,7 @@
     "svgo": "4.0.0",
     "symlink-dir": "^7.1.0",
     "typescript": "5.9.3",
-    "upem": "10.0.2",
+    "upem": "10.0.3",
     "vue-template-compiler": "2.7.16",
     "yarn": "1.22.22"
   },
