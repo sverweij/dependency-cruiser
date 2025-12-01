@@ -20,8 +20,6 @@ const INTERESTING_NODE_KINDS = new Set([
   typescript.SyntaxKind.ExportDeclaration,
   typescript.SyntaxKind.ImportDeclaration,
   typescript.SyntaxKind.ImportEqualsDeclaration,
-  typescript.SyntaxKind.DynamicImport,
-  typescript.SyntaxKind.TypeReference,
   typescript.SyntaxKind.LastTypeNode,
 ]);
 
