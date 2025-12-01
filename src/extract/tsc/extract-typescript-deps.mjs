@@ -60,7 +60,7 @@ function extractImports(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ImportDeclaration &&
         pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
@@ -84,7 +84,7 @@ function extractExports(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ExportDeclaration &&
         pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
@@ -112,7 +112,7 @@ function extractImportEquals(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ImportEqualsDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ImportEqualsDeclaration &&
         pStatement.moduleReference &&
         pStatement.moduleReference.expression &&
         pStatement.moduleReference.expression.text,
@@ -173,15 +173,15 @@ function firstArgumentIsAString(pASTNode) {
   return (
     lFirstArgument &&
     // "thing" or 'thing'
-    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
+    (lFirstArgument.kind === typescript.SyntaxKind.StringLiteral ||
       // `thing`
-      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
+      lFirstArgument.kind === typescript.SyntaxKind.FirstTemplateToken)
   );
 }
 
 function isRequireCallExpression(pASTNode) {
   if (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression
   ) {
     /*
@@ -204,7 +204,7 @@ function isRequireCallExpression(pASTNode) {
 
 function isSingleExoticRequire(pASTNode, pString) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
     pASTNode.expression.text === pString &&
     firstArgumentIsAString(pASTNode)
@@ -214,16 +214,15 @@ function isSingleExoticRequire(pASTNode, pString) {
 /* eslint complexity:0 */
 function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     pASTNode.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.escapedText === pObjectName &&
     pASTNode.expression.name &&
-    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.name.escapedText === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
@@ -236,25 +235,25 @@ function isTripleCursedCompositeExoticRequire(
   pPropertyName,
 ) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     pASTNode.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     // globalThis
     pASTNode.expression.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.expression.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.expression.kind ===
+      typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.expression.escapedText === pObjectName1 &&
     // process
-    typescript.SyntaxKind[pASTNode.expression.expression.name.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.name.kind ===
+      typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.name.escapedText === pObjectName2 &&
     // getBuiltinModule
     pASTNode.expression.name &&
-    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.name.escapedText === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
@@ -270,23 +269,22 @@ function isExoticRequire(pASTNode, pString) {
 
 function isDynamicImportExpression(pASTNode) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword" &&
+    pASTNode.expression.kind === typescript.SyntaxKind.ImportKeyword &&
     firstArgumentIsAString(pASTNode)
   );
 }
 
 function isTypeImport(pASTNode) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "LastTypeNode" &&
+    pASTNode.kind === typescript.SyntaxKind.LastTypeNode &&
     pASTNode.argument &&
-    typescript.SyntaxKind[pASTNode.argument.kind] === "LiteralType" &&
+    pASTNode.argument.kind === typescript.SyntaxKind.LiteralType &&
     ((pASTNode.argument.literal &&
-      typescript.SyntaxKind[pASTNode.argument.literal.kind] ===
-        "StringLiteral") ||
-      typescript.SyntaxKind[pASTNode.argument.literal.kind] ===
-        "FirstTemplateToken")
+      pASTNode.argument.literal.kind === typescript.SyntaxKind.StringLiteral) ||
+      pASTNode.argument.literal.kind ===
+        typescript.SyntaxKind.FirstTemplateToken)
   );
 }
 
@@ -296,7 +294,7 @@ function extractJSDocImportTags(pJSDocTags) {
       (pTag) =>
         pTag.tagName.escapedText === "import" &&
         pTag.moduleSpecifier &&
-        typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
+        pTag.moduleSpecifier.kind === typescript.SyntaxKind.StringLiteral &&
         pTag.moduleSpecifier.text,
     )
     .map((pTag) => ({
@@ -310,10 +308,9 @@ function extractJSDocImportTags(pJSDocTags) {
 function isJSDocImport(pTypeNode) {
   // import('./hello.mjs') within jsdoc
   return (
-    typescript.SyntaxKind[pTypeNode?.kind] === "LastTypeNode" &&
-    typescript.SyntaxKind[pTypeNode.argument?.kind] === "LiteralType" &&
-    typescript.SyntaxKind[pTypeNode.argument?.literal?.kind] ===
-      "StringLiteral" &&
+    pTypeNode?.kind === typescript.SyntaxKind.LastTypeNode &&
+    pTypeNode.argument?.kind === typescript.SyntaxKind.LiteralType &&
+    pTypeNode.argument?.literal?.kind === typescript.SyntaxKind.StringLiteral &&
     pTypeNode.argument.literal.text
   );
 }
@@ -362,7 +359,7 @@ function extractJSDocBracketImports(pJSDocTags) {
     .filter(
       (pTag) =>
         pTag.tagName.escapedText !== "import" &&
-        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode",
+        pTag.typeExpression?.kind === typescript.SyntaxKind.FirstJSDocNode,
     )
     .flatMap((pTag) => getJSDocImports(pTag))
     .map((pImportName) => ({
