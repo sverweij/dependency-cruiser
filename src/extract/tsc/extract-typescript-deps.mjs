@@ -412,15 +412,17 @@ function walk(
     }
 
     // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
-    for (const lExoticRequireString of pExoticRequireStrings) {
-      if (isExoticRequire(pASTNode, lExoticRequireString)) {
-        pResult.push({
-          module: pASTNode.arguments[0].text,
-          moduleSystem: "cjs",
-          exoticallyRequired: true,
-          exoticRequire: lExoticRequireString,
-          dependencyTypes: ["exotic-require"],
-        });
+    if (pASTNode.kind === typescript.SyntaxKind.CallExpression) {
+      for (const lExoticRequireString of pExoticRequireStrings) {
+        if (isExoticRequire(pASTNode, lExoticRequireString)) {
+          pResult.push({
+            module: pASTNode.arguments[0].text,
+            moduleSystem: "cjs",
+            exoticallyRequired: true,
+            exoticRequire: lExoticRequireString,
+            dependencyTypes: ["exotic-require"],
+          });
+        }
       }
     }
 
