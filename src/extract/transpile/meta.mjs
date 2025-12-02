@@ -87,7 +87,7 @@ export const EXTENSION2AVAILABLE = new Map([
 ]);
 
 const EXTENSIONS_PER_PARSER = {
-  swc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
+  swc: new Set([".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"]),
   // tsc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
   // acorn: [".js", ".cjs", ".mjs", ".jsx"],
 };
@@ -96,7 +96,7 @@ function extensionIsAvailable(pExtension) {
   return (
     EXTENSION2AVAILABLE.get(pExtension) ||
     // should eventually also check whether swc is enabled as a parser?
-    (TRANSPILER2AVAILABLE.swc && EXTENSIONS_PER_PARSER.swc.includes(pExtension))
+    (TRANSPILER2AVAILABLE.swc && EXTENSIONS_PER_PARSER.swc.has(pExtension))
   );
 }
 
