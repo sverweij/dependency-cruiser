@@ -231,6 +231,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.28.5",
+    "@astrojs/compiler": "2.13.0",
     "@babel/plugin-transform-modules-commonjs": "7.27.1",
     "@babel/preset-typescript": "7.28.5",
     "@eslint/eslintrc": "3.3.3",
@@ -308,6 +309,7 @@
     "node": "^20.12||^22||>=24"
   },
   "supportedTranspilers": {
+    "@astrojs/compiler": ">=2.0.0 <3.0.0",
     "babel": ">=7.0.0 <8.0.0",
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",

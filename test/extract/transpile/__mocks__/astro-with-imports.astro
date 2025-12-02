@@ -1,0 +1,24 @@
+---
+import { Button } from "./components/Button.astro";
+import { formatDate } from "../utils/date.js";
+
+interface Props {
+  title: string;
+  date: Date;
+}
+
+const { title, date } = Astro.props;
+const formattedDate = formatDate(date);
+---
+
+<div>
+  <h1>{title}</h1>
+  <time>{formattedDate}</time>
+  <Button />
+</div>
+
+<script>
+  import { logAnalytics } from "./analytics.js";
+
+  logAnalytics("page-view");
+</script>
