@@ -399,6 +399,10 @@ function visitNode(
   pExoticRequireStrings,
   pDetectProcessBuiltinModuleCalls,
 ) {
+  // checks are in order of ~expected frequency
+
+  // early returns as these types of dependencyTypes cannot occur at the same
+  // time in a single AST node
   // require('a-string'), require(`a-template-literal`)
   if (isRequireCallExpression(pASTNode)) {
     pResult.push({
@@ -407,6 +411,31 @@ function visitNode(
       exoticallyRequired: false,
       dependencyTypes: ["require"],
     });
+    return;
+  }
+
+  // import('a-string'), import(`a-template-literal`)
+  if (isDynamicImportExpression(pASTNode)) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "es6",
+      dynamic: true,
+      exoticallyRequired: false,
+      dependencyTypes: ["dynamic-import"],
+    });
+    return;
+  }
+
+  // const atype: import('./types').T
+  // const atype: import(`./types`).T
+  if (isTypeImport(pASTNode)) {
+    pResult.push({
+      module: pASTNode.argument.literal.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-import"],
+    });
+    return;
   }
 
   // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
@@ -420,6 +449,7 @@ function visitNode(
           exoticRequire: lExoticRequireString,
           dependencyTypes: ["exotic-require"],
         });
+        return;
       }
     }
   }
@@ -440,28 +470,6 @@ function visitNode(
       moduleSystem: "cjs",
       exoticallyRequired: false,
       dependencyTypes: ["process-get-builtin-module"],
-    });
-  }
-
-  // import('a-string'), import(`a-template-literal`)
-  if (isDynamicImportExpression(pASTNode)) {
-    pResult.push({
-      module: pASTNode.arguments[0].text,
-      moduleSystem: "es6",
-      dynamic: true,
-      exoticallyRequired: false,
-      dependencyTypes: ["dynamic-import"],
-    });
-  }
-
-  // const atype: import('./types').T
-  // const atype: import(`./types`).T
-  if (isTypeImport(pASTNode)) {
-    pResult.push({
-      module: pASTNode.argument.literal.text,
-      moduleSystem: "es6",
-      exoticallyRequired: false,
-      dependencyTypes: ["type-import"],
     });
   }
 }
