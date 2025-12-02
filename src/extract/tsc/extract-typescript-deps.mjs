@@ -392,6 +392,80 @@ function extractJSDocImports(pJSDocNodes) {
   return lJSDocImportTags.concat(lJSDocBracketImports);
 }
 
+// eslint-disable-next-line max-lines-per-function
+function visitNode(
+  pResult,
+  pASTNode,
+  pExoticRequireStrings,
+  pDetectProcessBuiltinModuleCalls,
+) {
+  // require('a-string'), require(`a-template-literal`)
+  if (isRequireCallExpression(pASTNode)) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "cjs",
+      exoticallyRequired: false,
+      dependencyTypes: ["require"],
+    });
+  }
+
+  // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+  if (pASTNode.kind === typescript.SyntaxKind.CallExpression) {
+    for (const lExoticRequireString of pExoticRequireStrings) {
+      if (isExoticRequire(pASTNode, lExoticRequireString)) {
+        pResult.push({
+          module: pASTNode.arguments[0].text,
+          moduleSystem: "cjs",
+          exoticallyRequired: true,
+          exoticRequire: lExoticRequireString,
+          dependencyTypes: ["exotic-require"],
+        });
+      }
+    }
+  }
+
+  // const path = process.getBuiltinModule('node:path'); const fs = globalThis.process.getBuiltinModule(`node:fs`);
+  if (
+    pDetectProcessBuiltinModuleCalls &&
+    (isCompositeExoticRequire(pASTNode, "process", "getBuiltinModule") ||
+      isTripleCursedCompositeExoticRequire(
+        pASTNode,
+        "globalThis",
+        "process",
+        "getBuiltinModule",
+      ))
+  ) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "cjs",
+      exoticallyRequired: false,
+      dependencyTypes: ["process-get-builtin-module"],
+    });
+  }
+
+  // import('a-string'), import(`a-template-literal`)
+  if (isDynamicImportExpression(pASTNode)) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "es6",
+      dynamic: true,
+      exoticallyRequired: false,
+      dependencyTypes: ["dynamic-import"],
+    });
+  }
+
+  // const atype: import('./types').T
+  // const atype: import(`./types`).T
+  if (isTypeImport(pASTNode)) {
+    pResult.push({
+      module: pASTNode.argument.literal.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-import"],
+    });
+  }
+}
+
 /**
  * Walks the AST and collects all dependencies
  *
@@ -400,14 +474,12 @@ function extractJSDocImports(pJSDocNodes) {
  * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
  * @returns {(pASTNode: Node) => void} - the walker function
  */
-// eslint-disable-next-line max-lines-per-function
 function walk(
   pResult,
   pExoticRequireStrings,
   pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
 ) {
-  // eslint-disable-next-line max-lines-per-function
   return (pASTNode) => {
     // /** @import thing from './module' */ etc
     // /** @type {import('module').thing}*/ etc
@@ -422,72 +494,12 @@ function walk(
     }
 
     if (INTERESTING_NODE_KINDS.has(pASTNode.kind)) {
-      // require('a-string'), require(`a-template-literal`)
-      if (isRequireCallExpression(pASTNode)) {
-        pResult.push({
-          module: pASTNode.arguments[0].text,
-          moduleSystem: "cjs",
-          exoticallyRequired: false,
-          dependencyTypes: ["require"],
-        });
-      }
-
-      // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
-      if (pASTNode.kind === typescript.SyntaxKind.CallExpression) {
-        for (const lExoticRequireString of pExoticRequireStrings) {
-          // eslint-disable-next-line max-depth
-          if (isExoticRequire(pASTNode, lExoticRequireString)) {
-            pResult.push({
-              module: pASTNode.arguments[0].text,
-              moduleSystem: "cjs",
-              exoticallyRequired: true,
-              exoticRequire: lExoticRequireString,
-              dependencyTypes: ["exotic-require"],
-            });
-          }
-        }
-      }
-
-      // const path = process.getBuiltinModule('node:path'); const fs = globalThis.process.getBuiltinModule(`node:fs`);
-      if (
-        pDetectProcessBuiltinModuleCalls &&
-        (isCompositeExoticRequire(pASTNode, "process", "getBuiltinModule") ||
-          isTripleCursedCompositeExoticRequire(
-            pASTNode,
-            "globalThis",
-            "process",
-            "getBuiltinModule",
-          ))
-      ) {
-        pResult.push({
-          module: pASTNode.arguments[0].text,
-          moduleSystem: "cjs",
-          exoticallyRequired: false,
-          dependencyTypes: ["process-get-builtin-module"],
-        });
-      }
-
-      // import('a-string'), import(`a-template-literal`)
-      if (isDynamicImportExpression(pASTNode)) {
-        pResult.push({
-          module: pASTNode.arguments[0].text,
-          moduleSystem: "es6",
-          dynamic: true,
-          exoticallyRequired: false,
-          dependencyTypes: ["dynamic-import"],
-        });
-      }
-
-      // const atype: import('./types').T
-      // const atype: import(`./types`).T
-      if (isTypeImport(pASTNode)) {
-        pResult.push({
-          module: pASTNode.argument.literal.text,
-          moduleSystem: "es6",
-          exoticallyRequired: false,
-          dependencyTypes: ["type-import"],
-        });
-      }
+      visitNode(
+        pResult,
+        pASTNode,
+        pExoticRequireStrings,
+        pDetectProcessBuiltinModuleCalls,
+      );
     }
 
     typescript.forEachChild(
