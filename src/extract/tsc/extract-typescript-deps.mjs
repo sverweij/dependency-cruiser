@@ -323,21 +323,19 @@ function isJSDocImport(pTypeNode) {
   );
 }
 
-function keyInJSDocIsIgnorable(pKey) {
-  return [
-    "parent",
-    "pos",
-    "end",
-    "flags",
-    "emitNode",
-    "modifierFlagsCache",
-    "transformFlags",
-    "id",
-    "flowNode",
-    "symbol",
-    "original",
-  ].includes(pKey);
-}
+const IGNORABLE_JSDOC_KEYS = new Set([
+  "parent",
+  "pos",
+  "end",
+  "flags",
+  "emitNode",
+  "modifierFlagsCache",
+  "transformFlags",
+  "id",
+  "flowNode",
+  "symbol",
+  "original",
+]);
 
 export function walkJSDoc(pObject, pCollection = new Set()) {
   if (isJSDocImport(pObject)) {
@@ -348,7 +346,7 @@ export function walkJSDoc(pObject, pCollection = new Set()) {
     }
   } else if (typeof pObject === "object") {
     for (const lKey in pObject) {
-      if (!keyInJSDocIsIgnorable(lKey) && pObject[lKey]) {
+      if (!IGNORABLE_JSDOC_KEYS.has(lKey) && pObject[lKey]) {
         walkJSDoc(pObject[lKey], pCollection);
       }
     }
@@ -439,6 +437,9 @@ function visitNode(
   }
 
   // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+  // strictly speaking checking whether kind is CallExpression is not necessary as
+  // the functions inside the loop will do that as well. However, it saves quite a
+  // of computation when the list of exotic require strings is not empty
   if (pASTNode.kind === typescript.SyntaxKind.CallExpression) {
     for (const lExoticRequireString of pExoticRequireStrings) {
       if (isExoticRequire(pASTNode, lExoticRequireString)) {
