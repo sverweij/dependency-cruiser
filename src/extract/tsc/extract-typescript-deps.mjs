@@ -15,6 +15,14 @@ const typescript = await tryImport(
   meta.supportedTranspilers.typescript,
 );
 
+const INTERESTING_NODE_KINDS = new Set([
+  typescript.SyntaxKind.CallExpression,
+  typescript.SyntaxKind.ExportDeclaration,
+  typescript.SyntaxKind.ImportDeclaration,
+  typescript.SyntaxKind.ImportEqualsDeclaration,
+  typescript.SyntaxKind.LastTypeNode,
+]);
+
 function isTypeOnlyImport(pStatement) {
   return (
     pStatement.importClause &&
@@ -60,7 +68,7 @@ function extractImports(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ImportDeclaration &&
         pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
@@ -84,7 +92,7 @@ function extractExports(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ExportDeclaration &&
         pStatement.moduleSpecifier,
     )
     .map((pStatement) => ({
@@ -112,7 +120,7 @@ function extractImportEquals(pAST) {
   return pAST.statements
     .filter(
       (pStatement) =>
-        typescript.SyntaxKind[pStatement.kind] === "ImportEqualsDeclaration" &&
+        pStatement.kind === typescript.SyntaxKind.ImportEqualsDeclaration &&
         pStatement.moduleReference &&
         pStatement.moduleReference.expression &&
         pStatement.moduleReference.expression.text,
@@ -173,15 +181,15 @@ function firstArgumentIsAString(pASTNode) {
   return (
     lFirstArgument &&
     // "thing" or 'thing'
-    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
+    (lFirstArgument.kind === typescript.SyntaxKind.StringLiteral ||
       // `thing`
-      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
+      lFirstArgument.kind === typescript.SyntaxKind.FirstTemplateToken)
   );
 }
 
 function isRequireCallExpression(pASTNode) {
   if (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression
   ) {
     /*
@@ -204,7 +212,7 @@ function isRequireCallExpression(pASTNode) {
 
 function isSingleExoticRequire(pASTNode, pString) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
     pASTNode.expression.text === pString &&
     firstArgumentIsAString(pASTNode)
@@ -214,16 +222,15 @@ function isSingleExoticRequire(pASTNode, pString) {
 /* eslint complexity:0 */
 function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     pASTNode.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.escapedText === pObjectName &&
     pASTNode.expression.name &&
-    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.name.escapedText === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
@@ -236,25 +243,25 @@ function isTripleCursedCompositeExoticRequire(
   pPropertyName,
 ) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     pASTNode.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
-      "PropertyAccessExpression" &&
+    pASTNode.expression.expression.kind ===
+      typescript.SyntaxKind.PropertyAccessExpression &&
     // globalThis
     pASTNode.expression.expression.expression &&
-    typescript.SyntaxKind[pASTNode.expression.expression.expression.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.expression.kind ===
+      typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.expression.escapedText === pObjectName1 &&
     // process
-    typescript.SyntaxKind[pASTNode.expression.expression.name.kind] ===
-      "Identifier" &&
+    pASTNode.expression.expression.name.kind ===
+      typescript.SyntaxKind.Identifier &&
     pASTNode.expression.expression.name.escapedText === pObjectName2 &&
     // getBuiltinModule
     pASTNode.expression.name &&
-    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
     pASTNode.expression.name.escapedText === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
@@ -270,23 +277,22 @@ function isExoticRequire(pASTNode, pString) {
 
 function isDynamicImportExpression(pASTNode) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword" &&
+    pASTNode.expression.kind === typescript.SyntaxKind.ImportKeyword &&
     firstArgumentIsAString(pASTNode)
   );
 }
 
 function isTypeImport(pASTNode) {
   return (
-    typescript.SyntaxKind[pASTNode.kind] === "LastTypeNode" &&
+    pASTNode.kind === typescript.SyntaxKind.LastTypeNode &&
     pASTNode.argument &&
-    typescript.SyntaxKind[pASTNode.argument.kind] === "LiteralType" &&
+    pASTNode.argument.kind === typescript.SyntaxKind.LiteralType &&
     ((pASTNode.argument.literal &&
-      typescript.SyntaxKind[pASTNode.argument.literal.kind] ===
-        "StringLiteral") ||
-      typescript.SyntaxKind[pASTNode.argument.literal.kind] ===
-        "FirstTemplateToken")
+      pASTNode.argument.literal.kind === typescript.SyntaxKind.StringLiteral) ||
+      pASTNode.argument.literal.kind ===
+        typescript.SyntaxKind.FirstTemplateToken)
   );
 }
 
@@ -296,7 +302,7 @@ function extractJSDocImportTags(pJSDocTags) {
       (pTag) =>
         pTag.tagName.escapedText === "import" &&
         pTag.moduleSpecifier &&
-        typescript.SyntaxKind[pTag.moduleSpecifier.kind] === "StringLiteral" &&
+        pTag.moduleSpecifier.kind === typescript.SyntaxKind.StringLiteral &&
         pTag.moduleSpecifier.text,
     )
     .map((pTag) => ({
@@ -310,29 +316,26 @@ function extractJSDocImportTags(pJSDocTags) {
 function isJSDocImport(pTypeNode) {
   // import('./hello.mjs') within jsdoc
   return (
-    typescript.SyntaxKind[pTypeNode?.kind] === "LastTypeNode" &&
-    typescript.SyntaxKind[pTypeNode.argument?.kind] === "LiteralType" &&
-    typescript.SyntaxKind[pTypeNode.argument?.literal?.kind] ===
-      "StringLiteral" &&
+    pTypeNode?.kind === typescript.SyntaxKind.LastTypeNode &&
+    pTypeNode.argument?.kind === typescript.SyntaxKind.LiteralType &&
+    pTypeNode.argument?.literal?.kind === typescript.SyntaxKind.StringLiteral &&
     pTypeNode.argument.literal.text
   );
 }
 
-function keyInJSDocIsIgnorable(pKey) {
-  return [
-    "parent",
-    "pos",
-    "end",
-    "flags",
-    "emitNode",
-    "modifierFlagsCache",
-    "transformFlags",
-    "id",
-    "flowNode",
-    "symbol",
-    "original",
-  ].includes(pKey);
-}
+const IGNORABLE_JSDOC_KEYS = new Set([
+  "parent",
+  "pos",
+  "end",
+  "flags",
+  "emitNode",
+  "modifierFlagsCache",
+  "transformFlags",
+  "id",
+  "flowNode",
+  "symbol",
+  "original",
+]);
 
 export function walkJSDoc(pObject, pCollection = new Set()) {
   if (isJSDocImport(pObject)) {
@@ -343,7 +346,7 @@ export function walkJSDoc(pObject, pCollection = new Set()) {
     }
   } else if (typeof pObject === "object") {
     for (const lKey in pObject) {
-      if (!keyInJSDocIsIgnorable(lKey) && pObject[lKey]) {
+      if (!IGNORABLE_JSDOC_KEYS.has(lKey) && pObject[lKey]) {
         walkJSDoc(pObject[lKey], pCollection);
       }
     }
@@ -362,7 +365,7 @@ function extractJSDocBracketImports(pJSDocTags) {
     .filter(
       (pTag) =>
         pTag.tagName.escapedText !== "import" &&
-        typescript.SyntaxKind[pTag.typeExpression?.kind] === "FirstJSDocNode",
+        pTag.typeExpression?.kind === typescript.SyntaxKind.FirstJSDocNode,
     )
     .flatMap((pTag) => getJSDocImports(pTag))
     .map((pImportName) => ({
@@ -387,34 +390,57 @@ function extractJSDocImports(pJSDocNodes) {
   return lJSDocImportTags.concat(lJSDocBracketImports);
 }
 
-/**
- * Walks the AST and collects all dependencies
- *
- * @param {Node} pASTNode - the AST node to start from
- * @param {string[]} pExoticRequireStrings - exotic require strings to look for
- * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
- * @returns {(pASTNode: Node) => void} - the walker function
- */
 // eslint-disable-next-line max-lines-per-function
-function walk(
+function visitNode(
   pResult,
+  pASTNode,
   pExoticRequireStrings,
-  pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
 ) {
-  // eslint-disable-next-line max-lines-per-function
-  return (pASTNode) => {
-    // require('a-string'), require(`a-template-literal`)
-    if (isRequireCallExpression(pASTNode)) {
-      pResult.push({
-        module: pASTNode.arguments[0].text,
-        moduleSystem: "cjs",
-        exoticallyRequired: false,
-        dependencyTypes: ["require"],
-      });
-    }
+  // checks are in order of ~expected frequency
 
-    // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+  // early returns as these types of dependencyTypes cannot occur at the same
+  // time in a single AST node
+  // require('a-string'), require(`a-template-literal`)
+  if (isRequireCallExpression(pASTNode)) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "cjs",
+      exoticallyRequired: false,
+      dependencyTypes: ["require"],
+    });
+    return;
+  }
+
+  // import('a-string'), import(`a-template-literal`)
+  if (isDynamicImportExpression(pASTNode)) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "es6",
+      dynamic: true,
+      exoticallyRequired: false,
+      dependencyTypes: ["dynamic-import"],
+    });
+    return;
+  }
+
+  // const atype: import('./types').T
+  // const atype: import(`./types`).T
+  if (isTypeImport(pASTNode)) {
+    pResult.push({
+      module: pASTNode.argument.literal.text,
+      moduleSystem: "es6",
+      exoticallyRequired: false,
+      dependencyTypes: ["type-import"],
+    });
+    return;
+  }
+
+  // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+  // strictly speaking checking whether kind is CallExpression is not necessary as
+  // the functions inside the loop will do that as well. However, it saves quite a
+  // of computation when the list of exotic require strings is not empty
+  if (pASTNode.kind === typescript.SyntaxKind.CallExpression) {
     for (const lExoticRequireString of pExoticRequireStrings) {
       if (isExoticRequire(pASTNode, lExoticRequireString)) {
         pResult.push({
@@ -424,50 +450,46 @@ function walk(
           exoticRequire: lExoticRequireString,
           dependencyTypes: ["exotic-require"],
         });
+        return;
       }
     }
+  }
 
-    // const path = process.getBuiltinModule('node:path'); const fs = globalThis.process.getBuiltinModule(`node:fs`);
-    if (
-      pDetectProcessBuiltinModuleCalls &&
-      (isCompositeExoticRequire(pASTNode, "process", "getBuiltinModule") ||
-        isTripleCursedCompositeExoticRequire(
-          pASTNode,
-          "globalThis",
-          "process",
-          "getBuiltinModule",
-        ))
-    ) {
-      pResult.push({
-        module: pASTNode.arguments[0].text,
-        moduleSystem: "cjs",
-        exoticallyRequired: false,
-        dependencyTypes: ["process-get-builtin-module"],
-      });
-    }
+  // const path = process.getBuiltinModule('node:path'); const fs = globalThis.process.getBuiltinModule(`node:fs`);
+  if (
+    pDetectProcessBuiltinModuleCalls &&
+    (isCompositeExoticRequire(pASTNode, "process", "getBuiltinModule") ||
+      isTripleCursedCompositeExoticRequire(
+        pASTNode,
+        "globalThis",
+        "process",
+        "getBuiltinModule",
+      ))
+  ) {
+    pResult.push({
+      module: pASTNode.arguments[0].text,
+      moduleSystem: "cjs",
+      exoticallyRequired: false,
+      dependencyTypes: ["process-get-builtin-module"],
+    });
+  }
+}
 
-    // import('a-string'), import(`a-template-literal`)
-    if (isDynamicImportExpression(pASTNode)) {
-      pResult.push({
-        module: pASTNode.arguments[0].text,
-        moduleSystem: "es6",
-        dynamic: true,
-        exoticallyRequired: false,
-        dependencyTypes: ["dynamic-import"],
-      });
-    }
-
-    // const atype: import('./types').T
-    // const atype: import(`./types`).T
-    if (isTypeImport(pASTNode)) {
-      pResult.push({
-        module: pASTNode.argument.literal.text,
-        moduleSystem: "es6",
-        exoticallyRequired: false,
-        dependencyTypes: ["type-import"],
-      });
-    }
-
+/**
+ * Walks the AST and collects all dependencies
+ *
+ * @param {Node} pASTNode - the AST node to start from
+ * @param {string[]} pExoticRequireStrings - exotic require strings to look for
+ * @param {boolean} pDetectJSDocImports - whether to detect jsdoc imports
+ * @returns {(pASTNode: Node) => void} - the walker function
+ */
+function walk(
+  pResult,
+  pExoticRequireStrings,
+  pDetectJSDocImports,
+  pDetectProcessBuiltinModuleCalls,
+) {
+  return (pASTNode) => {
     // /** @import thing from './module' */ etc
     // /** @type {import('module').thing}*/ etc
     if (pDetectJSDocImports && pASTNode.jsDoc) {
@@ -479,6 +501,16 @@ function walk(
         pResult.push(lImport);
       }
     }
+
+    if (INTERESTING_NODE_KINDS.has(pASTNode.kind)) {
+      visitNode(
+        pResult,
+        pASTNode,
+        pExoticRequireStrings,
+        pDetectProcessBuiltinModuleCalls,
+      );
+    }
+
     typescript.forEachChild(
       pASTNode,
       walk(
