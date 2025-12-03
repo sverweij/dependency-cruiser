@@ -46,7 +46,7 @@ function filterReaches(pModules, pReachesFilter) {
   // TODO: optimize - avoid re-indexing for each reaches filter
   /** @type {Set<string>} */
   const lModuleNamesToReach = new Set();
-  for (let lModule of pModules) {
+  for (const lModule of pModules) {
     if (moduleMatchesFilter(lModule, pReachesFilter)) {
       lModuleNamesToReach.add(lModule.source);
     }
@@ -56,8 +56,8 @@ function filterReaches(pModules, pReachesFilter) {
   const lReachingModules = new Set();
   const lIndexedModules = new IndexedModuleGraph(pModules);
 
-  for (let lModuleToReach of lModuleNamesToReach) {
-    for (let lDependent of lIndexedModules.findTransitiveDependents(
+  for (const lModuleToReach of lModuleNamesToReach) {
+    for (const lDependent of lIndexedModules.findTransitiveDependents(
       lModuleToReach,
     )) {
       lReachingModules.add(lDependent);

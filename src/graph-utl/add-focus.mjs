@@ -36,7 +36,7 @@ export default function addFocus(pModules, pFilter) {
     let lReachableModuleNamesArray = [];
     let lIndexedModules = new IndexedModuleGraph(pModules);
 
-    for (let lFocusedModule of lFocusedModuleNames) {
+    for (const lFocusedModule of lFocusedModuleNames) {
       lReachableModuleNamesArray = lReachableModuleNamesArray
         .concat(
           lIndexedModules.findTransitiveDependents(lFocusedModule, lDepth),

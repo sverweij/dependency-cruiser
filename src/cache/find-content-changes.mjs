@@ -101,7 +101,7 @@ export default function findContentChanges(
   lDiffCachedVsNew.forEach(({ name }) => lFileSet.delete(name));
 
   const lDiffNewVsCached = [];
-  for (let lFileName of lFileSet) {
+  for (const lFileName of lFileSet) {
     lDiffNewVsCached.push({
       name: lFileName,
       type: /** @type import('watskeburt').changeType */ ("added"),

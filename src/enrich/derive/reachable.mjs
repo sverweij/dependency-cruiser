@@ -122,7 +122,7 @@ function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
     isModuleInRuleTo(pReachableRule, pToModule, pModule),
   );
 
-  for (let lToModule of lToModules) {
+  for (const lToModule of lToModules) {
     if (pModule.source !== lToModule.source) {
       const lPath = pIndexedGraph.getPath(pModule.source, lToModule.source);
 
@@ -147,7 +147,7 @@ function addReachableToModule(
 ) {
   let lFound = false;
 
-  for (let lFromModule of pFilteredFromModules) {
+  for (const lFromModule of pFilteredFromModules) {
     if (
       !lFound &&
       pModule.source !== lFromModule.source &&
