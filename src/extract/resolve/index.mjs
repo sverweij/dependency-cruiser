@@ -103,7 +103,7 @@ const JS_TO_TS_MAP = new Map([
 /**
  *
  * @param {string} pJavaScriptExtension
- * @returns {string}
+ * @returns {string[]}
  */
 function getTypeScriptExtensionsToTry(pJavaScriptExtension) {
   return JS_TO_TS_MAP.get(pJavaScriptExtension) ?? [];
