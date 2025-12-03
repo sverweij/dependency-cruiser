@@ -20,7 +20,7 @@ async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
   }
 
   if (Array.isArray(lReturnValue.extends)) {
-    for (let lExtends of lReturnValue.extends) {
+    for (const lExtends of lReturnValue.extends) {
       lReturnValue = mergeConfigs(
         lReturnValue,
         // eslint-disable-next-line no-await-in-loop

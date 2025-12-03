@@ -47,7 +47,7 @@ function normalizeReporterOptions(pReporterOptions) {
 function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
   let lReturnValue = { ...pOptions };
 
-  for (let lFilterOptionKey of pFilterOptionKeys) {
+  for (const lFilterOptionKey of pFilterOptionKeys) {
     if (pOptions[lFilterOptionKey]) {
       lReturnValue[lFilterOptionKey] = normalizeFilterOption(
         lReturnValue[lFilterOptionKey],

@@ -43,16 +43,21 @@ function exclude(pModules, pExcludeFilter) {
  * @returns {IModule[]}
  */
 function filterReaches(pModules, pReachesFilter) {
-  const lModuleNamesToReach = pModules
-    .filter((pModule) => moduleMatchesFilter(pModule, pReachesFilter))
-    .map(({ source }) => source);
+  // TODO: optimize - avoid re-indexing for each reaches filter
+  /** @type {Set<string>} */
+  const lModuleNamesToReach = new Set();
+  for (const lModule of pModules) {
+    if (moduleMatchesFilter(lModule, pReachesFilter)) {
+      lModuleNamesToReach.add(lModule.source);
+    }
+  }
 
   /** @type {Set<string>} */
   const lReachingModules = new Set();
   const lIndexedModules = new IndexedModuleGraph(pModules);
 
-  for (let lModuleToReach of lModuleNamesToReach) {
-    for (let lDependent of lIndexedModules.findTransitiveDependents(
+  for (const lModuleToReach of lModuleNamesToReach) {
+    for (const lDependent of lIndexedModules.findTransitiveDependents(
       lModuleToReach,
     )) {
       lReachingModules.add(lDependent);
@@ -63,7 +68,7 @@ function filterReaches(pModules, pReachesFilter) {
     .filter(({ source }) => lReachingModules.has(source))
     .map((pModule) => ({
       ...pModule,
-      matchesReaches: lModuleNamesToReach.includes(pModule.source),
+      matchesReaches: lModuleNamesToReach.has(pModule.source),
       dependencies: pModule.dependencies.filter(({ resolved }) =>
         lReachingModules.has(resolved),
       ),

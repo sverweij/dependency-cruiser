@@ -35,7 +35,7 @@ export const EXTENSION2WRAPPER = new Map([
   [".cjsx", coffeeVanillaWrap],
 ]);
 
-const BABEL_ABLE_EXTENSIONS = [
+const BABEL_ABLE_EXTENSIONS = new Set([
   ".js",
   ".cjs",
   ".mjs",
@@ -47,7 +47,7 @@ const BABEL_ABLE_EXTENSIONS = [
   ".d.ts",
   ".d.cts",
   ".d.mts",
-];
+]);
 
 /**
  * returns the babel wrapper if there's a babelConfig in the transpiler
@@ -67,7 +67,7 @@ const BABEL_ABLE_EXTENSIONS = [
 export function getWrapper(pExtension, pTranspilerOptions) {
   if (
     Object.keys(pTranspilerOptions?.babelConfig ?? {}).length > 0 &&
-    BABEL_ABLE_EXTENSIONS.includes(pExtension)
+    BABEL_ABLE_EXTENSIONS.has(pExtension)
   ) {
     return babelWrap;
   }

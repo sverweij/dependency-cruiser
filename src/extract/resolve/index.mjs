@@ -14,6 +14,8 @@ import pathToPosix from "#utl/path-to-posix.mjs";
  * @import { IDependency } from "../../../types/cruise-result.mjs";
  */
 
+const COMMONJS_RESOLVABLE_MODULE_SYSTEMS = new Set(["cjs", "es6", "tsd"]);
+
 /**
  *
  * @param {IModule} pModule
@@ -33,7 +35,7 @@ function resolveModule(
   const lStrippedModuleName = stripToModuleName(pModule.module);
   if (
     isRelativeModuleName(lStrippedModuleName) ||
-    ["cjs", "es6", "tsd"].includes(pModule.moduleSystem)
+    COMMONJS_RESOLVABLE_MODULE_SYSTEMS.has(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
       lStrippedModuleName,
@@ -52,12 +54,21 @@ function resolveModule(
   return lReturnValue;
 }
 
+const RESOLVABLE_TO_TS_VARIANT_EXTENSIONS = new Set([
+  ".js",
+  ".jsx",
+  ".mjs",
+  ".cjs",
+]);
+
 function canBeResolvedToTsVariant(pModuleName) {
-  return [".js", ".jsx", ".mjs", ".cjs"].includes(extname(pModuleName));
+  return RESOLVABLE_TO_TS_VARIANT_EXTENSIONS.has(extname(pModuleName));
 }
 
+const TYPESCRIPT_ISH_EXTENSIONS = new Set([".ts", ".tsx", ".cts", ".mts"]);
+
 function isTypeScriptIshExtension(pModuleName) {
-  return [".ts", ".tsx", ".cts", ".mts"].includes(extname(pModuleName));
+  return TYPESCRIPT_ISH_EXTENSIONS.has(extname(pModuleName));
 }
 function resolveYarnVirtual(pBaseDirectory, pPath) {
   const pnpAPI = (monkeyPatchedModule?.findPnpApi ?? (() => false))(pPath);
@@ -82,20 +93,20 @@ function resolveYarnVirtual(pBaseDirectory, pPath) {
   return pPath;
 }
 
+const JS_TO_TS_MAP = new Map([
+  [".js", [".ts", ".tsx", ".d.ts"]],
+  [".jsx", [".ts", ".tsx", ".d.ts"]],
+  [".cjs", [".cts", ".d.cts"]],
+  [".mjs", [".mts", ".d.mts"]],
+]);
+
 /**
  *
  * @param {string} pJavaScriptExtension
- * @returns {string}
+ * @returns {string[]}
  */
 function getTypeScriptExtensionsToTry(pJavaScriptExtension) {
-  const lJS2TSMap = new Map([
-    [".js", [".ts", ".tsx", ".d.ts"]],
-    [".jsx", [".ts", ".tsx", ".d.ts"]],
-    [".cjs", [".cts", ".d.cts"]],
-    [".mjs", [".mts", ".d.mts"]],
-  ]);
-
-  return lJS2TSMap.get(pJavaScriptExtension) ?? [];
+  return JS_TO_TS_MAP.get(pJavaScriptExtension) ?? [];
 }
 
 // eslint-disable-next-line max-lines-per-function

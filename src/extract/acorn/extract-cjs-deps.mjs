@@ -52,7 +52,7 @@ function pushRequireCallsToDependencies(
   pRequireStrings,
 ) {
   return (pNode) => {
-    for (let lName of pRequireStrings) {
+    for (const lName of pRequireStrings) {
       if (isRequireOfSomeSort(pNode, lName)) {
         const lModuleName = pryStringsFromArguments(pNode.arguments);
         if (lModuleName) {

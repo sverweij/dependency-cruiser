@@ -113,20 +113,22 @@ export function stripQueryParameters(pFilenameString) {
   return pFilenameString.replace(/\?.+$/, "");
 }
 
+const TS_COMPATIBLE_EXTENSIONS = new Set([
+  ".ts",
+  ".tsx",
+  ".mts",
+  ".cts",
+  ".js",
+  ".mjs",
+  ".cjs",
+  ".vue",
+]);
+
 /**
  * Returns true if the file name has a TypeScript compatible extension
  * @param {string} pFileName
  * @returns {boolean}
  */
 export function isTypeScriptCompatible(pFileName) {
-  return [
-    ".ts",
-    ".tsx",
-    ".mts",
-    ".cts",
-    ".js",
-    ".mjs",
-    ".cjs",
-    ".vue",
-  ].includes(extname(pFileName));
+  return TS_COMPATIBLE_EXTENSIONS.has(extname(pFileName));
 }
