@@ -1,4 +1,5 @@
 import { normalizeREProperties, normalizeToREAsString } from "../helpers.mjs";
+import { bus } from "#utl/bus.mjs";
 
 /**
  * @import { RuleScopeType } from "../../../types/shared-types.mjs";
@@ -113,6 +114,7 @@ function normalizeRule(pRule) {
  * @return {IStrictRuleSet}
  */
 export default function normalizeRuleSet(pRuleSet) {
+  bus.info("parse rule set: normalize");
   const lRuleSet = structuredClone(pRuleSet);
 
   if (lRuleSet?.allowed) {

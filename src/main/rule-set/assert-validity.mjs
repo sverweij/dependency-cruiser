@@ -3,6 +3,7 @@ import safeRegex from "safe-regex";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 import configurationSchema from "#configuration-schema";
+import { bus } from "#utl/bus.mjs";
 import { has, get } from "#utl/object-util.mjs";
 /**
  * @import { IConfiguration } from "../../../types/configuration.mjs";
@@ -93,9 +94,16 @@ function assertRuleSafety(pRule) {
  *                                 a message
  */
 export default function assertRuleSetValid(pConfiguration) {
+  bus.info("parse rule set: validate");
+
+  bus.debug("parse rule set: validate: schema compliance");
   assertSchemaCompliance(configurationSchema, pConfiguration);
+
+  bus.debug("parse rule set: validate: rule safety");
   (pConfiguration.allowed || []).forEach(assertRuleSafety);
   (pConfiguration.forbidden || []).forEach(assertRuleSafety);
+
+  bus.debug("parse rule set: validate: cruise options validity");
   if (pConfiguration?.options) {
     assertCruiseOptionsValid(pConfiguration.options);
   }

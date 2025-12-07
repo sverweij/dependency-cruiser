@@ -683,7 +683,11 @@ export default {
         ],
       },
     },
-    progress: { type: "performance-log", maximumLevel: 60 },
+
+    progress: { 
+      type: "performance-log", 
+      maximumLevel: 60 
+    },
     cache: {
       strategy: "metadata",
       compress: true,
