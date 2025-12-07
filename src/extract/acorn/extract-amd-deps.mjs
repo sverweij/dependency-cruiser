@@ -30,24 +30,23 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
 
 function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
   if (isLikelyAMDDefine(pNode)) {
-    pNode.expression.arguments
-      .filter(
-        (pArgument) =>
-          pArgument.type === "FunctionExpression" &&
-          pArgument.params.some(
-            (pParameter) =>
-              pParameter.name === "require" ||
-              pExoticRequireStrings.includes(pParameter.name),
-          ),
-      )
-      .forEach((pFunction) =>
+    for (const lArgument of pNode.expression.arguments) {
+      if (
+        lArgument.type === "FunctionExpression" &&
+        lArgument.params.some(
+          (pParameter) =>
+            pParameter.name === "require" ||
+            pExoticRequireStrings.includes(pParameter.name),
+        )
+      ) {
         extractCommonJSDependencies(
-          pFunction.body,
+          lArgument.body,
           pDependencies,
           "amd",
           pExoticRequireStrings,
-        ),
-      );
+        );
+      }
+    }
   }
 }
 

@@ -59,6 +59,7 @@ export default class IndexedModuleGraph {
    * @param {Set<string>} pVisited - technical parameter - best to leave out of direct calls
    * @returns {Array<string>}
    */
+  // eslint-disable-next-line complexity
   findTransitiveDependents(
     pName,
     pMaxDepth = 0,
@@ -75,16 +76,17 @@ export default class IndexedModuleGraph {
 
       // @TODO this works for modules, but not for folders yet
       if (lDependents.length > 0) {
-        lDependents
-          .filter((pDependent) => !lVisited.has(pDependent))
-          .forEach((pDependent) =>
+        for (const lDependent of lDependents) {
+          // eslint-disable-next-line max-depth
+          if (!lVisited.has(lDependent)) {
             this.findTransitiveDependents(
-              pDependent,
+              lDependent,
               pMaxDepth,
               pDepth + 1,
               lVisited,
-            ),
-          );
+            );
+          }
+        }
       }
       lReturnValue = Array.from(lVisited);
     }
