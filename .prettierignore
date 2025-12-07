@@ -1,2 +1,3 @@
 **/*.schema.mjs
+**/*.validate.mjs
 **/*.schema.json

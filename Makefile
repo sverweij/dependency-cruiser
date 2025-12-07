@@ -9,6 +9,9 @@ GENERATED_SOURCES=src/schema/baseline-violations.schema.mjs \
 	src/schema/cruise-result.schema.json \
 	src/meta.cjs
 
+GENERATED_VALIDATORS=src/schema/configuration.validate.mjs \
+	src/schema/cruise-result.validate.mjs
+
 SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/cache-options.mjs \
 	tools/schema/cache-strategy-type.mjs \
@@ -44,10 +47,10 @@ SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 .PHONY: help build clean
 
 # "phony" targets
-build: $(GENERATED_SOURCES)
+build: $(GENERATED_SOURCES) $(GENERATED_VALIDATORS)
 
 clean:
-	$(RM) $(GENERATED_SOURCES)
+	$(RM) $(GENERATED_SOURCES) $(GENERATED_VALIDATORS)
 
 help:
 	@echo
@@ -70,6 +73,9 @@ src/%.schema.mjs: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.ut
 
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
 	$(NODE) ./tools/generate-schemas.utl.mjs $@
+
+src/schema/%.validate.mjs: src/schema/%.schema.mjs $(GENERATED_SOURCES) tools/generate-schema-validator.utl.mjs
+	$(NODE) ./tools/generate-schema-validator.utl.mjs $< $@
 
 src/meta.cjs: package.json tools/generate-meta.utl.mjs
 	$(NODE) ./tools/generate-meta.utl.mjs < $< > $@

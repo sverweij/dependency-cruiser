@@ -23,6 +23,7 @@ export default [
       "**/coverage",
       "**/tmp",
       "src/**/*.schema.mjs",
+      "src/schema/*.validate.mjs",
       "src/report/dot-webpage/svg-in-html-snippets/script.cjs",
       "test/integration/**/*",
       "test/*/__fixtures__/**/*",
