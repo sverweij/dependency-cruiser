@@ -213,9 +213,7 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
     );
   }
   lReturnValue.metrics = shouldCalculateMetrics(pOptions);
-  // if (has(pOptions, "ruleSet")) {
-  //   lReturnValue.ruleSet = normalizeRuleSet(pOptions.ruleSet);
-  // }
+
   if (lReturnValue.cache) {
     lReturnValue.cache = normalizeCacheOptions(lReturnValue.cache);
   }

@@ -56,7 +56,7 @@ const getRandomFlowId = memoize(getRandomFlowIdBare);
  * Returns a timestamp in ISO format without the trailing 'Z'. It used to be
  * an issue with TeamCity that it didn't use the trailing 'Z' (this is
  * documented in the teamcity-service-messages source code) - not sure whether
- * this is still the case, but this is what we do to be on the safe side.
+ * this is still the case, but better safe than sorry.
  *
  * @returns {string} a timestamp in ISO format without the trailing 'Z'
  */

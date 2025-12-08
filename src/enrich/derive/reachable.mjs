@@ -171,10 +171,7 @@ function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
   const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
 
   return pGraph.map((pModule) => {
-    // strictly speaking we should clone pModule to prevent mutating it,
-    // but in practice this function is called with a structuredClone'd graph
-    // anyway and the (reference only) copy we use now is faster (observable
-    // even on dependency-cruiser's self scan) and less memory intentsive.
+    // mutating pModule intentionally for performance; callers pass a cloned graph
     let lModule = pModule;
 
     if (shouldAddReaches(pReachableRule, lModule)) {

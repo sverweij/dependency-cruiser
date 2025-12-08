@@ -3,9 +3,9 @@ import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 const EOL = "\n";
 
 function anonymizePathArray(pPathArray, pWordList) {
-  // the coverage ignore is here because the || [] branch isn't taken when running
-  // tests and with the current setup of the anonymize module that's not going
-  // to change. Still want to keep the branch from robustness perspective though.
+  // coverage ignore: the || [] branch isn't taken when running tests. With the
+  // current setup of the anonymize module that won't change.
+  // We keep the branch for robustness though.
   /* c8 ignore next 1 */
   return (pPathArray || []).map((pPath) => anonymizePath(pPath, pWordList));
 }

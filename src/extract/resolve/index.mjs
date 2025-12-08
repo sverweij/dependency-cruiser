@@ -223,7 +223,7 @@ export default function resolve(
 
   if (!lResolvedDependency.coreModule && !lResolvedDependency.couldNotResolve) {
     // enhanced-resolve inserts a NULL character in front of any `#` character.
-    // This wonky replace corrects that that so the filename again corresponds
+    // This wonky replace corrects that so the filename again corresponds
     // with a real file on disk
     const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
       // eslint-disable-next-line no-control-regex

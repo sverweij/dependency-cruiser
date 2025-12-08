@@ -211,11 +211,8 @@ export default function determineDependencyTypes(
   }
 
   if (pDependency.coreModule) {
-    // this business seems duplicate (it's already in
-    // the passed object as `coreModule`- determined by the resolve-AMD or
-    // resolve-commonJS module). I want to deprecate the `coreModule`
-    // attribute in favor of this one and determining it here will make
-    // live easier in the future
+    // keeping coreModule for backwards compatibility
+    // would prefer using only the core dependency-type, though
     lReturnValue.push("core");
   } else if (
     isRelativeModuleName(pModuleName) ||

@@ -134,8 +134,8 @@ function extractImportEquals(pAST) {
 }
 
 /**
- * might be wise to distinguish the three types of /// directive that
- * can come out of this as the resolution algorithm might differ
+ * Extracts /// directives e.g.
+ * /// <reference path="beep-tee-boop" />
  *
  * @param {Node} pAST - typescript syntax tree
  * @returns {{module: string, moduleSystem: string}[]} - 'tripple slash' dependencies
@@ -196,8 +196,7 @@ function isRequireCallExpression(pASTNode) {
      * from typescript 5.0.0 the `originalKeywordKind` attribute is deprecated
      * and from 5.2.0 it will be gone. However, in typescript < 5.0.0 (still used
      * heavily IRL) it's the only way to get it - hence this test for the
-     * existence of the * identifierToKeywordKind function to remain backwards
-     * compatible
+     * existence of the * identifierToKeywordKind function
      */
     const lSyntaxKind = typescript.identifierToKeywordKind
       ? typescript.SyntaxKind[

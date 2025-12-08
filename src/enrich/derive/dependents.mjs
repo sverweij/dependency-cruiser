@@ -6,7 +6,7 @@ function isDependentsRule(pRule) {
   // used in folder rules and when moreUnstable is in the 'to' => governed by
   // the 'metrics' flag in options, sot not going to repeat that here
 
-  // dependents are used in the orphans analsys. hHwever, there is a fall back
+  // dependents are used in the orphans analsys. However, there is a fall back
   // where it does its own analysis, so not going to repeat that check here.
   return (
     /* c8 ignore start */

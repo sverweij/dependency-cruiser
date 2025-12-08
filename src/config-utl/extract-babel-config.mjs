@@ -90,8 +90,8 @@ export default async function extractBabelConfig(pBabelConfigFileName) {
   if (babel) {
     const lConfig = {
       ...(await getConfig(pBabelConfigFileName)),
-      // under some circumstances babel (and/ or its plugins) really likes to
-      // have a filename to go with the config - so we pass it
+      // under some circumstances babel (and/ or its plugins) needs
+      // a filename to go with the config - so we pass it
       filename: pBabelConfigFileName,
     };
     lReturnValue = {

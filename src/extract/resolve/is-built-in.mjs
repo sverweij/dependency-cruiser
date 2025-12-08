@@ -16,16 +16,14 @@ export function isBuiltin(pModuleName, pResolveOptions) {
   // - tell everyone to run bunx with the --bun option, so bun uses bun instead of node
   //   and hope everyone actually does that and it doesn't lead to a bunch of questions
   //   in the issues section. I don't expect that to happen anytime soon => other options
-  // - add the bun builtins here.
+  // - add the bun builtins without prefix here.
   //   this sounds attractive, but some of the modules ('undici', 'ws') are
   //   also npm packages. In nodejs context that will lead to a.o. false
   //   classifications.
-  // - add the bun builtins in dependency-cruiser.js
+  // - add the bun builtins in dependency-cruiser.js + automatically detect modules with the
+  //   bun: protocol (which are unambiguous) as built-ins.
   //   Current approach. The --init command will try to detect whether it's
   //   in a bun repo and add the bun builtins to the config.
-  //
-  // Update: We now also detect modules with the 'bun:' protocol prefix as built-ins
-  // automatically, as they're unambiguous (unlike bare module names like 'undici').
   return (
     moduleIsBuiltin(pModuleName) ||
     pModuleName.startsWith("bun:") ||

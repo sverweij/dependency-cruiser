@@ -38,7 +38,7 @@ export function isExternalModule(
       // WebPack treats these differently:
       // - absolute paths only match that exact path
       // - relative paths get a node lookup treatment so "turtle" matches
-      //   "turtle", "../turtle", "../../turtle", "../../../turtle"
+      //   "turtle", "../turtle", "../../turtle"
       // hence we'll have to test for them in different fashion as well.
       // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
       (pModuleFolderName) => {
@@ -57,7 +57,7 @@ function determineFollowableExtensions(pResolveOptions) {
   let lReturnValue = new Set(pResolveOptions.extensions);
 
   // we could include things like pictures, movies, html, xml etc in
-  // lKnownUnfollowables as well. Typically in javascript-like sources you don't
+  // lKnownUnfollowables as well. Ijavascript-like sources you don't
   //  import non-javascript stuff without mentioning the extension
   // (`import 'styles.scss` is more clear than`import 'styles'` as you'd expect
   // that to resolve to something javascript-like. Defensively added the
@@ -186,8 +186,8 @@ function isWorkspaceAliased(pModuleName, pResolvedModuleName, pManifest) {
     if (picomatch.isMatch(pResolvedModuleName, lModuleFriendlyWorkspaceGlobs)) {
       return true;
     }
-    // it's possible to run node with --preserve-symlinks, in which case
-    // the symlinked workspace folders are not resolved to their realpath.
+    // it's possible to run node with --preserve-symlinks. The symlinked workspace folders
+    // then are not resolved to their realpath.
     // So we need to check both the thing in node_modules _and_ the resolved
     // thing. Annoyingly, the symlink in node_modules is the `name` attribute
     // of the workspace, not the path of the workspace itself. So if it's

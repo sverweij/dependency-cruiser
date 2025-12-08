@@ -11,10 +11,11 @@ const require = createRequire(import.meta.url);
  * @returns {string}
  */
 function getVersion(pModuleName) {
-  // // The 'proper' way to do this would be with a dynamic import with an
-  // // import assertion. Because it's 'experimental' since node 16 and prints
-  // // an ugly warning on stderr since node 19 we'll be using the require
-  // // hack below in stead.
+  // The 'proper' way to do this would be with a dynamic import with an
+  // import assertion. Because it's 'experimental' since node 16 and prints
+  // an ugly warning on stderr since node 19 we'll be using the require
+  // hack below in stead. Code would otherwise have been:
+  //
   // const lManifest = await import(
   //   // @ts-expect-error TS2345 extractRootModuleName can return either a string or
   //   // undefined. If undefined this function will throw. Which is _fine_, even
@@ -22,8 +23,8 @@ function getVersion(pModuleName) {
   //   path.join(extractRootModuleName(pModuleName), "package.json"),
   //   { assert: { type: "json" } }
   // );
-  // // changes the return type to Promise<string>
   // return lManifest.default.version;
+  //
   // eslint-disable-next-line import/no-dynamic-require, security/detect-non-literal-require
   const lManifest = require(
     join(

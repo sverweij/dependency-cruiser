@@ -63,7 +63,7 @@ export function getPackageRoot(pModule) {
  *
  * The pBaseDirectory parameter is necessary because dependency-cruiser/ this module
  * will have a different base dir, and will hence resolve either to the
- * wrong package or not to a package at all.
+ * wrong package or to no package.
  *
  * @param  {string} pModuleName  The name of the module to get the package.json of
  * @param  {string} pFileDirectory The folder the module resides in. Defaults to the current working directory
@@ -82,9 +82,9 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
       {
         ...pResolveOptions,
         // if a module has exports fields _and_ does not expose package.json
-        // in those exports, enhanced-resolve (nor node!) will not be able to
+        // in those exports, enhanced-resolve (nr node!) won't be able to
         // resolve the package.json if it actually heeds those exports fields.
-        // We can instruct enhanced-resolve to ignore them, however, by passing
+        // We can instruct enhanced-resolve to ignore them by passing
         // it the empty array for exports fields (overriding anything in
         // the pResvolveOptions)
         exportsFields: [],

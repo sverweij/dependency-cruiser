@@ -4,7 +4,6 @@ export function get(pObject, pPath, pDefault) {
   if (!pObject || !pPath) {
     return pDefault;
   }
-  // Regex explained: https://regexr.com/58j0k
   const lPathArray = pPath.match(/([^[.\]])+/g);
 
   const lReturnValue = lPathArray.reduce((pPreviousObject, pKey) => {

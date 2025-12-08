@@ -39,11 +39,8 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
   }
 }
 export function write(pOutputTo, pContent) {
-  // previously we checked here to ensure pContent ended on an EOL (and if it
-  // didn't we added one). As for one or two reporters we DON'T want this
-  // to happen automatically (e.g. the 'null' one) we've moved that check
-  // to the individual reporters and with a unit test ensured that all
-  // reporters (current and future) keep doing that.
+  // Reporters are responsible for ensuring output ends with a newline so the
+  // write function intentionally does not append an EOL
   if ("-" === pOutputTo) {
     writeToStdOut(pContent);
   } else {

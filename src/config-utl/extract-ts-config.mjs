@@ -68,8 +68,6 @@ export default function extractTSConfig(pTSConfigFileName) {
         ),
       );
     }
-    // lRetval.fileNames; // all files included in the project
-    // lRetval.options; // CompilerOptions
   }
 
   return lReturnValue;

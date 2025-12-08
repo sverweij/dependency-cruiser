@@ -136,7 +136,6 @@
     "!src/**/*.ts",
     "!src/**/*.md",
     "!src/**/*.schema.mjs",
-    "!src/schema/README.md",
     "!types/README.md",
     "!**/*.DS_Store",
     "types/**/*.d.mts",

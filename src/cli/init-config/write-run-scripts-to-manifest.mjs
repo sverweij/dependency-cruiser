@@ -107,11 +107,7 @@ export function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
   const lManifest = { ...(pManifest || {}) };
   const lExistingRunScripts = lManifest.scripts || {};
 
-  // This could instead be done with
-  // {...pAdditionalScriptEntries, ...lManifest} and no logic at all,
-  // but that'd add the new scripts on top, which doesn't feel right
-  //
-  // An alternative would be to sort the keys - but that'd be rude
+  // This ensures the new scripts are added _below_ the ones currently in the manifest
   lManifest.scripts = {
     ...lExistingRunScripts,
     ...filterNewScriptEntries(lExistingRunScripts, pAdditionalRunScripts),

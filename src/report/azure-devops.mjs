@@ -5,7 +5,6 @@ import {
 } from "./utl/index.mjs";
 
 const SEVERITY2VSO_TYPE = new Map([
-  // "error" | "warn" | "info" | "ignore"
   ["error", "error"],
   ["warn", "warning"],
   // azure devops doesn't seem to know 'info'. We still want to
@@ -184,26 +183,3 @@ export default function azureDevOps(pResults) {
     exitCode: pResults.summary.error,
   };
 }
-
-/*
-Some notes from the documentation over at https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
-
-Warnings and errors:
-
-##vso[task.logissue type=warning;sourcepath=consoleapp/main.cs;linenumber=1;columnnumber=1;code=100;]Found something that could be a problem.
-
-Progress
-##vso[task.setprogress]current operation
-
-Complete
-##vso[task.complete]current operation
-
-Message grouping
-##[group]Beginning of a group
-##[warning]Warning message
-##[error]Error message
-##[section]Start of a section
-##[debug]Debug text
-##[command]Command-line being run
-##[endgroup]
-*/

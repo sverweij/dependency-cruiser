@@ -108,8 +108,8 @@ export function extractModuleAttributes(pString) {
  * @returns {string} the stripped string
  */
 export function stripQueryParameters(pFilenameString) {
-  // url.parse(pFilenameString).pathname did this quite admirably, but it's
-  // deprecated, hence this funky RE replace. And accompanying unit test :-/
+  // url.parse(pFilenameString).pathname did this, but it's
+  // deprecated, hence this funky RE replace.
   return pFilenameString.replace(/\?.+$/, "");
 }
 

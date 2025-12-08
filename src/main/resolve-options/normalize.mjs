@@ -17,9 +17,8 @@ const DEFAULT_RESOLVE_OPTIONS = {
   symlinks: true,
   // if a webpack config overrides extensions, there's probably
   // good cause. The scannableExtensions are an educated guess
-  // anyway, that works well in most circumstances.
-  // Note that if extract/transpile/index gets an unknown extension
-  // passed, it'll fall back to the javascript parser
+  // anyway.Note: if extract/transpile/index gets an unknown extension
+  // it'll fall back to the javascript parser
   extensions: scannableExtensions,
   // for typescript projects that import stuff that's only in
   // node_modules/@types we need:
