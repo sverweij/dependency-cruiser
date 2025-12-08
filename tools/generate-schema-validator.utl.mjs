@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import Ajv from "ajv";
 import standaloneCode from "ajv/dist/standalone/index.js";
 
@@ -9,7 +9,7 @@ if (process.argv.length === 4) {
   const lInputSchemaFileName = process.argv.pop();
 
   const lSchema = await import(`../${lInputSchemaFileName}`);
-  const validate = ajv.compile(lSchema.defaul);
+  const validate = ajv.compile(lSchema.default);
 
   const lModuleCode = standaloneCode(ajv, validate);
 
