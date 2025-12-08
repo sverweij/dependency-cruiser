@@ -9,10 +9,7 @@ if (process.argv.length === 4) {
   const lInputSchemaFileName = process.argv.pop();
 
   const lSchema = await import(`../${lInputSchemaFileName}`);
-  const validate = ajv.compile(
-    lSchema.default,
-    // JSON.parse(readFileSync(lInputSchemaFileName, "utf8")),
-  );
+  const validate = ajv.compile(lSchema.defaul);
 
   const lModuleCode = standaloneCode(ajv, validate);
 
