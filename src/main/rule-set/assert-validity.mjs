@@ -4,6 +4,8 @@ import { normalizeToREAsString } from "../helpers.mjs";
 import { bus } from "#utl/bus.mjs";
 import { has, get } from "#utl/object-util.mjs";
 import validateConfigurationSchema from "#schema/configuration.validate.mjs";
+import { validateErrorsToString } from "#schema/utl.mjs";
+
 /**
  * @import { IConfiguration } from "../../../types/configuration.mjs";
  */
@@ -20,12 +22,6 @@ import validateConfigurationSchema from "#schema/configuration.validate.mjs";
 // This does _not_ influence the star height algorithm, which is the main value
 // of the safe-regex package.
 const MAX_SAFE_REGEX_STAR_REPEAT_LIMIT = 10000;
-
-function validateErrorsToString(pErrors) {
-  return pErrors
-    .map((pError) => `data${pError.instancePath} ${pError.message}`)
-    .join(", ");
-}
 
 function assertSchemaCompliance(pConfiguration) {
   if (!validateConfigurationSchema(pConfiguration)) {

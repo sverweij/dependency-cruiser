@@ -2,12 +2,7 @@ import { assertFormatOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeFormatOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
 import validateCruiseResultSchema from "#schema/cruise-result.validate.mjs";
-
-function validateErrorsToString(pErrors) {
-  return pErrors
-    .map((pError) => `data${pError.instancePath} ${pError.message}`)
-    .join(", ");
-}
+import { validateErrorsToString } from "#schema/utl.mjs";
 
 function validateResultAgainstSchema(pResult) {
   if (!validateCruiseResultSchema(pResult)) {
