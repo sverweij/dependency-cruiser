@@ -1,15 +1,15 @@
-import Ajv from "ajv";
 import safeRegex from "safe-regex";
 import { assertCruiseOptionsValid } from "../options/assert-validity.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
-import configurationSchema from "#configuration-schema";
 import { bus } from "#utl/bus.mjs";
 import { has, get } from "#utl/object-util.mjs";
+import validateConfigurationSchema from "#schema/configuration.validate.mjs";
+import { validateErrorsToString } from "#schema/utl.mjs";
+
 /**
  * @import { IConfiguration } from "../../../types/configuration.mjs";
  */
 
-const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,
 // the repeat limit is not the best of heuristics for indicating exponential time
 // regular expressions - and it leads to false positives. E.g. if you use rules
@@ -23,10 +23,10 @@ const ajv = new Ajv();
 // of the safe-regex package.
 const MAX_SAFE_REGEX_STAR_REPEAT_LIMIT = 10000;
 
-function assertSchemaCompliance(pSchema, pConfiguration) {
-  if (!ajv.validate(pSchema, pConfiguration)) {
+function assertSchemaCompliance(pConfiguration) {
+  if (!validateConfigurationSchema(pConfiguration)) {
     throw new Error(
-      `The supplied configuration is not valid: ${ajv.errorsText()}.\n`,
+      `The supplied configuration is not valid: ${validateErrorsToString(validateConfigurationSchema.errors)}.\n`,
     );
   }
 }
@@ -38,12 +38,12 @@ function hasPath(pObject, pSection, pCondition) {
 }
 
 function safeRule(pRule, pSection, pCondition) {
-  return (
-    !hasPath(pRule, pSection, pCondition) ||
-    safeRegex(normalizeToREAsString(get(pRule[pSection], pCondition)), {
+  if (hasPath(pRule, pSection, pCondition)) {
+    return safeRegex(normalizeToREAsString(get(pRule[pSection], pCondition)), {
       limit: MAX_SAFE_REGEX_STAR_REPEAT_LIMIT,
-    })
-  );
+    });
+  }
+  return true;
 }
 
 function assertRuleSafety(pRule) {
@@ -97,7 +97,7 @@ export default function assertRuleSetValid(pConfiguration) {
   bus.info("parse rule set: validate");
 
   bus.debug("parse rule set: validate: schema compliance");
-  assertSchemaCompliance(configurationSchema, pConfiguration);
+  assertSchemaCompliance(pConfiguration);
 
   bus.debug("parse rule set: validate: rule safety");
   (pConfiguration.allowed || []).forEach(assertRuleSafety);

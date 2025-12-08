@@ -15,6 +15,7 @@
     "tmp*",
     ".mocharc.cjs",
     ".eslintrc.cjs",
+    "src/schema/*.validate.mjs",
     "src/cli/tools/svg-in-html-snippets/script.snippet.cjs",
     "src/cli/init-config/get-user-input.mjs",
     "src/cli/listeners/*/index.mjs",

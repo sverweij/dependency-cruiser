@@ -1,16 +1,13 @@
-import Ajv from "ajv";
-
 import { assertFormatOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeFormatOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import validateCruiseResultSchema from "#schema/cruise-result.validate.mjs";
+import { validateErrorsToString } from "#schema/utl.mjs";
 
 function validateResultAgainstSchema(pResult) {
-  const ajv = new Ajv();
-
-  if (!ajv.validate(cruiseResultSchema, pResult)) {
+  if (!validateCruiseResultSchema(pResult)) {
     throw new Error(
-      `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`,
+      `The supplied dependency-cruiser result is not valid: ${validateErrorsToString(validateCruiseResultSchema.errors)}.\n`,
     );
   }
 }

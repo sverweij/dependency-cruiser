@@ -64,6 +64,24 @@
   },
   {
     "type": "module",
+    "from": "src/schema/configuration.schema.mjs",
+    "to": "src/schema/configuration.schema.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "not-unreachable-from-cli"
+    }
+  },
+  {
+    "type": "module",
+    "from": "src/schema/cruise-result.schema.mjs",
+    "to": "src/schema/cruise-result.schema.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "not-unreachable-from-cli"
+    }
+  },
+  {
+    "type": "module",
     "from": "src/cli/assert-node-environment-suitable.mjs",
     "to": "src/cli/assert-node-environment-suitable.mjs",
     "rule": {
@@ -111,15 +129,6 @@
     "type": "dependency",
     "from": "src/cli/init-config/write-run-scripts-to-manifest.mjs",
     "to": "src/cli/defaults.mjs",
-    "rule": {
-      "severity": "info",
-      "name": "not-to-ancestor-folders"
-    }
-  },
-  {
-    "type": "dependency",
-    "from": "src/enrich/derive/dependents/get-dependents.mjs",
-    "to": "src/enrich/derive/module-utl.mjs",
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
