@@ -2,16 +2,13 @@ import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { deepEqual, equal } from "node:assert/strict";
 import { throws } from "node:assert";
-import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import {
   UnCalledWritableTestStream,
   WritableTestStream,
 } from "../writable-test-stream.utl.mjs";
-import configurationSchema from "#configuration-schema";
+import { validate as validateConfigurationSchema } from "#schema/configuration.validate.mjs";
 import initConfig from "#cli/init-config/index.mjs";
-
-const ajv = new Ajv();
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 
@@ -40,7 +37,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
       equal(lResult.default.hasOwnProperty("extends"), false);
     } finally {
       deleteDammit(RULES_FILE_JS);
@@ -65,7 +62,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
       equal(lResult.default.hasOwnProperty("extends"), false);
       equal(lResult.default.options.hasOwnProperty("tsConfig"), false);
     } finally {
@@ -112,7 +109,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
       equal(lResult.default.hasOwnProperty("extends"), false);
       equal(lResult.default.options.hasOwnProperty("tsConfig"), true);
       deepEqual(lResult.default.options.tsConfig, {
@@ -141,7 +138,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
       equal(lResult.default.hasOwnProperty("extends"), false);
       equal(lResult.default.options.hasOwnProperty("webpackConfig"), true);
       deepEqual(lResult.default.options.webpackConfig, {
@@ -173,7 +170,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
 
       const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));
       equal(lManifest.hasOwnProperty("scripts"), true);
@@ -205,7 +202,7 @@ describe("[I] cli/init-config/index", () => {
       });
       const lResult = await import(lConfigResultFileName);
 
-      ajv.validate(configurationSchema, lResult.default);
+      validateConfigurationSchema(lResult.default);
       deepEqual(lResult.default, {});
 
       const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));

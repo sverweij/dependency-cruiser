@@ -3,13 +3,11 @@ import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
 import { deepEqual, ok, equal } from "node:assert/strict";
 import { randomBytes } from "node:crypto";
-import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
-import configurationSchema from "#configuration-schema";
+import { validate as validateConfigurationSchema } from "#schema/configuration.validate.mjs";
 import buildConfig from "#cli/init-config/build-config.mjs";
 import normalizeInitOptions from "#cli/init-config/normalize-init-options.mjs";
 
-const ajv = new Ajv();
 const RANDOM_TMP_FILENAME_LENGTH = 10;
 
 const createConfigNormalized = async (pInitOptions) => {
@@ -37,7 +35,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     const lResult = await createConfigNormalized({});
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(!lResult.hasOwnProperty("extends"));
   });
 
@@ -49,7 +47,7 @@ describe("[I] cli/init-config/build-config", () => {
       hasTestsOutsideSource: false,
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("forbidden"));
     equal(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
@@ -65,7 +63,7 @@ describe("[I] cli/init-config/build-config", () => {
       hasTestsOutsideSource: true,
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("forbidden"));
     equal(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
@@ -81,7 +79,7 @@ describe("[I] cli/init-config/build-config", () => {
       webpackConfig: "./webpack.prod.js",
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.webpackConfig, {
       fileName: "./webpack.prod.js",
@@ -96,7 +94,7 @@ describe("[I] cli/init-config/build-config", () => {
       tsConfig: "./tsconfig.json",
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.tsConfig, {
       fileName: "./tsconfig.json",
@@ -111,7 +109,7 @@ describe("[I] cli/init-config/build-config", () => {
       jsConfig: "./jsconfig.json",
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.tsConfig, {
       fileName: "./jsconfig.json",
@@ -126,7 +124,7 @@ describe("[I] cli/init-config/build-config", () => {
       babelConfig: "./.babelrc.json",
     });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.babelConfig, {
       fileName: "./.babelrc.json",
@@ -136,7 +134,7 @@ describe("[I] cli/init-config/build-config", () => {
   it("generates mainFields including 'module' for package.json with a type: module field", async () => {
     const lResult = await createConfigNormalized({ isTypeModule: true });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.enhancedResolveOptions.mainFields, [
       "module",
@@ -149,7 +147,7 @@ describe("[I] cli/init-config/build-config", () => {
   it("generates mainFields including 'module' for package.json withOUT a type: module field", async () => {
     const lResult = await createConfigNormalized({});
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.enhancedResolveOptions.mainFields, [
       "main",
@@ -161,7 +159,7 @@ describe("[I] cli/init-config/build-config", () => {
   it("generates a builtins property with additional bun builtins when we use bun", async () => {
     const lResult = await createConfigNormalized({ usesBun: true });
 
-    ajv.validate(configurationSchema, lResult);
+    validateConfigurationSchema(lResult);
     ok(lResult.hasOwnProperty("options"));
     deepEqual(lResult.options.builtInModules.add, [
       "bun",

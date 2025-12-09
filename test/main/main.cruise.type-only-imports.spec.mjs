@@ -1,8 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -13,8 +12,6 @@ const output = normBaseDirectory(
 const outputWithRules = normBaseDirectory(
   requireJSON("./__mocks__/type-only-imports/output-with-rules.json"),
 );
-
-const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -39,7 +36,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
     );
 
     deepEqual(lResult.output, output);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("flags type only imports when forbidden", async () => {
@@ -66,6 +63,6 @@ describe("[E] main.cruise - explicitly type only imports", () => {
     );
 
     deepEqual(lResult.output, outputWithRules);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 });

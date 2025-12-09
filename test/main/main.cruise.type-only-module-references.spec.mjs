@@ -1,8 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -13,8 +12,6 @@ const output = normBaseDirectory(
 const outputNoTS = normBaseDirectory(
   requireJSON("./__mocks__/type-only-module-references/output-no-ts.json"),
 );
-
-const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -39,7 +36,7 @@ describe("[E] main.cruise - type only module references", () => {
     );
 
     deepEqual(lResult.output, output);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("don't find it when not looking for pre-compilation deps", async () => {
@@ -54,6 +51,6 @@ describe("[E] main.cruise - type only module references", () => {
     );
 
     deepEqual(lResult.output, outputNoTS);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 });

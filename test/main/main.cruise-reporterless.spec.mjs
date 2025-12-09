@@ -1,7 +1,6 @@
 import { deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import { createRequireJSON } from "../backwards.utl.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -30,8 +29,6 @@ const folderFixtures = requireJSON(
   "./__fixtures__/cruise-reporterless/folder.json",
 );
 
-const ajv = new Ajv();
-
 function runFixture(pFixture) {
   if (!Boolean(pFixture.ignore)) {
     it(pFixture.title, async () => {
@@ -45,7 +42,7 @@ function runFixture(pFixture) {
         },
       );
 
-      ajv.validate(cruiseResultSchema, lResult.output);
+      validateCruiseResult(lResult.output);
       deepEqual(lResult.output.modules, pFixture.expected);
       if (lResult.output.folders) {
         deepEqual(lResult.output.folders, pFixture.expectedFolders);

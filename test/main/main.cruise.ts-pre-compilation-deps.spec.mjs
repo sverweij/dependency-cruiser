@@ -1,8 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -19,8 +18,6 @@ const tsNoPrecompFixtureCJS = normBaseDirectory(
 const tsNoPrecompFixtureES = normBaseDirectory(
   requireJSON("./__fixtures__/ts-no-precomp-es.json"),
 );
-
-const ajv = new Ajv();
 
 describe("[E] main.cruise - tsPreCompilationDeps", () => {
   it("ts-pre-compilation-deps: on, target CJS", async () => {
@@ -44,7 +41,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     deepEqual(lResult.output, tsPreCompFixtureCJS);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
   it("ts-pre-compilation-deps: on, target ES", async () => {
     const lResult = await cruise(
@@ -67,7 +64,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     deepEqual(lResult.output, tsPreCompFixtureES);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
   it("ts-pre-compilation-deps: off, target CJS", async () => {
     const lResult = await cruise(
@@ -90,7 +87,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     deepEqual(lResult.output, tsNoPrecompFixtureCJS);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
   it("ts-pre-compilation-deps: off, target ES", async () => {
     const lResult = await cruise(
@@ -113,6 +110,6 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     deepEqual(lResult.output, tsNoPrecompFixtureES);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 });

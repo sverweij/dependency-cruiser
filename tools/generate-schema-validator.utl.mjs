@@ -17,6 +17,6 @@ if (process.argv.length === 4) {
 } else {
   process.exitCode = 1;
   process.stderr.write(
-    `\nUsage: generate-schema-validator.utl.mjs input-schema.json output-validator.mjs\n\n  e.g. generate-schema-validator.utl.mjs ./src/schema/configuration.schema.json ./src/schema/configuration.validate.mjs\n\n`,
+    `\nUsage: generate-schema-validator.utl.mjs input-schema.json output-validator.mjs\n\n  e.g. generate-schema-validator.utl.mjs ./src/schema/configuration.schema.mjs ./src/schema/configuration.validate.mjs\n\n`,
   );
 }

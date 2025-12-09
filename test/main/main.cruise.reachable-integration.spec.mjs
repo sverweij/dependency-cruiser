@@ -1,11 +1,8 @@
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
-import Ajv from "ajv";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import normalizeOptions from "#cli/normalize-cli-options.mjs";
 import cruise from "#main/cruise.mjs";
-
-const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -67,7 +64,7 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    ajv.validate(cruiseResultSchema, lResult);
+    validateCruiseResult(lResult);
   });
 
   it("finds the dead wood from an 'allowed' rule set", async () => {
@@ -101,7 +98,7 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    ajv.validate(cruiseResultSchema, lResult);
+    validateCruiseResult(lResult);
   });
 
   it("finds the stuff that needs to be isolated from an 'allowed' rule set", async () => {
@@ -127,6 +124,6 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    ajv.validate(cruiseResultSchema, lResult);
+    validateCruiseResult(lResult);
   });
 });

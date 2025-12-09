@@ -64,24 +64,6 @@
   },
   {
     "type": "module",
-    "from": "src/schema/configuration.schema.mjs",
-    "to": "src/schema/configuration.schema.mjs",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "type": "module",
-    "from": "src/schema/cruise-result.schema.mjs",
-    "to": "src/schema/cruise-result.schema.mjs",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "type": "module",
     "from": "src/cli/assert-node-environment-suitable.mjs",
     "to": "src/cli/assert-node-environment-suitable.mjs",
     "rule": {

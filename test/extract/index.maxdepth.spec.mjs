@@ -30,7 +30,7 @@ describe("[I] extract/index - max depth", () => {
         lResult,
         requireJSON(`./__fixtures__/max-depth-${pDepth}.json`),
       );
-      // ajv.validate(resultSchema, lResult);
+      // validateCruiseResult(lResult);
     }),
   );
 });

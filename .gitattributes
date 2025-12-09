@@ -7,8 +7,9 @@
 *.mp3 binary
 *.ogg binary
 
-src/schema/** linguist-generated
 src/meta.cjs linguist-generated
-**/*.template.js linguist-generated
+src/schema/**/*.validate.mjs linguist-generated
+src/schema/**/*.schema.mjs linguist-generated
+src/schema/**/*.json linguist-generated
 doc/** linguist-documentation
 docs/** linguist-documentation

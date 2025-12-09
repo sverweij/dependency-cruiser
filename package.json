@@ -84,8 +84,6 @@
   },
   "main": "src/main/index.mjs",
   "imports": {
-    "#configuration-schema": "./src/schema/configuration.schema.mjs",
-    "#cruise-result-schema": "./src/schema/cruise-result.schema.mjs",
     "#*": "./src/*"
   },
   "exports": {
@@ -249,6 +247,7 @@
     "c8": "10.1.3",
     "clean-pkg-json": "1.3.0",
     "coffeescript": "2.7.0",
+    "esbuild": "0.27.1",
     "eslint": "9.39.1",
     "eslint-config-moving-meadow": "5.0.0",
     "eslint-config-prettier": "10.1.8",

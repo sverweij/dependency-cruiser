@@ -1,12 +1,9 @@
 import { deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import summarize from "#enrich/summarize/index.mjs";
-
-const ajv = new Ajv();
 
 describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
@@ -23,7 +20,7 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
-    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
+    validateCruiseResult({ modules: [], summary: lSummary });
   });
   it("adds a rule set when there is one", () => {
     const lSummary = summarize([], { ruleSet: { required: [] } }, []);
@@ -42,7 +39,7 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
-    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
+    validateCruiseResult({ modules: [], summary: lSummary });
   });
 
   it("consistently summarizes the same circular dependency, regardless the order", () => {
@@ -64,7 +61,7 @@ describe("[I] enrich/summarize", () => {
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
     deepEqual(lResult1, lResult2);
-    ajv.validate(cruiseResultSchema, { modules: [], summary: lResult1 });
+    validateCruiseResult({ modules: [], summary: lResult1 });
   });
 
   it("summarizes all circular dependencies, even when there's more per thingus", () => {
@@ -171,7 +168,7 @@ describe("[I] enrich/summarize", () => {
 
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
     deepEqual(lSummary, lExpected);
-    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
+    validateCruiseResult({ modules: [], summary: lSummary });
   });
 
   it("includes known violations in the summary", () => {
@@ -293,6 +290,6 @@ describe("[I] enrich/summarize", () => {
         ],
       },
     });
-    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
+    validateCruiseResult({ modules: [], summary: lSummary });
   });
 });

@@ -1,5 +1,6 @@
 export function validateErrorsToString(pErrors) {
-  return pErrors
+  /* c8 ignore next 1 */
+  return (pErrors || [])
     .map((pError) => `data${pError.instancePath} ${pError.message}`)
     .join(", ");
 }

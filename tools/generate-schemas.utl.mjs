@@ -9,7 +9,7 @@ function stripAttribute(pObject, pAttribute) {
   delete lObject[pAttribute];
 
   for (const lKey of Object.keys(pObject)) {
-    if (typeof pObject[lKey] === "object") {
+    if (typeof pObject[lKey] === "object" && pObject[lKey] !== null) {
       lObject[lKey] = stripAttribute(pObject[lKey], pAttribute);
     }
   }

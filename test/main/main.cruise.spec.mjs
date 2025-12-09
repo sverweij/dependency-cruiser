@@ -2,10 +2,9 @@ import { deepEqual } from "node:assert/strict";
 import { posix as path } from "node:path";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import Ajv from "ajv";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
@@ -18,8 +17,6 @@ const jsxFixture = normBaseDirectory(requireJSON("./__fixtures__/jsx.json"));
 const jsxAsObjectFixture = normBaseDirectory(
   requireJSON("./__fixtures__/jsx-as-object.json"),
 );
-
-const ajv = new Ajv();
 
 function pathPosixify(pOutput) {
   const lReturnValue = { ...pOutput };
@@ -34,7 +31,7 @@ describe("[E] main.cruise - main", () => {
     const lResult = await cruise(["test/main/__mocks__/ts"]);
 
     deepEqual(pathPosixify(lResult.output), tsFixture);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("Returns an object when no options are passed (absolute path)", async () => {
@@ -45,7 +42,7 @@ describe("[E] main.cruise - main", () => {
     );
 
     deepEqual(pathPosixify(lResult.output), tsFixture);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("processes tsx correctly", async () => {
@@ -56,7 +53,7 @@ describe("[E] main.cruise - main", () => {
     );
 
     deepEqual(pathPosixify(lResult.output), tsxFixture);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("processes jsx correctly", async () => {
@@ -67,7 +64,7 @@ describe("[E] main.cruise - main", () => {
     );
 
     deepEqual(pathPosixify(lResult.output), jsxFixture);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
   it("process rulesets in the form a an object instead of json", async () => {
     const lResult = await cruise(
@@ -79,7 +76,7 @@ describe("[E] main.cruise - main", () => {
     );
 
     deepEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
   it("Collapses to a pattern when a collapse pattern is passed", async () => {
     const lResult = await cruise(
@@ -102,6 +99,6 @@ describe("[E] main.cruise - main", () => {
         ),
       ),
     );
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 });

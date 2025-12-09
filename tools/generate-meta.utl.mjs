@@ -21,7 +21,6 @@ function getStream(pStream) {
 const lJSONAsString = await getStream(process.stdin);
 const $package = JSON.parse(lJSONAsString);
 const lGeneratedSource = `/* generated - don't edit */
-  
   module.exports = {
     version: "${$package.version}",
     engines: {

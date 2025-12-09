@@ -1,11 +1,8 @@
 import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
 import { rmSync } from "node:fs";
-import Ajv from "ajv";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import Cache from "#cache/cache.mjs";
 import cruise from "#main/cruise.mjs";
-
-const ajv = new Ajv();
 
 const CACHE_FOLDER =
   "test/main/__mocks__/cache/node_modules/.cache/dependency-cruiser";
@@ -32,7 +29,7 @@ describe("[E] main.cruise - cache", () => {
     Reflect.deleteProperty(lCache, "revisionData");
 
     deepEqual(lResult.output, lCache);
-    ajv.validate(cruiseResultSchema, lResult.output);
+    validateCruiseResult(lResult.output);
   });
 
   it("cruising twice yields the same result (minus 'revisionData')", async () => {
@@ -60,7 +57,7 @@ describe("[E] main.cruise - cache", () => {
     );
     Reflect.deleteProperty(lResultTwo.output, "revisionData");
     deepEqual(lResultTwo.output, lResult.output);
-    ajv.validate(cruiseResultSchema, lResultTwo.output);
+    validateCruiseResult(lResultTwo.output);
   });
 
   it("cruising twice with non-compatible arguments yields different results", async () => {
@@ -91,6 +88,6 @@ describe("[E] main.cruise - cache", () => {
     Reflect.deleteProperty(lNewCache, "revisionData");
     notDeepStrictEqual(lNewCache, lOldCache);
     deepEqual(lNewCache, lResultTwo.output);
-    ajv.validate(cruiseResultSchema, lNewCache);
+    validateCruiseResult(lNewCache);
   });
 });

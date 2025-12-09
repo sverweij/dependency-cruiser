@@ -1,5 +1,4 @@
 import { equal, deepEqual } from "node:assert/strict";
-import Ajv from "ajv";
 import sourceReport from "./__mocks__/src-report.mjs";
 import fixtureReport from "./__fixtures__/src-report.mjs";
 import sourceReportWithWordlist from "./__mocks__/src-report-wordlist.mjs";
@@ -14,11 +13,9 @@ import sourceFolders from "./__mocks__/folders.mjs";
 import fixtureFolders from "./__fixtures__/folders.mjs";
 import sourceFolderCycles from "./__mocks__/folder-cycles.mjs";
 import fixtureFolderCycles from "./__fixtures__/folder-cycles.mjs";
-import cruiseResultSchema from "#cruise-result-schema";
+import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import anonymize from "#report/anon/index.mjs";
 import { clearCache } from "#report/anon/anonymize-path-element.mjs";
-
-const ajv = new Ajv();
 
 const META_SYNTACTIC_VARIABLES = [
   "foo",
@@ -53,7 +50,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureReport);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
 
@@ -62,7 +59,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureReportWithWordlist);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
 
@@ -73,7 +70,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureCycle);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with (violated) reaches rules", () => {
@@ -83,7 +80,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureReachesReport);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with dependents", () => {
@@ -93,7 +90,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureDependents);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with folders", () => {
@@ -103,7 +100,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureFolders);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
 
@@ -114,7 +111,7 @@ describe("[I] report/anon", () => {
     const lOutput = JSON.parse(lResult.output);
 
     deepEqual(lOutput, fixtureFolderCycles);
-    ajv.validate(cruiseResultSchema, lOutput);
+    validateCruiseResult(lOutput);
     equal(lResult.exitCode, 0);
   });
 });
