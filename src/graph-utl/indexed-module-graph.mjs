@@ -164,25 +164,19 @@ export default class IndexedModuleGraph {
     if (!lFromNode) {
       return [];
     }
+    for (const lDependency of lFromNode.dependencies) {
+      if (!pVisited.has(lDependency.name)) {
+        if (lDependency.name === pTo) {
+          return [this.#geldEdge(lDependency)];
+        }
+        let lCandidatePath = this.getPath(lDependency.name, pTo, pVisited);
 
-    const lDirectUnvisitedDependencies = lFromNode.dependencies
-      .filter((pDependency) => !pVisited.has(pDependency.name))
-      .map(this.#geldEdge);
-    const lFoundDependency = lDirectUnvisitedDependencies.find(
-      (pDependency) => pDependency.name === pTo,
-    );
-
-    if (lFoundDependency) {
-      return [lFoundDependency];
-    }
-
-    for (const lNewFrom of lDirectUnvisitedDependencies) {
-      let lCandidatePath = this.getPath(lNewFrom.name, pTo, pVisited);
-
-      if (lCandidatePath.length > 0) {
-        return [lNewFrom].concat(lCandidatePath);
+        if (lCandidatePath.length > 0) {
+          return [this.#geldEdge(lDependency)].concat(lCandidatePath);
+        }
       }
     }
+
     return [];
   }
 
