@@ -118,12 +118,11 @@ function shouldAddReachable(pRule, pModuleTo, pGraph) {
 }
 
 function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
-  const lToModules = pGraph.filter((pToModule) =>
-    isModuleInRuleTo(pReachableRule, pToModule, pModule),
-  );
-
-  for (const lToModule of lToModules) {
-    if (pModule.source !== lToModule.source) {
+  for (const lToModule of pGraph) {
+    if (
+      pModule.source !== lToModule.source &&
+      isModuleInRuleTo(pReachableRule, lToModule, pModule)
+    ) {
       const lPath = pIndexedGraph.getPath(pModule.source, lToModule.source);
 
       if (lPath.length > 0) {
