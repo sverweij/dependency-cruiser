@@ -149,8 +149,10 @@ function anonymize(pResults, pWordList) {
 function sanitizeWordList(pWordList) {
   return pWordList
     .map((pString) => pString.replace(/[^a-zA-Z-]/g, "_"))
-    .filter((pString) => pString.match(/^[a-zA-Z-_]+$/g))
-    .filter((pString) => !pString.match(WHITELIST_RE));
+    .filter(
+      (pString) =>
+        /^[a-zA-Z-_]+$/g.test(pString) && !WHITELIST_RE.test(pString),
+    );
 }
 
 /**
