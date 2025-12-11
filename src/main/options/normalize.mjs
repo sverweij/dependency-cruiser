@@ -64,7 +64,7 @@ function normalizeCollapse(pCollapse) {
   const lFolderBelowNodeModules = `node_modules/${lOneOrMoreNonSlashes}`;
   const lSingleDigitRe = /^\d$/;
 
-  if (typeof pCollapse === "number" || pCollapse.match(lSingleDigitRe)) {
+  if (typeof pCollapse === "number" || lSingleDigitRe.test(pCollapse)) {
     lReturnValue = `${lFolderBelowNodeModules}|^${lFolderPattern.repeat(
       Number.parseInt(pCollapse, 10),
     )}`;
