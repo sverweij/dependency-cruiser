@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable security/detect-object-injection */
 import { dirname, resolve, sep } from "node:path/posix";
 import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
@@ -29,10 +30,10 @@ export function propertyEquals(pRule, pDependency, pProperty) {
 }
 
 export function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
-  return Boolean(
+  return (
     !pRule.to[pRuleProperty] ||
     (pDependency[pProperty] &&
-      pDependency[pProperty].match(pRule.to[pRuleProperty])),
+      new RegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
   );
 }
 
@@ -42,37 +43,40 @@ export function propertyMatchesNot(
   pRuleProperty,
   pProperty,
 ) {
-  return Boolean(
+  return (
     !pRule.to[pRuleProperty] ||
     (pDependency[pProperty] &&
-      !pDependency[pProperty].match(pRule.to[pRuleProperty])),
+      !new RegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
   );
 }
 
 export function matchesFromPath(pRule, pModule) {
-  return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));
+  return !pRule.from.path || new RegExp(pRule.from.path).test(pModule.source);
 }
 
 export function matchesFromPathNot(pRule, pModule) {
-  return Boolean(
-    !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot),
+  return (
+    !pRule.from.pathNot || !new RegExp(pRule.from.pathNot).test(pModule.source)
   );
 }
 
 export function matchesModulePath(pRule, pModule) {
-  return Boolean(!pRule.module.path || pModule.source.match(pRule.module.path));
+  return (
+    !pRule.module.path || new RegExp(pRule.module.path).test(pModule.source)
+  );
 }
 
 export function matchesModulePathNot(pRule, pModule) {
-  return Boolean(
-    !pRule.module.pathNot || !pModule.source.match(pRule.module.pathNot),
+  return (
+    !pRule.module.pathNot ||
+    !new RegExp(pRule.module.pathNot).test(pModule.source)
   );
 }
 
 function _matchesToPath(pRule, pString, pGroups = []) {
-  return Boolean(
+  return (
     !pRule.to.path ||
-    pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups)),
+    new RegExp(replaceGroupPlaceholders(pRule.to.path, pGroups)).test(pString)
   );
 }
 
@@ -87,7 +91,9 @@ export function matchToModulePath(pRule, pModule, pGroups) {
 function _matchesToPathNot(pRule, pString, pGroups = []) {
   return (
     !pRule.to.pathNot ||
-    !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
+    !new RegExp(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)).test(
+      pString,
+    )
   );
 }
 
@@ -100,16 +106,16 @@ export function matchToModulePathNot(pRule, pModule, pGroups) {
 }
 
 export function matchesToDependencyTypes(pRule, pDependency) {
-  return Boolean(
+  return (
     !pRule.to.dependencyTypes ||
-    intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes),
+    intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes)
   );
 }
 
 export function matchesToDependencyTypesNot(pRule, pDependency) {
-  return Boolean(
+  return (
     !pRule.to.dependencyTypesNot ||
-    !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot),
+    !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot)
   );
 }
 
@@ -118,12 +124,16 @@ export function matchesToVia(pRule, pDependency, pGroups) {
   if (pRule.to.via && pDependency.cycle) {
     if (pRule.to.via.path) {
       lReturnValue = pDependency.cycle.some(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.via.path, pGroups)),
+        new RegExp(replaceGroupPlaceholders(pRule.to.via.path, pGroups)).test(
+          name,
+        ),
       );
     }
     if (pRule.to.via.pathNot) {
       lReturnValue = !pDependency.cycle.every(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.via.pathNot, pGroups)),
+        new RegExp(
+          replaceGroupPlaceholders(pRule.to.via.pathNot, pGroups),
+        ).test(name),
       );
     }
     if (pRule.to.via.dependencyTypes) {
@@ -149,12 +159,16 @@ export function matchesToViaOnly(pRule, pDependency, pGroups) {
   if (pRule.to.viaOnly && pDependency.cycle) {
     if (pRule.to.viaOnly.path) {
       lReturnValue = pDependency.cycle.every(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups)),
+        new RegExp(
+          replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups),
+        ).test(name),
       );
     }
     if (pRule.to.viaOnly.pathNot) {
       lReturnValue = !pDependency.cycle.some(({ name }) =>
-        name.match(replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups)),
+        new RegExp(
+          replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups),
+        ).test(name),
       );
     }
     if (pRule.to.viaOnly.dependencyTypes) {

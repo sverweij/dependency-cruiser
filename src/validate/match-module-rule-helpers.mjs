@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-regexp */
 import {
   matchToModulePath,
   matchToModulePathNot,
@@ -98,8 +99,8 @@ export function matchesReachesRule(pRule, pModule) {
 function dependentsCountsMatch(pRule, pDependents) {
   const lMatchingDependentsCount = pDependents.filter(
     (pDependent) =>
-      Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
-      Boolean(!pRule.from.pathNot || !pDependent.match(pRule.from.pathNot)),
+      (!pRule.from.path || new RegExp(pRule.from.path).test(pDependent)) &&
+      (!pRule.from.pathNot || !new RegExp(pRule.from.pathNot).test(pDependent)),
   ).length;
   return (
     (!pRule.module.numberOfDependentsLessThan ||

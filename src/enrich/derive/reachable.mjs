@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 import {
   matchToModulePath,
@@ -22,8 +23,9 @@ function isModuleInRuleFrom(pRule) {
     const lRuleFrom = pRule.from ?? pRule.module;
     if (lRuleFrom) {
       return (
-        (!lRuleFrom.path || pModule.source.match(lRuleFrom.path)) &&
-        (!lRuleFrom.pathNot || !pModule.source.match(lRuleFrom.pathNot))
+        (!lRuleFrom.path || new RegExp(lRuleFrom.path).test(pModule.source)) &&
+        (!lRuleFrom.pathNot ||
+          !new RegExp(lRuleFrom.pathNot).test(pModule.source))
       );
     }
     return false;
@@ -118,12 +120,11 @@ function shouldAddReachable(pRule, pModuleTo, pGraph) {
 }
 
 function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
-  const lToModules = pGraph.filter((pToModule) =>
-    isModuleInRuleTo(pReachableRule, pToModule, pModule),
-  );
-
-  for (const lToModule of lToModules) {
-    if (pModule.source !== lToModule.source) {
+  for (const lToModule of pGraph) {
+    if (
+      pModule.source !== lToModule.source &&
+      isModuleInRuleTo(pReachableRule, lToModule, pModule)
+    ) {
       const lPath = pIndexedGraph.getPath(pModule.source, lToModule.source);
 
       if (lPath.length > 0) {
