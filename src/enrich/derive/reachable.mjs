@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 import {
   matchToModulePath,
@@ -22,8 +23,9 @@ function isModuleInRuleFrom(pRule) {
     const lRuleFrom = pRule.from ?? pRule.module;
     if (lRuleFrom) {
       return (
-        (!lRuleFrom.path || pModule.source.match(lRuleFrom.path)) &&
-        (!lRuleFrom.pathNot || !pModule.source.match(lRuleFrom.pathNot))
+        (!lRuleFrom.path || new RegExp(lRuleFrom.path).test(pModule.source)) &&
+        (!lRuleFrom.pathNot ||
+          !new RegExp(lRuleFrom.pathNot).test(pModule.source))
       );
     }
     return false;
