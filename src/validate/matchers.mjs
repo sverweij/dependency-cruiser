@@ -1,7 +1,7 @@
-/* eslint-disable security/detect-non-literal-regexp */
+ 
 /* eslint-disable security/detect-object-injection */
 import { dirname, resolve, sep } from "node:path/posix";
-import { replaceGroupPlaceholders } from "#utl/regex-util.mjs";
+import { getCachedRegExp, replaceGroupPlaceholders } from "#utl/regex-util.mjs";
 import { intersects } from "#utl/array-util.mjs";
 
 // by their nature some dependency types always occur alongside other
@@ -33,7 +33,7 @@ export function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
   return (
     !pRule.to[pRuleProperty] ||
     (pDependency[pProperty] &&
-      new RegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
+      getCachedRegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
   );
 }
 
@@ -46,37 +46,43 @@ export function propertyMatchesNot(
   return (
     !pRule.to[pRuleProperty] ||
     (pDependency[pProperty] &&
-      !new RegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
+      !getCachedRegExp(pRule.to[pRuleProperty]).test(pDependency[pProperty]))
   );
 }
 
 export function matchesFromPath(pRule, pModule) {
-  return !pRule.from.path || new RegExp(pRule.from.path).test(pModule.source);
+  return (
+    !pRule.from.path || getCachedRegExp(pRule.from.path).test(pModule.source)
+  );
 }
 
 export function matchesFromPathNot(pRule, pModule) {
   return (
-    !pRule.from.pathNot || !new RegExp(pRule.from.pathNot).test(pModule.source)
+    !pRule.from.pathNot ||
+    !getCachedRegExp(pRule.from.pathNot).test(pModule.source)
   );
 }
 
 export function matchesModulePath(pRule, pModule) {
   return (
-    !pRule.module.path || new RegExp(pRule.module.path).test(pModule.source)
+    !pRule.module.path ||
+    getCachedRegExp(pRule.module.path).test(pModule.source)
   );
 }
 
 export function matchesModulePathNot(pRule, pModule) {
   return (
     !pRule.module.pathNot ||
-    !new RegExp(pRule.module.pathNot).test(pModule.source)
+    !getCachedRegExp(pRule.module.pathNot).test(pModule.source)
   );
 }
 
 function _matchesToPath(pRule, pString, pGroups = []) {
   return (
     !pRule.to.path ||
-    new RegExp(replaceGroupPlaceholders(pRule.to.path, pGroups)).test(pString)
+    getCachedRegExp(replaceGroupPlaceholders(pRule.to.path, pGroups)).test(
+      pString,
+    )
   );
 }
 
@@ -91,7 +97,7 @@ export function matchToModulePath(pRule, pModule, pGroups) {
 function _matchesToPathNot(pRule, pString, pGroups = []) {
   return (
     !pRule.to.pathNot ||
-    !new RegExp(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)).test(
+    !getCachedRegExp(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)).test(
       pString,
     )
   );
@@ -124,14 +130,14 @@ export function matchesToVia(pRule, pDependency, pGroups) {
   if (pRule.to.via && pDependency.cycle) {
     if (pRule.to.via.path) {
       lReturnValue = pDependency.cycle.some(({ name }) =>
-        new RegExp(replaceGroupPlaceholders(pRule.to.via.path, pGroups)).test(
-          name,
-        ),
+        getCachedRegExp(
+          replaceGroupPlaceholders(pRule.to.via.path, pGroups),
+        ).test(name),
       );
     }
     if (pRule.to.via.pathNot) {
       lReturnValue = !pDependency.cycle.every(({ name }) =>
-        new RegExp(
+        getCachedRegExp(
           replaceGroupPlaceholders(pRule.to.via.pathNot, pGroups),
         ).test(name),
       );
@@ -159,14 +165,14 @@ export function matchesToViaOnly(pRule, pDependency, pGroups) {
   if (pRule.to.viaOnly && pDependency.cycle) {
     if (pRule.to.viaOnly.path) {
       lReturnValue = pDependency.cycle.every(({ name }) =>
-        new RegExp(
+        getCachedRegExp(
           replaceGroupPlaceholders(pRule.to.viaOnly.path, pGroups),
         ).test(name),
       );
     }
     if (pRule.to.viaOnly.pathNot) {
       lReturnValue = !pDependency.cycle.some(({ name }) =>
-        new RegExp(
+        getCachedRegExp(
           replaceGroupPlaceholders(pRule.to.viaOnly.pathNot, pGroups),
         ).test(name),
       );

@@ -1,3 +1,22 @@
+/* eslint-disable security/detect-non-literal-regexp */
+const REGEXP_CACHE = new Map();
+
+/**
+ * Returns a cached RegExp instance for the given pattern.
+ *
+ * RegExp compilation is pretty fast, and the caching mechanism adds
+ * some overhead, but when a pattern is used _really_ often, the trade-off
+ * is worth it.
+ * @param {string} pPattern
+ * @returns RegExp
+ */
+export function getCachedRegExp(pPattern) {
+  if (!REGEXP_CACHE.has(pPattern)) {
+    REGEXP_CACHE.set(pPattern, new RegExp(pPattern));
+  }
+  return REGEXP_CACHE.get(pPattern);
+}
+
 /**
  * If there is at least one group expression in the given pRulePath
  * return the first matched one.
@@ -19,7 +38,7 @@ export function extractGroups(pFromRestriction, pActualPath) {
     // except before it enters here it has already been 'normalized' to a string
     // so it can be safely passed to match. The right solution here (TODO)
     // is to create a separate type for NormalizedFromRestriction
-    let lMatchResult = pActualPath.match(pFromRestriction.path);
+    let lMatchResult = getCachedRegExp(pFromRestriction.path).exec(pActualPath);
 
     if (lMatchResult && lMatchResult.length > 1) {
       lReturnValue = lMatchResult.filter(
@@ -49,7 +68,6 @@ export function extractGroups(pFromRestriction, pActualPath) {
 export function replaceGroupPlaceholders(pString, pExtractedGroups) {
   return pExtractedGroups.reduce(
     (pAll, pThis, pIndex) =>
-      // eslint-disable-next-line security/detect-non-literal-regexp
       pAll.replace(new RegExp(`\\$${pIndex}`, "g"), pThis),
     pString,
   );

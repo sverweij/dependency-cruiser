@@ -16,7 +16,7 @@ const EXTENSION_RE = /(?<extension>(?:(?:\.d\.(?:[cm])?ts)|\.coffee\.md)$)/;
  * @return {string}          extension
  */
 export default function getExtension(pFileName) {
-  const lMatchResult = pFileName.match(EXTENSION_RE);
+  const lMatchResult = EXTENSION_RE.exec(pFileName);
 
   return lMatchResult?.groups?.extension ?? extname(pFileName);
 }

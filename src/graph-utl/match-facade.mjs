@@ -1,5 +1,6 @@
 export function filenameMatchesPattern(pFullPathToFile, pPattern) {
-  return RegExp(pPattern, "g").test(pFullPathToFile);
+  // eslint-disable-next-line security/detect-non-literal-regexp
+  return new RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
 export function moduleMatchesFilter(pModule, pFilter) {
