@@ -1,4 +1,3 @@
- 
 /* eslint-disable security/detect-object-injection */
 import { dirname, resolve, sep } from "node:path/posix";
 import { getCachedRegExp, replaceGroupPlaceholders } from "#utl/regex-util.mjs";

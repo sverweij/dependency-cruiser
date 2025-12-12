@@ -1,4 +1,3 @@
- 
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 import {
   matchToModulePath,

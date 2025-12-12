@@ -1,4 +1,3 @@
- 
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import { propertyEquals, matchesToIsMoreUnstable } from "./matchers.mjs";
 import {
