@@ -1,6 +1,7 @@
+import { getCachedRegExp } from "#utl/regex-util.mjs";
+
 export function filenameMatchesPattern(pFullPathToFile, pPattern) {
-  // eslint-disable-next-line security/detect-non-literal-regexp
-  return new RegExp(pPattern, "g").test(pFullPathToFile);
+  return getCachedRegExp(pPattern).test(pFullPathToFile);
 }
 
 export function moduleMatchesFilter(pModule, pFilter) {

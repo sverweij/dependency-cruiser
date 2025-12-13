@@ -3,9 +3,9 @@ import { isAbsolute, resolve as path_resolve } from "node:path";
 import { join as posix_join } from "node:path/posix";
 import picomatch from "picomatch";
 import getExtension from "#utl/get-extension.mjs";
+import { getCachedRegExp } from "#utl/regex-util.mjs";
 
 /**
- * @import { IResolveOptions } from "../../../types/resolve-options.mjs"
  * @import { ITranspileOptions } from "../../../types/dependency-cruiser.mjs"
  */
 
@@ -109,9 +109,7 @@ function isSubpathImport(pModuleName, pManifest) {
       // Quoting https://nodejs.org/api/packages.html#subpath-imports :
       // > "* maps expose nested subpaths as it is a string replacement syntax only"
       const lMatchREasString = pImportLHS.replace(/\*/g, ".+");
-      // eslint-disable-next-line security/detect-non-literal-regexp
-      const lMatchRE = new RegExp(`^${lMatchREasString}$`);
-      return lMatchRE.test(pModuleName);
+      return getCachedRegExp(`^${lMatchREasString}$`).test(pModuleName);
     })
   );
 }
@@ -226,11 +224,9 @@ function matchesTSConfigPaths(pModuleName, pPaths) {
   //
   // TODO: 'any string' - does this include the empty string as well? Checks seem
   // to indicate it doesn't, so we use `.+` instead of `.*`
-  return Object.keys(pPaths).some((pPathLHS) => {
-    // eslint-disable-next-line security/detect-non-literal-regexp
-    const lMatchRE = new RegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`);
-    return lMatchRE.test(pModuleName);
-  });
+  return Object.keys(pPaths).some((pPathLHS) =>
+    getCachedRegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`).test(pModuleName),
+  );
 }
 
 function stripExtension(pModulePath) {
