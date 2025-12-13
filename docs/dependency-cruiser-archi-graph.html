@@ -350,7 +350,7 @@ div.hint {
 <polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="208.76,-93.1 214.76,-91 208.76,-88.9 208.76,-93.1"/>
 </g>
 <!-- src/main&#45;&gt;src/utl -->
-<g id="edge23" class="edge">
+<g id="edge22" class="edge">
 <title>src/main&#45;&gt;src/utl</title>
 <path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M155.2,-138.75C155.2,-118.39 155.2,-71 155.2,-71 155.2,-71 140,-71 140,-71 140,-71 140,-43.24 140,-43.24"/>
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="142.1,-43.24 140,-37.24 137.9,-43.24 142.1,-43.24"/>
@@ -362,7 +362,7 @@ div.hint {
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="167.7,-73.8 165.6,-67.8 163.5,-73.8 167.7,-73.8"/>
 </g>
 <!-- src/main&#45;&gt;src/report -->
-<g id="edge22" class="edge">
+<g id="edge23" class="edge">
 <title>src/main&#45;&gt;src/report</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M143,-138.53C143,-138.53 143,-104.43 143,-104.43"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="145.1,-104.43 143,-98.43 140.9,-104.43 145.1,-104.43"/>
@@ -717,18 +717,16 @@ document.querySelector("svg").insertAdjacentHTML(
   `,
 );
 
-// Add a small increment to the last value of the path to make gradients on
-// horizontal paths work. Without them all browsers I tested with (firefox,
-// chrome) do not render the gradient, but instead make the line transparent
-// (or the color of the background, I haven't looked into it that deeply,
-// but for the hack it doesn't matter which).
+// Slightly nudge the last numeric path value (+0.001) so SVG stroke
+// gradients render correctly on horizontal paths. Without them,
+// they don't render at all (firefox, chrome).
 function skewLineABit(lDrawingInstructions) {
   var lLastValue = lDrawingInstructions.match(/(\d+\.?\d*)$/)[0];
-  // Smaller values than .001 _should_ work as well, but don't in all
-  // cases. Even this value is so small that it is not visible to the
+  // Smaller values than .001 _should_ work, but don't always.
+  // Even this value is so small that it is not visible to the
   // human eye (tested with the two I have at my disposal).
   var lIncrement = 0.001;
-  var lNewLastValue = parseFloat(lLastValue) + lIncrement;
+  var lNewLastValue = Number.parseFloat(lLastValue) + lIncrement;
 
   return lDrawingInstructions.replace(lLastValue, lNewLastValue);
 }

@@ -1108,18 +1108,16 @@ document.querySelector("svg").insertAdjacentHTML(
   `,
 );
 
-// Add a small increment to the last value of the path to make gradients on
-// horizontal paths work. Without them all browsers I tested with (firefox,
-// chrome) do not render the gradient, but instead make the line transparent
-// (or the color of the background, I haven't looked into it that deeply,
-// but for the hack it doesn't matter which).
+// Slightly nudge the last numeric path value (+0.001) so SVG stroke
+// gradients render correctly on horizontal paths. Without them,
+// they don't render at all (firefox, chrome).
 function skewLineABit(lDrawingInstructions) {
   var lLastValue = lDrawingInstructions.match(/(\d+\.?\d*)$/)[0];
-  // Smaller values than .001 _should_ work as well, but don't in all
-  // cases. Even this value is so small that it is not visible to the
+  // Smaller values than .001 _should_ work, but don't always.
+  // Even this value is so small that it is not visible to the
   // human eye (tested with the two I have at my disposal).
   var lIncrement = 0.001;
-  var lNewLastValue = parseFloat(lLastValue) + lIncrement;
+  var lNewLastValue = Number.parseFloat(lLastValue) + lIncrement;
 
   return lDrawingInstructions.replace(lLastValue, lNewLastValue);
 }
