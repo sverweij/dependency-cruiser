@@ -4,9 +4,8 @@ const REGEXP_CACHE = new Map();
 /**
  * Returns a cached RegExp instance for the given pattern.
  *
- * RegExp compilation is pretty fast, and the caching mechanism adds
- * some overhead, but when a pattern is used _really_ often, the trade-off
- * is worth it.
+ * See ./regex-cache.md for design considerations
+ *
  * @param {string} pPattern
  * @returns RegExp
  */
@@ -15,6 +14,10 @@ export function getCachedRegExp(pPattern) {
     REGEXP_CACHE.set(pPattern, new RegExp(pPattern));
   }
   return REGEXP_CACHE.get(pPattern);
+}
+
+export function clearRegExpCache() {
+  REGEXP_CACHE.clear();
 }
 
 /**
