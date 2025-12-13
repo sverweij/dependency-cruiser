@@ -1091,7 +1091,7 @@ function skewLineABit(lDrawingInstructions) {
   // Even this value is so small that it is not visible to the
   // human eye (tested with the two I have at my disposal).
   var lIncrement = 0.001;
-  var lNewLastValue = parseFloat(lLastValue) + lIncrement;
+  var lNewLastValue = Number.parseFloat(lLastValue) + lIncrement;
 
   return lDrawingInstructions.replace(lLastValue, lNewLastValue);
 }
