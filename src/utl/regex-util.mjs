@@ -71,7 +71,7 @@ export function extractGroups(pFromRestriction, pActualPath) {
 export function replaceGroupPlaceholders(pString, pExtractedGroups) {
   return pExtractedGroups.reduce(
     (pAll, pThis, pIndex) =>
-      pAll.replace(new RegExp(`\\$${pIndex}`, "g"), pThis),
+      pAll.replaceAll(new RegExp(`\\$${pIndex}`, "g"), pThis),
     pString,
   );
 }
