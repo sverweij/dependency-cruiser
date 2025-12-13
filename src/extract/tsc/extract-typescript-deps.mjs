@@ -560,7 +560,6 @@ export default function extractTypeScriptDependencies(
   pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
 ) {
-  // console.dir(pTypeScriptAST, { depth: 100 });
   return typescript
     ? extractImports(pTypeScriptAST)
         .concat(extractExports(pTypeScriptAST))

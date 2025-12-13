@@ -72,7 +72,7 @@ function deriveCorePackageName(pSource) {
  */
 export function getURLForModule(pModule, pPrefix, pSuffix) {
   // TODO: derive the URLs from configuration
-  if (pModule.dependencyTypes?.some((pType) => pType === "core")) {
+  if (pModule.dependencyTypes?.includes("core")) {
     const lPackageName = deriveCorePackageName(pModule.source);
     // Check if it's a Bun core module (starts with bun:)
     if (lPackageName.startsWith("bun:")) {

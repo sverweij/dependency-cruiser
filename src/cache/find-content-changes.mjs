@@ -98,7 +98,10 @@ export default function findContentChanges(
   );
 
   bus.debug("cache: - get (new - cached)");
-  lDiffCachedVsNew.forEach(({ name }) => lFileSet.delete(name));
+  // eslint-disable-next-line budapestian/local-variable-pattern
+  for (const { name } of lDiffCachedVsNew) {
+    lFileSet.delete(name);
+  }
 
   const lDiffNewVsCached = [];
   for (const lFileName of lFileSet) {

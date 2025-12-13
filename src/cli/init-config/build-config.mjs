@@ -45,8 +45,8 @@ function buildNotToTestRule(pInitOptions) {
       }
     },`;
   return pInitOptions.hasTestsOutsideSource
-    ? lNotToTestRule.replace(
-        /{{testLocationRE}}/g,
+    ? lNotToTestRule.replaceAll(
+        "{{testLocationRE}}",
         folderNameArrayToRE(pInitOptions?.testLocation ?? []),
       )
     : "";
@@ -211,12 +211,12 @@ function buildBuiltInModulesAttribute(pInitOptions) {
  */
 export default function buildConfig(pInitOptions) {
   return configTemplate
-    .replace(
-      /{{sourceLocationRE}}/g,
+    .replaceAll(
+      "{{sourceLocationRE}}",
       folderNameArrayToRE(pInitOptions.sourceLocation),
     )
-    .replace(
-      /{{resolutionExtensionsAsString}}/g,
+    .replaceAll(
+      "{{resolutionExtensionsAsString}}",
       extensionsToString(pInitOptions.resolutionExtensions),
     )
     .replace("{{notToTestRule}}", buildNotToTestRule(pInitOptions))
