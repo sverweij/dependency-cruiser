@@ -7,7 +7,7 @@ const REGEXP_CACHE = new Map();
  * See ./regex-cache.md for design considerations
  *
  * @param {string} pPattern
- * @returns RegExp
+ * @returns {RegExp}
  */
 export function getCachedRegExp(pPattern) {
   if (!REGEXP_CACHE.has(pPattern)) {
