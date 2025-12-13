@@ -226,8 +226,7 @@ export default function resolve(
     // This wonky replace corrects that so the filename again corresponds
     // with a real file on disk
     const lResolvedEHRCorrected = lResolvedDependency.resolved.replaceAll(
-      // eslint-disable-next-line no-control-regex
-      /\u0000#/g,
+      "\u0000#",
       "#",
     );
     const lResolvedYarnVirtual = resolveYarnVirtual(

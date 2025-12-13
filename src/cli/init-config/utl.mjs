@@ -5,7 +5,7 @@
  */
 export function folderNameArrayToRE(pArrayOfStrings) {
   const lFoldersInARE = pArrayOfStrings
-    .map((pName) => pName.replaceAll(/\\/g, "\\\\").replaceAll(/\./g, "\\."))
+    .map((pName) => pName.replaceAll("\\", "\\\\").replaceAll(".", "\\."))
     .join("|");
 
   return `^(${lFoldersInARE})`;
