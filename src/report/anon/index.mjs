@@ -1,3 +1,4 @@
+import { clearCache } from "./anonymize-path-element.mjs";
 import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
 const EOL = "\n";
@@ -148,7 +149,7 @@ function anonymize(pResults, pWordList) {
 
 function sanitizeWordList(pWordList) {
   return pWordList
-    .map((pString) => pString.replace(/[^a-zA-Z-]/g, "_"))
+    .map((pString) => pString.replaceAll(/[^a-zA-Z-]/g, "_"))
     .filter(
       (pString) =>
         /^[a-zA-Z-_]+$/g.test(pString) && !WHITELIST_RE.test(pString),
@@ -184,7 +185,7 @@ export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
     lAnonymousReporterOptions.wordlist =
       pResults?.summary?.optionsUsed?.reporterOptions?.anon?.wordlist ?? [];
   }
-  return {
+  const lReturnValue = {
     output:
       JSON.stringify(
         anonymize(
@@ -196,4 +197,6 @@ export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
       ) + EOL,
     exitCode: 0,
   };
+  clearCache();
+  return lReturnValue;
 }

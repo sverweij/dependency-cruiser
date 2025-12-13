@@ -48,7 +48,7 @@ function smartURIConcat(pPrefix, pSource) {
 function deriveExternalPackageName(pSource) {
   const lRE =
     /node_modules\/(?<packageName>[^@][^/]+)|(?<atPackageName>@[^/]+\/[^/]+)/;
-  const lMatch = pSource.match(lRE);
+  const lMatch = lRE.exec(pSource);
   if (lMatch) {
     return lMatch.groups.packageName || lMatch.groups.atPackageName;
   }

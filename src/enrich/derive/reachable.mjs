@@ -1,11 +1,10 @@
-/* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 import {
   matchToModulePath,
   matchToModulePathNot,
 } from "#validate/matchers.mjs";
 import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
-import { extractGroups } from "#utl/regex-util.mjs";
+import { getCachedRegExp, extractGroups } from "#utl/regex-util.mjs";
 
 function isReachableRule(pRule) {
   return Object.hasOwn(pRule?.to ?? {}, "reachable");
@@ -19,16 +18,25 @@ function getReachableRules(pRuleSet) {
 }
 
 function isModuleInRuleFrom(pRule) {
+  const lRuleFrom = pRule.from ?? pRule.module;
+  if (!lRuleFrom) {
+    return () => false;
+  }
+  const lRuleFromPathRE = lRuleFrom.path
+    ? getCachedRegExp(lRuleFrom.path)
+    : null;
+  const lRuleFromPathNotRE = lRuleFrom.pathNot
+    ? getCachedRegExp(lRuleFrom.pathNot)
+    : null;
+
   return (pModule) => {
-    const lRuleFrom = pRule.from ?? pRule.module;
-    if (lRuleFrom) {
-      return (
-        (!lRuleFrom.path || new RegExp(lRuleFrom.path).test(pModule.source)) &&
-        (!lRuleFrom.pathNot ||
-          !new RegExp(lRuleFrom.pathNot).test(pModule.source))
-      );
+    if (lRuleFromPathRE && !lRuleFromPathRE.test(pModule.source)) {
+      return false;
     }
-    return false;
+    if (lRuleFromPathNotRE && lRuleFromPathNotRE.test(pModule.source)) {
+      return false;
+    }
+    return true;
   };
 }
 

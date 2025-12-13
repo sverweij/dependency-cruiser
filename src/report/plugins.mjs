@@ -43,7 +43,7 @@ async function getPluginReporter(pOutputType) {
 
 export function getExternalPluginReporter(pOutputType) {
   const lPluginPatternRE = /^plugin:(?<pluginName>.+)$/;
-  const lPluginMatch = (pOutputType || "").match(lPluginPatternRE);
+  const lPluginMatch = lPluginPatternRE.exec(pOutputType || "");
 
   if (lPluginMatch?.groups) {
     return getPluginReporter(lPluginMatch.groups.pluginName);

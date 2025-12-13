@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-non-literal-regexp */
 import {
   matchToModulePath,
   matchToModulePathNot,
@@ -7,7 +6,7 @@ import {
   matchesModulePath,
   matchesModulePathNot,
 } from "./matchers.mjs";
-import { extractGroups } from "#utl/regex-util.mjs";
+import { getCachedRegExp, extractGroups } from "#utl/regex-util.mjs";
 
 /**
  * @import { IModule } from "../../types/cruise-result.mjs";
@@ -99,8 +98,9 @@ export function matchesReachesRule(pRule, pModule) {
 function dependentsCountsMatch(pRule, pDependents) {
   const lMatchingDependentsCount = pDependents.filter(
     (pDependent) =>
-      (!pRule.from.path || new RegExp(pRule.from.path).test(pDependent)) &&
-      (!pRule.from.pathNot || !new RegExp(pRule.from.pathNot).test(pDependent)),
+      (!pRule.from.path || getCachedRegExp(pRule.from.path).test(pDependent)) &&
+      (!pRule.from.pathNot ||
+        !getCachedRegExp(pRule.from.pathNot).test(pDependent)),
   ).length;
   return (
     (!pRule.module.numberOfDependentsLessThan ||

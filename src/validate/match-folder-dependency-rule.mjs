@@ -1,23 +1,28 @@
-/* eslint-disable security/detect-non-literal-regexp */
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import { propertyEquals, matchesToIsMoreUnstable } from "./matchers.mjs";
-import { extractGroups, replaceGroupPlaceholders } from "#utl/regex-util.mjs";
+import {
+  getCachedRegExp,
+  extractGroups,
+  replaceGroupPlaceholders,
+} from "#utl/regex-util.mjs";
 
 function fromFolderPath(pRule, pFromFolder) {
-  return !pRule.from.path || new RegExp(pRule.from.path).test(pFromFolder.name);
+  return (
+    !pRule.from.path || getCachedRegExp(pRule.from.path).test(pFromFolder.name)
+  );
 }
 
 function fromFolderPathNot(pRule, pFromFolder) {
   return (
     !pRule.from.pathNot ||
-    !new RegExp(pRule.from.pathNot).test(pFromFolder.name)
+    !getCachedRegExp(pRule.from.pathNot).test(pFromFolder.name)
   );
 }
 
 function toFolderPath(pRule, pToFolder, pGroups) {
   return (
     !pRule.to.path ||
-    new RegExp(replaceGroupPlaceholders(pRule.to.path, pGroups)).test(
+    getCachedRegExp(replaceGroupPlaceholders(pRule.to.path, pGroups)).test(
       pToFolder.name,
     )
   );
@@ -26,7 +31,7 @@ function toFolderPath(pRule, pToFolder, pGroups) {
 function toFolderPathNot(pRule, pToFolder, pGroups) {
   return (
     !pRule.to.pathNot ||
-    !new RegExp(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)).test(
+    !getCachedRegExp(replaceGroupPlaceholders(pRule.to.pathNot, pGroups)).test(
       pToFolder.name,
     )
   );

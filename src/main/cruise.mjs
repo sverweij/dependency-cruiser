@@ -3,6 +3,7 @@ import { assertCruiseOptionsValid } from "./options/assert-validity.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
 import { bus } from "#utl/bus.mjs";
+import { clearRegExpCache } from "#utl/regex-util.mjs";
 
 const TOTAL_STEPS = 10;
 
@@ -104,5 +105,10 @@ export default async function cruise(
   }
 
   bus.summary("report", c(9));
-  return await reportWrap(lCruiseResult, lCruiseOptions);
+  const lResult = await reportWrap(lCruiseResult, lCruiseOptions);
+
+  bus.debug("clear regex cache");
+  clearRegExpCache();
+
+  return lResult;
 }

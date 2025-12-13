@@ -1,9 +1,12 @@
 import consolidateModules from "./consolidate-modules.mjs";
 import consolidateModuleDependencies from "./consolidate-module-dependencies.mjs";
+import { getCachedRegExp } from "#utl/regex-util.mjs";
 
 function squashDependencyToPattern(pCollapsePattern) {
   return (pDependency) => {
-    const lCollapseMatch = pDependency.resolved.match(pCollapsePattern);
+    const lCollapseMatch = getCachedRegExp(pCollapsePattern).exec(
+      pDependency.resolved,
+    );
 
     return {
       ...pDependency,
@@ -27,7 +30,9 @@ function determineConsolidatedness(pConsolidated, pCollapseMatch, pSource) {
 
 function squashModuleToPattern(pCollapsePattern) {
   return (pModule) => {
-    const lCollapseMatch = pModule.source.match(pCollapsePattern);
+    const lCollapseMatch = getCachedRegExp(pCollapsePattern).exec(
+      pModule.source,
+    );
 
     return {
       ...pModule,

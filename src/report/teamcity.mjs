@@ -19,18 +19,18 @@ function escape(pMessageString) {
   return (
     pMessageString
       .toString()
-      .replace(/\|/g, "||")
-      .replace(/\n/g, "|n")
-      .replace(/\r/g, "|r")
-      .replace(/\[/g, "|[")
-      .replace(/\]/g, "|]")
+      .replaceAll("|", "||")
+      .replaceAll("\n", "|n")
+      .replaceAll("\r", "|r")
+      .replaceAll("[", "|[")
+      .replaceAll("]", "|]")
       // next line
-      .replace(/\u0085/g, "|x")
+      .replaceAll("\u0085", "|x")
       // line separator
-      .replace(/\u2028/g, "|l")
+      .replaceAll("\u2028", "|l")
       // paragraph separator
-      .replace(/\u2029/g, "|p")
-      .replace(/'/g, "|'")
+      .replaceAll("\u2029", "|p")
+      .replaceAll("'", "|'")
   );
 }
 
