@@ -108,7 +108,7 @@ function isSubpathImport(pModuleName, pManifest) {
       // replacement only.
       // Quoting https://nodejs.org/api/packages.html#subpath-imports :
       // > "* maps expose nested subpaths as it is a string replacement syntax only"
-      const lMatchREasString = pImportLHS.replace(/\*/g, ".+");
+      const lMatchREasString = pImportLHS.replaceAll(/\*/g, ".+");
       return getCachedRegExp(`^${lMatchREasString}$`).test(pModuleName);
     })
   );
@@ -225,7 +225,7 @@ function matchesTSConfigPaths(pModuleName, pPaths) {
   // TODO: 'any string' - does this include the empty string as well? Checks seem
   // to indicate it doesn't, so we use `.+` instead of `.*`
   return Object.keys(pPaths).some((pPathLHS) =>
-    getCachedRegExp(`^${pPathLHS.replace(/\*/g, ".+")}$`).test(pModuleName),
+    getCachedRegExp(`^${pPathLHS.replaceAll(/\*/g, ".+")}$`).test(pModuleName),
   );
 }
 

@@ -106,10 +106,10 @@ function focusHighlights(pModules, pNamesHashMap) {
 
 const hashToReadableNodeName = (pNode) =>
   pNode
-    .replace(ACORN_DUMMY_VALUE, "__unknown__")
-    .replace(/^\.$|^\.\//g, "__currentPath__")
-    .replace(/^\.{2}$|^\.{2}\//g, "__prevPath__")
-    .replace(/[[\]/.@~-]/g, "_");
+    .replaceAll(ACORN_DUMMY_VALUE, "__unknown__")
+    .replaceAll(/^\.$|^\.\//g, "__currentPath__")
+    .replaceAll(/^\.{2}$|^\.{2}\//g, "__prevPath__")
+    .replaceAll(/[[\]/.@~-]/g, "_");
 
 /**
  * @param {import("../../types/cruise-result").IModule[]} pModules

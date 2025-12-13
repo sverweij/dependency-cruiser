@@ -149,7 +149,7 @@ function anonymize(pResults, pWordList) {
 
 function sanitizeWordList(pWordList) {
   return pWordList
-    .map((pString) => pString.replace(/[^a-zA-Z-]/g, "_"))
+    .map((pString) => pString.replaceAll(/[^a-zA-Z-]/g, "_"))
     .filter(
       (pString) =>
         /^[a-zA-Z-_]+$/g.test(pString) && !WHITELIST_RE.test(pString),

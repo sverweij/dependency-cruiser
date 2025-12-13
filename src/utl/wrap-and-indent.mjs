@@ -1,9 +1,7 @@
 const DEFAULT_INDENT = 4;
 
 function indentString(pString, pCount) {
-  const lRegex = /^(?!\s*$)/gm;
-
-  return pString.replace(lRegex, " ".repeat(pCount));
+  return pString.replaceAll(/^(?!\s*$)/gm, " ".repeat(pCount));
 }
 
 /**

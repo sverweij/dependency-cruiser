@@ -146,7 +146,7 @@ function resolveWithRetry(
     lReturnValue.couldNotResolve &&
     canBeResolvedToTsVariant(lStrippedModuleName)
   ) {
-    const lModuleWithoutExtension = lStrippedModuleName.replace(
+    const lModuleWithoutExtension = lStrippedModuleName.replaceAll(
       /\.(js|jsx|cjs|mjs)$/g,
       "",
     );
@@ -225,7 +225,7 @@ export default function resolve(
     // enhanced-resolve inserts a NULL character in front of any `#` character.
     // This wonky replace corrects that so the filename again corresponds
     // with a real file on disk
-    const lResolvedEHRCorrected = lResolvedDependency.resolved.replace(
+    const lResolvedEHRCorrected = lResolvedDependency.resolved.replaceAll(
       // eslint-disable-next-line no-control-regex
       /\u0000#/g,
       "#",
