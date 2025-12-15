@@ -151,8 +151,7 @@ function sanitizeWordList(pWordList) {
   return pWordList
     .map((pString) => pString.replaceAll(/[^a-zA-Z-]/g, "_"))
     .filter(
-      (pString) =>
-        /^[a-zA-Z-_]+$/g.test(pString) && !WHITELIST_RE.test(pString),
+      (pString) => /^[a-zA-Z-_]+$/.test(pString) && !WHITELIST_RE.test(pString),
     );
 }
 

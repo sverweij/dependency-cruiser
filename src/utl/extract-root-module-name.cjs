@@ -1,5 +1,5 @@
-const LOCAL_MODULE_RE = /^[.]{1,2}($|\/.*)/g;
-const ABSOLUTE_MODULE_RE = /^\/.*/g;
+const LOCAL_MODULE_RE = /^[.]{1,2}($|\/.*)/;
+const ABSOLUTE_MODULE_RE = /^\/.*/;
 
 const PACKAGE_RE = "[^/]+";
 const SCOPED_PACKAGE_RE = "@[^/]+(/[^/]+)";
@@ -13,8 +13,8 @@ const ROOT_MODULE_RE = new RegExp(`^(${SCOPED_PACKAGE_RE}|${PACKAGE_RE})`, "g");
  */
 module.exports = function extractRootModuleName(pModuleName) {
   if (
-    pModuleName.match(LOCAL_MODULE_RE) ||
-    pModuleName.match(ABSOLUTE_MODULE_RE)
+    LOCAL_MODULE_RE.test(pModuleName) ||
+    ABSOLUTE_MODULE_RE.test(pModuleName)
   ) {
     return pModuleName;
   } else {

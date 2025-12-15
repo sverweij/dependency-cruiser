@@ -1,15 +1,12 @@
 import DEFAULT_THEME from "./default-theme.mjs";
 import { attributizeObject } from "./module-utl.mjs";
 import { has, get } from "#utl/object-util.mjs";
-
-function matchesRE(pValue, pRE) {
-  const lMatchResult = pValue.match && pValue.match(pRE);
-
-  return lMatchResult && lMatchResult.length > 0;
-}
+import { getCachedRegExp } from "#utl/regex-util.mjs";
 
 function matchesCriterion(pModuleKey, pCriterion) {
-  return pModuleKey === pCriterion || matchesRE(pModuleKey, pCriterion);
+  return (
+    pModuleKey === pCriterion || getCachedRegExp(pCriterion).test(pModuleKey)
+  );
 }
 
 function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {

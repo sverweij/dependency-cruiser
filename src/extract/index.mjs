@@ -80,7 +80,6 @@ function extractFileDirectoryArray(
   const lResult = [];
   for (const lFilename of lInitialSources) {
     if (!lVisited.has(lFilename)) {
-      lVisited.add(lFilename);
       lResult.push(
         ...extractRecursive(
           lFilename,
@@ -96,15 +95,7 @@ function extractFileDirectoryArray(
   return lResult;
 }
 
-function isNotFollowable({ followable }) {
-  return !followable;
-}
-
-function notInFromListAlready(pFromList) {
-  return ({ resolved }) => !pFromList.some(({ source }) => source === resolved);
-}
-
-function toDependencyToSource(pToListItem) {
+function toDependencyAsModule(pToListItem) {
   return {
     source: pToListItem.resolved,
     followable: pToListItem.followable,
@@ -116,18 +107,20 @@ function toDependencyToSource(pToListItem) {
   };
 }
 
-function complete(pAll, pFromListItem) {
-  return pAll
-    .concat(pFromListItem)
+function complete(pModules, pModule) {
+  return pModules
+    .concat(pModule)
     .concat(
-      pFromListItem.dependencies
-        .filter(isNotFollowable)
-        .filter(notInFromListAlready(pAll))
-        .map(toDependencyToSource),
+      pModule.dependencies
+        .filter(
+          ({ followable, resolved }) =>
+            !followable && !pModules.some(({ source }) => source === resolved),
+        )
+        .map(toDependencyAsModule),
     );
 }
 
-function filterExcludedDynamicDependencies(pModule, pExclude) {
+function removeExcludedDynamicDependencies(pModule, pExclude) {
   // no need to do the 'path' thing as that was addressed in extractFileDirectoryArray already
   return {
     ...pModule,
@@ -164,7 +157,7 @@ export default function extract(
   )
     .reduce(complete, [])
     .map((pModule) =>
-      filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude),
+      removeExcludedDynamicDependencies(pModule, pCruiseOptions.exclude),
     );
   pResolveOptions.fileSystem.purge();
   clearCaches();

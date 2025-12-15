@@ -6,8 +6,8 @@ import { getAvailableReporters } from "#report/index.mjs";
  * @import { ICruiseOptions, IFormatOptions } from "../../../types/options.mjs";
  */
 
-const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/gi;
-const VALID_DEPTH_RE = /^\d{1,2}$/g;
+const MODULE_SYSTEM_LIST_RE = /^(?:(?:cjs|amd|es6|tsd)(?:,|$)){1,4}/i;
+const VALID_DEPTH_RE = /^\d{1,2}$/;
 
 function isObject(pObject) {
   return (
@@ -37,7 +37,7 @@ function assertModuleSystemsValid(pModuleSystems) {
     pModuleSystems &&
     Array.isArray(pModuleSystems) &&
     !pModuleSystems.every((pModuleSystem) =>
-      pModuleSystem.match(MODULE_SYSTEM_LIST_RE),
+      MODULE_SYSTEM_LIST_RE.test(pModuleSystem),
     )
   ) {
     throw new Error(
@@ -65,7 +65,7 @@ function assertOutputTypeValid(pOutputType) {
 }
 
 function assertMaxDepthValid(pDepth) {
-  if (pDepth && !pDepth.toString().match(VALID_DEPTH_RE)) {
+  if (pDepth && !VALID_DEPTH_RE.test(pDepth.toString())) {
     throw new Error(
       `'${pDepth}' is not a valid depth - use an integer between 0 and 99`,
     );

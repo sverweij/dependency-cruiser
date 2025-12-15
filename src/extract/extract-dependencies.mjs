@@ -14,6 +14,7 @@ import {
   extractModuleAttributes,
 } from "./helpers.mjs";
 import { uniqBy, intersects } from "#utl/array-util.mjs";
+import { getCachedRegExp } from "#utl/regex-util.mjs";
 
 /**
  * @import { IDependency } from "../../types/cruise-result.mjs";
@@ -79,7 +80,7 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
 
 function matchesDoNotFollow({ resolved, dependencyTypes }, pDoNotFollow) {
   const lMatchesPath = pDoNotFollow.path
-    ? RegExp(pDoNotFollow.path, "g").test(resolved)
+    ? getCachedRegExp(pDoNotFollow.path).test(resolved)
     : false;
   const lMatchesDependencyTypes = pDoNotFollow.dependencyTypes
     ? intersects(dependencyTypes, pDoNotFollow.dependencyTypes)
@@ -114,7 +115,7 @@ function addResolutionAttributes(
 }
 
 function matchesPattern(pFullPathToFile, pPattern) {
-  return RegExp(pPattern, "g").test(pFullPathToFile);
+  return getCachedRegExp(pPattern).test(pFullPathToFile);
 }
 
 /**
@@ -166,7 +167,6 @@ export default function getDependencies(
       extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
       getDependencyUniqueKey,
     )
-      .sort(compareDeps)
       .map(
         addResolutionAttributes(
           pCruiseOptions,
@@ -181,7 +181,8 @@ export default function getDependencies(
             !matchesPattern(resolved, pCruiseOptions.exclude.path)) &&
           (!pCruiseOptions?.includeOnly?.path ||
             matchesPattern(resolved, pCruiseOptions.includeOnly.path)),
-      );
+      )
+      .sort(compareDeps);
   } catch (pError) {
     throw new Error(
       `Extracting dependencies ran afoul of...\n\n  ${pError.message}\n... in ${pFileName}\n\n`,

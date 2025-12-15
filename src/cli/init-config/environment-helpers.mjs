@@ -11,10 +11,10 @@ import { DEFAULT_CONFIG_FILE_NAME } from "../defaults.mjs";
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 const LIKELY_PACKAGES_FOLDERS = ["packages"];
-const TSCONFIG_CANDIDATE_PATTERN = /.*tsconfig.*\.json$/gi;
-const JSCONFIG_CANDIDATE_PATTERN = /.*jsconfig.*\.json$/gi;
-const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.(c?js|json5?|ts|ya?ml)$/gi;
-const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
+const TSCONFIG_CANDIDATE_PATTERN = /.*tsconfig.*\.json$/i;
+const JSCONFIG_CANDIDATE_PATTERN = /.*jsconfig.*\.json$/i;
+const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.(c?js|json5?|ts|ya?ml)$/i;
+const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/i;
 
 /**
  * Read the package manifest ('package.json') and return it as a javascript object
@@ -93,7 +93,7 @@ function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
   return readdirSync(pFolderName, "utf8").filter(
     (pFileName) =>
       statSync(join(pFolderName, pFileName)).isFile() &&
-      pFileName.match(pPattern),
+      pPattern.test(pFileName),
   );
 }
 

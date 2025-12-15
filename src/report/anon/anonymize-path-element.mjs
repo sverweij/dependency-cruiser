@@ -34,7 +34,7 @@ function replaceFromWordList(pPathElement, pWordList, pCached) {
 export function anonymizePathElement(
   pPathElement,
   pWordList = [],
-  pWhiteListRE = /^$/g,
+  pWhiteListRE = /^$/,
   pCached = true,
 ) {
   return pWhiteListRE.test(pPathElement)
