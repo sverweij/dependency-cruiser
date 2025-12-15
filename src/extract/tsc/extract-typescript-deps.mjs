@@ -15,13 +15,16 @@ const typescript = await tryImport(
   meta.supportedTranspilers.typescript,
 );
 
-const INTERESTING_NODE_KINDS = new Set([
-  typescript.SyntaxKind.CallExpression,
-  typescript.SyntaxKind.ExportDeclaration,
-  typescript.SyntaxKind.ImportDeclaration,
-  typescript.SyntaxKind.ImportEqualsDeclaration,
-  typescript.SyntaxKind.LastTypeNode,
-]);
+const INTERESTING_NODE_KINDS = typescript
+  ? new Set([
+      typescript.SyntaxKind.CallExpression,
+      typescript.SyntaxKind.ExportDeclaration,
+      typescript.SyntaxKind.ImportDeclaration,
+      typescript.SyntaxKind.ImportEqualsDeclaration,
+      typescript.SyntaxKind.LastTypeNode,
+    ])
+  : /* c8 ignore next 1 */
+    new Set();
 
 function isTypeOnlyImport(pStatement) {
   return (
