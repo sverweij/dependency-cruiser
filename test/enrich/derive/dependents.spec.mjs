@@ -122,7 +122,7 @@ describe("[U] enrich/derive/dependents - get-dependents", () => {
       getDependents({ source: "itsme" }, [
         {
           source: "someoneelse",
-          dependencies: [],
+          dependencies: new Set([]),
         },
       ]),
       [],
@@ -134,7 +134,7 @@ describe("[U] enrich/derive/dependents - get-dependents", () => {
       getDependents({ source: "itsme" }, [
         {
           source: "someoneelse",
-          dependencies: [{ resolved: "itsnotme" }],
+          dependencies: new Set(["itsnotme"]),
         },
       ]),
       [],
@@ -146,7 +146,7 @@ describe("[U] enrich/derive/dependents - get-dependents", () => {
       getDependents({ source: "itsme" }, [
         {
           source: "someoneelse",
-          dependencies: [{ resolved: "itsnotme" }, { resolved: "itsme" }],
+          dependencies: new Set(["itsnotme", "itsme"]),
         },
       ]),
       ["someoneelse"],
@@ -158,16 +158,16 @@ describe("[U] enrich/derive/dependents - get-dependents", () => {
       getDependents({ source: "itsme" }, [
         {
           source: "someoneelse",
-          dependencies: [{ resolved: "itsnotme" }, { resolved: "itsme" }],
+          dependencies: new Set(["itsnotme", "itsme"]),
         },
         {
           source: "someoneelse-again",
-          dependencies: [
-            { resolved: "notme" },
-            { resolved: "notmeagain" },
-            { resolved: "itsme" },
-            { resolved: "itsnotmeeither" },
-          ],
+          dependencies: new Set([
+            "notme",
+            "notmeagain",
+            "itsme",
+            "itsnotmeeither",
+          ]),
         },
       ]),
       ["someoneelse", "someoneelse-again"],
