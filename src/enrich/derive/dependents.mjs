@@ -2,9 +2,9 @@
 
 function isDependentsRule(pRule) {
   // used in folder rules and when moreUnstable is in the 'to' => governed by
-  // the 'metrics' flag in options, sot not going to repeat that here
+  // the 'metrics' flag in options, so not going to repeat that here
 
-  // dependents are used in the orphans analsys. However, there is a fall back
+  // dependents are used in the orphans analysis. However, there is a fall back
   // where it does its own analysis which is faster on itself, so not going
   // to repeat that check here either.
   return (
@@ -16,7 +16,7 @@ function isDependentsRule(pRule) {
 }
 
 export function getDependents(pModule, pModulesWithDependencySet) {
-  // perf between O(n) in an unconnected graph and O(n^2) in a fully connected one
+  // perf O(n) as dependency-lookups are O(1)
   return pModulesWithDependencySet
     .filter(({ dependencies }) => dependencies.has(pModule.source))
     .map((pDependentModule) => pDependentModule.source);
