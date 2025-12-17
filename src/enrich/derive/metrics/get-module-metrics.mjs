@@ -1,5 +1,4 @@
 import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
-import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 export function addInstabilityMetric(pModule) {
   return {
@@ -15,25 +14,23 @@ export function addInstabilityMetric(pModule) {
   };
 }
 
-function addInstabilityToDependency(pAllModules) {
-  const lIndexedModules = new IndexedModuleGraph(pAllModules);
+function addInstabilityToDependency(pIndexedModules) {
   return (pDependency) => ({
     ...pDependency,
     instability:
-      (lIndexedModules.findVertexByName(pDependency.resolved) || {})
+      (pIndexedModules.findVertexByName(pDependency.resolved) || {})
         .instability || 0,
   });
 }
 
 export function deNormalizeInstabilityMetricsToDependencies(
   pModule,
-  _,
-  pAllModules,
+  pIndexedModules,
 ) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.map(
-      addInstabilityToDependency(pAllModules),
+      addInstabilityToDependency(pIndexedModules),
     ),
   };
 }
