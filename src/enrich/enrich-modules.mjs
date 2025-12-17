@@ -5,7 +5,6 @@ import deriveReachable from "./derive/reachable.mjs";
 import addValidations from "./add-validations.mjs";
 import softenKnownViolations from "./soften-known-violations.mjs";
 import deriveModuleMetrics from "./derive/metrics/index.mjs";
-import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import addFocus from "#graph-utl/add-focus.mjs";
 import { bus } from "#utl/bus.mjs";
 
@@ -18,8 +17,8 @@ import { bus } from "#utl/bus.mjs";
  */
 export default function enrichModules(pModules, pOptions) {
   bus.info("analyze: cycles");
-  const lIndexedModules = new IndexedModuleGraph(pModules);
-  let lModules = deriveCycles(pModules, lIndexedModules, {
+
+  let lModules = deriveCycles(pModules, {
     pSourceAttribute: "source",
     pDependencyName: "resolved",
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,

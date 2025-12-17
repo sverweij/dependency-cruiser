@@ -148,7 +148,7 @@ export default function aggregateToFolders(pModules, pOptions = {}) {
     .map(deNormalizeInstability);
   lFolders = lFolders.concat(getSinks(lFolders));
 
-  return detectCycles(lFolders, new IndexedModuleGraph(lFolders, "name"), {
+  return detectCycles(lFolders, {
     pSourceAttribute: "name",
     pDependencyName: "name",
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,

@@ -1,4 +1,5 @@
 /* eslint-disable security/detect-object-injection */
+import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 /** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
 
@@ -49,16 +50,17 @@ function addCircularityCheckToDependency(
  * dependencies with that added.
  */
 export default function detectAndAddCycles(
-  pNodes,
-  pIndexedNodes,
+  pModules,
   { pSourceAttribute, pDependencyName, pSkipAnalysisNotInRules, pRuleSet },
 ) {
   if (!pSkipAnalysisNotInRules || hasCycleRule(pRuleSet)) {
-    return pNodes.map((pModule) => ({
+    const lIndexedModules = new IndexedModuleGraph(pModules, pSourceAttribute);
+
+    return pModules.map((pModule) => ({
       ...pModule,
       dependencies: pModule.dependencies.map((pToDep) =>
         addCircularityCheckToDependency(
-          pIndexedNodes,
+          lIndexedModules,
           pModule[pSourceAttribute],
           pToDep,
           pDependencyName,
@@ -66,7 +68,7 @@ export default function detectAndAddCycles(
       ),
     }));
   }
-  return pNodes.map((pModule) => ({
+  return pModules.map((pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies.map((pToDep) => ({
       ...pToDep,

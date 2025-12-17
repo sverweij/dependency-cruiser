@@ -36,7 +36,7 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
     ];
     const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: false,
@@ -58,7 +58,7 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
     ];
     const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: false,
@@ -84,7 +84,7 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
     ];
     const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: true,
@@ -109,7 +109,7 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
     ];
     const lIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: true,
