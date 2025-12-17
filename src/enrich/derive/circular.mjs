@@ -45,30 +45,33 @@ function addCircularityCheckToDependency(
 }
 
 /**
- * Runs through all dependencies of all pNodes, for each of them determines
+ * Runs through all dependencies of all pModulesOrFolders, for each of them determines
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  */
 export default function detectAndAddCycles(
-  pModules,
+  pModulesOrFolders,
   { pSourceAttribute, pDependencyName, pSkipAnalysisNotInRules, pRuleSet },
 ) {
   if (!pSkipAnalysisNotInRules || hasCycleRule(pRuleSet)) {
-    const lIndexedModules = new IndexedModuleGraph(pModules, pSourceAttribute);
+    const lIndexedGraph = new IndexedModuleGraph(
+      pModulesOrFolders,
+      pSourceAttribute,
+    );
 
-    return pModules.map((pModule) => ({
-      ...pModule,
-      dependencies: pModule.dependencies.map((pToDep) =>
+    return pModulesOrFolders.map((pModuleOrFolder) => ({
+      ...pModuleOrFolder,
+      dependencies: pModuleOrFolder.dependencies.map((pToDep) =>
         addCircularityCheckToDependency(
-          lIndexedModules,
-          pModule[pSourceAttribute],
+          lIndexedGraph,
+          pModuleOrFolder[pSourceAttribute],
           pToDep,
           pDependencyName,
         ),
       ),
     }));
   }
-  return pModules.map((pModule) => ({
+  return pModulesOrFolders.map((pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies.map((pToDep) => ({
       ...pToDep,
