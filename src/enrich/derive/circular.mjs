@@ -1,4 +1,5 @@
 /* eslint-disable security/detect-object-injection */
+import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 /** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
 
@@ -44,29 +45,33 @@ function addCircularityCheckToDependency(
 }
 
 /**
- * Runs through all dependencies of all pNodes, for each of them determines
+ * Runs through all dependencies of all pModulesOrFolders, for each of them determines
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  */
 export default function detectAndAddCycles(
-  pNodes,
-  pIndexedNodes,
+  pModulesOrFolders,
   { pSourceAttribute, pDependencyName, pSkipAnalysisNotInRules, pRuleSet },
 ) {
   if (!pSkipAnalysisNotInRules || hasCycleRule(pRuleSet)) {
-    return pNodes.map((pModule) => ({
-      ...pModule,
-      dependencies: pModule.dependencies.map((pToDep) =>
+    const lIndexedGraph = new IndexedModuleGraph(
+      pModulesOrFolders,
+      pSourceAttribute,
+    );
+
+    return pModulesOrFolders.map((pModuleOrFolder) => ({
+      ...pModuleOrFolder,
+      dependencies: pModuleOrFolder.dependencies.map((pToDep) =>
         addCircularityCheckToDependency(
-          pIndexedNodes,
-          pModule[pSourceAttribute],
+          lIndexedGraph,
+          pModuleOrFolder[pSourceAttribute],
           pToDep,
           pDependencyName,
         ),
       ),
     }));
   }
-  return pNodes.map((pModule) => ({
+  return pModulesOrFolders.map((pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies.map((pToDep) => ({
       ...pToDep,

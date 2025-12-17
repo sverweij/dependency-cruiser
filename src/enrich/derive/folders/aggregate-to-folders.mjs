@@ -9,7 +9,6 @@ import {
   getParentFolders,
   object2Array,
 } from "./utl.mjs";
-import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
@@ -148,7 +147,7 @@ export default function aggregateToFolders(pModules, pOptions = {}) {
     .map(deNormalizeInstability);
   lFolders = lFolders.concat(getSinks(lFolders));
 
-  return detectCycles(lFolders, new IndexedModuleGraph(lFolders, "name"), {
+  return detectCycles(lFolders, {
     pSourceAttribute: "name",
     pDependencyName: "name",
     pSkipAnalysisNotInRules: pOptions.skipAnalysisNotInRules,

@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
 import detectAndAddCycles, { hasCycleRule } from "#enrich/derive/circular.mjs";
-import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 
 describe("[U] enrich/circular - hasCycleRule", () => {
   it("returns false for empty lRuleSet", () => {
@@ -34,9 +33,8 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
         dependencies: [],
       },
     ];
-    const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: false,
@@ -56,9 +54,8 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
         dependencies: [{ resolved: "a" }],
       },
     ];
-    const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: false,
@@ -82,9 +79,8 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
         dependencies: [{ resolved: "a" }],
       },
     ];
-    const lMockIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lMockIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: true,
@@ -107,9 +103,8 @@ describe("[U] enrich/circular - detectAndAddCycles", () => {
         dependencies: [{ resolved: "a" }],
       },
     ];
-    const lIndexedNodes = new IndexedModuleGraph(lNodes);
 
-    const lResult = detectAndAddCycles(lNodes, lIndexedNodes, {
+    const lResult = detectAndAddCycles(lNodes, {
       pSourceAttribute: "source",
       pDependencyName: "resolved",
       pSkipAnalysisNotInRules: true,
