@@ -9,7 +9,6 @@ import {
   getParentFolders,
   object2Array,
 } from "./utl.mjs";
-import IndexedModuleGraph from "#graph-utl/indexed-module-graph.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
