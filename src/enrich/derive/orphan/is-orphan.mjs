@@ -1,6 +1,10 @@
-import { isDependent } from "../module-utl.mjs";
-
-export default function isOrphan(pModule, pGraph) {
+/**
+ *
+ * @param {import("../../../../types/dependency-cruiser.mjs").IModule} pModules
+ * @param {import("#graph-utl/module-graph-with-dependency-set.mjs").default} pModulesWithDependencySet
+ * @returns {boolean}
+ */
+export default function isOrphan(pModule, pModulesWithDependencySet) {
   if (pModule.dependencies.length > 0) {
     return false;
   }
@@ -10,5 +14,5 @@ export default function isOrphan(pModule, pGraph) {
     return pModule.dependents.length === 0;
   }
   // ... otherwise calculate them
-  return !pGraph.some(isDependent(pModule.source));
+  return !pModulesWithDependencySet.moduleHasDependents(pModule);
 }
