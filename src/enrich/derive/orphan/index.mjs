@@ -31,7 +31,7 @@ export default function deriveOrphans(
     // isOrphan has early exits the dependents derivation doesn't:
     // - when the module already has dependencies (quick length check)
     // - when dependents are already calculated (quick length check as well). If
-    //   they are the  lModulesWithDependencySet is created for naught.
+    //   they are, the lModulesWithDependencySet is created for naught.
     const lModulesWithDependencySet = new ModuleGraphWithDependencySet(
       pModules,
     );

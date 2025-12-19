@@ -1,4 +1,5 @@
 /**
+ * returns true if the given module has no dependencies and no dependents
  *
  * @param {import("../../../../types/dependency-cruiser.mjs").IModule} pModule
  * @param {import("#graph-utl/module-graph-with-dependency-set.mjs").default} pModulesWithDependencySet
