@@ -1,10 +1,3 @@
-export function isDependent(pResolvedName) {
-  return (pModule) =>
-    pModule.dependencies.some(
-      (pDependency) => pDependency.resolved === pResolvedName,
-    );
-}
-
 export function metricsAreCalculable(pModule) {
   return (
     !pModule.coreModule &&
