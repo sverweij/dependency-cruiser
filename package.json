@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "17.3.4-beta-1",
+  "version": "17.3.5-beta-2",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
