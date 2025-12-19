@@ -21,6 +21,7 @@ export default class MetaDataStrategy {
   /**
    * @param {string} _pDirectory
    * @param {ICruiseResult} _pCachedCruiseResult
+   * @param {IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<changeType>=} pOptions.interestingChangeTypes
