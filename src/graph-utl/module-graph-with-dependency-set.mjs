@@ -2,6 +2,8 @@ export default class ModuleGraphWithDependencySet {
   /** @type {Array<{source: string, dependencies: Set<string>}>} */
   #modulesWithDependencySet;
   /**
+   * Creates Module graph optimized for querying dependents
+   * @constructor
    * @param {import("../../types/dependency-cruiser.mjs").IModule[]} pModules
    */
   constructor(pModules) {
@@ -14,6 +16,8 @@ export default class ModuleGraphWithDependencySet {
   }
 
   /**
+   * Returns true if the given module has dependents in the graph, false otherwise
+   *
    * @param {import("../../types/dependency-cruiser.mjs").IModule} pModule
    * @returns {boolean}
    */
@@ -24,6 +28,7 @@ export default class ModuleGraphWithDependencySet {
   }
 
   /**
+   * Returns an array of module source paths that depend on the given module
    *
    * @param {import("../../types/dependency-cruiser.mjs").IModule} pModule
    * @returns {Array<string>}

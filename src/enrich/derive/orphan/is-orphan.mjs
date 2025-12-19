@@ -1,6 +1,6 @@
 /**
  *
- * @param {import("../../../../types/dependency-cruiser.mjs").IModule} pModules
+ * @param {import("../../../../types/dependency-cruiser.mjs").IModule} pModule
  * @param {import("#graph-utl/module-graph-with-dependency-set.mjs").default} pModulesWithDependencySet
  * @returns {boolean}
  */
