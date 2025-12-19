@@ -3,11 +3,15 @@ import { equal } from "node:assert/strict";
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
 import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 import isOrphan from "#enrich/derive/orphan/is-orphan.mjs";
+import ModuleGraphWithDependencySet from "#graph-utl/module-graph-with-dependency-set.mjs";
 
 describe("[U] enrich/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {
     equal(
-      isOrphan({ source: "./lonely.js", dependencies: [] }, ONE_MODULE_FIXTURE),
+      isOrphan(
+        { source: "./lonely.js", dependencies: [] },
+        new ModuleGraphWithDependencySet(ONE_MODULE_FIXTURE),
+      ),
       true,
     );
   });
@@ -30,7 +34,7 @@ describe("[U] enrich/derive/orphan/isOrphan", () => {
             },
           ],
         },
-        TWO_MODULES_FIXTURE,
+        new ModuleGraphWithDependencySet(TWO_MODULES_FIXTURE),
       ),
       false,
     );
@@ -43,7 +47,7 @@ describe("[U] enrich/derive/orphan/isOrphan", () => {
           source: "snak.js",
           dependencies: [],
         },
-        TWO_MODULES_FIXTURE,
+        new ModuleGraphWithDependencySet(TWO_MODULES_FIXTURE),
       ),
       false,
     );
