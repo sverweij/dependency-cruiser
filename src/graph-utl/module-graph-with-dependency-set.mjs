@@ -22,4 +22,15 @@ export default class ModuleGraphWithDependencySet {
       dependencies.has(pModule.source),
     );
   }
+
+  /**
+   *
+   * @param {import("../../types/dependency-cruiser.mjs").IModule} pModule
+   * @returns {Array<string>}
+   */
+  getDependents(pModule) {
+    return this.#modulesWithDependencySet
+      .filter(({ dependencies }) => dependencies.has(pModule.source))
+      .map(({ source }) => source);
+  }
 }

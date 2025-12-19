@@ -1,5 +1,7 @@
 /** @import { IFlattenedRuleSet } from "../../../types/rule-set.mjs" */
 
+import ModuleGraphWithDependencySet from "#graph-utl/module-graph-with-dependency-set.mjs";
+
 function isDependentsRule(pRule) {
   // used in folder rules and when moreUnstable is in the 'to' => governed by
   // the 'metrics' flag in options, so not going to repeat that here
@@ -13,13 +15,6 @@ function isDependentsRule(pRule) {
     Object.hasOwn(pRule?.module ?? {}, "numberOfDependentsMoreThan")
     /* c8 ignore stop */
   );
-}
-
-export function getDependents(pModule, pModulesWithDependencySet) {
-  // perf O(n) as dependency-lookups are O(1)
-  return pModulesWithDependencySet
-    .filter(({ dependencies }) => dependencies.has(pModule.source))
-    .map((pDependentModule) => pDependentModule.source);
 }
 
 /**
@@ -42,15 +37,13 @@ export default function addDependents(
     // large graphs it pays off significantly - creation is a few centiseconds
     // but it cuts analysis in half on large graphs (and even on smaller
     // graphs it's a win, even though just a few milliseconds)
-    const lModulesWithDependencySet = pModules.map((pModule) => ({
-      source: pModule.source,
-      dependencies: new Set(
-        pModule.dependencies.map((pDependency) => pDependency.resolved),
-      ),
-    }));
+    const lModulesWithDependencySet = new ModuleGraphWithDependencySet(
+      pModules,
+    );
+
     return pModules.map((pModule) => ({
       ...pModule,
-      dependents: getDependents(pModule, lModulesWithDependencySet),
+      dependents: lModulesWithDependencySet.getDependents(pModule),
     }));
   }
   return pModules;
