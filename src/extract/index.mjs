@@ -70,13 +70,13 @@ function extractFileDirectoryArray(
 ) {
   let lVisited = new Set();
 
-  bus.info("read files: gather initial sources");
+  bus.debug("extract: gather initial sources");
   const lInitialSources = gatherInitialSources(
     pFileDirectoryArray,
     pCruiseOptions,
   );
 
-  bus.info("read files: visit dependencies");
+  bus.debug("extract: visit dependencies");
   const lResult = [];
   for (const lFilename of lInitialSources) {
     if (!lVisited.has(lFilename)) {

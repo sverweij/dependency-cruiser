@@ -83,7 +83,7 @@ export default function findContentChanges(
   pCachedCruiseResult,
   pOptions,
 ) {
-  bus.debug("cache: - get revision data");
+  bus.debug("cache: content: get revision data");
   const lFileSet = new Set(
     findAllFiles(pDirectory, {
       baseDir: pOptions.baseDir,
@@ -92,12 +92,12 @@ export default function findContentChanges(
     }).filter(hasInterestingExtension(pOptions.extensions)),
   );
 
-  bus.debug("cache: - get (cached - new)");
+  bus.debug("cache: content: get (cached - new)");
   const lDiffCachedVsNew = pCachedCruiseResult.modules.map(
     diffCachedModuleAgainstFileSet(lFileSet, pOptions.baseDir),
   );
 
-  bus.debug("cache: - get (new - cached)");
+  bus.debug("cache: content: get (new - cached)");
   // eslint-disable-next-line budapestian/local-variable-pattern
   for (const { name } of lDiffCachedVsNew) {
     lFileSet.delete(name);
@@ -112,6 +112,6 @@ export default function findContentChanges(
     });
   }
 
-  bus.debug("cache: - return revision data");
+  bus.debug("cache: content: return revision data");
   return lDiffCachedVsNew.concat(lDiffNewVsCached);
 }

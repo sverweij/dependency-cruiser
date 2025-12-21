@@ -686,7 +686,7 @@ export default {
 
     progress: { 
       type: "performance-log", 
-      maximumLevel: 60 
+      maximumLevel: 50 
     },
     cache: {
       strategy: "metadata",

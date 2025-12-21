@@ -1,5 +1,5 @@
 import { styleText } from "node:util";
-import { INFO } from "#utl/bus.mjs";
+import { INFO, SUMMARY } from "#utl/bus.mjs";
 
 const MS_PER_SECOND = 1000;
 const MS_PER_MICRO_SECOND = 0.001;
@@ -64,7 +64,7 @@ function formatMessage(pMessage, pLevel) {
 export function formatTime(
   pNumber,
   pConversionMultiplier = MS_PER_SECOND,
-  pLevel = INFO,
+  pLevel = SUMMARY,
 ) {
   return formatMessage(
     gTimeFormat(pConversionMultiplier * pNumber)

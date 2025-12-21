@@ -80,16 +80,16 @@ function assertRuleSafety(pRule) {
  * @throws {Error}          An error with the reason for the error as a message
  */
 export default function assertRuleSetValid(pConfiguration) {
-  bus.info("parse rule set: validate");
+  bus.debug("startup: parse rule set: validate");
 
-  bus.debug("parse rule set: validate: schema compliance");
+  bus.trace("startup: parse rule set: validate: schema");
   assertSchemaCompliance(pConfiguration);
 
-  bus.debug("parse rule set: validate: rule safety");
+  bus.trace("startup: parse rule set: validate: rule safety");
   (pConfiguration.allowed || []).forEach(assertRuleSafety);
   (pConfiguration.forbidden || []).forEach(assertRuleSafety);
 
-  bus.debug("parse rule set: validate: cruise options validity");
+  bus.trace("startup: parse rule set: validate: options");
   if (pConfiguration?.options) {
     assertCruiseOptionsValid(pConfiguration.options);
   }
