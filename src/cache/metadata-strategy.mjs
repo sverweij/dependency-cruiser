@@ -43,9 +43,9 @@ export default class MetaDataStrategy {
       ...pOptions,
     };
     try {
-      bus.debug("cache: - get sha");
+      bus.debug("cache: metadata: get sha");
       const lSHA = await lOptions.shaRetrievalFn();
-      bus.debug("cache: - get diff");
+      bus.debug("cache: metadata: get diff");
       const lDiff = /** @type {IChange[]} */ (
         await lOptions.diffListFn({ oldRevision: lSHA })
       );
@@ -56,7 +56,7 @@ export default class MetaDataStrategy {
         )
         .filter(changeHasInterestingExtension(lOptions.extensions))
         .filter(isInterestingChangeType(lOptions.interestingChangeTypes));
-      bus.debug("cache: - sha-sum diff");
+      bus.debug("cache: metadata: sha-sum diff");
       return {
         SHA1: lSHA,
         changes: lChanges.map(lOptions.checksumFn),

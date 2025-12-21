@@ -8,7 +8,6 @@ import type { ResolveOptions, CachedInputFileSystem } from "enhanced-resolve";
  */
 interface IResolveOptions extends ResolveOptions {
   /**
-   *
    * Without bustTheCache (or with the value `false`) the resolver
    * is initialized only once per session. If the attribute
    * equals `true` the resolver is initialized on each call

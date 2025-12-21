@@ -4,6 +4,7 @@ import { applyFilters } from "#graph-utl/filter-bank.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
 import { compareModules } from "#graph-utl/compare.mjs";
 import stripSelfTransitions from "#graph-utl/strip-self-transitions.mjs";
+import { bus } from "#utl/bus.mjs";
 
 /**
  * @import { ICruiseResult } from "../../types/cruise-result.mjs";
@@ -54,12 +55,14 @@ function getReporterSection(pOutputType) {
  * @returns {IReporterOutput}
  */
 export default async function reportWrap(pResult, pFormatOptions) {
+  bus.debug("report: get");
   const lReportFunction = await getReporter(pFormatOptions.outputType);
   const lReportOptions =
     pResult.summary.optionsUsed?.reporterOptions?.[
       getReporterSection(pFormatOptions.outputType)
     ] ?? {};
 
+  bus.debug("report: execute");
   return lReportFunction(
     reSummarizeResults(pResult, pFormatOptions),
     // passing format options here so reporters that read collapse patterns

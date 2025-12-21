@@ -19,7 +19,7 @@ export default async function cruise(
   pResolveOptions,
   pTranspileOptions,
 ) {
-  bus.summary("parse options", c(1));
+  bus.summary("startup: parse options", c(1));
   const lCruiseOptionsValid = assertCruiseOptionsValid(pCruiseOptions);
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
@@ -47,7 +47,7 @@ export default async function cruise(
     }
   }
 
-  bus.summary("import analytical modules", c(3));
+  bus.summary("startup: import analytical modules", c(3));
   const [
     { default: normalizeRuleSet },
     { default: assertRuleSetValid },
@@ -67,7 +67,7 @@ export default async function cruise(
   ]);
 
   if (lCruiseOptions.ruleSet) {
-    bus.summary("parse rule set", c(4));
+    bus.summary("startup: parse rule set", c(4));
     lCruiseOptions.ruleSet = normalizeRuleSet(
       assertRuleSetValid(lCruiseOptions.ruleSet),
     );
@@ -77,14 +77,14 @@ export default async function cruise(
     pFileAndDirectoryArray,
   );
 
-  bus.summary("determine how to resolve", c(5));
+  bus.summary("startup: get resolve options", c(5));
   const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig,
   );
 
-  bus.summary("read files", c(6));
+  bus.summary("extract", c(6));
   const lExtractionResult = extract(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
@@ -107,7 +107,7 @@ export default async function cruise(
   bus.summary("report", c(9));
   const lResult = await reportWrap(lCruiseResult, lCruiseOptions);
 
-  bus.debug("clear regex cache");
+  bus.debug("end: clear regex cache");
   clearRegExpCache();
 
   return lResult;

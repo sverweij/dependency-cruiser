@@ -50,7 +50,7 @@ export function getEndText(pState, pLevel, pMaxLevel) {
     const lTime = process.uptime();
     const { user, system } = process.cpuUsage();
     const { heapUsed, heapTotal, external, rss } = process.memoryUsage();
-    pState.previousMessage = "really done";
+    pState.previousMessage = "end: really done";
 
     return (
       getProgressLine("", pState, pLevel, pMaxLevel) +

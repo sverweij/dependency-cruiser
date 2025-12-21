@@ -24,6 +24,10 @@ class Bus extends EventEmitter {
   debug(pMessage, pOptions, ...pArguments) {
     this.progress(pMessage, { ...pOptions, level: DEBUG }, pArguments);
   }
+
+  trace(pMessage, pOptions, ...pArguments) {
+    this.progress(pMessage, { ...pOptions, level: TRACE }, pArguments);
+  }
 }
 
 export const bus = new Bus();

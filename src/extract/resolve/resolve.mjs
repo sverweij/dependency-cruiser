@@ -2,9 +2,21 @@ import enhancedResolve from "enhanced-resolve";
 import { stripQueryParameters } from "../helpers.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
+/** @import {IResolveOptions} from "../../../types/resolve-options.mjs" */
+
+/** @type {Map<string, enhancedResolve.Resolver>} */
 let gResolvers = new Map();
+/** @type {Map<string, boolean>} */
 let gInitialized = new Map();
 
+/**
+ * Initializes a resolver for the given caching context if not already done
+ *
+ * @param {IResolveOptions} pEHResolveOptions Options to pass to enhanced resolve
+ * @param {string} pCachingContext - caching
+ *
+ * @returns {void}
+ */
 function init(pEHResolveOptions, pCachingContext) {
   if (!gInitialized.get(pCachingContext) || pEHResolveOptions.bustTheCache) {
     // assuming the cached file system here
@@ -23,8 +35,8 @@ function init(pEHResolveOptions, pCachingContext) {
  *
  * @param {string} pModuleName The module name to resolve (e.g. 'slodash', './myModule')
  * @param {string} pFileDirectory The directory from which to resolve the module
- * @param {any} pResolveOptions Options to pass to enhanced resolve
- * @param {any} pCachingContext - caching
+ * @param {IResolveOptions} pResolveOptions Options to pass to enhanced resolve
+ * @param {string} pCachingContext - caching
  *
  * @returns {string} path to the resolved file on disk
  */

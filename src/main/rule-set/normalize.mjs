@@ -114,7 +114,7 @@ function normalizeRule(pRule) {
  * @return {IStrictRuleSet}
  */
 export default function normalizeRuleSet(pRuleSet) {
-  bus.info("parse rule set: normalize");
+  bus.debug("startup: parse rule set: normalize");
   const lRuleSet = structuredClone(pRuleSet);
 
   if (lRuleSet?.allowed) {
