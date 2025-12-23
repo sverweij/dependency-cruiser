@@ -1,4 +1,5 @@
-import { deepEqual, equal } from "node:assert/strict";
+/* eslint-disable unicorn/prevent-abbreviations */
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,6 +10,9 @@ const render = dot("flat");
 const requireJSON = createRequireJSON(import.meta.url);
 
 const deps = requireJSON("./__mocks__/dependency-cruiser-2020-01-25.json");
+const depsCollapsedSrcUtl = requireJSON(
+  "./__mocks__/dependency-cruiser-collapsed-src-utl-2020-01-25.json",
+);
 const orphans = requireJSON("./__mocks__/orphans.json");
 const rxjs = requireJSON("./__mocks__/rxjs.json");
 
@@ -17,6 +21,10 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const fixturesFolder = join(__dirname, "__fixtures__");
 const flatDot = readFileSync(
   join(fixturesFolder, "dependency-cruiser-2020-01-25.dot"),
+  "utf8",
+);
+const flatDotCollapsedSrcUtl = readFileSync(
+  join(fixturesFolder, "dependency-cruiser-collapsed-src-utl-2020-01-25.dot"),
   "utf8",
 );
 const flatOrphansDot = readFileSync(
@@ -30,6 +38,13 @@ describe("[I] report/dot/flat-level reporter", () => {
     const lReturnValue = render(deps);
 
     equal(lReturnValue.output, flatDot);
+    equal(lReturnValue.exitCode, 0);
+  });
+
+  it("consolidates sources matching a collapse pattern", () => {
+    const lReturnValue = render(depsCollapsedSrcUtl);
+
+    equal(lReturnValue.output, flatDotCollapsedSrcUtl);
     equal(lReturnValue.exitCode, 0);
   });
 
