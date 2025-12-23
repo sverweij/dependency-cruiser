@@ -1,14 +1,22 @@
+import { randomInt } from "node:crypto";
 import { EOL } from "node:os";
 import { INFO, SUMMARY } from "#utl/bus.mjs";
 
-const MICRO_SECONDS_PER_SECOND = 1000000;
+const MICRO_SECONDS_PER_SECOND = 1_000_000;
+// 2 ** 47;
+const MIN_RUN_ID = 140_737_488_355_328;
+// Max safe int (2 ** 48), - 1. Note: != Number.MAX_SAFE_INTEGER, which is too big for crypto.randomInt
+const MAX_RUN_ID = 281_474_976_710_655;
 
 function formatPerfLine({
   runStartTime,
+  runId,
   message,
   time,
   elapsedTime,
+  user,
   elapsedUser,
+  system,
   elapsedSystem,
   rss,
   heapUsed,
@@ -18,10 +26,13 @@ function formatPerfLine({
   return (
     JSON.stringify({
       runStartTime,
+      runId,
       message,
       time: Math.round(time * MICRO_SECONDS_PER_SECOND),
       elapsedTime: Math.round(elapsedTime * MICRO_SECONDS_PER_SECOND),
+      user,
       elapsedUser,
+      system,
       elapsedSystem,
       rss,
       heapUsed,
@@ -40,10 +51,13 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
     const { rss, heapTotal, heapUsed, external } = process.memoryUsage();
     const lStats = {
       runStartTime: pState.runStartTime,
+      runId: pState.runId,
       message: pState.previousMessage,
       time: lTime,
       elapsedTime: lTime - pState.previousTime,
+      user,
       elapsedUser: user - pState.previousUserUsage,
+      system,
       elapsedSystem: system - pState.previousSystemUsage,
       rss,
       heapUsed,
@@ -76,6 +90,7 @@ export default function setUpNDJSONListener(
 ) {
   let lState = {
     runStartTime: new Date(Date.now()).toISOString(),
+    runId: randomInt(MIN_RUN_ID, MAX_RUN_ID),
     previousMessage: "startup: nodejs loading",
     previousTime: 0,
     previousUserUsage: 0,
