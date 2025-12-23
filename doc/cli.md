@@ -1191,19 +1191,17 @@ stay in view when dependency-cruiser is done.
 ```
         ∆ rss   ∆ heapTotal    ∆ heapUsed    ∆ external     ⏱  system       ⏱  user       ⏱  real after step...
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------
-   +50.484 kB    +19.028 kB     +9.817 kB     +1.835 kB         64 ms        402 ms        332 ms nodejs starting
-      +648 kB       +256 kB       +760 kB          0 kB          0 ms         13 ms         12 ms parsing options
-    +2.416 kB     +1.316 kB     +3.687 kB       +832 kB          7 ms         41 ms         90 ms cache: checking freshness with metadata
-  +108.932 kB    +71.416 kB    +50.004 kB    +32.978 kB         83 ms        853 ms        794 ms importing analytical modules
-   +11.228 kB     +8.732 kB     +7.417 kB       -139 kB          8 ms        395 ms        195 ms parsing rule set
-        +4 kB          0 kB        +29 kB          0 kB          0 ms          3 ms          1 ms determining how to resolve
-   +42.004 kB    +39.424 kB    +45.359 kB       +357 kB        115 ms      2.198 ms      1.256 ms reading files
-    +6.656 kB     +6.144 kB     +5.186 kB        -72 kB          8 ms        618 ms        345 ms analyzing
-    +1.696 kB     +1.076 kB     +2.245 kB       +535 kB          1 ms          8 ms          8 ms cache: saving
-       +24 kB          0 kB       +632 kB         +1 kB          0 ms          5 ms          5 ms reporting
-         0 kB          0 kB         +4 kB          0 kB          0 ms          0 ms          0 ms really done
+   +198,656kB    +101,760kB     +64,202kB     +11,242kB          48ms         375ms         298ms startup: nodejs loading
+     +1,184kB      +1,792kB        +571kB           0kB           0ms           8ms           3ms startup: parse options
+     +1,376kB      +1,440kB      +4,739kB        +469kB           2ms          10ms          11ms startup: import analytical modules
+    +13,248kB     +11,776kB     +11,926kB           0kB           2ms          30ms          17ms startup: parse rule set
+        +32kB           0kB         +29kB           0kB           0ms           0ms           0ms startup: get resolve options
+   +152,320kB    +144,224kB     +75,456kB      -8,777kB          43ms         537ms         301ms extract
+    +18,864kB     +18,432kB      +1,970kB           0kB           4ms          73ms          44ms analyze
+        +48kB           0kB      +1,942kB          +8kB           0ms           3ms           3ms report
+          0kB           0kB        +255kB           0kB           0ms           0ms           0ms end: really done
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------
-  +224.092 kB   +147.392 kB   +125.139 kB    +36.326 kB        288 ms      4.537 ms      3.038 ms
+   +385,728kB    +279,424kB    +160,840kB      +2,942kB          99ms       1,037ms         677ms 
 ```
 
 Number formatting takes place with the `Intl` API, so in your locale the numbers
