@@ -1178,6 +1178,11 @@ without the progress messages ending up in your output.
 
 </details>
 
+#### none (the default when you don't pass --progress )
+
+Make sure dependency-cruiser doesn't print any feedback. Useful if you want to
+override the progress option configured in a configuration file.
+
 #### performance-log
 
 Writes a detailed overview of the time and memory each step in dependency-cruiser's
@@ -1209,10 +1214,34 @@ and units might look slightly different.
 
 </details>
 
-#### none (the default when you don't pass --progress )
+#### ndjson
 
-Make sure dependency-cruiser doesn't print any feedback. Useful if you want to
-override the progress option configured in a configuration file.
+Emits roughly the same data as [_performance-log_](#performance-log) to
+stderr, but in ndjson format so it's easy to process. It's designed for running
+detailed performance tests of each individual step in dependency-cruiser's
+processing with statistical significance, and as such the format can and will
+change without dependency-cruiser getting a major bump.
+
+<details>
+<summary>Typical output</summary>
+
+```
+dependency-cruiser src bin test configs types tools --no-cache -Tnull --progress ndjson 2>> performance-log.ndjson
+```
+
+```json
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"startup: nodejs loading","time":297855,"elapsedTime":297855,"user":366111,"elapsedUser":366111,"system":48490,"elapsedSystem":48490,"rss":196329472,"heapUsed":78937168,"heapTotal":97124352,"external":11581186}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"startup: parse options","time":300133,"elapsedTime":2278,"user":368517,"elapsedUser":2406,"system":48671,"elapsedSystem":181,"rss":196706304,"heapUsed":79231160,"heapTotal":97124352,"external":11581226}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"startup: import analytical modules","time":315104,"elapsedTime":14971,"user":409243,"elapsedUser":40726,"system":52464,"elapsedSystem":3793,"rss":205144064,"heapUsed":57310320,"heapTotal":104366080,"external":2748843}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"startup: parse rule set","time":326651,"elapsedTime":11547,"user":430393,"elapsedUser":21150,"system":52820,"elapsedSystem":356,"rss":205635584,"heapUsed":70138952,"heapTotal":104366080,"external":2757035}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"startup: get resolve options","time":326741,"elapsedTime":90,"user":430467,"elapsedUser":74,"system":52836,"elapsedSystem":16,"rss":205635584,"heapUsed":70199840,"heapTotal":104366080,"external":2757035}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"extract","time":523713,"elapsedTime":196971,"user":803754,"elapsedUser":373287,"system":77658,"elapsedSystem":24822,"rss":333938688,"heapUsed":121507992,"heapTotal":227934208,"external":2688354}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"analyze","time":548901,"elapsedTime":25189,"user":843483,"elapsedUser":39729,"system":78831,"elapsedSystem":1173,"rss":336887808,"heapUsed":96978728,"heapTotal":230031360,"external":2688354}
+{"runStartTime":"2025-12-24T19:25:50.037Z","runId":213435185128416,"message":"report","time":551008,"elapsedTime":2107,"user":847523,"elapsedUser":4040,"system":78948,"elapsedSystem":117,"rss":336904192,"heapUsed":99378056,"heapTotal":230031360,"external":2688354}
+
+```
+</details>
+
 
 ### `--no-progress`: don't show feedback on what dependency-cruiser is doing
 

@@ -1852,6 +1852,7 @@ options: {
     // options:
     // "cli-feedback" (the default)
     // "performance-log"
+    // "ndjson"
     // "none"
     maximumLevel: 50
     // allowed levels:
