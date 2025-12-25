@@ -1,18 +1,23 @@
 import { accessSync, constants } from "node:fs";
 import { relative, join } from "node:path";
-import memoize, { memoizeClear } from "memoize";
 import { isBuiltin } from "./is-built-in.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
 
-const fileExists = memoize((pFile) => {
+const FILE_EXISTENCE_CACHE = new Map();
+const fileExists = (pFile) => {
+  if (FILE_EXISTENCE_CACHE.has(pFile)) {
+    return FILE_EXISTENCE_CACHE.get(pFile);
+  }
+
   try {
     accessSync(pFile, constants.R_OK);
   } catch (pError) {
+    FILE_EXISTENCE_CACHE.set(pFile, false);
     return false;
   }
-
+  FILE_EXISTENCE_CACHE.set(pFile, true);
   return true;
-});
+};
 
 function guessPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
   return pathToPosix(
@@ -63,5 +68,5 @@ export function resolveAMD(
 }
 
 export function clearCache() {
-  memoizeClear(fileExists);
+  FILE_EXISTENCE_CACHE.clear();
 }
