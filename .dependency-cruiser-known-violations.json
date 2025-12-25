@@ -145,15 +145,6 @@
   },
   {
     "type": "dependency",
-    "from": "src/enrich/derive/orphan/is-orphan.mjs",
-    "to": "src/enrich/derive/module-utl.mjs",
-    "rule": {
-      "severity": "info",
-      "name": "not-to-ancestor-folders"
-    }
-  },
-  {
-    "type": "dependency",
     "from": "src/extract/resolve/resolve.mjs",
     "to": "src/extract/helpers.mjs",
     "rule": {
