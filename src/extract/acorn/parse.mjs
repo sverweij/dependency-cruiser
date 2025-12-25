@@ -13,7 +13,7 @@ const ACORN_OPTIONS = {
 const TSCONFIG_CONSTANTS = {
   PRESERVE_JSX: 1,
 };
-/**@type {Map<string,acorn.Node>} */
+/**@type {Map<string, acorn.Node>} */
 const CACHE = new Map();
 
 const acornJsxParser = acornParser.extend(acornJsx());

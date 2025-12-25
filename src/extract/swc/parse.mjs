@@ -19,7 +19,7 @@ const SWC_PARSE_OPTIONS = {
   decorators: true,
   // TODO: {tj}sx ?
 };
-/** @type {Map<string,ModuleItem[]>} */
+/** @type {Map<string, ModuleItem[]>} */
 const CACHE = new Map();
 
 export function getASTFromSource(pSource) {
@@ -38,7 +38,7 @@ export function getASTCached(pFileName) {
   if (CACHE.has(pFileName)) {
     return CACHE.get(pFileName);
   }
-  /** @type {swcCore swc} */
+  /** @type {swcCore} */
   const lAST = swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
   CACHE.set(pFileName, lAST);
   return lAST;

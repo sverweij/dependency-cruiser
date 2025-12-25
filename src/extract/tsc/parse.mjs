@@ -9,7 +9,7 @@ const typescript = await tryImport(
   "typescript",
   meta.supportedTranspilers.typescript,
 );
-/** @type {Map<string,any>} */
+/** @type {Map<string, any>} */
 const CACHE = new Map();
 
 /**
@@ -36,7 +36,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
 
 /**
  * Compiles the file identified by pFileName into a (typescript)
- * AST and returns it, Subsequent calls for the same file name will
+ * AST and returns it. Subsequent calls for the same file name will
  * return the result from a cache
  *
  * @param {string} pFileName - the name of the file to compile
