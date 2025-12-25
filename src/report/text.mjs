@@ -7,7 +7,7 @@ const EOL = "\n";
 
 /**
  *
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/cruise-result.mjs").IModule} pModule
  * @param {Set<string>} pModulesInFocus
  * @param {boolean} pHighlightFocused
  * @returns {any}
@@ -47,7 +47,7 @@ function stringify(pFlatDependency) {
 
 /**
  *
- * @param {import("../../types/cruise-result").IModule[]} pModules
+ * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
  * @returns {Set<string>}
  */
 function getModulesInFocus(pModules) {
@@ -60,8 +60,8 @@ function getModulesInFocus(pModules) {
 
 /**
  *
- * @param {import("../../types/cruise-result").ICruiseResult} pResults
- * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options.mjs").ITextReporterOptions} pOptions
  * @returns {string}
  */
 function report(pResults, pOptions) {
@@ -82,9 +82,9 @@ function report(pResults, pOptions) {
 /**
  * Returns the results of a cruise in a text only format
  * - for each dependency the from and the two, separated by an arrow.
- * @param {import("../../types/cruise-result").ICruiseResult} pResults
- * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
- * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options.mjs").ITextReporterOptions} pOptions
+ * @returns {import("../../types/dependency-cruiser.mjs").IReporterOutput}
  */
 export default function text(pResults, pOptions) {
   return {

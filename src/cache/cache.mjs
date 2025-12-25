@@ -31,19 +31,12 @@ const EMPTY_CACHE = {
     optionsUsed: {},
   },
 };
-// Bump this to the current major.minor version when the cache format changes in
-// a way that's not backwards compatible.
-// e.g. version 3.0.0 => 3
-//     version 3.1.0 => 3.1
-//     version 3.1.1 => 3.1
-//     version 3.11.0 => 3.11
-// This means we assume breaking cache format versions won't occur
-// in patch releases. If worst case scenario it _is_ necessary we could
-// add the patch version divided by 1000_000 e.g.:
-//     version 3.14.16 => 3.14 + 16/1000_000 = 3.140016
+
+// see ./cache-rationales.md#cache-format-versioning for rationale & bump instructions
 const CACHE_FORMAT_VERSION = 16.2;
 
 export default class Cache {
+  /** @type {(IRevisionData | null)=} */
   #revisionData;
   #cacheStrategy;
   #compress;
@@ -59,7 +52,11 @@ export default class Cache {
         : new MetadataStrategy();
     this.#compress = pCompress ?? false;
   }
-
+  /**
+   *
+   * @param {ICruiseResult} pCachedCruiseResult
+   * @returns {boolean}
+   */
   cacheFormatVersionCompatible(pCachedCruiseResult) {
     return (
       (pCachedCruiseResult?.revisionData?.cacheFormatVersion ?? 1) >=
@@ -130,22 +127,7 @@ export default class Cache {
    */
   #compact(pPayload, pCompress) {
     if (pCompress) {
-      /**
-       * we landed on brotli with BROTLI_MIN_QUALITY because:
-       * - even with BROTLI_MIN_QUALITY it compresses better than gzip
-       *   (regardless of compression level)
-       * - at BROTLI_MIN_QUALITY it's faster than gzip
-       * - BROTLI_MAX_QUALITY gives a bit better compression but is _much_
-       *   slower than even gzip
-       *
-       * In our situation the sync version is significantly faster than the
-       * async version + zlib functions need to be promisified before they
-       * can be used in promises, which will add the to the execution time
-       * as well.
-       *
-       * As sync or async doesn't _really_
-       * matter for the cli, we're using the sync version here.
-       */
+      // see ./cache-rationales.md#cache-compression for rationale
       return brotliCompressSync(pPayload, {
         params: {
           [zlibConstants.BROTLI_PARAM_QUALITY]:

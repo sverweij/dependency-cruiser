@@ -17,7 +17,7 @@ import {
 
 /**
  * @param {string} pBaseDirectory
- * @returns {(IModule) => IModule}
+ * @returns {(pModule: IModule) => IModule}
  */
 function addCheckSumToModule(pBaseDirectory) {
   return (pModule) => {

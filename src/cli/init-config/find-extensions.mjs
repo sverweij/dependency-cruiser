@@ -17,6 +17,10 @@ function reduceToCounts(pAll, pExtension) {
   return pAll;
 }
 
+/**
+ * @param {Record<string,number>} pCountsObject
+ * @returns {(pLeft: string, pRight: string) => number}
+ */
 function compareByCount(pCountsObject) {
   return function compare(pLeft, pRight) {
     return pCountsObject[pRight] - pCountsObject[pLeft];

@@ -1343,14 +1343,25 @@ happens when
 > Available from version 12.5.0
 
 With this option you can tell dependency-cruiser how it should detect whether
-files have changed. The default (`metadata`) use git for this - it is the fastest
-and most reliable of the two. The other one (`content`) is there in case you
-don't have git available or are working on a shallow clone of your repository
-(which might be the only practical way on a continuous integration server). The
-`content` strategy looks at the content of the files.
+files have changed. The default (`metadata`) uses git for this. The other one 
+(`content`) is there in case you don't have git available or are working on a 
+shallow clone of your repository (which might be the only practical way on a
+continuous integration server). The `content` strategy looks at the content of
+the files.
 
 When you don't pass --cache-strategy (and don't specify a `strategy` in the
 `cache` option in you .dependency-cruiser.js) the strategy defaults to `metadata`.
+
+> [!tip]
+> The _checking cache freshness_ steop with the `metadata` strategy is about
+> 7x slower when dependency-cruiser is run from a script from within package.json
+> as when dependency-cruiser is run directly with nodejs (265ms vs 37ms on a 
+> MacBook Pro with an M4 processor). Note that _even then_ a run-from cache
+> is still significantly faster than a non-cached run.
+>
+> The `content` strategy doesn't suffer from this 'running from package.json' 
+> penalty, so in some scenarios it might be unexpectedly faster than the 
+> `metadata` strategy.
 
 ### `--no-cache`: switch off caching
 

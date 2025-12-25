@@ -11,7 +11,7 @@ export function c(pComplete, pTotal = TOTAL_STEPS) {
   return { complete: pComplete / pTotal };
 }
 
-/** @type {import("../../types/dependency-cruiser.js").cruise} */
+/** @type {import("../../types/dependency-cruiser.mjs").cruise} */
 // eslint-disable-next-line max-lines-per-function, max-statements
 export default async function cruise(
   pFileAndDirectoryArray,
@@ -21,7 +21,7 @@ export default async function cruise(
 ) {
   bus.summary("startup: parse options", c(1));
   const lCruiseOptionsValid = assertCruiseOptionsValid(pCruiseOptions);
-  /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
+  /** @type {import("../../types/strict-options.mjs").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
     lCruiseOptionsValid,
     pFileAndDirectoryArray,

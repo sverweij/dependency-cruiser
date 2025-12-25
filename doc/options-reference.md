@@ -1786,11 +1786,11 @@ The long form:
     cache: {
       // folder where dependency-cruiser will put its cache files
       folder: "node_modules/.cache/dependency-cruiser",
+      
       // cache strategy to use - either 'metadata' (which uses git in the
-      // background) or 'content' (which will look at file content (hashes),
-      // is slower than 'metadata' and is a bleeding edge feature as of
-      // version 12.5.0)
+      // background) or 'content' (which will look at file content (hashes))
       strategy: "metadata",
+
       // whether or not to compress the cache file. Switching this to true
       // will make dependency-cruiser a few milliseconds slower over all.
       // The resulting cache file will be 80-90% smaller though.

@@ -1,6 +1,6 @@
 export function isValidPlugin(pPluginFunction) {
   let lReturnValue = false;
-  /** @type {import('../../types/dependency-cruiser').ICruiseResult} */
+  /** @type {import('../../types/dependency-cruiser.mjs').ICruiseResult} */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {
