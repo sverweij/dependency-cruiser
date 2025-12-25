@@ -1,8 +1,9 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import memoize, { memoizeClear } from "memoize";
 import { resolve } from "./resolve.mjs";
 import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
+
+const PACKAGE_JSON_CACHE = new Map();
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -72,7 +73,11 @@ export function getPackageRoot(pModule) {
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
+export function getPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
+  const lCacheKey = `${pModuleName}|${pFileDirectory}`;
+  if (PACKAGE_JSON_CACHE.has(lCacheKey)) {
+    return PACKAGE_JSON_CACHE.get(lCacheKey);
+  }
   let lReturnValue = null;
 
   try {
@@ -102,12 +107,9 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
   } catch (pError) {
     // left empty on purpose
   }
+  PACKAGE_JSON_CACHE.set(lCacheKey, lReturnValue);
   return lReturnValue;
 }
-
-export const getPackageJson = memoize(bareGetPackageJson, {
-  cacheKey: (pArguments) => `${pArguments[0]}|${pArguments[1]}`,
-});
 
 /**
  * Tells whether the pModule as resolved to pBaseDirectory is deprecated
@@ -164,5 +166,5 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
 }
 
 export function clearCache() {
-  memoizeClear(getPackageJson);
+  PACKAGE_JSON_CACHE.clear();
 }
