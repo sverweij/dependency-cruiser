@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import { Parser as acornParser, parse as acornParse } from "acorn";
 import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
-import memoize, { memoizeClear } from "memoize";
 import transpile from "../transpile/index.mjs";
 import getExtension from "#utl/get-extension.mjs";
 
@@ -11,10 +10,12 @@ const ACORN_OPTIONS = {
   sourceType: "module",
   ecmaVersion: 11,
 };
-
 const TSCONFIG_CONSTANTS = {
   PRESERVE_JSX: 1,
 };
+/**@type {Map<string, acorn.Node>} */
+const CACHE = new Map();
+
 const acornJsxParser = acornParser.extend(acornJsx());
 
 function needsJSXTreatment(pFileRecord, pTranspileOptions) {
@@ -57,13 +58,19 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
  *
  * If parsing fails we fall back to acorn's 'loose' parser
  *
- * @param {string} pFileName      path to the file to be parsed
- * @param {any} pTranspileOptions options for the transpiler(s) - a tsconfig or
- *                                a babel config
- * @returns {acorn.Node}              the abstract syntax tree
+ * Subsequent calls for the same file name will return the result from a cache.
+ *
+ * @param {string} pFileName - the name of the file to compile
+ * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
+ * @return {acorn.Node} - a (javascript) AST
  */
-function getAST(pFileName, pTranspileOptions) {
-  return getASTFromSource(
+export function getASTCached(pFileName, pTranspileOptions) {
+  // taking the transpile options into account of the cache key seems like
+  // a good idea, but a.t.m. isn't necessary. Easy to add later if needed.
+  if (CACHE.has(pFileName)) {
+    return CACHE.get(pFileName);
+  }
+  const lAST = getASTFromSource(
     {
       source: readFileSync(pFileName, "utf8"),
       extension: getExtension(pFileName),
@@ -71,24 +78,10 @@ function getAST(pFileName, pTranspileOptions) {
     },
     pTranspileOptions,
   );
+  CACHE.set(pFileName, lAST);
+  return lAST;
 }
 
-/**
- * Compiles the file identified by pFileName into a (javascript)
- * AST and returns it. Subsequent calls for the same file name will
- * return the result from a cache.
- *
- * @param {string} pFileName - the name of the file to compile
- * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
- * @return {acorn.Node} - a (javascript) AST
- */
-// taking the transpile options into account of the memoize cache key seems like
-// a good idea. However, previously we use `${pTranspileOptions}` which always
-// serializes to [object Object], which doesn't help. So for now we're not
-// taking the transpile options into account. If we ever need to, it'll be
-// a JSON.stringify away (which _will_ be significantly slower)
-export const getASTCached = memoize(getAST);
-
 export function clearCache() {
-  memoizeClear(getASTCached);
+  CACHE.clear();
 }

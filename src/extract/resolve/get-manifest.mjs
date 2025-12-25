@@ -1,7 +1,9 @@
 import { join, dirname, sep } from "node:path";
 import { readFileSync } from "node:fs";
-import memoize, { memoizeClear } from "memoize";
 import mergePackages from "./merge-manifests.mjs";
+
+const SINGLE_MANIFEST_CACHE = new Map();
+const COMBINED_MANIFEST_CACHE = new Map();
 
 /**
  * return the contents of the package manifest ('package.json' closest to
@@ -16,7 +18,11 @@ import mergePackages from "./merge-manifests.mjs";
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const getSingleManifest = memoize((pFileDirectory) => {
+function getSingleManifest(pFileDirectory) {
+  if (SINGLE_MANIFEST_CACHE.has(pFileDirectory)) {
+    return SINGLE_MANIFEST_CACHE.get(pFileDirectory);
+  }
+
   let lReturnValue = null;
 
   try {
@@ -39,8 +45,9 @@ const getSingleManifest = memoize((pFileDirectory) => {
       lReturnValue = getSingleManifest(lNextDirectory);
     }
   }
+  SINGLE_MANIFEST_CACHE.set(pFileDirectory, lReturnValue);
   return lReturnValue;
-});
+}
 
 function maybeReadPackage(pFileDirectory) {
   let lReturnValue = {};
@@ -80,11 +87,7 @@ function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
   return lReturnValue;
 }
 
-// despite the two parameters there's no resolver function provided
-// to memoize. This is deliberate - the pBaseDirectory will typically
-// be the same for each call in a typical cruise, so the default
-// memoize resolver (the first param) will suffice.
-const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
+function getCombinedManifests(pFileDirectory, pBaseDirectory) {
   // The way this is called, this shouldn't happen. If it is, there's
   // something gone terribly awry
   if (
@@ -97,8 +100,14 @@ const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
         `&title=Unexpected Error: Unusual baseDir passed to package reading function: '${pBaseDirectory}'`,
     );
   }
+  // despite the two parameters this function has, we only use the pFileDirectory
+  // parameter as cache key. This is deliberate as the pBaseDirectory will
+  // be the same for each call in a typical cruise.
+  if (COMBINED_MANIFEST_CACHE.has(pFileDirectory)) {
+    return COMBINED_MANIFEST_CACHE.get(pFileDirectory);
+  }
 
-  const lReturnValue = getIntermediatePaths(
+  const lMergedPackages = getIntermediatePaths(
     pFileDirectory,
     pBaseDirectory,
   ).reduce(
@@ -106,8 +115,11 @@ const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
     {},
   );
 
-  return Object.keys(lReturnValue).length > 0 ? lReturnValue : null;
-});
+  const lReturnValue =
+    Object.keys(lMergedPackages).length > 0 ? lMergedPackages : null;
+  COMBINED_MANIFEST_CACHE.set(pFileDirectory, lReturnValue);
+  return lReturnValue;
+}
 
 /**
  * return
@@ -138,6 +150,6 @@ export function getManifest(
 }
 
 export function clearCache() {
-  memoizeClear(getCombinedManifests);
-  memoizeClear(getSingleManifest);
+  SINGLE_MANIFEST_CACHE.clear();
+  COMBINED_MANIFEST_CACHE.clear();
 }
