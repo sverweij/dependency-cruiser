@@ -1,7 +1,14 @@
 import { randomInt } from "node:crypto";
-import memoize, { memoizeClear } from "memoize";
-
 import { formatPercentage, formatViolation } from "./utl/index.mjs";
+/** @import { IInspection, IInspectionType } from "./teamcity.d.mts" */
+
+const CATEGORY = "dependency-cruiser";
+const SEVERITY2TEAMCITY_SEVERITY = new Map([
+  ["error", "ERROR"],
+  ["warn", "WARNING"],
+  ["info", "INFO"],
+]);
+const EOL = "\n";
 
 /**
  * Escape string for TeamCity output.
@@ -38,19 +45,17 @@ function escape(pMessageString) {
  * Returns a random flowId consisting of 10 numeric digits. TeamCity doesn't
  * currently seem to have demands on the format (it's just a string as far
  * as I can tell), but this is what teamcity-service-messages used, so as
- * per the rule of least surprise, this is what we use.
+ * per the rule of least surprise, this is what we use as well.
  *
  * @return {string} a random flowId consisting of 10 numeric digits
  */
-function getRandomFlowIdBare() {
+function getRandomFlowId() {
   const lFlowIdLength = 10;
   // eslint-disable-next-line no-magic-numbers
   const lFlowIdMax = 10 ** lFlowIdLength;
 
   return randomInt(1, lFlowIdMax).toString().padStart(lFlowIdLength, "0");
 }
-
-const getRandomFlowId = memoize(getRandomFlowIdBare);
 
 /**
  * Returns a timestamp in ISO format without the trailing 'Z'. It used to be
@@ -64,101 +69,113 @@ function getTimeStamp() {
   return new Date().toISOString().slice(0, -1);
 }
 
-function inspectionType(pData) {
+/**
+ * formats an inspection type TeamCity service message
+ * @param {IInspectionType} pInspectionTypeData
+ * @returns {string}
+ */
+function formatInspectionType(pInspectionTypeData) {
   const lAttributes = [];
   lAttributes.push(
-    `id='${pData.id}'`,
-    `name='${pData.name}'`,
-    `description='${escape(pData.description)}'`,
-    `category='${pData.category}'`,
-    `flowId='${getRandomFlowId()}'`,
+    `id='${pInspectionTypeData.id}'`,
+    `name='${pInspectionTypeData.name}'`,
+    `description='${escape(pInspectionTypeData.description)}'`,
+    `category='${pInspectionTypeData.category}'`,
+    `flowId='${pInspectionTypeData.flowId}'`,
     `timestamp='${getTimeStamp()}'`,
   );
   return `##teamcity[inspectionType ${lAttributes.join(" ")}]`;
 }
 
-function inspection(pData) {
+/**
+ * formats an inspection TeamCity service message
+ * @param {IInspection} pInspectionData
+ * @returns {string}
+ */
+function formatInspection(pInspectionData) {
   const lAttributes = [];
   lAttributes.push(
-    `typeId='${pData.typeId}'`,
-    `message='${escape(pData.message)}'`,
+    `typeId='${pInspectionData.typeId}'`,
+    `message='${escape(pInspectionData.message)}'`,
   );
-  if (pData.file) {
-    lAttributes.push(`file='${pData.file}'`);
+  if (pInspectionData.file) {
+    lAttributes.push(`file='${pInspectionData.file}'`);
   }
   lAttributes.push(
-    `SEVERITY='${pData.SEVERITY}'`,
-    `flowId='${getRandomFlowId()}'`,
+    `SEVERITY='${pInspectionData.SEVERITY}'`,
+    `flowId='${pInspectionData.flowId}'`,
     `timestamp='${getTimeStamp()}'`,
   );
 
   return `##teamcity[inspection ${lAttributes.join(" ")}]`;
 }
 
-const CATEGORY = "dependency-cruiser";
-const SEVERITY2TEAMCITY_SEVERITY = new Map([
-  ["error", "ERROR"],
-  ["warn", "WARNING"],
-  ["info", "INFO"],
-]);
-const EOL = "\n";
-
 function severity2teamcitySeverity(pSeverity) {
   return SEVERITY2TEAMCITY_SEVERITY.get(pSeverity) || "INFO";
 }
 
-function reportRules(pRules, pViolations) {
+function reportRules(pRules, pViolations, pFlowId) {
   return pRules
     .filter((pRule) =>
       pViolations.some((pViolation) => pRule.name === pViolation.rule.name),
     )
     .map((pRule) =>
-      inspectionType({
+      formatInspectionType({
         id: pRule.name,
         name: pRule.name,
         description: pRule.comment || pRule.name,
         category: CATEGORY,
+        flowId: pFlowId,
       }),
     );
 }
 
-function reportAllowedRule(pAllowedRule, pViolations) {
+function reportAllowedRule(pAllowedRule, pViolations, pFlowId) {
   let lReturnValue = [];
 
   if (
     pAllowedRule.length > 0 &&
     pViolations.some((pViolation) => pViolation.rule.name === "not-in-allowed")
   ) {
-    lReturnValue = inspectionType({
+    lReturnValue = formatInspectionType({
       id: "not-in-allowed",
       name: "not-in-allowed",
       description: "dependency is not in the 'allowed' set of rules",
       category: CATEGORY,
+      flowId: pFlowId,
     });
   }
   return lReturnValue;
 }
 
-function reportIgnoredRules(pIgnoredCount) {
+function reportIgnoredRules(pIgnoredCount, pFlowId) {
   let lReturnValue = [];
 
   if (pIgnoredCount > 0) {
-    lReturnValue = inspectionType({
+    lReturnValue = formatInspectionType({
       id: "ignored-known-violations",
       name: "ignored-known-violations",
       description:
         "some dependency violations were ignored; run with --no-ignore-known to see them",
       category: CATEGORY,
+      flowId: pFlowId,
     });
   }
   return lReturnValue;
 }
 
-function reportViolatedRules(pRuleSetUsed, pViolations, pIgnoredCount) {
-  return reportRules(pRuleSetUsed?.forbidden ?? [], pViolations)
-    .concat(reportAllowedRule(pRuleSetUsed?.allowed ?? [], pViolations))
-    .concat(reportRules(pRuleSetUsed?.required ?? [], pViolations))
-    .concat(reportIgnoredRules(pIgnoredCount));
+function reportViolatedRules(
+  pRuleSetUsed,
+  pViolations,
+  pIgnoredCount,
+  pFlowId,
+) {
+  return reportRules(pRuleSetUsed?.forbidden ?? [], pViolations, pFlowId)
+    .concat(
+      reportAllowedRule(pRuleSetUsed?.allowed ?? [], pViolations, pFlowId),
+    )
+    .concat(reportRules(pRuleSetUsed?.required ?? [], pViolations, pFlowId))
+    .concat(reportIgnoredRules(pIgnoredCount, pFlowId));
 }
 
 function formatModuleViolation(pViolation) {
@@ -204,12 +221,13 @@ function bakeViolationMessage(pViolation) {
   );
 }
 
-function reportIgnoredViolation(pIgnoredCount) {
+function reportIgnoredViolation(pIgnoredCount, pFlowId) {
   let lReturnValue = [];
 
   if (pIgnoredCount > 0) {
-    lReturnValue = inspection({
+    lReturnValue = formatInspection({
       typeId: "ignored-known-violations",
+      flowId: pFlowId,
       message: `${pIgnoredCount} known violations ignored. Run with --no-ignore-known to see them.`,
       SEVERITY: "WARNING",
     });
@@ -217,17 +235,18 @@ function reportIgnoredViolation(pIgnoredCount) {
   return lReturnValue;
 }
 
-function reportViolations(pViolations, pIgnoredCount) {
+function reportViolations(pViolations, pIgnoredCount, pFlowId) {
   return pViolations
     .map((pViolation) =>
-      inspection({
+      formatInspection({
         typeId: pViolation.rule.name,
+        flowId: pFlowId,
         message: bakeViolationMessage(pViolation),
         file: pViolation.from,
         SEVERITY: severity2teamcitySeverity(pViolation.rule.severity),
       }),
     )
-    .concat(reportIgnoredViolation(pIgnoredCount));
+    .concat(reportIgnoredViolation(pIgnoredCount, pFlowId));
 }
 
 /**
@@ -242,8 +261,7 @@ function reportViolations(pViolations, pIgnoredCount) {
  */
 // eslint-disable-next-line complexity
 export default function teamcity(pResults) {
-  memoizeClear(getRandomFlowId);
-
+  const lFlowId = getRandomFlowId();
   const lRuleSet = pResults?.summary?.ruleSetUsed ?? [];
   const lViolations = (pResults?.summary?.violations ?? []).filter(
     (pViolation) => pViolation.rule.severity !== "ignore",
@@ -252,9 +270,9 @@ export default function teamcity(pResults) {
 
   return {
     output:
-      reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)
-        .concat(reportViolations(lViolations, lIgnoredCount))
-        .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, "") || EOL,
+      reportViolatedRules(lRuleSet, lViolations, lIgnoredCount, lFlowId)
+        .concat(reportViolations(lViolations, lIgnoredCount, lFlowId))
+        .reduce((pAll, pCurrent) => `${pAll}${pCurrent}${EOL}`, "") || EOL,
     exitCode: pResults.summary.error,
   };
 }
