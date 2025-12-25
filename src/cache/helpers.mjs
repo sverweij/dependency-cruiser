@@ -2,7 +2,6 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { extname } from "node:path";
-import memoize from "memoize";
 import { filenameMatchesPattern } from "#graph-utl/match-facade.mjs";
 
 /**
@@ -20,19 +19,30 @@ function hash(pString) {
   return createHash("sha1").update(pString).digest("base64");
 }
 
+// We should clear this cache when we're done with it (typically: after a cruise
+// is done). Not a big issue for cli use, though, might become one for repeated
+// runs in a long running process (e.g. when used as a library).
+/** @type {Map<string, string>} */
+const HASHES_CACHE = new Map();
+
 /**
  * @param {string} pFileName
  * @returns {string}
  */
-function _getFileHashSync(pFileName) {
-  try {
-    return hash(readFileSync(pFileName, "utf8"));
-  } catch (pError) {
-    return "file not found";
+export function getFileHashSync(pFileName) {
+  if (HASHES_CACHE.has(pFileName)) {
+    // @ts-expect-error TS2322 .has already guarantees the pFileName exists, and hence we can't get undefined
+    return HASHES_CACHE.get(pFileName);
   }
+  let lHashedFileName = "file not found";
+  try {
+    lHashedFileName = hash(readFileSync(pFileName, "utf8"));
+  } catch (pError) {
+    // will return "file not found" as per default
+  }
+  HASHES_CACHE.set(pFileName, lHashedFileName);
+  return lHashedFileName;
 }
-
-export const getFileHashSync = memoize(_getFileHashSync);
 
 /**
  * @param {IChange} pChange
