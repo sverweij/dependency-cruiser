@@ -1,6 +1,6 @@
 import { randomInt } from "node:crypto";
 import { formatPercentage, formatViolation } from "./utl/index.mjs";
-/** @import { IInspection, IInspectionType } from "./teamcity.d.mts" */
+/** @import { IInspection, IInspectionType } from "./teamcity.types.ts" */
 
 const CATEGORY = "dependency-cruiser";
 const SEVERITY2TEAMCITY_SEVERITY = new Map([
@@ -42,12 +42,13 @@ function escape(pMessageString) {
 }
 
 /**
- * Returns a random flowId consisting of 10 numeric digits. TeamCity doesn't
- * currently seem to have demands on the format (it's just a string as far
- * as I can tell), but this is what teamcity-service-messages used, so as
+ * Returns a random flowId consisting of 10 numeric digits.
+ *
+ * TeamCity doesn't seem to have demands on the format (it's just a string),
+ * but this is what teamcity-service-messages used, so as
  * per the rule of least surprise, this is what we use as well.
  *
- * @return {string} a random flowId consisting of 10 numeric digits
+ * @return {string} 10 random numeric digits
  */
 function getRandomFlowId() {
   const lFlowIdLength = 10;
@@ -58,10 +59,9 @@ function getRandomFlowId() {
 }
 
 /**
- * Returns a timestamp in ISO format without the trailing 'Z'. It used to be
- * an issue with TeamCity that it didn't use the trailing 'Z' (this is
- * documented in the teamcity-service-messages source code) - not sure whether
- * this is still the case, but better safe than sorry.
+ * Returns a timestamp in ISO format without the trailing 'Z'. TeamCity
+ * didn't use the trailing 'Z' (documented in the teamcity-service-messages
+ * source) - not sure whether still the case, but better safe than sorry.
  *
  * @returns {string} a timestamp in ISO format without the trailing 'Z'
  */
@@ -256,8 +256,8 @@ function reportViolations(pViolations, pIgnoredCount, pFlowId) {
  * - for each violation in the passed results: an `inspection` with the
  *   violated rule name and the tos and froms
  *
- * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
+ * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser.mjs").IReporterOutput}
  */
 // eslint-disable-next-line complexity
 export default function teamcity(pResults) {
