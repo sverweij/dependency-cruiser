@@ -689,7 +689,12 @@ export default {
       maximumLevel: 50 
     },
     cache: {
-      strategy: "metadata",
+      // amazingly, for dependency-cruiser's own use case the 'content' strategy
+      // (calculates all file checksums) works (~1.25x) faster than the 'metadata' 
+      // strategy (uses git for detecting changes). From a package.json script
+      // the difference is even bigger, as there the 'metadata' strategy takes
+      // 10x longer as compared to a direct nodejs call.
+      strategy: "content",
       compress: true,
     },
   },
