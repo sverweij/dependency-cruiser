@@ -42,7 +42,7 @@ export default async function cruise(
     const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
     if (await lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
-      bus.summary("cache: report from cache", c(8));
+      bus.summary("report: from cache", c(8));
       return await reportWrap(lCachedResults, lCruiseOptions);
     }
   }
