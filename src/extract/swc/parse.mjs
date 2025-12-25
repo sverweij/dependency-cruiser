@@ -1,4 +1,3 @@
-import memoize, { memoizeClear } from "memoize";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
@@ -20,14 +19,11 @@ const SWC_PARSE_OPTIONS = {
   decorators: true,
   // TODO: {tj}sx ?
 };
+/** @type {Map<string,ModuleItem[]>} */
+const CACHE = new Map();
 
 export function getASTFromSource(pSource) {
   return swc.parseSync(pSource, SWC_PARSE_OPTIONS);
-}
-
-function getAST(pFileName) {
-  /** @type {swcCore swc} */
-  return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
 /**
@@ -38,10 +34,18 @@ function getAST(pFileName) {
  * @param {string} pFileName - the name of the file to compile
  * @return {ModuleItem[]} - an (swc) AST
  */
-export const getASTCached = memoize(getAST);
+export function getASTCached(pFileName) {
+  if (CACHE.has(pFileName)) {
+    return CACHE.get(pFileName);
+  }
+  /** @type {swcCore swc} */
+  const lAST = swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
+  CACHE.set(pFileName, lAST);
+  return lAST;
+}
 
 export function clearCache() {
-  memoizeClear(getASTCached);
+  CACHE.clear();
 }
 
 /**
