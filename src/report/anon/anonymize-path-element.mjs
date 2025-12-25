@@ -1,11 +1,19 @@
-import memoize, { memoizeClear } from "memoize";
 import randomString from "./random-string.mjs";
+
+const ALREADY_USED_WORDS = new Map();
 
 function replace(pElement, pIndex, pWordList) {
   return pIndex === 0 ? pWordList.shift() || randomString(pElement) : pElement;
 }
 
-const replaceCached = memoize(replace);
+function replaceCached(pElement, pIndex, pWordList) {
+  if (ALREADY_USED_WORDS.has(pElement)) {
+    return ALREADY_USED_WORDS.get(pElement);
+  }
+  const lReplaced = replace(pElement, pIndex, pWordList);
+  ALREADY_USED_WORDS.set(pElement, lReplaced);
+  return lReplaced;
+}
 
 function replaceFromWordList(pPathElement, pWordList, pCached) {
   return pPathElement
@@ -49,5 +57,5 @@ export function anonymizePathElement(
  * @returns {void}
  */
 export function clearCache() {
-  memoizeClear(replaceCached);
+  ALREADY_USED_WORDS.clear();
 }
