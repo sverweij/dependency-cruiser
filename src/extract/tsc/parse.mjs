@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import memoize, { memoizeClear } from "memoize";
 import transpile from "../transpile/index.mjs";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
@@ -10,6 +9,8 @@ const typescript = await tryImport(
   "typescript",
   meta.supportedTranspilers.typescript,
 );
+/** @type {Map<string,any>} */
+const CACHE = new Map();
 
 /**
  * Compiles pTypescriptSource into a (typescript) AST
@@ -35,15 +36,19 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
 
 /**
  * Compiles the file identified by pFileName into a (typescript)
- * AST and returns it
+ * AST and returns it, Subsequent calls for the same file name will
+ * return the result from a cache
  *
  * @param {string} pFileName - the name of the file to compile
  * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
  *                                a babel config
  * @return {object} - a (typescript) AST
  */
-function getAST(pFileName, pTranspileOptions) {
-  return getASTFromSource(
+export function getASTCached(pFileName, pTranspileOptions) {
+  if (CACHE.has(pFileName)) {
+    return CACHE.get(pFileName);
+  }
+  const lAST = getASTFromSource(
     {
       source: readFileSync(pFileName, "utf8"),
       extension: getExtension(pFileName),
@@ -51,17 +56,9 @@ function getAST(pFileName, pTranspileOptions) {
     },
     pTranspileOptions,
   );
+  CACHE.set(pFileName, lAST);
+  return lAST;
 }
-
-/**
- * Compiles the file identified by pFileName into a (typescript)
- * AST and returns it. Subsequent calls for the same file name will
- * return the result from a cache
- *
- * @param {string} pFileName - the name of the file to compile
- * @return {object} - a (typescript) AST
- */
-export const getASTCached = memoize(getAST);
 
 /**
  * @return {boolean} - true if the typescript compiler is available,
@@ -70,5 +67,5 @@ export const getASTCached = memoize(getAST);
 export const isAvailable = () => typescript !== false;
 
 export function clearCache() {
-  memoizeClear(getASTCached);
+  CACHE.clear();
 }
