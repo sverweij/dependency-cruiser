@@ -6,8 +6,8 @@ import pathToPosix from "#utl/path-to-posix.mjs";
 
 /** @type {Map<string, enhancedResolve.Resolver>} */
 let gResolvers = new Map();
-/** @type {Map<string, boolean>} */
-let gInitialized = new Map();
+/** @type {Set<string>} */
+let gInitialized = new Set();
 
 /**
  * Initializes a resolver for the given caching context if not already done
@@ -18,15 +18,14 @@ let gInitialized = new Map();
  * @returns {void}
  */
 function init(pEHResolveOptions, pCachingContext) {
-  if (!gInitialized.get(pCachingContext) || pEHResolveOptions.bustTheCache) {
+  if (!gInitialized.has(pCachingContext) || pEHResolveOptions.bustTheCache) {
     // assuming the cached file system here
     pEHResolveOptions.fileSystem.purge();
     gResolvers.set(
       pCachingContext,
       enhancedResolve.ResolverFactory.createResolver(pEHResolveOptions),
     );
-    /* eslint security/detect-object-injection:0 */
-    gInitialized.set(pCachingContext, true);
+    gInitialized.add(pCachingContext);
   }
 }
 
