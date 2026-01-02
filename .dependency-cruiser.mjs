@@ -399,66 +399,66 @@ export default {
     },
   ],
   options: {
-    /* pattern specifying which files not to follow further when encountered
-      (regular expression)
-      no need to specify here as well as we use the same as is in the
-      recommended preset anyway
-    */
+    // pattern specifying which files not to follow further when encountered
+    // (regular expression)
+    // no need to specify here as it's already in the 'recommended' preset
+    // from which we inherit
     // "doNotFollow": "node_modules",
 
-    /* pattern specifying which files to exclude (regular expression) */
+    // pattern specifying which files to exclude (regular expression)
     exclude: [
       "mocks",
       "fixtures",
       "test/integration",
-      "src/report/dot-webpage/svg-in-html-snippets/script.cjs",
+      "src/report/dot-webpage/svg-in-html-snippets/script[.]cjs",
     ],
 
-    /* list of module systems to cruise */
-    moduleSystems: ["cjs", "es6"],
+    // list of module systems to cruise
+    moduleSystems: ["es6", "cjs"],
 
-    /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
+    // prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/)
+    // prefix: `vscode://file/${process.cwd()}/`,
     prefix: "https://github.com/sverweij/dependency-cruiser/blob/main/",
 
-    /* if true detect dependencies that only exist before typescript-to-javascript compilation */
+    // if true detect dependencies that only exist before typescript-to-javascript compilation
     tsPreCompilationDeps: true,
 
     extraExtensionsToScan: [".json"],
 
-    /* if true leave symlinks untouched, otherwise use the realpath */
+    // if true leave symlinks untouched, otherwise use the realpath
     // "preserveSymlinks": false,
 
-    /* TypeScript project file ('tsconfig.json') to use for
-      (1) compilation and
-      (2) resolution (e.g. with the paths property)
-
-      The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
-      current working directory. When not provided defaults to './tsconfig.json'.
-    */
+    // TypeScript project file ('tsconfig.json') to use for
+    // (1) compilation and
+    // (2) resolution (e.g. with the paths property)
+    //
+    // The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
+    // current working directory. When not provided defaults to './tsconfig.json'.
     // "tsConfig": {
     //    "fileName": "./tsconfig.json"
     // },
 
-    /* Webpack configuration to use to get resolve options from.
-
-      The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
-      current working directory. When not provided defaults to './webpack.conf.js'.
-
-      The (optional) `env` and `arguments` attributes contain the parameters to be passed if
-      your webpack config is a function and takes them (see webpack documentation
-      for details)
-    */
+    // Webpack configuration to use to get resolve options from.
+    //
+    // The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
+    // current working directory. When not provided defaults to './webpack.conf.js'.
+    //
+    // The (optional) `env` and `arguments` attributes contain the parameters to be passed if
+    // your webpack config is a function and takes them (see webpack documentation
+    // for details)
     // "webpackConfig": {
     // "fileName": "./webpack.conf.js"
     //    "env": {},
     //    "arguments": {}
     // },
+    
     // "babelConfig": {
     //   "fileName": "./.babelrc"
     // },
-    /* Experimental: the parser to use
-     */
+    
+    // Experimental: the parser to use. Not set as detectJSDocImports will imply "tsc" anyway
     // parser: "tsc", // acorn, tsc
+    
     detectJSDocImports: true, // implies parser: "tsc"
     detectProcessBuiltinModuleCalls: true,
     experimentalStats: true,
@@ -469,9 +469,9 @@ export default {
       aliasFields: ["browser"],
       conditionNames: ["import", "require"],
       extensions: [
+        ".js",
         ".cjs",
         ".mjs",
-        ".js",
         // ".jsx",
         // ".ts",
         // ".cts",
