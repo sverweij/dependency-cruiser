@@ -37,6 +37,8 @@ interface IStrictToRestriction extends IToRestriction {
 export interface IStrictReachabilityToRestrictionType extends IReachabilityToRestrictionType {
   path?: string;
   pathNot?: string;
+  via?: IStrictMiniDependencyRestriction;
+  viaOnly?: IStrictMiniDependencyRestriction;
 }
 
 export interface IStrictRequiredToRestrictionType extends IRequiredToRestrictionType {
