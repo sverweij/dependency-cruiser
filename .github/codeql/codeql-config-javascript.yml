@@ -8,6 +8,7 @@ paths:
   - types/
 paths-ignore:
   - '**/*.schema.mjs'
+  - '**/*.validate.mjs'
   - 'test/integration/**'
   - 'test/*/__fixtures__/**'
   - 'test/*/*/__fixtures__/**'
