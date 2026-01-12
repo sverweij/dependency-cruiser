@@ -1,8 +1,4 @@
 name: ci
-permissions:
-  contents: read
-  pull-requests: read
-  actions: read
 
 on:
   push:
@@ -28,6 +24,10 @@ defaults:
 
 jobs:
   check-linux:
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -97,6 +97,10 @@ jobs:
     env:
       PLATFORM: windows-latest
       NO_COLOR: 1
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
@@ -116,39 +120,3 @@ jobs:
           npm run build
       - run: npm run depcruise
       - run: npx mocha --invert --fgrep "#do-not-run-on-windows"
-
-  # for #reasons the run step takes forever to complete on the ci - while 
-  # running fine locally. Something to figure out another time.
-  # check-berry-integration:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v6
-  #     - uses: actions/cache@v5
-  #       with:
-  #         path: |
-  #           .yarn
-  #           .yarnrc.yml
-  #           .pnp.js
-  #           yarn.lock
-  #         key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
-  #         restore-keys: |
-  #           ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-  #     - uses: actions/setup-node@v6
-  #       with:
-  #         node-version: ${{env.NODE_LATEST}}
-  #     - name: install & build
-  #       run: |
-  #         rm -f .npmrc
-  #         yarn set version berry
-  #         YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
-  #     - name: forbidden dependency check
-  #       run: |
-  #         yarn --version
-  #         yarn depcruise
-  #     # testing doesn't work as the tests are esm and berry, with pnp enabled,
-  #     # doesn't support esm yet.
-  #     # - name: test coverage
-  #     #   run: |
-  #     #     node --version
-  #     #     yarn --version
-  #     #     yarn test:cover
