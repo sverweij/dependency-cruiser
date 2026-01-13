@@ -3,9 +3,9 @@ import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
-import summarize from "#enrich/summarize/index.mjs";
+import summarize from "#analyze/summarize/index.mjs";
 
-describe("[I] enrich/summarize", () => {
+describe("[I] analyze/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
     const lSummary = summarize([], {}, []);
     deepEqual(lSummary, {

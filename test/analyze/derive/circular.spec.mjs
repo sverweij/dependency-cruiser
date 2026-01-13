@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import detectAndAddCycles, { hasCycleRule } from "#enrich/derive/circular.mjs";
+import detectAndAddCycles, { hasCycleRule } from "#analyze/derive/circular.mjs";
 
-describe("[U] enrich/circular - hasCycleRule", () => {
+describe("[U] analyze/circular - hasCycleRule", () => {
   it("returns false for empty lRuleSet", () => {
     assert.equal(hasCycleRule({}), false);
   });
@@ -21,7 +21,7 @@ describe("[U] enrich/circular - hasCycleRule", () => {
   });
 });
 
-describe("[U] enrich/circular - detectAndAddCycles", () => {
+describe("[U] analyze/circular - detectAndAddCycles", () => {
   it("adds circular: false when no cycles", () => {
     const lNodes = [
       {

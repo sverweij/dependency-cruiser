@@ -504,7 +504,7 @@ export default {
         ],
       },
       dot: {
-        collapsePattern: ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
+        collapsePattern: ["^src/report/[^/]+", "^src/analyze/derive/[^/]+"],
         filters: {
           includeOnly: { path: "^(src|bin)" },
           exclude: { path: ["^src/meta[.]cjs$", "^src/utl/bus.+"] },
@@ -553,7 +553,7 @@ export default {
               attributes: { fillcolor: "#ccffcc" },
             },
             {
-              criteria: { source: "^src/enrich" },
+              criteria: { source: "^src/analyze" },
               attributes: { fillcolor: "#77eeaa" },
             },
             {
@@ -616,7 +616,7 @@ export default {
               attributes: { color: "#00770077" },
             },
             {
-              criteria: { resolved: "^src/enrich" },
+              criteria: { resolved: "^src/analyze" },
               attributes: { color: "#00776677" },
             },
             {

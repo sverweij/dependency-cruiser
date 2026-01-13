@@ -1,4 +1,4 @@
-import enrichModules from "./enrich-modules.mjs";
+import analyzeModules from "./analyze-modules.mjs";
 import aggregateToFolders from "./derive/folders/index.mjs";
 import summarize from "./summarize/index.mjs";
 import { bus } from "#utl/bus.mjs";
@@ -16,8 +16,8 @@ import { bus } from "#utl/bus.mjs";
  * @param {string[]} pFileAndDirectoryArray
  * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
  */
-export default function enrich(pModules, pOptions, pFileAndDirectoryArray) {
-  const lModules = enrichModules(pModules, pOptions);
+export default function analyze(pModules, pOptions, pFileAndDirectoryArray) {
+  const lModules = analyzeModules(pModules, pOptions);
   bus.info("analyze: aggregate to folders");
   const lFolders = aggregateToFolders(lModules, pOptions);
 

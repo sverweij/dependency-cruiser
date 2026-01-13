@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import normalize from "#main/rule-set/normalize.mjs";
-import addReachability from "#enrich/derive/reachable.mjs";
+import addReachability from "#analyze/derive/reachable.mjs";
 import clearExtractCaches from "#extract/clear-caches.mjs";
 
 const GRAPH = [
@@ -102,7 +102,7 @@ const ANNOTATED_GRAPH_FOR_HAJOO = [
   },
 ];
 
-describe("[U] enrich/derive/reachable/index - reachability detection", () => {
+describe("[U] analyze/derive/reachable/index - reachability detection", () => {
   beforeEach(() => {
     clearExtractCaches();
   });

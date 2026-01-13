@@ -1,5 +1,5 @@
 import { getReporter } from "#report/index.mjs";
-import summarize from "#enrich/summarize/index.mjs";
+import summarize from "#analyze/summarize/index.mjs";
 import { applyFilters } from "#graph-utl/filter-bank.mjs";
 import consolidateToPattern from "#graph-utl/consolidate-to-pattern.mjs";
 import { compareModules } from "#graph-utl/compare.mjs";

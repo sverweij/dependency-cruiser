@@ -5,9 +5,9 @@ import {
   getEfferentCouplings,
   getParentFolders,
   object2Array,
-} from "#enrich/derive/folders/utl.mjs";
+} from "#analyze/derive/folders/utl.mjs";
 
-describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
+describe("[U] analyze/derive/folders/utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {
     equal(getAfferentCouplings({ dependents: [] }, "src/whoopla").length, 0);
   });
@@ -60,13 +60,13 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   });
 });
 
-describe("[U] enrich/derive/folders/utl - getEfferentCouplings", () => {
+describe("[U] analyze/derive/folders/utl - getEfferentCouplings", () => {
   it("no dependencies => 0", () => {
     equal(getEfferentCouplings({ dependencies: [] }, "src/whoopla").length, 0);
   });
 });
 
-describe("[U] enrich/derive/folders/utl - getParentFolders", () => {
+describe("[U] analyze/derive/folders/utl - getParentFolders", () => {
   it("for a parent-less folder just returns that folder", () => {
     deepEqual(getParentFolders("src"), ["src"]);
   });
@@ -79,7 +79,7 @@ describe("[U] enrich/derive/folders/utl - getParentFolders", () => {
   });
 });
 
-describe("[U] enrich/derive/folders/utl - objectToArray", () => {
+describe("[U] analyze/derive/folders/utl - objectToArray", () => {
   it("no folders in object => empty array", () => {
     deepEqual(object2Array({}), []);
   });

@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import softenKnownViolations from "#enrich/soften-known-violations.mjs";
+import softenKnownViolations from "#analyze/soften-known-violations.mjs";
 
-describe("[U] enrich/soften-known-violations - modules violations", () => {
+describe("[U] analyze/soften-known-violations - modules violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownModuleViolations = [
     {
@@ -101,7 +101,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
   });
 });
 
-describe("[U] enrich/soften-known-violations - reachability violations", () => {
+describe("[U] analyze/soften-known-violations - reachability violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownReachabilityViolations = [
     {
@@ -195,7 +195,7 @@ describe("[U] enrich/soften-known-violations - reachability violations", () => {
   });
 });
 
-describe("[U] enrich/soften-known-violations - module dependency instability violations", () => {
+describe("[U] analyze/soften-known-violations - module dependency instability violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownInstabilityViolations = [
     {
@@ -254,7 +254,7 @@ describe("[U] enrich/soften-known-violations - module dependency instability vio
   });
 });
 
-describe("[U] enrich/soften-known-violations - dependency violations", () => {
+describe("[U] analyze/soften-known-violations - dependency violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownDependencyViolations = [
     {

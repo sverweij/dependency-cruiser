@@ -54,7 +54,7 @@ export default async function cruise(
     { default: normalizeFilesAndDirectories },
     { default: normalizeResolveOptions },
     { default: extract },
-    { default: enrich },
+    { default: analyze },
   ] = await Promise.all([
     // despite rule set parsing being behind an if, it's the 'normal' use case
     // for dependency-cruiser, so import it unconditionally nonetheless
@@ -63,7 +63,7 @@ export default async function cruise(
     import("./files-and-dirs/normalize.mjs"),
     import("./resolve-options/normalize.mjs"),
     import("#extract/index.mjs"),
-    import("#enrich/index.mjs"),
+    import("#analyze/index.mjs"),
   ]);
 
   if (lCruiseOptions.ruleSet) {
@@ -93,7 +93,7 @@ export default async function cruise(
   );
 
   bus.summary("analyze", c(7));
-  const lCruiseResult = enrich(
+  const lCruiseResult = analyze(
     lExtractionResult,
     lCruiseOptions,
     lNormalizedFileAndDirectoryArray,

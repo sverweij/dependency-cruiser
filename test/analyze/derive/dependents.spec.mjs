@@ -1,9 +1,9 @@
 import { deepEqual, equal } from "node:assert/strict";
 import addDependents, {
   hasDependentsRule,
-} from "#enrich/derive/dependents.mjs";
+} from "#analyze/derive/dependents.mjs";
 
-describe("[U] enrich/derive/dependents - has-dependents-rule", () => {
+describe("[U] analyze/derive/dependents - has-dependents-rule", () => {
   it("returns false on an empty rule set", () => {
     equal(hasDependentsRule({}), false);
   });
@@ -49,7 +49,7 @@ describe("[U] enrich/derive/dependents - has-dependents-rule", () => {
   });
 });
 
-describe("[U] enrich/derive/dependents - addDependents", () => {
+describe("[U] analyze/derive/dependents - addDependents", () => {
   const lModules = [
     { source: "a", dependencies: [{ resolved: "b" }, { resolved: "c" }] },
     { source: "b", dependencies: [{ resolved: "c" }] },

@@ -2,10 +2,10 @@ import { equal } from "node:assert/strict";
 
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
 import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
-import isOrphan from "#enrich/derive/orphan/is-orphan.mjs";
+import isOrphan from "#analyze/derive/orphan/is-orphan.mjs";
 import ModuleGraphWithDependencySet from "#graph-utl/module-graph-with-dependency-set.mjs";
 
-describe("[U] enrich/derive/orphan/isOrphan", () => {
+describe("[U] analyze/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {
     equal(
       isOrphan(

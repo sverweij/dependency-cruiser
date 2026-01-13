@@ -15,7 +15,7 @@ import { bus } from "#utl/bus.mjs";
  * @param {IOptions} pOptions
  * @returns {IModule[]}
  */
-export default function enrichModules(pModules, pOptions) {
+export default function analyzeModules(pModules, pOptions) {
   bus.info("analyze: cycles");
 
   let lModules = deriveCycles(pModules, {

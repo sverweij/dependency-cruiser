@@ -56,7 +56,7 @@ export default {
               attributes: { fillcolor: "#ccffcc" },
             },
             {
-              criteria: { source: "^src/enrich" },
+              criteria: { source: "^src/analyze" },
               attributes: { fillcolor: "#77eeaa" },
             },
             {
@@ -123,7 +123,7 @@ export default {
               attributes: { color: "#00770077" },
             },
             {
-              criteria: { resolved: "^src/enrich" },
+              criteria: { resolved: "^src/analyze" },
               attributes: { color: "#00776677" },
             },
             {

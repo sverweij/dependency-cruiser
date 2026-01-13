@@ -118,8 +118,8 @@
   },
   {
     "type": "dependency",
-    "from": "src/enrich/derive/folders/aggregate-to-folders.mjs",
-    "to": "src/enrich/derive/circular.mjs",
+    "from": "src/analyze/derive/folders/aggregate-to-folders.mjs",
+    "to": "src/analyze/derive/circular.mjs",
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -127,8 +127,8 @@
   },
   {
     "type": "dependency",
-    "from": "src/enrich/derive/folders/aggregate-to-folders.mjs",
-    "to": "src/enrich/derive/module-utl.mjs",
+    "from": "src/analyze/derive/folders/aggregate-to-folders.mjs",
+    "to": "src/analyze/derive/module-utl.mjs",
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -136,8 +136,8 @@
   },
   {
     "type": "dependency",
-    "from": "src/enrich/derive/metrics/get-module-metrics.mjs",
-    "to": "src/enrich/derive/module-utl.mjs",
+    "from": "src/analyze/derive/metrics/get-module-metrics.mjs",
+    "to": "src/analyze/derive/module-utl.mjs",
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"

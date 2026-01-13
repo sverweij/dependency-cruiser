@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
-import isSameViolation from "#enrich/summarize/is-same-violation.mjs";
+import isSameViolation from "#analyze/summarize/is-same-violation.mjs";
 
-describe("[U] enrich/is-same-violation", () => {
+describe("[U] analyze/is-same-violation", () => {
   it("1:1 the same => same", () => {
     const lViolation = {
       rule: {

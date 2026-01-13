@@ -1,12 +1,12 @@
 import { deepEqual } from "node:assert/strict";
 
-import aggregateToFolders from "#enrich/derive/folders/aggregate-to-folders.mjs";
+import aggregateToFolders from "#analyze/derive/folders/aggregate-to-folders.mjs";
 
 function compareFolders(pLeftFolder, pRightFolder) {
   return pLeftFolder.name.localeCompare(pRightFolder.name);
 }
 
-describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
+describe("[U] analyze/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
     deepEqual(aggregateToFolders([]), []);
   });

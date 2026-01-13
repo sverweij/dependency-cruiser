@@ -4,7 +4,7 @@ import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
 import ONE_MODULE_AFTER_PROCESSING from "./__mocks__/one-module.afterprocessing.mjs";
 import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 import TWO_MODULES_AFTER_PROCESSING from "./__mocks__/two-module.afterprocessing.mjs";
-import deriveOrphans, { hasOrphanRule } from "#enrich/derive/orphan/index.mjs";
+import deriveOrphans, { hasOrphanRule } from "#analyze/derive/orphan/index.mjs";
 
 const RULE_SET_WITH_ORPHAN_RULE = {
   forbidden: [
@@ -26,7 +26,7 @@ const RULE_SET_WITH_ALLOWED_ORPHAN_RULE = {
   ],
 };
 
-describe("[U] enrich/derive/orphan/index - hasOrphanRule", () => {
+describe("[U] analyze/derive/orphan/index - hasOrphanRule", () => {
   it("returns false on an empty rule set", () => {
     equal(hasOrphanRule([]), false);
   });
@@ -40,7 +40,7 @@ describe("[U] enrich/derive/orphan/index - hasOrphanRule", () => {
   });
 });
 
-describe("[U] enrich/derive/orphan/index - orphan detection", () => {
+describe("[U] analyze/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {
     deepEqual(
       deriveOrphans(ONE_MODULE_FIXTURE, {}),

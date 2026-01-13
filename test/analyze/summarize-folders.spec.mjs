@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import summarizeFolders from "#enrich/summarize/summarize-folders.mjs";
+import summarizeFolders from "#analyze/summarize/summarize-folders.mjs";
 
 const FIXTURE_WITHOUT_VIOLATIONS = [
   {
@@ -185,7 +185,7 @@ const CYCLE_RULE_SET = {
   ],
 };
 
-describe("[I] enrich/summarize/summarize-folders", () => {
+describe("[I] analyze/summarize/summarize-folders", () => {
   it("returns an empty array when presented with an empty array of folders", () => {
     deepEqual(summarizeFolders([], SDP_RULE_SET), []);
   });
