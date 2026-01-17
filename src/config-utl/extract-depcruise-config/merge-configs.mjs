@@ -105,7 +105,7 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
  * @returns {Object} - The merged rule set
  */
 // eslint-disable-next-line complexity
-export default (pConfigExtended, pConfigBase) => {
+export default function mergeConfigs(pConfigExtended, pConfigBase) {
   const lForbidden = mergeRules(
     pConfigExtended?.forbidden ?? [],
     pConfigBase?.forbidden ?? [],
@@ -133,4 +133,4 @@ export default (pConfigExtended, pConfigBase) => {
       pConfigBase?.options ?? {},
     ),
   };
-};
+}
