@@ -273,6 +273,14 @@
     "vue-template-compiler": "2.7.16",
     "yarn": "1.22.22"
   },
+  "we-have-these-dependencies-because": {
+    "overrides": {
+      "baseline-browser-mapping": "Without this override this transitive dependency will start rudely printing that it is outdated in the middle of our tests (for reading babel configurations, go figure)"
+    }
+  },
+  "overrides": {
+    "baseline-browser-mapping": "^2.9.15"
+  },
   "upem": {
     "policies": [
       {
