@@ -27,12 +27,23 @@ export function hasDependentsRule(pRuleSet) {
     (pRuleSet?.allowed ?? []).some(isDependentsRule)
   );
 }
-
+/**
+ *
+ * @param {Partial<import("../../../types/cruise-result.d.mts").IModule[]>} pModules
+ * @param {import("../../../types/options.d.mts").ICruiseOptions} options
+ * @returns
+ */
 export default function addDependents(
   pModules,
-  { skipAnalysisNotInRules, metrics, ruleSet },
+  { skipAnalysisNotInRules, metrics, ruleSet, reaches, focus },
 ) {
-  if (!skipAnalysisNotInRules || metrics || hasDependentsRule(ruleSet)) {
+  if (
+    !skipAnalysisNotInRules ||
+    metrics ||
+    reaches ||
+    focus ||
+    hasDependentsRule(ruleSet)
+  ) {
     // creating this optimized structure here might seem overkill, but on
     // large graphs it pays off significantly - creation is a few centiseconds
     // but it cuts analysis in half on large graphs (and even on smaller
