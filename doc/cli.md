@@ -1353,7 +1353,7 @@ When you don't pass --cache-strategy (and don't specify a `strategy` in the
 `cache` option in you .dependency-cruiser.js) the strategy defaults to `metadata`.
 
 > [!tip]
-> The _checking cache freshness_ steop with the `metadata` strategy is about
+> The _checking cache freshness_ step with the `metadata` strategy is about
 > 7x slower when dependency-cruiser is run from a script from within package.json
 > as when dependency-cruiser is run directly with nodejs (265ms vs 37ms on a 
 > MacBook Pro with an M4 processor). Note that _even then_ a run-from cache
