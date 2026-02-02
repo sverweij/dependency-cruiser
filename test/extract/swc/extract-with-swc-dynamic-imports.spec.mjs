@@ -53,12 +53,14 @@ describe("[U] ast-extractors/extract-swc - dynamic imports", () => {
     );
   });
 
-  it("ignores dynamic import statements without a parameter", () => {
-    deepEqual(
-      extractWithSwc(
-        "import(/* nothing */).then(judeljo => { judeljo.hochik() })",
-      ),
-      [],
-    );
-  });
+  // as per v1.15.11 @swc/core throws a syntax error, so this test won't
+  // work anymore
+  // it("ignores dynamic import statements without a parameter", () => {
+  //   deepEqual(
+  //     extractWithSwc(
+  //       "import(/* nothing */).then(judeljo => { judeljo.hochik() })",
+  //     ),
+  //     [],
+  //   );
+  // });
 });
