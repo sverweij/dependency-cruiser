@@ -216,7 +216,7 @@
     "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.5.2",
     "acorn-walk": "8.3.4",
-    "commander": "14.0.2",
+    "commander": "14.0.3",
     "enhanced-resolve": "5.18.4",
     "ignore": "7.0.5",
     "interpret": "3.1.1",
@@ -231,16 +231,16 @@
     "watskeburt": "5.0.2"
   },
   "devDependencies": {
-    "@babel/core": "7.28.6",
+    "@babel/core": "7.29.0",
     "@babel/plugin-transform-modules-commonjs": "7.28.6",
     "@babel/preset-typescript": "7.28.5",
     "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.2",
-    "@swc/core": "1.15.10",
-    "@types/node": "25.0.10",
+    "@swc/core": "1.15.11",
+    "@types/node": "25.2.0",
     "@types/prompts": "2.4.9",
-    "@typescript-eslint/eslint-plugin": "8.53.1",
-    "@typescript-eslint/parser": "8.53.1",
+    "@typescript-eslint/eslint-plugin": "8.54.0",
+    "@typescript-eslint/parser": "8.54.0",
     "@vue/compiler-sfc": "3.5.27",
     "ajv": "8.17.1",
     "c8": "10.1.3",
@@ -257,7 +257,7 @@
     "eslint-plugin-n": "17.23.2",
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
-    "globals": "17.0.0",
+    "globals": "17.3.0",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "mocha": "11.7.5",
@@ -265,7 +265,7 @@
     "npm-run-all2": "8.0.4",
     "prettier": "3.8.1",
     "proxyquire": "2.1.3",
-    "svelte": "5.48.0",
+    "svelte": "5.49.1",
     "svgo": "4.0.0",
     "symlink-dir": "^7.1.0",
     "typescript": "5.9.3",
@@ -275,11 +275,13 @@
   },
   "we-have-these-dependencies-because": {
     "overrides": {
-      "baseline-browser-mapping": "Without this override this transitive dependency will start rudely printing that it is outdated in the middle of our tests (for reading babel configurations, go figure)"
+      "baseline-browser-mapping": "Without this override this transitive dependency will start rudely printing that it is outdated in the middle of our tests (for reading babel configurations, go figure)",
+      "diff": "Transitive dependency of mocha 11.7.5. diff has a low severity vulnerability in < 8.0.3 (see https://github.com/advisories/GHSA-73rr-hh4g-fpgx)"
     }
   },
   "overrides": {
-    "baseline-browser-mapping": "^2.9.15"
+    "baseline-browser-mapping": "^2.9.15",
+    "diff": "8.0.3"
   },
   "upem": {
     "policies": [
