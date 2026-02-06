@@ -11,11 +11,7 @@ describe("[I] svelte transpiler", () => {
     equal(wrap.isAvailable(), true);
   });
   [
-    [
-      "ts",
-      (pSource) =>
-        pSource.replace('import Header from "./Header.svelte";\n', ""),
-    ],
+    ["ts", (pSource) => pSource],
     ["js", (pSource) => pSource],
   ].forEach(([variant, transformExpected]) => {
     it(`'transpiles' svelte with "<script lang='${variant}'>"'`, async () => {
