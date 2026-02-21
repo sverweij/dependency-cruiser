@@ -211,13 +211,13 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.15.0",
+    "acorn": "8.16.0",
     "acorn-jsx": "5.3.2",
     "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.5.2",
-    "acorn-walk": "8.3.4",
+    "acorn-walk": "8.3.5",
     "commander": "14.0.3",
-    "enhanced-resolve": "5.19.0",
+    "enhanced-resolve": "5.20.0",
     "ignore": "7.0.5",
     "interpret": "3.1.1",
     "is-installed-globally": "1.0.0",
@@ -228,34 +228,34 @@
     "safe-regex": "2.1.1",
     "semver": "7.7.4",
     "tsconfig-paths-webpack-plugin": "4.2.0",
-    "watskeburt": "5.0.2"
+    "watskeburt": "5.0.3"
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
     "@babel/plugin-transform-modules-commonjs": "7.28.6",
     "@babel/preset-typescript": "7.28.5",
-    "@eslint/eslintrc": "3.3.3",
-    "@eslint/js": "9.39.2",
-    "@swc/core": "1.15.11",
-    "@types/node": "25.2.1",
+    "@eslint/eslintrc": "3.3.4",
+    "@eslint/js": "^9.39.3",
+    "@swc/core": "1.15.17",
+    "@types/node": "25.3.2",
     "@types/prompts": "2.4.9",
-    "@typescript-eslint/eslint-plugin": "8.54.0",
-    "@typescript-eslint/parser": "8.54.0",
-    "@vue/compiler-sfc": "3.5.27",
-    "ajv": "8.17.1",
-    "c8": "10.1.3",
+    "@typescript-eslint/eslint-plugin": "8.56.1",
+    "@typescript-eslint/parser": "8.56.1",
+    "@vue/compiler-sfc": "3.5.29",
+    "ajv": "8.18.0",
+    "c8": "11.0.0",
     "clean-pkg-json": "1.3.0",
     "coffeescript": "2.7.0",
     "esbuild": "0.27.3",
-    "eslint": "9.39.2",
+    "eslint": "^9.39.3",
     "eslint-config-moving-meadow": "5.0.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-budapestian": "^6.0.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-mocha": "^10.5.0",
-    "eslint-plugin-n": "17.23.2",
-    "eslint-plugin-security": "3.0.1",
+    "eslint-plugin-n": "17.24.0",
+    "eslint-plugin-security": "4.0.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "globals": "17.3.0",
     "husky": "9.1.7",
@@ -265,26 +265,54 @@
     "npm-run-all2": "8.0.4",
     "prettier": "3.8.1",
     "proxyquire": "2.1.3",
-    "svelte": "5.49.2",
+    "svelte": "5.53.6",
     "svgo": "4.0.0",
     "symlink-dir": "^7.1.0",
     "typescript": "5.9.3",
-    "upem": "10.0.3",
+    "upem": "10.0.4",
     "vue-template-compiler": "2.7.16",
     "yarn": "1.22.22"
   },
   "we-have-these-dependencies-because": {
+    "dependencies": {
+      "rechoir": "extracting webpack resolve configs; it's what webpack itself uses. version is synched with that in webpack",
+      "interpret": "extracting webpack resolve configs; it's what webpack itself uses. version is synched with that in webpack",
+      "ignore": "to ignore files in .gitignore (both in the git based caching and in init-config"
+    },
     "overrides": {
       "baseline-browser-mapping": "Without this override this transitive dependency will start rudely printing that it is outdated in the middle of our tests (for reading babel configurations, go figure)",
-      "diff": "Transitive dependency of mocha 11.7.5. diff has a low severity vulnerability in < 8.0.3 (see https://github.com/advisories/GHSA-73rr-hh4g-fpgx)"
+      "diff": "Transitive dependency of mocha 11.7.5. diff has a low severity vulnerability in < 8.0.3 (see https://github.com/advisories/GHSA-73rr-hh4g-fpgx)",
+      "minimatch": "versions older than 10.2.1 can in corner cases be misused for ReDos. Overridden what we can. The rest (deps of eslint c.s.) we can't bump as they're too far behind"
     }
   },
   "overrides": {
+    "upem": {
+      "@npmcli/map-workspaces": {
+        "minimatch": "^10.2.4"
+      }
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^10.2.4"
+    },
     "baseline-browser-mapping": "^2.9.15",
-    "diff": "8.0.3"
+    "c8": {
+      "glob": "^13.0.3",
+      "yargs": "^18.0.0"
+    },
+    "mocha": {
+      "diff": "^8.0.3",
+      "glob": "^13.0.3",
+      "minimatch": "^10.2.4",
+      "serialize-javascript": "^7.0.3"
+    }
   },
   "upem": {
     "policies": [
+      {
+        "package": "@eslint/js",
+        "policy": "wanted",
+        "because": "incomaptibilities that take ages to resolve"
+      },
       {
         "package": "interpret",
         "policy": "wanted",
@@ -294,6 +322,11 @@
         "package": "rechoir",
         "policy": "wanted",
         "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/main/packages/webpack-cli/package.json"
+      },
+      {
+        "package": "eslint",
+        "policy": "wanted",
+        "because": "incomaptibilities that take ages to resolve"
       },
       {
         "package": "eslint-plugin-budapestian",
