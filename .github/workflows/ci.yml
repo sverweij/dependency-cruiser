@@ -56,7 +56,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install graphviz
-          npm install
+          # legacy peer deps because otherwise typescript-eslint hard-complains
+          # as it can't find a suitable typescript compiler (we're on 6 now, 
+          # ts-eslint isn't yet)
+          npm install --legacy-peer-deps
           npm run build
       - name: lint (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
@@ -116,7 +119,10 @@ jobs:
       - name: install & build
         run: |
           choco install graphviz
-          npm install
+          # legacy peer deps because otherwise typescript-eslint hard-complains
+          # as it can't find a suitable typescript compiler (we're on 6 now, 
+          # ts-eslint isn't yet)
+          npm install --legacy-peer-deps
           npm run build
       - run: npm run depcruise
       - run: npx mocha --invert --fgrep "#do-not-run-on-windows"

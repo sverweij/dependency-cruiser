@@ -21,7 +21,10 @@ jobs:
         with:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
-      - run: npm clean-install
+      # legacy peer deps because otherwise typescript-eslint hard-complains
+      # as it can't find a suitable typescript compiler (we're on 6 now, 
+      # ts-eslint isn't yet)
+      - run: npm clean-install --legacy-peer-deps
       - name: publish as latest
         run: npm publish --provenance --access public
         if: github.event.release.prerelease == false
