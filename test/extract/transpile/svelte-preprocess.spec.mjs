@@ -66,7 +66,8 @@ describe("[U] sync svelte pre-processor", () => {
       <button on:click={increment}>
         count is {count}
       </button>`;
-    const lExpected = `<script lang="ts">console.log(713);
+    const lExpected = `<script lang="ts">"use strict";
+console.log(713);
 </script>
       
       <button on:click={increment}>
