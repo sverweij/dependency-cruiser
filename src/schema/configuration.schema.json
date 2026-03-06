@@ -387,6 +387,14 @@
         "reachable": {
           "type": "boolean",
           "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
+        },
+        "via": {
+          "description": "For reachable rules - whether or not to match paths that include some modules with these conditions. If you want to match paths that _exclusively_ include modules satisfying them use the viaOnly restriction.E.g. to allow all paths, except when they go through one specific module. Typically to temporarily disallow some paths with a lower severity - setting up a rule with a via that ignores them in an 'allowed' section.",
+          "$ref": "#/definitions/MiniDependencyRestrictionType"
+        },
+        "viaOnly": {
+          "description": "For reachable rules - whether or not to match paths that include exclusively modules with these conditions. This is different from the regular via that already matches when only _some_ of the modules in the path satisfy the condition.",
+          "$ref": "#/definitions/MiniDependencyRestrictionType"
         }
       }
     },
