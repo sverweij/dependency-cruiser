@@ -73,7 +73,7 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   via?: MiniDependencyRestrictionType;
   /**
-   * "For circular dependencies - whether or not to match cycles that include
+   * For circular dependencies - whether or not to match cycles that include
    * exclusively modules with this regular expression. This is different from
    * the regular via that already matches when only some of the modules in the
    * cycle satisfy the regular expression
@@ -88,7 +88,7 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   viaNot?: string | string[];
   /**
-   * "For circular dependencies - whether or not to match cycles that include
+   * For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.
    * @deprecated use via.pathNot in stead
    */
@@ -163,6 +163,23 @@ export interface IReachabilityToRestrictionType extends IBaseRestrictionType {
    * Whether or not to match modules that aren't reachable from the from part of the rule.
    */
   reachable: boolean;
+  /**
+   * For reachable rules - whether or not to match paths that include
+   * some modules with these conditions. If you want to match paths that
+   * _exclusively_ include modules satisfying them use the viaOnly
+   * restriction.
+   * E.g. to allow all paths, except when they go through one specific module.
+   * Typically to temporarily disallow some 'forbidden' paths with a lower severity
+   * - setting up a rule with a via that ignores them in an 'allowed' section.
+   */
+  via?: MiniDependencyRestrictionType;
+  /**
+   * For reachable rules - whether or not to match paths that include
+   * exclusively modules with these conditions. This is different from
+   * the regular via that already matches when only _some_ of the modules in the
+   * path satisfy the condition.
+   */
+  viaOnly?: MiniDependencyRestrictionType;
 }
 
 export interface IRequiredToRestrictionType {
