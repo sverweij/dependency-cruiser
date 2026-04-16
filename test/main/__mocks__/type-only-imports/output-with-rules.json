@@ -37,7 +37,7 @@
         "type": "dependency",
         "from": "src/bla.ts",
         "to": "src/types.ts",
-        "unResolved": "./types",
+        "unresolvedTo": "./types",
         "dependencyTypes": ["local", "type-only", "import"],
         "rule": { "severity": "warn", "name": "no-type-only" }
       }

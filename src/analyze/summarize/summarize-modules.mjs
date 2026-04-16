@@ -17,7 +17,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
     type: "dependency",
     from: pModule.source,
     to: pDependency.resolved,
-    unResolved: pDependency.module,
+    unresolvedTo: pDependency.module,
     dependencyTypes: pDependency.dependencyTypes,
     rule: pRule,
   };

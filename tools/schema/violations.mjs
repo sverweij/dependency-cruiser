@@ -25,7 +25,7 @@ export default {
           description:
             "The (resolved) 'to' part of the dependency this violation is about",
         },
-        unResolved: {
+        unresolvedTo: {
           type: "string",
           description:
             "The (unresolved) 'to' part of the dependency this violation is about",

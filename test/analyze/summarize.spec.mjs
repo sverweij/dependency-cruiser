@@ -85,7 +85,7 @@ describe("[I] analyze/summarize", () => {
           type: "cycle",
           from: "src/brand.js",
           to: "src/domain.js",
-          unResolved: "./domain",
+          unresolvedTo: "./domain",
           dependencyTypes: ["local"],
           rule: {
             severity: "warn",
@@ -110,7 +110,7 @@ describe("[I] analyze/summarize", () => {
           type: "cycle",
           from: "src/brand.js",
           to: "src/market.js",
-          unResolved: "./market",
+          unresolvedTo: "./market",
           dependencyTypes: ["local"],
           rule: {
             severity: "warn",
@@ -131,7 +131,7 @@ describe("[I] analyze/summarize", () => {
           type: "cycle",
           from: "src/domain.js",
           to: "src/market.js",
-          unResolved: "./market",
+          unresolvedTo: "./market",
           dependencyTypes: ["local"],
           rule: {
             severity: "warn",
@@ -263,7 +263,7 @@ describe("[I] analyze/summarize", () => {
           type: "instability",
           from: "violation.js",
           to: "dont-touch-this.js",
-          unResolved: "dont-touch-this-but-unresolved.js",
+          unresolvedTo: "dont-touch-this-but-unresolved.js",
           dependencyTypes: [],
           rule: {
             name: "a-rule",

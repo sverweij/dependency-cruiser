@@ -34,11 +34,11 @@ export interface IViolation {
   /**
    * The (unresolved) to part of the dependency this violation is about
    */
-  unResolved?: string;
+  unresolvedTo?: string;
   /**
    * The dependencyTypes that define the relation between the to and the from
    */
-  dependencyTypes: DependencyType[];
+  dependencyTypes?: DependencyType[];
   /**
    * The circular path if the violation is about circularity
    */
