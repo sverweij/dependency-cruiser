@@ -1,6 +1,7 @@
 import ruleSummary from "./rule-summary.mjs";
 import violationType from "./violation-type.mjs";
 import miniDependency from "./mini-dependency-type.mjs";
+import dependencyType from "./dependency-type.mjs";
 
 export default {
   definitions: {
@@ -21,6 +22,17 @@ export default {
         },
         to: {
           type: "string",
+          description:
+            "The (resolved) 'to' part of the dependency this violation is about",
+        },
+        unResolved: {
+          type: "string",
+          description:
+            "The (unresolved) 'to' part of the dependency this violation is about",
+        },
+        dependencyTypes: {
+          type: "array",
+          items: { $ref: "#/definitions/DependencyTypeType" },
         },
         type: { $ref: "#/definitions/ViolationTypeType" },
         rule: { $ref: "#/definitions/RuleSummaryType" },
@@ -70,5 +82,6 @@ export default {
     ...ruleSummary.definitions,
     ...violationType.definitions,
     ...miniDependency.definitions,
+    ...dependencyType.definitions,
   },
 };

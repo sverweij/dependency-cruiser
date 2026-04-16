@@ -93,6 +93,8 @@ describe("[E] main.format - format", () => {
         type: "dependency",
         from: "src/cli/",
         to: "src/extract/",
+        unResolved: "../../extract/resolve/resolve",
+        dependencyTypes: ["local"],
         rule: {
           severity: "warn",
           name: "cli-to-main-only-warn",
