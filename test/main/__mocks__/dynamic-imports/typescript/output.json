@@ -109,12 +109,16 @@
         "type": "dependency",
         "from": "src/dynamic-to-circular.ts",
         "to": "src/circular.ts",
+        "unresolvedTo": "./circular",
+        "dependencyTypes": ["local", "dynamic-import"],
         "rule": { "severity": "warn", "name": "no-dynamic" }
       },
       {
         "type": "cycle",
         "from": "src/circular.ts",
         "to": "src/index.ts",
+        "unresolvedTo": "./index",
+        "dependencyTypes": ["local", "import"],
         "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           { "name": "src/index.ts", "dependencyTypes": ["local", "import"] },
