@@ -27,7 +27,7 @@ export interface IReporterOptions {
    */
   err?: IErrorReporterOptions;
   /**
-   * Options to tweak the output of the err-hhtml reporter
+   * Options to tweak the output of the err-html reporter
    */
   "err-html"?: IErrorReporterOptions;
   /**
@@ -69,7 +69,7 @@ export interface IAnonReporterOptions {
    * List of words to use to replace path elements of file names in the output
    * with so the output isn't directly traceable to its intended purpose.
    * When the list is exhausted, the anon reporter will use random strings
-   * patterned after the original file name in stead. The list is empty
+   * patterned after the original file name instead. The list is empty
    * by default.
    *
    * Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
@@ -143,15 +143,15 @@ export interface IErrorReporterOptions {
    * For external modules (typically those in node_modules), show the
    * unresolved module name instead of the resolved one in the error
    * overview.
-   * E.g. 'snodash' instead of
-   * 'node_modules/snodash/dist/esm/bundle.mjs'.
+   * E.g. 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.
+   * Defaults to false.
    */
   showExternalModulesUnresolved?: boolean;
   /**
-   * For aliased modules (either subpath imports in package.json orvia legacy
-   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name in stead of the
+   * For aliased modules (either subpath imports in package.json or via legacy
+   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
    * resolved one in the error overview.
-   * E.g. * '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs
+   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
    * Defaults to false.
    */
   showAliasedModulesUnresolved?: boolean;
@@ -221,17 +221,17 @@ export interface IMarkdownReporterOptions {
    */
   collapseDetails?: boolean;
   /**
-   * For external modules (typically those in node_modules) show the unresolved module name in stead
+   * For external modules (typically those in node_modules) show the unresolved module name instead
    * of the resolved one in the error overview.
-   * E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+   * E.g 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.
    * Defaults to false.
    */
   showExternalModulesUnresolved?: boolean;
   /**
    * For aliased modules (either subpath imports in package.json orvia legacy
-   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name in stead of the
+   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
    * resolved one in the error overview.
-   * E.g. * '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs
+   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
    * Defaults to false.
    */
   showAliasedModulesUnresolved?: boolean;

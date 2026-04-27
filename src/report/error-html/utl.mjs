@@ -48,8 +48,8 @@ function formatModuleTo() {
   return "";
 }
 
-function formatInstabilityTo(pViolation) {
-  return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatPercentage(
+function formatInstabilityTo(pViolation, pOptions) {
+  return `${formatDependencyTo(pViolation, pOptions)}&nbsp;<span class="extra">(I: ${formatPercentage(
     pViolation.metrics.to.instability,
   )})</span>`;
 }

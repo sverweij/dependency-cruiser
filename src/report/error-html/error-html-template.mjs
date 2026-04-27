@@ -180,7 +180,7 @@ export default `<!DOCTYPE html>
       background-color: green;
       color: white;
     }
-    .type-import, type-only {
+    .type-import, .type-only {
       background-color: blue;
       color: white;
     }

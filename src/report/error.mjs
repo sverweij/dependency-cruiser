@@ -42,8 +42,8 @@ function formatReachabilityViolation(pViolation) {
   return `${styleText("bold", pViolation.from)} → ${styleText("bold", pViolation.to)}${formatMiniDependency(pViolation.via)}`;
 }
 
-function formatInstabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)}${EOL}${styleText(
+function formatInstabilityViolation(pViolation, pOptions) {
+  return `${formatDependencyViolation(pViolation, pOptions)}${EOL}${styleText(
     "dim",
     wrapAndIndent(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,

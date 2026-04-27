@@ -1410,10 +1410,12 @@ module.exports = {
         // Whether or not to collapse the list of violations in a <details> block
         // especially practical when the list of violations is still large.
         collapseDetails: true,
-        // Show exteranl modules unresolved e.g. 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'
-        showExternalModulesUnresolved?: boolean;
-        // Show aliased modules unresolved e.g. '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs
-        showAliasedModulesUnresolved?: boolean;
+        // Show external modules unresolved e.g. 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'
+        // defaults to false
+        showExternalModulesUnresolved: false;
+        // Show aliased modules unresolved e.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
+        // defaults to false
+        showAliasedModulesUnresolved?: false;
         // The text to in the <summary> section of the <details> block
         collapsedMessage: "Violations found - click to expand",
         // The text to show when no violations were found

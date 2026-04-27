@@ -150,14 +150,15 @@ export function getOneLetterDependencyType(pDependencyTypes) {
 }
 export function formatDependencyTo(pViolation, pOptions) {
   if (pViolation.unresolvedTo) {
+    const lDependencyTypes = pViolation?.dependencyTypes ?? [];
     const lShowUnresolvedExternal =
       pOptions?.showExternalModulesUnresolved &&
-      pViolation.dependencyTypes.some((pDependencyType) =>
+      lDependencyTypes.some((pDependencyType) =>
         pDependencyType.startsWith("npm"),
       );
     const lShowUnresolvedAliased =
       pOptions?.showAliasedModulesUnresolved &&
-      pViolation.dependencyTypes.includes("aliased");
+      lDependencyTypes.includes("aliased");
     return lShowUnresolvedExternal || lShowUnresolvedAliased
       ? pViolation.unresolvedTo
       : pViolation.to;

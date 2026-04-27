@@ -957,7 +957,7 @@
         },
         "showExternalModulesUnresolved": {
           "type": "boolean",
-          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the erroroverview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the error overview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
           "default": false
         },
         "showAliasedModulesUnresolved": {
@@ -1004,7 +1004,7 @@
       "properties": {
         "showExternalModulesUnresolved": {
           "type": "boolean",
-          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the erroroverview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the error overview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
           "default": false
         },
         "showAliasedModulesUnresolved": {

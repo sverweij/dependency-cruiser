@@ -164,7 +164,7 @@ export default {
           type: "boolean",
           description:
             "For external modules (typically those in node_modules) show the " +
-            "unresolved module name in stead of the resolved one in the error" +
+            "unresolved module name in stead of the resolved one in the error " +
             "overview. E.g 'snodash' in stead of " +
             "'node_modules/snodash/dist/esm/bundle.mjs'.",
           default: false,
@@ -228,7 +228,7 @@ export default {
           type: "boolean",
           description:
             "For external modules (typically those in node_modules) show the " +
-            "unresolved module name in stead of the resolved one in the error" +
+            "unresolved module name in stead of the resolved one in the error " +
             "overview. E.g 'snodash' in stead of " +
             "'node_modules/snodash/dist/esm/bundle.mjs'.",
           default: false,

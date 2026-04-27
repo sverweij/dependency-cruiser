@@ -83,6 +83,7 @@ function getViolationRowClass(pViolation) {
  */
 function constructViolationRow(pPrefix, pOptions) {
   return (pViolation) => {
+    const lDependencyTypes = pViolation?.dependencyTypes ?? [];
     return `  <tr${getViolationRowClass(pViolation)}>
     <td class="${pViolation.rule.severity}">${pViolation.rule.severity}</td>
     <td class="nowrap">
@@ -93,7 +94,7 @@ function constructViolationRow(pPrefix, pOptions) {
     <td><a href="${pPrefix}${pViolation.from}">${
       pViolation.from
     }</a>${determineFromExtras(pViolation)}</td>
-    <td><span class="dependency-type ${pViolation.dependencyTypes?.join(" ")}">${getOneLetterDependencyType(pViolation.dependencyTypes)}</span></td>
+    <td><span class="dependency-type ${lDependencyTypes.join(" ")}" title="dependency types: ${lDependencyTypes.join(", ")}">${getOneLetterDependencyType(lDependencyTypes)}</span></td>
     <td>${determineTo(pViolation, pOptions)}</td>
   </tr>`;
   };
@@ -117,7 +118,7 @@ function constructViolationsList(pResults, pOptions) {
           <th>severity</th>
           <th>rule</th>
           <th>from</th>
-          <th></th>
+          <th>types</th>
           <th>to</th>
         </tr>
       </thead>
