@@ -86,7 +86,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 /**
  *
  * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
- * @param {boolean} pIncludeIgnoredInDetails
+ * @param {object} pOptions
  * @return {string}
  */
 function formatViolations(pViolations, pOptions) {
