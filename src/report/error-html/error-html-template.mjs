@@ -159,6 +159,31 @@ export default `<!DOCTYPE html>
     .extra {
       color: gray;
     }
+    .dependency-type {
+      font-family: courier;
+      padding: 4px;
+      border-radius: 3px;
+    }
+    .local {
+      background-color: lightgray;
+      color: black;
+    }
+    .npm-bundled, .npm-dev, .npm-no-pkg, .npm-optional, .npm-peer, .npm-unknown, .npm {
+      background-color: darkred;
+      color: white;
+    }
+    .aliased {
+      background-color: blue;
+      color: white;
+    }
+    .aliased-subpath-import, .core {
+      background-color: green;
+      color: white;
+    }
+    .type-import, type-only {
+      background-color: blue;
+      color: white;
+    }
   </style>
   <style type="text/css" media="print">
     th,

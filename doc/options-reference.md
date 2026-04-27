@@ -1295,6 +1295,44 @@ module.exports = {
 }
 ```
 
+### err, err-long and err-html
+
+By default the err, err-long and err-html reporters show module names on the 
+`to` part of a dependency-violation as how it's resolved on disk. For some 
+types of modules this can make the error summaries in these reporters a bit harder
+to read. E.g. reading `node_modules/snodash/dist/esm/bundle.mjs` (resolved) vs
+`snodash` (unresolved; what's actually in the module that imported it) is a bit 
+easier. It's not the default because the unresolved name contains more information,
+which might be useful e.g. if you import `glodash` it might be useful for you to
+know whether it's imported from `node_modules/glodash/index.js` from 
+`packages/thingies/node_modules/glodash/index.js`.
+
+The options below enable you to configure whether you want to see the _resolved_ 
+or _unresolved_ module names for external modules ('npm' - typically stuff in
+node_modules) or for aliases (node subpath imports, or tsconfig/ webpack/ babel
+aliases and paths).
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      "err-html": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true,
+      },
+      // separately configured for the `err` and `err-long` reporters e.g.
+      // err: {
+      //   showExternalModulesUnresolved: true,
+      //   showAliasedModulesUnresolved: false
+      // } 
+      // ...
+    }
+  }
+}
+```
+
+
 ### metrics
 
 By default the metrics reporter emits instability metrics for all modules and
@@ -1372,6 +1410,10 @@ module.exports = {
         // Whether or not to collapse the list of violations in a <details> block
         // especially practical when the list of violations is still large.
         collapseDetails: true,
+        // Show exteranl modules unresolved e.g. 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'
+        showExternalModulesUnresolved?: boolean;
+        // Show aliased modules unresolved e.g. '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs
+        showAliasedModulesUnresolved?: boolean;
         // The text to in the <summary> section of the <details> block
         collapsedMessage: "Violations found - click to expand",
         // The text to show when no violations were found

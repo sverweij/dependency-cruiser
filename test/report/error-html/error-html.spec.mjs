@@ -61,7 +61,7 @@ describe("[I] report/error-html", () => {
     equal(lResult.exitCode, 0);
   });
 
-  it("report nicely on orphans, cycles and metric rules", () => {
+  it("reports orphans, cycles and metric rules", () => {
     const lResult = errorHTML(orphansCyclesMetrics);
 
     doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
@@ -70,7 +70,7 @@ describe("[I] report/error-html", () => {
     // empty 'to' column for module only rules
     match(
       lResult.output,
-      />src\/schema\/baseline-violations\.schema\.js<\/a><\/td>[^<]*<td><\/td>/,
+      />src\/schema\/baseline-violations\.schema\.js<\/a><\/td>[^<]*<td><span[^>]*><\/span><\/td>[^<]*<td><\/td>/,
     );
     // cycles as cycles in the 'to' column:
     match(
@@ -80,11 +80,11 @@ describe("[I] report/error-html", () => {
     // metrics violations with the 'instability' for the involved modules in:
     match(
       lResult.output,
-      /src\/extract\/transpile\/index\.js<\/a>&nbsp;<span class="extra">\(I: 33%\)<\/span><\/td>[^<]*<td>src\/extract\/transpile\/meta.js&nbsp;<span class="extra">\(I: 80%\)<\/span>/,
+      /src\/extract\/transpile\/index\.js<\/a>&nbsp;<span class="extra">\(I: 33%\)<\/span><\/td>[^<]*<td><span[^>]*><\/span><\/td>[^<]*<td>src\/extract\/transpile\/meta.js&nbsp;<span class="extra">\(I: 80%\)<\/span>/,
     );
   });
 
-  it("report nicely on via's", () => {
+  it("reports vias", () => {
     const lResult = errorHTML(viaDeps);
 
     doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));

@@ -5,6 +5,7 @@ import {
 } from "./utl.mjs";
 import template from "./error-html-template.mjs";
 import meta from "#meta.cjs";
+import { getOneLetterDependencyType } from "#report/utl/index.mjs";
 
 function getViolatedRuleRowClass(pViolatedRule) {
   return pViolatedRule.unviolated ? ' class="unviolated"' : "";
@@ -76,12 +77,11 @@ function constructViolatedRulesTable(pResults) {
 function getViolationRowClass(pViolation) {
   return pViolation.rule.severity === "ignore" ? ' class="ignored"' : "";
 }
-
 /**
  * @param {import('../../../types/cruise-result.mjs').IViolation} pViolation
  * @returns {string}
  */
-function constructViolationRow(pPrefix) {
+function constructViolationRow(pPrefix, pOptions) {
   return (pViolation) => {
     return `  <tr${getViolationRowClass(pViolation)}>
     <td class="${pViolation.rule.severity}">${pViolation.rule.severity}</td>
@@ -93,7 +93,8 @@ function constructViolationRow(pPrefix) {
     <td><a href="${pPrefix}${pViolation.from}">${
       pViolation.from
     }</a>${determineFromExtras(pViolation)}</td>
-    <td>${determineTo(pViolation)}</td>
+    <td><span class="dependency-type ${pViolation.dependencyTypes?.join(" ")}">${getOneLetterDependencyType(pViolation.dependencyTypes)}</span></td>
+    <td>${determineTo(pViolation, pOptions)}</td>
   </tr>`;
   };
 }
@@ -102,7 +103,7 @@ function constructViolationRow(pPrefix) {
  * @param {import('../../../types/cruise-result.mjs').ICruiseResult} pResults
  * @returns {string}
  */
-function constructViolationsList(pResults) {
+function constructViolationsList(pResults, pOptions) {
   if (pResults.summary.violations.length > 0) {
     return `<span id="show-ignored-violations">
       <h2><svg class="p__svg--inline" viewBox="0 0 12 16" version="1.1" aria-hidden="true">
@@ -116,12 +117,18 @@ function constructViolationsList(pResults) {
           <th>severity</th>
           <th>rule</th>
           <th>from</th>
+          <th></th>
           <th>to</th>
         </tr>
       </thead>
       <tbody>
       ${pResults.summary.violations
-        .map(constructViolationRow(pResults.summary.optionsUsed.prefix ?? ""))
+        .map(
+          constructViolationRow(
+            pResults.summary.optionsUsed.prefix ?? "",
+            pOptions,
+          ),
+        )
         .join("\n")}
       ${
         pResults.summary.ignore > 0
@@ -149,7 +156,12 @@ function constructViolationsList(pResults) {
  * @param {import('../../../types/cruise-result.mjs')} pResults
  * @returns {string}
  */
-function report(pResults) {
+function report(pResults, pOptions) {
+  const lOptions = {
+    showExternalModulesUnresolved: false,
+    showAliasedModulesUnresolved: false,
+    ...pOptions,
+  };
   return template
     .replace("{{totalCruised}}", pResults.summary.totalCruised)
     .replace(
@@ -161,7 +173,7 @@ function report(pResults) {
     .replace("{{info}}", pResults.summary.info)
     .replace("{{ignore}}", pResults.summary.ignore ?? 0)
     .replace("{{violatedRulesTable}}", constructViolatedRulesTable(pResults))
-    .replace("{{violationsList}}", constructViolationsList(pResults))
+    .replace("{{violationsList}}", constructViolationsList(pResults, lOptions))
     .replace("{{depcruiseVersion}}", `dependency-cruiser@${meta.version}`)
     .replace("{{runDate}}", new Date().toISOString());
 }
@@ -173,9 +185,9 @@ function report(pResults) {
  * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */
-export default function errorHtml(pResults) {
+export default function errorHtml(pResults, pOptions) {
   return {
-    output: report(pResults),
+    output: report(pResults, pOptions || {}),
     exitCode: 0,
   };
 }
