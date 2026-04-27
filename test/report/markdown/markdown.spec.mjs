@@ -4,6 +4,7 @@ import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
 import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
+import unresolvedViolations from "./__mocks__/unresolved-violations.mjs";
 import markdown from "#report/markdown.mjs";
 
 describe("[I] report/markdown", () => {
@@ -144,5 +145,44 @@ describe("[I] report/markdown", () => {
       lResult.output,
       /|:grey_exclamation:&nbsp;_SDP_|src\/extract\/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)<\/span>|src\/extract\/transpile\/meta.js&nbsp;<span class="extra">(I: 80%)<\/span>|/,
     );
+  });
+
+  it("renders resolved paths by default (showExternal/AliasedModulesUnresolved both false)", () => {
+    const lResult = markdown(unresolvedViolations);
+
+    match(lResult.output, /node_modules\/snodash\/index\.js/);
+    match(lResult.output, /src\/utils\/main\.cjs/);
+  });
+
+  it("renders unresolved name for external deps when showExternalModulesUnresolved is true", () => {
+    const lResult = markdown(unresolvedViolations, {
+      showExternalModulesUnresolved: true,
+    });
+
+    match(lResult.output, /\|snodash\|/);
+    doesNotMatch(lResult.output, /node_modules\/snodash\/index\.js/);
+    match(lResult.output, /src\/utils\/main\.cjs/);
+  });
+
+  it("renders unresolved name for aliased deps when showAliasedModulesUnresolved is true", () => {
+    const lResult = markdown(unresolvedViolations, {
+      showAliasedModulesUnresolved: true,
+    });
+
+    match(lResult.output, /node_modules\/snodash\/index\.js/);
+    match(lResult.output, /\|#utils\|/);
+    doesNotMatch(lResult.output, /src\/utils\/main\.cjs/);
+  });
+
+  it("renders unresolved names for both when showExternalModulesUnresolved and showAliasedModulesUnresolved are true", () => {
+    const lResult = markdown(unresolvedViolations, {
+      showExternalModulesUnresolved: true,
+      showAliasedModulesUnresolved: true,
+    });
+
+    match(lResult.output, /\|snodash\|/);
+    doesNotMatch(lResult.output, /node_modules\/snodash\/index\.js/);
+    match(lResult.output, /\|#utils\|/);
+    doesNotMatch(lResult.output, /src\/utils\/main\.cjs/);
   });
 });
