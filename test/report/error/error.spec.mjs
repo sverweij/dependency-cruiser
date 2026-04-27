@@ -13,6 +13,7 @@ import ignoredViolations from "./__mocks__/ignored-violations.mjs";
 import ignoredAndRealViolations from "./__mocks__/ignored-and-real-violations.mjs";
 import missingViolationType from "./__mocks__/missing-violation-type.mjs";
 import unknownViolationType from "./__mocks__/unknown-violation-type.mjs";
+import unresolvedViolations from "./__mocks__/unresolved-violations.mjs";
 import render from "#report/error.mjs";
 
 describe("[I] report/error", () => {
@@ -106,6 +107,61 @@ describe("[I] report/error", () => {
   it("renders a violation as a dependency-violation when the violation.type is yet unknown", () => {
     const lResult = render(unknownViolationType);
     match(lResult.output, new RegExp(`warn unknown-type: a.js → b.js${EOL}`));
+  });
+  it("renders unresolved-to as the resolved path by default", () => {
+    const lResult = render(unresolvedViolations);
+    match(
+      lResult.output,
+      new RegExp(
+        `error no-external: src/index.mjs → node_modules/snodash/index.js${EOL}`,
+      ),
+    );
+    match(
+      lResult.output,
+      new RegExp(`warn no-aliased: src/index.mjs → src/utils/main.cjs${EOL}`),
+    );
+  });
+  it("renders unresolved-to as the unresolved name when showExternalModulesUnresolved is true", () => {
+    const lResult = render(unresolvedViolations, {
+      showExternalModulesUnresolved: true,
+    });
+    match(
+      lResult.output,
+      new RegExp(`error no-external: src/index.mjs → snodash${EOL}`),
+    );
+    match(
+      lResult.output,
+      new RegExp(`warn no-aliased: src/index.mjs → src/utils/main.cjs${EOL}`),
+    );
+  });
+  it("renders unresolved-to as the unresolved name when showAliasedModulesUnresolved is true", () => {
+    const lResult = render(unresolvedViolations, {
+      showAliasedModulesUnresolved: true,
+    });
+    match(
+      lResult.output,
+      new RegExp(
+        `error no-external: src/index.mjs → node_modules/snodash/index.js${EOL}`,
+      ),
+    );
+    match(
+      lResult.output,
+      new RegExp(`warn no-aliased: src/index.mjs → #utils${EOL}`),
+    );
+  });
+  it("renders unresolved-to as the unresolved name for both external and aliased when both options are true", () => {
+    const lResult = render(unresolvedViolations, {
+      showExternalModulesUnresolved: true,
+      showAliasedModulesUnresolved: true,
+    });
+    match(
+      lResult.output,
+      new RegExp(`error no-external: src/index.mjs → snodash${EOL}`),
+    );
+    match(
+      lResult.output,
+      new RegExp(`warn no-aliased: src/index.mjs → #utils${EOL}`),
+    );
   });
   it("emits a warning when there's > 1 ignored violation and no other violations", () => {
     const lResult = render(ignoredViolations);
