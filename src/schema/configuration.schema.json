@@ -307,12 +307,12 @@
           "$ref": "#/definitions/MiniDependencyRestrictionType"
         },
         "viaNot": {
-          "description": "This attribute is deprecated. Use 'viaOnly' with a 'pathNot' attribute in stead.",
+          "description": "This attribute is deprecated. Use 'viaOnly' with a 'pathNot' attribute instead.",
           "deprecated": true,
           "$ref": "#/definitions/REAsStringsType"
         },
         "viaSomeNot": {
-          "description": "This attribute is deprecated. Use 'via' with a 'pathNot' attribute in stead.",
+          "description": "This attribute is deprecated. Use 'via' with a 'pathNot' attribute instead.",
           "deprecated": true,
           "$ref": "#/definitions/REAsStringsType"
         },
@@ -613,7 +613,7 @@
         "forceDeriveDependents": {
           "type": "boolean",
           "deprecated": true,
-          "description": "Hasn't had any effect on dependency-cruiser's behaviour since a few major versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules` option in stead. Previously documented behaviour: When true includes de-normalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
+          "description": "Hasn't had any effect on dependency-cruiser's behaviour since a few major versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules` option instead. Previously documented behaviour: When true includes de-normalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
         },
         "webpackConfig": {
           "type": "object",
@@ -861,7 +861,7 @@
       "properties": {
         "wordlist": {
           "type": "array",
-          "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose. When the list is exhausted, the anon reporter will use random strings patterned after the original file name in stead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
+          "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose. When the list is exhausted, the anon reporter will use random strings patterned after the original file name instead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
           "items": { "type": "string" }
         }
       }
@@ -957,12 +957,12 @@
         },
         "showExternalModulesUnresolved": {
           "type": "boolean",
-          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the error overview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+          "description": "For external modules (typically those in node_modules) show the unresolved module name instead of the resolved one in the error overview. E.g 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
           "default": false
         },
         "showAliasedModulesUnresolved": {
           "type": "boolean",
-          "description": "For aliased modules (either subpath imports in package.json or via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name in stead of the resolved one in the error overview. E.g. '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs",
+          "description": "For aliased modules (either subpath imports in package.json or via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the resolved one in the error overview. E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'.",
           "default": false
         },
         "noViolationsMessage": {
@@ -1004,12 +1004,12 @@
       "properties": {
         "showExternalModulesUnresolved": {
           "type": "boolean",
-          "description": "For external modules (typically those in node_modules) show the unresolved module name in stead of the resolved one in the error overview. E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+          "description": "For external modules (typically those in node_modules) show the unresolved module name instead of the resolved one in the error overview. E.g 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
           "default": false
         },
         "showAliasedModulesUnresolved": {
           "type": "boolean",
-          "description": "For aliased modules (either subpath imports in package.json or via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name in stead of the resolved one in the error overview. E.g. '#utils' in stead of 'libs/shared/utils/lib/src/main.cjs",
+          "description": "For aliased modules (either subpath imports in package.json or via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the resolved one in the error overview. E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs",
           "default": false
         }
       }

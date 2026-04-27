@@ -1302,10 +1302,10 @@ By default the err, err-long and err-html reporters show module names on the
 types of modules this can make the error summaries in these reporters a bit harder
 to read. E.g. reading `node_modules/snodash/dist/esm/bundle.mjs` (resolved) vs
 `snodash` (unresolved; what's actually in the module that imported it) is a bit 
-easier. It's not the default because the unresolved name contains more information,
-which might be useful e.g. if you import `glodash` it might be useful for you to
-know whether it's imported from `node_modules/glodash/index.js` from 
-`packages/thingies/node_modules/glodash/index.js`.
+easier. It's not the default because the resolved name contains more information.
+E.g. if you import `glodash` it might be useful for to know whether it's imported
+from `node_modules/glodash/index.js` or 
+from `packages/thingies/node_modules/glodash/index.js`.
 
 The options below enable you to configure whether you want to see the _resolved_ 
 or _unresolved_ module names for external modules ('npm' - typically stuff in
@@ -1413,7 +1413,7 @@ module.exports = {
         // Show external modules unresolved e.g. 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'
         // defaults to false
         showExternalModulesUnresolved: false;
-        // Show aliased modules unresolved e.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
+        // Show aliased modules unresolved e.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
         // defaults to false
         showAliasedModulesUnresolved?: false;
         // The text to in the <summary> section of the <details> block

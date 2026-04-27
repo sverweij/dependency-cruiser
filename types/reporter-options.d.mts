@@ -151,7 +151,7 @@ export interface IErrorReporterOptions {
    * For aliased modules (either subpath imports in package.json or via legacy
    * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
    * resolved one in the error overview.
-   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
+   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
    * Defaults to false.
    */
   showAliasedModulesUnresolved?: boolean;
@@ -215,7 +215,7 @@ export interface IMarkdownReporterOptions {
    * The text to show as a header on top of the detailed list of violations. E.g. '### All violations'
    * When left out shows a default value.
    */
-  detailsHeader?: boolean;
+  detailsHeader?: string;
   /**
    * Whether or not to collapse the list of violations in a <details> block. Defaults to true.
    */
@@ -228,10 +228,10 @@ export interface IMarkdownReporterOptions {
    */
   showExternalModulesUnresolved?: boolean;
   /**
-   * For aliased modules (either subpath imports in package.json orvia legacy
+   * For aliased modules (either subpath imports in package.json or via legacy
    * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
    * resolved one in the error overview.
-   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs
+   * 'E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
    * Defaults to false.
    */
   showAliasedModulesUnresolved?: boolean;

@@ -37,7 +37,7 @@ export default {
             "List of words to use to replace path elements of file names in the output " +
             "with so the output isn't directly traceable to its intended purpose. " +
             "When the list is exhausted, the anon reporter will use random strings " +
-            "patterned after the original file name in stead. The list is empty " +
+            "patterned after the original file name instead. The list is empty " +
             "by default. " +
             "Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
           items: {
@@ -164,8 +164,8 @@ export default {
           type: "boolean",
           description:
             "For external modules (typically those in node_modules) show the " +
-            "unresolved module name in stead of the resolved one in the error " +
-            "overview. E.g 'snodash' in stead of " +
+            "unresolved module name instead of the resolved one in the error " +
+            "overview. E.g 'snodash' instead of " +
             "'node_modules/snodash/dist/esm/bundle.mjs'.",
           default: false,
         },
@@ -174,8 +174,8 @@ export default {
           description:
             "For aliased modules (either subpath imports in package.json or " +
             "via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved " +
-            "module name in stead of the resolved one in the error overview. E.g. " +
-            "'#utils' in stead of 'libs/shared/utils/lib/src/main.cjs",
+            "module name instead of the resolved one in the error overview. E.g. " +
+            "'#utils' instead of 'libs/shared/utils/lib/src/main.cjs'.",
           default: false,
         },
         noViolationsMessage: {
@@ -228,8 +228,8 @@ export default {
           type: "boolean",
           description:
             "For external modules (typically those in node_modules) show the " +
-            "unresolved module name in stead of the resolved one in the error " +
-            "overview. E.g 'snodash' in stead of " +
+            "unresolved module name instead of the resolved one in the error " +
+            "overview. E.g 'snodash' instead of " +
             "'node_modules/snodash/dist/esm/bundle.mjs'.",
           default: false,
         },
@@ -238,8 +238,8 @@ export default {
           description:
             "For aliased modules (either subpath imports in package.json or " +
             "via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved " +
-            "module name in stead of the resolved one in the error overview. E.g. " +
-            "'#utils' in stead of 'libs/shared/utils/lib/src/main.cjs",
+            "module name instead of the resolved one in the error overview. E.g. " +
+            "'#utils' instead of 'libs/shared/utils/lib/src/main.cjs",
           default: false,
         },
       },

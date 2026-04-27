@@ -134,7 +134,7 @@ function constructViolationsList(pResults, pOptions) {
       ${
         pResults.summary.ignore > 0
           ? `<tr>
-        <td colspan="4" class="controls">
+        <td colspan="5" class="controls">
           <div id="show-ignored">
             &downarrow; <a href="#show-ignored-violations">also show ignored violations</a>
           </div>
