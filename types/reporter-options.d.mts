@@ -140,9 +140,11 @@ export interface IDotThemeEntry {
 
 export interface IErrorReporterOptions {
   /**
-   * For external modules (typically those in node_modules) show the unresolved module name in stead
-   * of the resolved one in the error overview.
-   * E.g 'snodash' in stead of 'node_modules/snodash/dist/esm/bundle.mjs'.",
+   * For external modules (typically those in node_modules), show the
+   * unresolved module name instead of the resolved one in the error
+   * overview.
+   * E.g. 'snodash' instead of
+   * 'node_modules/snodash/dist/esm/bundle.mjs'.
    */
   showExternalModulesUnresolved?: boolean;
   /**
