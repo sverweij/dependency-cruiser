@@ -1,4 +1,8 @@
-import { formatViolation, formatPercentage } from "../utl/index.mjs";
+import {
+  formatViolation,
+  formatPercentage,
+  formatDependencyTo,
+} from "../utl/index.mjs";
 import meta from "#meta.cjs";
 
 export function getFormattedAllowedRule(pRuleSetUsed) {
@@ -40,21 +44,17 @@ function formatReachabilityTo(pViolation) {
     .join(" &rightarrow;<br/>")}`;
 }
 
-function formatDependencyTo(pViolation) {
-  return pViolation.to;
-}
-
 function formatModuleTo() {
   return "";
 }
 
-function formatInstabilityTo(pViolation) {
-  return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatPercentage(
+function formatInstabilityTo(pViolation, pOptions) {
+  return `${formatDependencyTo(pViolation, pOptions)}&nbsp;<span class="extra">(I: ${formatPercentage(
     pViolation.metrics.to.instability,
   )})</span>`;
 }
 
-export function determineTo(pViolation) {
+export function determineTo(pViolation, pOptions) {
   const lViolationType2Formatter = {
     dependency: formatDependencyTo,
     module: formatModuleTo,
@@ -66,6 +66,7 @@ export function determineTo(pViolation) {
     pViolation,
     lViolationType2Formatter,
     formatDependencyTo,
+    pOptions,
   );
 }
 

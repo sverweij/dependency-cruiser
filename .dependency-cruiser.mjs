@@ -496,6 +496,22 @@ export default {
       "proxyquire.load",
     ],
     reporterOptions: {
+      "err": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true
+      },
+      "err-long": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true
+      },
+      "err-html": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true
+      },
+      "markdown": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true
+      },
       archi: {
         collapsePattern: [
           "^(src|test)/[^/]+",

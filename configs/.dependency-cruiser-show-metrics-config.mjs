@@ -48,6 +48,10 @@ export default {
       text: {
         highlightFocused: true,
       },
+      "err-html": {
+        showExternalModulesUnresolved: true,
+        showAliasedModulesUnresolved: true,
+      },
       dot: {
         showMetrics: true,
         theme: {

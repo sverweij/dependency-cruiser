@@ -3,6 +3,7 @@ import { styleText } from "node:util";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
+  formatDependencyTo,
 } from "./utl/index.mjs";
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
 import wrapAndIndent from "#utl/wrap-and-indent.mjs";
@@ -29,8 +30,8 @@ function formatModuleViolation(pViolation) {
   return styleText("bold", pViolation.from);
 }
 
-function formatDependencyViolation(pViolation) {
-  return `${styleText("bold", pViolation.from)} → ${styleText("bold", pViolation.to)}`;
+function formatDependencyViolation(pViolation, pOptions) {
+  return `${styleText("bold", pViolation.from)} → ${styleText("bold", formatDependencyTo(pViolation, pOptions))}`;
 }
 
 function formatCycleViolation(pViolation) {
@@ -41,8 +42,8 @@ function formatReachabilityViolation(pViolation) {
   return `${styleText("bold", pViolation.from)} → ${styleText("bold", pViolation.to)}${formatMiniDependency(pViolation.via)}`;
 }
 
-function formatInstabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)}${EOL}${styleText(
+function formatInstabilityViolation(pViolation, pOptions) {
+  return `${formatDependencyViolation(pViolation, pOptions)}${EOL}${styleText(
     "dim",
     wrapAndIndent(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} → ${formatPercentage(pViolation.metrics.to.instability)}`,
@@ -51,7 +52,7 @@ function formatInstabilityViolation(pViolation) {
   )}`;
 }
 
-function formatViolation(pViolation) {
+function formatViolation(pViolation, pOptions) {
   const lViolationType2Formatter = {
     module: formatModuleViolation,
     dependency: formatDependencyViolation,
@@ -63,6 +64,7 @@ function formatViolation(pViolation) {
     pViolation,
     lViolationType2Formatter,
     formatDependencyViolation,
+    pOptions,
   );
 
   return (
@@ -115,7 +117,13 @@ function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   return "";
 }
 
-function report(pResults, pLong) {
+function report(pResults, pOptions) {
+  const lOptions = {
+    long: false,
+    showExternalModulesUnresolved: false,
+    showAliasedModulesUnresolved: false,
+    ...pOptions,
+  };
   const lNonIgnorableViolations = pResults.summary.violations.filter(
     (pViolation) => pViolation.rule.severity !== "ignore",
   );
@@ -132,8 +140,11 @@ function report(pResults, pLong) {
 
   return lNonIgnorableViolations
     .reverse()
-    .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
-    .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}${EOL}`, EOL)
+    .map(addExplanation(pResults.summary.ruleSetUsed, lOptions.long))
+    .reduce(
+      (pAll, pThis) => `${pAll}  ${formatViolation(pThis, lOptions)}${EOL}`,
+      EOL,
+    )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
     .concat(EOL);
@@ -154,7 +165,7 @@ function report(pResults, pLong) {
  */
 export default function error(pResults, pOptions) {
   return {
-    output: report(pResults, (pOptions || {}).long),
+    output: report(pResults, pOptions || {}),
     exitCode: pResults.summary.error,
   };
 }

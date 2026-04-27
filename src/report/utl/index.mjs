@@ -14,9 +14,11 @@ export function formatViolation(
   pViolation,
   pViolationType2Formatter,
   pDefaultFormatter,
+  pOptions,
 ) {
   return (pViolationType2Formatter[pViolation.type] || pDefaultFormatter)(
     pViolation,
+    pOptions,
   );
 }
 
@@ -104,4 +106,62 @@ export function getURLForModule(pModule, pPrefix, pSuffix) {
     return lURL;
   }
   return pModule.source;
+}
+
+/**
+ *
+ * @param {import("../../../types/shared-types.mjs").DependencyType[]} pDependencyTypes
+ * @returns {string}
+ */
+export function getOneLetterDependencyType(pDependencyTypes) {
+  if (pDependencyTypes) {
+    if (
+      pDependencyTypes.some((pDependencyType) =>
+        pDependencyType.startsWith("npm"),
+      )
+    ) {
+      return "n";
+    }
+    if (pDependencyTypes.includes("aliased-subpath-import")) {
+      return "#";
+    }
+    if (pDependencyTypes.includes("aliased")) {
+      return "@";
+    }
+    if (pDependencyTypes.includes("core")) {
+      return "c";
+    }
+    if (pDependencyTypes.includes("export")) {
+      return "x";
+    }
+    if (pDependencyTypes.includes("local")) {
+      return ".";
+    }
+    if (
+      pDependencyTypes.some((pDependencyType) =>
+        pDependencyType.startsWith("type-"),
+      )
+    ) {
+      return "T";
+    }
+  }
+
+  return "";
+}
+export function formatDependencyTo(pViolation, pOptions) {
+  if (pViolation.unresolvedTo) {
+    const lDependencyTypes = pViolation?.dependencyTypes ?? [];
+    const lShowUnresolvedExternal =
+      pOptions?.showExternalModulesUnresolved &&
+      lDependencyTypes.some((pDependencyType) =>
+        pDependencyType.startsWith("npm"),
+      );
+    const lShowUnresolvedAliased =
+      pOptions?.showAliasedModulesUnresolved &&
+      lDependencyTypes.includes("aliased");
+    return lShowUnresolvedExternal || lShowUnresolvedAliased
+      ? pViolation.unresolvedTo
+      : pViolation.to;
+  }
+  return pViolation.to;
 }

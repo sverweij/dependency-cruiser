@@ -22,6 +22,8 @@ const REPORT_DEFAULTS = {
   detailsHeader: "### :fire: All violations",
   collapseDetails: true,
   collapsedMessage: "Violations found - click to expand",
+  showExternalModulesUnresolved: false,
+  showAliasedModulesUnresolved: false,
   noViolationsMessage:
     ":revolving_hearts: No violations found. Get gummy bears to celebrate.",
 
@@ -84,20 +86,21 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 /**
  *
  * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
- * @param {boolean} pIncludeIgnoredInDetails
+ * @param {object} pOptions
  * @return {string}
  */
-function formatViolations(pViolations, pIncludeIgnoredInDetails) {
+function formatViolations(pViolations, pOptions) {
   const lTableHead = "|violated rule|module|to|\n|:---|:---|:---|\n";
 
   return pViolations
     .filter(
       (pViolation) =>
-        pViolation.rule.severity !== "ignore" || pIncludeIgnoredInDetails,
+        pViolation.rule.severity !== "ignore" ||
+        pOptions.includeIgnoredInDetails,
     )
     .reduce((pAll, pViolation) => {
       const lFromExtras = determineFromExtras(pViolation);
-      const lTo = determineTo(pViolation);
+      const lTo = determineTo(pViolation, pOptions);
 
       return `${pAll}|${severity2Icon(pViolation.rule.severity)}&nbsp;_${
         pViolation.rule.name
@@ -116,7 +119,7 @@ function details(pResults, pOptions) {
     }
     lReturnValue += `${formatViolations(
       pResults.summary.violations,
-      pOptions.includeIgnoredInDetails,
+      pOptions,
     )}\n\n`;
     if (pOptions.collapseDetails) {
       lReturnValue += "</details>\n\n";

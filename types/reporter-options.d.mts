@@ -23,6 +23,18 @@ export interface IReporterOptions {
    */
   ddot?: IDotReporterOptions;
   /**
+   * Options to tweak the output of the err reporter
+   */
+  err?: IErrorReporterOptions;
+  /**
+   * Options to tweak the output of the err-html reporter
+   */
+  "err-html"?: IErrorReporterOptions;
+  /**
+   * Options to tweak the output of the err-long reporter
+   */
+  "err-long"?: IErrorReporterOptions;
+  /**
    * Options to tweak the output of the flat /fdot reporter
    */
   flat?: IDotReporterOptions;
@@ -57,7 +69,7 @@ export interface IAnonReporterOptions {
    * List of words to use to replace path elements of file names in the output
    * with so the output isn't directly traceable to its intended purpose.
    * When the list is exhausted, the anon reporter will use random strings
-   * patterned after the original file name in stead. The list is empty
+   * patterned after the original file name instead. The list is empty
    * by default.
    *
    * Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
@@ -126,6 +138,24 @@ export interface IDotThemeEntry {
   attributes: any;
 }
 
+export interface IErrorReporterOptions {
+  /**
+   * For external modules (typically those in node_modules), show the
+   * unresolved module name instead of the resolved one in the error
+   * overview.
+   * E.g. 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.
+   * Defaults to false.
+   */
+  showExternalModulesUnresolved?: boolean;
+  /**
+   * For aliased modules (either subpath imports in package.json or via legacy
+   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
+   * resolved one in the error overview.
+   * E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
+   * Defaults to false.
+   */
+  showAliasedModulesUnresolved?: boolean;
+}
 export interface IMetricsReporterOptions {
   hideModules?: boolean;
   hideFolders?: boolean;
@@ -185,11 +215,26 @@ export interface IMarkdownReporterOptions {
    * The text to show as a header on top of the detailed list of violations. E.g. '### All violations'
    * When left out shows a default value.
    */
-  detailsHeader?: boolean;
+  detailsHeader?: string;
   /**
    * Whether or not to collapse the list of violations in a <details> block. Defaults to true.
    */
   collapseDetails?: boolean;
+  /**
+   * For external modules (typically those in node_modules) show the unresolved module name instead
+   * of the resolved one in the error overview.
+   * E.g 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.
+   * Defaults to false.
+   */
+  showExternalModulesUnresolved?: boolean;
+  /**
+   * For aliased modules (either subpath imports in package.json or via legacy
+   * tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved module name instead of the
+   * resolved one in the error overview.
+   * 'E.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
+   * Defaults to false.
+   */
+  showAliasedModulesUnresolved?: boolean;
   /**
    * The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'
    * When left out shows a default value.

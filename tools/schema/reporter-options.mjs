@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import REAsStringsType from "./re-as-strings-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
 import compoundFocusType from "./compound-focus-type.mjs";
@@ -20,6 +21,9 @@ export default {
         metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
         mermaid: { $ref: "#/definitions/MermaidReporterOptionsType" },
         text: { $ref: "#/definitions/TextReporterOptionsType" },
+        err: { $ref: "#/definitions/ErrorReporterOptionsType" },
+        "err-long": { $ref: "#/definitions/ErrorReporterOptionsType" },
+        "err-html": { $ref: "#/definitions/ErrorReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
@@ -33,7 +37,7 @@ export default {
             "List of words to use to replace path elements of file names in the output " +
             "with so the output isn't directly traceable to its intended purpose. " +
             "When the list is exhausted, the anon reporter will use random strings " +
-            "patterned after the original file name in stead. The list is empty " +
+            "patterned after the original file name instead. The list is empty " +
             "by default. " +
             "Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
           items: {
@@ -156,6 +160,24 @@ export default {
             "The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'. " +
             "When left out shows a default value.",
         },
+        showExternalModulesUnresolved: {
+          type: "boolean",
+          description:
+            "For external modules (typically those in node_modules) show the " +
+            "unresolved module name instead of the resolved one in the error " +
+            "overview. E.g 'snodash' instead of " +
+            "'node_modules/snodash/dist/esm/bundle.mjs'.",
+          default: false,
+        },
+        showAliasedModulesUnresolved: {
+          type: "boolean",
+          description:
+            "For aliased modules (either subpath imports in package.json or " +
+            "via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved " +
+            "module name instead of the resolved one in the error overview. E.g. " +
+            "'#utils' instead of 'libs/shared/utils/lib/src/main.cjs'.",
+          default: false,
+        },
         noViolationsMessage: {
           type: "string",
           description:
@@ -192,6 +214,33 @@ export default {
           description:
             "Whether or not to highlight modules that are focused with the --focus " +
             "command line option (/ general option). Defaults to false",
+        },
+      },
+    },
+    ErrorReporterOptionsType: {
+      type: "object",
+      description:
+        "Options that influence rendition of the err style reporters " +
+        "(like err, err-html, markdown)",
+      additionalProperties: false,
+      properties: {
+        showExternalModulesUnresolved: {
+          type: "boolean",
+          description:
+            "For external modules (typically those in node_modules) show the " +
+            "unresolved module name instead of the resolved one in the error " +
+            "overview. E.g 'snodash' instead of " +
+            "'node_modules/snodash/dist/esm/bundle.mjs'.",
+          default: false,
+        },
+        showAliasedModulesUnresolved: {
+          type: "boolean",
+          description:
+            "For aliased modules (either subpath imports in package.json or " +
+            "via legacy tsconfig/ jsconfig/ webpack/ babel constructs) show the unresolved " +
+            "module name instead of the resolved one in the error overview. E.g. " +
+            "'#utils' instead of 'libs/shared/utils/lib/src/main.cjs",
+          default: false,
         },
       },
     },

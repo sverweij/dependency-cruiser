@@ -200,14 +200,14 @@ export default {
         viaNot: {
           description:
             "This attribute is deprecated. Use 'viaOnly' with a 'pathNot' attribute " +
-            "in stead.",
+            "instead.",
           deprecated: true,
           $ref: "#/definitions/REAsStringsType",
         },
         viaSomeNot: {
           description:
             "This attribute is deprecated. Use 'via' with a 'pathNot' attribute " +
-            "in stead.",
+            "instead.",
           deprecated: true,
           $ref: "#/definitions/REAsStringsType",
         },
