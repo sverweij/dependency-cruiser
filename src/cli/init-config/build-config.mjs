@@ -3,7 +3,7 @@ import { folderNameArrayToRE } from "./utl.mjs";
 import configTemplate from "./config-template.mjs";
 
 /**
- * @import { IInitConfig } from "./types.js";
+ * @import { IInitConfig } from "./types.mjs";
  */
 
 /**

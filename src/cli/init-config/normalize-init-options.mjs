@@ -8,7 +8,7 @@ import findExtensions from "./find-extensions.mjs";
 import meta from "#meta.cjs";
 
 /**
- * @import { IInitConfig, IPartialInitConfig } from "./types.js";
+ * @import { IInitConfig, IPartialInitConfig } from "./types.mjs";
  */
 
 /**
