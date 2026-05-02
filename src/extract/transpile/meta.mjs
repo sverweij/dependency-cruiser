@@ -3,7 +3,7 @@ import {
   isAvailable as swcIsAvailable,
   version as swcVersion,
 } from "../swc/parse.mjs";
-import tryAvailable from "./try-import-available.mjs";
+import tryImportAvailable from "./try-import-available.mjs";
 import javascriptWrap from "./javascript-wrap.mjs";
 import babelWrap from "./babel-wrap.mjs";
 import coffeeScriptWrapFunction from "./coffeescript-wrap.mjs";
@@ -12,6 +12,10 @@ import svelteWrapFunction from "./svelte-wrap.mjs";
 import typescriptWrapFunction from "./typescript-wrap.mjs";
 import vueTemplateWrap from "./vue-template-wrap.cjs";
 import meta from "#meta.cjs";
+
+/**
+ * @import { IAvailableTranspiler } from "../../../types/dependency-cruiser.mjs";
+ */
 
 const swcWrap = {
   isAvailable: () => swcIsAvailable(),
@@ -23,25 +27,43 @@ const typescriptWrap = typescriptWrapFunction("esm");
 
 function gotCoffee() {
   return (
-    tryAvailable("coffeescript", meta.supportedTranspilers.coffeescript) ||
-    tryAvailable("coffee-script", meta.supportedTranspilers["coffee-script"])
+    tryImportAvailable(
+      "coffeescript",
+      meta.supportedTranspilers.coffeescript,
+    ) ||
+    /* c8 ignore start */
+    // fallback for ancient versions of the coffeescript compilers
+    tryImportAvailable(
+      "coffee-script",
+      meta.supportedTranspilers["coffee-script"],
+    )
+    /* c8 ignore stop */
   );
 }
 
 const TRANSPILER2AVAILABLE = {
-  babel: tryAvailable("@babel/core", meta.supportedTranspilers.babel),
+  babel: tryImportAvailable("@babel/core", meta.supportedTranspilers.babel),
   javascript: true,
   "coffee-script": gotCoffee(),
   coffeescript: gotCoffee(),
-  livescript: tryAvailable("livescript", meta.supportedTranspilers.livescript),
-  svelte: tryAvailable("svelte/compiler", meta.supportedTranspilers.svelte),
-  swc: tryAvailable("@swc/core", meta.supportedTranspilers.swc),
-  typescript: tryAvailable("typescript", meta.supportedTranspilers.typescript),
-  "vue-template-compiler": tryAvailable(
+  livescript: tryImportAvailable(
+    "livescript",
+    meta.supportedTranspilers.livescript,
+  ),
+  svelte: tryImportAvailable(
+    "svelte/compiler",
+    meta.supportedTranspilers.svelte,
+  ),
+  swc: tryImportAvailable("@swc/core", meta.supportedTranspilers.swc),
+  typescript: tryImportAvailable(
+    "typescript",
+    meta.supportedTranspilers.typescript,
+  ),
+  "vue-template-compiler": tryImportAvailable(
     "vue-template-compiler",
     meta.supportedTranspilers["vue-template-compiler"],
   ),
-  "@vue/compiler-sfc": tryAvailable(
+  "@vue/compiler-sfc": tryImportAvailable(
     "@vue/compiler-sfc",
     meta.supportedTranspilers["@vue/compiler-sfc"],
   ),

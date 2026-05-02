@@ -4,6 +4,7 @@ import normalizeInitOptions from "./normalize-init-options.mjs";
 import buildConfig from "./build-config.mjs";
 import writeConfig from "./write-config.mjs";
 import getUserInput from "./get-user-input.mjs";
+import { checkAndWarnInconsistencies } from "./check-and-warn-inconsistencies.mjs";
 import {
   isLikelyMonoRepo,
   fileExists,
@@ -22,7 +23,7 @@ import {
 import { writeRunScriptsToManifest } from "./write-run-scripts-to-manifest.mjs";
 
 /**
- * @import { IInitConfig, IPartialInitConfig, OneShotConfigIDType } from "./types.js";
+ * @import { IInitConfig, IPartialInitConfig, OneShotConfigIDType } from "./types.mjs";
  */
 
 const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
@@ -95,6 +96,9 @@ export default function initConfig(pInit, pConfigFileName, pStreams) {
   if (pInit === true) {
     getUserInput()
       .then(normalizeInitOptions)
+      .then((pNormalizedInitOptions) =>
+        checkAndWarnInconsistencies(pNormalizedInitOptions, lStreams.stderr),
+      )
       .then(buildConfig)
       .then(writeConfig)
       .catch((pError) => {
@@ -103,6 +107,7 @@ export default function initConfig(pInit, pConfigFileName, pStreams) {
     /* c8 ignore stop */
   } else if (pInit !== false) {
     const lNormalizedInitConfig = normalizeInitOptions(getOneShotConfig(pInit));
+    checkAndWarnInconsistencies(lNormalizedInitConfig, lStreams.stderr);
     const lConfigFileName = pConfigFileName || getDefaultConfigFileName();
 
     if (manifestIsUpdatable(lNormalizedInitConfig)) {

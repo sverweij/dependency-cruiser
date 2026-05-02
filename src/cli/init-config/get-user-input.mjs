@@ -163,7 +163,7 @@ const QUESTIONS = [
 ];
 
 /**
- * @return {Promise<import("./types").IPartialInitConfig>}
+ * @return {Promise<import("./types.d.mts").IPartialInitConfig>}
  */
 export default function getUserInput() {
   return prompts(QUESTIONS);
