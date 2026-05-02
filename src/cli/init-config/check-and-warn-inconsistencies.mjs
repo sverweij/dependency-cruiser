@@ -2,7 +2,6 @@
 /**
  * @import { IInitConfig } from "./types.mjs";
  * @import { IAvailableTranspiler } from "../../../types/dependency-cruiser.mjs"
- * @import { Writable } from "node:stream"
  */
 
 import { EOL } from "node:os";
@@ -57,6 +56,7 @@ function babelIsConsistent(pInitOptions, pAvailableTranspilers) {
  *
  * @param {IInitConfig} pInitOptions
  * @param {NodeJS.WritableStream} [pErrorStream]
+ * @param {typeof getAvailableTranspilers} [pAvailableTranspilerFunction]
  * @return {IInitConfig} pInitOptions
  */
 export function checkAndWarnInconsistencies(
