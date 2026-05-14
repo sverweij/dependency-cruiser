@@ -56,10 +56,25 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install graphviz
-          # legacy peer deps because otherwise typescript-eslint hard-complains
+          
+          # engine-strict disable:
+          # some devDependency (listr2 via lint-staged) dropped node 20 support. we didn't yet.
+          # it's not relevant on the ci, but still blocks installs. Hence ...
+          rm -f .npmrc
+          # ... and for good measure
+          npm set engine-strict=false
+          
+          # legacy-peer-deps because otherwise typescript-eslint hard-complains
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
-          npm install --legacy-peer-deps
+          # ignore-scripts because no need for them
+          npm install --legacy-peer-deps --ignore-scripts
+          
+          # engine-strict disable 
+          # better to have no stuff altered going forward
+          git restore .npmrc
+
+          # finally what we're here for ...
           npm run build
       - name: lint (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
