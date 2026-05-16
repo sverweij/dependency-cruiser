@@ -625,7 +625,7 @@ dependency-cruiser.
 ### `--config`/ `--validate`
 
 Validates against a list of rules in a configuration file. This defaults to a file
-called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/
+called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/ `.dependency-cruiser.mjs`/
 `.dependency-cruiser.json`), but you can specify your own rules file, which can
 be in json format or a valid node module returning a rules object literal.
 
@@ -695,8 +695,7 @@ specified --config (or --validate) options.
 
 > If you actually use this, I'm interested in your use case. Please drop an
 > [issue on GitHub](https://github.com/sverweij/dependency-cruiser/issues/new?assignees=&labels=&template=use-without-config.md&title=I+use+dependency-cruiser+without+a+configuration+file.+This+is+why:) or contact me on mastodon
-> ([@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow)) or twitter
-> ([@mcmeadow](https://twitter.com/mcmeadow)).
+> ([@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow)).
 
 ### `--init`
 

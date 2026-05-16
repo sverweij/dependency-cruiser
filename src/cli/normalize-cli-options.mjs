@@ -70,7 +70,7 @@ function validateAndGetDefaultRulesFileName() {
 
   if (typeof lReturnValue === "undefined") {
     throw new TypeError(
-      `Can't open a config file (.dependency-cruiser.(c)js) at the default location. Does it exist?\n` +
+      `Can't open a config file (.dependency-cruiser.(c|m)js) at the default location. Does it exist?\n` +
         `         - You can create one by running 'npx dependency-cruiser --init'\n` +
         `         - Want to run a without a config file? Use --no-config\n`,
     );

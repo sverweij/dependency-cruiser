@@ -10,8 +10,7 @@ reflected in the _main_ branch) with security updates.
 If you think you have found a vulnerability, please report responsibly. Don't
 create GitHub issues for security issues. Instead, please send an email to
 sander_verweij@yahoo.com and/ or a direct message (DM) to
-[@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow) on Mastodon (or
-[@mcmeadow](https://twitter.com/mcmeadow) on twitter while it lasts) and we'll
+[@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow) on Mastodon and we'll
 look into it as soon as we can.
 
 We appreciate any responsible disclosure of vulnerabilities that might impact

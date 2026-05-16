@@ -69,7 +69,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     try {
       await normalizeCliOptions({ validate: true });
     } catch (pError) {
-      equal(pError.message.includes(".dependency-cruiser.(c)js"), true);
+      equal(pError.message.includes(".dependency-cruiser.(c|m)js"), true);
     }
   });
 

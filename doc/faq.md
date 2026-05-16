@@ -709,7 +709,7 @@ If you have an issue, suggestion - don't hesitate to create an
 
 You're welcome to create a pull request - if it's something more complex it's
 probably wise to first create an issue or hit [@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow)
-up on Mastodon (or on twitter, while it lasts: [@mcmeadow](https://twitter.com/mcmeadow))
+up on Mastodon.
 
 For things that don't fit an issue or pull request you're welcome to
 contact these accounts as well (checked at approximately daily intervals).
