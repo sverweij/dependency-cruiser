@@ -137,7 +137,7 @@ jobs:
           # legacy peer deps because otherwise typescript-eslint hard-complains
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
-          npm install --legacy-peer-deps
+          npm install --legacy-peer-deps --ignore-scripts
           npm run build
       - run: npm run depcruise
       - run: npx mocha --invert --fgrep "#do-not-run-on-windows"

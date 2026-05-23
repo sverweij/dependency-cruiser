@@ -7,7 +7,7 @@ cache:
 test_async_node:
   image: node:latest
   script:
-    - npm install
+    - npm install --legacy-peer-deps --ignore-scripts
     - npm run lint
     - npm run depcruise
     - npm run test:yarn-pnp
