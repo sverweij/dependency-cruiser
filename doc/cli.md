@@ -764,9 +764,9 @@ it has to them. To see how dependency-cruiser perceives its environment use
 <summary>Typical output</summary>
 
 ```
-    dependency-cruiser@17.0.0
+    dependency-cruiser@18.0.0
 
-    node version supported : ^20.12||^22||>=24
+    node version supported : ^22||^24||>=26
     node version found     : v24.4.0
     os version found       : arm64 darwin@24.5.0
 

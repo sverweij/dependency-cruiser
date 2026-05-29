@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [20.x, 26.x]
+        node-version: [22.x, 26.x]
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
@@ -56,13 +56,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install graphviz
-          
-          # engine-strict disable:
-          # some devDependency (listr2 via lint-staged) dropped node 20 support. we didn't yet.
-          # it's not relevant on the ci, but still blocks installs. Hence ...
-          rm -f .npmrc
-          # ... and for good measure
-          npm set engine-strict=false
           
           # legacy-peer-deps because otherwise typescript-eslint hard-complains
           # as it can't find a suitable typescript compiler (we're on 6 now, 
