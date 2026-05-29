@@ -216,7 +216,7 @@
     "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.5.2",
     "acorn-walk": "8.3.5",
-    "commander": "14.0.3",
+    "commander": "15.0.0",
     "enhanced-resolve": "5.22.1",
     "ignore": "7.0.5",
     "interpret": "3.1.1",
