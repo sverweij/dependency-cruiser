@@ -314,11 +314,6 @@
         "because": "incomaptibilities that take ages to resolve"
       },
       {
-        "package": "commander",
-        "policy": "wanted",
-        "because": "commander@^15 dropped node 20 support "
-      },
-      {
         "package": "eslint",
         "policy": "wanted",
         "because": "incomaptibilities that take ages to resolve"
@@ -366,7 +361,7 @@
     ]
   },
   "engines": {
-    "node": "^20.12||^22||>=24"
+    "node": "^22||^24||>=26"
   },
   "supportedTranspilers": {
     "babel": ">=7.0.0 <8.0.0",
