@@ -1,6 +1,5 @@
 import enhancedResolve from "enhanced-resolve";
 import { stripQueryParameters } from "../helpers.mjs";
-import pathToPosix from "#utl/path-to-posix.mjs";
 
 /** @import {IResolveOptions} from "../../../types/resolve-options.mjs" */
 
@@ -51,7 +50,7 @@ export function resolve(
     gResolvers.get(pCachingContext).resolveSync(
       {},
       // lookupStartPath
-      pathToPosix(pFileDirectory),
+      pFileDirectory,
       // request
       pModuleName,
     ),
