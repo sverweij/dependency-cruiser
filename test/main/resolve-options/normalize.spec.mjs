@@ -29,7 +29,7 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("does not add the typescript paths plugin to the plugins if no tsConfig is specified", () => {
+  it("does not add enhanced-resolve tsconfig options if no tsConfig is specified", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
@@ -48,7 +48,7 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("adds the typescript paths plugin to the plugins if a tsConfig is specified, even without a baseUrl", () => {
+  it("adds enhanced-resolve tsconfig options if a tsConfig is specified, even without a baseUrl", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
@@ -70,7 +70,7 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", () => {
+  it("adds enhanced-resolve tsconfig options if a tsConfig is specified with a baseUrl and actual paths", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
