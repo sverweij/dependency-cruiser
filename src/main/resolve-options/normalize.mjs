@@ -61,10 +61,6 @@ function getNonOverridableResolveOptions(pCacheDuration) {
   };
 }
 
-function pushPlugin(pPlugins, pPluginToPush) {
-  return (pPlugins || []).concat(pPluginToPush);
-}
-
 function compileResolveOptions(
   pResolveOptions,
   pTSConfig,
