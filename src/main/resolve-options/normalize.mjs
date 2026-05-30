@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { resolve as resolvePath } from "node:path";
 import enhancedResolve from "enhanced-resolve";
 import { scannableExtensions } from "#extract/transpile/meta.mjs";
 import {
@@ -70,7 +71,7 @@ function compileResolveOptions(
 
   if (pResolveOptions.tsConfig) {
     lResolveOptions.tsconfig = {
-      configFile: pResolveOptions.tsConfig.fileName,
+      configFile: resolvePath(pResolveOptions.tsConfig),
 
       // baseUrl: pTSConfig?.options?.baseUrl ? undefined : "./",
       // references: pTSConfig?.options?.references ?? []
