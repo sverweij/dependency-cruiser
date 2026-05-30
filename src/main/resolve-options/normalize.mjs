@@ -68,11 +68,6 @@ function compileResolveOptions(
 ) {
   let lResolveOptions = {};
 
-  // There's a performance impact of ~1 ms per resolve even when there
-  // are 0 paths in the tsconfig, so not loading it when not necessary
-  // will be a win.
-  // Also: requiring the plugin only when it's necessary will save some
-  // startup time (especially on a cold require cache)
   if (pResolveOptions.tsConfig) {
     lResolveOptions.tsconfig = {
       configFile: pResolveOptions.tsConfig.fileName,
