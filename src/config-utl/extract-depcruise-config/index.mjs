@@ -58,7 +58,7 @@ export default async function extractDepcruiseConfig(
   const lResolvedFileName = resolve(
     pConfigFileName,
     pBaseDirectory,
-    await normalizeResolveOptions(
+    normalizeResolveOptions(
       {
         extensions: [".js", ".json", ".cjs", ".mjs"],
       },

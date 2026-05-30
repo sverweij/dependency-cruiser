@@ -7,13 +7,13 @@ import extract from "#extract/index.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - do not follow", () => {
-  it("do not follow - doNotFollow.path", async () => {
+  it("do not follow - doNotFollow.path", () => {
     const lOptions = normalizeCruiseOptions({
       doNotFollow: {
         path: "donotfollowonceinthisfolder",
       },
     });
-    const lResolveOptions = await normalizeResolveOptions(
+    const lResolveOptions = normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -28,13 +28,13 @@ describe("[I] extract/index - do not follow", () => {
     deepEqual(lResult, requireJSON("./__fixtures__/donotfollow.json"));
   });
 
-  it("do not follow - doNotFollow.dependencyTypes", async () => {
+  it("do not follow - doNotFollow.dependencyTypes", () => {
     const lOptions = normalizeCruiseOptions({
       doNotFollow: {
         dependencyTypes: ["npm-no-pkg"],
       },
     });
-    const lResolveOptions = await normalizeResolveOptions(
+    const lResolveOptions = normalizeResolveOptions(
       {
         bustTheCache: true,
       },
