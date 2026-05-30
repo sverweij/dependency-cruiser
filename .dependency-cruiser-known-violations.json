@@ -3,6 +3,13 @@
     "type": "dependency",
     "from": "src/cli/init-config/get-user-input.mjs",
     "to": "src/extract/tsc/parse.mjs",
+    "unresolvedTo": "#extract/tsc/parse.mjs",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-subpath-import",
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "error",
       "name": "cli-to-main-only"
@@ -12,6 +19,11 @@
     "type": "dependency",
     "from": "test/utl/try-import.spec.mjs",
     "to": "test/utl/node_modules/beta/index.js",
+    "unresolvedTo": "beta",
+    "dependencyTypes": [
+      "npm-no-pkg",
+      "exotic-require"
+    ],
     "rule": {
       "severity": "error",
       "name": "no-non-package-json"
@@ -21,6 +33,11 @@
     "type": "dependency",
     "from": "test/utl/try-import.spec.mjs",
     "to": "test/utl/node_modules/no-default-export/main.mjs",
+    "unresolvedTo": "no-default-export",
+    "dependencyTypes": [
+      "npm-no-pkg",
+      "exotic-require"
+    ],
     "rule": {
       "severity": "error",
       "name": "no-non-package-json"
@@ -30,6 +47,11 @@
     "type": "dependency",
     "from": "test/utl/try-import.spec.mjs",
     "to": "test/utl/node_modules/rc/index.js",
+    "unresolvedTo": "rc",
+    "dependencyTypes": [
+      "npm-no-pkg",
+      "exotic-require"
+    ],
     "rule": {
       "severity": "error",
       "name": "no-non-package-json"
@@ -39,6 +61,11 @@
     "type": "dependency",
     "from": "test/utl/try-require.spec.cjs",
     "to": "test/utl/node_modules/beta/index.js",
+    "unresolvedTo": "beta",
+    "dependencyTypes": [
+      "npm-no-pkg",
+      "require"
+    ],
     "rule": {
       "severity": "error",
       "name": "no-non-package-json"
@@ -48,6 +75,11 @@
     "type": "dependency",
     "from": "test/utl/try-require.spec.cjs",
     "to": "test/utl/node_modules/rc/index.js",
+    "unresolvedTo": "rc",
+    "dependencyTypes": [
+      "npm-no-pkg",
+      "require"
+    ],
     "rule": {
       "severity": "error",
       "name": "no-non-package-json"
@@ -91,35 +123,13 @@
   },
   {
     "type": "dependency",
-    "from": "src/cli/init-config/environment-helpers.mjs",
-    "to": "src/cli/defaults.mjs",
-    "rule": {
-      "severity": "info",
-      "name": "not-to-ancestor-folders"
-    }
-  },
-  {
-    "type": "dependency",
-    "from": "src/cli/init-config/index.mjs",
-    "to": "src/cli/defaults.mjs",
-    "rule": {
-      "severity": "info",
-      "name": "not-to-ancestor-folders"
-    }
-  },
-  {
-    "type": "dependency",
-    "from": "src/cli/init-config/write-run-scripts-to-manifest.mjs",
-    "to": "src/cli/defaults.mjs",
-    "rule": {
-      "severity": "info",
-      "name": "not-to-ancestor-folders"
-    }
-  },
-  {
-    "type": "dependency",
     "from": "src/analyze/derive/folders/aggregate-to-folders.mjs",
     "to": "src/analyze/derive/circular.mjs",
+    "unresolvedTo": "../circular.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -129,6 +139,11 @@
     "type": "dependency",
     "from": "src/analyze/derive/folders/aggregate-to-folders.mjs",
     "to": "src/analyze/derive/module-utl.mjs",
+    "unresolvedTo": "../module-utl.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -138,6 +153,53 @@
     "type": "dependency",
     "from": "src/analyze/derive/metrics/get-module-metrics.mjs",
     "to": "src/analyze/derive/module-utl.mjs",
+    "unresolvedTo": "../module-utl.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/cli/init-config/environment-helpers.mjs",
+    "to": "src/cli/defaults.mjs",
+    "unresolvedTo": "../defaults.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/cli/init-config/index.mjs",
+    "to": "src/cli/defaults.mjs",
+    "unresolvedTo": "../defaults.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "info",
+      "name": "not-to-ancestor-folders"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/cli/init-config/write-run-scripts-to-manifest.mjs",
+    "to": "src/cli/defaults.mjs",
+    "unresolvedTo": "../defaults.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -147,6 +209,11 @@
     "type": "dependency",
     "from": "src/extract/resolve/resolve.mjs",
     "to": "src/extract/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -156,6 +223,11 @@
     "type": "dependency",
     "from": "src/extract/swc/extract.mjs",
     "to": "src/extract/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -165,6 +237,11 @@
     "type": "dependency",
     "from": "src/extract/tsc/extract.mjs",
     "to": "src/extract/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -174,6 +251,11 @@
     "type": "dependency",
     "from": "src/main/options/normalize.mjs",
     "to": "src/main/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -183,6 +265,11 @@
     "type": "dependency",
     "from": "src/main/rule-set/assert-validity.mjs",
     "to": "src/main/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
@@ -192,6 +279,11 @@
     "type": "dependency",
     "from": "src/main/rule-set/normalize.mjs",
     "to": "src/main/helpers.mjs",
+    "unresolvedTo": "../helpers.mjs",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
     "rule": {
       "severity": "info",
       "name": "not-to-ancestor-folders"
