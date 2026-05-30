@@ -66,7 +66,7 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    // equal((lNormalizedOptions.plugins || []).length, 1);
+    equal(lNormalizedOptions.tsconfig.configFile, TEST_TSCONFIG);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
@@ -88,7 +88,7 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    // equal(lNormalizedOptions.plugins.length, 1);
+    equal(lNormalizedOptions.tsconfig.configFile, TEST_TSCONFIG);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
