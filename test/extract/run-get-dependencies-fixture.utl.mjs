@@ -19,12 +19,12 @@ export function runFixture(pFixture, pParser = "acorn") {
     lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
   }
 
-  it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
+  it(`${pFixture.title} (with '${pParser}' as parser)`, () => {
     deepEqual(
       extractDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
-        await normalizeResolveOptions(
+        normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
           normalizeCruiseOptions(lOptions),
         ),

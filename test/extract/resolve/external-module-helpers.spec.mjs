@@ -9,11 +9,11 @@ import {
   dependencyIsDeprecated,
 } from "#extract/resolve/external-module-helpers.mjs";
 
-const BASIC_RESOLVE_OPTIONS = await normalizeResolveOptions(
+const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions(
   {},
   normalizeCruiseOptions({}),
 );
-const RESOLVE_OPTIONS_HEEDING_EXPORTS = await normalizeResolveOptions(
+const RESOLVE_OPTIONS_HEEDING_EXPORTS = normalizeResolveOptions(
   { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
   normalizeCruiseOptions({}),
 );
