@@ -1,6 +1,5 @@
 import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
-import json5 from "json5";
 
 /**
  *
@@ -16,5 +15,6 @@ export default async function readConfig(pAbsolutePathToConfigFile) {
     );
     return config;
   }
+  const { default: json5 } = await import("json5");
   return json5.parse(await readFile(pAbsolutePathToConfigFile, "utf8"));
 }
