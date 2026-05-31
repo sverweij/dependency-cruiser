@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 
 import { extname } from "node:path";
-import json5 from "json5";
 import makeAbsolute from "./make-absolute.mjs";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
@@ -36,6 +35,7 @@ async function getJSConfig(pBabelConfigFileName) {
 
 async function getJSON5Config(pBabelConfigFileName) {
   let lReturnValue = {};
+  const { default: json5 } = await import("json5");
 
   try {
     lReturnValue = json5.parse(await readFile(pBabelConfigFileName, "utf8"));

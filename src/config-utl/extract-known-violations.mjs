@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import json5 from "json5";
 import makeAbsolute from "./make-absolute.mjs";
 
 /**
@@ -53,6 +52,8 @@ function makeForwardCompatible(pKnownViolation) {
 }
 
 export default async function extractKnownViolations(pKnownViolationsFileName) {
+  const { default: json5 } = await import("json5");
+
   try {
     const lFileContents = await readFile(
       makeAbsolute(pKnownViolationsFileName),
