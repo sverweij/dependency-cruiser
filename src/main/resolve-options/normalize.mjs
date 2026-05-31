@@ -62,19 +62,12 @@ function getNonOverridableResolveOptions(pCacheDuration) {
   };
 }
 
-function compileResolveOptions(
-  pResolveOptions,
-  pTSConfig,
-  pResolveOptionsFromDCConfig,
-) {
+function compileResolveOptions(pResolveOptions, pResolveOptionsFromDCConfig) {
   let lResolveOptions = {};
 
   if (pResolveOptions.tsConfig) {
     lResolveOptions.tsconfig = {
       configFile: resolvePath(pResolveOptions.tsConfig),
-
-      // baseUrl: pTSConfig?.options?.baseUrl ? undefined : "./",
-      // references: pTSConfig?.options?.references ?? []
     };
   }
 
@@ -97,11 +90,7 @@ function compileResolveOptions(
  * @returns
  */
 // eslint-disable-next-line complexity
-export default function normalizeResolveOptions(
-  pResolveOptions,
-  pOptions,
-  pTSConfig,
-) {
+export default function normalizeResolveOptions(pResolveOptions, pOptions) {
   const lRuleSet = pOptions?.ruleSet ?? {};
 
   return compileResolveOptions(
@@ -131,7 +120,6 @@ export default function normalizeResolveOptions(
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...pResolveOptions,
     },
-    pTSConfig || {},
     pOptions?.enhancedResolveOptions ?? {},
   );
 }

@@ -81,7 +81,6 @@ export default async function cruise(
   const lNormalizedResolveOptions = normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
-    pTranspileOptions?.tsConfig,
   );
 
   bus.summary("extract", c(6));
