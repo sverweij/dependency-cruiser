@@ -78,7 +78,7 @@ export default async function cruise(
   );
 
   bus.summary("startup: get resolve options", c(5));
-  const lNormalizedResolveOptions = normalizeResolveOptions(
+  const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig,

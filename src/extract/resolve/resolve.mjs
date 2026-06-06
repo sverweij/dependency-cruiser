@@ -1,6 +1,6 @@
-import { resolve as resolvePath } from "node:path";
 import enhancedResolve from "enhanced-resolve";
 import { stripQueryParameters } from "../helpers.mjs";
+import pathToPosix from "#utl/path-to-posix.mjs";
 
 /** @import {IResolveOptions} from "../../../types/resolve-options.mjs" */
 
@@ -50,10 +50,8 @@ export function resolve(
   return stripQueryParameters(
     gResolvers.get(pCachingContext).resolveSync(
       {},
-      // lookupStartPath - must be absolute so enhanced-resolve classifies
-      // it correctly on Windows (relative paths with backslashes would be
-      // treated as PathType.Normal and POSIX-normalised, breaking ".." resolution)
-      resolvePath(pFileDirectory),
+      // lookupStartPath
+      pathToPosix(pFileDirectory),
       // request
       pModuleName,
     ),

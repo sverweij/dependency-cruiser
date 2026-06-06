@@ -7,13 +7,13 @@ import extract from "#extract/index.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - exclude", () => {
-  it("exclude - exclude.path", () => {
+  it("exclude - exclude.path", async () => {
     const lOptions = normalizeCruiseOptions({
       exclude: {
         path: "dynamic-to-circular",
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -28,13 +28,13 @@ describe("[I] extract/index - exclude", () => {
     deepEqual(lResult, requireJSON("./__mocks__/exclude/path/es/output.json"));
   });
 
-  it("exclude - exclude.dynamic", () => {
+  it("exclude - exclude.dynamic", async () => {
     const lOptions = normalizeCruiseOptions({
       exclude: {
         dynamic: true,
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },

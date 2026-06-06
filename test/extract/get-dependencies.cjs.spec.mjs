@@ -30,12 +30,12 @@ function runFixture(pFixture, pParser = "acorn") {
     lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
   }
 
-  it(`${pFixture.title} (with '${pParser}' as parser)`, () => {
+  it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
     deepEqual(
       extractDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
           normalizeCruiseOptions(lOptions),
         ),
@@ -71,9 +71,9 @@ describe("[I] extract/getDependencies - CommonJS - ", () => {
 });
 
 describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
-  it("strips the inline loader prefix from the module name when resolving", () => {
+  it("strips the inline loader prefix from the module name when resolving", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -101,9 +101,9 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
     );
   });
 
-  it("strips multiple inline loader prefixes from the module name when resolving", () => {
+  it("strips multiple inline loader prefixes from the module name when resolving", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );

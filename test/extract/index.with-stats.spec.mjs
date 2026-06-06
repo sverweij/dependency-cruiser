@@ -7,11 +7,11 @@ import extract from "#extract/index.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - with experimentalStats", () => {
-  it("extracts the dependencies and stats for a simple dependency", () => {
+  it("extracts the dependencies and stats for a simple dependency", async () => {
     const lOptions = normalizeCruiseOptions({
       experimentalStats: true,
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
