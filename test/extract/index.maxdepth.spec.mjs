@@ -9,11 +9,11 @@ const requireJSON = createRequireJSON(import.meta.url);
 describe("[I] extract/index - max depth", () => {
   /* eslint no-magic-numbers:0 */
   [0, 1, 2, 4].forEach((pDepth) =>
-    it(`returns the correct graph when max-depth === ${pDepth}`, () => {
+    it(`returns the correct graph when max-depth === ${pDepth}`, async () => {
       const lOptions = normalizeCruiseOptions({
         maxDepth: pDepth,
       });
-      const lResolveOptions = normalizeResolveOptions(
+      const lResolveOptions = await normalizeResolveOptions(
         {
           bustTheCache: true,
         },

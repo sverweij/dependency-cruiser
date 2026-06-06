@@ -8,12 +8,12 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const WORKING_DIRECTORY = process.cwd();
 
-function wrappedResolve(pModuleAttributes) {
+async function wrappedResolve(pModuleAttributes) {
   return resolve(
     pModuleAttributes,
     process.cwd(),
     process.cwd(),
-    normalizeResolveOptions(
+    await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -31,7 +31,7 @@ describe("[I] extract/resolve/index - typescript", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("resolves to ts before it considers vue", () => {
+  it("resolves to ts before it considers vue", async () => {
     deepEqual(
       resolve(
         {
@@ -40,7 +40,7 @@ describe("[I] extract/resolve/index - typescript", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "vue-last"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             bustTheCache: true,
           },

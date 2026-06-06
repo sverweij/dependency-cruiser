@@ -8,7 +8,7 @@ import extract from "#extract/index.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - cache busting", () => {
-  it("delivers a different output", () => {
+  it("delivers a different output", async () => {
     const lOptions = normalizeCruiseOptions({
       ruleSet: {
         forbidden: [
@@ -35,7 +35,7 @@ describe("[I] extract/index - cache busting", () => {
         ],
       },
     });
-    const lResolveOptions = normalizeResolveOptions({}, lOptions);
+    const lResolveOptions = await normalizeResolveOptions({}, lOptions);
     const lFirstResultFixture = requireJSON(
       "./__fixtures__/cache-busting-first-tree.json",
     );

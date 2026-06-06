@@ -9,12 +9,12 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const WORKING_DIRECTORY = process.cwd();
 
-function wrappedResolve(pModuleAttributes) {
+async function wrappedResolve(pModuleAttributes) {
   return resolve(
     pModuleAttributes,
     process.cwd(),
     process.cwd(),
-    normalizeResolveOptions(
+    await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -32,7 +32,7 @@ describe("[I] extract/resolve/index - general", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("resolves a local dependency to a file on disk", () => {
+  it("resolves a local dependency to a file on disk", async () => {
     deepEqual(
       resolve(
         {
@@ -41,7 +41,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions({}, {}),
+        await normalizeResolveOptions({}, {}),
       ),
       {
         coreModule: false,
@@ -141,7 +141,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves known non-followables as not followable: json", () => {
+  it("resolves known non-followables as not followable: json", async () => {
     deepEqual(
       resolve(
         {
@@ -150,7 +150,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions({ bustTheCache: true }, {}),
+        await normalizeResolveOptions({ bustTheCache: true }, {}),
       ),
       {
         coreModule: false,
@@ -162,7 +162,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", () => {
+  it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", async () => {
     deepEqual(
       resolve(
         {
@@ -171,7 +171,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             extensions: [".js", ".json"],
             bustTheCache: true,
@@ -189,7 +189,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", () => {
+  it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", async () => {
     deepEqual(
       resolve(
         {
@@ -198,7 +198,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             extensions: [".js", ".json", ".scss"],
             bustTheCache: true,
@@ -216,7 +216,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("considers passed (webpack) aliases", () => {
+  it("considers passed (webpack) aliases", async () => {
     deepEqual(
       resolve(
         {
@@ -225,7 +225,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             alias: {
               hoepla: join(__dirname, "__mocks__", "i-got-aliased-to-hoepla"),
@@ -245,7 +245,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("considers a passed (webpack) modules array", () => {
+  it("considers a passed (webpack) modules array", async () => {
     deepEqual(
       resolve(
         {
@@ -254,7 +254,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             modules: [
               "node_modules",
@@ -280,7 +280,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("strips query parameters from file names", () => {
+  it("strips query parameters from file names", async () => {
     deepEqual(
       resolve(
         {
@@ -289,7 +289,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions({}, {}),
+        await normalizeResolveOptions({}, {}),
       ),
       {
         coreModule: false,
@@ -318,7 +318,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", () => {
+  it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
     deepEqual(
       resolve(
@@ -328,7 +328,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             bustTheCache: true,
             exportsFields: ["exports"],
@@ -382,7 +382,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("Passes mainFields correctly so it's possible to resolve type-only packages", () => {
+  it("Passes mainFields correctly so it's possible to resolve type-only packages", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-type-only-packages");
     deepEqual(
       resolve(
@@ -392,7 +392,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           mainFields: ["main", "types"],
         }),
@@ -407,7 +407,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves modules passed as builtInModules.overrides as core modules", () => {
+  it("resolves modules passed as builtInModules.overrides as core modules", async () => {
     deepEqual(
       resolve(
         {
@@ -416,7 +416,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           builtInModules: {
             override: ["totally-not-a-core-module-irl"],
@@ -433,7 +433,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("resolves modules passed as builtInModules.add as core modules", () => {
+  it("resolves modules passed as builtInModules.add as core modules", async () => {
     deepEqual(
       resolve(
         {
@@ -442,7 +442,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           builtInModules: {
             add: ["totally-not-a-core-module-irl"],
@@ -459,7 +459,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("does not resolve nodejs core modules when builtInModules.overrides is passed", () => {
+  it("does not resolve nodejs core modules when builtInModules.overrides is passed", async () => {
     deepEqual(
       resolve(
         {
@@ -468,7 +468,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           builtInModules: {
             override: ["totally-not-a-core-module-irl"],
@@ -485,7 +485,7 @@ describe("[I] extract/resolve/index - general", () => {
     );
   });
 
-  it("still resolves nodejs core modules when builtInModules.add is passed", () => {
+  it("still resolves nodejs core modules when builtInModules.add is passed", async () => {
     deepEqual(
       resolve(
         {
@@ -494,7 +494,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           builtInModules: {
             add: ["totally-not-a-core-module-irl"],

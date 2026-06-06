@@ -9,9 +9,13 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 describe("[I] main/resolve-options/normalize", () => {
   const lDefaultNoOfResolveOptions = 10;
   const TEST_TSCONFIG = join(__dirname, "__mocks__", "tsconfig.test.json");
+  const lTsconfigContents = {};
+  const lTsconfigContentsWithBaseURLAndPaths = {
+    options: { baseUrl: "", paths: { "*": ["lalala/*"] } },
+  };
 
-  it("comes with a set of defaults when passed with no options at all", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("comes with a set of defaults when passed with no options at all", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalizeCruiseOptions({}),
     );
@@ -25,12 +29,13 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("does not add enhanced-resolve tsconfig options if no tsConfig is specified", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("does not add the typescript paths plugin to the plugins if no tsConfig is specified", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
         ruleSet: { options: {} },
       }),
+      lTsconfigContents,
     );
 
     equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
@@ -39,16 +44,17 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    ok(!lNormalizedOptions.hasOwnProperty("tsconfig"));
+    equal((lNormalizedOptions.plugins || []).length, 0);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("adds enhanced-resolve tsconfig options if a tsConfig is specified, even without a baseUrl", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("adds the typescript paths plugin to the plugins if a tsConfig is specified, even without a baseUrl", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
+      lTsconfigContents,
     );
 
     equal(
@@ -60,16 +66,17 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    equal(lNormalizedOptions.tsconfig.configFile, TEST_TSCONFIG);
+    equal((lNormalizedOptions.plugins || []).length, 1);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("adds enhanced-resolve tsconfig options if a tsConfig is specified with a baseUrl and actual paths", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
+      lTsconfigContentsWithBaseURLAndPaths,
     );
 
     equal(
@@ -81,11 +88,11 @@ describe("[I] main/resolve-options/normalize", () => {
     equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    equal(lNormalizedOptions.tsconfig.configFile, TEST_TSCONFIG);
+    equal(lNormalizedOptions.plugins.length, 1);
     equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
-  it("should set builtInModules if override or add is defined", () => {
+  it("should set builtInModules if override or add is defined", async () => {
     const lOptions = {
       builtInModules: {
         override: ["fs", "path"],
@@ -93,15 +100,15 @@ describe("[I] main/resolve-options/normalize", () => {
       },
     };
 
-    const lNormalizedOptions = normalizeResolveOptions(lOptions);
+    const lNormalizedOptions = await normalizeResolveOptions(lOptions);
 
     deepEqual(lNormalizedOptions.builtInModules, lOptions.builtInModules);
   });
 
-  it("should not set builtInModules if neither override nor add is defined", () => {
+  it("should not set builtInModules if neither override nor add is defined", async () => {
     const lOptions = {};
 
-    const lNormalizedOptions = normalizeResolveOptions(lOptions);
+    const lNormalizedOptions = await normalizeResolveOptions(lOptions);
 
     // eslint-disable-next-line no-undefined
     equal(lNormalizedOptions.builtInModules, undefined);

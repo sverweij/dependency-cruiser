@@ -18,9 +18,9 @@ describe("[I] extract/getDependencies - CoffeeScript - ", () => {
 });
 
 describe("[I] extract/getDependencies - Error scenarios - ", () => {
-  it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {
+  it("Does not raise an exception on syntax errors (because we're on the loose parser)", async () => {
     const lOptions = normalizeCruiseOptions({});
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -50,9 +50,12 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   let lOptions = {};
   let lResolveOptions = {};
 
-  before("normalize options & resolve options", () => {
+  before("normalize options & resolve options", async () => {
     lOptions = normalizeCruiseOptions({});
-    lResolveOptions = normalizeResolveOptions({ bustTheCache: true }, lOptions);
+    lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions,
+    );
   });
 
   it("Just skips require(481)", () => {
@@ -90,11 +93,11 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
 });
 
 describe("[I] extract/getDependencies - include", () => {
-  it("returns no dependencies when the includeOnly pattern is erroneous", () => {
+  it("returns no dependencies when the includeOnly pattern is erroneous", async () => {
     const lOptions = normalizeCruiseOptions({
       includeOnly: "will-not-match-dependencies-for-this-file",
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -109,9 +112,9 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it('only includes dependencies matching the passed "includeOnly" (1)', () => {
+  it('only includes dependencies matching the passed "includeOnly" (1)', async () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "/src/" });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -139,9 +142,9 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it('only includes dependencies matching the passed "includeOnly" (2)', () => {
+  it('only includes dependencies matching the passed "includeOnly" (2)', async () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "include" });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -181,9 +184,9 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("annotates the exotic require", () => {
+  it("annotates the exotic require", async () => {
     const lOptions = normalizeCruiseOptions({ exoticRequireStrings: ["need"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -213,13 +216,13 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("does not support nested exotic requires deeper than 3 (reallyGlobal.globalThis.process.getBuiltinModule)", () => {
+  it("does not support nested exotic requires deeper than 3 (reallyGlobal.globalThis.process.getBuiltinModule)", async () => {
     const lOptions = normalizeCruiseOptions({
       exoticRequireStrings: [
         "reallyGlobal.globalThis.process.getBuiltinModule",
       ],
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -234,11 +237,11 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("recognizes process.getBuiltinModule & annotates it", () => {
+  it("recognizes process.getBuiltinModule & annotates it", async () => {
     const lOptions = normalizeCruiseOptions({
       detectProcessBuiltinModuleCalls: true,
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -266,11 +269,11 @@ describe("[I] extract/getDependencies - include", () => {
       ],
     );
   });
-  it("does not recognize process.getBuiltinModule when the detectProcessBuiltinModuleCalls is off", () => {
+  it("does not recognize process.getBuiltinModule when the detectProcessBuiltinModuleCalls is off", async () => {
     const lOptions = normalizeCruiseOptions({
       detectProcessBuiltinModuleCalls: false,
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -285,11 +288,11 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("recognizes globalThis.process.getBuiltinModule & annotates it", () => {
+  it("recognizes globalThis.process.getBuiltinModule & annotates it", async () => {
     const lOptions = normalizeCruiseOptions({
       detectProcessBuiltinModuleCalls: true,
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -318,11 +321,11 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("does not parse files matching extensions in the extraExtensionsToScan array", () => {
+  it("does not parse files matching extensions in the extraExtensionsToScan array", async () => {
     const lOptions = normalizeCruiseOptions({
       extraExtensionsToScan: [".bentknee", ".yolo"],
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -337,11 +340,11 @@ describe("[I] extract/getDependencies - include", () => {
     );
   });
 
-  it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", () => {
+  it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", async () => {
     const lOptions = normalizeCruiseOptions({
       tsPreCompilationDeps: "specify",
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );

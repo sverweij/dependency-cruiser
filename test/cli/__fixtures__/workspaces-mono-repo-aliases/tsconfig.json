@@ -5,7 +5,7 @@
     "baseUrl": "./",
     "paths": {
       "@modules/*": ["./libs/*"],
-      "@sister": ["./libs/zus/"]
+      "@sister": ["./libs/zus/*"]
     },
     "noEmit": true,
     "skipLibCheck": true

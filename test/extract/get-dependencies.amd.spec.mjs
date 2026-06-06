@@ -45,9 +45,9 @@ describe("[I] extract/getDependencies - AMD - ", () => {
   // amdFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
 describe("[I] extract/getDependencies - AMD - with bangs", () => {
-  it("splits extracts the module part of the plugin + module - regular requirejs", () => {
+  it("splits extracts the module part of the plugin + module - regular requirejs", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
@@ -62,9 +62,9 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     );
   });
 
-  it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", () => {
+  it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions,
     );
