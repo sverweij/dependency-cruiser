@@ -20,7 +20,18 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   presets: [],
   assumptions: {},
   browserslistConfigFile: false,
-  targets: {},
+  targets: {
+    // this is different between babel 7 and 8. 8 expects this, apparently
+    // android: "148.0.0",
+    // chrome: "109.0.0",
+    // edge: "147.0.0",
+    // firefox: "140.0.0",
+    // ios: "18.5.0",
+    // opera: "127.0.0",
+    // opera_mobile: "80.0.0",
+    // safari: "26.3.0",
+    // samsung: "29.0.0",
+  },
 };
 
 describe("[I] config-utl/extract-babel-config", () => {

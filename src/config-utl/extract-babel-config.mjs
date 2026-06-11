@@ -95,7 +95,7 @@ export default async function extractBabelConfig(pBabelConfigFileName) {
       filename: pBabelConfigFileName,
     };
     lReturnValue = {
-      ...babel.loadOptions(lConfig),
+      ...babel.loadOptionsSync(lConfig),
       // according to the babel documentation a config parsed & expanded through
       // loadOptions can be passed to the parser. With some plugins/ presets
       // this does not seem to be true anymore, though

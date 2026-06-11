@@ -2,7 +2,7 @@
 import { writeFileSync } from "node:fs";
 import { extname } from "node:path";
 import { format } from "prettier";
-import babel from "@babel/core";
+import * as babel from "@babel/core";
 
 function stripAttribute(pObject, pAttribute) {
   const lObject = structuredClone(pObject);
