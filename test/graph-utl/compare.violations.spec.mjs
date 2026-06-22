@@ -70,4 +70,108 @@ describe("[U] graph-utl/compare - violations", () => {
   it("returns -1 when rule 'to' < the one compared against", () => {
     equal(compareViolations(lViolation, lLaterToViolation), -1);
   });
+
+  it("returns -1 when cycle is alphabetically earlier", () => {
+    const lCycleA = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [
+        { name: "a", dependencyTypes: ["local"] },
+        { name: "b", dependencyTypes: ["local"] },
+      ],
+    };
+    const lCycleB = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [
+        { name: "c", dependencyTypes: ["local"] },
+        { name: "b", dependencyTypes: ["local"] },
+      ],
+    };
+    equal(compareViolations(lCycleA, lCycleB), -1);
+  });
+
+  it("returns 1 when cycle is alphabetically later", () => {
+    const lCycleA = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [
+        { name: "c", dependencyTypes: ["local"] },
+        { name: "b", dependencyTypes: ["local"] },
+      ],
+    };
+    const lCycleB = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [
+        { name: "a", dependencyTypes: ["local"] },
+        { name: "b", dependencyTypes: ["local"] },
+      ],
+    };
+    equal(compareViolations(lCycleA, lCycleB), 1);
+  });
+
+  it("returns -1 when first cycle is shorter", () => {
+    const lCycleA = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [{ name: "a", dependencyTypes: ["local"] }],
+    };
+    const lCycleB = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [
+        { name: "a", dependencyTypes: ["local"] },
+        { name: "b", dependencyTypes: ["local"] },
+      ],
+    };
+    equal(compareViolations(lCycleA, lCycleB), -1);
+  });
+
+  it("returns -1 when via is alphabetically earlier", () => {
+    const lViaA = {
+      from: "a",
+      to: "d",
+      rule: { name: "reachability", severity: "error" },
+      via: [
+        { name: "b", dependencyTypes: ["local"] },
+        { name: "c", dependencyTypes: ["local"] },
+      ],
+    };
+    const lViaB = {
+      from: "a",
+      to: "d",
+      rule: { name: "reachability", severity: "error" },
+      via: [
+        { name: "x", dependencyTypes: ["local"] },
+        { name: "c", dependencyTypes: ["local"] },
+      ],
+    };
+    equal(compareViolations(lViaA, lViaB), -1);
+  });
+
+  it("returns 0 when both violations lack cycle or via fields", () => {
+    equal(compareViolations(lViolation, lViolation), 0);
+  });
+
+  it("returns -1 when first violation has no cycle and second does", () => {
+    const lNoCycle = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+    };
+    const lWithCycle = {
+      from: "a",
+      to: "b",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [{ name: "a", dependencyTypes: ["local"] }],
+    };
+    equal(compareViolations(lNoCycle, lWithCycle), -1);
+  });
 });
