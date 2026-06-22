@@ -174,4 +174,52 @@ describe("[U] graph-utl/compare - violations", () => {
     };
     equal(compareViolations(lNoCycle, lWithCycle), -1);
   });
+
+  it("returns -1 when unresolvedTo is alphabetically earlier", () => {
+    const lUnresA = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      unresolvedTo: "a",
+    };
+    const lUnresB = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      unresolvedTo: "z",
+    };
+    equal(compareViolations(lUnresA, lUnresB), -1);
+  });
+
+  it("returns -1 when type is alphabetically earlier", () => {
+    const lTypeA = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      type: "a",
+    };
+    const lTypeB = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      type: "z",
+    };
+    equal(compareViolations(lTypeA, lTypeB), -1);
+  });
+
+  it("returns -1 when dependencyTypes is alphabetically earlier", () => {
+    const lDepTypesA = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      dependencyTypes: ["alpha", "beta"],
+    };
+    const lDepTypesB = {
+      from: "from",
+      to: "to",
+      rule: { name: "cool-rule", severity: "error" },
+      dependencyTypes: ["alpha", "kappa"],
+    };
+    equal(compareViolations(lDepTypesA, lDepTypesB), -1);
+  });
 });
