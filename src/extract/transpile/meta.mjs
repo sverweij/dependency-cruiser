@@ -11,6 +11,7 @@ import livescriptWrap from "./livescript-wrap.mjs";
 import svelteWrapFunction from "./svelte-wrap.mjs";
 import typescriptWrapFunction from "./typescript-wrap.mjs";
 import vueTemplateWrap from "./vue-template-wrap.cjs";
+import astroWrapFunction from "./astro-wrap.mjs";
 import meta from "#meta.cjs";
 
 /**
@@ -24,6 +25,8 @@ const swcWrap = {
 const coffeeScriptWrap = coffeeScriptWrapFunction(false);
 const svelteWrap = svelteWrapFunction(javascriptWrap);
 const typescriptWrap = typescriptWrapFunction("esm");
+const typescriptTsxWrap = typescriptWrapFunction("tsx");
+const astroWrap = astroWrapFunction(typescriptTsxWrap);
 
 function gotCoffee() {
   return (
@@ -42,6 +45,10 @@ function gotCoffee() {
 }
 
 const TRANSPILER2AVAILABLE = {
+  "@astrojs/compiler": tryAvailable(
+    "@astrojs/compiler",
+    meta.supportedTranspilers["@astrojs/compiler"],
+  ),
   babel: tryImportAvailable("@babel/core", meta.supportedTranspilers.babel),
   javascript: true,
   "coffee-script": gotCoffee(),
@@ -70,6 +77,7 @@ const TRANSPILER2AVAILABLE = {
 };
 
 const TRANSPILER2WRAPPER = {
+  "@astrojs/compiler": astroWrap,
   babel: babelWrap,
   javascript: javascriptWrap,
   "coffee-script": coffeeScriptWrap,
@@ -106,6 +114,7 @@ export const EXTENSION2AVAILABLE = new Map([
   [".coffee.md", gotCoffee()],
   [".csx", gotCoffee()],
   [".cjsx", gotCoffee()],
+  [".astro", TRANSPILER2AVAILABLE["@astrojs/compiler"]],
 ]);
 
 const EXTENSIONS_PER_PARSER = {
