@@ -42,6 +42,13 @@ export default `<!DOCTYPE html>
       width: 100%;
     }
 
+    th { 
+      position: sticky; 
+      top: 0; 
+      z-index: 2; 
+      background-color: white 
+    }
+
     th,
     td {
       text-align: left;
