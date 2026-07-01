@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { styleText } from "node:util";
 import picomatch from "picomatch";
-import isInstalledGlobally from "is-installed-globally";
+import isInstalledGlobally from "./utl/is-installed-globally.mjs";
 
 import assertFileExistence from "./utl/assert-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
