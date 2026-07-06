@@ -1,11 +1,9 @@
-/* c8 ignore file */
 /* eslint-disable n/no-process-env */
 import { fileURLToPath } from "node:url";
 import { existsSync, realpathSync, readFileSync } from "node:fs";
 import { join, relative, sep, resolve, dirname } from "node:path";
 import { homedir } from "node:os";
 
-/* c8 ignore start */
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const IS_WINDOWS = process.platform === "win32";
 
@@ -29,8 +27,11 @@ function isPathInside(pChildPath, pParentPath) {
  */
 export function readNpmrcPrefix(pFilePath, pReadFile = readFileSync) {
   try {
-    const lMatch = pReadFile(pFilePath, "utf8").match(/^prefix\s*=\s*(.+)$/m);
-    return lMatch ? lMatch[1].trim() : null;
+    // {0,64} in stead of
+    const lMatch = /^prefix\s{0,64}=\s{0,64}(?<prefix>.+)$/m.exec(
+      pReadFile(pFilePath, "utf8"),
+    );
+    return lMatch ? lMatch.groups.prefix : null;
   } catch {
     return null;
   }
@@ -214,4 +215,3 @@ const isInstalledGlobally = (() => {
 })();
 
 export default isInstalledGlobally;
-/* c8 ignore stop */
