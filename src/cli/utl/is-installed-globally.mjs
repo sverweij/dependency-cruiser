@@ -27,7 +27,7 @@ function isPathInside(pChildPath, pParentPath) {
  */
 export function readNpmrcPrefix(pFilePath, pReadFile = readFileSync) {
   try {
-    // {0,64} in stead of
+    // {0,64} in stead of *
     const lMatch = /^prefix\s{0,64}=\s{0,64}(?<prefix>.+)$/m.exec(
       pReadFile(pFilePath, "utf8"),
     );
@@ -38,23 +38,19 @@ export function readNpmrcPrefix(pFilePath, pReadFile = readFileSync) {
 }
 
 export function getGlobalNpmrcPath(pRuntime = {}) {
-  const lEnvironment = pRuntime.environment ?? process.env;
-  const lExecPath = pRuntime.execPath ?? process.execPath;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-
-  if (lIsWindows && lEnvironment.APPDATA) {
-    return join(lEnvironment.APPDATA, "/npm/etc/npmrc");
+  if (pRuntime.isWindows && pRuntime.environment.APPDATA) {
+    return join(pRuntime.environment.APPDATA, "/npm/etc/npmrc");
   }
   // Homebrew special case: `$(brew --prefix)/lib/node_modules/npm/npmrc`
-  if (lExecPath.includes("/Cellar/node")) {
-    const lHomebrewPrefix = lExecPath.slice(
+  if (pRuntime.execPath.includes("/Cellar/node")) {
+    const lHomebrewPrefix = pRuntime.execPath.slice(
       0,
-      lExecPath.indexOf("/Cellar/node"),
+      pRuntime.execPath.indexOf("/Cellar/node"),
     );
     return join(lHomebrewPrefix, "/lib/node_modules/npm/npmrc");
   }
-  if (lExecPath.endsWith("/bin/node")) {
-    return join(dirname(dirname(lExecPath)), "/etc/npmrc");
+  if (pRuntime.execPath.endsWith("/bin/node")) {
+    return join(dirname(dirname(pRuntime.execPath)), "/etc/npmrc");
   }
 
   return null;
@@ -69,68 +65,57 @@ function getNpmConfigPrefixFromEnvironment(pEnvironment) {
   );
 }
 
-// eslint-disable-next-line max-statements
 export function getNpmPrefix(pRuntime = {}) {
-  const lEnvironment = pRuntime.environment ?? process.env;
-  const lHomeDirectory = pRuntime.homeDirectory ?? homedir();
-  const lExecPath = pRuntime.execPath ?? process.execPath;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-  const lReadNpmrcPrefix = pRuntime.readNpmrcPrefix ?? readNpmrcPrefix;
-  const lGetGlobalNpmrcPath = pRuntime.getGlobalNpmrcPath ?? getGlobalNpmrcPath;
-
   // npm_config_prefix env var (case-insensitive, set by npm when running scripts)
-  const lEnvironmentPrefix = getNpmConfigPrefixFromEnvironment(lEnvironment);
+  const lEnvironmentPrefix = getNpmConfigPrefixFromEnvironment(
+    pRuntime.environment,
+  );
   if (lEnvironmentPrefix) {
     return resolve(lEnvironmentPrefix);
   }
 
-  const lHomePrefix = lReadNpmrcPrefix(join(lHomeDirectory, ".npmrc"));
+  const lHomePrefix = pRuntime.readNpmrcPrefix(
+    join(pRuntime.homeDirectory, ".npmrc"),
+  );
   if (lHomePrefix) {
     return lHomePrefix;
   }
 
-  if (lEnvironment.PREFIX) {
-    return lEnvironment.PREFIX;
+  if (pRuntime.environment.PREFIX) {
+    return pRuntime.environment.PREFIX;
   }
 
-  const lGlobalNpmrcPath = lGetGlobalNpmrcPath({
-    environment: lEnvironment,
-    execPath: lExecPath,
-    isWindows: lIsWindows,
+  const lGlobalNpmrcPath = pRuntime.getGlobalNpmrcPath({
+    environment: pRuntime.environment,
+    execPath: pRuntime.execPath,
+    isWindows: pRuntime.isWindows,
   });
   if (lGlobalNpmrcPath) {
-    const lGlobalPrefix = lReadNpmrcPrefix(lGlobalNpmrcPath);
+    const lGlobalPrefix = pRuntime.readNpmrcPrefix(lGlobalNpmrcPath);
     if (lGlobalPrefix) {
       return lGlobalPrefix;
     }
   }
 
-  if (lIsWindows) {
-    return lEnvironment.APPDATA
-      ? join(lEnvironment.APPDATA, "npm")
-      : dirname(lExecPath);
+  if (pRuntime.isWindows) {
+    return pRuntime.environment.APPDATA
+      ? join(pRuntime.environment.APPDATA, "npm")
+      : dirname(pRuntime.execPath);
   }
-  return dirname(dirname(lExecPath));
+  return dirname(dirname(pRuntime.execPath));
 }
 
 export function getNpmGlobalPackagesDirectory(pRuntime = {}) {
-  const lGetNpmPrefix = pRuntime.getNpmPrefix ?? getNpmPrefix;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-
   return join(
-    lGetNpmPrefix(),
-    lIsWindows ? "node_modules" : "lib/node_modules",
+    pRuntime.getNpmPrefix(),
+    pRuntime.isWindows ? "node_modules" : "lib/node_modules",
   );
 }
 
 export function getYarnWindowsDirectory(pRuntime = {}) {
-  const lEnvironment = pRuntime.environment ?? process.env;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-  const lExists = pRuntime.exists ?? existsSync;
-
-  if (lIsWindows && lEnvironment.LOCALAPPDATA) {
-    const lDirectory = join(lEnvironment.LOCALAPPDATA, "Yarn");
-    if (lExists(lDirectory)) {
+  if (pRuntime.isWindows && pRuntime.environment.LOCALAPPDATA) {
+    const lDirectory = join(pRuntime.environment.LOCALAPPDATA, "Yarn");
+    if (pRuntime.exists(lDirectory)) {
       return lDirectory;
     }
   }
@@ -138,71 +123,81 @@ export function getYarnWindowsDirectory(pRuntime = {}) {
 }
 
 export function getYarnPrefix(pRuntime = {}) {
-  const lEnvironment = pRuntime.environment ?? process.env;
-  const lHomeDirectory = pRuntime.homeDirectory ?? homedir();
-  const lGetYarnWindowsDirectory =
-    pRuntime.getYarnWindowsDirectory ?? getYarnWindowsDirectory;
-  const lExists = pRuntime.exists ?? existsSync;
-  const lGetNpmPrefix = pRuntime.getNpmPrefix ?? getNpmPrefix;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-
-  if (lEnvironment.PREFIX) {
-    return lEnvironment.PREFIX;
+  if (pRuntime.environment.PREFIX) {
+    return pRuntime.environment.PREFIX;
   }
 
-  const lWindowsDirectory = lGetYarnWindowsDirectory({
-    environment: lEnvironment,
-    isWindows: lIsWindows,
-    exists: lExists,
+  const lWindowsDirectory = pRuntime.getYarnWindowsDirectory({
+    environment: pRuntime.environment,
+    isWindows: pRuntime.isWindows,
+    exists: pRuntime.exists,
   });
   if (lWindowsDirectory) {
     return lWindowsDirectory;
   }
 
-  const lConfigPrefix = join(lHomeDirectory, ".config/yarn");
-  if (lExists(lConfigPrefix)) {
+  const lConfigPrefix = join(pRuntime.homeDirectory, ".config/yarn");
+  if (pRuntime.exists(lConfigPrefix)) {
     return lConfigPrefix;
   }
 
-  const lHomePrefix = join(lHomeDirectory, ".yarn-config");
-  if (lExists(lHomePrefix)) {
+  const lHomePrefix = join(pRuntime.homeDirectory, ".yarn-config");
+  if (pRuntime.exists(lHomePrefix)) {
     return lHomePrefix;
   }
 
-  return lGetNpmPrefix();
+  return pRuntime.getNpmPrefix();
 }
 
 export function getYarnGlobalPackagesDirectory(pRuntime = {}) {
-  const lGetYarnPrefix = pRuntime.getYarnPrefix ?? getYarnPrefix;
-  const lGetYarnWindowsDirectory =
-    pRuntime.getYarnWindowsDirectory ?? getYarnWindowsDirectory;
-  const lEnvironment = pRuntime.environment ?? process.env;
-  const lIsWindows = pRuntime.isWindows ?? IS_WINDOWS;
-  const lExists = pRuntime.exists ?? existsSync;
-  const lYarnPrefix = resolve(lGetYarnPrefix());
+  const lYarnPrefix = resolve(pRuntime.getYarnPrefix());
 
   return join(
     lYarnPrefix,
-    lGetYarnWindowsDirectory({
-      environment: lEnvironment,
-      isWindows: lIsWindows,
-      exists: lExists,
+    pRuntime.getYarnWindowsDirectory({
+      environment: pRuntime.environment,
+      isWindows: pRuntime.isWindows,
+      exists: pRuntime.exists,
     })
       ? "Data/global/node_modules"
       : "global/node_modules",
   );
 }
 
+// eslint-disable-next-line complexity
+function cookRuntimeShit(pRuntime = {}) {
+  return {
+    getYarnPrefix: pRuntime.getYarnPrefix ?? getYarnPrefix,
+    getYarnGlobalPackagesDirectory:
+      pRuntime.getYarnGlobalPackagesDirectory ?? getYarnGlobalPackagesDirectory,
+    getYarnWindowsDirectory:
+      pRuntime.getYarnWindowsDirectory ?? getYarnWindowsDirectory,
+    getNpmGlobalPackagesDirectory:
+      pRuntime.getNpmGlobalPackagesDirectory ?? getNpmGlobalPackagesDirectory,
+    getNpmPrefix: pRuntime.getNpmPrefix ?? getNpmPrefix,
+    readNpmrcPrefix: pRuntime.readNpmrcPrefix ?? readNpmrcPrefix,
+    getGlobalNpmrcPath: pRuntime.getGlobalNpmrcPath ?? getGlobalNpmrcPath,
+    execPath: pRuntime.execPath ?? process.execPath,
+    homeDirectory: pRuntime.homeDirectory ?? homedir(),
+    environment: pRuntime.environment ?? process.env,
+    isWindows: pRuntime.isWindows ?? IS_WINDOWS,
+    exists: pRuntime.exists ?? existsSync,
+    realPath: pRuntime.realpath ?? realpathSync,
+  };
+}
+
 export function isInstalledGloballyForPath(pCurrentDirectory, pRuntime = {}) {
-  const lGetYarnGlobalPackagesDirectory =
-    pRuntime.getYarnGlobalPackagesDirectory ?? getYarnGlobalPackagesDirectory;
-  const lGetNpmGlobalPackagesDirectory =
-    pRuntime.getNpmGlobalPackagesDirectory ?? getNpmGlobalPackagesDirectory;
-  const lRealpath = pRuntime.realpath ?? realpathSync;
+  const lRuntime = cookRuntimeShit(pRuntime);
 
   return (
-    isPathInside(pCurrentDirectory, lGetYarnGlobalPackagesDirectory()) ||
-    isPathInside(pCurrentDirectory, lRealpath(lGetNpmGlobalPackagesDirectory()))
+    isPathInside(
+      pCurrentDirectory,
+      lRuntime.getYarnGlobalPackagesDirectory(),
+    ) ||
+    isPathInside(
+      pCurrentDirectory,
+      lRuntime.realPath(lRuntime.getNpmGlobalPackagesDirectory()),
+    )
   );
 }
 
