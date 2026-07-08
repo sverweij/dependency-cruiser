@@ -4,9 +4,6 @@ import { existsSync, realpathSync, readFileSync } from "node:fs";
 import { join, relative, sep, resolve, dirname } from "node:path";
 import { homedir } from "node:os";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const IS_WINDOWS = process.platform === "win32";
-
 function isPathInside(pChildPath, pParentPath) {
   const lRelation = relative(pParentPath, pChildPath);
   return Boolean(
@@ -27,7 +24,7 @@ function isPathInside(pChildPath, pParentPath) {
  */
 export function readNpmrcPrefix(pFilePath, pReadFile = readFileSync) {
   try {
-    // {0,64} in stead of *
+    // {0,64} in stead of * as 64 chars seems like a reasonable upper limit
     const lMatch = /^prefix\s{0,64}=\s{0,64}(?<prefix>.+)$/m.exec(
       pReadFile(pFilePath, "utf8"),
     );
@@ -165,8 +162,8 @@ export function getYarnGlobalPackagesDirectory(pRuntime = {}) {
 }
 
 // eslint-disable-next-line complexity
-function cookRuntimeShit(pRuntime = {}) {
-  return {
+export function isInstalledGloballyForPath(pCurrentDirectory, pRuntime = {}) {
+  const lRuntime = {
     getYarnPrefix: pRuntime.getYarnPrefix ?? getYarnPrefix,
     getYarnGlobalPackagesDirectory:
       pRuntime.getYarnGlobalPackagesDirectory ?? getYarnGlobalPackagesDirectory,
@@ -180,14 +177,10 @@ function cookRuntimeShit(pRuntime = {}) {
     execPath: pRuntime.execPath ?? process.execPath,
     homeDirectory: pRuntime.homeDirectory ?? homedir(),
     environment: pRuntime.environment ?? process.env,
-    isWindows: pRuntime.isWindows ?? IS_WINDOWS,
+    isWindows: pRuntime.isWindows ?? process.platform === "win32",
     exists: pRuntime.exists ?? existsSync,
     realPath: pRuntime.realpath ?? realpathSync,
   };
-}
-
-export function isInstalledGloballyForPath(pCurrentDirectory, pRuntime = {}) {
-  const lRuntime = cookRuntimeShit(pRuntime);
 
   return (
     isPathInside(
@@ -201,12 +194,10 @@ export function isInstalledGloballyForPath(pCurrentDirectory, pRuntime = {}) {
   );
 }
 
-const isInstalledGlobally = (() => {
+export function isInstalledGlobally() {
   try {
-    return isInstalledGloballyForPath(__dirname);
+    return isInstalledGloballyForPath(dirname(fileURLToPath(import.meta.url)));
   } catch {
     return false;
   }
-})();
-
-export default isInstalledGlobally;
+}
