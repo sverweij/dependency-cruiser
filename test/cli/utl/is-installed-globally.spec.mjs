@@ -20,6 +20,15 @@ describe("[U] cli/utl/is-installed-globally npm", () => {
     equal(lPrefix, "/tmp/npm");
   });
 
+  it("readNpmrcPrefix returns null when there's no prefix in the npmrc", () => {
+    const lPrefix = readNpmrcPrefix(
+      "/irrelevant/.npmrc",
+      () => "registry = https://example.com\nnotaprefix = /tmp/npm\n",
+    );
+
+    equal(lPrefix, null);
+  });
+
   it("readNpmrcPrefix returns null when read fails", () => {
     const lPrefix = readNpmrcPrefix("/irrelevant/.npmrc", () => {
       throw new Error("nope");
@@ -137,6 +146,19 @@ describe("[U] cli/utl/is-installed-globally npm", () => {
     });
 
     equal(lPrefix, "/tmp/appdata/npm");
+  });
+
+  it("getNpmPrefix has windows fallback when there's no APPDATA folder", () => {
+    const lPrefix = getNpmPrefix({
+      environment: {},
+      homeDirectory: "/home/test",
+      execPath: "/custom/node",
+      isWindows: true,
+      readNpmrcPrefix: () => null,
+      getGlobalNpmrcPath: () => null,
+    });
+
+    equal(lPrefix, "/custom");
   });
 
   it("getNpmPrefix has unix fallback", () => {
