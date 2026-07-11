@@ -386,5 +386,6 @@ export default {
         },
       ],
     },
+    environment: {},
   },
 };

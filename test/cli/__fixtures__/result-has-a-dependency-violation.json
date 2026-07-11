@@ -9872,6 +9872,14 @@
           "scope": "module"
         }
       ]
+    },
+    "environment": {
+      "version": "version",
+      "nodeVersionSupported": "^nodeVersion",
+      "nodeVersionFound": "nodeVersion",
+      "osVersionFound": "osVersion",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

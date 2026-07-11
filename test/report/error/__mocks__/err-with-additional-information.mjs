@@ -17,5 +17,6 @@ export default {
     info: 0,
     totalCruised: 2,
     optionsUsed: {},
+    environment: {},
   },
 };

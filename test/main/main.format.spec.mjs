@@ -22,6 +22,44 @@ const MINIMAL_RESULT = {
       args: "",
       outputType: "json",
     },
+    environment: {
+      version: "18.0.0",
+      nodeVersionSupported: "^42",
+      nodeVersionFound: "v42.0.0",
+      osVersionFound: "riscv pinecil@1.2.3",
+      transpilersFound: [
+        {
+          name: "javascript",
+          version: "*",
+          available: true,
+          currentVersion: "acorn@8.17.0",
+        },
+        {
+          name: "typescript",
+          version: ">=2.0.0 <7.0.0",
+          available: false,
+          currentVersion: "-",
+        },
+      ],
+      extensionsFound: [
+        {
+          extension: ".js",
+          available: true,
+        },
+        {
+          extension: ".cjs",
+          available: true,
+        },
+        {
+          extension: ".mjs",
+          available: true,
+        },
+        {
+          extension: ".jsx",
+          available: true,
+        },
+      ],
+    },
   },
 };
 
@@ -77,7 +115,7 @@ describe("[E] main.format - format", () => {
     );
   });
 
-  it("returns an json reporter formatted report when presented with a legal result", async () => {
+  it("returns a json reporter formatted report when presented with a legal result", async () => {
     const lResult = await format(MINIMAL_RESULT, { outputType: "json" });
     deepEqual(JSON.parse(lResult.output), MINIMAL_RESULT);
   });

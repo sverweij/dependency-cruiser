@@ -77,5 +77,6 @@ export default {
         },
       ],
     },
+    environment: {},
   },
 };

@@ -17,6 +17,7 @@
     "totalCruised": 1,
     "totalDependenciesCruised": 0,
     "optionsUsed": {
+      "baseDir": "/test/main/__mocks__/type-only-module-references",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
@@ -27,8 +28,96 @@
       "preserveSymlinks": false,
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
-      "args": "src",
-      "baseDir": "test/main/__mocks__/type-only-module-references"
+      "args": "src"
+    },
+    "environment": {
+      "version": "18.0.0",
+      "nodeVersionSupported": "^22||^24||>=26",
+      "nodeVersionFound": "v26.2.0",
+      "osVersionFound": "arm64 darwin@25.5.0",
+      "transpilersFound": [
+        {
+          "name": "javascript",
+          "version": "*",
+          "available": true,
+          "currentVersion": "acorn@8.17.0"
+        },
+        {
+          "name": "babel",
+          "version": ">=7.0.0 <8.0.0",
+          "available": true,
+          "currentVersion": "@babel/core@7.29.7"
+        },
+        {
+          "name": "coffee-script",
+          "version": ">=1.0.0 <2.0.0",
+          "available": true,
+          "currentVersion": "coffeescript@2.7.0"
+        },
+        {
+          "name": "coffeescript",
+          "version": ">=1.0.0 <3.0.0",
+          "available": true,
+          "currentVersion": "coffeescript@2.7.0"
+        },
+        {
+          "name": "livescript",
+          "version": ">=1.0.0 <2.0.0",
+          "available": false,
+          "currentVersion": "-"
+        },
+        {
+          "name": "svelte",
+          "version": ">=3.0.0 <6.0.0",
+          "available": true,
+          "currentVersion": "svelte/compiler@5.56.4"
+        },
+        {
+          "name": "swc",
+          "version": ">=1.0.0 <2.0.0",
+          "available": true,
+          "currentVersion": "@swc/core@1.15.43"
+        },
+        {
+          "name": "typescript",
+          "version": ">=2.0.0 <7.0.0",
+          "available": true,
+          "currentVersion": "typescript@6.0.3"
+        },
+        {
+          "name": "vue-template-compiler",
+          "version": ">=2.0.0 <3.0.0",
+          "available": true,
+          "currentVersion": "vue-template-compiler"
+        },
+        {
+          "name": "@vue/compiler-sfc",
+          "version": ">=3.0.0 <4.0.0",
+          "available": true,
+          "currentVersion": "vue-template-compiler"
+        }
+      ],
+      "extensionsFound": [
+        { "extension": ".js", "available": true },
+        { "extension": ".cjs", "available": true },
+        { "extension": ".mjs", "available": true },
+        { "extension": ".jsx", "available": true },
+        { "extension": ".ts", "available": true },
+        { "extension": ".tsx", "available": true },
+        { "extension": ".d.ts", "available": true },
+        { "extension": ".cts", "available": true },
+        { "extension": ".d.cts", "available": true },
+        { "extension": ".mts", "available": true },
+        { "extension": ".d.mts", "available": true },
+        { "extension": ".vue", "available": true },
+        { "extension": ".svelte", "available": true },
+        { "extension": ".ls", "available": false },
+        { "extension": ".coffee", "available": true },
+        { "extension": ".litcoffee", "available": true },
+        { "extension": ".coffee.md", "available": true },
+        { "extension": ".csx", "available": true },
+        { "extension": ".cjsx", "available": true }
+      ]
     }
   }
 }

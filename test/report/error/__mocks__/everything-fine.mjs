@@ -270,5 +270,6 @@ export default {
       moduleSystems: ["amd", "cjs", "es6"],
       outputType: "json",
     },
+    environment: {},
   },
 };

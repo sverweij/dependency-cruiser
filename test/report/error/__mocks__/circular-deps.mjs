@@ -156,5 +156,6 @@ export default {
         },
       ],
     },
+    environment: {},
   },
 };

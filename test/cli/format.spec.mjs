@@ -125,8 +125,7 @@ describe("[E] cli/format", () => {
         outputTo: lOutFile,
       },
     );
-
-    equal(lExitCode, 2);
     deleteDammit(lOutFile);
+    equal(lExitCode, 2);
   });
 });

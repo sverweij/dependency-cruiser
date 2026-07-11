@@ -5,9 +5,22 @@ import cycleFest from "./__mocks__/cycle-fest.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import summarize from "#analyze/summarize/index.mjs";
 
+const DUMMY_ENVIRONMENT = {
+  version: "481",
+  nodeVersionSupported: "^42",
+  nodeVersionFound: "42.1.2",
+  osVersionFound: `riscv pinecil@1.2.3`,
+  transpilersFound: [],
+  extensionsFound: [],
+};
+
+function getFakeEnvironmentInfo() {
+  return DUMMY_ENVIRONMENT;
+}
+
 describe("[I] analyze/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
-    const lSummary = summarize([], {}, []);
+    const lSummary = summarize([], {}, [], [], getFakeEnvironmentInfo);
     deepEqual(lSummary, {
       error: 0,
       info: 0,
@@ -19,11 +32,18 @@ describe("[I] analyze/summarize", () => {
       totalDependenciesCruised: 0,
       violations: [],
       warn: 0,
+      environment: DUMMY_ENVIRONMENT,
     });
     validateCruiseResult({ modules: [], summary: lSummary });
   });
   it("adds a rule set when there is one", () => {
-    const lSummary = summarize([], { ruleSet: { required: [] } }, []);
+    const lSummary = summarize(
+      [],
+      { ruleSet: { required: [] } },
+      [],
+      [],
+      getFakeEnvironmentInfo,
+    );
     deepEqual(lSummary, {
       error: 0,
       info: 0,
@@ -38,6 +58,7 @@ describe("[I] analyze/summarize", () => {
       totalDependenciesCruised: 0,
       violations: [],
       warn: 0,
+      environment: DUMMY_ENVIRONMENT,
     });
     validateCruiseResult({ modules: [], summary: lSummary });
   });
@@ -57,8 +78,20 @@ describe("[I] analyze/summarize", () => {
         ],
       },
     };
-    const lResult1 = summarize(cycleStartsOnOne, lOptions, ["src"]);
-    const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
+    const lResult1 = summarize(
+      cycleStartsOnOne,
+      lOptions,
+      ["src"],
+      [],
+      getFakeEnvironmentInfo,
+    );
+    const lResult2 = summarize(
+      cycleStartsOnTwo,
+      lOptions,
+      ["src"],
+      [],
+      getFakeEnvironmentInfo,
+    );
 
     deepEqual(lResult1, lResult2);
     validateCruiseResult({ modules: [], summary: lResult1 });
@@ -170,9 +203,16 @@ describe("[I] analyze/summarize", () => {
           },
         ],
       },
+      environment: DUMMY_ENVIRONMENT,
     };
 
-    const lSummary = summarize(cycleFest, lOptions, ["src"]);
+    const lSummary = summarize(
+      cycleFest,
+      lOptions,
+      ["src"],
+      [],
+      getFakeEnvironmentInfo,
+    );
     deepEqual(lSummary, lExpected);
     validateCruiseResult({ modules: [], summary: lSummary });
   });
@@ -196,34 +236,48 @@ describe("[I] analyze/summarize", () => {
         },
       },
     ];
-    deepEqual(summarize([], { knownViolations: lKnownViolations }, []), {
-      error: 0,
-      info: 0,
-      ignore: 0,
-      optionsUsed: {
-        args: "",
-        knownViolations: lKnownViolations,
+    deepEqual(
+      summarize(
+        [],
+        { knownViolations: lKnownViolations },
+        [],
+        [],
+        getFakeEnvironmentInfo,
+      ),
+      {
+        error: 0,
+        info: 0,
+        ignore: 0,
+        optionsUsed: {
+          args: "",
+          knownViolations: lKnownViolations,
+        },
+        totalCruised: 0,
+        totalDependenciesCruised: 0,
+        violations: [],
+        warn: 0,
+        environment: DUMMY_ENVIRONMENT,
       },
-      totalCruised: 0,
-      totalDependenciesCruised: 0,
-      violations: [],
-      warn: 0,
-    });
+    );
   });
 
   it("doesn't include known violations key when none exist", () => {
-    deepEqual(summarize([], { knownViolations: [] }, []), {
-      error: 0,
-      info: 0,
-      ignore: 0,
-      optionsUsed: {
-        args: "",
+    deepEqual(
+      summarize([], { knownViolations: [] }, [], [], getFakeEnvironmentInfo),
+      {
+        error: 0,
+        info: 0,
+        ignore: 0,
+        optionsUsed: {
+          args: "",
+        },
+        totalCruised: 0,
+        totalDependenciesCruised: 0,
+        violations: [],
+        warn: 0,
+        environment: DUMMY_ENVIRONMENT,
       },
-      totalCruised: 0,
-      totalDependenciesCruised: 0,
-      violations: [],
-      warn: 0,
-    });
+    );
   });
 
   it("violating something with moreUnstable & instabilities", () => {
@@ -255,6 +309,8 @@ describe("[I] analyze/summarize", () => {
         },
       },
       [],
+      [],
+      getFakeEnvironmentInfo,
     );
 
     deepEqual(lSummary, {
@@ -299,6 +355,7 @@ describe("[I] analyze/summarize", () => {
           },
         ],
       },
+      environment: DUMMY_ENVIRONMENT,
     });
     validateCruiseResult({ modules: [], summary: lSummary });
   });

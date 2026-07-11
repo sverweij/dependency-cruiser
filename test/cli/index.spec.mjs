@@ -1,3 +1,4 @@
+import { mock } from "node:test";
 import { readFileSync, unlinkSync } from "node:fs";
 import { doesNotThrow, equal, throws, match } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting

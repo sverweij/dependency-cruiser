@@ -167,6 +167,14 @@
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/cjs/sub test/cli/__fixtures__/duplicate-subs/sub/more-in-sub.js test/cli/__fixtures__/unresolvable-in-sub"
+    },
+    "environment": {
+      "version": "481",
+      "nodeVersionSupported": "^42",
+      "nodeVersionFound": "42.1.2",
+      "osVersionFound": "riscv pinecil@1.2.3",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

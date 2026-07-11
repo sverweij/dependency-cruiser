@@ -2707,6 +2707,44 @@
           }
         }
       ]
+    },
+    "environment": {
+      "version": "18.0.0",
+      "nodeVersionSupported": "^22||^24||>=26",
+      "nodeVersionFound": "v26.2.0",
+      "osVersionFound": "arm64 darwin@25.5.0",
+      "transpilersFound": [
+        {
+          "name": "javascript",
+          "version": "*",
+          "available": true,
+          "currentVersion": "acorn@8.17.0"
+        },
+        {
+          "name": "typescript",
+          "version": ">=2.0.0 <7.0.0",
+          "available": false,
+          "currentVersion": "-"
+        }
+      ],
+      "extensionsFound": [
+        {
+          "extension": ".js",
+          "available": true
+        },
+        {
+          "extension": ".cjs",
+          "available": true
+        },
+        {
+          "extension": ".mjs",
+          "available": true
+        },
+        {
+          "extension": ".jsx",
+          "available": true
+        },
+      ],
     }
   }
 }

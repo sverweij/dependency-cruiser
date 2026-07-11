@@ -5369,5 +5369,6 @@ export default {
       allowed: [],
       allowedSeverity: "warn",
     },
+    environment: {}
   },
 };

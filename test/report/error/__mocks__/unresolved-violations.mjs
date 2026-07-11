@@ -44,5 +44,7 @@ export default {
         },
       ],
     },
+    environment: {
+    }
   },
 };
