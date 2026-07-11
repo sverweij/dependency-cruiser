@@ -1,4 +1,4 @@
-import { deepEqual } from "node:assert/strict";
+import { deepEqual, ok } from "node:assert/strict";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
@@ -16,6 +16,19 @@ const DUMMY_ENVIRONMENT = {
 
 function getFakeEnvironmentInfo() {
   return DUMMY_ENVIRONMENT;
+}
+function getFakeEnvironmentInfoWithTypeScriptFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "typescript",
+        available: true,
+        version: "",
+        currentVersion: ">=2.0.0 <7.0.0",
+      },
+    ],
+  };
 }
 
 describe("[I] analyze/summarize", () => {
@@ -358,5 +371,33 @@ describe("[I] analyze/summarize", () => {
       environment: DUMMY_ENVIRONMENT,
     });
     validateCruiseResult({ modules: [], summary: lSummary });
+  });
+
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" } },
+      [],
+      [],
+      getFakeEnvironmentInfo,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("does not emit an issue into the 'environment' when a typescript transpiler is expected and not missing", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithTypeScriptFound,
+    );
+
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
   });
 });

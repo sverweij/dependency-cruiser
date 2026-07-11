@@ -8,7 +8,6 @@ import {
   getDependenciesCruised,
 } from "./get-stats.mjs";
 import { compareViolations } from "#graph-utl/compare.mjs";
-import { getAvailableTranspilers } from "#extract/transpile/meta.mjs";
 import { getEnvironmentInfo } from "#environment.mjs";
 
 /**

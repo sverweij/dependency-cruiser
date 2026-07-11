@@ -142,7 +142,7 @@ function formatEnvironmentIssues(pEnvironmentIssues) {
   const lEnvironmentIssues = pEnvironmentIssues ?? [];
 
   return (
-    (lEnvironmentIssues.length > 1 ? EOL : "") +
+    (lEnvironmentIssues.length > 0 ? EOL : "") +
     lEnvironmentIssues.map(formatEnvironmentIssue).join(EOL)
   );
 }
@@ -165,7 +165,7 @@ function report(pResults, pOptions) {
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)${EOL}${formatIgnoreWarning(
       pResults.summary.ignore,
-    )}${EOL}`;
+    )}${formatEnvironmentIssues(pResults.summary.environment?.issues)}${EOL}`;
   }
 
   return lNonIgnorableViolations
@@ -177,7 +177,7 @@ function report(pResults, pOptions) {
     )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
-    .concat(formatEnvironmentIssues(pResults.summary.environment.issues))
+    .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
     .concat(EOL);
 }
 
