@@ -29,7 +29,7 @@ export function clearRegExpCache() {
  * This fills our current need. Later we can expand it to return all group
  * matches.
  *
- * @param {import("../../types/restrictions").IFromRestriction} pFromRestriction
+ * @param {import("../../types/restrictions.mjs").IFromRestriction} pFromRestriction
  * @param {string} pActualPath
  * @returns {string[]|null}
  */

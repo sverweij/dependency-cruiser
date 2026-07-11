@@ -135,11 +135,10 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
 /**
  *
  * @param {string[]} pFileDirectoryArray
- * @param {import("../../types/options.mjs").ICruiseOptions} lCruiseOptions
+ * @param {import("../../types/options.mjs").ICruiseOptions} pCruiseOptions
  * @param {{stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream}=} pStreams
  * @returns {number}
  */
-
 // eslint-disable-next-line max-lines-per-function
 export default async function executeCli(
   pFileDirectoryArray,

@@ -33,7 +33,7 @@ const EMPTY_CACHE = {
 };
 
 // see ./cache-rationales.md#cache-format-versioning for rationale & bump instructions
-const CACHE_FORMAT_VERSION = 16.2;
+const CACHE_FORMAT_VERSION = 18.1;
 
 export default class Cache {
   /** @type {(IRevisionData | null)=} */
