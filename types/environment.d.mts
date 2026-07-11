@@ -19,6 +19,10 @@ export interface IAvailableTranspiler {
    */
   version: string;
   /**
+   * The currently installed version (e.g. 2.3.4). '-' if not installed
+   */
+  currentVersion: string;
+  /**
    * Whether or not the transpiler is available in the current environment
    */
   available: boolean;
