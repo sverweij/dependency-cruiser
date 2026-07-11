@@ -14,6 +14,8 @@ async function barfTheJSON(
   pResult,
   pTargetDirectory = MAIN_MOCKS_DIR,
 ) {
+  pResult.output.summary.optionsUsed.baseDir =
+    pResult.output.summary.optionsUsed.baseDir.replace(WORKING_DIR, "");
   const lFormatted = await format(JSON.stringify(pResult.output), {
     parser: "json",
   });
