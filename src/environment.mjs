@@ -12,6 +12,6 @@ export function getEnvironmentInfo() {
     nodeVersionFound: process.version,
     osVersionFound: `${arch()} ${platform()}@${release()}`,
     transpilersFound: getAvailableTranspilers(),
-    extensionsFound: allExtensions,
+    extensionsFound: structuredClone(allExtensions),
   };
 }
