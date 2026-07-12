@@ -40,8 +40,9 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepEqual(lResult.output, tsPreCompFixtureCJS);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, tsPreCompFixtureCJS);
   });
   it("ts-pre-compilation-deps: on, target ES", async () => {
     const lResult = await cruise(
@@ -63,8 +64,9 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepEqual(lResult.output, tsPreCompFixtureES);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, tsPreCompFixtureES);
   });
   it("ts-pre-compilation-deps: off, target CJS", async () => {
     const lResult = await cruise(
@@ -86,8 +88,9 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepEqual(lResult.output, tsNoPrecompFixtureCJS);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, tsNoPrecompFixtureCJS);
   });
   it("ts-pre-compilation-deps: off, target ES", async () => {
     const lResult = await cruise(
@@ -109,7 +112,8 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepEqual(lResult.output, tsNoPrecompFixtureES);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, tsNoPrecompFixtureES);
   });
 });

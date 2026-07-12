@@ -35,8 +35,9 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepEqual(lResult.output, output);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, output);
   });
 
   it("flags type only imports when forbidden", async () => {
@@ -62,7 +63,8 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepEqual(lResult.output, outputWithRules);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, outputWithRules);
   });
 });

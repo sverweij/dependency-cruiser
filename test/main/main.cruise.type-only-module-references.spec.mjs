@@ -35,8 +35,9 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true, resolveLicenses: true },
     );
 
-    deepEqual(lResult.output, output);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, output);
   });
 
   it("don't find it when not looking for pre-compilation deps", async () => {
@@ -50,7 +51,8 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, outputNoTS);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, outputNoTS);
   });
 });

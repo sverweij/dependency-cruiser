@@ -30,8 +30,9 @@ describe("[E] main.cruise - main", () => {
   it("Returns an object when no options are passed", async () => {
     const lResult = await cruise(["test/main/__mocks__/ts"]);
 
-    deepEqual(pathPosixify(lResult.output), tsFixture);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(pathPosixify(lResult.output), tsFixture);
   });
 
   it("Returns an object when no options are passed (absolute path)", async () => {
@@ -41,8 +42,9 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(pathPosixify(lResult.output), tsFixture);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(pathPosixify(lResult.output), tsFixture);
   });
 
   it("processes tsx correctly", async () => {
@@ -52,8 +54,9 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(pathPosixify(lResult.output), tsxFixture);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(pathPosixify(lResult.output), tsxFixture);
   });
 
   it("processes jsx correctly", async () => {
@@ -63,8 +66,9 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(pathPosixify(lResult.output), jsxFixture);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(pathPosixify(lResult.output), jsxFixture);
   });
   it("process rulesets in the form a an object instead of json", async () => {
     const lResult = await cruise(
@@ -75,8 +79,9 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
   });
   it("Collapses to a pattern when a collapse pattern is passed", async () => {
     const lResult = await cruise(
@@ -88,6 +93,8 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
+    validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
     deepEqual(
       pathPosixify(lResult.output),
       normBaseDirectory(
@@ -99,6 +106,5 @@ describe("[E] main.cruise - main", () => {
         ),
       ),
     );
-    validateCruiseResult(lResult.output);
   });
 });

@@ -16,6 +16,7 @@ async function barfTheJSON(
 ) {
   pResult.output.summary.optionsUsed.baseDir =
     pResult.output.summary.optionsUsed.baseDir.replace(WORKING_DIR, "");
+  pResult.output.summary.environment = {};
   const lFormatted = await format(JSON.stringify(pResult.output), {
     parser: "json",
   });

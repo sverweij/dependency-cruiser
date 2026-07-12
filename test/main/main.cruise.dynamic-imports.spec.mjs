@@ -60,8 +60,9 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, esOut);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
+    deepEqual(lResult.output, esOut);
   });
 
   it("detects dynamic dependencies in typescript", async () => {
@@ -96,6 +97,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
 
     deepEqual(lResult.output, tsOut);
   });
@@ -133,6 +135,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = {};
     deepEqual(lResult.output, tsOutpre);
   });
 });
