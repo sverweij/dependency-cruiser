@@ -24,8 +24,75 @@ function getFakeEnvironmentInfoWithTypeScriptFound() {
       {
         name: "typescript",
         available: true,
-        version: "",
-        currentVersion: ">=2.0.0 <7.0.0",
+        version: ">=2.0.0 <7.0.0",
+        currentVersion: "3.4.5",
+      },
+    ],
+  };
+}
+
+function getFakeEnvironmentInfoWithSWCNotFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "swc",
+        available: false,
+        version: ">=1.0.0 <2.0.0",
+        currentVersion: "-",
+      },
+    ],
+  };
+}
+
+function getFakeEnvironmentInfoWithSWCFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "swc",
+        available: true,
+        version: ">=1.0.0 <2.0.0",
+        currentVersion: "@swc/core@1.15.43",
+      },
+    ],
+  };
+}
+function getFakeEnvironmentInfoWithTypeScriptNotFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "typescript",
+        available: false,
+        version: ">=2.0.0 <7.0.0",
+        currentVersion: "-",
+      },
+    ],
+  };
+}
+function getFakeEnvironmentInfoWithBabelFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "babel",
+        available: true,
+        version: ">=7.0.0 <9.0.0",
+        currentVersion: "@babel/core@8.9.10",
+      },
+    ],
+  };
+}
+function getFakeEnvironmentInfoWithBabelNotFound() {
+  return {
+    ...DUMMY_ENVIRONMENT,
+    transpilersFound: [
+      {
+        name: "babel",
+        available: false,
+        version: ">=7.0.0 <9.0.0",
+        currentVersion: "-",
       },
     ],
   };
@@ -373,13 +440,13 @@ describe("[I] analyze/summarize", () => {
     validateCruiseResult({ modules: [], summary: lSummary });
   });
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing", () => {
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig)", () => {
     const lSummary = summarize(
       [],
       { tsConfig: { fileName: "./tsconfig.json" } },
       [],
       [],
-      getFakeEnvironmentInfo,
+      getFakeEnvironmentInfoWithTypeScriptNotFound,
     );
     ok(lSummary.environment.issues);
     ok(
@@ -389,6 +456,81 @@ describe("[I] analyze/summarize", () => {
     );
   });
 
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsPrecompilationDeps)", () => {
+    const lSummary = summarize(
+      [],
+      { tsPreCompilationDeps: true },
+      [],
+      [],
+      getFakeEnvironmentInfoWithTypeScriptNotFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (detectJSDocImports)", () => {
+    const lSummary = summarize(
+      [],
+      { detectJSDocImports: true },
+      [],
+      [],
+      getFakeEnvironmentInfoWithTypeScriptNotFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (parser === 'tsc')", () => {
+    const lSummary = summarize(
+      [],
+      { parser: "tsc" },
+      [],
+      [],
+      getFakeEnvironmentInfoWithTypeScriptNotFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (parser === 'swc')", () => {
+    const lSummary = summarize(
+      [],
+      { parser: "swc" },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCNotFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-swc-transpiler",
+      ),
+    );
+  });
+
+  it("emits no 'environment' when swc is expected but missing (parser === 'swc')", () => {
+    const lSummary = summarize(
+      [],
+      { parser: "swc" },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
   it("does not emit an issue into the 'environment' when a typescript transpiler is expected and not missing", () => {
     const lSummary = summarize(
       [],
@@ -396,6 +538,34 @@ describe("[I] analyze/summarize", () => {
       [],
       [],
       getFakeEnvironmentInfoWithTypeScriptFound,
+    );
+
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
+  it("emits an issue into the 'environment' when a babel transpiler is expected but missing", () => {
+    const lSummary = summarize(
+      [],
+      { babelConfig: { fileName: "./.babelrc" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithBabelNotFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-babel-transpiler",
+      ),
+    );
+  });
+
+  it("does not emit an issue into the 'environment' when a babel transpiler is expected and not missing", () => {
+    const lSummary = summarize(
+      [],
+      { babelConfig: { fileName: "./.babelrc" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithBabelFound,
     );
 
     ok(!Object.hasOwn(lSummary.environment, "issues"));

@@ -130,7 +130,7 @@ function formatIgnoreWarning(pNumberOfIgnoredViolations) {
 function formatEnvironmentIssue(pEnvironmentIssue) {
   return styleText(
     SEVERITY2COLOR.get(pEnvironmentIssue.severity),
-    `${SEVERITY2ICON.get(pEnvironmentIssue.severity)} ${pEnvironmentIssue.name}: ${pEnvironmentIssue.description}`,
+    `${SEVERITY2ICON.get(pEnvironmentIssue.severity)} ${styleText("bold", pEnvironmentIssue.name)}: ${pEnvironmentIssue.description}`,
   );
 }
 
