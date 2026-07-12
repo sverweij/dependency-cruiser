@@ -146,6 +146,7 @@
     "totalCruised": 6,
     "totalDependenciesCruised": 6,
     "optionsUsed": {
+      "baseDir": "",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
@@ -157,6 +158,14 @@
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "test/main/__mocks__/ts"
+    },
+    "environment": {
+      "version": "481",
+      "nodeVersionSupported": "^42",
+      "nodeVersionFound": "42.1.2",
+      "osVersionFound": "riscv pinecil@1.2.3",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

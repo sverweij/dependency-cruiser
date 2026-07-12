@@ -39,6 +39,7 @@ function reSummarizeResults(pResult, pFormatOptions) {
         // TODO: apply filters to the folders too
         pResult.folders,
       ),
+      environment: pResult.summary.environment,
     },
     modules: lModules,
   };

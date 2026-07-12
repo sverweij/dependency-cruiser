@@ -14,6 +14,8 @@ import ignoredAndRealViolations from "./__mocks__/ignored-and-real-violations.mj
 import missingViolationType from "./__mocks__/missing-violation-type.mjs";
 import unknownViolationType from "./__mocks__/unknown-violation-type.mjs";
 import unresolvedViolations from "./__mocks__/unresolved-violations.mjs";
+import environmentIssuesNoViolations from "./__mocks__/environment-issues-no-violations.mjs";
+import environmentIssuesViolations from "./__mocks__/environment-issues-violations.mjs";
 import render from "#report/error.mjs";
 
 describe("[I] report/error", () => {
@@ -182,6 +184,22 @@ describe("[I] report/error", () => {
     match(
       lResult.output,
       /10 known violations ignored. Run with --no-ignore-known to see them\./,
+    );
+  });
+
+  it("emits environment issues when they're in the summary (when there's violations)", () => {
+    const result = render(environmentIssuesViolations);
+    match(
+      result.output,
+      /environment-issue-name: Hoor, wie klopt daar kind'ren[.]/,
+    );
+  });
+
+  it("emits environment issues when they're in the summary (even when there's no violations)", () => {
+    const result = render(environmentIssuesNoViolations);
+    match(
+      result.output,
+      /environment-issue-name: Zie, de maan schijnt door de bomen[.]/,
     );
   });
 });

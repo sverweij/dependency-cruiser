@@ -1,4 +1,5 @@
 import { deepEqual } from "node:assert/strict";
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
@@ -35,8 +36,9 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true, resolveLicenses: true },
     );
 
-    deepEqual(lResult.output, output);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
+    deepEqual(lResult.output, output);
   });
 
   it("don't find it when not looking for pre-compilation deps", async () => {
@@ -50,7 +52,8 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, outputNoTS);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
+    deepEqual(lResult.output, outputNoTS);
   });
 });

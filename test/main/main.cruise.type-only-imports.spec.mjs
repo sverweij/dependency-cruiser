@@ -1,4 +1,5 @@
 import { deepEqual } from "node:assert/strict";
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
@@ -35,8 +36,9 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepEqual(lResult.output, output);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
+    deepEqual(lResult.output, output);
   });
 
   it("flags type only imports when forbidden", async () => {
@@ -62,7 +64,8 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepEqual(lResult.output, outputWithRules);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
+    deepEqual(lResult.output, outputWithRules);
   });
 });

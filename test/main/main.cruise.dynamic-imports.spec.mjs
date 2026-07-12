@@ -1,5 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import cruise from "#main/cruise.mjs";
@@ -60,8 +61,9 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    deepEqual(lResult.output, esOut);
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
+    deepEqual(lResult.output, esOut);
   });
 
   it("detects dynamic dependencies in typescript", async () => {
@@ -96,6 +98,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
 
     deepEqual(lResult.output, tsOut);
   });
@@ -133,6 +136,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     validateCruiseResult(lResult.output);
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
     deepEqual(lResult.output, tsOutpre);
   });
 });

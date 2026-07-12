@@ -40,6 +40,7 @@
     "totalCruised": 2,
     "totalDependenciesCruised": 1,
     "optionsUsed": {
+      "baseDir": "/test/main/__mocks__/type-only-module-references",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
@@ -50,8 +51,15 @@
       "preserveSymlinks": false,
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": true,
-      "args": "src",
-      "baseDir": "test/main/__mocks__/type-only-module-references"
+      "args": "src"
+    },
+    "environment": {
+      "version": "481",
+      "nodeVersionSupported": "^42",
+      "nodeVersionFound": "42.1.2",
+      "osVersionFound": "riscv pinecil@1.2.3",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

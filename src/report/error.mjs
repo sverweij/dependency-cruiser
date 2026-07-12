@@ -15,6 +15,13 @@ const SEVERITY2COLOR = new Map([
   ["ignore", "gray"],
 ]);
 
+const SEVERITY2ICON = new Map([
+  ["error", "x"],
+  ["warn", "‼"],
+  ["info", "i"],
+  ["ignore", "-"],
+]);
+
 const EXTRA_PATH_INFORMATION_INDENT = 6;
 
 function formatMiniDependency(pMiniDependency) {
@@ -116,6 +123,29 @@ function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   }
   return "";
 }
+/**
+ * @param {import("../../types/cruise-result.mjs").IEnvironmentIssue} pEnvironmentIssue
+ * @returns {string}
+ */
+function formatEnvironmentIssue(pEnvironmentIssue) {
+  return styleText(
+    SEVERITY2COLOR.get(pEnvironmentIssue.severity),
+    `${SEVERITY2ICON.get(pEnvironmentIssue.severity)} ${styleText("bold", pEnvironmentIssue.name)}: ${pEnvironmentIssue.description}`,
+  );
+}
+
+/**
+ * @param {import("../../types/cruise-result.mjs").IEnvironmentIssue[]} pEnvironmentIssues
+ * @returns {string}
+ */
+function formatEnvironmentIssues(pEnvironmentIssues) {
+  const lEnvironmentIssues = pEnvironmentIssues ?? [];
+
+  return (
+    (lEnvironmentIssues.length > 0 ? EOL : "") +
+    lEnvironmentIssues.map(formatEnvironmentIssue).join(EOL)
+  );
+}
 
 function report(pResults, pOptions) {
   const lOptions = {
@@ -135,7 +165,7 @@ function report(pResults, pOptions) {
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)${EOL}${formatIgnoreWarning(
       pResults.summary.ignore,
-    )}${EOL}`;
+    )}${formatEnvironmentIssues(pResults.summary.environment?.issues)}${EOL}`;
   }
 
   return lNonIgnorableViolations
@@ -147,6 +177,7 @@ function report(pResults, pOptions) {
     )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
+    .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
     .concat(EOL);
 }
 

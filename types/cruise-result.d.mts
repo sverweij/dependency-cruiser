@@ -6,10 +6,15 @@ import type {
   ModuleSystemType,
   ProtocolType,
   ExperimentalStatsType,
+  SeverityType,
 } from "./shared-types.mjs";
 import type { IViolation } from "./violations.mjs";
 import type { IRuleSummary } from "./rule-summary.mjs";
 import type { IChange } from "watskeburt";
+import type {
+  IAvailableExtension,
+  IAvailableTranspiler,
+} from "./environment.mjs";
 
 export interface IRevisionChange extends IChange {
   // optional because
@@ -359,6 +364,28 @@ export interface ISummary {
    * the number of warnings in the dependencies
    */
   warn: number;
+  /**
+   * information on the environment the cruise ran on
+   */
+  environment: {
+    version: string;
+    nodeVersionSupported: string;
+    nodeVersionFound: string;
+    osVersionFound: string;
+    transpilersFound: IAvailableTranspiler[];
+    extensionsFound: IAvailableExtension[];
+    /**
+     * Issues detected in the environment that might have influenced the cruise
+     * e.g. a missing (supported) typescript transpiler, while there's a tsconfig
+     */
+    issues?: IEnvironmentIssue[];
+  };
+}
+
+export interface IEnvironmentIssue {
+  severity: SeverityType;
+  name: string;
+  description: string;
 }
 
 /**

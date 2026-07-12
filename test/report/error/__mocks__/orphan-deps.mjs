@@ -40,5 +40,6 @@ export default {
       tsPreCompilationDeps: false,
       preserveSymlinks: false,
     },
+    environment: {},
   },
 };

@@ -8,9 +8,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../extract/resolve/resolve",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -30,9 +28,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../main/resolve-options/normalize",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -46,9 +42,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./merge-configs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -62,9 +56,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./read-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -78,9 +70,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -102,9 +92,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -119,9 +107,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/isEqual",
           "moduleSystem": "cjs",
@@ -136,9 +122,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/uniqBy",
           "moduleSystem": "cjs",
@@ -153,9 +137,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/uniqWith",
           "moduleSystem": "cjs",
@@ -178,9 +160,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -194,9 +174,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "json5",
           "moduleSystem": "cjs",
@@ -211,9 +189,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -235,9 +211,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../utl/bus",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -251,9 +225,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "chalk",
           "moduleSystem": "cjs",
@@ -268,9 +240,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "figures",
           "moduleSystem": "cjs",
@@ -300,9 +270,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../../utl/bus",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -316,9 +284,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./format-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -332,9 +298,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "chalk",
           "moduleSystem": "cjs",
@@ -357,9 +321,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../main",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -373,9 +335,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "chalk",
           "moduleSystem": "cjs",
@@ -390,9 +350,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "figures",
           "moduleSystem": "cjs",
@@ -415,9 +373,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../main",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -431,9 +387,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./normalize-options",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -447,9 +401,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/io",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -463,9 +415,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/validate-file-existence",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -479,9 +429,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "get-stream",
           "moduleSystem": "cjs",
@@ -504,9 +452,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./compile-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -520,9 +466,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./defaults.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -536,9 +480,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -552,9 +494,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/clone",
           "moduleSystem": "cjs",
@@ -569,9 +509,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -586,9 +524,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/set",
           "moduleSystem": "cjs",
@@ -603,9 +539,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -625,9 +559,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "local"
-      ],
+      "dependencyTypes": ["local"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": true,
@@ -641,9 +573,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -665,9 +595,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -689,9 +617,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/make-absolute",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -713,9 +639,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -737,9 +661,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../main",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -753,9 +675,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../utl/bus",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -769,9 +689,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./ears/cli-feedback-listener",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -785,9 +703,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./ears/performance-log-listener",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -801,9 +717,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./format-meta-info",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -817,9 +731,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./get-resolve-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -833,9 +745,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./init-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -849,9 +759,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./normalize-options",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -865,9 +773,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./parse-babel-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -881,9 +787,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./parse-ts-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -897,9 +801,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/io",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -913,9 +815,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/validate-file-existence",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -929,9 +829,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "ISC",
           "module": "glob",
           "moduleSystem": "cjs",
@@ -946,9 +844,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -971,9 +867,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../defaults.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -987,9 +881,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./build-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1003,9 +895,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1019,9 +909,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./get-user-input",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1035,9 +923,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./normalize-init-options",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1051,9 +937,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./write-config",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1067,9 +951,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./write-run-scripts-to-manifest",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1091,9 +973,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./config.js.template",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1107,9 +987,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1123,9 +1001,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "handlebars/runtime",
           "moduleSystem": "cjs",
@@ -1148,9 +1024,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "handlebars/runtime",
           "moduleSystem": "cjs",
@@ -1173,9 +1047,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1189,9 +1061,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -1214,9 +1084,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1230,9 +1098,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./inquirer-validators",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1246,9 +1112,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "inquirer",
           "moduleSystem": "cjs",
@@ -1271,9 +1135,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1287,9 +1149,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1311,9 +1171,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../../package.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1327,9 +1185,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1351,9 +1207,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../defaults.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1367,9 +1221,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1383,9 +1235,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "chalk",
           "moduleSystem": "cjs",
@@ -1400,9 +1250,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "figures",
           "moduleSystem": "cjs",
@@ -1417,9 +1265,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1441,9 +1287,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../utl/wrap-and-indent",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1457,9 +1301,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../defaults.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1473,9 +1315,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./environment-helpers",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1489,9 +1329,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "chalk",
           "moduleSystem": "cjs",
@@ -1506,9 +1344,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "figures",
           "moduleSystem": "cjs",
@@ -1523,9 +1359,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1547,9 +1381,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../package.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1563,9 +1395,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./utl/make-absolute",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1579,9 +1409,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm-dev"
-          ],
+          "dependencyTypes": ["npm-dev"],
           "license": "MIT",
           "module": "@babel/core",
           "moduleSystem": "cjs",
@@ -1597,9 +1425,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1613,9 +1439,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "json5",
           "moduleSystem": "cjs",
@@ -1630,9 +1454,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -1647,9 +1469,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1663,9 +1483,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "semver-try-require",
           "moduleSystem": "cjs",
@@ -1688,9 +1506,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../package.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1704,9 +1520,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "lodash/get",
           "moduleSystem": "cjs",
@@ -1721,9 +1535,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1737,9 +1549,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "semver-try-require",
           "moduleSystem": "cjs",
@@ -1754,9 +1564,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm-dev"
-          ],
+          "dependencyTypes": ["npm-dev"],
           "license": "Apache-2.0",
           "module": "typescript",
           "moduleSystem": "cjs",
@@ -1780,9 +1588,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1796,9 +1602,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "MIT",
           "module": "get-stream",
           "moduleSystem": "cjs",
@@ -1813,9 +1617,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1837,9 +1639,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../../package.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -1853,9 +1653,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm"
-          ],
+          "dependencyTypes": ["npm"],
           "license": "ISC",
           "module": "semver",
           "moduleSystem": "cjs",
@@ -1876,9 +1674,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1904,9 +1700,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1918,9 +1712,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1932,9 +1724,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "local"
-      ],
+      "dependencyTypes": ["local"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1946,9 +1736,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm-dev"
-      ],
+      "dependencyTypes": ["npm-dev"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1960,9 +1748,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1974,9 +1760,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm-dev"
-      ],
+      "dependencyTypes": ["npm-dev"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -1988,9 +1772,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2002,9 +1784,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2016,9 +1796,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2030,9 +1808,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2044,9 +1820,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2058,9 +1832,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2086,9 +1858,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2100,9 +1870,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2114,9 +1882,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2135,9 +1901,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2149,9 +1913,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2163,9 +1925,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2177,9 +1937,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": true,
-      "dependencyTypes": [
-        "npm"
-      ],
+      "dependencyTypes": ["npm"],
       "dependencies": [],
       "orphan": false,
       "matchesFocus": false,
@@ -2221,21 +1979,14 @@
       "focus": {
         "path": "^(src/cli)"
       },
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/main/fixtures/cruise-results-dc-2020-08-30-src-cli.json",
       "outputType": "json",
       "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
       "preserveSymlinks": false,
       "rulesFile": ".dependency-cruiser.json",
       "tsPreCompilationDeps": true,
-      "exoticRequireStrings": [
-        "tryRequire"
-      ],
+      "exoticRequireStrings": ["tryRequire"],
       "reporterOptions": {
         "archi": {
           "collapsePattern": "^(node_modules|src|test)/[^/]+|^bin/"
@@ -2550,9 +2301,7 @@
             "path": "^(bin|src)"
           },
           "to": {
-            "dependencyTypes": [
-              "npm-dev"
-            ],
+            "dependencyTypes": ["npm-dev"],
             "exoticallyRequired": false
           }
         },
@@ -2572,9 +2321,7 @@
           "comment": "This module uses an external dependency that in package.json shows up as an optional dependency. In dependency-cruiser optional dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-optional"
-            ]
+            "dependencyTypes": ["npm-optional"]
           }
         },
         {
@@ -2583,9 +2330,7 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-peer"
-            ]
+            "dependencyTypes": ["npm-peer"]
           }
         },
         {
@@ -2646,9 +2391,7 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "core"
-            ],
+            "dependencyTypes": ["core"],
             "path": [
               "^(v8/tools/codemap)$",
               "^(v8/tools/consarray)$",
@@ -2689,10 +2432,7 @@
           "comment": "This module depends on an npm package that isn't in the 'dependencies' section of your package.json. That's problematic as the package either (1) won't be available on live (2 - worse) will be available on live with an non-guaranteed version. Fix it by adding the package to the dependencies in your package.json.",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-no-pkg",
-              "npm-unknown"
-            ]
+            "dependencyTypes": ["npm-no-pkg", "npm-unknown"]
           }
         },
         {
@@ -2701,10 +2441,46 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "deprecated"
-            ]
+            "dependencyTypes": ["deprecated"]
           }
+        }
+      ]
+    },
+    "environment": {
+      "version": "18.0.0",
+      "nodeVersionSupported": "^22||^24||>=26",
+      "nodeVersionFound": "v26.2.0",
+      "osVersionFound": "arm64 darwin@25.5.0",
+      "transpilersFound": [
+        {
+          "name": "javascript",
+          "version": "*",
+          "available": true,
+          "currentVersion": "acorn@8.17.0"
+        },
+        {
+          "name": "typescript",
+          "version": ">=2.0.0 <7.0.0",
+          "available": false,
+          "currentVersion": "-"
+        }
+      ],
+      "extensionsFound": [
+        {
+          "extension": ".js",
+          "available": true
+        },
+        {
+          "extension": ".cjs",
+          "available": true
+        },
+        {
+          "extension": ".mjs",
+          "available": true
+        },
+        {
+          "extension": ".jsx",
+          "available": true
         }
       ]
     }

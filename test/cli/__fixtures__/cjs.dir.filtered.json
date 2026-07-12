@@ -375,6 +375,14 @@
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
       "args": "test/cli/__fixtures__/cjs"
+    },
+    "environment": {
+      "version": "481",
+      "nodeVersionSupported": "^42",
+      "nodeVersionFound": "42.1.2",
+      "osVersionFound": "riscv pinecil@1.2.3",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

@@ -142,5 +142,6 @@ export default {
     ruleSetUsed: {
       forbidden: [],
     },
+    environment: {},
   },
 };

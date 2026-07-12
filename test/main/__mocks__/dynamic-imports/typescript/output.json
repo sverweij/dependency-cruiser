@@ -140,6 +140,7 @@
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
+      "baseDir": "/test/main/__mocks__/dynamic-imports/typescript",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
@@ -150,8 +151,7 @@
       "preserveSymlinks": false,
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,
-      "args": "src",
-      "baseDir": "test/main/__mocks__/dynamic-imports/typescript"
+      "args": "src"
     },
     "ruleSetUsed": {
       "forbidden": [
@@ -170,6 +170,14 @@
           "scope": "module"
         }
       ]
+    },
+    "environment": {
+      "version": "481",
+      "nodeVersionSupported": "^42",
+      "nodeVersionFound": "42.1.2",
+      "osVersionFound": "riscv pinecil@1.2.3",
+      "transpilersFound": [],
+      "extensionsFound": []
     }
   }
 }

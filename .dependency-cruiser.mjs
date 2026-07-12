@@ -89,6 +89,7 @@ export default {
           "^src/report/dot-webpage/wrap-in-html[.]mjs$",
           "$1",
           "^src/meta[.]cjs$",
+          "^src/environment[.]mjs$",
           "^src/extract/transpile/meta[.]mjs$",
         ],
         dependencyTypesNot: ["npm", "core", "type-only"],
@@ -268,6 +269,7 @@ export default {
           "[.]schema[.]json$",
           "[.]d[.]ts$",
           "^src/report/",
+          "^src/main/index[.]mjs$", // package.json entry point
           "^src/config-utl/extract-depcruise-options.mjs$",
         ],
         reachable: false,
@@ -381,7 +383,7 @@ export default {
       },
       to: {
         ancestor: true,
-        pathNot: "^src/meta[.]cjs$",
+        pathNot: ["^src/meta[.]cjs$", "^src/environment[.]mjs$"],
       },
     },
     {
