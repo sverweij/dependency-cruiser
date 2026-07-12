@@ -64,7 +64,7 @@ function babelIsConsistent(pOptions, pAvailableTranspilers) {
 
 /**
  * @param {IOptions} pOptions
- * @param {IAvailableTranspiler} pAvailableTranspilers
+ * @param {IAvailableTranspiler[]} pAvailableTranspilers
  * @returns {{issues?: IEnvironmentIssue[]}}
  */
 function determineEnvironmentIssues(pOptions, pAvailableTranspilers) {

@@ -520,7 +520,7 @@ describe("[I] analyze/summarize", () => {
     );
   });
 
-  it("emits no 'environment' when swc is expected but missing (parser === 'swc')", () => {
+  it("does not emit an issue into the 'environment' when swc transpiler is available (parser === 'swc')", () => {
     const lSummary = summarize(
       [],
       { parser: "swc" },

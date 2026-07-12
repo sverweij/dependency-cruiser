@@ -196,7 +196,7 @@ function normalizeCache(pCliOptions) {
  *
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @param {any} pKnownCliOptions [description]
- * @return {import("../../types/options.d.mts").ICruiseOptions}          [description]
+ * @return {import("../../types/options.mjs").ICruiseOptions}          [description]
  */
 export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
   let lOptions = {

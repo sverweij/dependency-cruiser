@@ -713,7 +713,7 @@ export default {
       // the difference is even bigger, as there the 'metadata' strategy takes
       // 10x longer as compared to a direct nodejs call.
       strategy: "content",
-      // compress: true,
+      compress: true,
     },
   },
 };
