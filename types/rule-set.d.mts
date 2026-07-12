@@ -128,13 +128,10 @@ export interface IRegularAllowedRuleType {
 }
 
 export type IAllowedRuleType =
-  | IRegularAllowedRuleType
-  | IReachabilityAllowedRuleType;
+  IRegularAllowedRuleType | IReachabilityAllowedRuleType;
 
 export type IAnyRuleType =
-  | IForbiddenRuleType
-  | IAllowedRuleType
-  | IRequiredRuleType;
+  IForbiddenRuleType | IAllowedRuleType | IRequiredRuleType;
 
 export interface IFlattenedRuleSet {
   /**

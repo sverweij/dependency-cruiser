@@ -14,10 +14,7 @@ import type { ModuleSystemType, OutputType } from "./shared-types.mjs";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =
-  | "cli-feedback"
-  | "performance-log"
-  | "ndjson"
-  | "none";
+  "cli-feedback" | "performance-log" | "ndjson" | "none";
 export type ParserType = "acorn" | "tsc" | "swc";
 
 export interface ITsConfig {

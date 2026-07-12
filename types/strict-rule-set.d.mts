@@ -54,13 +54,10 @@ export interface IStrictRegularAllowedRuleType extends IRegularAllowedRuleType {
   to: IStrictToRestriction;
 }
 export type IStrictAllowedRuleType =
-  | IStrictRegularAllowedRuleType
-  | IStrictReachabilityAllowedRuleType;
+  IStrictRegularAllowedRuleType | IStrictReachabilityAllowedRuleType;
 
 export type IStrictAnyRuleType =
-  | IStrictForbiddenRuleType
-  | IStrictAllowedRuleType
-  | IStrictRequiredRuleType;
+  IStrictForbiddenRuleType | IStrictAllowedRuleType | IStrictRequiredRuleType;
 
 export interface IStrictRuleSet extends IFlattenedRuleSet {
   forbidden?: IStrictForbiddenRuleType[];
