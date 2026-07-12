@@ -2,15 +2,7 @@ import { readFileSync } from "node:fs";
 import { deepEqual, equal } from "node:assert/strict";
 import normalizeNewline from "normalize-newline";
 import normBaseDirectory from "../main/norm-base-directory.utl.mjs";
-
-const DUMMY_ENVIRONMENT = {
-  version: "481",
-  nodeVersionSupported: "^42",
-  nodeVersionFound: "42.1.2",
-  osVersionFound: `riscv pinecil@1.2.3`,
-  transpilersFound: [],
-  extensionsFound: [],
-};
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 
 const neutralizeEnvironment = (pKey, pValue) =>
   pKey === "environment" ? DUMMY_ENVIRONMENT : pValue;

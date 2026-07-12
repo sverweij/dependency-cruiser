@@ -1,18 +1,10 @@
 import { deepEqual, ok } from "node:assert/strict";
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import summarize from "#analyze/summarize/index.mjs";
-
-const DUMMY_ENVIRONMENT = {
-  version: "481",
-  nodeVersionSupported: "^42",
-  nodeVersionFound: "42.1.2",
-  osVersionFound: `riscv pinecil@1.2.3`,
-  transpilersFound: [],
-  extensionsFound: [],
-};
 
 function getFakeEnvironmentInfo() {
   return DUMMY_ENVIRONMENT;

@@ -1,4 +1,5 @@
 import { deepEqual } from "node:assert/strict";
+import { DUMMY_ENVIRONMENT } from "../utl/dummy-environment.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
@@ -36,7 +37,7 @@ describe("[E] main.cruise - type only module references", () => {
     );
 
     validateCruiseResult(lResult.output);
-    lResult.output.summary.environment = {};
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
     deepEqual(lResult.output, output);
   });
 
@@ -52,7 +53,7 @@ describe("[E] main.cruise - type only module references", () => {
     );
 
     validateCruiseResult(lResult.output);
-    lResult.output.summary.environment = {};
+    lResult.output.summary.environment = DUMMY_ENVIRONMENT;
     deepEqual(lResult.output, outputNoTS);
   });
 });

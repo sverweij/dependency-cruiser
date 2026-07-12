@@ -3,6 +3,7 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { format } from "prettier";
 import main from "../src/main/index.mjs";
+import { DUMMY_ENVIRONMENT } from "../test/utl/dummy-environment.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const WORKING_DIR = process.cwd();
@@ -16,7 +17,7 @@ async function barfTheJSON(
 ) {
   pResult.output.summary.optionsUsed.baseDir =
     pResult.output.summary.optionsUsed.baseDir.replace(WORKING_DIR, "");
-  pResult.output.summary.environment = {};
+  pResult.output.summary.environment = DUMMY_ENVIRONMENT;
   const lFormatted = await format(JSON.stringify(pResult.output), {
     parser: "json",
   });
