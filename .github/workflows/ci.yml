@@ -61,7 +61,7 @@ jobs:
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
           # ignore-scripts because no need for them
-          npm install --legacy-peer-deps --ignore-scripts
+          npm clean-install --legacy-peer-deps --ignore-scripts
           
           # engine-strict disable 
           # better to have no stuff altered going forward
@@ -130,7 +130,7 @@ jobs:
           # legacy peer deps because otherwise typescript-eslint hard-complains
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
-          npm install --legacy-peer-deps --ignore-scripts
+          npm clean-install --legacy-peer-deps --ignore-scripts
           npm run build
       - run: npm run depcruise
       - run: npx mocha --invert --fgrep "#do-not-run-on-windows"
