@@ -23,14 +23,14 @@ jobs:
           registry-url: https://registry.npmjs.org
       # staged publishing works as of npm@11.15.0. Until that or higher is
       # shipped with nodejs by default we need to install it manually.
-      - run: npm install -g npm@^11.15.0
+      - run: npm install -g npm@11.18.0 --ignore-scripts
       - run: |
           node --version
           npm --version
       # legacy peer deps because otherwise typescript-eslint hard-complains
       # as it can't find a suitable typescript compiler (we're on 6 now, 
       # ts-eslint isn't yet)
-      - run: npm clean-install --legacy-peer-deps
+      - run: npm clean-install --legacy-peer-deps --ignore-scripts
       - name: publish as latest
         run: npm stage publish --provenance --access public
         if: github.event.release.prerelease == false
