@@ -8,7 +8,7 @@ import pathToPosix from "./path-to-posix.mjs";
  */
 
 /**
- * @typedef {{directoryName: string; filterFn: FilterFunctionType}} IgnoreRuleType
+ * @typedef {{directoryName: string; ignoreMatcher: import("ignore").Ignore}} IgnoreRuleType
  */
 
 /**
@@ -49,28 +49,26 @@ function normalizeDirectoryName(pDirectoryName, pBaseDirectory) {
 /**
  * @param {string} pDirectoryName
  * @param {string} pIgnoreFileContents
- * @param {string[]} pAdditionalIgnorePatterns
+ * @param {string[]=} pAdditionalIgnorePatterns
  * @returns {IgnoreRuleType}
  */
 function createIgnoreRule(
   pDirectoryName,
   pIgnoreFileContents,
-  pAdditionalIgnorePatterns,
+  pAdditionalIgnorePatterns = [],
 ) {
   return {
     directoryName: pDirectoryName,
-    filterFn: ignore()
+    ignoreMatcher: ignore()
       .add(pIgnoreFileContents)
-      .add(pAdditionalIgnorePatterns)
-      .createFilter(),
+      .add(pAdditionalIgnorePatterns),
   };
 }
 
 /**
  * @param {string} pDirectoryName
  * @param {string} pBaseDirectory
- * @param {{ignoreFileContents?: string; additionalIgnorePatterns: string[]}}
- *   pOptions
+ * @param {{ignoreFileContents?: string}} pOptions
  * @returns {IgnoreRuleType}
  */
 function createIgnoreRuleForDirectory(
@@ -83,64 +81,29 @@ function createIgnoreRuleForDirectory(
       ? readIgnoreFile(join(pBaseDirectory, pDirectoryName, ".gitignore"))
       : pOptions.ignoreFileContents;
 
-  return createIgnoreRule(
-    pDirectoryName,
-    lIgnoreFileContents,
-    pOptions.additionalIgnorePatterns,
-  );
+  return createIgnoreRule(pDirectoryName, lIgnoreFileContents);
 }
 
 /**
  * @param {string[]} pAncestorDirectoryNames
  * @param {string} pBaseDirectory
- * @param {{ignoreFileContents?: string; additionalIgnorePatterns: string[]}} pOptions
  * @returns {IgnoreRuleType[]}
  */
 function createIgnoreRulesFromDirectoryNames(
   pAncestorDirectoryNames,
   pBaseDirectory,
-  pOptions,
 ) {
-  const lIgnoreRules = [];
-  let lIsRootDirectory = true;
-
-  for (const lAncestorDirectoryName of pAncestorDirectoryNames) {
-    const lIgnoreRuleOptions = {
-      additionalIgnorePatterns: pOptions.additionalIgnorePatterns,
-    };
-
-    if (
-      lIsRootDirectory &&
-      typeof pOptions.ignoreFileContents !== "undefined"
-    ) {
-      lIgnoreRuleOptions.ignoreFileContents = pOptions.ignoreFileContents;
-    }
-
-    lIgnoreRules.push(
-      createIgnoreRuleForDirectory(
-        lAncestorDirectoryName,
-        pBaseDirectory,
-        lIgnoreRuleOptions,
-      ),
-    );
-    lIsRootDirectory = false;
-  }
-
-  return lIgnoreRules;
+  return pAncestorDirectoryNames.map((pAncestorDirectoryName) =>
+    createIgnoreRuleForDirectory(pAncestorDirectoryName, pBaseDirectory, {}),
+  );
 }
 
 /**
  * @param {string} pDirectoryName
  * @param {string} pBaseDirectory
- * @param {{ignoreFileContents?: string; additionalIgnorePatterns: string[]}}
- *   pOptions
  * @returns {IgnoreRuleType[]}
  */
-function createIgnoreRulesBeforeDirectory(
-  pDirectoryName,
-  pBaseDirectory,
-  pOptions,
-) {
+function createIgnoreRulesBeforeDirectory(pDirectoryName, pBaseDirectory) {
   const lNormalizedDirectoryName = normalizeDirectoryName(
     pDirectoryName,
     pBaseDirectory,
@@ -164,7 +127,6 @@ function createIgnoreRulesBeforeDirectory(
   return createIgnoreRulesFromDirectoryNames(
     lAncestorDirectoryNames,
     pBaseDirectory,
-    pOptions,
   );
 }
 
@@ -174,19 +136,33 @@ function createIgnoreRulesBeforeDirectory(
  * @returns {boolean}
  */
 function fileShouldBeKept(pFilePath, pIgnoreRules) {
-  return pIgnoreRules.every(({ directoryName, filterFn }) => {
+  let lFileIsIgnored = false;
+
+  for (const lIgnoreRule of pIgnoreRules) {
+    const lDirectoryName = lIgnoreRule.directoryName;
+    const lIgnoreMatcher = lIgnoreRule.ignoreMatcher;
     let lRelativePath = null;
 
-    if (directoryName === "") {
+    if (lDirectoryName === "") {
       lRelativePath = pFilePath;
-    } else if (pFilePath === directoryName) {
-      lRelativePath = "";
-    } else if (pFilePath.startsWith(`${directoryName}/`)) {
-      lRelativePath = pFilePath.slice(directoryName.length + 1);
+    } else if (pFilePath.startsWith(`${lDirectoryName}/`)) {
+      lRelativePath = pFilePath.slice(lDirectoryName.length + 1);
     }
 
-    return lRelativePath === null ? true : filterFn(lRelativePath);
-  });
+    if (lRelativePath !== null) {
+      const { ignored: lIgnored, unignored: lUnignored } =
+        lIgnoreMatcher.test(lRelativePath);
+
+      if (lIgnored) {
+        lFileIsIgnored = true;
+      }
+      if (lUnignored) {
+        lFileIsIgnored = false;
+      }
+    }
+  }
+
+  return !lFileIsIgnored;
 }
 
 /**
@@ -199,7 +175,7 @@ function identityFilter(_pString, _pIndex, _pArray) {
 
 /**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreRules: IgnoreRuleType[]; rootIgnoreFileContents?: string; additionalIgnorePatterns: string[]; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}}
+ * @param {{baseDir: string; ignoreRules: IgnoreRuleType[]; startDirectoryName: string; startDirectoryIgnoreFileContents?: string; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}}
  *   pOptions
  * @returns {string[]}
  */
@@ -208,8 +184,8 @@ function walk(
   {
     baseDir,
     ignoreRules,
-    rootIgnoreFileContents,
-    additionalIgnorePatterns,
+    startDirectoryName,
+    startDirectoryIgnoreFileContents,
     excludeFilterFn,
     includeOnlyFilterFn,
   },
@@ -217,10 +193,9 @@ function walk(
   const lCurrentDirectoryName = normalizeDirectoryName(pDirectoryName, baseDir);
   const lCurrentIgnoreRules = ignoreRules.concat(
     createIgnoreRuleForDirectory(lCurrentDirectoryName, baseDir, {
-      additionalIgnorePatterns,
-      ...(lCurrentDirectoryName === "" &&
-      typeof rootIgnoreFileContents !== "undefined"
-        ? { ignoreFileContents: rootIgnoreFileContents }
+      ...(lCurrentDirectoryName === startDirectoryName &&
+      typeof startDirectoryIgnoreFileContents !== "undefined"
+        ? { ignoreFileContents: startDirectoryIgnoreFileContents }
         : {}),
     }),
   );
@@ -238,8 +213,8 @@ function walk(
         ...walk(lFile, {
           baseDir,
           ignoreRules: lCurrentIgnoreRules,
-          rootIgnoreFileContents,
-          additionalIgnorePatterns,
+          startDirectoryName,
+          startDirectoryIgnoreFileContents,
           excludeFilterFn,
           includeOnlyFilterFn,
         }),
@@ -269,21 +244,17 @@ export default function findAllFiles(
   },
 ) {
   const lAdditionalIgnorePatterns = additionalIgnorePatterns ?? [".git"];
-  const lIgnoreRules = createIgnoreRulesBeforeDirectory(
-    pDirectoryName,
-    baseDir,
-    {
-      additionalIgnorePatterns: lAdditionalIgnorePatterns,
-      ignoreFileContents:
-        ignoreFileContents ?? readIgnoreFile(join(baseDir, ".gitignore")),
-    },
-  );
+  const lStartDirectoryName = normalizeDirectoryName(pDirectoryName, baseDir);
+  const lIgnoreRules = [
+    createIgnoreRule("", "", lAdditionalIgnorePatterns),
+    ...createIgnoreRulesBeforeDirectory(pDirectoryName, baseDir),
+  ];
 
   return walk(pDirectoryName, {
     baseDir,
     ignoreRules: lIgnoreRules,
-    rootIgnoreFileContents: ignoreFileContents,
-    additionalIgnorePatterns: lAdditionalIgnorePatterns,
+    startDirectoryName: lStartDirectoryName,
+    startDirectoryIgnoreFileContents: ignoreFileContents,
     excludeFilterFn: excludeFilterFn ?? identityFilter,
     includeOnlyFilterFn: includeOnlyFilterFn ?? identityFilter,
   });

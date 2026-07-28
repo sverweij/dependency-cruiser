@@ -41,4 +41,64 @@ describe("[U] utl/findAllFiles", () => {
       ],
     );
   });
+
+  it("lets deeper .gitignore negations re-include files in scope", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles(".", {
+          baseDir: join(lBaseDirectory, "negation-tree"),
+        }),
+      ),
+      [".gitignore", "nested/.gitignore", "nested/important.log", "root.txt"],
+    );
+  });
+
+  it("uses ignoreFileContents as override for the start directory", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles("nested", {
+          baseDir: join(lBaseDirectory, "nested-start-override-tree"),
+          ignoreFileContents: "override-ignored.txt\n.gitignore\n",
+        }),
+      ),
+      ["nested/disk-ignored.txt", "nested/keep.txt"],
+    );
+  });
+
+  it("applies additionalIgnorePatterns throughout traversal", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles(".", {
+          baseDir: join(lBaseDirectory, "additional-patterns-tree"),
+          additionalIgnorePatterns: ["vendor"],
+        }),
+      ),
+      ["keep.txt"],
+    );
+  });
+
+  it("combines ignore handling with include/exclude filters", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles(".", {
+          baseDir: join(lBaseDirectory, "nested-gitignore-tree"),
+          excludeFilterFn: (pPath) => !pPath.includes("child"),
+          includeOnlyFilterFn: (pPath) =>
+            !pPath.includes("/") || pPath.endsWith(".txt"),
+        }),
+      ),
+      ["keep-root.txt", "nested/keep-nested.txt", "override-ignored.txt"],
+    );
+  });
+
+  it("builds ancestor rules for deep non-root starts", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles("level1/level2/level3", {
+          baseDir: join(lBaseDirectory, "deep-start-tree"),
+        }),
+      ),
+      ["level1/level2/level3/keep.txt"],
+    );
+  });
 });
