@@ -38,7 +38,7 @@ export function readManifest(pManifestFileName = "./package.json") {
 export function fileExists(pFile) {
   try {
     accessSync(pFile, constants.R_OK);
-  } catch (pError) {
+  } catch {
     return false;
   }
   return true;
@@ -53,7 +53,7 @@ function babelIsConfiguredInManifest() {
   try {
     // @ts-expect-error defaultly tsc doesn't know about newfangled stuff like hasOwn
     lReturnValue = Object.hasOwn(readManifest(), "babel");
-  } catch (pError) {
+  } catch {
     // silently ignore - we'll return false anyway then
   }
   return lReturnValue;
@@ -67,7 +67,7 @@ export function isTypeModule() {
 
   try {
     lReturnValue = (readManifest()?.type ?? "commonjs") === "module";
-  } catch (pError) {
+  } catch {
     // silently ignore - we'll return false anyway then
   }
 
@@ -112,7 +112,7 @@ function getPackageManager(pManifest) {
     if (Object.hasOwn(lManifest, "packageManager")) {
       lReturnValue = lManifest.packageManager;
     }
-  } catch (pError) {
+  } catch {
     // silently ignore - we'll return the empty string anyway then
   }
   return lReturnValue;

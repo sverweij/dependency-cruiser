@@ -20,7 +20,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
           "webpack.config.unknown-extension",
         ),
       );
-    } catch (_pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);

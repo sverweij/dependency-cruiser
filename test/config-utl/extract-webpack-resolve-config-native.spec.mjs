@@ -11,7 +11,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     let lThrown = false;
     try {
       await loadResolveConfig();
-    } catch (_pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -21,7 +21,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     let lThrown = false;
     try {
       await loadResolveConfig("config-does-not-exist");
-    } catch (_pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -33,7 +33,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
       await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/invalid.config.js"),
       );
-    } catch (_pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);

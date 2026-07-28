@@ -11,7 +11,7 @@ const fileExists = (pFile) => {
 
   try {
     accessSync(pFile, constants.R_OK);
-  } catch (pError) {
+  } catch {
     FILE_EXISTENCE_CACHE.set(pFile, false);
     return false;
   }

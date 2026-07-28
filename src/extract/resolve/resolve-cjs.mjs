@@ -26,7 +26,7 @@ function addResolutionAttributes(
         lReturnValue.resolved,
         pResolveOptions,
       );
-    } catch (pError) {
+    } catch {
       lReturnValue.couldNotResolve = true;
     }
   }

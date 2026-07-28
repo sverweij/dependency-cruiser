@@ -30,7 +30,7 @@ async function getPluginReporter(pOutputType) {
   try {
     const lModule = await import(pOutputType);
     lReturnValue = lModule.default;
-  } catch (pError) {
+  } catch {
     throw new Error(
       `Could not find reporter plugin '${pOutputType}' (or it isn't valid)`,
     );

@@ -60,7 +60,7 @@ export default async function tryImport(pModuleName, pSemanticVersion) {
     }
     const lModule = await import(pModuleName);
     return lModule.default ? lModule.default : lModule;
-  } catch (pError) {
+  } catch {
     return false;
   }
 }

@@ -39,7 +39,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     let lThrown = false;
     try {
       await extractBabelConfig();
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -49,7 +49,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     let lThrown = false;
     try {
       await extractBabelConfig("config-does-not-exist");
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -61,7 +61,7 @@ describe("[I] config-utl/extract-babel-config", () => {
       await extractBabelConfig(
         getFullPath("./__mocks__/babelconfig/babelrc.invalid.json"),
       );
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -73,7 +73,7 @@ describe("[I] config-utl/extract-babel-config", () => {
       await extractBabelConfig(
         getFullPath("./__mocks__/babelconfig/babelrc.not-a-babel-option.json"),
       );
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -159,7 +159,7 @@ describe("[I] config-utl/extract-babel-config", () => {
           "./__mocks__/babelconfig-js/babel.function-export.config.js",
         ),
       );
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);
@@ -173,7 +173,7 @@ describe("[I] config-utl/extract-babel-config", () => {
           "./__mocks__/babelconfig-js/babel.config.wildly-unsupported-extension",
         ),
       );
-    } catch (pError) {
+    } catch {
       lThrown = true;
     }
     equal(lThrown, true);

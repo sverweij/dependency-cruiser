@@ -46,7 +46,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
     // ecmaVersion 11 necessary for acorn to understand dynamic imports
     // explicitly passing ecmaVersion is recommended from acorn 8
     return acornParse(lJavaScriptSource, ACORN_OPTIONS);
-  } catch (pError) {
+  } catch {
     return acornLooseParse(lJavaScriptSource, ACORN_OPTIONS);
   }
 }

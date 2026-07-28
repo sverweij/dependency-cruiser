@@ -34,10 +34,10 @@ function getSingleManifest(pFileDirectory) {
 
     try {
       lReturnValue = JSON.parse(lPackageContent);
-    } catch (pError) {
+    } catch {
       // left empty on purpose
     }
-  } catch (pError) {
+  } catch {
     const lNextDirectory = dirname(pFileDirectory);
 
     if (lNextDirectory !== pFileDirectory) {
@@ -60,10 +60,10 @@ function maybeReadPackage(pFileDirectory) {
 
     try {
       lReturnValue = JSON.parse(lPackageContent);
-    } catch (pError) {
+    } catch {
       // left empty on purpose
     }
-  } catch (pError) {
+  } catch {
     // left empty on purpose
   }
   return lReturnValue;

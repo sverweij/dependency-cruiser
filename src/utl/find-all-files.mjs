@@ -56,7 +56,7 @@ function walk(
 function readIgnoreFile(pFileName) {
   try {
     return readFileSync(pFileName, "utf8");
-  } catch (pError) {
+  } catch {
     return "";
   }
 }

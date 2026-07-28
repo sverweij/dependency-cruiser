@@ -45,7 +45,7 @@ function fileExists(pFileName) {
   try {
     accessSync(pFileName, constants.R_OK);
     return true;
-  } catch (pError) {
+  } catch {
     return false;
   }
 }

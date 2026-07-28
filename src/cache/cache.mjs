@@ -115,7 +115,7 @@ export default class Cache {
         lPayload = await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8");
       }
       return JSON.parse(lPayload);
-    } catch (pError) {
+    } catch {
       return EMPTY_CACHE;
     }
   }

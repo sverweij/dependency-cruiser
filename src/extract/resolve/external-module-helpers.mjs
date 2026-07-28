@@ -104,7 +104,7 @@ export function getPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
       "manifest-resolution",
     );
     lReturnValue = JSON.parse(readFileSync(lPackageJsonFilename, "utf8"));
-  } catch (pError) {
+  } catch {
     // left empty on purpose
   }
   PACKAGE_JSON_CACHE.set(lCacheKey, lReturnValue);

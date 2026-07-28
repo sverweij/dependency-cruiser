@@ -7,7 +7,7 @@ export function validateLocation(pLocations) {
       if (!statSync(lLocation).isDirectory()) {
         return `'${lLocation}' doesn't seem to be a folder - please try again`;
       }
-    } catch (pError) {
+    } catch {
       return `'${lLocation}' doesn't seem to exist - please try again`;
     }
   }

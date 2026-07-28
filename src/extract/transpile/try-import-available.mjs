@@ -38,7 +38,7 @@ export default function tryImportAvailable(pModuleName, pSemanticVersion) {
     // of course we'd love to use something like import.meta.resolve, but
     // that's _experimental_, so ¯\_(ツ)_/¯
     return Boolean(require.resolve(pModuleName));
-  } catch (pError) {
+  } catch {
     return false;
   }
 }

@@ -43,7 +43,7 @@ function tryRequire(pModuleName, pSemanticVersion) {
     }
     // eslint-disable-next-line import/no-dynamic-require, n/global-require, security/detect-non-literal-require
     return require(pModuleName);
-  } catch (pError) {
+  } catch {
     return false;
   }
 }

@@ -59,7 +59,7 @@ before((pCallback) => {
 after(() => {
   try {
     unlinkSync(symlinkDirectory);
-  } catch (pError) {
+  } catch {
     // just swallow the error, there's nothing we can do about it
   }
 });
