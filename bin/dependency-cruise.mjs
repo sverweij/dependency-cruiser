@@ -1,9 +1,18 @@
 #!/usr/bin/env node
+import { enableCompileCache } from "node:module";
 import { EOL } from "node:os";
 import { program, Option } from "commander";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import cli from "#cli/index.mjs";
 import meta from "#meta.cjs";
+
+if (enableCompileCache) {
+  try {
+    enableCompileCache();
+  } catch {
+    // deliberately ignored
+  }
+}
 
 try {
   assertNodeEnvironmentSuitable();
