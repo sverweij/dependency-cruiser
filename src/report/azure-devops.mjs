@@ -80,7 +80,7 @@ function formatViolation(pViolation) {
     reachability: formatReachabilityViolation,
     instability: formatInstabilityViolation,
   };
-  let lFormattedViolators = _formatViolation(
+  const lFormattedViolators = _formatViolation(
     pViolation,
     lViolationType2Formatter,
     formatDependencyViolation,
@@ -133,7 +133,7 @@ function formatIgnoreWarning(pNumberOfIgnored) {
  * @returns {string}
  */
 function formatResultMessage(pSummary) {
-  let lStatSummary = `${pSummary.totalCruised} modules, ${
+  const lStatSummary = `${pSummary.totalCruised} modules, ${
     pSummary?.totalDependenciesCruised ?? 0
   } dependencies cruised`;
 

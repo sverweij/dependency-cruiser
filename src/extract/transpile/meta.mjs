@@ -155,7 +155,7 @@ export const scannableExtensions = Array.from(
  * - the version (range) supported
  * - whether or not it is available in the current environment
  *
- * @return {IAvailableTranspiler[]} an array of supported transpilers
+ * @returns {IAvailableTranspiler[]} an array of supported transpilers
  */
 export function getAvailableTranspilers() {
   return ["javascript"]

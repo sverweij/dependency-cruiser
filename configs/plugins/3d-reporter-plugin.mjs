@@ -114,7 +114,7 @@ function render3DThing(pCruiseResult) {
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @returns {import('../../types/dependency-cruiser').IReporterOutput} -
  *      output: a string
  *      exitCode: 0
  */

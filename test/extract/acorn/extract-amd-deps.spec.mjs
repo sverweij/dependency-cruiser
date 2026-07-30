@@ -15,7 +15,7 @@ const extractAMD = (
 
 describe("[U] acorn/extract-AMD-deps", () => {
   it("amd define", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractAMD(
       `define(["./root_one", "./root_two"], function(root_one){ /* do stuff */ });`,
@@ -40,7 +40,7 @@ describe("[U] acorn/extract-AMD-deps", () => {
   });
 
   it("amd require wrapper", () => {
-    let lDeps = [];
+    const lDeps = [];
     const lInput = `define(function(require, exports, module){
       var one = require('./one-with-require'),
           two = require('./two-with-require');
@@ -66,7 +66,7 @@ describe("[U] acorn/extract-AMD-deps", () => {
   });
 
   it("amd require wrapper with the require parameter named something else", () => {
-    let lDeps = [];
+    const lDeps = [];
     const lInput = `define(function(want, exports, module){
       var one = want('./one-with-want'),
           two = want('./two-with-want');

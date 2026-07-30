@@ -10,12 +10,12 @@ const MAX_TRANSPILER_NAME_LENGTH = 22;
 const MAX_VERSION_STRING_LENGTH = 24;
 
 function formatTranspilers(pAvailableTranspilers) {
-  let lTranspilerTableHeader = styleText(
+  const lTranspilerTableHeader = styleText(
     "bold",
     `    ✔ ${"transpiler".padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${"versions supported".padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} version found`,
   );
-  let lTranspilerTableDivider = `    - ${"-".repeat(MAX_TRANSPILER_NAME_LENGTH)} ${"-".repeat(MAX_VERSION_RANGE_STRING_LENGTH)} ${"-".repeat(MAX_VERSION_STRING_LENGTH)}`;
-  let lTranspilerTable = pAvailableTranspilers
+  const lTranspilerTableDivider = `    - ${"-".repeat(MAX_TRANSPILER_NAME_LENGTH)} ${"-".repeat(MAX_VERSION_RANGE_STRING_LENGTH)} ${"-".repeat(MAX_VERSION_STRING_LENGTH)}`;
+  const lTranspilerTable = pAvailableTranspilers
     .map(
       (pTranspiler) =>
         `    ${bool2Symbol(pTranspiler.available)} ${pTranspiler.name.padEnd(MAX_TRANSPILER_NAME_LENGTH)} ${pTranspiler.version.padEnd(MAX_VERSION_RANGE_STRING_LENGTH)} ${pTranspiler.currentVersion}`,

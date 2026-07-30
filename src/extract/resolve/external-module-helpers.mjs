@@ -30,14 +30,14 @@ const PACKAGE_JSON_CACHE = new Map();
  * non-commonJS and are still using node_modules) e.g. '../node_modules/oldash/fp'
  *
  * @param  {string} pModule a module name
- * @return {string}         the module name root
+ * @returns {string}         the module name root
  */
 export function getPackageRoot(pModule) {
   if (!pModule || isRelativeModuleName(pModule)) {
     return pModule;
   }
 
-  let lPathElements = pModule.split("/");
+  const lPathElements = pModule.split("/");
 
   if (isScoped(pModule)) {
     // '@imdoingweirdvoodoo'
@@ -69,7 +69,7 @@ export function getPackageRoot(pModule) {
  * @param  {string} pModuleName  The name of the module to get the package.json of
  * @param  {string} pFileDirectory The folder the module resides in. Defaults to the current working directory
  * @param  {any} pResolveOptions options for the resolver
- * @return {Record<string, any>} The package.json as a javascript object, or
+ * @returns {Record<string, any>} The package.json as a javascript object, or
  *                           null if either module or package.json could
  *                           not be found
  */
@@ -117,7 +117,7 @@ export function getPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
  * @param  {string} pModuleName  The name of the module to get the deprecation status of
  * @param  {string} pFileDirectory The folder the module resides in.
  * @param  {any} pResolveOptions options for the resolver
- * @return {boolean}         true when deprecated, false in all other cases
+ * @returns {boolean}         true when deprecated, false in all other cases
  */
 export function dependencyIsDeprecated(
   pModuleName,
@@ -125,7 +125,7 @@ export function dependencyIsDeprecated(
   pResolveOptions,
 ) {
   let lReturnValue = false;
-  let lPackageJson = getPackageJson(
+  const lPackageJson = getPackageJson(
     pModuleName,
     pFileDirectory,
     pResolveOptions,
@@ -144,12 +144,12 @@ export function dependencyIsDeprecated(
  * @param  {string} pModuleName  The name of the module to get the license of
  * @param  {string} pFileDirectory The folder the module resides in.
  * @param  {any} pResolveOptions options for the resolver
- * @return {string}          The module's license string, or '' in case
+ * @returns {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
 export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
   let lReturnValue = "";
-  let lPackageJson = getPackageJson(
+  const lPackageJson = getPackageJson(
     pModuleName,
     pFileDirectory,
     pResolveOptions,

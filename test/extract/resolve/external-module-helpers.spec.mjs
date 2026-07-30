@@ -55,7 +55,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   });
 
   it("returns a package.json when there is one (root)", () => {
-    let lPackageJson = getPackageJson(
+    const lPackageJson = getPackageJson(
       "acorn",
       process.cwd(),
       BASIC_RESOLVE_OPTIONS,
@@ -67,7 +67,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   });
 
   it("returns a package.json when there is one (root) - base dir defaults to current working dir", () => {
-    let lPackageJson = getPackageJson("acorn", null, BASIC_RESOLVE_OPTIONS);
+    const lPackageJson = getPackageJson("acorn", null, BASIC_RESOLVE_OPTIONS);
 
     ok(lPackageJson);
     equal(lPackageJson.hasOwnProperty("name"), true);
@@ -75,7 +75,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   });
 
   it("returns a package.json when there is one ('local' node_modules)", () => {
-    let lPackageJson = getPackageJson(
+    const lPackageJson = getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
       "./test/extract/resolve/__mocks__/deprecated-node-module/",
       BASIC_RESOLVE_OPTIONS,
@@ -87,7 +87,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   });
 
   it("returns a package.json even when it's not specified in the node modules exports and the regular resolver is supposed to heed those exports", () => {
-    let lPackageJson = getPackageJson(
+    const lPackageJson = getPackageJson(
       "testinga-two",
       "./test/extract/resolve/__mocks__/unreadable-package-json-because-not-exported",
       RESOLVE_OPTIONS_HEEDING_EXPORTS,

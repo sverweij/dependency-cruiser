@@ -12,7 +12,7 @@ const RANDOM_TMP_FILENAME_LENGTH = 10;
 
 const createConfigNormalized = async (pInitOptions) => {
   const lConfigAsString = buildConfig(normalizeInitOptions(pInitOptions));
-  let lTemporaryFileName = join(
+  const lTemporaryFileName = join(
     tmpdir(),
     `${randomBytes(RANDOM_TMP_FILENAME_LENGTH).toString("hex")}.cjs`,
   );

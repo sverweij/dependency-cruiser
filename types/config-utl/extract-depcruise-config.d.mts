@@ -17,7 +17,7 @@ import type { IConfiguration } from "../configuration.mjs";
  * @param pConfigFileName
  * @param pAlreadyVisited
  * @param pBaseDirectory
- * @return dependency-cruiser configuration
+ * @returns dependency-cruiser configuration
  * @throws when the config is not valid (/ does not exist/ isn't readable)
  */
 export default function extractDepcruiseConfig(

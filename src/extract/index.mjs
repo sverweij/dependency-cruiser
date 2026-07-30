@@ -68,7 +68,7 @@ function extractFileDirectoryArray(
   pResolveOptions,
   pTranspileOptions,
 ) {
-  let lVisited = new Set();
+  const lVisited = new Set();
 
   bus.debug("extract: gather initial sources");
   const lInitialSources = gatherInitialSources(

@@ -179,7 +179,7 @@ function sanitizeWordList(pWordList) {
  */
 export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
   /** @type {{wordlist?: String[]}} */
-  let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
+  const lAnonymousReporterOptions = pAnonymousReporterOptions || {};
   if (!lAnonymousReporterOptions.wordlist) {
     lAnonymousReporterOptions.wordlist =
       pResults?.summary?.optionsUsed?.reporterOptions?.anon?.wordlist ?? [];

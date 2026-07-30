@@ -89,7 +89,7 @@ export function getWrapper(pExtension, pTranspilerOptions) {
  * @param  {{ extension:string; source:string; filename:string; }} pFileRecord      Record with source code, an extension and a filename
  * @param  {any} pTranspilerOptions (optional) object with options influencing
  *                                the underlying transpiler behavior.
- * @return {string}               the transpiled version of the file (or the file
+ * @returns {string}               the transpiled version of the file (or the file
  *                                itself when the function could not find a
  *                                transpiler matching pExtension
  */

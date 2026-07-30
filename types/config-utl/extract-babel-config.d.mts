@@ -5,7 +5,7 @@
  * Silently fails if a supported @babel/core version can't be found
  *
  * @param pBabelConfigFileName
- * @return babel config as an object
+ * @returns babel config as an object
  * @throws when the babel config has an unknown extension OR
  *         when the babel config is invalid OR
  *         when dependency-cruiser can't yet process it

@@ -193,7 +193,7 @@ function normalizeDotReporterOptions(
   pGranularity,
   pResults,
 ) {
-  let lDotReporterOptions = pDotReporterOptions || {};
+  const lDotReporterOptions = pDotReporterOptions || {};
 
   return {
     theme:

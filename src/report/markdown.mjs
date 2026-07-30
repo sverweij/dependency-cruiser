@@ -49,7 +49,7 @@ function severity2Icon(pSeverity) {
 
 /**
  * @param {import("../../types/cruise-result.mjs").ISummary} pSummary
- * @return {string}
+ * @returns {string}
  */
 function formatStatsSummary(pSummary) {
   const lSpacerLength = 4;
@@ -60,7 +60,7 @@ function formatStatsSummary(pSummary) {
 /**
  * @param {import("../../types/cruise-result.mjs").ICruiseResult} pCruiseResult
  * @param {Boolean} pIncludeIgnoredInSummary
- * @return {string}
+ * @returns {string}
  */
 function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
   const lTableHead =
@@ -87,7 +87,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
  *
  * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
  * @param {object} pOptions
- * @return {string}
+ * @returns {string}
  */
 function formatViolations(pViolations, pOptions) {
   const lTableHead = "|violated rule|module|to|\n|:---|:---|:---|\n";

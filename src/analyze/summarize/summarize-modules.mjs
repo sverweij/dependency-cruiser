@@ -69,7 +69,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
  *
  * @param {any} pModules an array of modules
  * @param {any} pRuleSet? a rule set
- * @return {any} an array of violations
+ * @returns {any} an array of violations
  */
 function extractDependencyViolations(pModules, pRuleSet) {
   return pModules

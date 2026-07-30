@@ -32,7 +32,7 @@ export function formatViolation(
  *
  * @param {string} pPrefix - prefix
  * @param {string} pSource - filename
- * @return {string} prefix and filename concatenated
+ * @returns {string} prefix and filename concatenated
  */
 function smartURIConcat(pPrefix, pSource) {
   if (PROTOCOL_PREFIX_RE.test(pPrefix)) {

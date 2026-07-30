@@ -10,7 +10,7 @@ function addResolutionAttributes(
   pFileDirectory,
   pResolveOptions,
 ) {
-  let lReturnValue = {};
+  const lReturnValue = {};
 
   if (isBuiltin(pModuleName, pResolveOptions)) {
     lReturnValue.coreModule = true;

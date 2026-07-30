@@ -20,7 +20,7 @@ export class Observable<T> {
    * @owner Observable
    * @method create
    * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
-   * @return {Observable} a new cold observable
+   * @returns {Observable} a new cold observable
    * @nocollapse
    */
   static create: Function = <T>(subscribe?: (subscriber: Subscriber<T>) => TeardownLogic) => {

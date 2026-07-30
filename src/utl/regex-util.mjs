@@ -41,7 +41,9 @@ export function extractGroups(pFromRestriction, pActualPath) {
     // except before it enters here it has already been 'normalized' to a string
     // so it can be safely passed to match. The right solution here (TODO)
     // is to create a separate type for NormalizedFromRestriction
-    let lMatchResult = getCachedRegExp(pFromRestriction.path).exec(pActualPath);
+    const lMatchResult = getCachedRegExp(pFromRestriction.path).exec(
+      pActualPath,
+    );
 
     if (lMatchResult && lMatchResult.length > 1) {
       lReturnValue = lMatchResult.filter(

@@ -6,7 +6,9 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
     .filter(({ name }) => name === pExtendedRule.name)
     .reduce(
       (pAll, pBaseRule) => ({
+        /* oxlint-disable-next-line no-accumulating-spread */
         ...pBaseRule,
+        /* oxlint-disable-next-line no-accumulating-spread */
         ...pAll,
       }),
       pExtendedRule,
@@ -25,11 +27,11 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
  * @param {*} pRuleArrayExtended - array of 'forbidden' rules that extend the ...
  * @param {*} pRuleArrayBase - array of 'forbidden' rules to extend
  *
- * @return {Array} - the merged array
+ * @returns {Array} - the merged array
  */
 function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
   // merge anonymous on 100% equality
-  let lAnonymousRules = uniqWith(
+  const lAnonymousRules = uniqWith(
     pRuleArrayExtended.concat(pRuleArrayBase).filter(({ name }) => !name),
     isDeepStrictEqual,
   );
@@ -61,7 +63,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
  * @param {*} pAllowedArrayExtended - array of 'allowed' rules that extend the ///
  * @param {*} pAllowedArrayBase - array of 'allowed' rules to extend
  *
- * @return {Array} - the merged array
+ * @returns {Array} - the merged array
  */
 function mergeAllowedRules(pAllowedArrayExtended, pAllowedArrayBase) {
   return uniqWith(

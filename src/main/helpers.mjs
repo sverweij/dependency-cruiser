@@ -25,7 +25,7 @@ export function normalizeREProperties(
   pPropertyContainer,
   pREProperties = RE_PROPERTIES,
 ) {
-  let lPropertyContainer = structuredClone(pPropertyContainer);
+  const lPropertyContainer = structuredClone(pPropertyContainer);
 
   for (const lProperty of pREProperties) {
     // lProperty can be nested properties, so we use _.has and _.get

@@ -88,7 +88,7 @@ export default function setUpNDJSONListener(
   pMaxLevel = INFO,
   pStream = process.stderr,
 ) {
-  let lState = {
+  const lState = {
     runStartTime: new Date(Date.now()).toISOString(),
     runId: randomInt(MIN_RUN_ID, MAX_RUN_ID),
     previousMessage: "startup: nodejs loading",

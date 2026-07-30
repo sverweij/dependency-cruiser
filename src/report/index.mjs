@@ -36,6 +36,7 @@ const TYPE2MODULE = new Map([
  *                       and returns an IReporterOutput
  */
 export async function getReporter(pOutputType) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = {};
   if (pOutputType?.startsWith("plugin:")) {
     lReturnValue = await getExternalPluginReporter(pOutputType);

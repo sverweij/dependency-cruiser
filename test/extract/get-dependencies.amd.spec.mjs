@@ -18,7 +18,7 @@ const amdBangCJSWrapper = requireJSON(
   "./__fixtures__/amd-bang-CJSWrapper.json",
 );
 
-let symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
+const symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
 
 /* eslint-disable mocha/no-top-level-hooks */
 before((pCallback) => {

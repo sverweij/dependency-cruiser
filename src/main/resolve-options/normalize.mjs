@@ -37,7 +37,7 @@ const DEFAULT_RESOLVE_OPTIONS = {
 
 function omit(pObject, pProperty) {
   const lObject = structuredClone(pObject);
-  // eslint-disable-next-line security/detect-object-injection
+  /* oxlint-disable-next-line no-dynamic-delete */
   delete lObject[pProperty];
   return lObject;
 }
@@ -71,7 +71,7 @@ async function compileResolveOptions(
   pTSConfig,
   pResolveOptionsFromDCConfig,
 ) {
-  let lResolveOptions = {};
+  const lResolveOptions = {};
 
   // There's a performance impact of ~1 ms per resolve even when there
   // are 0 paths in the tsconfig, so not loading it when not necessary

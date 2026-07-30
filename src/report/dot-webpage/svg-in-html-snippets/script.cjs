@@ -84,7 +84,7 @@ function Mode() {
  *
  * @param {SVGGelement[]} pEdges
  * @param {SVGGElement[]} pNodes
- * @return {{get: (pTitleText:string) => SVGGElement[]}}
+ * @returns {{get: (pTitleText:string) => SVGGElement[]}}
  */
 function Title2ElementMap(pEdges, pNodes) {
   /* {{[key: string]: SVGGElement[]}} */
@@ -93,7 +93,7 @@ function Title2ElementMap(pEdges, pNodes) {
   /**
    * @param {NodeListOf<SVGGElement>} pEdges
    * @param {NodeListOf<SVGGElement>} pNodes
-   * @return {{[key: string]: SVGGElement[]}}
+   * @returns {{[key: string]: SVGGElement[]}}
    */
   function buildMap(pEdges, pNodes) {
     var title2NodeMap = buildTitle2NodeMap(pNodes);
@@ -102,7 +102,7 @@ function Title2ElementMap(pEdges, pNodes) {
   }
   /**
    * @param {NodeListOf<SVGGElement>} pNodes
-   * @return {{[key: string]: SVGGElement}}
+   * @returns {{[key: string]: SVGGElement}}
    */
   function buildTitle2NodeMap(pNodes) {
     return nodeListToArray(pNodes).reduce(addNodeToMap, {});
@@ -136,7 +136,7 @@ function Title2ElementMap(pEdges, pNodes) {
   /**
    *
    * @param {string} pString
-   * @return {{from?: string; to?:string;}}
+   * @returns {{from?: string; to?:string;}}
    */
   function pryEdgeFromTitle(pString) {
     var nodeNames = pString.split(/\s*->\s*/);
@@ -149,7 +149,7 @@ function Title2ElementMap(pEdges, pNodes) {
   /**
    *
    * @param {string} pTitleText
-   * @return {SVGGElement[]}
+   * @returns {SVGGElement[]}
    */
   function get(pTitleText) {
     return (pTitleText && elementMap[pTitleText]) || [];
@@ -161,7 +161,7 @@ function Title2ElementMap(pEdges, pNodes) {
 
 /**
  * @param {SVGGElement} pGElement
- * @return {string?}
+ * @returns {string?}
  */
 function getTitleText(pGElement) {
   /** @type {SVGTitleElement} */
@@ -177,7 +177,7 @@ function getTitleText(pGElement) {
 
 /**
  * @param {NodeListOf<Element>} pNodeList
- * @return {Element[]}
+ * @returns {Element[]}
  */
 function nodeListToArray(pNodeList) {
   var lReturnValue = [];

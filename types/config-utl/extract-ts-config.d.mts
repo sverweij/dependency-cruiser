@@ -7,7 +7,7 @@ import type { ParsedCommandLine } from "typescript";
  * Silently fails if a supported version of the typescript compiler isn't available
  *
  * @param pTSConfigFileName
- * @return tsconfig as an object
+ * @returns tsconfig as an object
  * @throws {Error} when the tsconfig is invalid/ has errors
  * @throws {TypeError} when the tsconfig is unreadable
  */

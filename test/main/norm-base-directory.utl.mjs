@@ -4,7 +4,7 @@ export default function normBaseDirectory(
   pUnprocessedJSON,
   pBaseDirectory = process.cwd(),
 ) {
-  let lReturnValue = structuredClone(pUnprocessedJSON);
+  const lReturnValue = structuredClone(pUnprocessedJSON);
   lReturnValue.summary.optionsUsed.baseDir = join(
     pBaseDirectory,
     lReturnValue.summary.optionsUsed?.baseDir ?? "",

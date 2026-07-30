@@ -16,7 +16,7 @@ import { getAvailableTranspilers } from "#extract/transpile/meta.mjs";
  *
  * @param {IInitConfig} pInitOptions
  * @param {IAvailableTranspiler[]} pAvailableTranspilers
- * @return {boolean}
+ * @returns {boolean}
  */
 function typescriptIsConsistent(pInitOptions, pAvailableTranspilers) {
   if (pInitOptions.usesTypeScript) {
@@ -37,7 +37,7 @@ function typescriptIsConsistent(pInitOptions, pAvailableTranspilers) {
  *
  * @param {IInitConfig} pInitOptions
  * @param {IAvailableTranspiler[]} pAvailableTranspilers
- * @return {boolean}
+ * @returns {boolean}
  */
 function babelIsConsistent(pInitOptions, pAvailableTranspilers) {
   if (pInitOptions.babelConfig) {
@@ -57,7 +57,7 @@ function babelIsConsistent(pInitOptions, pAvailableTranspilers) {
  * @param {IInitConfig} pInitOptions
  * @param {NodeJS.WritableStream} [pErrorStream]
  * @param {typeof getAvailableTranspilers} [pAvailableTranspilerFunction]
- * @return {IInitConfig} pInitOptions
+ * @returns {IInitConfig} pInitOptions
  */
 export function checkAndWarnInconsistencies(
   pInitOptions,

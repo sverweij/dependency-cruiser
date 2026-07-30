@@ -90,7 +90,7 @@ async function attemptImport(pAbsoluteWebpackConfigFileName) {
        * module system. If we'd use a dynamic import, these monkey-patches wouldn't
        * be used.
        */
-      /* eslint n/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+      /* oxlint-disable-next-line no-dynamic-require */
       return require(pAbsoluteWebpackConfigFileName);
     }
   } catch (pError) {
@@ -112,7 +112,7 @@ async function attemptImport(pAbsoluteWebpackConfigFileName) {
  * @param {string} pWebpackConfigFilename
  * @param {{ [key: string]: any }=} pEnvironment
  * @param {webpackArgumentsType=} pArguments
- * @return {Promise<import("enhanced-resolve").ResolveOptions|{}>} webpack resolve config as an object
+ * @returns {Promise<import("enhanced-resolve").ResolveOptions|{}>} webpack resolve config as an object
  * @throws {Error} when the webpack config isn't usable (e.g. because it
  *                 doesn't exist, or because it's invalid)
  */

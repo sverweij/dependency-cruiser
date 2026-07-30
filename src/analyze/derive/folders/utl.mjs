@@ -23,8 +23,8 @@ export function getEfferentCouplings(pModule, pDirname) {
  * @returns string[]
  */
 export function getParentFolders(pPath) {
-  let lFragments = pPath.split("/");
-  let lReturnValue = [];
+  const lFragments = pPath.split("/");
+  const lReturnValue = [];
 
   while (lFragments.length > 0) {
     lReturnValue.push(lFragments.join("/"));

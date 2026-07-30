@@ -100,7 +100,7 @@ function expandGlob(pBaseDirectory, pScannedGlob) {
  *                               notably useful attributes:
  *                               - exclude - regexp of what to exclude
  *                               - includeOnly - regexp what to include
- * @return {string[]}            paths to files to be gathered.
+ * @returns {string[]}            paths to files to be gathered.
  */
 export default function gatherInitialSources(
   pFileDirectoryAndGlobArray,

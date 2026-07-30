@@ -7,7 +7,7 @@ const typescript = await tryImport(
 );
 
 function getCompilerOptions(pFlavor, pTSConfig) {
-  let lCompilerOptions = {};
+  const lCompilerOptions = {};
 
   if (pFlavor === "tsx") {
     lCompilerOptions.jsx = "react";

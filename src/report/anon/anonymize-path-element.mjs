@@ -37,7 +37,7 @@ function replaceFromWordList(pPathElement, pWordList, pCached) {
  * @param {string[]} pWordList words to pick from
  * @param {RegExp} pWhiteListRE pattern not to anonymize
  * @param {boolean} pCached caches the replaced value, with pPathElement as the key
- * @return {string} the path element, anonymized if it isn't whitelisted
+ * @returns {string} the path element, anonymized if it isn't whitelisted
  */
 export function anonymizePathElement(
   pPathElement,

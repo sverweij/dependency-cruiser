@@ -115,7 +115,7 @@ function determineNodeModuleDependencyTypes(
   pResolveOptions,
 ) {
   /** @type { DependencyType[] } */
-  let lReturnValue = determineManifestDependencyTypes(
+  const lReturnValue = determineManifestDependencyTypes(
     getPackageRoot(pModuleName),
     pPackageDeps,
     pResolveOptions.modules,
@@ -151,6 +151,7 @@ function determineExternalModuleDependencyTypes(
   pBaseDirectory,
 ) {
   /** @type { DependencyType[] } */
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = [];
 
   if (
@@ -179,7 +180,7 @@ function determineExternalModuleDependencyTypes(
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
  * @param {ITranspileOptions} pTranspileOptions
  *
- * @return { DependencyType[] }an array of dependency types for the dependency
+ * @returns { DependencyType[] }an array of dependency types for the dependency
  */
 // eslint-disable-next-line max-lines-per-function
 export default function determineDependencyTypes(

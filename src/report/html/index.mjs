@@ -17,7 +17,7 @@ function addShowTitle(pDependencyEntry) {
 }
 
 function getClasses(pModule, pOtherClasses) {
-  let lClasses = pOtherClasses || [];
+  const lClasses = pOtherClasses || [];
   if (pModule.coreModule) {
     lClasses.push("cell-core-module");
   }
@@ -37,7 +37,7 @@ function constructTableHead(pModules) {
 }
 
 function constructTableCellTitle(pModule, pIncidence) {
-  let lTitleLines = [];
+  const lTitleLines = [];
   if (pIncidence.rule) {
     lTitleLines.push(`${pIncidence.rule}:`);
   }

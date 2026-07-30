@@ -37,7 +37,7 @@ export function getFileHashSync(pFileName) {
   let lHashedFileName = "file not found";
   try {
     lHashedFileName = hash(readFileSync(pFileName, "utf8"));
-  } catch (pError) {
+  } catch {
     // will return "file not found" as per default
   }
   HASHES_CACHE.set(pFileName, lHashedFileName);
@@ -46,7 +46,7 @@ export function getFileHashSync(pFileName) {
 
 /**
  * @param {IChange} pChange
- * @return {IRevisionChange}
+ * @returns {IRevisionChange}
  */
 export function addCheckSumToChangeSync(pChange) {
   return {

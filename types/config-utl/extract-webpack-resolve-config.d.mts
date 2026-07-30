@@ -8,7 +8,7 @@ import type { ResolveOptions } from "enhanced-resolve";
  * @param pWebpackConfigFilename
  * @param pEnvironment
  * @param pArguments
- * @return webpack resolve config as an object
+ * @returns webpack resolve config as an object
  * @throws when the webpack config isn't usable (e.g. because it
  *         doesn't exist, or because it's invalid)
  */

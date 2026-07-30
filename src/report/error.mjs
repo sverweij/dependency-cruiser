@@ -96,7 +96,7 @@ function sumMeta(pMeta) {
 }
 
 function formatSummary(pSummary) {
-  let lMessage = `${EOL}x ${sumMeta(
+  const lMessage = `${EOL}x ${sumMeta(
     pSummary,
   )} dependency violations (${formatMeta(pSummary)}). ${
     pSummary.totalCruised

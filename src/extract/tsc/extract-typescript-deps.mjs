@@ -540,7 +540,7 @@ function extractNestedDependencies(
   pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
 ) {
-  let lResult = [];
+  const lResult = [];
 
   walk(
     lResult,

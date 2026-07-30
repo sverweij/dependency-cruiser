@@ -34,7 +34,7 @@ const FORMAT_DIAGNOSTICS_HOST = {
  * Silently fails if a supported version of the typescript compiler isn't available
  *
  * @param {string} pTSConfigFileName
- * @return {import("typescript").ParsedCommandLine} tsconfig as an object
+ * @returns {import("typescript").ParsedCommandLine} tsconfig as an object
  * @throws {Error} when the tsconfig is invalid/ has errors
  * @throws {TypeError} when the tsconfig is unreadable
  */

@@ -43,7 +43,7 @@ export default class IndexedModuleGraph {
 
   /**
    * @param {string} pName
-   * @return {IVertex}
+   * @returns {IVertex}
    */
   findVertexByName(pName) {
     return this.#indexedGraph.get(pName);
@@ -71,7 +71,7 @@ export default class IndexedModuleGraph {
     const lModule = this.#indexedGraph.get(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
-      let lDependents = lModule.dependents || [];
+      const lDependents = lModule.dependents || [];
       const lVisited = pVisited.add(pName);
 
       // @TODO this works for modules, but not for folders yet
@@ -115,7 +115,7 @@ export default class IndexedModuleGraph {
     const lModule = this.#indexedGraph.get(pName);
 
     if (lModule && (!pMaxDepth || pDepth <= pMaxDepth)) {
-      let lDependencies = lModule.dependencies;
+      const lDependencies = lModule.dependencies;
       const lVisited = pVisited.add(pName);
 
       if (lDependencies.length > 0) {
@@ -169,7 +169,7 @@ export default class IndexedModuleGraph {
         if (lDependency.name === pTo) {
           return [this.#geldEdge(lDependency)];
         }
-        let lCandidatePath = this.getPath(lDependency.name, pTo, pVisited);
+        const lCandidatePath = this.getPath(lDependency.name, pTo, pVisited);
 
         if (lCandidatePath.length > 0) {
           return [this.#geldEdge(lDependency)].concat(lCandidatePath);
@@ -187,7 +187,7 @@ export default class IndexedModuleGraph {
    * @param {string} pInitialSource The 'source' attribute of the node to be tested (source uniquely identifying a node)
    * @param {IEdge} pCurrentDependency The 'to' node to be traversed as a dependency object of the previous 'from' traversed
    * @param {Set<string>=} pVisited Technical parameter - best to leave out of direct calls
-   * @return {Array<IMiniDependency>} see description above
+   * @returns {Array<IMiniDependency>} see description above
    */
   #getCycle(pInitialSource, pCurrentDependency, pVisited) {
     const lVisited = pVisited || new Set();
@@ -239,7 +239,7 @@ export default class IndexedModuleGraph {
    *                                (source uniquely identifying a node)
    * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
    *                                be traversed
-   * @return {Array<IMiniDependency>}   see description above
+   * @returns {Array<IMiniDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
     /** @type {IVertex} */

@@ -62,7 +62,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
  *
  * @param {string} pFileName - the name of the file to compile
  * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
- * @return {acorn.Node} - a (javascript) AST
+ * @returns {acorn.Node} - a (javascript) AST
  */
 export function getASTCached(pFileName, pTranspileOptions) {
   // taking the transpile options into account of the cache key seems like

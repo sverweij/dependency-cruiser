@@ -32,7 +32,7 @@ function getMaxSeverity(pRules) {
 
 /**
  * @param {string} pSource
- * @return {string}
+ * @returns {string}
  */
 function getVertexName(pSource) {
   const lFolderName = dirname(pSource)
@@ -117,7 +117,7 @@ function getDependencyAttributes(pDependency) {
 
 /**
  * @param {import('../../types/cruise-result').ICruiseResult} pCruiseResult
- * @return {string}
+ * @returns {string}
  */
 function renderD2Source(pCruiseResult) {
   const lVertices = pCruiseResult.modules
@@ -153,7 +153,7 @@ function renderD2Source(pCruiseResult) {
  * d2 reporter
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
- * @return {import('../../types/dependency-cruiser').IReporterOutput}
+ * @returns {import('../../types/dependency-cruiser').IReporterOutput}
  */
 export default function d2(pCruiseResult) {
   return {

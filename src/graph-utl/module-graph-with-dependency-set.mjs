@@ -3,7 +3,7 @@ export default class ModuleGraphWithDependencySet {
   #modulesWithDependencySet;
   /**
    * Creates a module graph optimized for querying dependents
-   * @constructor
+   * @class
    * @param {import("../../types/dependency-cruiser.mjs").IModule[]} pModules
    */
   constructor(pModules) {

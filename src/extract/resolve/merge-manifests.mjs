@@ -2,7 +2,7 @@ import { uniq } from "#utl/array-util.mjs";
 
 /* eslint-disable security/detect-object-injection */
 function normalizeManifestKeys(pManifest) {
-  let lReturnValue = pManifest;
+  const lReturnValue = pManifest;
 
   if (pManifest.bundleDependencies) {
     pManifest.bundledDependencies = structuredClone(
@@ -60,7 +60,7 @@ function isAnArrayKey(pKey) {
  *                               source being perused (e.g. ./packages/sub/package.json)
  * @param  {any} pFurtherManifest the contents of a package.json further away
  *                               (e.g. ./package.json)
- * @return {any}                 the combined dependency-keys within those manifests
+ * @returns {any}                 the combined dependency-keys within those manifests
  */
 export default function mergeManifests(pClosestManifest, pFurtherManifest) {
   return getJointUniqueDependencyKeys(

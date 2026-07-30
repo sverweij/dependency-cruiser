@@ -19,7 +19,7 @@ function getOptionValue(pDefault) {
 
 // eslint-disable-next-line complexity
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
-  let lOptions = structuredClone(pCliOptions);
+  const lOptions = structuredClone(pCliOptions);
 
   if (Object.hasOwn(lOptions, pConfigWrapperName)) {
     set(
@@ -51,6 +51,7 @@ function fileExists(pFileName) {
 }
 
 function validateAndGetCustomRulesFileName(pValidate) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = "";
 
   if (fileExists(pValidate)) {
@@ -66,7 +67,7 @@ function validateAndGetCustomRulesFileName(pValidate) {
 }
 
 function validateAndGetDefaultRulesFileName() {
-  let lReturnValue = RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
+  const lReturnValue = RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
 
   if (typeof lReturnValue === "undefined") {
     throw new TypeError(
@@ -79,6 +80,7 @@ function validateAndGetDefaultRulesFileName() {
 }
 
 function validateAndNormalizeRulesFileName(pValidate) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = "";
 
   if (typeof pValidate === "string") {
@@ -196,7 +198,7 @@ function normalizeCache(pCliOptions) {
  *
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @param {any} pKnownCliOptions [description]
- * @return {import("../../types/options.mjs").ICruiseOptions}          [description]
+ * @returns {import("../../types/options.mjs").ICruiseOptions}          [description]
  */
 export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
   let lOptions = {

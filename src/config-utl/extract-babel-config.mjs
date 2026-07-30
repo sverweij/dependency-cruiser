@@ -6,6 +6,7 @@ import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 async function getJSConfig(pBabelConfigFileName) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = {};
 
   try {
@@ -34,6 +35,7 @@ async function getJSConfig(pBabelConfigFileName) {
 }
 
 async function getJSON5Config(pBabelConfigFileName) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = {};
   const { default: json5 } = await import("json5");
 
@@ -78,7 +80,7 @@ async function getConfig(pBabelConfigFileName) {
  * Silently fails if a supported @babel/core version can't be found
  *
  * @param {string} pBabelConfigFileName
- * @return {object} babel config as an object
+ * @returns {object} babel config as an object
  * @throws {Error} when the babel config has an unknown extension OR
  *                 when the babel config is invalid OR
  *                 when dependency-cruiser can't yet process it

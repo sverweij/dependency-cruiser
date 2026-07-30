@@ -34,7 +34,7 @@ export default function setUpPerformanceLogListener(
   pMaxLevel = INFO,
   pStream = process.stderr,
 ) {
-  let lState = {
+  const lState = {
     previousMessage: "startup: nodejs loading",
     previousTime: 0,
     previousUserUsage: 0,
