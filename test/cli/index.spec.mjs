@@ -154,7 +154,7 @@ function resetOutputDirectory() {
     try {
       unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "cjs"));
       unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "amd"));
-    } catch (pError) {
+    } catch {
       // process.stderr.write(typeof e);
     }
   });
@@ -180,7 +180,7 @@ function resetOutputDirectory() {
 
 function setModuleType(pTestPairs, pModuleType) {
   return pTestPairs.map((pTestPair) => {
-    let lReturnValue = {
+    const lReturnValue = {
       description: pTestPair.description.replace(
         /{{moduleType}}/g,
         pModuleType,

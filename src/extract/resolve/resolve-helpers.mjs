@@ -7,7 +7,7 @@ export function addLicenseAttribute(
   { baseDirectory, fileDirectory },
   pResolveOptions,
 ) {
-  let lReturnValue = {};
+  const lReturnValue = {};
   if (
     pResolveOptions.resolveLicenses &&
     isExternalModule(

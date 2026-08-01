@@ -32,7 +32,7 @@ function determineExtractionFunction(pCruiseOptions, pFileName) {
  * @param  {ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {IDependency[]} an array of dependency objects (see above)
+ * @returns {IDependency[]} an array of dependency objects (see above)
  */
 export default function extractStats(
   pFileName,

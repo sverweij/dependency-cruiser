@@ -43,7 +43,7 @@ function getExtensions(pInitOptions) {
 
 /**
  * @param {IPartialInitConfig} pInitOptions
- * @return {IPartialInitConfig}
+ * @returns {IPartialInitConfig}
  */
 function populate(pInitOptions) {
   const lReturnValue = {
@@ -71,10 +71,10 @@ function populate(pInitOptions) {
 /**
  *
  * @param {IPartialInitConfig} pInitOptions
- * @return {IInitConfig}
+ * @returns {IInitConfig}
  */
 export default function normalizeInitOptions(pInitOptions) {
-  let lReturnValue = populate(pInitOptions);
+  const lReturnValue = populate(pInitOptions);
   if (!Object.hasOwn(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&

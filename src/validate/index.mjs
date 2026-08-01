@@ -18,7 +18,7 @@ function compareSeverity(pFirst, pSecond) {
 }
 
 function validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo) {
-  let lFoundRuleViolations = [];
+  const lFoundRuleViolations = [];
 
   if (pRuleSet.allowed) {
     const lInterestingAllowedRules = pRuleSet.allowed.filter(
@@ -75,7 +75,7 @@ function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
  */
 function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
   /** @type {IValidationResult} */
-  let lReturnValue = { valid: true };
+  const lReturnValue = { valid: true };
 
   const lFoundRuleViolations = validateAgainstAllowedRules(
     pRuleSet,

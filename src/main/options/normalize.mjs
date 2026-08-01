@@ -45,7 +45,7 @@ function normalizeReporterOptions(pReporterOptions) {
 }
 
 function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
-  let lReturnValue = { ...pOptions };
+  const lReturnValue = { ...pOptions };
 
   for (const lFilterOptionKey of pFilterOptionKeys) {
     if (pOptions[lFilterOptionKey]) {
@@ -74,7 +74,7 @@ function normalizeCollapse(pCollapse) {
 
 function normalizeFocusDepth(pFormatOptions) {
   /** @type {IFormatOptions}*/
-  let lFormatOptions = structuredClone(pFormatOptions);
+  const lFormatOptions = structuredClone(pFormatOptions);
   if (Object.hasOwn(lFormatOptions, "focusDepth")) {
     if (lFormatOptions?.focus) {
       lFormatOptions.focus.depth = Number.parseInt(

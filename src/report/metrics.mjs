@@ -249,7 +249,7 @@ function transformMetricsToTable(
       largeIntegerWidth: METRIC_WIDTH + METRIC_WIDTH,
     },
   );
-  let lComponents = lObject.data
+  const lComponents = lObject.data
     .filter(
       (pComponent) =>
         (!hideModules && pComponent.type === "module") ||
@@ -268,7 +268,7 @@ function transformMetricsToTable(
  *
  * @param {import('../../types/dependency-cruiser.js').ICruiseResult} pCruiseResult -
  * @param {import("../../types/reporter-options.js").IMetricsReporterOptions} pReporterOptions
- * @return {import('../../types/dependency-cruiser.js').IReporterOutput} -
+ * @returns {import('../../types/dependency-cruiser.js').IReporterOutput} -
  */
 export default function metrics(pCruiseResult, pReporterOptions) {
   const lReporterOptions = pReporterOptions || {};

@@ -1,0 +1,72 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "import",
+    "jsdoc",
+    "node",
+    "oxc",
+    "promise",
+    "typescript"
+  ],
+  "ignorePatterns": [
+    "**/.pnp.cjs",
+    "**/.yarn",
+    "**/node_modules",
+    "**/coverage",
+    "**/tmp",
+    "src/**/*.schema.mjs",
+    "src/schema/*.validate.mjs",
+    "src/report/dot-webpage/svg-in-html-snippets/script.cjs",
+    "test/integration/**/*",
+    "test/*/__fixtures__/**/*",
+    "test/*/*/__fixtures__/**/*",
+    "test/*/*/*/__fixtures__/**/*",
+    "test/*/__mocks__/**/*",
+    "test/*/*/__mocks__/**/*"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "restriction": "error",
+    "perf": "warn",
+    "style": "off", //
+    "nursery": "warn"
+  },
+  // "options": {
+  //   "reportUnusedDisableDirectives": "warn"
+  // },
+  "rules": {
+    "explicit-member-accessibility": "off", // false positives: borks on any method called 'write'
+    "import/no-default-export": "off",
+    "import/no-relative-parent-imports": "off",
+    "no-plusplus": "off",
+    "no-use-before-define": "off",
+    "oxc/no-map-spread": "off", // perf rule - for current context not impactful to fix
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-rest-spread-properties": "off",
+    "oxc/no-async-await": "off",
+    "import/no-named-as-default-member": "off",
+    "no-extra-boolean-cast": "off",
+    "node/no-top-level-await": "off",
+    "import/no-commonjs": "off", // we still have to use this occasionally
+    "typescript/no-require-imports": "off", // this is occasionally required,
+    "typescript/no-explicit-any": "off",
+    "preserve-caught-error": "off",
+    "import/unambiguous": "off",
+    "no-underscore-dangle": "off",
+    "typescript/explicit-module-boundary-types": "off",
+    "class-methods-use-this": "off",
+    "no-undefined": "off",
+    "promise/catch-or-return": "off",
+    "prefer-const": "error",
+    "complexity": "error",
+    // "max-lines-per-function": "error"
+    // "max-lines": "error"
+  },
+  "env": {
+    "builtin": true,
+    "node": true,
+    "mocha": true
+  }
+}

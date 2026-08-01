@@ -16,6 +16,7 @@ function squashDependencyToPattern(pCollapsePattern) {
 }
 
 function determineConsolidatedness(pConsolidated, pCollapseMatch, pSource) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = false;
 
   // if it was  already established it's consolidated (e.g. from an earlier

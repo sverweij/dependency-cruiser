@@ -4,7 +4,7 @@
  *
  * @param {string[]} pLeftArray an array of strings
  * @param {string[]} pRightArray another array of strings
- * @return {boolean} true if there's at least one element in pLeftArray also in pRightArray
+ * @returns {boolean} true if there's at least one element in pLeftArray also in pRightArray
  */
 export function intersects(pLeftArray, pRightArray) {
   if (pLeftArray.length === 0 || pRightArray.length === 0) {

@@ -14,7 +14,7 @@ const COMBINED_MANIFEST_CACHE = new Map();
  *
  * @param {string} pFileDirectory the folder relative to which to find
  *                          the package.json
- * @return {any} the contents of the package.json as a javascript
+ * @returns {any} the contents of the package.json as a javascript
  *               object or null if the package.json could not be
  *               found or is invalid
  */
@@ -70,7 +70,7 @@ function maybeReadPackage(pFileDirectory) {
 }
 
 function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
-  let lReturnValue = [];
+  const lReturnValue = [];
   let lIntermediate = pFileDirectory;
 
   while (
@@ -133,7 +133,7 @@ function getCombinedManifests(pFileDirectory, pBaseDirectory) {
  * @param  {string}  pBaseDirectory              the directory to consider as base (or 'root')
  * @param  {Boolean} pCombinedDependencies whether to stop (false) or continue
  *                                         searching until the 'root'
- * @return {any}                           the contents of a package.json as a javascript
+ * @returns {any}                           the contents of a package.json as a javascript
  *                                         object or null if a package.json could not be
  *                                        found or is invalid
  */

@@ -30,6 +30,7 @@ function resolveModule(
   pFileDirectory,
   pResolveOptions,
 ) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = null;
 
   const lStrippedModuleName = stripToModuleName(pModule.module);
@@ -178,7 +179,7 @@ function resolveWithRetry(
  *                              detected in
  * @param  {IResolveOptions} pResolveOptions
  * @param  {any} pTranspileOptions
- * @return {Partial <IDependency>}
+ * @returns {Partial <IDependency>}
  *
  *
  */

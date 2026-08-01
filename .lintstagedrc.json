@@ -1,10 +1,7 @@
 {
-  "{src,config}/**/*.{js,cjs,mjs}": ["eslint --fix"],
+  "{src,config}/**/*.{js,cjs,mjs}": ["oxlint --fix"],
   "{tools,src,config}/**/*.{js,cjs,mjs,json}": ["prettier --write"],
-  "bin/*": ["eslint --fix", "prettier --write"],
-  "test/**/*.{utl,spec}.{mjs,cjs}": ["eslint --fix", "prettier --write"],
-  "types/**/*.d.ts": [
-    "eslint --config types/.eslintrc.json --fix",
-    "prettier --write"
-  ]
+  "bin/*": ["oxlint --fix", "prettier --write"],
+  "test/**/*.{utl,spec}.{mjs,cjs}": ["oxlint --fix", "prettier --write"],
+  "types/**/*.d.ts": ["oxlint --fix", "prettier --write"]
 }

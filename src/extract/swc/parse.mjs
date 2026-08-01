@@ -32,7 +32,7 @@ export function getASTFromSource(pSource) {
  * return the result from a cache
  *
  * @param {string} pFileName - the name of the file to compile
- * @return {ModuleItem[]} - an (swc) AST
+ * @returns {ModuleItem[]} - an (swc) AST
  */
 export function getASTCached(pFileName) {
   if (CACHE.has(pFileName)) {
@@ -49,7 +49,7 @@ export function clearCache() {
 }
 
 /**
- * @return {boolean} - true if the swc compiler is available,
+ * @returns {boolean} - true if the swc compiler is available,
  *                     false in all other cases
  */
 // @ts-expect-error dfdfd

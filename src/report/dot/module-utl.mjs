@@ -57,8 +57,8 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
 export function folderify(pShowMetrics) {
   /** @param {import("../../../types/cruise-result").IModule} pModule*/
   return (pModule) => {
-    let lAdditions = {};
-    let lDirectoryName = dirname(pModule.source);
+    const lAdditions = {};
+    const lDirectoryName = dirname(pModule.source);
 
     if (lDirectoryName !== ".") {
       lAdditions.folder = lDirectoryName;

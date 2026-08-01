@@ -76,7 +76,7 @@ function assertRuleSafety(pRule) {
  * Throws an Error in all other cases.
  *
  * @param  {IConfiguration} pConfiguration The configuration to validate
- * @return {IConfiguration} The configuration as passed
+ * @returns {IConfiguration} The configuration as passed
  * @throws {Error}          An error with the reason for the error as a message
  */
 export default function assertRuleSetValid(pConfiguration) {

@@ -17,7 +17,7 @@ import path from "node:path";
  * @param  {string} pFilePath   the path to transform
  * @param  {path} pPathModule? optional - the path module/ object to use (for testing
  *                              this module on posix platforms only; defaults to require('path'))
- * @return {string}             the transformed path
+ * @returns {string}             the transformed path
  */
 export default function pathToPosix(pFilePath, pPathModule = path) {
   const lPathModule = pPathModule || path;

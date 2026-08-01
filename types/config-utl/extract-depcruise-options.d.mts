@@ -10,7 +10,7 @@ import type { ICruiseOptions } from "../options.mjs";
  * ```
  *
  * @param pConfigFileName
- * @return dependency-cruiser options
+ * @returns dependency-cruiser options
  * @throws when the config is not valid (/ does not exist/ isn't readable)
  */
 export default function extractDepcruiseOptions(

@@ -15,7 +15,7 @@ export function extract(
   pFileName,
   pTranspileOptions,
 ) {
-  let lDependencies = [];
+  const lDependencies = [];
   const lAST = getASTCached(join(baseDir, pFileName), pTranspileOptions);
 
   if (moduleSystems.includes("cjs")) {

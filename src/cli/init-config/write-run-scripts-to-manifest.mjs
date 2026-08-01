@@ -60,7 +60,7 @@ const EXPERIMENTAL_SCRIPT_DOC = [
 
 /**
  * @param {import("./types.d.mts").IInitConfig} pInitOptions
- * @return {any} an bunch of key value pairs that can be plonked into a `scripts` attribute in a package.json
+ * @returns {any} an bunch of key value pairs that can be plonked into a `scripts` attribute in a package.json
  */
 export function compileRunScripts(pInitOptions) {
   let lReturnValue = {};
@@ -91,7 +91,7 @@ export function compileRunScripts(pInitOptions) {
  * @param {any} pAdditionalRunScripts
  * @param {any} pExistingRunScripts
  *
- * @return {any} the scripts in pAdditionalRunScripts that don't yet exist in
+ * @returns {any} the scripts in pAdditionalRunScripts that don't yet exist in
  * pExistingRunScripts
  */
 function filterNewScriptEntries(pExistingRunScripts, pAdditionalRunScripts) {

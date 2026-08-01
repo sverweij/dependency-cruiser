@@ -5,9 +5,9 @@ import pathToPosix from "#utl/path-to-posix.mjs";
 /** @import {IResolveOptions} from "../../../types/resolve-options.mjs" */
 
 /** @type {Map<string, enhancedResolve.Resolver>} */
-let gResolvers = new Map();
+const gResolvers = new Map();
 /** @type {Set<string>} */
-let gInitialized = new Set();
+const gInitialized = new Set();
 
 /**
  * Initializes a resolver for the given caching context if not already done

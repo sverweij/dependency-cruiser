@@ -11,7 +11,7 @@
  *
  * @param {IFlattenedRuleSet} pRuleSet - The rule set to search in
  * @param {string} pName - The rule name to look for
- * @return {IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
+ * @returns {IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
 export function findRuleByName(pRuleSet, pName) {
   const lNamedRules = (pRuleSet?.forbidden ?? []).concat(
@@ -34,7 +34,7 @@ function ruleHasALicenseLikeAttribute(pRule) {
  * Returns false in all other cases
  *
  * @param {IFlattenedRuleSet} pRuleSet
- * @return {boolean}
+ * @returns {boolean}
  */
 export function ruleSetHasLicenseRule(pRuleSet) {
   return (
@@ -45,7 +45,7 @@ export function ruleSetHasLicenseRule(pRuleSet) {
 
 /**
  * @param {IFlattenedRuleSet} pRuleSet
- * @return {boolean}
+ * @returns {boolean}
  */
 export function ruleSetHasDeprecationRule(pRuleSet) {
   return (

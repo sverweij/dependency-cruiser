@@ -54,7 +54,7 @@ export function isExternalModule(
 }
 
 function determineFollowableExtensions(pResolveOptions) {
-  let lReturnValue = new Set(pResolveOptions.extensions);
+  const lReturnValue = new Set(pResolveOptions.extensions);
 
   // we could include things like pictures, movies, html, xml etc in
   // lKnownUnfollowables as well. Ijavascript-like sources you don't

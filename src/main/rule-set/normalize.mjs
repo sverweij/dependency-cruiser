@@ -111,7 +111,7 @@ function normalizeRule(pRule) {
  * - severity (default 'warn')
  *
  * @param  {IFlattenedRuleSet} pRuleSet
- * @return {IStrictRuleSet}
+ * @returns {IStrictRuleSet}
  */
 export default function normalizeRuleSet(pRuleSet) {
   bus.debug("startup: parse rule set: normalize");

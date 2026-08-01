@@ -32,7 +32,7 @@ const folderFixtures = requireJSON(
 function runFixture(pFixture) {
   if (!Boolean(pFixture.ignore)) {
     it(pFixture.title, async () => {
-      let lResult = await cruise(
+      const lResult = await cruise(
         [pFixture.input.fileName],
         pFixture.input.options,
         {

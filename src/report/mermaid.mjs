@@ -63,7 +63,7 @@ function renderSubgraphs(pSource, pOptions, pDepth = 0) {
  * @param {Map<string, string>} pNamesHashMap
  */
 function convertSubgraphSources(pCruiseResult, pNamesHashMap) {
-  let lTree = {};
+  const lTree = {};
 
   for (const lModule of pCruiseResult.modules) {
     const lPaths = lModule.source.split("/");
@@ -114,7 +114,7 @@ const hashToReadableNodeName = (pNode) =>
 /**
  * @param {import("../../types/cruise-result").IModule[]} pModules
  * @param {Boolean} pMinify
- * @return {Map<string, string>}
+ * @returns {Map<string, string>}
  */
 function hashModuleNames(pModules, pMinify) {
   const lBase = 36;
@@ -173,7 +173,7 @@ ${focusHighlights(pCruiseResult.modules, lNamesHashMap)}`;
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  * @param {import("../../types/reporter-options").IMermaidReporterOptions} pOptions
- * @return {import('../../types/dependency-cruiser').IReporterOutput}
+ * @returns {import('../../types/dependency-cruiser').IReporterOutput}
  */
 export default function mermaid(pCruiseResult, pOptions) {
   return {

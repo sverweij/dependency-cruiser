@@ -16,7 +16,7 @@ const extractcommonJS = (
 
 describe("[U] acorn/extract-cjs-deps", () => {
   it("require with in an assignment", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS("const x = require('./static')", lDeps);
     deepEqual(lDeps, [
@@ -31,7 +31,7 @@ describe("[U] acorn/extract-cjs-deps", () => {
   });
 
   it("use an exotic require and specify it as exoticRequireString", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS(
       "const need = require; const x = need('./static-required-with-need')",
@@ -51,7 +51,7 @@ describe("[U] acorn/extract-cjs-deps", () => {
   });
 
   it("use an exotic combined require and specify it as exoticRequireString", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS(
       "const x = window.require('./static-required-with-need')",
@@ -71,7 +71,7 @@ describe("[U] acorn/extract-cjs-deps", () => {
   });
 
   it("use an exotic require and don't specify it as exoticRequireString", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS(
       "const need = require; const x = need('./static-required-with-need')",
@@ -81,7 +81,7 @@ describe("[U] acorn/extract-cjs-deps", () => {
   });
 
   it("require with in an assignment - template literal argument", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS("const x = require(`template-literal`)", lDeps);
     deepEqual(lDeps, [
@@ -96,14 +96,14 @@ describe("[U] acorn/extract-cjs-deps", () => {
   });
 
   it("non-string argument doesn't yield a dependency (number)", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS("require(42);", lDeps);
     deepEqual(lDeps, []);
   });
 
   it("non-string argument doesn't yield a dependency (function call)", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractcommonJS(
       `

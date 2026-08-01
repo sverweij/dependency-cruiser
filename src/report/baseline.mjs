@@ -7,7 +7,7 @@ const EOL = "\n";
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @returns {import('../../types/dependency-cruiser').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */

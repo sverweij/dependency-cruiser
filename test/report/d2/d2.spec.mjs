@@ -5,7 +5,7 @@ import d2 from "#report/d2.mjs";
 describe("[I] d2", () => {
   const lMocks = readdirSync("./test/report/d2/__mocks__");
 
-  lMocks.forEach((pMock, pIndex, pArray) => {
+  for (const pMock of lMocks) {
     it(`renders a d2 - ${pMock}`, async () => {
       const lCruiseResult = await import(`./__mocks__/${pMock}`);
       const lExpected = readFileSync(
@@ -16,5 +16,5 @@ describe("[I] d2", () => {
 
       equal(lActual, lExpected);
     });
-  });
+  }
 });

@@ -273,5 +273,6 @@ export default Visitor
       }
     }
   : /* c8 ignore start */
+    /* oxlint-disable-next-line typescript/no-extraneous-class */
     class Empty {};
 /* c8 ignore stop */

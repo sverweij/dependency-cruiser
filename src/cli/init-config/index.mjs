@@ -33,7 +33,7 @@ const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
  * (e.g. a tsconfig exists => use it and assume typescript is used)
  *
  * @param {OneShotConfigIDType} pOneShotConfigId
- * @return {IPartialInitConfig} an initialization configuration
+ * @returns {IPartialInitConfig} an initialization configuration
  */
 function getOneShotConfig(pOneShotConfigId) {
   /** @type {IPartialInitConfig} */

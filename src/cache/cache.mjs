@@ -123,7 +123,7 @@ export default class Cache {
   /**
    * @param {string} pPayload
    * @param {boolean} pCompress
-   * @return {Buffer|string}
+   * @returns {Buffer|string}
    */
   #compact(pPayload, pCompress) {
     if (pCompress) {
@@ -144,7 +144,7 @@ export default class Cache {
    * @param {IRevisionData=} pRevisionData
    */
   async write(pCacheFolder, pCruiseResult, pRevisionData) {
-    let lRevisionData = pRevisionData ?? this.#revisionData;
+    const lRevisionData = pRevisionData ?? this.#revisionData;
 
     await mkdir(pCacheFolder, { recursive: true });
     const lUncompressedPayload = JSON.stringify(
@@ -153,7 +153,7 @@ export default class Cache {
         lRevisionData,
       ),
     );
-    let lPayload = this.#compact(lUncompressedPayload, this.#compress);
+    const lPayload = this.#compact(lUncompressedPayload, this.#compress);
 
     // relying on writeFile defaults to 'do the right thing' (i.e. utf8
     // when the payload is a string; raw buffer otherwise)

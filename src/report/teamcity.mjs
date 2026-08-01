@@ -16,7 +16,7 @@ const EOL = "\n";
  * Copied from https://github.com/pifantastic/teamcity-service-messages/blob/master/lib/message.js#L72
  *
  * @param  {String} pMessageString the string to escape
- * @return {String}
+ * @returns {String}
  */
 function escape(pMessageString) {
   if (pMessageString === null) {
@@ -48,7 +48,7 @@ function escape(pMessageString) {
  * but this is what teamcity-service-messages used, so as
  * per the rule of least surprise, this is what we use as well.
  *
- * @return {string} 10 random numeric digits
+ * @returns {string} 10 random numeric digits
  */
 function getRandomFlowId() {
   const lFlowIdLength = 10;

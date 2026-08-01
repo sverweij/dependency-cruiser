@@ -51,7 +51,7 @@ function getRandomChar(pChar) {
  * pulp2slurp => jgyb3guyow
  *
  * @param {string} pString - any string
- * @return {string} - a random string with above specs
+ * @returns {string} - a random string with above specs
  */
 export default function getRandomString(pString) {
   return Array.from(pString).map(getRandomChar).join("");

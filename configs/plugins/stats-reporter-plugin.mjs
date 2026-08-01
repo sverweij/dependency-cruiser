@@ -34,7 +34,7 @@ function doMagic(pCruiseResult) {
  * got passed
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult - a result from a cruise.
- * @return {string} an object with some stats
+ * @returns {string} an object with some stats
  */
 function samplePluginReporter(pCruiseResult) {
   const lDependencyCounts = pCruiseResult.modules
@@ -68,7 +68,7 @@ function samplePluginReporter(pCruiseResult) {
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @returns {import('../../types/dependency-cruiser').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */

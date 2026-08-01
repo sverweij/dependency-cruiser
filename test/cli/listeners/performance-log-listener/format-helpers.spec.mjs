@@ -32,6 +32,7 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatTime", () => 
   });
 
   it("converts to ms, left pads & adds the unit at the end (negative numbers)", () => {
+    /* oxlint-disable-next-line approx-constant */
     equal(formatTime(-3.1415926535), "     -3,142ms ");
   });
 

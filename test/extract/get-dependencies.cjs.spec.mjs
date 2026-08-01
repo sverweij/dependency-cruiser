@@ -13,7 +13,7 @@ const requireJSON = createRequireJSON(import.meta.url);
 
 const cjsFixtures = requireJSON("./__fixtures__/cjs.json");
 
-let symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
+const symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
 
 function runFixture(pFixture, pParser = "acorn") {
   const lOptions = {

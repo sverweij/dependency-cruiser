@@ -18,7 +18,7 @@ const CACHE = new Map();
  * @param {object} pFileRecord Record with source code, an extension and a filename
  * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
  *                                a babel config
- * @return {object} - a (typescript) AST
+ * @returns {object} - a (typescript) AST
  */
 export function getASTFromSource(pFileRecord, pTranspileOptions) {
   let lSource = pFileRecord.source;
@@ -42,7 +42,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
  * @param {string} pFileName - the name of the file to compile
  * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
  *                                a babel config
- * @return {object} - a (typescript) AST
+ * @returns {object} - a (typescript) AST
  */
 export function getASTCached(pFileName, pTranspileOptions) {
   if (CACHE.has(pFileName)) {
@@ -61,7 +61,7 @@ export function getASTCached(pFileName, pTranspileOptions) {
 }
 
 /**
- * @return {boolean} - true if the typescript compiler is available,
+ * @returns {boolean} - true if the typescript compiler is available,
  *                     false in all other cases
  */
 export const isAvailable = () => typescript !== false;

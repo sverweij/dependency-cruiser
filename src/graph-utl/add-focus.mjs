@@ -34,7 +34,7 @@ export default function addFocus(pModules, pFilter) {
       ({ source }) => source,
     );
     let lReachableModuleNamesArray = [];
-    let lIndexedModules = new IndexedModuleGraph(pModules);
+    const lIndexedModules = new IndexedModuleGraph(pModules);
 
     for (const lFocusedModule of lFocusedModuleNames) {
       lReachableModuleNamesArray = lReachableModuleNamesArray

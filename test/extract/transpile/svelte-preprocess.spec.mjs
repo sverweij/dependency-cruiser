@@ -26,7 +26,7 @@ describe("[U] sync svelte pre-processor", () => {
       const lSyncResult = sveltePreProcess(pInput, typeScriptWrap, {});
       const lAsyncResult = await svelteCompiler.preprocess(pInput, {
         script: ({ content, attributes }) => {
-          let lReturnValue = { code: content };
+          const lReturnValue = { code: content };
 
           if (attributes.lang === "ts" && typeScriptWrap.isAvailable()) {
             lReturnValue.code = typeScriptWrap.transpile(content, {

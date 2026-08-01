@@ -75,7 +75,7 @@ function getCanonicalModuleName(pModuleName, pProtocol) {
  */
 // eslint-disable-next-line complexity
 export function extractModuleAttributes(pString) {
-  let lReturnValue = { module: pString };
+  const lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex
     /^(?<protocol>node:|file:|data:|bun:)(?:(?<mimeType>[^,]+),)?(?<module>.+)$/,

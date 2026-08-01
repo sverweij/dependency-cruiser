@@ -10,7 +10,7 @@ const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
 
 describe("[U] acorn/extract-ES6-deps", () => {
   it("dynamic imports of strings", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
     deepEqual(lDeps, [
@@ -25,7 +25,7 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("dynamic imports of a template literal without placeholders yields an import", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
     deepEqual(lDeps, [
@@ -40,7 +40,7 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("dynamic imports of a template literal with placeholders doesn't yield an import", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractES6(
       // eslint-disable-next-line no-template-curly-in-string
@@ -51,7 +51,7 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("yield a dynamic import yields an import", () => {
-    let lDeps = [];
+    const lDeps = [];
     const lYieldImport = `function* a() {
             yield import('http');
         }`;
@@ -69,14 +69,14 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("dynamic imports of a number doesn't yield an import", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractES6("import(42).then(pModule => pModule.x);", lDeps);
     deepEqual(lDeps, []);
   });
 
   it("dynamic imports of a function call doesn't yield an import", () => {
-    let lDeps = [];
+    const lDeps = [];
 
     extractES6(
       `
@@ -89,7 +89,7 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("doesn't get confused about import keywords in jsx components", () => {
-    let lDependencies = [];
+    const lDependencies = [];
     const lInput = `import React from 'react';
 
     export const ReplicateIssueComponent = props => {
@@ -113,7 +113,7 @@ describe("[U] acorn/extract-ES6-deps", () => {
   });
 
   it("does a.t.m. NOT handle certain ways of jsx notation correctly", () => {
-    let lDependencies = [];
+    const lDependencies = [];
     const lInput = `import React from 'react';
 
 export class ReplicateIssueComponent extends React.Component {

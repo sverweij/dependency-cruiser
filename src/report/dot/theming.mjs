@@ -47,12 +47,18 @@ function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
 }
 
 export function getThemeAttributes(pModuleOrDependency, pAttributeCriteria) {
-  return (pAttributeCriteria || [])
-    .filter((pSchemeEntry) =>
-      moduleOrDependencyMatchesCriteria(pSchemeEntry, pModuleOrDependency),
-    )
-    .map((pSchemeEntry) => pSchemeEntry.attributes)
-    .reduce((pAll, pCurrent) => ({ ...pCurrent, ...pAll }), {});
+  return (
+    (pAttributeCriteria || [])
+      .filter((pSchemeEntry) =>
+        moduleOrDependencyMatchesCriteria(pSchemeEntry, pModuleOrDependency),
+      )
+      .map((pSchemeEntry) => pSchemeEntry.attributes)
+      /* oxlint-disable-next-line no-accumulating-spread - 
+       replacing it with alternatives is going to yield the same O(n^2)
+       complexity, just with more lines of code
+     */
+      .reduce((pAll, pCurrent) => ({ ...pCurrent, ...pAll }), {})
+  );
 }
 
 export function normalizeTheme(pTheme) {

@@ -25,6 +25,7 @@ export function isValidPlugin(pPluginFunction) {
 }
 
 async function getPluginReporter(pOutputType) {
+  /* oxlint-disable-next-line no-useless-assignment */
   let lReturnValue = false;
 
   try {

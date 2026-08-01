@@ -1,5 +1,4 @@
 import { equal } from "node:assert/strict";
-import matchModuleRule from "#validate/match-module-rule.mjs";
 import { matchesOrphanRule } from "#validate/match-module-rule-helpers.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };

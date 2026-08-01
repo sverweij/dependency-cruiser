@@ -221,10 +221,10 @@ describe("[U] ast-extractors/extract-typescript - jsdoc 'bracket' imports", () =
       ],
     );
   });
-  it("extracts @return wrapped in type shenanigans)", () => {
+  it("extracts @returns wrapped in type shenanigans)", () => {
     deepEqual(
       extractTypescript(
-        "/** @return {Promise<import('./types.js').IPartialInitConfig>} */",
+        "/** @returns {Promise<import('./types.js').IPartialInitConfig>} */",
         [],
         true,
       ),

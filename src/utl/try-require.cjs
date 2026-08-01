@@ -6,7 +6,7 @@ const extractRootModuleName = require("./extract-root-module-name.cjs");
 /**
  * @throws {Error}
  * @param pModuleName the name of the module to get the version for
- * @return the version of the module identified by pModuleName
+ * @returns the version of the module identified by pModuleName
  */
 function getVersion(pModuleName) {
   // @ts-expect-error TS2345 extractRootModuleName can return either a string or
@@ -26,7 +26,7 @@ function getVersion(pModuleName) {
  *
  * @param {string} pModuleName      the name of the module to resolve
  * @param {string} [pSemanticVersion] (optional) a semantic version (range)
- * @return {NodeModule | false }the (resolved) module identified by pModuleName or false
+ * @returns {NodeModule | false }the (resolved) module identified by pModuleName or false
  */
 function tryRequire(pModuleName, pSemanticVersion) {
   try {

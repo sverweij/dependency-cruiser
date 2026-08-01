@@ -13,7 +13,7 @@ const EXTENSION_RE = /(?<extension>(?:(?:\.d\.(?:[cm])?ts)|\.coffee\.md)$)/;
  * .ts, .cts and .mts
  *
  * @param {string} pFileName path to the file to be parsed
- * @return {string}          extension
+ * @returns {string}          extension
  */
 export default function getExtension(pFileName) {
   const lMatchResult = EXTENSION_RE.exec(pFileName);

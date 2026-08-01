@@ -22,7 +22,7 @@ export default async function cruise(
   bus.summary("startup: parse options", c(1));
   const lCruiseOptionsValid = assertCruiseOptionsValid(pCruiseOptions);
   /** @type {import("../../types/strict-options.mjs").IStrictCruiseOptions} */
-  let lCruiseOptions = normalizeCruiseOptions(
+  const lCruiseOptions = normalizeCruiseOptions(
     lCruiseOptionsValid,
     pFileAndDirectoryArray,
   );
