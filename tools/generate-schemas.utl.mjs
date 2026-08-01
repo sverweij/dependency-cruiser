@@ -51,13 +51,28 @@ function getInputModuleName(pOutputFileName) {
 if (process.argv.length === 3) {
   const lOutputFileName = process.argv.pop();
 
-  import(getInputModuleName(lOutputFileName))
-    .then(emitConsolidatedSchema(lOutputFileName))
-    // eslint-disable-next-line unicorn/prefer-top-level-await
-    .catch((pError) => {
-      process.exitCode = 2;
-      process.stderr.write(`${pError}\n`);
-    });
+  if (
+    !lOutputFileName.endsWith(".schema.json") &&
+    !lOutputFileName.endsWith(".schema.mjs")
+  ) {
+    process.exitCode = 1;
+    process.stderr.write(
+      `\nError: '${lOutputFileName}' is not a valid schema file path\n\n`,
+    );
+  } else if (lOutputFileName.includes("..")) {
+    process.exitCode = 1;
+    process.stderr.write(
+      `\nError: '${lOutputFileName}' contains illegal path traversal\n\n`,
+    );
+  } else {
+    import(getInputModuleName(lOutputFileName))
+      .then(emitConsolidatedSchema(lOutputFileName))
+      // eslint-disable-next-line unicorn/prefer-top-level-await
+      .catch((pError) => {
+        process.exitCode = 2;
+        process.stderr.write(`${pError}\n`);
+      });
+  }
 } else {
   process.exitCode = 1;
   process.stderr.write(
