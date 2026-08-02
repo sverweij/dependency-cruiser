@@ -242,6 +242,7 @@
     "c8": "12.0.0",
     "clean-pkg-json": "2.0.0",
     "coffeescript": "2.7.0",
+    "esbuild": "0.28.1",
     "husky": "9.1.7",
     "lint-staged": "17.2.0",
     "mocha": "11.7.6",
