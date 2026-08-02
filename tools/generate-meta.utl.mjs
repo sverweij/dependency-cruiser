@@ -24,10 +24,13 @@ if (!process.permission) {
   );
   process.exit(1);
 }
-process.permission.drop("fs.read", "..");
-process.permission.drop("fs.read", "/");
-process.permission.drop("fs.write", "..");
-process.permission.drop("fs.write", "/");
+// drop is not available in older node versions, like ^22, yet
+if (Object.hasOwn(process.permission, "drop")) {
+  process.permission.drop("fs.read", "..");
+  process.permission.drop("fs.read", "/");
+  process.permission.drop("fs.write", "..");
+  process.permission.drop("fs.write", "/");
+}
 
 const lJSONAsString = await getStream(process.stdin);
 const $package = JSON.parse(lJSONAsString);
