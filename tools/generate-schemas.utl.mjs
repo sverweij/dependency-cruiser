@@ -48,6 +48,17 @@ function getInputModuleName(pOutputFileName) {
   return pOutputFileName.replace(lRE, "./$1.schema.mjs");
 }
 
+if (!process.permission) {
+  process.stderr.write(
+    "This script only runs with node\'s permission model.\n\n",
+  );
+  process.exit(1);
+}
+process.permission.drop("fs.read", "..");
+process.permission.drop("fs.read", "/");
+process.permission.drop("fs.write", "..");
+process.permission.drop("fs.write", "/");
+
 if (process.argv.length === 3) {
   const lOutputFileName = process.argv.pop();
 

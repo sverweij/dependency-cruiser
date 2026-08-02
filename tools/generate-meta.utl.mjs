@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 import { format } from "prettier";
 
 function getStream(pStream) {
@@ -17,6 +17,17 @@ function getStream(pStream) {
       });
   });
 }
+
+if (!process.permission) {
+  process.stderr.write(
+    "This script only runs with node\'s permission model.\n\n",
+  );
+  process.exit(1);
+}
+process.permission.drop("fs.read", "..");
+process.permission.drop("fs.read", "/");
+process.permission.drop("fs.write", "..");
+process.permission.drop("fs.write", "/");
 
 const lJSONAsString = await getStream(process.stdin);
 const $package = JSON.parse(lJSONAsString);

@@ -1,7 +1,7 @@
 .SUFFIXES: .js .css .html
 .INTERMEDIATE: src/schema/configuration.schema.mjs \
 	src/schema/cruise-result.schema.mjs
-NODE=node
+NODE=node --permission
 RM=rm -f
 GENERATED_SOURCES=src/schema/baseline-violations.schema.mjs \
 	src/schema/baseline-violations.schema.json \
@@ -69,16 +69,16 @@ help:
 # production rules
 
 src/%.schema.mjs: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
-	$(NODE) ./tools/generate-schemas.utl.mjs $@
+	$(NODE) --allow-fs-read ./ --allow-fs-write ./src/schema/ ./tools/generate-schemas.utl.mjs $@
 
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
-	$(NODE) ./tools/generate-schemas.utl.mjs $@
+	$(NODE) --allow-fs-read ./ --allow-fs-write ./src/schema/ ./tools/generate-schemas.utl.mjs $@
 
 src/schema/%.validate.mjs: src/schema/%.schema.mjs tools/generate-schema-validator.utl.mjs
-	$(NODE) ./tools/generate-schema-validator.utl.mjs $< $@
+	$(NODE) --allow-fs-read ./ --allow-fs-write src/schema/ ./tools/generate-schema-validator.utl.mjs $< $@
 	npx esbuild --tree-shaking=true --minify --allow-overwrite --outfile=$@ $@
 	$(RM) $<
 
 src/meta.cjs: package.json tools/generate-meta.utl.mjs
-	$(NODE) ./tools/generate-meta.utl.mjs < $< > $@
+	$(NODE) --allow-fs-read ./ ./tools/generate-meta.utl.mjs < $< > $@
 	npx prettier --write $@

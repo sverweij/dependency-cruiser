@@ -4,6 +4,17 @@ import standaloneCode from "ajv/dist/standalone/index.js";
 
 const ajv = new Ajv({ code: { source: true, esm: true } });
 
+if (!process.permission) {
+  process.stderr.write(
+    "This script only runs with node\'s permission model.\n\n",
+  );
+  process.exit(1);
+}
+process.permission.drop("fs.read", "..");
+process.permission.drop("fs.read", "/");
+process.permission.drop("fs.write", "..");
+process.permission.drop("fs.write", "/");
+
 if (process.argv.length === 4) {
   const lOutputFileName = process.argv.pop();
   const lInputSchemaFileName = process.argv.pop();
