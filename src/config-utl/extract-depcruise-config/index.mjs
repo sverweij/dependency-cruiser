@@ -60,7 +60,7 @@ export default async function extractDepcruiseConfig(
     pBaseDirectory,
     await normalizeResolveOptions(
       {
-        extensions: [".js", ".json", ".cjs", ".mjs"],
+        extensions: [".js", ".json", ".cjs", ".mjs", ".ts", ".cts", ".mts"],
       },
       {},
     ),

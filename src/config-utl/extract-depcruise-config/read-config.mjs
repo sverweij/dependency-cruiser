@@ -8,7 +8,9 @@ import { extname } from "node:path";
  */
 export default async function readConfig(pAbsolutePathToConfigFile) {
   if (
-    [".js", ".cjs", ".mjs", ""].includes(extname(pAbsolutePathToConfigFile))
+    [".js", ".cjs", ".mjs", ".mts", ".cts", ".ts", ""].includes(
+      extname(pAbsolutePathToConfigFile),
+    )
   ) {
     const { default: config } = await import(
       `file://${pAbsolutePathToConfigFile}`
