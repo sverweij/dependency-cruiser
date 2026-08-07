@@ -22,7 +22,7 @@ Dependency-cruiser doesn't come shipped with the necessary transpilers to
 handle these languages. Instead, it uses what is already available in the
 environment (see [below](#q-does-this-mean-dependency-cruiser-installs-transpilers-for-all-these-languages)).
 You can check if the transpilers are available to dependency-cruiser by
-running `depcruise --info`.
+running `dependency-cruiser --info`.
 
 When it turns out they aren't yet:
 
@@ -34,7 +34,7 @@ When it turns out they aren't yet:
   compiler(s) with the `-p` option. E.g. to get a list of all incoming and
   outgoing dependencies of a TypeScript file you could use this:
   ```
-  npx -p typescript@4.3.5 -p dependency-cruiser@latest depcruise src -T text --focus src/main/index.ts
+  npx -p typescript@4.3.5 -p dependency-cruiser@latest dependency-cruiser src -T text --focus src/main/index.ts
   ```
 
 </details>
@@ -93,7 +93,7 @@ for a solution.
 <details>
 <summary>Background</summary>
 
-The graph above is the result of a command like `depcruise src/index.ts -T dot | dot -T svg > deps.svg`.
+The graph above is the result of a command like `dependency-cruiser src/index.ts -T dot | dot -T svg > deps.svg`.
 As dependency-cruiser got _src/index.ts_ as an explicit argument, it'll scan it.
 When no TypeScript compiler is available it'll fall back to the JavaScript one.
 As TypeScript looks a lot like JavaScript, it will still find all direct dependencies.
@@ -173,7 +173,7 @@ E.g. to focus on stuff _within_ src only and not
 show any test and mock files, you'd do something like this:
 
 ```sh
-depcruise src --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
+dependency-cruiser src --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
 </details>
@@ -230,7 +230,7 @@ quite a bit.
 To achieve that either pass `-Gsplines=ortho` to dot, e.g. in a complete incantation:
 
 ```sh
-depcruise src --config .dependency-cruiser-graph.js --output-type dot | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
+dependency-cruiser src --config .dependency-cruiser-graph.js --output-type dot | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
 ```
 
 ... or put it permanently in your dependency-cruiser configuration in the dot
@@ -613,6 +613,9 @@ export default {
 
 > Newer versions of the `--init` generator automatically do this for you.
 
+As of version 18.2.0 dependency-cruiser also recognizes configuration files written
+in TypeScript - provided the node.js environment it runs in directly supports them.
+
 </details>
 
 ### Q: Does dependency-cruiser support granularity finer than modules (e.g. classes, functions, variables, ...)?
@@ -641,10 +644,10 @@ maintain both of which take time.
   (pCruiseResult: ICruiseResult): IReporterOutput;
   ```
 - pass the module as an output type, e.g. on the command line:
-  - `depcruise src --output-type plugin:my-awesome-plugin`
+  - `dependency-cruiser src --output-type plugin:my-awesome-plugin`
   - dependency-cruiser should be able to find `my-awesome-plugin`. For
     local modules this typically means you have to provide it the full path
-    path e.g. `depcruise src --output-type plugin:$(pwd)/path/to/my-awesome-plugin`
+    path e.g. `dependency-cruiser src --output-type plugin:$(pwd)/path/to/my-awesome-plugin`
 - before executing the plugin dependency-cruiser checks whether the function
   has the correct signature and whether it can handle minimal input.
 
