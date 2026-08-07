@@ -626,6 +626,7 @@ dependency-cruiser.
 
 Validates against a list of rules in a configuration file. This defaults to a file
 called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/ `.dependency-cruiser.mjs`/
+/ `.dependency-cruiser.ts`/, `.dependency-cruiser.cts`/ `.dependency-cruiser.mts`/
 `.dependency-cruiser.json`), but you can specify your own rules file, which can
 be in json format or a valid node module returning a rules object literal.
 
