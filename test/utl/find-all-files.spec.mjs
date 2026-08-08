@@ -1,6 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import findAllFiles from "#utl/find-all-files.mjs";
+import { writeFileSync } from "node:fs";
 
 const lBaseDirectory = "test/utl/__mocks__/find-all-files";
 
@@ -26,6 +27,12 @@ describe("[U] utl/findAllFiles", () => {
   });
 
   it("keeps nested .gitignore handling when root ignore contents are overridden", () => {
+    // we have to write this file each time this test runs; it's in the .gitignore,
+    // so git will indeed ignore it, and the ci won't have it for sure.
+    writeFileSync(
+      join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
+      "",
+    );
     deepEqual(
       sortStrings(
         findAllFiles(".", {

@@ -77,7 +77,7 @@ function createIgnoreRuleForDirectory(
   pOptions,
 ) {
   const lIgnoreFileContents =
-    typeof pOptions.ignoreFileContents === "undefined"
+    pOptions.ignoreFileContents === undefined
       ? readIgnoreFile(join(pBaseDirectory, pDirectoryName, ".gitignore"))
       : pOptions.ignoreFileContents;
 
@@ -194,7 +194,7 @@ function walk(
   const lCurrentIgnoreRules = ignoreRules.concat(
     createIgnoreRuleForDirectory(lCurrentDirectoryName, baseDir, {
       ...(lCurrentDirectoryName === startDirectoryName &&
-      typeof startDirectoryIgnoreFileContents !== "undefined"
+      startDirectoryIgnoreFileContents !== undefined
         ? { ignoreFileContents: startDirectoryIgnoreFileContents }
         : {}),
     }),
