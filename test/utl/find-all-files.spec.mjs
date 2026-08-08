@@ -1,5 +1,5 @@
 import { deepEqual } from "node:assert/strict";
-import { unlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, rmSync, unlinkSync, writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { join } from "node:path";
 import findAllFiles from "#utl/find-all-files.mjs";
@@ -24,6 +24,15 @@ describe("[U] utl/findAllFiles", () => {
       join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
       "",
     );
+    mkdirSync(join(lBaseDirectory, "additional-patterns-tree", ".git"));
+    writeFileSync(
+      join(lBaseDirectory, "additional-patterns-tree", ".git", "config"),
+      "",
+    );
+    writeFileSync(
+      join(lBaseDirectory, "additional-patterns-tree", "vendor", ".gitignore"),
+      "!ignored.txt\n",
+    );
   });
 
   after(() => {
@@ -31,6 +40,17 @@ describe("[U] utl/findAllFiles", () => {
       unlinkSync(join(lBaseDirectory, "nested-gitignore-tree", ".gitignore"));
       unlinkSync(
         join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
+      );
+      rmSync(join(lBaseDirectory, "additional-patterns-tree", ".git"), {
+        recursive: true,
+      });
+      unlinkSync(
+        join(
+          lBaseDirectory,
+          "additional-patterns-tree",
+          "vendor",
+          ".gitignore",
+        ),
       );
     } catch {
       // ignored - not a terrible thing to happen if they can't be removed
@@ -98,7 +118,51 @@ describe("[U] utl/findAllFiles", () => {
       sortStrings(
         findAllFiles(".", {
           baseDir: join(lBaseDirectory, "additional-patterns-tree"),
-          additionalIgnorePatterns: ["vendor"],
+          additionalIgnorePatterns: [".git", "vendor"],
+        }),
+      ),
+      ["keep.txt"],
+    );
+  });
+
+  it("lets additional pattern negations override .gitignore rules", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles(".", {
+          baseDir: join(lBaseDirectory, "nested-gitignore-tree"),
+          additionalIgnorePatterns: ["!root-ignored.txt"],
+        }),
+      ),
+      [
+        "keep-root.txt",
+        "nested/child/keep-child.txt",
+        "nested/keep-nested.txt",
+        "override-ignored.txt",
+        "root-ignored.txt",
+      ],
+    );
+  });
+
+  it("keeps additional patterns ignored after .gitignore negations", () => {
+    deepEqual(
+      sortStrings(
+        findAllFiles(".", {
+          baseDir: join(lBaseDirectory, "additional-patterns-tree"),
+          ignoreFileContents: "!.git\n!vendor\n",
+          additionalIgnorePatterns: [
+            ".git",
+            "vendor/.gitignore",
+            "vendor/ignored.txt",
+          ],
+          includeOnlyFilterFn: (pPath) =>
+            [
+              ".git",
+              ".git/config",
+              "keep.txt",
+              "vendor",
+              "vendor/.gitignore",
+              "vendor/ignored.txt",
+            ].includes(pPath),
         }),
       ),
       ["keep.txt"],

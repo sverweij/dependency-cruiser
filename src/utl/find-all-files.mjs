@@ -133,9 +133,10 @@ function createIgnoreRulesBeforeDirectory(pDirectoryName, pBaseDirectory) {
 /**
  * @param {string} pFilePath
  * @param {IgnoreRuleType[]} pIgnoreRules
+ * @param {IgnoreRuleType} pMandatoryIgnoreRule
  * @returns {boolean}
  */
-function fileShouldBeKept(pFilePath, pIgnoreRules) {
+function fileShouldBeKept(pFilePath, pIgnoreRules, pMandatoryIgnoreRule) {
   let lFileIsIgnored = false;
 
   for (const lIgnoreRule of pIgnoreRules) {
@@ -162,6 +163,16 @@ function fileShouldBeKept(pFilePath, pIgnoreRules) {
     }
   }
 
+  const { ignored: lIgnored, unignored: lUnignored } =
+    pMandatoryIgnoreRule.ignoreMatcher.test(pFilePath);
+
+  if (lIgnored) {
+    lFileIsIgnored = true;
+  }
+  if (lUnignored) {
+    lFileIsIgnored = false;
+  }
+
   return !lFileIsIgnored;
 }
 
@@ -175,7 +186,7 @@ function identityFilter(_pString, _pIndex, _pArray) {
 
 /**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreRules: IgnoreRuleType[]; startDirectoryName: string; startDirectoryIgnoreFileContents?: string; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}}
+ * @param {{baseDir: string; ignoreRules: IgnoreRuleType[]; mandatoryIgnoreRule: IgnoreRuleType; startDirectoryName: string; startDirectoryIgnoreFileContents?: string; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}}
  *   pOptions
  * @returns {string[]}
  */
@@ -184,6 +195,7 @@ function walk(
   {
     baseDir,
     ignoreRules,
+    mandatoryIgnoreRule,
     startDirectoryName,
     startDirectoryIgnoreFileContents,
     excludeFilterFn,
@@ -202,7 +214,9 @@ function walk(
 
   const lFilesInCurrentDirectory = readdirSync(join(baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
-    .filter((pFilePath) => fileShouldBeKept(pFilePath, lCurrentIgnoreRules))
+    .filter((pFilePath) =>
+      fileShouldBeKept(pFilePath, lCurrentIgnoreRules, mandatoryIgnoreRule),
+    )
     .filter(excludeFilterFn)
     .filter(includeOnlyFilterFn);
 
@@ -213,6 +227,7 @@ function walk(
         ...walk(lFile, {
           baseDir,
           ignoreRules: lCurrentIgnoreRules,
+          mandatoryIgnoreRule,
           startDirectoryName,
           startDirectoryIgnoreFileContents,
           excludeFilterFn,
@@ -245,14 +260,20 @@ export default function findAllFiles(
 ) {
   const lAdditionalIgnorePatterns = additionalIgnorePatterns ?? [".git"];
   const lStartDirectoryName = normalizeDirectoryName(pDirectoryName, baseDir);
-  const lIgnoreRules = [
-    createIgnoreRule("", "", lAdditionalIgnorePatterns),
-    ...createIgnoreRulesBeforeDirectory(pDirectoryName, baseDir),
-  ];
+  const lMandatoryIgnoreRule = createIgnoreRule(
+    "",
+    "",
+    lAdditionalIgnorePatterns,
+  );
+  const lIgnoreRules = createIgnoreRulesBeforeDirectory(
+    pDirectoryName,
+    baseDir,
+  );
 
   return walk(pDirectoryName, {
     baseDir,
     ignoreRules: lIgnoreRules,
+    mandatoryIgnoreRule: lMandatoryIgnoreRule,
     startDirectoryName: lStartDirectoryName,
     startDirectoryIgnoreFileContents: ignoreFileContents,
     excludeFilterFn: excludeFilterFn ?? identityFilter,
