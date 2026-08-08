@@ -1,8 +1,8 @@
 import { deepEqual } from "node:assert/strict";
-import { join } from "node:path";
-import findAllFiles from "#utl/find-all-files.mjs";
 import { unlinkSync, writeFileSync } from "node:fs";
 import { EOL } from "node:os";
+import { join } from "node:path";
+import findAllFiles from "#utl/find-all-files.mjs";
 
 const lBaseDirectory = "test/utl/__mocks__/find-all-files";
 
@@ -12,7 +12,7 @@ function sortStrings(pStrings) {
 
 describe("[U] utl/findAllFiles", () => {
   before(() => {
-    // the .gitignore in the nested-gitnore-tree is itself in another .gitignore,
+    // the .gitignore in the nested-gitignore-tree is itself in another .gitignore,
     // so it's ignored on commit, and the ci (or other dev envs that are clones)
     // won't have it available. Hence write it thusly
     writeFileSync(
