@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import findAllFiles from "#utl/find-all-files.mjs";
-import { writeFileSync } from "node:fs";
+import { unlinkSync, writeFileSync } from "node:fs";
 
 const lBaseDirectory = "test/utl/__mocks__/find-all-files";
 
@@ -10,6 +10,32 @@ function sortStrings(pStrings) {
 }
 
 describe("[U] utl/findAllFiles", () => {
+  before(() => {
+    // the .gitignore in the nested-gitnore-tree is itself in another .gitignore,
+    // so it's ignored on commit, and the ci (or other dev envs that are clones)
+    // won't have it available. Hence write it thusly
+    writeFileSync(
+      join(lBaseDirectory, "nested-gitignore-tree", ".gitignore"),
+      ".gitignore\nroot-ignored.txt\n",
+    );
+    // same story for the root-ignored.txt
+    writeFileSync(
+      join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
+      "",
+    );
+  });
+
+  after(() => {
+    try {
+      unlinkSync(join(lBaseDirectory, "nested-gitignore-tree", ".gitignore"));
+      unlinkSync(
+        join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
+      );
+    } catch {
+      // ignored - not a terrible thing to happen if they can't be removed
+      // not worth stopping processing for
+    }
+  });
   it("applies .gitignore files in nested folders relative to each folder", () => {
     deepEqual(
       sortStrings(
@@ -27,12 +53,6 @@ describe("[U] utl/findAllFiles", () => {
   });
 
   it("keeps nested .gitignore handling when root ignore contents are overridden", () => {
-    // we have to write this file each time this test runs; it's in the .gitignore,
-    // so git will indeed ignore it, and the ci won't have it for sure.
-    writeFileSync(
-      join(lBaseDirectory, "nested-gitignore-tree", "root-ignored.txt"),
-      "",
-    );
     deepEqual(
       sortStrings(
         findAllFiles(".", {
