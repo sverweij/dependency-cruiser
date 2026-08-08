@@ -2,6 +2,7 @@ import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import findAllFiles from "#utl/find-all-files.mjs";
 import { unlinkSync, writeFileSync } from "node:fs";
+import { EOL } from "node:os";
 
 const lBaseDirectory = "test/utl/__mocks__/find-all-files";
 
@@ -16,7 +17,7 @@ describe("[U] utl/findAllFiles", () => {
     // won't have it available. Hence write it thusly
     writeFileSync(
       join(lBaseDirectory, "nested-gitignore-tree", ".gitignore"),
-      ".gitignore\nroot-ignored.txt\n",
+      `.gitignore${EOL}root-ignored.txt${EOL}`,
     );
     // same story for the root-ignored.txt
     writeFileSync(
