@@ -1,10 +1,14 @@
 import { readdirSync, statSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path/posix";
 import ignore from "ignore";
 import pathToPosix from "./path-to-posix.mjs";
 
 /**
  * @typedef {(pString:string, pIndex: number, pArray: string[]) => boolean} FilterFunctionType
+ */
+
+/**
+ * @typedef {{directoryName: string; ignoreMatcher: import("ignore").Ignore}} IgnoreRuleType
  */
 
 /**
@@ -20,45 +24,145 @@ function fileIsDirectory(pFullPathToFile, pBaseDirectory) {
 }
 
 /**
- * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreFilterFn: FilterFunctionType; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}} pOptions
- * @returns {string[]}
+ * @param {string} pFileName
+ * @returns {string}
  */
-function walk(
-  pDirectoryName,
-  { baseDir, ignoreFilterFn, excludeFilterFn, includeOnlyFilterFn },
-) {
-  const lFilesInCurrentDirectory = readdirSync(join(baseDir, pDirectoryName))
-    .map((pFileName) => join(pDirectoryName, pFileName))
-    .filter(ignoreFilterFn)
-    .filter(excludeFilterFn)
-    .filter(includeOnlyFilterFn);
-
-  const lFiles = [];
-  for (const lFile of lFilesInCurrentDirectory) {
-    if (fileIsDirectory(lFile, baseDir)) {
-      lFiles.push(
-        ...walk(lFile, {
-          baseDir,
-          ignoreFilterFn,
-          excludeFilterFn,
-          includeOnlyFilterFn,
-        }),
-      );
-    } else {
-      lFiles.push(pathToPosix(lFile));
-    }
-  }
-
-  return lFiles;
-}
-
 function readIgnoreFile(pFileName) {
   try {
     return readFileSync(pFileName, "utf8");
   } catch {
     return "";
   }
+}
+
+/**
+ * @param {string} pDirectoryName
+ * @param {string} pBaseDirectory
+ * @returns {string}
+ */
+function normalizeDirectoryName(pDirectoryName, pBaseDirectory) {
+  return pathToPosix(
+    relative(pBaseDirectory, join(pBaseDirectory, pDirectoryName)),
+  );
+}
+
+/**
+ * @param {string} pDirectoryName
+ * @param {string} pIgnoreFileContents
+ * @param {string[]=} pAdditionalIgnorePatterns
+ * @returns {IgnoreRuleType}
+ */
+function createIgnoreRule(
+  pDirectoryName,
+  pIgnoreFileContents,
+  pAdditionalIgnorePatterns = [],
+) {
+  return {
+    directoryName: pDirectoryName,
+    ignoreMatcher: ignore()
+      .add(pIgnoreFileContents)
+      .add(pAdditionalIgnorePatterns),
+  };
+}
+
+/**
+ * @param {string} pDirectoryName
+ * @param {string} pBaseDirectory
+ * @param {{ignoreFileContents?: string}} pOptions
+ * @returns {IgnoreRuleType}
+ */
+function createIgnoreRuleForDirectory(
+  pDirectoryName,
+  pBaseDirectory,
+  pOptions,
+) {
+  const lIgnoreFileContents =
+    pOptions.ignoreFileContents === undefined
+      ? readIgnoreFile(join(pBaseDirectory, pDirectoryName, ".gitignore"))
+      : pOptions.ignoreFileContents;
+
+  return createIgnoreRule(pDirectoryName, lIgnoreFileContents);
+}
+
+/**
+ * @param {string[]} pAncestorDirectoryNames
+ * @param {string} pBaseDirectory
+ * @returns {IgnoreRuleType[]}
+ */
+function createIgnoreRulesFromDirectoryNames(
+  pAncestorDirectoryNames,
+  pBaseDirectory,
+) {
+  return pAncestorDirectoryNames.map((pAncestorDirectoryName) =>
+    createIgnoreRuleForDirectory(pAncestorDirectoryName, pBaseDirectory, {}),
+  );
+}
+
+/**
+ * @param {string} pDirectoryName
+ * @param {string} pBaseDirectory
+ * @returns {IgnoreRuleType[]}
+ */
+function createIgnoreRulesBeforeDirectory(pDirectoryName, pBaseDirectory) {
+  const lNormalizedDirectoryName = normalizeDirectoryName(
+    pDirectoryName,
+    pBaseDirectory,
+  );
+
+  if (lNormalizedDirectoryName === "") {
+    return [];
+  }
+
+  const lDirectorySegments = lNormalizedDirectoryName.split("/");
+  const lAncestorDirectoryNames = [""];
+  let lCurrentDirectoryName = "";
+
+  for (const lDirectorySegment of lDirectorySegments.slice(0, -1)) {
+    lCurrentDirectoryName = lCurrentDirectoryName
+      ? join(lCurrentDirectoryName, lDirectorySegment)
+      : lDirectorySegment;
+    lAncestorDirectoryNames.push(pathToPosix(lCurrentDirectoryName));
+  }
+
+  return createIgnoreRulesFromDirectoryNames(
+    lAncestorDirectoryNames,
+    pBaseDirectory,
+  );
+}
+
+/**
+ * @param {string} pFilePath
+ * @param {IgnoreRuleType[]} pIgnoreRules
+ * @returns {boolean}
+ */
+function fileShouldBeKept(pFilePath, pIgnoreRules) {
+  let lFileIsIgnored = false;
+
+  for (const lIgnoreRule of pIgnoreRules) {
+    const lDirectoryName = lIgnoreRule.directoryName;
+    const lIgnoreMatcher = lIgnoreRule.ignoreMatcher;
+    let lRelativePath = null;
+
+    if (lDirectoryName === "") {
+      lRelativePath = pFilePath;
+    } else if (pFilePath.startsWith(`${lDirectoryName}/`)) {
+      lRelativePath = pFilePath.slice(lDirectoryName.length + 1);
+    }
+
+    if (lRelativePath !== null) {
+      const { ignored: lIgnored, unignored: lUnignored } =
+        lIgnoreMatcher.test(lRelativePath);
+
+      if (lIgnored) {
+        lFileIsIgnored = true;
+      }
+      if (lUnignored) {
+        lFileIsIgnored = false;
+      }
+    }
+  }
+
+  return !lFileIsIgnored;
 }
 
 /**
@@ -71,7 +175,62 @@ function identityFilter(_pString, _pIndex, _pArray) {
 
 /**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn?: FilterFunctionType; includeOnlyFilterFn?: FilterFunctionType}} pOptions
+ * @param {{baseDir: string; ignoreRules: IgnoreRuleType[]; startDirectoryName: string; startDirectoryIgnoreFileContents?: string; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}}
+ *   pOptions
+ * @returns {string[]}
+ */
+function walk(
+  pDirectoryName,
+  {
+    baseDir,
+    ignoreRules,
+    startDirectoryName,
+    startDirectoryIgnoreFileContents,
+    excludeFilterFn,
+    includeOnlyFilterFn,
+  },
+) {
+  const lCurrentDirectoryName = normalizeDirectoryName(pDirectoryName, baseDir);
+  const lCurrentIgnoreRules = ignoreRules.concat(
+    createIgnoreRuleForDirectory(lCurrentDirectoryName, baseDir, {
+      ...(lCurrentDirectoryName === startDirectoryName &&
+      startDirectoryIgnoreFileContents !== undefined
+        ? { ignoreFileContents: startDirectoryIgnoreFileContents }
+        : {}),
+    }),
+  );
+
+  const lFilesInCurrentDirectory = readdirSync(join(baseDir, pDirectoryName))
+    .map((pFileName) => join(pDirectoryName, pFileName))
+    .filter((pFilePath) => fileShouldBeKept(pFilePath, lCurrentIgnoreRules))
+    .filter(excludeFilterFn)
+    .filter(includeOnlyFilterFn);
+
+  const lFiles = [];
+  for (const lFile of lFilesInCurrentDirectory) {
+    if (fileIsDirectory(lFile, baseDir)) {
+      lFiles.push(
+        ...walk(lFile, {
+          baseDir,
+          ignoreRules: lCurrentIgnoreRules,
+          startDirectoryName,
+          startDirectoryIgnoreFileContents,
+          excludeFilterFn,
+          includeOnlyFilterFn,
+        }),
+      );
+    } else {
+      lFiles.push(pathToPosix(lFile));
+    }
+  }
+
+  return lFiles;
+}
+
+/**
+ * @param {string} pDirectoryName
+ * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn?: FilterFunctionType; includeOnlyFilterFn?: FilterFunctionType}}
+ *   pOptions
  * @returns {string[]}
  */
 export default function findAllFiles(
@@ -84,17 +243,18 @@ export default function findAllFiles(
     includeOnlyFilterFn,
   },
 ) {
-  const lIgnoreFileContents =
-    ignoreFileContents ?? readIgnoreFile(join(baseDir, ".gitignore"));
   const lAdditionalIgnorePatterns = additionalIgnorePatterns ?? [".git"];
-  const lIgnoreFilterFunction = ignore()
-    .add(lIgnoreFileContents)
-    .add(lAdditionalIgnorePatterns)
-    .createFilter();
+  const lStartDirectoryName = normalizeDirectoryName(pDirectoryName, baseDir);
+  const lIgnoreRules = [
+    createIgnoreRule("", "", lAdditionalIgnorePatterns),
+    ...createIgnoreRulesBeforeDirectory(pDirectoryName, baseDir),
+  ];
 
   return walk(pDirectoryName, {
     baseDir,
-    ignoreFilterFn: lIgnoreFilterFunction,
+    ignoreRules: lIgnoreRules,
+    startDirectoryName: lStartDirectoryName,
+    startDirectoryIgnoreFileContents: ignoreFileContents,
     excludeFilterFn: excludeFilterFn ?? identityFilter,
     includeOnlyFilterFn: includeOnlyFilterFn ?? identityFilter,
   });
