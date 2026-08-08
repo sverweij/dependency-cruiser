@@ -1,5 +1,5 @@
 import { readdirSync, statSync, readFileSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative } from "node:path/posix";
 import ignore from "ignore";
 import pathToPosix from "./path-to-posix.mjs";
 
