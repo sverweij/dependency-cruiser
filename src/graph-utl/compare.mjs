@@ -1,14 +1,14 @@
 /** @import { IViolation } from "../../types/dependency-cruiser.mjs" */
 /* eslint-disable no-magic-numbers */
-function severity2number(pSeverity) {
-  const lSeverity2Number = new Map([
-    ["error", 1],
-    ["warn", 2],
-    ["info", 3],
-    ["ignore", 4],
-  ]);
+const SEVERITY2MUMBER = new Map([
+  ["error", 1],
+  ["warn", 2],
+  ["info", 3],
+  ["ignore", 4],
+]);
 
-  return lSeverity2Number.get(pSeverity) || -1;
+function severity2number(pSeverity) {
+  return SEVERITY2MUMBER.get(pSeverity) || -1;
 }
 
 export function compareSeverities(pFirstSeverity, pSecondSeverity) {
