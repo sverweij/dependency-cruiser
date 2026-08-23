@@ -1,5 +1,5 @@
-import { equal } from "node:assert/strict";
-import { compareViolations } from "#graph-utl/compare.mjs";
+import { deepEqual, equal } from "node:assert/strict";
+import { compareViolations, diffViolationArrays } from "#graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - violations", () => {
   const lViolation = {
@@ -221,5 +221,109 @@ describe("[U] graph-utl/compare - violations", () => {
       dependencyTypes: ["alpha", "kappa"],
     };
     equal(compareViolations(lDepTypesA, lDepTypesB), -1);
+  });
+
+  it("diffs arrays of violations by value", () => {
+    const lSharedViolation = {
+      from: "app.js",
+      to: "lib.js",
+      rule: { name: "no-cycles", severity: "error" },
+    };
+    const lOldViolation = {
+      from: "a.js",
+      to: "b.js",
+      rule: { name: "no-cycles", severity: "warn" },
+    };
+    const lNewViolation = {
+      from: "c.js",
+      to: "d.js",
+      rule: { name: "no-cycles", severity: "info" },
+    };
+
+    deepEqual(
+      diffViolationArrays(
+        [lOldViolation, lSharedViolation],
+        [lSharedViolation, lNewViolation],
+      ),
+      {
+        new: [lNewViolation],
+        same: [lSharedViolation],
+        old: [lOldViolation],
+      },
+    );
+  });
+
+  it("diffs arrays with repeated equal violations without inventing new comparison logic", () => {
+    const lDuplicateViolation = {
+      from: "dup.js",
+      to: "dup-target.js",
+      rule: { name: "reachability", severity: "error" },
+    };
+    const lOtherViolation = {
+      from: "other.js",
+      to: "other-target.js",
+      rule: { name: "reachability", severity: "warn" },
+    };
+
+    deepEqual(
+      diffViolationArrays(
+        [lDuplicateViolation, lDuplicateViolation, lOtherViolation],
+        [lDuplicateViolation],
+      ),
+      {
+        new: [],
+        same: [lDuplicateViolation],
+        old: [lDuplicateViolation, lOtherViolation],
+      },
+    );
+  });
+
+  it("uses cycle and via details and tolerates missing optional fields", () => {
+    const lSameViaViolation = {
+      from: "src/a.js",
+      to: "src/z.js",
+      rule: { name: "reachability", severity: "error" },
+      via: [{ name: "src/b.js" }, { name: "src/c.js" }],
+    };
+    const lDifferentViaViolation = {
+      from: "src/a.js",
+      to: "src/z.js",
+      rule: { name: "reachability", severity: "error" },
+      via: [{ name: "src/x.js" }, { name: "src/c.js" }],
+    };
+    const lSameCycleViolation = {
+      from: "src/a.js",
+      to: "src/b.js",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [{ name: "src/a.js" }, { name: "src/b.js" }],
+    };
+    const lDifferentCycleViolation = {
+      from: "src/a.js",
+      to: "src/b.js",
+      rule: { name: "no-cycles", severity: "error" },
+      cycle: [{ name: "src/a.js" }, { name: "src/c.js" }],
+    };
+
+    deepEqual(diffViolationArrays([lSameViaViolation], [lSameViaViolation]), {
+      new: [],
+      same: [lSameViaViolation],
+      old: [],
+    });
+    deepEqual(
+      diffViolationArrays([lSameCycleViolation], [lDifferentCycleViolation]),
+      {
+        new: [lDifferentCycleViolation],
+        same: [],
+        old: [lSameCycleViolation],
+      },
+    );
+    deepEqual(
+      diffViolationArrays([lDifferentViaViolation], [lSameViaViolation]),
+      {
+        new: [lSameViaViolation],
+        same: [],
+        old: [lDifferentViaViolation],
+      },
+    );
   });
 });

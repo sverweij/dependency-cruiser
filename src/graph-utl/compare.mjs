@@ -71,7 +71,7 @@ function compareArrays(pFirstArray, pSecondArray) {
  *
  * @param {IViolation} pFirstViolation
  * @param {IViolation} pSecondViolation
- * @returns
+ * @returns {number}
  */
 // eslint-disable-next-line complexity
 export function compareViolations(pFirstViolation, pSecondViolation) {
@@ -94,6 +94,70 @@ export function compareViolations(pFirstViolation, pSecondViolation) {
     compareArraysByName(pFirstViolation.cycle, pSecondViolation.cycle) ||
     compareArraysByName(pFirstViolation.via, pSecondViolation.via)
   );
+}
+
+/**
+ * Compare two arrays of violations and return a diff by value.
+ *
+ * Use the project’s established scalar ordering, compareViolations(),
+ * rather than introducing a second comparison construct. This keeps the
+ * semantics in one place and makes the diff logic easier to maintain.
+ *
+ * @param {IViolation[]} pFirstViolationArray - First array of violations
+ * @param {IViolation[]} pSecondViolationArray - Second array of violations
+ * @returns {{
+ *   new: IViolation[]; // only in the second array
+ *   same: IViolation[]; // in both arrays
+ *   old: IViolation[]; // only in the first array
+ * }}
+ */
+export function diffViolationArrays(
+  pFirstViolationArray,
+  pSecondViolationArray,
+) {
+  const lFirstViolations = pFirstViolationArray.sort(compareViolations);
+  const lSecondViolations = pSecondViolationArray.sort(compareViolations);
+  const lNew = [];
+  const lSame = [];
+  const lOld = [];
+  let lFirstIndex = 0;
+  let lSecondIndex = 0;
+
+  while (
+    lFirstIndex < lFirstViolations.length ||
+    lSecondIndex < lSecondViolations.length
+  ) {
+    if (lFirstIndex >= lFirstViolations.length) {
+      lNew.push(lSecondViolations[lSecondIndex]);
+      lSecondIndex += 1;
+      continue;
+    }
+
+    if (lSecondIndex >= lSecondViolations.length) {
+      lOld.push(lFirstViolations[lFirstIndex]);
+      lFirstIndex += 1;
+      continue;
+    }
+
+    const lComparison = compareViolations(
+      lFirstViolations[lFirstIndex],
+      lSecondViolations[lSecondIndex],
+    );
+
+    if (lComparison === 0) {
+      lSame.push(lFirstViolations[lFirstIndex]);
+      lFirstIndex += 1;
+      lSecondIndex += 1;
+    } else if (lComparison < 0) {
+      lOld.push(lFirstViolations[lFirstIndex]);
+      lFirstIndex += 1;
+    } else {
+      lNew.push(lSecondViolations[lSecondIndex]);
+      lSecondIndex += 1;
+    }
+  }
+
+  return { new: lNew, same: lSame, old: lOld };
 }
 
 export function compareRules(pLeftRule, pRightRule) {
