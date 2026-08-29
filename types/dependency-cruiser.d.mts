@@ -28,7 +28,7 @@ export interface IReporterOutput {
   output: ICruiseResult | string;
   /**
    * Textual meta information to show in a side-channel (like stderr). E.g.
-   * the baseline reporter returns the nummerical diffs between the current
+   * the baseline reporter returns the numerical diffs between the current
    * and the new baseline.
    */
   meta?: string;

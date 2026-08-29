@@ -240,7 +240,7 @@ describe("[U] graph-utl/compare - violations - compare disregarding severities",
     equal(compareViolationsExSeverities(lLessSevereViolation, lViolation), 0);
   });
 
-  it("returns 0 when rule name < the one compared against", () => {
+  it("returns -1 when rule name < the one compared against", () => {
     equal(compareViolationsExSeverities(lViolation, lLaterNameViolation), -1);
   });
 
