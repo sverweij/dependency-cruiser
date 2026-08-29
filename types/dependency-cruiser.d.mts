@@ -27,6 +27,12 @@ export interface IReporterOutput {
    */
   output: ICruiseResult | string;
   /**
+   * Textual meta information to show in a side-channel (like stderr). E.g.
+   * the baseline reporter returns the nummerical diffs between the current
+   * and the new baseline.
+   */
+  meta?: string;
+  /**
    * The exit code - reporters can return a non-zero value when they find
    * errors here. api consumers (like a cli) can use this to return a
    * non-zero exit code, so the build breaks when something is wrong

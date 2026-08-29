@@ -71,15 +71,21 @@ function compareArrays(pFirstArray, pSecondArray) {
  *
  * @param {IViolation} pFirstViolation
  * @param {IViolation} pSecondViolation
+ * @param {boolean} pCompareSeverities
  * @returns {number}
  */
 // eslint-disable-next-line complexity
-export function compareViolations(pFirstViolation, pSecondViolation) {
+function compareViolationsBase(
+  pFirstViolation,
+  pSecondViolation,
+  pCompareSeverities,
+) {
   return (
-    compareSeverities(
-      pFirstViolation.rule.severity,
-      pSecondViolation.rule.severity,
-    ) ||
+    (pCompareSeverities &&
+      compareSeverities(
+        pFirstViolation.rule.severity,
+        pSecondViolation.rule.severity,
+      )) ||
     pFirstViolation.rule.name.localeCompare(pSecondViolation.rule.name) ||
     pFirstViolation.from.localeCompare(pSecondViolation.from) ||
     pFirstViolation.to.localeCompare(pSecondViolation.to) ||
@@ -94,6 +100,31 @@ export function compareViolations(pFirstViolation, pSecondViolation) {
     compareArraysByName(pFirstViolation.cycle, pSecondViolation.cycle) ||
     compareArraysByName(pFirstViolation.via, pSecondViolation.via)
   );
+}
+
+/**
+ * Compares violations on all relevant fields _excluding_ severity
+ *
+ * @param {IViolation} pFirstViolation
+ * @param {IViolation} pSecondViolation
+ * @returns {number}
+ */
+export function compareViolationsExSeverities(
+  pFirstViolation,
+  pSecondViolation,
+) {
+  return compareViolationsBase(pFirstViolation, pSecondViolation, false);
+}
+
+/**
+ * Compares violations on all relevant fields _including_ severity
+ *
+ * @param {IViolation} pFirstViolation
+ * @param {IViolation} pSecondViolation
+ * @returns {number}
+ */
+export function compareViolations(pFirstViolation, pSecondViolation) {
+  return compareViolationsBase(pFirstViolation, pSecondViolation, true);
 }
 
 /**
@@ -115,8 +146,12 @@ export function diffViolationArrays(
   pFirstViolationArray,
   pSecondViolationArray,
 ) {
-  const lFirstViolations = pFirstViolationArray.sort(compareViolations);
-  const lSecondViolations = pSecondViolationArray.sort(compareViolations);
+  const lFirstViolations = pFirstViolationArray.toSorted(
+    compareViolationsExSeverities,
+  );
+  const lSecondViolations = pSecondViolationArray.toSorted(
+    compareViolationsExSeverities,
+  );
   const lNew = [];
   const lSame = [];
   const lOld = [];
@@ -139,7 +174,7 @@ export function diffViolationArrays(
       continue;
     }
 
-    const lComparison = compareViolations(
+    const lComparison = compareViolationsExSeverities(
       lFirstViolations[lFirstIndex],
       lSecondViolations[lSecondIndex],
     );

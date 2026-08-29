@@ -1,6 +1,22 @@
 [
   {
     "type": "dependency",
+    "from": "bin/depcruise-baseline.mjs",
+    "to": "src/config-utl/extract-known-violations.mjs",
+    "unresolvedTo": "#config-utl/extract-known-violations.mjs",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-subpath-import",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "bin-to-cli-only"
+    }
+  },
+  {
+    "type": "dependency",
     "from": "src/cli/init-config/get-user-input.mjs",
     "to": "src/extract/tsc/parse.mjs",
     "unresolvedTo": "#extract/tsc/parse.mjs",

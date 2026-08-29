@@ -12,6 +12,7 @@ import setUpNDJSONListener from "./listeners/ndjson.mjs";
 import { set } from "#utl/object-util.mjs";
 import cruise from "#main/cruise.mjs";
 import { INFO, bus } from "#utl/bus.mjs";
+import { EOL } from "node:os";
 
 // eslint-disable-next-line complexity
 async function extractResolveOptions(pCruiseOptions) {
@@ -96,7 +97,7 @@ function setUpListener(pCruiseOptions) {
   }
 }
 
-async function runCruise(pFileDirectoryArray, pCruiseOptions) {
+async function runCruise(pFileDirectoryArray, pCruiseOptions, pErrorStream) {
   const lCruiseOptions = await addKnownViolations(
     await normalizeCliOptions(pCruiseOptions),
   );
@@ -128,6 +129,9 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   bus.progress("cli: writing results", { complete: 1 });
   bus.emit("write-start");
   write(lCruiseOptions.outputTo, lReportingResult.output);
+  if (lReportingResult.meta) {
+    pErrorStream.write(`${lReportingResult.meta}${EOL}`);
+  }
 
   return lReportingResult.exitCode;
 }
@@ -179,7 +183,11 @@ export default async function executeCli(
       const { default: initConfig } = await import("./init-config/index.mjs");
       initConfig(lCruiseOptions.init, null, lStreams);
     } else {
-      lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
+      lExitCode = await runCruise(
+        pFileDirectoryArray,
+        lCruiseOptions,
+        lStreams.stderr,
+      );
     }
   } catch (pError) {
     lStreams.stderr.write(

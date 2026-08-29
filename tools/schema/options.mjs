@@ -82,6 +82,12 @@ export default {
             { $ref: "#/definitions/CompoundHighlightType" },
           ],
         },
+        ignoreKnown: {
+          description:
+            "whether or not to ignore known violations (whether passed in a separate " +
+            "file or directly in knownViolations)",
+          type: "boolean",
+        },
         knownViolations: {
           description:
             "baseline of known validations. Typically you'd specify these in a file called " +

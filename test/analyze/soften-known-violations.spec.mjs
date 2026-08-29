@@ -95,8 +95,25 @@ describe("[U] analyze/soften-known-violations - modules violations", () => {
     ];
 
     deepEqual(
-      softenKnownViolations(lModules, lKnownModuleViolations, "info"),
+      softenKnownViolations(lModules, lKnownModuleViolations, true, "info"),
       lSoftenedModules,
+    );
+  });
+
+  it("invalid modules that are in known violations are left alone when ignoreKnown is false", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "./remi.js",
+        valid: false,
+        rules: [{ name: "no-orphans", severity: "error" }],
+        dependencies: [],
+      },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownModuleViolations, false),
+      lModules,
     );
   });
 });
@@ -416,8 +433,30 @@ describe("[U] analyze/soften-known-violations - dependency violations", () => {
     ];
 
     deepEqual(
-      softenKnownViolations(lModules, lKnownDependencyViolations, "warn"),
+      softenKnownViolations(lModules, lKnownDependencyViolations, true, "warn"),
       lSoftenedModules,
+    );
+  });
+
+  it("invalid dependencies that are in known violations are left alone when ignoreKnown equals false", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "./from.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "./forbidden-fruit/apple.js",
+            valid: false,
+            rules: [{ name: "not-to-forbidden-fruit", severity: "error" }],
+          },
+        ],
+      },
+    ];
+
+    deepEqual(
+      softenKnownViolations(lModules, lKnownDependencyViolations, false),
+      lModules,
     );
   });
 
@@ -514,7 +553,7 @@ describe("[U] analyze/soften-known-violations - dependency violations", () => {
     ];
 
     deepEqual(
-      softenKnownViolations(lModules, lKnownCyclicViolations, "info"),
+      softenKnownViolations(lModules, lKnownCyclicViolations, true, "info"),
       lSoftenedModules,
     );
   });

@@ -111,16 +111,18 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
  *
  * @param {import("../../types/cruise-result.mjs").IModule[]} pModules
  * @param {import("../../types/baseline-violations.mjs").IBaselineViolations} pKnownViolations
+ * @param {boolean} pIgnoreKnown
  * @param {import("../../types/shared-types.mjs").SeverityType} pSoftenedSeverity
  * @returns {import("../../types/cruise-result.mjs").IModule[]}
  */
 export default function softenKnownViolations(
   pModules,
   pKnownViolations,
+  pIgnoreKnown,
   pSoftenedSeverity = "ignore",
 ) {
-  if (pKnownViolations) {
-    bus.info("analyze: compare to known errors");
+  if (pKnownViolations && !(pIgnoreKnown === false)) {
+    bus.info("analyze: compare to known violations");
     return pModules.map((pModule) =>
       softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity),
     );

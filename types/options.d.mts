@@ -110,6 +110,11 @@ export interface ICruiseOptions {
    */
   highlight?: string | string[] | IHighlightType;
   /*
+   * whether or not to ignore known violations (whether passed in a separate
+   * file or directly in knownViolations)
+   */
+  ignoreKnown?: boolean;
+  /*
    * baseline of known validations. Typically you'd specify these in a file called
    * .dependency-cruiser-known-violations.json (which you'd generate with the --outputType
    * 'baseline') - and which is easy to keep up to date. In a pinch you can specify

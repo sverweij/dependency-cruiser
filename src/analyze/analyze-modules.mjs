@@ -41,7 +41,11 @@ export default function analyzeModules(pModules, pOptions) {
   bus.info("analyze: validations");
   lModules = addValidations(lModules, pOptions.ruleSet, pOptions.validate);
 
-  lModules = softenKnownViolations(lModules, pOptions.knownViolations);
+  lModules = softenKnownViolations(
+    lModules,
+    pOptions.knownViolations,
+    pOptions.ignoreKnown,
+  );
 
   return lModules;
 }

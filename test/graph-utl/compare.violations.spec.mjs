@@ -1,52 +1,55 @@
 import { deepEqual, equal } from "node:assert/strict";
-import { compareViolations, diffViolationArrays } from "#graph-utl/compare.mjs";
+import {
+  compareViolations,
+  compareViolationsExSeverities,
+  diffViolationArrays,
+} from "#graph-utl/compare.mjs";
 
-describe("[U] graph-utl/compare - violations", () => {
-  const lViolation = {
-    from: "from",
-    to: "to",
-    rule: {
-      name: "cool-rule",
-      severity: "error",
-    },
-  };
+const lViolation = {
+  from: "from",
+  to: "to",
+  rule: {
+    name: "cool-rule",
+    severity: "error",
+  },
+};
 
-  const lLessSevereViolation = {
-    from: "from",
-    to: "to",
-    rule: {
-      name: "cool-rule",
-      severity: "info",
-    },
-  };
+const lLessSevereViolation = {
+  from: "from",
+  to: "to",
+  rule: {
+    name: "cool-rule",
+    severity: "info",
+  },
+};
 
-  const lLaterNameViolation = {
-    from: "from",
-    to: "to",
-    rule: {
-      name: "drool-rule",
-      severity: "error",
-    },
-  };
+const lLaterNameViolation = {
+  from: "from",
+  to: "to",
+  rule: {
+    name: "drool-rule",
+    severity: "error",
+  },
+};
 
-  const lLaterToViolation = {
-    from: "from",
-    to: "tox",
-    rule: {
-      name: "cool-rule",
-      severity: "error",
-    },
-  };
+const lLaterToViolation = {
+  from: "from",
+  to: "tox",
+  rule: {
+    name: "cool-rule",
+    severity: "error",
+  },
+};
 
-  const lLaterFromViolation = {
-    from: "fromx",
-    to: "to",
-    rule: {
-      name: "cool-rule",
-      severity: "error",
-    },
-  };
-
+const lLaterFromViolation = {
+  from: "fromx",
+  to: "to",
+  rule: {
+    name: "cool-rule",
+    severity: "error",
+  },
+};
+describe("[U] graph-utl/compare - violations - regular compare", () => {
   it("returns 0 for identical violations", () => {
     equal(compareViolations(lViolation, lViolation), 0);
   });
@@ -222,7 +225,35 @@ describe("[U] graph-utl/compare - violations", () => {
     };
     equal(compareViolations(lDepTypesA, lDepTypesB), -1);
   });
+});
 
+describe("[U] graph-utl/compare - violations - compare disregarding severities", () => {
+  it("returns 0 for identical violations", () => {
+    equal(compareViolationsExSeverities(lViolation, lViolation), 0);
+  });
+
+  it("returns 0 when severity > the one compared against, but the rest is the same", () => {
+    equal(compareViolationsExSeverities(lViolation, lLessSevereViolation), 0);
+  });
+
+  it("returns 0 when severity < the one compared against, but the rest is the same", () => {
+    equal(compareViolationsExSeverities(lLessSevereViolation, lViolation), 0);
+  });
+
+  it("returns 0 when rule name < the one compared against", () => {
+    equal(compareViolationsExSeverities(lViolation, lLaterNameViolation), -1);
+  });
+
+  it("returns -1 when rule 'from' < the one compared against", () => {
+    equal(compareViolationsExSeverities(lViolation, lLaterFromViolation), -1);
+  });
+
+  it("returns -1 when rule 'to' < the one compared against", () => {
+    equal(compareViolationsExSeverities(lViolation, lLaterToViolation), -1);
+  });
+});
+
+describe("[U] graph-utl/compare - violations - diff array of violations", () => {
   it("diffs arrays of violations by value", () => {
     const lSharedViolation = {
       from: "app.js",

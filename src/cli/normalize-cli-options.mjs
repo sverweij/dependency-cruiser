@@ -108,6 +108,10 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
   }
 }
 
+function normalizeIgnoreKnown(pCliOptions) {
+  return { ignoreKnown: !!pCliOptions.ignoreKnown };
+}
+
 function normalizeKnownViolationsOption(pCliOptions) {
   if (
     !Object.hasOwn(pCliOptions, "ignoreKnown") ||
@@ -222,6 +226,7 @@ export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
   lOptions = { ...lOptions, ...normalizeCache(lOptions) };
   lOptions = { ...lOptions, ...normalizeCacheStrategy(lOptions) };
   lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
+  lOptions = { ...lOptions, ...normalizeIgnoreKnown(lOptions) };
   lOptions = normalizeConfigFileName(lOptions, "webpackConfig", WEBPACK_CONFIG);
   lOptions = normalizeConfigFileName(lOptions, "tsConfig", TYPESCRIPT_CONFIG);
   lOptions = normalizeConfigFileName(lOptions, "babelConfig", BABEL_CONFIG);
