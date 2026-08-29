@@ -218,6 +218,7 @@
       },
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "ignoreKnown": false,
       "metrics": false,
       "moduleSystems": ["es6", "cjs"],
       "outputTo": "../../__output__/workspaces-mono-repo-aliases.json",

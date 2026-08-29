@@ -15,6 +15,7 @@ const SHAREABLE_OPTIONS = [
   "externalModuleResolutionStrategy",
   "focus",
   "focusDepth",
+  "ignoreKnown",
   "includeOnly",
   "knownViolations",
   "maxDepth",

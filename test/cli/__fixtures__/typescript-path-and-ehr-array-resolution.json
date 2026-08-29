@@ -116,6 +116,7 @@
       },
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "ignoreKnown": false,
       "metrics": false,
       "moduleSystems": [
         "es6",

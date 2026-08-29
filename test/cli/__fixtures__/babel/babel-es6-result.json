@@ -72,6 +72,7 @@
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "ignoreKnown": false,
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/babel-es6-result.json",
