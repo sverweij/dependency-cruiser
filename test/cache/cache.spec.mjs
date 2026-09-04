@@ -2,7 +2,6 @@ import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { brotliDecompressSync } from "node:zlib";
-import { describe } from "mocha";
 import Cache from "#cache/cache.mjs";
 
 const OUTPUTS_FOLDER = "test/cache/__outputs__/";

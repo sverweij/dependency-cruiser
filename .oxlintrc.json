@@ -52,6 +52,7 @@
     "import/no-commonjs": "off", // we still have to use this occasionally
     "typescript/no-require-imports": "off", // this is occasionally required,
     "typescript/no-explicit-any": "off",
+    "typescript/no-var-requires": "off",
     "preserve-caught-error": "off",
     "import/unambiguous": "off",
     "no-underscore-dangle": "off",
