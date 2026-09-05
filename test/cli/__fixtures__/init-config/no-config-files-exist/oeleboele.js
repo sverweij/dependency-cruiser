@@ -216,7 +216,7 @@ module.exports = {
       conditionNames: ["import", "require", "node", "default"],
       /*
          The extensions, by default are the same as the ones dependency-cruiser
-         can access (run `npx depcruise --info` to see which ones that are in
+         can access (run `npx dependency-cruiser --info` to see which ones that are in
          _your_ environment. If that list is larger than what you need (e.g.
          it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use
          TypeScript you can pass just the extensions you actually use (e.g.

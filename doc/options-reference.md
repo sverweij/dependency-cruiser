@@ -146,12 +146,12 @@ to follow external dependencies, instead of specifying the "node_modules" path:
 > Only in the second step it allows files matching its pattern to be visited
 > (but not followed any further).
 >
-> This means dependency-cruise _will_ encounter files matching `doNotFollow`
+> This means dependency-cruiser _will_ encounter files matching `doNotFollow`
 > but only when they are dependencies of other modules. This a.o. prevents unexpected
 > behaviour where specifying node modules as `doNotFollow` pattern would still
 > traverse all node_modules when the node_modules were part of the arguments
-> e.g. in `depcruise --do-not-follow node_modules --validate -- src test node_modules`
-> or, more subtly with `depcruise --don-not-follow node_modules -- validate -- .`.
+> e.g. in `dependency-cruiser --do-not-follow node_modules --config -- src test node_modules`
+> or, more subtly with `dependency-cruiser --don-not-follow node_modules --config -- .`.
 
 ### `includeOnly`: only include modules satisfying a pattern
 
@@ -218,7 +218,7 @@ Example configuration:
 <summary>sample command line invocation and graphical output</summary>
 
 ```sh
-depcruise -src c focus.config.json -T dot | dot -T svg > focus.svg
+dependency-cruiser -src c focus.config.json -T dot | dot -T svg > focus.svg
 ```
 
 ![focus](assets/filtering/focus.svg)
@@ -251,7 +251,7 @@ Example configuration:
 <summary>sample command line invocation and graphical output</summary>
 
 ```sh
-depcruise src -c focus-depth-2.config.json -T dot | dot -T svg > focus-depth-2.svg
+dependency-cruiser src -c focus-depth-2.config.json -T dot | dot -T svg > focus-depth-2.svg
 ```
 
 ![focus with depth 2](assets/filtering/focus-depth-2.svg)
@@ -305,7 +305,7 @@ a `matchesFocus` attribute, which is either `true` for modules in focus or
 When run...
 
 ```sh
-depcruise src -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
+dependency-cruiser src -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
 ```
 
 ...it'll look something like this:
@@ -669,10 +669,10 @@ assume the fileName to be `tsconfig.json`)
 ```sh
 ## use the `tsconfig.json` in the current directory into account when looking
 ## at typescript sources:
-depcruise --ts-config --validate -- src
+dependency-cruiser --ts-config -- src
 
 ## use `tsconfig.prod.json for the same purpose:
-depcruise --ts-config tsconfig.prod.json --validate -- src
+dependency-cruiser --ts-config tsconfig.prod.json -- src
 ```
 
 #### Usage notes
@@ -1045,7 +1045,7 @@ the default theme to be replaced by flipping the `replace` attribute to `true`.
 
 <details>
 <summary>bare</summary>
-<!-- bin/dependency-cruise.mjs -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
+<!-- bin/dependency-cruiser.mjs -Tdot -c doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
 
 ```javascript
 module.exports = {
@@ -1196,9 +1196,9 @@ and then (with [`depcruise-fmt`](cli.md#depcruise-fmt)) run the various
 reporters over it. E.g.
 
 ```sh
-# depcruise reads all specified modules from disk and parses them to infer
+# dependency-cruiser reads all specified modules from disk and parses them to infer
 # dependencies. For big repos this can take a while
-depcruise src bin test -T json -c > results.json
+dependency-cruiser src bin test -T json -c > results.json
 
 # depcruise-fmt reads the result of a cruise and emits a report
 # on it, so it doesn't need to do the expensive disk access & parse

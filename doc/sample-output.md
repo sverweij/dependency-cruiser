@@ -29,7 +29,7 @@ through dot. (_Daphne is like that. She and her command line: a *terrifying*
 weapon._)
 
 ```sh
-dependency-cruise -v -T dot test/fixtures | dot -T png > sample-dot-output.png
+dependency-cruiser -c -T dot test/fixtures | dot -T png > sample-dot-output.png
 ```
 
 ![sample dot output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/main/doc/assets/sample-dot-output.png)
@@ -45,14 +45,14 @@ She _loves_ how the exit code reflects the number of offending dependencies when
 she uses the `err` output type:
 
 ```sh
-dependency-cruise -T err -v test/fixtures
+dependency-cruiser -T err test/fixtures
 
   error sub-not-allowed: test/fixtures/cjs/root_one.js → test/fixtures/cjs/sub/dir.js
   error sub-not-allowed: test/fixtures/cjs/two_only_one.js → test/fixtures/cjs/sub/dir.js
 
 ✖ 2 violations (2 errors, 0 warnings)
 
-make: *** [dependency-cruise] Error 2
+make: *** [dependency-cruiser] Error 2
 ```
 
 (Daphne also loves how `-T err` just _shuts up_ and _stays out of her way_
@@ -70,7 +70,7 @@ The build server _knows_ its architect, so it put a dependency report in a spot
 where Alex can find it easily. This is the _command_:
 
 ```sh
-dependency-cruise -v -T html -f stuff-for-alex/sample-dot-output.html test/fixtures
+dependency-cruiser -c -T html -f stuff-for-alex/sample-dot-output.html test/fixtures
 ```
 
 (_Actually the build server didn't. You know that. Build servers aren't that
@@ -90,7 +90,7 @@ environs, however, is not. Hence: comma separated values. In a file. So excel
 (or LibreOffice) can chug it like it's 1999:
 
 ```sh
-dependency-cruise -v -T csv -f sample-dot-output.csv test/fixtures
+dependency-cruiser -c -T csv -f sample-dot-output.csv test/fixtures
 ```
 
 ![oldskool csv output. In a spreadsheet. Way out man!](https://raw.githubusercontent.com/sverweij/dependency-cruiser/main/doc/assets/sample-csv-output.png)
@@ -100,7 +100,7 @@ dependency-cruise -v -T csv -f sample-dot-output.csv test/fixtures
 This is there for the _persona_ 'Marty the maintainer', so he can debug things.
 
 ```sh
-dependency-cruise -T json -v -f sample-json-output.json test/fixtures
+dependency-cruiser -T json -c -f sample-json-output.json test/fixtures
 ```
 
 The result is rather voluminous, so here's just a link if you want to see it

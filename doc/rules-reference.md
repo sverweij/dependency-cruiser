@@ -14,7 +14,7 @@
     [for validation](https://github.com/sverweij/state-machine-cat/blob/main/config/dependency-cruiser/base.mjs)
     and the one it uses [for generating a visual graph](https://github.com/sverweij/state-machine-cat/blob/main/config/dependency-cruiser/graph.mjs).
   - [mscgen.js](https://mscgen.js.org)'s [.dependency-cruiser.js](https://github.com/mscgenjs/mscgenjs-core/blob/master/.dependency-cruiser.js)
-- Tip: run `depcruise --init` to create a .dependency-cruiser.js with
+- Tip: run `dependency-cruiser --init` to create a .dependency-cruiser.js with
   some rules that make sense in most projects.
 
 ## Contents
@@ -515,12 +515,12 @@ To detect orphan guys you can add e.g. this snippet to your
   dependency incoming or outgoing. Specify one or more folder, several
   files or a glob. E.g.
   ```
-  depcruise -v -- src lib test
+  dependency-cruiser -c -- src lib test
   ```
   will find orphans if they exist,
   whereas
   ```sh
-  depcruise -v -- src/index.ts
+  dependency-cruiser -c -- src/index.ts
   ```
   probably won't (unless index.ts is an orphan itself).
 - :bulb: by definition orphan modules have no dependencies. So when `orphan` is

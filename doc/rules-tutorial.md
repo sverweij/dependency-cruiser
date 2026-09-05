@@ -31,7 +31,7 @@ reason or other.
 This rule says it is `forbidden` to have a relation `from` anything `to` things
 with a `path` that contains the string `http`.
 
-You run a depcruise with these rules and lo and behold it comes up with
+You run a dependency-cruise with these rules and lo and behold it comes up with
 something:
 
 _warn_ unnamed: **src/secure/index.ts** → **node_modules/@supsec/http/index.js**  

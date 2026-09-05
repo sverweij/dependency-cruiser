@@ -25,10 +25,10 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
     deepEqual(
       addRunScriptsToManifest(
         { scripts: { test: "jest" } },
-        { depcruise: "depcruise src -v" },
+        { depcruise: "dependency-cruiser src -c" },
       ),
       {
-        scripts: { depcruise: "depcruise src -v", test: "jest" },
+        scripts: { depcruise: "dependency-cruiser src -c", test: "jest" },
       },
     );
   });
@@ -40,16 +40,16 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
           scripts: {
             test: "jest",
             depcruise:
-              "depcruise --config custom-cruiser-config.js --err-long bin src test",
+              "dependency-cruiser --config custom-cruiser-config.js --err-long bin src test",
           },
         },
-        { depcruise: "depcruise src -v" },
+        { depcruise: "dependency-cruiser src -c" },
       ),
       {
         scripts: {
           test: "jest",
           depcruise:
-            "depcruise --config custom-cruiser-config.js --err-long bin src test",
+            "dependency-cruiser --config custom-cruiser-config.js --err-long bin src test",
         },
       },
     );
