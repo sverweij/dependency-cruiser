@@ -109,7 +109,9 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
 }
 
 function normalizeIgnoreKnown(pCliOptions) {
-  return { ignoreKnown: !!pCliOptions.ignoreKnown };
+  return Object.hasOwn(pCliOptions, "ignoreKnown")
+    ? { ignoreKnown: !!pCliOptions.ignoreKnown }
+    : {};
 }
 
 function normalizeKnownViolationsOption(pCliOptions) {

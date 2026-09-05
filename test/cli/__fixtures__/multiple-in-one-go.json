@@ -162,7 +162,6 @@
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/multiple-in-one-go.json",
       "outputType": "json",
-      "ignoreKnown": false,
       "preserveSymlinks": false,
       "skipAnalysisNotInRules": false,
       "tsPreCompilationDeps": false,

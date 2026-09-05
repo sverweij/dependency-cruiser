@@ -18,7 +18,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       outputTo: "-",
       outputType: "err",
       validate: false,
-      ignoreKnown: false,
     });
   });
 
@@ -28,7 +27,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       outputType: "err",
       moduleSystems: ["cjs", "es6"],
       validate: false,
-      ignoreKnown: false,
     });
   });
 
@@ -48,7 +46,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       ruleSet: {},
       config: true,
       validate: true,
-      ignoreKnown: false,
     });
   });
 
@@ -63,7 +60,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
         ruleSet: {},
         config: ".dependency-cruiser.json",
         validate: true,
-        ignoreKnown: false,
       },
     );
   });
@@ -85,7 +81,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       rulesFile: ".dependency-cruiser.js",
       ruleSet: {},
       validate: true,
-      ignoreKnown: false,
     });
   });
 
@@ -97,7 +92,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
       validate: true,
-      ignoreKnown: false,
     });
   });
 
@@ -109,7 +103,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
       validate: true,
-      ignoreKnown: false,
     });
   });
 
@@ -134,7 +127,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
         rulesFile: "./test/cli/__fixtures__/rules.empty.json",
         ruleSet: {},
         validate: true,
-        ignoreKnown: false,
       },
     );
   });
@@ -161,7 +153,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
           ],
         },
         validate: true,
-        ignoreKnown: false,
       },
     );
   });
@@ -188,7 +179,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
           ],
         },
         validate: true,
-        ignoreKnown: false,
       },
     );
   });
@@ -215,7 +205,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
         ],
       },
       validate: true,
-      ignoreKnown: false,
     });
   });
 
@@ -236,7 +225,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
           },
         },
         validate: true,
-        ignoreKnown: false,
       },
     );
   });
@@ -258,7 +246,6 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
           },
         },
         validate: true,
-        ignoreKnown: false,
       },
     );
   });

@@ -51,7 +51,6 @@
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
-      "ignoreKnown": false,
       "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "../../__output__/jsdoc-import-tags.json",
