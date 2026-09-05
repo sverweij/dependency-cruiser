@@ -4,7 +4,7 @@ The command line interface is a straightforward affair - you pass it a bunch of
 files, and dependency-cruiser will start cruising them:
 
 ```sh
-depcruise [options] <files-or-directories>
+dependency-cruiser [options] <files-or-directories>
 ```
 
 Below you'll find a list of command line options you can use, divided into ones that
@@ -75,7 +75,7 @@ Just pass them as arguments. This, e.g. will cruise every file in the folders
 src, test and lib (recursively) + the file called index.ts in the root.
 
 ```sh
-depcruise --output-type dot src test lib index.ts
+dependency-cruiser --output-type dot src test lib index.ts
 ```
 
 #### passing globs as parameters
@@ -92,7 +92,7 @@ platforms slap some quotes around them, so it's not the environment
 (/ shell) expanding the glob, but dependency-cruiser itself:
 
 ```sh
-depcruise "packages/**/src/**/*.js"
+dependency-cruiser "packages/**/src/**/*.js"
 ```
 
 ### `--output-type`: specify the output format
@@ -103,7 +103,7 @@ For use in build scripts, in combination with `--config`. It's also
 the default reporter. Sample use:
 
 ```sh
-dependency-cruise --config my-depcruise-rules.json src
+dependency-cruiser --config my-depcruise-rules.json src
 ```
 
 This will:
@@ -127,7 +127,7 @@ how to fix it). If you use dependency-cruiser in a lint-staged like setup, this
 might be a useful format,
 
 ```sh
-dependency-cruise --output-type err-long --config my-depcruise-rules.json src
+dependency-cruiser --output-type err-long --config my-depcruise-rules.json src
 ```
 
 #### dot
@@ -137,7 +137,7 @@ a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
 
 ```shell
-dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
+dependency-cruiser -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
 You can customise the look of these graphs. See the
@@ -204,7 +204,7 @@ Reporter that runs the dot reporter and pipes it through the GraphViz `dot`
 command and wraps the result in an html page. It's the same thing as running ...
 
 ```sh
-dependency-cruise -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependencygraph.html
+dependency-cruiser -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependencygraph.html
 ```
 
 ... but less typing & easier to remember.
@@ -295,7 +295,7 @@ tend to take up more space than the dot ones.
 Sample use:
 
 ```sh
-dependency-cruise src/cache --include-only "^src/cache" -T d2 | d2 --layout elk --scale 1 - > dependencygraph.svg
+dependency-cruiser src/cache --include-only "^src/cache" -T d2 | d2 --layout elk --scale 1 - > dependencygraph.svg
 ```
 
 <details>
@@ -314,7 +314,7 @@ Generates a stand-alone html report with:
 - a list of all dependency and module violations, ordered by severity, rule name, from module, to module.
 
 ```shell
-dependency-cruise --validate --output-type err-html -f dependency-report.html src test configs
+dependency-cruiser --config --output-type err-html -f dependency-report.html src test configs
 ```
 
 <img width="722" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
@@ -337,7 +337,7 @@ section in the options reference for details.
 Write it to html with a dependency matrix instead:
 
 ```shell
-dependency-cruise -T html -f dependencies.html src
+dependency-cruiser -T html -f dependencies.html src
 ```
 
 #### csv
@@ -353,7 +353,7 @@ Write the output in [TeamCity service message format](https://www.jetbrains.com/
 E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity messages to stdout:
 
 ```shell
-dependency-cruise src -T teamcity
+dependency-cruiser src -T teamcity
 ```
 
 <details>
@@ -382,7 +382,7 @@ Write the output in [Azure DevOps logging command format](https://docs.microsoft
 E.g. to cruise src (using the .dependency-cruiser config) and emit Azure DevOps logging commands to stdout:
 
 ```shell
-dependency-cruise src -T azure-devops
+dependency-cruiser src -T azure-devops
 ```
 
 <details>
@@ -408,7 +408,7 @@ Useful for grepping. There's an [option](./options-reference.md#text) to highlig
 'focused' modules by underlining them.
 
 ```sh
-dependency-cruise -T text --include-only src/report src/report
+dependency-cruiser -T text --include-only src/report src/report
 ```
 
 <details>
@@ -458,7 +458,7 @@ src/report/index.js → src/report/text.js
 `grep`:
 
 ```sh
-dependency-cruise -v -T text src | grep transpile/meta.js
+dependency-cruiser -c -T text src | grep transpile/meta.js
 ```
 
 <details>
@@ -495,13 +495,13 @@ about.
 To save an anonymized dependency graph to `anonymized-result.json` do this:
 
 ```sh
-depcruise --validate --output-type anon --output-to anonymized-result.json bin src
+dependency-cruiser --config --output-type anon --output-to anonymized-result.json bin src
 ```
 
 e.g. to save an anonymized graph into and svg:
 
 ```sh
-depcruise --validate --output-type anon bin src | depcruise-fmt --output-type dot - | dot -T svg > anonymized_graph.svg
+dependency-cruiser --config --output-type anon bin src | depcruise-fmt --output-type dot - | dot -T svg > anonymized_graph.svg
 ```
 
 <details>
@@ -631,7 +631,7 @@ called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/ `.dependency-cruis
 be in json format or a valid node module returning a rules object literal.
 
 ```shell
-dependency-cruise -x node_modules --config my.rules.json src spec
+dependency-cruiser -x node_modules --config my.rules.json src spec
 ```
 
 > _Caveat_: up to version 12, you needed to specify the `--config` command line
@@ -641,12 +641,12 @@ dependency-cruise -x node_modules --config my.rules.json src spec
 > If you want to run _without_ a configuration file use --no-config
 
 > _Tip_: usually you don't need to specify the rules file after --config. However
-> if you run `depcruise --config src`, _src_ will be interpreted as the rules file.
+> if you run `dependency-cruiser --config src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
 >
 > ```
-> dependency-cruise --config -- src
+> dependency-cruiser --config -- src
 > ```
 
 The configuration specifies a bunch of regular expressions pairs your dependencies
@@ -759,7 +759,7 @@ file.
 
 Which alt-js languages dependency-cruiser supports depends on the availability
 it has to them. To see how dependency-cruiser perceives its environment use
-`depcruise --info` (any arguments are ignored).
+`dependency-cruiser --info` (any arguments are ignored).
 
 <details>
 <summary>Typical output</summary>
@@ -899,7 +899,7 @@ configuration for multiple purposes.
 The first four options below will be of use when you want to tame the size of
 the visual representation of a big dependency graph. For the rest of the options
 you're typically best off setting in a configuration file (generate one with
-`depcruise --init`).
+`dependency-cruiser --init`).
 
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 
@@ -910,7 +910,7 @@ use with this is "node_modules" (but be sure to check out the possibilities you
 have with the [`doNotFollow` option](#./options-reference.md#donotfollow-dont-cruise-modules-any-further))
 
 ```sh
-dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
+dependency-cruiser -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
 ```
 
 Details and more ways to limit dependency-cruiser from following things: check out
@@ -923,7 +923,7 @@ E.g. to only take modules into account that are in the `src` tree (and exclude a
 node_modules, core modules and modules otherwise outside it):
 
 ```sh
-dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
+dependency-cruiser --include-only "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
 ```
 
 See [includeOnly](./options-reference.md#includeonly-only-include-modules-satisfying-a-pattern)
@@ -938,7 +938,7 @@ Takes a regular expression in the same fashion `--include-only`, `--exclude` and
 `--do-not-follow` do.
 
 ```sh
-dependency-cruise src --include-only "^src" --focus "^src/main" -T dot | dot -T svg > focus-on-main-dir-graph.svg
+dependency-cruiser src --include-only "^src" --focus "^src/main" -T dot | dot -T svg > focus-on-main-dir-graph.svg
 ```
 
 See [focus](./options-reference.md#focus-show-modules-matching-a-pattern---with-their-neighbours)
@@ -952,7 +952,7 @@ command line switch. A value of 1 (which is also the default) means _direct neig
 only_. 2 also shows the neighbour's neighbours, etc. The value 0 means 'infinite'.
 
 ```sh
-dependency-cruise src --include-only "^src" --focus "^src/main" --focus-depth 0 -T dot |\
+dependency-cruiser src --include-only "^src" --focus "^src/main" --focus-depth 0 -T dot |\
   dot -T svg > focus-on-main-dir-graph.svg
 ```
 
@@ -971,7 +971,7 @@ by a change you make in one or modules you can use this option.
 Just like the filter options above, takes a regular expression:
 
 ```sh
-dependency-cruise src --include-only "^src/report" --reaches "^src/report/utl/index.js" -T dot | dot -T svg > reaches-example.svg
+dependency-cruiser src --include-only "^src/report" --reaches "^src/report/utl/index.js" -T dot | dot -T svg > reaches-example.svg
 ```
 
 See [reaches](./options-reference.md#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
@@ -989,7 +989,7 @@ This can be useful when you want to see the modules that are impacted by a chang
 you made.
 
 ```sh
-dependency-cruise src --affected main -T dot | dot -T svg > affected-example.svg
+dependency-cruiser src --affected main -T dot | dot -T svg > affected-example.svg
 ```
 
 In combination with the `mermaid` reporter you can use it in your github action
@@ -1012,8 +1012,8 @@ or in the workflow summary:
 > are equivalent:
 >
 > ```sh
-> dependency-cruise src --affected -T dot | dot -T svg > affected-with-affectd.svg
-> dependency-cruise src --reaches "$(watskeburt main)" -T dot | dot -T svg > affected-with-reaches.svg
+> dependency-cruiser src --affected -T dot | dot -T svg > affected-with-affectd.svg
+> dependency-cruiser src --reaches "$(watskeburt main)" -T dot | dot -T svg > affected-with-reaches.svg
 > ```
 
 ### `--highlight`: highlight modules
@@ -1025,7 +1025,7 @@ expression.
 [^1]: Currently only _dot_ (and its variants) and _mermaid_.
 
 ```sh
-dependency-cruise src --include-only "^src/report" --highlight "^src/report/utl/index.js" -T dot | dot -T svg > highlight-example.svg
+dependency-cruiser src --include-only "^src/report" --highlight "^src/report/utl/index.js" -T dot | dot -T svg > highlight-example.svg
 ```
 
 This can be useful when you want to display what modules have changed since
@@ -1041,7 +1041,7 @@ same.
     git history.
 
 ```sh
-dependency-cruise src --highlight "$(watskeburt main)" -T dot | dot -T svg > highlight-diff-example.svg
+dependency-cruiser src --highlight "$(watskeburt main)" -T dot | dot -T svg > highlight-diff-example.svg
 ```
 
 <details>
@@ -1051,7 +1051,7 @@ With --highlight it shows the whole code base (suitable when your codebase is no
 that big). Command used:
 
 ```
-npx depcruise src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
+npx dependency-cruiser src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
 ```
 
 ![shows all modules that make up watskeburt with changes to one module](./assets/with-highlight.svg)
@@ -1060,7 +1060,7 @@ With --reaches it shows only part of the code base (suitable when your codebase
 is large). Command used:
 
 ```
-npx depcruise src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
+npx dependency-cruiser src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
 ```
 
 ![shows the one changed module, with all modules that can reach it](./assets/with-reaches.svg)
@@ -1085,7 +1085,7 @@ to do this with regular expressions (see below, and in the
 a lot you can pass
 
 ```sh
-depcruise src --include-only ^src --collapse 2 -T dot | dot -T svg > collapsed.svg
+dependency-cruiser src --include-only ^src --collapse 2 -T dot | dot -T svg > collapsed.svg
 ```
 
 > Under water dependency-cruiser translates the single digit into a regular
@@ -1098,7 +1098,7 @@ E.g. to only collapse stuff under `node_modules` and `lib` (but not under e.g.
 `test` and `src`) you can pass this:
 
 ```sh
-depcruise src --do-not-follow node_modules --collapse "^(node_modules|lib)/[^/]+" -T dot | dot -T svg > collapsed.svg
+dependency-cruiser src --do-not-follow node_modules --collapse "^(node_modules|lib)/[^/]+" -T dot | dot -T svg > collapsed.svg
 ```
 
 `--collapse` works the same as the [dot/ archi specific collapsePattern option](#summarising-collapsepattern-dot-and-archi-reporters),
@@ -1107,7 +1107,7 @@ This means you can not only use it to make graphical output look better, but als
 to show simple textual output of relations between high level components e.g.
 
 ```sh
-depcruise packages --include-only ^packages --collapse "^packages/[^/]+" -T text
+dependency-cruiser packages --include-only ^packages --collapse "^packages/[^/]+" -T text
 ```
 
 ### `--exclude`: exclude dependencies from being cruised
@@ -1117,11 +1117,11 @@ validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. Two examples:
 
 ```sh
-dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
+dependency-cruiser -x "node_modules" -T html -f deps-without-node_modules.html src
 ```
 
 ```sh
-dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
+dependency-cruiser -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
 See the [exclude](./options-reference.md#exclude-exclude-dependencies-from-being-cruised) option
@@ -1148,7 +1148,7 @@ command was mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
 
 ```sh
-dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-limited-dependency-graph.svg
+dependency-cruiser --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-limited-dependency-graph.svg
 ```
 
 See [maxDepth](./options-reference.md#maxdepth)
@@ -1257,7 +1257,7 @@ In the dot output prefix links to the source files with a string - useful to lin
 e.g. an on line repository.
 
 ```sh
-dependency-cruise --prefix "https://github.com/you/yourrepo/tree/master/" -T dot src | dot -T svg > dependency-graph-with-links-to-gh.svg
+dependency-cruiser --prefix "https://github.com/you/yourrepo/tree/master/" -T dot src | dot -T svg > dependency-graph-with-links-to-gh.svg
 ```
 
 See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
@@ -1383,15 +1383,15 @@ report _and_ generate a dependency graph. With only the `depcruise` command
 this would look like
 
 ```sh
-depcruise -v -T err-long src
-depcruise -v -T err-html src -f violation-report.html
-depcruise -v -T dot src | dot -T svg > dependency-graph.svg
+dependency-cruiser -c -T err-long src
+dependency-cruiser -c -T err-html src -f violation-report.html
+dependency-cruiser -c -T dot src | dot -T svg > dependency-graph.svg
 ```
 
 With depcruise-fmt there's one cruise and three quick depcruise-fmt commands
 
 ```sh
-depcruise -v -T json src -f cruise_result.json
+dependency-cruiser -c -T json src -f cruise_result.json
 depcruise-fmt -T err-long cruise_result.json
 depcruise-fmt -T err-html -f violation-report.html cruise_result.json
 depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
@@ -1404,7 +1404,7 @@ parts of the dependency-graph. This could be useful for chopping up humongous
 graphs efficiently, or to quickly find the uses of a module:
 
 ```sh
-depcruise -v -T json src -f cruise_result.json
+dependency-cruiser -c -T json src -f cruise_result.json
 depcruise-fmt -T dot --focus "^src/main" cruise_result.json | dot -T svg > main.svg
 depcruise-fmt -T dot --focus "^src/juggle" cruise_result.json | dot -T svg > juggle.svg
 depcruise-fmt -T dot --include-only "^src/the-law" cruise_result.json | dot -T svg > the-law.svg
@@ -1418,18 +1418,18 @@ depcruise-fmt -T text --focus "^src/main/spelunk-me\\.ts$" cruise_result.json
 
 The `--highlight` option is also available in case you want to just highlight
 modules without filtering them. See the [--highlight](#highlight-highlight-modules)
-documentation of the regular depcruise command for more information.
+documentation of the regular dependency-cruiser command for more information.
 
 ### collapse/ summarize
 
 Summarize or collapse to either a folder depth or (if you're feeling fancy) a regular
-expression. It works the same as the regular depcruise command's [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option.
+expression. It works the same as the regular dependency-cruiser command's [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option.
 
 ### prefix
 
-To enable different prefixes on the same depcruise run, you can uses the `--prefix`
+To enable different prefixes on the same dependency-cruiser run, you can uses the `--prefix`
 option to set (or override) the prefix used in e.g. the `err-html` and the
-`dot`-like reporters. It works the same as depcruise's
+`dot`-like reporters. It works the same as dependency-cruiser's
 [option of the same name](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--prefix-prefixing-links)
 
 See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
@@ -1481,7 +1481,7 @@ To create a baseline of known violations. You can use the resulting file to tell
 regular dependency-cruiser you want to ignore them for now and to only focus
 on new ones.
 
-> Shortcut for `depcruise -c -T baseline -f .dependency-cruiser-known-violations.json`
+> Shortcut for `dependency-cruiser -c -T baseline -f .dependency-cruiser-known-violations.json`
 > which might be a bit of an elaborate incantation for generating a list
 > of known violations.
 
@@ -1514,7 +1514,7 @@ GraphViz dot into html that is geared to make the graph easier to use. It adds a
 Typical use:
 
 ```console
-$ depcruise -v -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
+$ dependency-cruiser -c -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
 ```
 
 This works for all dot-based reporters, including `archi` and `ddot`

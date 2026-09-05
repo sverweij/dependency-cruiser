@@ -304,7 +304,7 @@ module.exports = {
       conditionNames: ['import', 'require', 'node', 'default', 'types'],
       
       // The extensions, by default are the same as the ones dependency-cruiser
-      // can access (run \`npx depcruise --info\` to see which ones that are in
+      // can access (run \`npx dependency-cruiser --info\` to see which ones that are in
       // _your_ environment). If that list is larger than you need you can pass
       // the extensions you actually use (e.g. ['.js', '.jsx']). This can speed
       // up module resolution, which is the most expensive step.

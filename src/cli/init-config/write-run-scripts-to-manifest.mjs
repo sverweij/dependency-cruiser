@@ -71,13 +71,13 @@ export function compileRunScripts(pInitOptions) {
     const lTestLocations = (pInitOptions.testLocation || []).join(" ");
 
     lReturnValue = {
-      depcruise: `depcruise ${lSourceLocations} ${lTestLocations}`,
-      "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
-      "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
-      "depcruise:graph:archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
-      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type err-html --output-to dependency-violation-report.html`,
-      "depcruise:text": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type text`,
-      "depcruise:focus": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type text --focus`,
+      depcruise: `dependency-cruiser ${lSourceLocations} ${lTestLocations}`,
+      "depcruise:graph": `dependency-cruiser ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
+      "depcruise:graph:dev": `dependency-cruiser ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
+      "depcruise:graph:archi": `dependency-cruiser ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
+      "depcruise:html": `dependency-cruiser ${lSourceLocations} ${lTestLocations} --progress --output-type err-html --output-to dependency-violation-report.html`,
+      "depcruise:text": `dependency-cruiser ${lSourceLocations} ${lTestLocations} --progress --output-type text`,
+      "depcruise:focus": `dependency-cruiser ${lSourceLocations} ${lTestLocations} --progress --output-type text --focus`,
     };
   }
 

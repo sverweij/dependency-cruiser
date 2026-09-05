@@ -72,10 +72,11 @@ try {
       "include modules matching the regex, but don't follow their dependencies",
     )
     .option(
-      "--ignore-known [file]",
-      "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)",
+      "-S, --collapse <regex>",
+      "collapse a to a folder depth by passing a single digit (e.g. 2). When passed a " +
+        'regex collapses to that pattern. E.g. "^packages/[^/]+/" would collapse to ' +
+        `modules/ folders directly under your packages folder. ${EOL}`,
     )
-    .addOption(new Option("--no-ignore-known").hideHelp(true))
     .addOption(
       new Option(
         "--ts-config [file]",
@@ -96,20 +97,10 @@ try {
       ).hideHelp(true),
     )
     .option(
-      "-S, --collapse <regex>",
-      "collapse a to a folder depth by passing a single digit (e.g. 2). When passed a " +
-        'regex collapses to that pattern. E.g. "^packages/[^/]+/" would collapse to ' +
-        "modules/ folders directly under your packages folder. ",
+      "--ignore-known [file]",
+      "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)",
     )
-    .addOption(
-      new Option(
-        "-p, --progress [type]",
-        "show progress while dependency-cruiser is busy",
-      ).choices(["cli-feedback", "performance-log", "ndjson", "none"]),
-    )
-    .addOption(
-      new Option("--no-progress", "Alias of --progress none").hideHelp(true),
-    )
+    .addOption(new Option("--no-ignore-known").hideHelp(true))
     .addOption(
       new Option(
         "-d, --max-depth <n>",
@@ -125,11 +116,11 @@ try {
     )
     .option(
       "-P, --prefix <prefix>",
-      `prefix to use for links in the dot and err-html reporters${EOL}${EOL}`,
+      `prefix to use for links in the dot and err-html reporters`,
     )
     .option(
       "--suffix <suffix>",
-      `suffix to use for links in the dot and err-html reporters${EOL}${EOL}`,
+      `suffix to use for links in the dot and err-html reporters${EOL}`,
     )
     .option(
       "-C, --cache [cache-directory]",
@@ -154,6 +145,15 @@ try {
         "--preserve-symlinks",
         "leave symlinks unchanged (off by default)",
       ).hideHelp(true),
+    )
+    .addOption(
+      new Option(
+        "-p, --progress [type]",
+        "show progress while dependency-cruiser is busy",
+      ).choices(["cli-feedback", "performance-log", "ndjson", "none"]),
+    )
+    .addOption(
+      new Option("--no-progress", "Alias of --progress none").hideHelp(true),
     )
     .addOption(
       new Option("-v, --validate [file]", `alias for --config`).hideHelp(true),

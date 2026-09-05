@@ -18,7 +18,7 @@ const FIX_DIR = "./test/cli/__fixtures__";
 const TEST_PAIRS = [
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
+      "dependency-cruiser -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
     dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
@@ -29,7 +29,7 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
+      "dependency-cruiser -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
     dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
@@ -40,7 +40,7 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.file.json test/cli/__fixtures__/{{moduleType}}/root_one.js",
+      "dependency-cruiser -f test/output/{{moduleType}}.file.json test/cli/__fixtures__/{{moduleType}}/root_one.js",
     dirOrFile: "test/cli/__fixtures__/{{moduleType}}/root_one.js",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
@@ -51,7 +51,7 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.json -x node_modules test/cli/__fixtures__/{{moduleType}}",
+      "dependency-cruiser -f test/output/{{moduleType}}.dir.filtered.json -x node_modules test/cli/__fixtures__/{{moduleType}}",
     dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
@@ -328,7 +328,7 @@ describe("[E] cli/index", () => {
       equal(lExitCode, 0);
     });
 
-    it("dependency-cruise -f cjs.dir.wontmarch.json this-doesnot-exist - non-existing generates an error", async () => {
+    it("dependency-cruiser -f cjs.dir.wontmarch.json this-doesnot-exist - non-existing generates an error", async () => {
       const lExitCode = await cli(
         ["this-doesnot-exist"],
         {
@@ -345,7 +345,7 @@ describe("[E] cli/index", () => {
       equal(lExitCode, 1);
     });
 
-    it("dependency-cruise -f file/you/cant/write/to - generates an error", async () => {
+    it("dependency-cruiser -f file/you/cant/write/to - generates an error", async () => {
       const lExitCode = await cli(
         ["test/cli/__fixtures__"],
         {
