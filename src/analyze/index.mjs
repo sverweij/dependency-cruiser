@@ -12,7 +12,7 @@ import { bus } from "#utl/bus.mjs";
  * caching) can use that.
  *
  * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
- * @param {import("../../types/dependency-cruiser.js").ICruiseOptions} pOptions
+ * @param {import("../../types/options.mjs").ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
  * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
  */

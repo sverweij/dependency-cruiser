@@ -56,6 +56,7 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     pOldOptions.detectProcessBuiltinModuleCalls ===
       pNewOptions.detectProcessBuiltinModuleCalls &&
     pOldOptions.skipAnalysisNotInRules === pNewOptions.skipAnalysisNotInRules &&
+    pOldOptions.ignoreKnown === pNewOptions.ignoreKnown &&
     metricsIsCompatible(pOldOptions.metrics, pNewOptions.metrics) &&
     // includeOnly suffers from a backwards compatibility disease
     includeOnlyIsCompatible(pOldOptions.includeOnly, pNewOptions.includeOnly) &&

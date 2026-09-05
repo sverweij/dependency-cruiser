@@ -396,7 +396,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
         outputTo: "-",
         outputType: "err",
         knownViolationsFile: "custom-known-violations.json",
-        ignoreKnown: "custom-known-violations.json",
+        ignoreKnown: true,
         validate: false,
       },
     );

@@ -12,6 +12,7 @@
       "args": "whatever",
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
+      "ignoreKnown": false,
       "outputTo": "empty.json",
       "metrics": false,
       "moduleSystems": ["amd", "cjs", "es6"],

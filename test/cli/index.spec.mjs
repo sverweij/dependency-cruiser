@@ -176,6 +176,7 @@ function resetOutputDirectory() {
   deleteDammit(
     path.join(OUT_DIR, "typescript-path-and-ehr-array-resolution.json"),
   );
+  deleteDammit(path.join(OUT_DIR, "baseline.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -290,6 +291,26 @@ describe("[E] cli/index", () => {
       const lExpectedTransgressions = 3;
 
       equal(lExitCode, lExpectedTransgressions);
+    });
+
+    it("writes baseline reporter metadata to stderr", async () => {
+      const lOutputFileName = "baseline.json";
+      const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+      const lExitCode = await cli(
+        ["test/cli/__fixtures__/known-violations/src"],
+        {
+          outputTo: lOutputTo,
+          outputType: "baseline",
+          validate: "test/cli/__fixtures__/known-violations/config.js",
+        },
+        {
+          stdout: new UnCalledWritableTestStream(),
+          stderr: new WritableTestStream(/new, \d+ same, \d+ removed/),
+        },
+      );
+
+      equal(lExitCode, 0);
+      equal(readFileSync(lOutputTo, "utf8").endsWith("\n"), true);
     });
 
     it("dependency-cruise -i shows meta info about the current environment", async () => {
