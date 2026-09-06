@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-import { parseArgs, styleText } from "node:util";
+import { parseArgs } from "node:util";
 import assertNodeEnvironmentSuitable from "#cli/assert-node-environment-suitable.mjs";
 import cli from "#cli/index.mjs";
 import meta from "#meta.cjs";
-import extractKnownViolations from "#config-utl/extract-known-violations.mjs";
 
 function showHelp() {
   process.stdout
@@ -62,29 +61,9 @@ try {
       options.config = true;
     }
 
-    let lCurrentBaseline = [];
-    try {
-      lCurrentBaseline = await extractKnownViolations(options["output-to"]);
-    } catch (pKnownViolationsExtractionError) {
-      if (pKnownViolationsExtractionError.code === "ENOENT") {
-        process.stderr.write(
-          styleText(
-            "yellow",
-            `‼ Known violations file '${options["output-to"]}' does not exist yet. Will assume an empty current violations set and create a new one instead.\n`,
-          ),
-        );
-      } else {
-        throw pKnownViolationsExtractionError;
-      }
-    }
-
     process.exitCode = await cli(positionals, {
       config: options.config,
-      outputTo: options["output-to"],
-      cache: false,
-      outputType: "baseline",
-      ignoreKnown: false,
-      knownViolations: lCurrentBaseline,
+      baseline: options["output-to"],
       progress: options["progress"],
     });
   }

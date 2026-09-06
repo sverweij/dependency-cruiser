@@ -4,6 +4,7 @@ import { getSHA } from "watskeburt";
 import normalizeCliOptions, {
   determineRulesFileName,
 } from "#cli/normalize-cli-options.mjs";
+import { WritableTestStream } from "./writable-test-stream.utl.mjs";
 
 // eslint-disable-next-line max-statements
 describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
@@ -419,6 +420,74 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
       ),
       true,
     );
+  });
+});
+
+describe("[I] cli/normalizeCliOptions - baseline", () => {
+  const WORKING_DIR = process.cwd();
+
+  afterEach(() => {
+    process.chdir(WORKING_DIR);
+  });
+
+  it("--baseline with a file name loads known violations and sets baseline output", async () => {
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
+    deepEqual(
+      await normalizeCliOptions({ baseline: "custom-known-violations.json" }),
+      {
+        baseline: "custom-known-violations.json",
+        outputTo: "custom-known-violations.json",
+        outputType: "baseline",
+        knownViolations: [],
+        ignoreKnown: false,
+        cache: false,
+        validate: false,
+      },
+    );
+  });
+
+  it("--baseline without a file name uses the default known-violations json", async () => {
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
+    deepEqual(await normalizeCliOptions({ baseline: true }), {
+      baseline: true,
+      outputTo: ".dependency-cruiser-known-violations.json",
+      outputType: "baseline",
+      knownViolations: [],
+      ignoreKnown: false,
+      cache: false,
+      validate: false,
+    });
+  });
+
+  it("--baseline with a non-existing file assumes no current known violations and tells it's going to create one", async () => {
+    deepEqual(
+      await normalizeCliOptions(
+        { baseline: "new-baseline.json" },
+        new WritableTestStream(
+          /‼ Known violations file '.+' does not exist yet[.]/,
+        ),
+      ),
+      {
+        baseline: "new-baseline.json",
+        outputTo: "new-baseline.json",
+        outputType: "baseline",
+        knownViolations: [],
+        ignoreKnown: false,
+        cache: false,
+        validate: false,
+      },
+    );
+  });
+
+  it("--baseline rethrows errors other than a missing file", async () => {
+    let lError = "none";
+
+    try {
+      await normalizeCliOptions({ baseline: "." });
+    } catch (pError) {
+      lError = pError.toString();
+    }
+    equal(lError.includes("EISDIR"), true);
   });
 });
 
