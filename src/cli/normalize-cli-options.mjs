@@ -1,5 +1,6 @@
 import { accessSync, constants } from "node:fs";
 import { isAbsolute } from "node:path";
+import { styleText } from "node:util";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
   DEFAULT_BASELINE_FILE_NAME,
@@ -12,9 +13,29 @@ import {
 } from "./defaults.mjs";
 import { set } from "#utl/object-util.mjs";
 import loadConfig from "#config-utl/extract-depcruise-config/index.mjs";
+import extractKnownViolations from "#config-utl/extract-known-violations.mjs";
 
 function getOptionValue(pDefault) {
   return (pValue) => (typeof pValue === "string" ? pValue : pDefault);
+}
+
+async function getCurrentBaseline(pBaselineFileName, pErrorStream) {
+  let lCurrentBaseline = [];
+  try {
+    lCurrentBaseline = await extractKnownViolations(pBaselineFileName);
+  } catch (pKnownViolationsExtractionError) {
+    if (pKnownViolationsExtractionError.code === "ENOENT") {
+      pErrorStream.write(
+        styleText(
+          "yellow",
+          `‼ Known violations file '${pBaselineFileName}' does not exist yet. Will assume an empty current violations set and create a new one instead.\n`,
+        ),
+      );
+    } else {
+      throw pKnownViolationsExtractionError;
+    }
+  }
+  return lCurrentBaseline;
 }
 
 // eslint-disable-next-line complexity
@@ -202,11 +223,15 @@ function normalizeCache(pCliOptions) {
  * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
  *
- * @param  {object} pOptionsAsPassedFromCommander [description]
+ * @param {object} pOptionsAsPassedFromCommander [description]
  * @param {any} pKnownCliOptions [description]
+ * @param {typeof process.stderr} pErrorStream
  * @returns {import("../../types/options.mjs").ICruiseOptions}          [description]
  */
-export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
+export default async function normalizeOptions(
+  pOptionsAsPassedFromCommander,
+  pErrorStream,
+) {
   let lOptions = {
     outputTo: OUTPUT_TO,
     outputType: OUTPUT_TYPE,
@@ -221,6 +246,22 @@ export default async function normalizeOptions(pOptionsAsPassedFromCommander) {
 
   if (Object.hasOwn(lOptions, "config")) {
     lOptions.validate = lOptions.config;
+  }
+
+  if (Object.hasOwn(lOptions, "baseline")) {
+    const lBaselineFileName =
+      typeof pOptionsAsPassedFromCommander.baseline === "string"
+        ? pOptionsAsPassedFromCommander.baseline
+        : ".dependency-cruiser-known-violations.json";
+    lOptions.ignoreKnown = false;
+    lOptions.outputTo = lBaselineFileName;
+    lOptions.outputType = "baseline";
+    lOptions.knownViolations = await getCurrentBaseline(
+      lBaselineFileName,
+      pErrorStream,
+    );
+    lOptions.cache = false;
+    Reflect.deleteProperty(lOptions, "cacheStrategy");
   }
 
   lOptions = { ...lOptions, ...(await normalizeValidationOption(lOptions)) };

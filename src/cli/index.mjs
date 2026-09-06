@@ -99,7 +99,7 @@ function setUpListener(pCruiseOptions) {
 
 async function runCruise(pFileDirectoryArray, pCruiseOptions, pErrorStream) {
   const lCruiseOptions = await addKnownViolations(
-    await normalizeCliOptions(pCruiseOptions),
+    await normalizeCliOptions(pCruiseOptions, pErrorStream),
   );
 
   pFileDirectoryArray

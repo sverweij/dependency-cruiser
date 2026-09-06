@@ -23,6 +23,7 @@ available in dependency-cruiser configurations.
 1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--no-metrics`: do not calculate stability metrics](#--no-metrics)
 1. [`--info`: show what alt-js are supported](#--info-show-what-alt-js-are-supported)
+1. [`--baseline`: create or update a known violations baseline](#--baseline-create-or-update-a-known-violations-baseline)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--no-ignore-known`: don't ignore known violations](#--no-ignore-known)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
@@ -813,35 +814,45 @@ it has to them. To see how dependency-cruiser perceives its environment use
 
 </details>
 
-### `--ignore-known`: ignore known violations
 
-> This feature was recently (september 2021) introduced. It is useful, well
-> tested, stable and it will stay. However, the file format and the ergonomics of
-> the command(s) to deal with known violations might still shift a bit _without_
-> dependency-cruiser getting a major version bump.
->
-> The `err`, `err-long` and `err-html` reporters have been adapted to reflect
-> the results of this feature well. Other reporters to which it is relevant (e.g.
-> all of the `dot` family, `html`, `teamcity`) will follow in releases after
-> dependency-cruiser v10.3.0.
+### `--baseline`: create or update a known violations baseline
+
+This option creates or updates the known violations. For example:
+
+```sh
+dependency-cruiser src --baseline
+```
+
+By default known violations go into `.dependency-cruiser-known-violations.json` 
+in the root of your project, but you can pass a different filename as well.
+When no known violations file exists yet, it'll create one. If one does exist
+it'll update it, and emit a short summary of the difference:
+
+```
+1 new, 18 same, 8 removed
+```
+
+To ensure this difference (and future features that build on it) is accurate
+`--baseline` implies `--no-ignore-known` and `--no-cache`.
+
+
+> Previously the recommended way for creating a baseline was to run 
+> depcruise-baseline - a separate script distributed with dependency-cruiser. 
+> As of 18.3.0 `--baseline` is the recommended way. 
+
+### `--ignore-known`: ignore known violations
 
 With this option engaged dependency-cruiser will ignore known violations as saved
 in the file you pass it as a parameter. If you don't pass a filename dependency-cruiser
 will assume the known violations to live in a file called `.dependency-cruiser-known-violations.json`.
 
-You can generate a known violations file with the `baseline` reporter e.g. like so:
+You can generate (and update) a known violations file with the 
+[`--baseline`](#--baseline-create-or-update-a-known-violations-baseline) command line 
+option.
 
-```sh
-dependency-cruiser src --config --output-type baseline --output-to .dependency-cruiser-known-violations.json
-```
-
-... or with the [`depcruise-baseline`](#depcruise-baseline) command which simplifies this a bit:
-
-```sh
-# will assume a .dependency-cruiser.{js,cjs,json} to exist and will write
-# the baseline output to .dependency-cruiser-known-violations.json
-depcruise-baseline src
-```
+> The `--baseline` option is (as of dependency-cruiser 18.3.0) the recommended way 
+> to create a baseline, over [`depcruise-baseline`](#depcruise-baseline) or the
+> baseline reporter (`--output-type baseline`)
 
 #### How dependency-cruiser ignores known violations
 

@@ -97,8 +97,12 @@ try {
       ).hideHelp(true),
     )
     .option(
+      "--baseline [file]",
+      'create or update a known violations baseline. Implies --no-ignore-known --no-cache (default: ".dependency-cruiser-known-violations.json")',
+    )
+    .option(
       "--ignore-known [file]",
-      "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)",
+      `ignore known violations as saved in [file] (default: ".dependency-cruiser-known-violations.json")${EOL}`,
     )
     .addOption(new Option("--no-ignore-known").hideHelp(true))
     .addOption(
