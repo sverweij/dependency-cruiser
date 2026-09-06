@@ -23,6 +23,7 @@
   - [summarising/ `collapsePattern` (`dot` and `archi` reporters)](#summarising-collapsepattern-dot-and-archi-reporters)
   - [filtering (`dot`, `ddot` and `archi` reporters)](#filtering-dot-ddot-and-archi-reporters)
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
+  - [baseline](#baseline)
   - [metrics](#metrics)
   - [markdown](#markdown)
   - [mermaid](#mermaid)
@@ -1331,7 +1332,30 @@ module.exports = {
   }
 }
 ```
+### baseline
 
+The baseline reporter, by default, emits all violations from the current cruise.
+When used as the base for the _ignore known_ feature, this has the drawback new
+violations might 'disappear' from view, while this might not be the intention
+(e.g. if you just want to do a cleanup of fixed violations).
+
+With the `mode` option you can steer this:
+- `mode: 'full'` - the default behaviour.
+- `mode: 'prune'` - keeps existing violations, removes fixed violations, but does
+   not add new violations
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      baseline: {
+        mode: 'prune',
+      },
+    },
+  },
+};
+```
 
 ### metrics
 
