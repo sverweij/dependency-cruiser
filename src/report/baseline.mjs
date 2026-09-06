@@ -17,7 +17,7 @@ function getBaseline(pCruiseResult, { knownViolations }, pBaselineOptions) {
   const lKnownViolations = knownViolations || [];
   const lBaselineOptions = {
     ...BASELINE_DEFAULT_OPTIONS,
-    ...(pBaselineOptions || {}),
+    ...pBaselineOptions,
   };
   const lViolationArrayDiff = diffViolationArrays(
     lKnownViolations,
