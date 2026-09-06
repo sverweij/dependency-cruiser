@@ -459,6 +459,22 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
     });
   });
 
+  it("--baseline with a cache strategy strips the cache strategy", async () => {
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
+    deepEqual(
+      await normalizeCliOptions({ baseline: true, cacheStrategy: "metadata" }),
+      {
+        baseline: true,
+        outputTo: ".dependency-cruiser-known-violations.json",
+        outputType: "baseline",
+        knownViolations: [],
+        ignoreKnown: false,
+        cache: false,
+        validate: false,
+      },
+    );
+  });
+
   it("--baseline with a non-existing file assumes no current known violations and tells it's going to create one", async () => {
     deepEqual(
       await normalizeCliOptions(
