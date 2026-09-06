@@ -15,6 +15,10 @@ export interface IReporterOptions {
    */
   archi?: IDotReporterOptions;
   /**
+   * Options to tweak the output of the baseline reporter
+   */
+  baseline?: IBaselineReporterOptions;
+  /**
    * Options to tweak the output of the dot reporter
    */
   dot?: IDotReporterOptions;
@@ -75,6 +79,10 @@ export interface IAnonReporterOptions {
    * Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
    */
   wordlist?: string[];
+}
+
+export interface IBaselineReporterOptions {
+  mode: "prune" | "full";
 }
 
 export interface IDotReporterOptions {

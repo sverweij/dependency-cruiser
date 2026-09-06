@@ -514,6 +514,9 @@ export default {
         showExternalModulesUnresolved: true,
         showAliasedModulesUnresolved: true
       },
+      baseline: {
+        mode: "prune"
+      },
       archi: {
         collapsePattern: [
           "^(src|test)/[^/]+",

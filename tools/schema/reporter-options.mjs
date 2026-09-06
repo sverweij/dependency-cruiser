@@ -14,6 +14,7 @@ export default {
       properties: {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
         archi: { $ref: "#/definitions/DotReporterOptionsType" },
+        baseline: { $ref: "#/definitions/BaselineOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
@@ -46,35 +47,19 @@ export default {
         },
       },
     },
-    MetricsReporterOptionsType: {
+    BaselineOptionsType: {
       type: "object",
-      description: "Options to tweak the output of the metrics reporter",
+      description: "Options to tweak the output of the baseline reporter",
       additionalProperties: false,
       properties: {
-        orderBy: {
+        mode: {
           type: "string",
-          enum: [
-            "instability",
-            "moduleCount",
-            "afferentCouplings",
-            "efferentCouplings",
-            "name",
-            "size",
-            "topLevelStatementCount",
-          ],
+          enum: ["prune", "full"],
           description:
-            "By what attribute (in addition to the names of the folders/ modules) " +
-            "to order the metrics by. Defaults to 'instability'.",
-        },
-        hideModules: {
-          type: "boolean",
-          description:
-            "When true hides module metrics from the report. Defaults to false",
-        },
-        hideFolders: {
-          type: "boolean",
-          description:
-            "When true hides folder metrics from the report. Defaults to false",
+            "In 'prune' mode the baseline output removes violations that aren't " +
+            "present in the current codebase, but it doesn't add any new ones. " +
+            "In 'full' mode it replaces the baseline with all current violations. " +
+            "Defaults to 'full'.",
         },
       },
     },
@@ -189,6 +174,38 @@ export default {
           description:
             "Whether or not to show a footer (with version & run date) at the bottom of the report. " +
             "Defaults to true",
+        },
+      },
+    },
+    MetricsReporterOptionsType: {
+      type: "object",
+      description: "Options to tweak the output of the metrics reporter",
+      additionalProperties: false,
+      properties: {
+        orderBy: {
+          type: "string",
+          enum: [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name",
+            "size",
+            "topLevelStatementCount",
+          ],
+          description:
+            "By what attribute (in addition to the names of the folders/ modules) " +
+            "to order the metrics by. Defaults to 'instability'.",
+        },
+        hideModules: {
+          type: "boolean",
+          description:
+            "When true hides module metrics from the report. Defaults to false",
+        },
+        hideFolders: {
+          type: "boolean",
+          description:
+            "When true hides folder metrics from the report. Defaults to false",
         },
       },
     },
