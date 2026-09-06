@@ -82,7 +82,7 @@ export interface IAnonReporterOptions {
 }
 
 export interface IBaselineReporterOptions {
-  mode: "prune" | "full";
+  mode?: "prune" | "full";
 }
 
 export interface IDotReporterOptions {

@@ -47,7 +47,7 @@ function getBaseline(pCruiseResult, { knownViolations }, pBaselineOptions) {
  * @param {import('../../types/dependency-cruiser.mjs').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @param {import("../../types/reporter-options").IBaselineOptions} pOptions
+ * @param {import("../../types/reporter-options.mjs").IBaselineReporterOptions} pBaselineOptions
  * @returns {import('../../types/dependency-cruiser.mjs').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
