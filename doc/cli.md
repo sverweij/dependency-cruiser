@@ -817,7 +817,7 @@ it has to them. To see how dependency-cruiser perceives its environment use
 
 ### `--baseline`: create or update a known violations baseline
 
-This options creates or updates the known violations. For example:
+This option creates or updates the known violations. For example:
 
 ```sh
 dependency-cruiser src --baseline
@@ -836,9 +836,9 @@ To ensure this difference (and future features that build on it) is accurate
 `--baseline` implies `--no-ignore-known` and `--no-cache`.
 
 
-> Previously the recommended way to run depcruise-baseline - a separate script
-> distributed with dependency-cruiser. As of 18.3.0 `--baseline` is the recommended
-> way. 
+> Previously the recommended way for creating a baseline was to run 
+> depcruise-baseline - a separate script distributed with dependency-cruiser. 
+> As of 18.3.0 `--baseline` is the recommended way. 
 
 ### `--ignore-known`: ignore known violations
 

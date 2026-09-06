@@ -839,7 +839,7 @@ options: {
 
 > :shell: there is no command line equivalent for this
 
-This options is _deprecated_ as per version 9.21.3; it's not necessary anymore
+This option is _deprecated_ as per version 9.21.3; it's not necessary anymore
 as detection now happens automatically (_enhanced_resolve_ supports it out of
 the box.)
 

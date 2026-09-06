@@ -261,6 +261,7 @@ export default async function normalizeOptions(
       pErrorStream,
     );
     lOptions.cache = false;
+    Reflect.deleteProperty(lOptions, "cacheStrategy");
   }
 
   lOptions = { ...lOptions, ...(await normalizeValidationOption(lOptions)) };
