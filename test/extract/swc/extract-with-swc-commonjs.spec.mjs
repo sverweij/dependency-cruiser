@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
+describe("[U] extract/swc - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
     deepEqual(
       extractWithSwc(

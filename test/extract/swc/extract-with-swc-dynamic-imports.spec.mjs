@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - dynamic imports", () => {
+describe("[U] extract/swc - dynamic imports", () => {
   it("correctly detects a dynamic import statement", () => {
     deepEqual(
       extractWithSwc(

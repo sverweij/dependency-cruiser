@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - exotics", () => {
+describe("[U] extract/swc - exotics", () => {
   it("doesn't detects 'exotic' dependencies when no exoticRequireStrings were passed", () => {
     deepEqual(
       extractWithSwc(

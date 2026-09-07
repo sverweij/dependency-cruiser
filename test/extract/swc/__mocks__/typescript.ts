@@ -1,0 +1,1 @@
+export function doMagic() { return 42 }

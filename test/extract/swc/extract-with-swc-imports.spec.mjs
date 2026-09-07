@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - regular imports", () => {
+describe("[U] extract/swc - regular imports", () => {
   it("extracts 'import for side effects only'", () => {
     deepEqual(extractWithSwc("import './import-for-side-effects';"), [
       {

@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - re-exports", () => {
+describe("[U] extract/swc - re-exports", () => {
   it("extracts 're-export everything'", () => {
     deepEqual(extractWithSwc("export * from './ts-thing';"), [
       {
