@@ -1,6 +1,6 @@
-import { clearCache, getASTCached } from "#extract/swc/parse.mjs";
 import { equal, throws } from "node:assert/strict";
 import { join } from "node:path";
+import { clearCache, getASTCached } from "#extract/swc/parse.mjs";
 
 describe("[U] extract/swc - parse ", () => {
   beforeEach(() => {
