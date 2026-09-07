@@ -119,6 +119,7 @@ const TS_COMPATIBLE_EXTENSIONS = new Set([
   ".mts",
   ".cts",
   ".js",
+  ".jsx",
   ".mjs",
   ".cjs",
   ".vue",

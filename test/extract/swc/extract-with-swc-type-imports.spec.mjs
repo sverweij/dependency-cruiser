@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("[U] ast-extractors/extract-swc - type imports", () => {
+describe("[U] extract/swc - type imports", () => {
   // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
   // it("extracts type imports in const declarations", () => {
   //   deepEqual(

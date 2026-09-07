@@ -17,13 +17,23 @@ const SWC_PARSE_OPTIONS = {
   target: "es2022",
   // allow for decorators
   decorators: true,
-  // TODO: {tj}sx ?
+  // no tsx by default - overridden when the extension calls for it (see getOptionsFor)
+  // tsx: false
 };
 /** @type {Map<string, ModuleItem[]>} */
 const CACHE = new Map();
 
-export function getASTFromSource(pSource) {
-  return swc.parseSync(pSource, SWC_PARSE_OPTIONS);
+/**
+ * Returns the parse options necessary to have swc parse the file name
+ * pFileName correctly (mainly important for jsx/ tsx)
+ *
+ * @param {string} pFileName
+ * @returns {ParseOptions}
+ */
+export function getOptionsFor(pFileName) {
+  return /[.](?:tsx|jsx)$/.test(pFileName)
+    ? { ...SWC_PARSE_OPTIONS, tsx: true }
+    : SWC_PARSE_OPTIONS;
 }
 
 /**
@@ -39,7 +49,7 @@ export function getASTCached(pFileName) {
     return CACHE.get(pFileName);
   }
   /** @type {swcCore} */
-  const lAST = swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
+  const lAST = swc.parseFileSync(pFileName, getOptionsFor(pFileName));
   CACHE.set(pFileName, lAST);
   return lAST;
 }
