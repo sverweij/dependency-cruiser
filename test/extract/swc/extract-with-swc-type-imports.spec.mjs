@@ -92,7 +92,7 @@ describe("[U] extract/swc - type imports", () => {
     ]);
   });
 
-  it("extracts type-only imports (typescript 3.8+); not type-only, but each specifier is type-only", () => {
+  it("extracts imports whose specifiers are all type-only (typescript 4.5+)", () => {
     deepEqual(
       extractWithSwc(
         "import { type SomeType, type SomeOtherType } from './some-module'",
@@ -109,7 +109,7 @@ describe("[U] extract/swc - type imports", () => {
     );
   });
 
-  it("extracts type-only imports (typescript 3.8+); not type-only, but each specifier is type-only", () => {
+  it("extracts imports with mixed type-only and value specifiers as runtime imports (typescript 4.5+)", () => {
     deepEqual(
       extractWithSwc(
         "import { type SomeType, SomeOtherThing } from './some-module'",
