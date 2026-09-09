@@ -2,7 +2,7 @@ import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
 describe("[U] extract/swc - type imports", () => {
-  // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
+  // // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
   // it("extracts type imports in const declarations", () => {
   //   deepEqual(
   //     extractWithSwc("const tiepetjes: import('./types').T;"),
@@ -87,8 +87,42 @@ describe("[U] extract/swc - type imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        dependencyTypes: ["import"],
+        dependencyTypes: ["import", "type-only"],
       },
     ]);
+  });
+
+  it("extracts imports whose specifiers are all type-only (typescript 4.5+)", () => {
+    deepEqual(
+      extractWithSwc(
+        "import { type SomeType, type SomeOtherType } from './some-module'",
+      ),
+      [
+        {
+          module: "./some-module",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["import", "type-only"],
+        },
+      ],
+    );
+  });
+
+  it("extracts imports with mixed type-only and value specifiers as runtime imports (typescript 4.5+)", () => {
+    deepEqual(
+      extractWithSwc(
+        "import { type SomeType, SomeOtherThing } from './some-module'",
+      ),
+      [
+        {
+          module: "./some-module",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["import"],
+        },
+      ],
+    );
   });
 });
