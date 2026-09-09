@@ -114,6 +114,16 @@ function isInterestingCallExpression(pExoticRequireStrings, pNode) {
   );
 }
 
+function nodeIsTypeOnly(pNode) {
+  if (pNode.typeOnly) {
+    return true;
+  }
+  return (
+    pNode?.specifiers.length > 0 &&
+    pNode.specifiers.every((pSpecifier) => pSpecifier.isTypeOnly)
+  );
+}
+
 export default Visitor
   ? class SwcDependencyVisitor extends Visitor {
       #exoticRequireStrings;
@@ -134,14 +144,15 @@ export default Visitor
           });
         }
       }
-
       #pushImportSource(pNode) {
         if (pNode.source) {
           this.#result.push({
             module: pNode.source.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
-            dependencyTypes: ["import"],
+            dependencyTypes: nodeIsTypeOnly(pNode)
+              ? ["import", "type-only"]
+              : ["import"],
           });
         }
       }
