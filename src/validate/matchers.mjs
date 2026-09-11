@@ -232,21 +232,66 @@ export function matchesMoreThanOneDependencyType(pRule, pDependency) {
   return true;
 }
 
+function isAncestor(pModuleSource, pDependencyResolved) {
+  const lModulePath = dirname(resolve(pModuleSource)) + sep;
+  const lDependencyPath = dirname(resolve(pDependencyResolved)) + sep;
+  return (
+    lModulePath.startsWith(lDependencyPath) &&
+    lModulePath.length > lDependencyPath.length
+  );
+}
 export function matchesAncestor(pRule, pModule, pDependency) {
   if (Object.hasOwn(pRule.to, "ancestor")) {
     if (pDependency.coreModule || pDependency.couldNotResolve) {
       return false;
     }
-    const lModulePath = dirname(resolve(pModule.source)) + sep;
-    const lDependencyPath = dirname(resolve(pDependency.resolved)) + sep;
-    const lDoesMatchAncestor =
-      lModulePath.startsWith(lDependencyPath) &&
-      lModulePath.length > lDependencyPath.length;
-
     if (pRule.to.ancestor) {
-      return lDoesMatchAncestor;
+      return isAncestor(pModule.source, pDependency.resolved);
     } else {
-      return !lDoesMatchAncestor;
+      return !isAncestor(pModule.source, pDependency.resolved);
+    }
+  }
+  return true;
+}
+
+function isDescendant(pModuleSource, pDependencyResolved) {
+  const lModulePath = dirname(resolve(pModuleSource)) + sep;
+  const lDependencyPath = dirname(resolve(pDependencyResolved)) + sep;
+  return (
+    lDependencyPath.startsWith(lModulePath) &&
+    lDependencyPath.length > lModulePath.length
+  );
+}
+
+export function matchesDescendant(pRule, pModule, pDependency) {
+  if (Object.hasOwn(pRule.to, "descendant")) {
+    if (pDependency.coreModule || pDependency.couldNotResolve) {
+      return false;
+    }
+    if (pRule.to.descendant) {
+      return isDescendant(pModule.source, pDependency.resolved);
+    } else {
+      return !isDescendant(pModule.source, pDependency.resolved);
+    }
+  }
+  return true;
+}
+
+// fun fact siblings c.s. are called collateral relatives
+// https://en.wikipedia.org/wiki/Lineal_descendant
+// the generic term is "kinship"
+export function matchesLinealRelative(pRule, pModule, pDependency) {
+  if (Object.hasOwn(pRule.to, "linealRelative")) {
+    if (pDependency.coreModule || pDependency.couldNotResolve) {
+      return false;
+    }
+    const lMatchesLinealRelative =
+      isAncestor(pModule.source, pDependency.resolved) ||
+      isDescendant(pModule.source, pDependency.resolved);
+    if (pRule.to.linealRelative) {
+      return lMatchesLinealRelative;
+    } else {
+      return !lMatchesLinealRelative;
     }
   }
   return true;
