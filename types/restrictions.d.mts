@@ -156,6 +156,16 @@ export interface IToRestriction extends IBaseRestrictionType {
    * folder of the module.
    */
   ancestor?: boolean;
+  /**
+   * When set to true, matches when the dependency is in a folder below the " +
+   * folder of the module.
+   */
+  descendant?: boolean;
+  /**
+   * When set to true, matches when the dependency is in a folder above or
+   * in a folder below the the module (so either an ancestor or a descendant)
+   */
+  linealRelative?: boolean;
 }
 
 export interface IReachabilityToRestrictionType extends IBaseRestrictionType {

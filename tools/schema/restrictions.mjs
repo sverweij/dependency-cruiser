@@ -227,6 +227,18 @@ export default {
             "When set to true, matches when the dependency is in a folder above the " +
             "folder of the module.",
         },
+        descendant: {
+          type: "boolean",
+          description:
+            "When set to true, matches when the dependency is in a folder below the " +
+            "folder of the module.",
+        },
+        linealRelative: {
+          type: "boolean",
+          description:
+            "When set to true, matches when the dependency is in a folder above or " +
+            "in a folder below the the module (so either an ancestor or a descendant).",
+        },
       },
     },
     DependentsModuleRestrictionType: {
