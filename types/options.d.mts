@@ -16,6 +16,7 @@ export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =
   "cli-feedback" | "performance-log" | "ndjson" | "none";
 export type ParserType = "acorn" | "tsc" | "swc";
+export type BaselineModeType = "full" | "shrink-only";
 
 export interface ITsConfig {
   fileName?: string;
@@ -429,6 +430,16 @@ export interface ICruiseOptions {
    * When caching is switched on the default cache folder is 'node_modules/.cache/dependency-cruiser/'
    */
   cache?: boolean | string | Partial<ICacheOptions>;
+
+  baseline?: {
+    /**
+     * How to update the baseline;
+     * 'full' - replaces all violations with the current set (the default behaviour)
+     * 'shrink-only' - keeps existing violations, removes fixed violations, but
+     *  does not add new ones.
+     */
+    mode?: BaselineModeType;
+  };
 }
 
 export interface IFormatOptions {

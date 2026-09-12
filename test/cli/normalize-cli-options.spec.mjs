@@ -435,7 +435,6 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
     deepEqual(
       await normalizeCliOptions({ baseline: "custom-known-violations.json" }),
       {
-        baseline: "custom-known-violations.json",
         outputTo: "custom-known-violations.json",
         outputType: "baseline",
         knownViolations: [],
@@ -449,7 +448,6 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
   it("--baseline without a file name uses the default known-violations json", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     deepEqual(await normalizeCliOptions({ baseline: true }), {
-      baseline: true,
       outputTo: ".dependency-cruiser-known-violations.json",
       outputType: "baseline",
       knownViolations: [],
@@ -464,11 +462,48 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
     deepEqual(
       await normalizeCliOptions({ baseline: true, cacheStrategy: "metadata" }),
       {
-        baseline: true,
         outputTo: ".dependency-cruiser-known-violations.json",
         outputType: "baseline",
         knownViolations: [],
         ignoreKnown: false,
+        cache: false,
+        validate: false,
+      },
+    );
+  });
+
+  it("--baseline with --baseline-shrink-only sets shrink-only mode", async () => {
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
+    deepEqual(
+      await normalizeCliOptions({ baseline: true, baselineShrinkOnly: true }),
+      {
+        outputTo: ".dependency-cruiser-known-violations.json",
+        outputType: "baseline",
+        knownViolations: [],
+        ignoreKnown: false,
+        baselineShrinkOnly: true,
+        baseline: {
+          mode: "shrink-only",
+        },
+        cache: false,
+        validate: false,
+      },
+    );
+  });
+
+  it("--baseline with --baseline-shrink-only false sets full mode", async () => {
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
+    deepEqual(
+      await normalizeCliOptions({ baseline: true, baselineShrinkOnly: false }),
+      {
+        outputTo: ".dependency-cruiser-known-violations.json",
+        outputType: "baseline",
+        knownViolations: [],
+        ignoreKnown: false,
+        baselineShrinkOnly: false,
+        baseline: {
+          mode: "full",
+        },
         cache: false,
         validate: false,
       },
@@ -484,7 +519,6 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
         ),
       ),
       {
-        baseline: "new-baseline.json",
         outputTo: "new-baseline.json",
         outputType: "baseline",
         knownViolations: [],

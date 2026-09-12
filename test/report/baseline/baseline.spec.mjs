@@ -33,7 +33,7 @@ describe("[I] report/baseline", () => {
     const lKnownViolations = lInput.summary.violations.slice(0, -1);
     lInput.summary.optionsUsed.knownViolations = lKnownViolations;
 
-    const lResult = baseline(lInput, { mode: "full" });
+    const lResult = baseline(lInput);
 
     deepEqual(JSON.parse(lResult.output), lInput.summary.violations);
     equal(
@@ -45,18 +45,19 @@ describe("[I] report/baseline", () => {
     );
   });
 
-  it("prunes new violations from the baseline in prune mode", () => {
+  it("removes new violations from the baseline in shrink-only mode", () => {
     const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
     const lKnownViolations = lInput.summary.violations.slice(0, -1);
     lInput.summary.optionsUsed.knownViolations = lKnownViolations;
+    lInput.summary.optionsUsed.baseline = { mode: "shrink-only" };
 
-    const lResult = baseline(lInput, { mode: "prune" });
+    const lResult = baseline(lInput);
 
     deepEqual(JSON.parse(lResult.output), lKnownViolations);
     equal(
       lResult.meta,
       "\nbaseline  : 5 violations\n\n" +
-        "  new     : 1 (running in 'prune' mode => not added to the baseline)\n" +
+        "  new     : 1 (running in 'shrink-only' mode => not added to the baseline)\n" +
         "  same    : 5\n" +
         "  removed : 0\n",
     );

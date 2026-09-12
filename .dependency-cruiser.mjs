@@ -453,14 +453,14 @@ export default {
     //    "env": {},
     //    "arguments": {}
     // },
-    
+
     // "babelConfig": {
     //   "fileName": "./.babelrc"
     // },
-    
+
     // Experimental: the parser to use. Not set as detectJSDocImports will imply "tsc" anyway
     // parser: "tsc", // acorn, tsc
-    
+
     detectJSDocImports: true, // implies parser: "tsc"
     detectProcessBuiltinModuleCalls: true,
     experimentalStats: true,
@@ -497,25 +497,25 @@ export default {
       "requireJSON",
       "proxyquire.load",
     ],
+    baseline: {
+      mode: "shrink-only",
+    },
     reporterOptions: {
-      "err": {
+      err: {
         showExternalModulesUnresolved: true,
-        showAliasedModulesUnresolved: true
+        showAliasedModulesUnresolved: true,
       },
       "err-long": {
         showExternalModulesUnresolved: true,
-        showAliasedModulesUnresolved: true
+        showAliasedModulesUnresolved: true,
       },
       "err-html": {
         showExternalModulesUnresolved: true,
-        showAliasedModulesUnresolved: true
+        showAliasedModulesUnresolved: true,
       },
-      "markdown": {
+      markdown: {
         showExternalModulesUnresolved: true,
-        showAliasedModulesUnresolved: true
-      },
-      baseline: {
-        mode: "prune"
+        showAliasedModulesUnresolved: true,
       },
       archi: {
         collapsePattern: [
@@ -705,13 +705,13 @@ export default {
       },
     },
 
-    progress: { 
-      type: "performance-log", 
-      maximumLevel: 50 
+    progress: {
+      type: "performance-log",
+      maximumLevel: 50,
     },
     cache: {
       // amazingly, for dependency-cruiser's own use case the 'content' strategy
-      // (calculates all file checksums) works (~1.25x) faster than the 'metadata' 
+      // (calculates all file checksums) works (~1.25x) faster than the 'metadata'
       // strategy (uses git for detecting changes). From a package.json script
       // the difference is even bigger, as there the 'metadata' strategy takes
       // 10x longer as compared to a direct nodejs call.

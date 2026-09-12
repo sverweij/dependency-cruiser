@@ -18,12 +18,13 @@
   - [`detectJSDocImports`: detect dependencies in JSDoc comments](#detectjsdocimports-detect-dependencies-in-jsdoc-comments)
   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
+  - [`baseDir`: specify a directory to cruise from](#baseDir-specify-a-directory-to-cruise-from)
+  - [baseline](#baseline)
 - [`reporterOptions`](#reporteroptions)
   - [theme (`dot`, `ddot` and `archi` reporters)](#theme-dot-ddot-and-archi-reporters)
   - [summarising/ `collapsePattern` (`dot` and `archi` reporters)](#summarising-collapsepattern-dot-and-archi-reporters)
   - [filtering (`dot`, `ddot` and `archi` reporters)](#filtering-dot-ddot-and-archi-reporters)
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
-  - [baseline](#baseline)
   - [metrics](#metrics)
   - [markdown](#markdown)
   - [mermaid](#mermaid)
@@ -898,6 +899,32 @@ This would transform a module `src/index.js` into the URL `coverage/src/index.js
 By default dependency-cruiser will take the current working directory to start
 a cruise from. If you want to alter that you can pass it in this attribute.
 
+### baseline
+
+> :shell: command line option equivalent: `--baseline-shrink-only`
+
+When you create or update a baseline (`--baseline` command line option or with
+`--outputType` _baseline_) it by default contains all violations from the current
+cruise. This has the drawback new violations might 'disappear' from view, while
+this might not be the intention (e.g. if you just want to do a cleanup of
+violations that have been fixed between two baselines).
+
+With the `mode` option you can steer this:
+- `mode: 'full'` - the default behaviour.
+- `mode: 'shrink-only'` - keeps existing violations, removes fixed violations, 
+   but does not add new ones.
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    baseline: {
+      mode: 'shrink-only',
+    },
+  },
+};
+```
+
 ## reporterOptions
 
 In the `reporterOptions` attribute you can pass things to reporters to influence
@@ -1332,30 +1359,6 @@ module.exports = {
   }
 }
 ```
-### baseline
-
-The baseline reporter, by default, emits all violations from the current cruise.
-When used as the base for the _ignore known_ feature, this has the drawback new
-violations might 'disappear' from view, while this might not be the intention
-(e.g. if you just want to do a cleanup of fixed violations).
-
-With the `mode` option you can steer this:
-- `mode: 'full'` - the default behaviour.
-- `mode: 'prune'` - keeps existing violations, removes fixed violations, but does
-   not add new violations
-
-```javascript
-module.exports = {
-  // ...
-  options: {
-    reporterOptions: {
-      baseline: {
-        mode: 'prune',
-      },
-    },
-  },
-};
-```
 
 ### metrics
 
@@ -1781,7 +1784,7 @@ The cacheDuration used here overrides any that might be set in webpack configs.
 ### `forceDeriveDependents`
 
 > [!WARNING]
-> Deprecated. This optiton hasnt had any effect on dependency-cruiser's behaviour
+> Deprecated. This option hasn't had any effect on dependency-cruiser's behaviour
 > since a few major versions. I there's a need to maniuplate whether or not 
 > dependendents get derived independent of any rule (/ metric/ report) needing
 > them use the [`skipAnalysisNotInRules`](#skipanalysisnotinrules) option as 

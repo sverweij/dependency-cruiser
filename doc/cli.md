@@ -24,6 +24,7 @@ available in dependency-cruiser configurations.
 1. [`--no-metrics`: do not calculate stability metrics](#--no-metrics)
 1. [`--info`: show what alt-js are supported](#--info-show-what-alt-js-are-supported)
 1. [`--baseline`: create or update a known violations baseline](#--baseline-create-or-update-a-known-violations-baseline)
+1. [`--baseline-shrink-only`](#--baseline-shrink-only)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--no-ignore-known`: don't ignore known violations](#--no-ignore-known)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
@@ -839,6 +840,10 @@ To ensure this difference (and future features that build on it) is accurate
 > Previously the recommended way for creating a baseline was to run 
 > depcruise-baseline - a separate script distributed with dependency-cruiser. 
 > As of 18.3.0 `--baseline` is the recommended way. 
+
+### `--baseline-shrink-only`
+
+Makes --baseline only _remove_ existing violations, and not add any new ones.
 
 ### `--ignore-known`: ignore known violations
 
