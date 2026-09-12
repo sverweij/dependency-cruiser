@@ -38,6 +38,8 @@
    - [rules on dependents - `numberOfDependentsMoreThan`](#rules-on-dependents---numberOfDependentsMoreThan)
    - [`circular`](#circular)
    - [`ancestor`](#ancestor)
+   - [`descendant`](#descendant)
+   - [`linealRelative`](#linealRelative)
    - [`license` and `licenseNot`](#license-and-licensenot)
    - [`dependencyTypes` and `dependencyTypesNot`](#dependencytypes-and-dependencytypesnot)
    - [`dynamic`](#dynamic)
@@ -905,6 +907,59 @@ modules in a 'higher' folder.
 For example, applied to the following dependency graph:
 
 ![ancestor](assets/sample-ancestor.svg)
+
+### `descendant`
+
+Whether or not to match modules that are in a folder below the folder of the
+module. This can be useful to prevent modules in a 'higher' folder to depend on
+modules in a 'lower' folder.
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: "no-descendant",
+  comment: "don't allow importing from folders below the current one",
+  severity: "error",
+  from: {},
+  to: { "descendant": true }
+}
+```
+
+For example, applied to the following dependency graph:
+
+![descendant](assets/sample-descendant.svg)
+
+### `linealRelative`
+
+Whether or not to match modules that are in a folder below the folder of the
+module. This can be useful to prevent modules in a 'higher' folder to depend on
+modules in a 'lower' folder.
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: "no-linealRelative",
+  comment: "don't allow importing from folders above or below the current one",
+  severity: "error",
+  from: {},
+  to: { "linealRelative": true }
+}
+``
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: "no-siblings",
+  comment: "don't allow importing from folders outside above or below the current one",
+  severity: "error",
+  from: {},
+  to: { "linealDescendant": false }
+}
+````
+
+For example, applied to the following dependency graph:
+
+![no-](assets/sample-descendant.svg)
 
 ### `license` and `licenseNot`
 
