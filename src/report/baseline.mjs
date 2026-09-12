@@ -10,7 +10,6 @@ const EOL = "\n";
 const BASELINE_DEFAULT_MODE = "full";
 
 /**
- * @param {ICruiseResult} pCruiseResult
  * @param {IViolation[]} pKnownViolations
  * @param {IViolation[]} pCurrentViolations
  * @param {BaselineModeType} pMode
