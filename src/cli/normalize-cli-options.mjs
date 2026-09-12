@@ -253,6 +253,12 @@ export default async function normalizeOptions(
       typeof pOptionsAsPassedFromCommander.baseline === "string"
         ? pOptionsAsPassedFromCommander.baseline
         : ".dependency-cruiser-known-violations.json";
+
+    // keeping the baseline option (a boolean or a string) as passed from commander
+    // in would overwrite the option as passed in the configuration file (an object,
+    // if any)
+    Reflect.deleteProperty(lOptions, "baseline");
+
     lOptions.ignoreKnown = false;
     lOptions.outputTo = lBaselineFileName;
     lOptions.outputType = "baseline";
@@ -260,6 +266,12 @@ export default async function normalizeOptions(
       lBaselineFileName,
       pErrorStream,
     );
+    if (Object.hasOwn(lOptions, "baselineShrinkOnly")) {
+      lOptions.baseline = {
+        ...lOptions.baseline,
+        mode: lOptions.baselineShrinkOnly ? "shrink-only" : "full",
+      };
+    }
     lOptions.cache = false;
     Reflect.deleteProperty(lOptions, "cacheStrategy");
   }

@@ -4,7 +4,6 @@ import defaults from "./defaults.mjs";
 import { uniq } from "#utl/array-util.mjs";
 
 /**
- * @import { ICruiseResult } from "../../../types/cruise-result.mjs";
  * @import { ICruiseOptions, IFormatOptions } from "../../../types/options.mjs";
  * @import { IStrictCruiseOptions, IStrictFormatOptions } from "../../../types/strict-options.mjs";
  * @import { IForbiddenRuleType, IFlattenedRuleSet } from "../../../types/rule-set.mjs";

@@ -1341,17 +1341,15 @@ violations might 'disappear' from view, while this might not be the intention
 
 With the `mode` option you can steer this:
 - `mode: 'full'` - the default behaviour.
-- `mode: 'prune'` - keeps existing violations, removes fixed violations, but does
-   not add new violations
+- `mode: 'shrink-only'` - keeps existing violations, removes fixed violations, 
+   but does not add new ones.
 
 ```javascript
 module.exports = {
   // ...
   options: {
-    reporterOptions: {
-      baseline: {
-        mode: 'prune',
-      },
+    baseline: {
+      mode: 'shrink-only',
     },
   },
 };
@@ -1781,7 +1779,7 @@ The cacheDuration used here overrides any that might be set in webpack configs.
 ### `forceDeriveDependents`
 
 > [!WARNING]
-> Deprecated. This optiton hasnt had any effect on dependency-cruiser's behaviour
+> Deprecated. This option hasn't had any effect on dependency-cruiser's behaviour
 > since a few major versions. I there's a need to maniuplate whether or not 
 > dependendents get derived independent of any rule (/ metric/ report) needing
 > them use the [`skipAnalysisNotInRules`](#skipanalysisnotinrules) option as 

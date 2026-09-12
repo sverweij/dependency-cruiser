@@ -1243,6 +1243,18 @@
             { "$ref": "#/definitions/CacheOptionsType" }
           ]
         },
+        "baseline": {
+          "type": "object",
+          "description": "Options to tweak how the baseline is updated",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["shrink-only", "full"],
+              "description": "In 'shrink-only' mode the baseline output removes violations that aren't present in the current codebase, but it doesn't add any new ones. In 'full' mode it replaces the baseline with all current violations. Defaults to 'full'."
+            }
+          }
+        },
         "args": {
           "type": "string",
           "description": "arguments passed on the command line"
@@ -1379,7 +1391,6 @@
       "properties": {
         "anon": { "$ref": "#/definitions/AnonReporterOptionsType" },
         "archi": { "$ref": "#/definitions/DotReporterOptionsType" },
-        "baseline": { "$ref": "#/definitions/BaselineOptionsType" },
         "dot": { "$ref": "#/definitions/DotReporterOptionsType" },
         "ddot": { "$ref": "#/definitions/DotReporterOptionsType" },
         "flat": { "$ref": "#/definitions/DotReporterOptionsType" },
@@ -1401,18 +1412,6 @@
           "type": "array",
           "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose. When the list is exhausted, the anon reporter will use random strings patterned after the original file name instead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
           "items": { "type": "string" }
-        }
-      }
-    },
-    "BaselineOptionsType": {
-      "type": "object",
-      "description": "Options to tweak the output of the baseline reporter",
-      "additionalProperties": false,
-      "properties": {
-        "mode": {
-          "type": "string",
-          "enum": ["prune", "full"],
-          "description": "In 'prune' mode the baseline output removes violations that aren't present in the current codebase, but it doesn't add any new ones. In 'full' mode it replaces the baseline with all current violations. Defaults to 'full'."
         }
       }
     },

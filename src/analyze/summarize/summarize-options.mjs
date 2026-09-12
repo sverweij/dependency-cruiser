@@ -1,6 +1,7 @@
 const SHAREABLE_OPTIONS = [
   "babelConfig",
   "baseDir",
+  "baseline",
   "cache",
   "collapse",
   "combinedDependencies",

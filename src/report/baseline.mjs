@@ -1,34 +1,35 @@
 import { diffViolationArrays } from "#graph-utl/compare.mjs";
+/**
+ * @import { ICruiseResult, IReporterOutput } from "../../types/dependency-cruiser.mjs";
+ * @import { IViolation} from "../../types/violations.mjs"
+ * @import { BaselineModeType } from "../../types/options.mjs"
+ */
 
 const DEFAULT_JSON_INDENT = 2;
 const EOL = "\n";
-const BASELINE_DEFAULT_OPTIONS = {
-  mode: "full",
-};
+const BASELINE_DEFAULT_MODE = "full";
 
 /**
- *
- * @param {import('../../types/cruise-result.d.mts').ICruiseResult} pCruiseResult
- * @param {{knownViolations: import('../../types/violations.d.mts').IViolation[]}} param1
- * @returns {import('../../types/dependency-cruiser.mjs').IReporterOutput}
+ * @param {ICruiseResult} pCruiseResult
+ * @param {IViolation[]} pKnownViolations
+ * @param {IViolation[]} pCurrentViolations
+ * @param {BaselineModeType} pMode
+ * @returns {IReporterOutput}
  */
-function getBaseline(pCruiseResult, { knownViolations }, pBaselineOptions) {
+function getBaseline(pKnownViolations, pCurrentViolations, pMode) {
   const lReturnValue = {};
-  const lKnownViolations = knownViolations || [];
-  const lBaselineOptions = {
-    ...BASELINE_DEFAULT_OPTIONS,
-    ...pBaselineOptions,
-  };
+  const lKnownViolations = pKnownViolations || [];
   const lViolationArrayDiff = diffViolationArrays(
     lKnownViolations,
-    pCruiseResult.summary.violations,
+    pCurrentViolations,
   );
-  let lViolationsToEmit = pCruiseResult.summary.violations;
+  let lViolationsToEmit = pCurrentViolations;
   let lModeAddition = " (running in 'full' mode => added to the baseline)";
 
-  if (lBaselineOptions.mode === "prune") {
+  if (pMode === "shrink-only") {
     lViolationsToEmit = lViolationArrayDiff.same;
-    lModeAddition = " (running in 'prune' mode => not added to the baseline)";
+    lModeAddition =
+      " (running in 'shrink-only' mode => not added to the baseline)";
   }
   lReturnValue.meta =
     `${EOL}baseline  : ${lViolationsToEmit.length} violations${EOL}${EOL}` +
@@ -44,21 +45,19 @@ function getBaseline(pCruiseResult, { knownViolations }, pBaselineOptions) {
 /**
  * Returns the current 'baseline' of violations, which can be used
  *
- * @param {import('../../types/dependency-cruiser.mjs').ICruiseResult} pCruiseResult -
+ * @param {ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @param {import("../../types/reporter-options.mjs").IBaselineReporterOptions} pBaselineOptions
- * @returns {import('../../types/dependency-cruiser.mjs').IReporterOutput} -
- *      output: some stats on modules and dependencies in json format
+ * @returns {IReporterOutput} -
+ *      output: known violations
+ *      meta: information to print on a side channel (e.g. stderr)
  *      exitCode: 0
  */
-export default function baseline(pCruiseResult, pBaselineOptions) {
+export default function baseline(pCruiseResult) {
   const { meta, output } = getBaseline(
-    pCruiseResult,
-    {
-      knownViolations: pCruiseResult.summary.optionsUsed.knownViolations,
-    },
-    pBaselineOptions,
+    pCruiseResult.summary.optionsUsed.knownViolations,
+    pCruiseResult.summary.violations,
+    pCruiseResult.summary.optionsUsed?.baseline?.mode ?? BASELINE_DEFAULT_MODE,
   );
   return {
     output,

@@ -492,6 +492,22 @@ export default {
             "Defaults to false (no caching).\n" +
             "When caching is switched on the default cache folder is 'node_modules/.cache/dependency-cruiser/'",
         },
+        baseline: {
+          type: "object",
+          description: "Options to tweak how the baseline is updated",
+          additionalProperties: false,
+          properties: {
+            mode: {
+              type: "string",
+              enum: ["shrink-only", "full"],
+              description:
+                "In 'shrink-only' mode the baseline output removes violations that aren't " +
+                "present in the current codebase, but it doesn't add any new ones. " +
+                "In 'full' mode it replaces the baseline with all current violations. " +
+                "Defaults to 'full'.",
+            },
+          },
+        },
       },
     },
     ...moduleSystemsType.definitions,

@@ -14,7 +14,6 @@ export default {
       properties: {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
         archi: { $ref: "#/definitions/DotReporterOptionsType" },
-        baseline: { $ref: "#/definitions/BaselineOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
@@ -44,22 +43,6 @@ export default {
           items: {
             type: "string",
           },
-        },
-      },
-    },
-    BaselineOptionsType: {
-      type: "object",
-      description: "Options to tweak the output of the baseline reporter",
-      additionalProperties: false,
-      properties: {
-        mode: {
-          type: "string",
-          enum: ["prune", "full"],
-          description:
-            "In 'prune' mode the baseline output removes violations that aren't " +
-            "present in the current codebase, but it doesn't add any new ones. " +
-            "In 'full' mode it replaces the baseline with all current violations. " +
-            "Defaults to 'full'.",
         },
       },
     },
