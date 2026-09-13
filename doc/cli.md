@@ -843,7 +843,11 @@ When no known violations file exists yet, it'll create one. If one does exist
 it'll update it, and emit a short summary of the difference:
 
 ```
-1 new, 18 same, 8 removed
+baseline  : 19 violations
+
+  new     : 1
+  same    : 18
+  removed : 8
 ```
 
 To ensure this difference (and future features that build on it) is accurate
@@ -1506,27 +1510,24 @@ Options:
 
 ### depcruise-baseline
 
-To create a baseline of known violations. You can use the resulting file to tell
-regular dependency-cruiser you want to ignore them for now and to only focus
-on new ones.
+Deprecated, use the dependency-cruiser [`--baseline`](#--baseline-create-or-update-a-known-violations-baseline) 
+option instead. Today `depcruise-baseline` is an alias for that option.
 
-> Shortcut for `dependency-cruiser -c -T baseline -f .dependency-cruiser-known-violations.json`
-> which might be a bit of an elaborate incantation for generating a list
-> of known violations.
-
-If your sources & test live in `src`, `test` and you use the default filenames
-for the dependency-cruiser configuration and known violations (recommended)
-then...
-
-```
-depcruise-baseline src test
-```
-
-... will generate the baseline of known violations to .dependency-cruiser-known-violations.json.
-
-The two command line options exist in case you want these files to live in
-different spots; `--config` to specify where the config file lives, `--output-to`
-to write to an alternative output location.
+> Usage used to be:
+> If your sources & test live in `src`, `test` and you use the default filenames
+> for the dependency-cruiser configuration and known violations (recommended)
+> then...
+> 
+> ```diff
+> - depcruise-baseline src test
+> + dependency-cruiser src test --baseline
+> ```
+>
+> ... would generate the baseline of known violations to .dependency-cruiser-known-violations.json.
+>
+> Two additional command line options exist in case you want these files to live in
+> different spots; `--config` to specify where the config file lives, `--output-to`
+> to write to an alternative output location.
 
 ## depcruise-wrap-stream-in-html
 
