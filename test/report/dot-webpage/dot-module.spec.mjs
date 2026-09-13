@@ -26,7 +26,7 @@ describe("[I] dot-picture", () => {
 
     throws(() => {
       dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-    }, /GraphViz dot, which is required for the 'x-dot-webpage' reporter/);
+    }, /GraphViz dot, which is required for the 'dot-webpage' reporter/);
   });
 
   it("throws an error when dot is available but isn't graphviz dot", () => {
@@ -39,7 +39,7 @@ describe("[I] dot-picture", () => {
 
     throws(() => {
       dotModule(MINIMAL_CRUISE_RESULT, lDotPictureReporterOptions);
-    }, /GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't/);
+    }, /GraphViz dot, which is required for the 'dot-webpage' reporter doesn't/);
   });
 
   it("throws an error when dot throws an error", () => {

@@ -423,7 +423,7 @@ _from: upsell, to: search|check-out|view-trip|check-in,_
  _..._
 
 That'll be heavy maintenance though; especially when your
-business components breed like a litter of rabbits. In stead, you can use
+business components breed like a litter of rabbits. Instead, you can use
 group matching:
 
 ```json
@@ -759,8 +759,8 @@ to this:
 | -------------- | -------------------------------------------------------- | --------------- | ------- | ----------------------------- |
 | `via`          | **some** of the modules in the cycle match the condition | `path: "^a/.+"` | `true`  | `a/aa.js` and `a/ab.js` match |
 | `viaOnly`      | **all** of the modules in the cycle match the condition  | `path: "^a/.+"` | `false` | `b/bb.js` doesn't match       |
-| _`viaNot`_     | _deprecated - use `viaOnly.pathNot` in stead_            | `path: "^a/.+"` | `false` | `a/aa.js` and `a/ab.js` match |
-| _`viaSomeNot`_ | _deprecated - use `via.pathNot` in stead_                | `path: "^a/.+"` | `true`  | `b/bb.js` doesn't match       |
+| _`viaNot`_     | _deprecated - use `viaOnly.pathNot` instead_             | `path: "^a/.+"` | `false` | `a/aa.js` and `a/ab.js` match |
+| _`viaSomeNot`_ | _deprecated - use `via.pathNot` instead_                 | `path: "^a/.+"` | `true`  | `b/bb.js` doesn't match       |
 
 ##### Example: allow cycles that have a type-only dependency in them
 

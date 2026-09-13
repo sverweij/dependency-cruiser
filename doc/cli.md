@@ -200,22 +200,35 @@ As a comparison, this is the default dot report for the same folder(s)
 This too is a reporter that shows the modules' instability metrics when they
 have been calculated ([--metrics](#--metrics) command line switch).
 
-#### x-dot-webpage
+#### dot-webpage
 
 Reporter that runs the dot reporter and pipes it through the GraphViz `dot`
-command and wraps the result in an html page. It's the same thing as running ...
+command and wraps the result in an html page that has some interactivity
+(highlight incoming and outgoing dependencies on hover, click to source).
 
-```sh
-dependency-cruiser -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependencygraph.html
-```
+With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
+GraphViz dot into html that is geared to make the graph easier to use. It adds a.o.:
 
-... but less typing & easier to remember.
+- highlighting dependencies on hover
+- the ability to 'pin' that highlight with a left mouse click ("on context menu").
+  Can be cleared with a left mouse click on something not a module or dependency
+  or by pressing the _Escape_ key.
 
-> [!NOTE]
-> The `x` in front of the name of the reporter means it is experimental and
-> might change or be removed in the future. See the
-> [pull request that introduced the reporter](https://github.com/sverweij/dependency-cruiser/pull/907)
-> for the rationale.
+<img width="1059" alt="highlight on hover" src="assets/highlight-on-hover.png">
+
+Some examples:
+
+- [Dependency-cruiser's own dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
+- [yarn v2's high level dependency graph](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-dependencies.html)
+- [state-machine-cat's dependency graph](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
+
+
+> Previously this reporter was called x-dot-webpage (x- for 'experimental').
+> That name still works but might get removed at some point in the future.
+>
+> Another way to get the same result was using a helper script that was 
+> distributed with dependency-cruiser (depcruise-wrap-stream-in-html), this 
+> too is deprecated in favor of the dot-webpage reporter.
 
 #### mermaid
 
@@ -1517,30 +1530,15 @@ to write to an alternative output location.
 
 ## depcruise-wrap-stream-in-html
 
-With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
-GraphViz dot into html that is geared to make the graph easier to use. It adds a.o.:
+Deprecated, use the [dot-webpage](#dot-webpage) reporter instead.
+> Typical use used to be
+> 
+> ```console
+> $ dependency-cruiser -c -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
+> ```
+> 
+> This works for all dot-based reporters, including `archi` and `ddot`
 
-- highlighting dependencies on hover
-- the ability to 'pin' that highlight with a left mouse click ("on context menu").
-  Can be cleared with a left mouse click on something not a module or dependency
-  or by pressing the _Escape_ key.
-
-<img width="1059" alt="highlight on hover" src="assets/highlight-on-hover.png">
-
-Typical use:
-
-```console
-$ dependency-cruiser -c -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
-```
-
-This works for all dot-based reporters, including `archi` and `ddot`
-
-Some examples:
-
-- [Dependency-cruiser's own dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
-- [yarn v2's high level dependency graph](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-dependencies.html)
-  (`archi` reporter)
-- [state-machine-cat's dependency graph](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
 
 ## Daphne's dependencies - a gentle introduction
 

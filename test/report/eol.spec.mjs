@@ -19,7 +19,8 @@ const lReporters = await Promise.all(
   lAvailableReporters
     .filter(
       (pReporterName) =>
-        pReporterName !== "null" && pReporterName !== "x-dot-webpage",
+        pReporterName !== "null" &&
+        !["x-dot-webpage", "dot-webpage"].includes(pReporterName),
     )
     .map(async (pReporter) => {
       const lReporter = await getReporter(pReporter);
@@ -49,10 +50,10 @@ describe("[I] most reporters' output ends on an EOL", () => {
     });
   });
 
-  it("the x-dot-webpage reporter output ends on an EOL", async () => {
-    const lXDotWebpageReporter = await getReporter("x-dot-webpage");
+  it("the dot-webpage reporter output ends on an EOL", async () => {
+    const lDotWebpageReporter = await getReporter("dot-webpage");
 
-    const lResult = lXDotWebpageReporter(MINIMAL_CRUISE_RESULT, {
+    const lResult = lDotWebpageReporter(MINIMAL_CRUISE_RESULT, {
       spawnFunction,
     });
     match(lResult.output, /\n$/);

@@ -126,7 +126,7 @@ try {
     lArrayOfFilesAndDirectoriesToCruise,
     depcruiseOptions,
     lWebpackResolveConfig,
-    //   change since v13: in stead of passing the tsConfig directly, like so:
+    //   change since v13: instead of passing the tsConfig directly, like so:
     // tsconfig
     //   you now pass it into an object that also supports other types of
     //   compiler options, like those for babel:

@@ -240,7 +240,7 @@ export interface ICruiseOptions {
    *
    * Hasn't had any effect on dependency-cruiser's behaviour since a few major
    * versions ago. If there's a need to manipulate this use the `skipAnalysisNotInRules`
-   * option in stead.
+   * option instead.
    *
    * Previously documented behavior:
    * > When true includes denormalized dependents in the cruise-result, even

@@ -114,6 +114,13 @@ function ruleSetHasMetricsRule(pRuleSet) {
   );
 }
 
+// TODO duplicated in ../report-wrap.mjs
+function getReporterSection(pOutputType) {
+  return ["x-dot-webpage", "dot-webpage"].includes(pOutputType)
+    ? "dot"
+    : pOutputType;
+}
+
 /**
  *
  * @param {ICruiseOptions} pOptions
@@ -121,8 +128,8 @@ function ruleSetHasMetricsRule(pRuleSet) {
  */
 function reporterShowsMetrics(pOptions) {
   return (
-    (pOptions.reporterOptions?.[pOptions?.outputType]?.showMetrics ?? false) ===
-    true
+    (pOptions.reporterOptions?.[getReporterSection(pOptions?.outputType)]
+      ?.showMetrics ?? false) === true
   );
 }
 
