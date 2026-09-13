@@ -18,7 +18,7 @@ Options:
   -V, --version             display version number
   -h, --help                display help for command
 
-‼ Deprecated. Use dependency-cruiser --baseline in stead.
+‼ Deprecated. Use dependency-cruiser --baseline instead.
 ‼ See https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline
 
 `);

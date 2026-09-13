@@ -14,7 +14,7 @@ function extractRootModuleName(pModuleName) {
 
 function getVersion(pModuleName) {
   // of course we'd love to use something like an import with an import assertion
-  // As that's _experimental_ we have to use _require_ in stead.
+  // As that's _experimental_ we have to use _require_ instead.
   // eslint-disable-next-line import/no-dynamic-require, security/detect-non-literal-require
   const lManifest = require(
     path.join(extractRootModuleName(pModuleName), "package.json"),
