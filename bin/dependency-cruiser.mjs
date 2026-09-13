@@ -100,15 +100,11 @@ try {
       "--baseline [file]",
       'create or update a known violations baseline. Implies --no-ignore-known --no-cache (default: ".dependency-cruiser-known-violations.json")',
     )
-    .option(
-      "--baseline-shrink-only",
-      "makes --baseline only remove existing violations, and not add any new ones ",
-    )
     .addOption(
       new Option(
-        "--no-baseline-shrink-only",
-        "to override shrink-only in either commandline or options",
-      ).hideHelp(true),
+        "--baseline-mode <mode>",
+        '"shrink-only" - remove fixed violations but don\'t add new ones; "full" (default) - replace everything',
+      ).choices(["full", "shrink-only"]),
     )
     .option(
       "--ignore-known [file]",
