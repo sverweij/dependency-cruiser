@@ -186,6 +186,15 @@ describe("[E] main.format - format", () => {
   // name and a `mocha --invert --fgrep "#do-not-run-on-windows"`  on the windows ci)
   it("uses the 'dot' reporter section for the 'dot-webpage' output type (#do-not-run-on-windows)", async () => {
     const lResult = await format(cruiseResult, {
+      outputType: "dot-webpage",
+    });
+    ok(lResult.output.includes("<html"));
+    // the color ffcccc doesn't occur in the default dot theme, but it does
+    // occur in the one we have in the cruiseResult
+    ok(lResult.output.includes('fill="#ffcccc"'));
+  });
+  it("uses the 'dot' reporter section for the 'x-dot-webpage' output type (#do-not-run-on-windows)", async () => {
+    const lResult = await format(cruiseResult, {
       outputType: "x-dot-webpage",
     });
     ok(lResult.output.includes("<html"));
