@@ -10,14 +10,17 @@ function showHelp() {
     .write(`Usage: depcruise-baseline [options] <files-or-directories...>
 
 Writes all known violations of rules in a .dependency-cruiser.js to a file.
-Alias for depcruise --no-ignore-known -c -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]
-Details: https://github.com/sverweij/dependency-cruiser
+Alias for dependency-cruiser --baseline 
 
 Options:
   -c, --config [file]       read rules and options from [file] (default: true)
   -f, --output-to [file]    file to write output to; - for stdout (default: ".dependency-cruiser-known-violations.json")
   -V, --version             display version number
   -h, --help                display help for command
+
+‼ Deprecated. Use dependency-cruiser --baseline in stead.
+‼ See https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline
+
 `);
 }
 
