@@ -58,7 +58,7 @@ Let's see how we can fix that - name and severity first.
   "forbidden": [
     {
       "name": "not-to-core-http",
-      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant instead",
       "severity": "error",
       "from": {},
       "to": { "path": "http" }
@@ -87,7 +87,7 @@ specifying we want to also match the _dependencyType_ `core`:
   "forbidden": [
     {
       "name": "not-to-core-http",
-      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant instead",
       "severity": "error",
       "from": {},
       "to": { "dependencyTypes": ["core"], "path": "http" }
@@ -126,7 +126,7 @@ You realise there might be more npm packages using http too, so ...
   "forbidden": [
     {
       "name": "not-to-core-http",
-      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+      "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant instead",
       "severity": "error",
       "from": { "pathNot": "^node_modules" },
       "to": { "dependencyTypes": ["core"], "path": "^http$" }

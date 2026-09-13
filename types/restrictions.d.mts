@@ -84,13 +84,13 @@ export interface IToRestriction extends IBaseRestrictionType {
    * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
    * except when they go through one specific module. Typically to temporarily
    * allow some cycles until they're removed.
-   * @deprecated use viaOnly.pathNot in stead
+   * @deprecated use viaOnly.pathNot instead
    */
   viaNot?: string | string[];
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * _some_ modules that don't satisfy this regular expression.
-   * @deprecated use via.pathNot in stead
+   * @deprecated use via.pathNot instead
    */
   viaSomeNot?: string | string[];
   /**

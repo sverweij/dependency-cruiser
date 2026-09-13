@@ -1530,7 +1530,7 @@ to write to an alternative output location.
 
 ## depcruise-wrap-stream-in-html
 
-Deprecated, use the [dot-webpage](#dot-webpage) reporter in stead.
+Deprecated, use the [dot-webpage](#dot-webpage) reporter instead.
 > Typical use used to be
 > 
 > ```console

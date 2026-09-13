@@ -1716,7 +1716,7 @@ when you have really special needs that that warrant it.
 
 > Likely you will not need to use this
 
-If you use a package that, in stead of the `main` field, or `exports` still uses
+If you use a package that, instead of the `main` field, or `exports` still uses
 the [`browser` field](https://github.com/defunctzombie/package-browser-field-spec)
 to indicate the main file in case it's for the browser, you can use:
 
