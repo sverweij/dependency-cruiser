@@ -46,7 +46,9 @@ function reSummarizeResults(pResult, pFormatOptions) {
 }
 
 function getReporterSection(pOutputType) {
-  return pOutputType === "x-dot-webpage" ? "dot" : pOutputType;
+  return ["x-dot-webpage", "dot-webpage"].includes(pOutputType)
+    ? "dot"
+    : pOutputType;
 }
 
 /**

@@ -184,7 +184,7 @@ describe("[E] main.format - format", () => {
   // having the test suite fail on windows, let alone for an experimental feature
   // I'm disabling the test on windows (with 'do not run on windows' in the test
   // name and a `mocha --invert --fgrep "#do-not-run-on-windows"`  on the windows ci)
-  it("uses the 'dot' reporter section for the 'x-dot-webpage' output type (#do-not-run-on-windows)", async () => {
+  it("uses the 'dot' reporter section for the 'dot-webpage' output type (#do-not-run-on-windows)", async () => {
     const lResult = await format(cruiseResult, {
       outputType: "x-dot-webpage",
     });

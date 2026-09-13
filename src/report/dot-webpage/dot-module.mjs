@@ -63,7 +63,7 @@ function isAvailable(pOptions) {
 export default function dotWebpage(pResults, pDotWebpageReporterOptions) {
   if (!isAvailable(pDotWebpageReporterOptions)) {
     throw new Error(
-      "GraphViz dot, which is required for the 'x-dot-webpage' reporter doesn't " +
+      "GraphViz dot, which is required for the 'dot-webpage' reporter doesn't " +
         "seem to be available on this system. See the GraphViz download page for " +
         "instruction on how to get it on your system: https://www.graphviz.org/download/",
     );
