@@ -266,14 +266,15 @@ export default async function normalizeOptions(
       lBaselineFileName,
       pErrorStream,
     );
-    if (Object.hasOwn(lOptions, "baselineMode")) {
-      lOptions.baseline = {
-        ...lOptions.baseline,
-        mode: lOptions.baselineMode,
-      };
-    }
     lOptions.cache = false;
     Reflect.deleteProperty(lOptions, "cacheStrategy");
+  }
+
+  if (Object.hasOwn(lOptions, "baselineMode")) {
+    lOptions.baseline = {
+      ...lOptions.baseline,
+      mode: lOptions.baselineMode,
+    };
   }
 
   lOptions = { ...lOptions, ...(await normalizeValidationOption(lOptions)) };
