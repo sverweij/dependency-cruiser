@@ -44,7 +44,7 @@ function reSummarizeResults(pResult, pFormatOptions) {
     modules: lModules,
   };
 }
-
+// TODO duplicated in ./options/normalize.mjs
 function getReporterSection(pOutputType) {
   return ["x-dot-webpage", "dot-webpage"].includes(pOutputType)
     ? "dot"
