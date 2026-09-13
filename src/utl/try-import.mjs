@@ -14,7 +14,7 @@ function getVersion(pModuleName) {
   // The 'proper' way to do this would be with a dynamic import with an
   // import assertion. Because it's 'experimental' since node 16 and prints
   // an ugly warning on stderr since node 19 we'll be using the require
-  // hack below in stead. Code would otherwise have been:
+  // hack below instead. Code would otherwise have been:
   //
   // const lManifest = await import(
   //   // @ts-expect-error TS2345 extractRootModuleName can return either a string or

@@ -76,7 +76,7 @@ wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/main/doc/real
 
   ```
     "dc": "dependency-cruiser --version && dependency-cruiser --ignore-known --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
-    "depcruise:baseline": "dependency-cruiser --version && depcruise-baseline packages/*/{*.js,src} --config react-dependency-cruiser-config.js",
+    "depcruise:baseline": "dependency-cruiser --version && dependency-cruiser packages/*/{*.js,src} --config react-dependency-cruiser-config.js --baseline",
     "depcruise:archi": "dependency-cruiser --ignore-known --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
 
