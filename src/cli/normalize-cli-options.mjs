@@ -266,10 +266,10 @@ export default async function normalizeOptions(
       lBaselineFileName,
       pErrorStream,
     );
-    if (Object.hasOwn(lOptions, "baselineShrinkOnly")) {
+    if (Object.hasOwn(lOptions, "baselineMode")) {
       lOptions.baseline = {
         ...lOptions.baseline,
-        mode: lOptions.baselineShrinkOnly ? "shrink-only" : "full",
+        mode: lOptions.baselineMode,
       };
     }
     lOptions.cache = false;

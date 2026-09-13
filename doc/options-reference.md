@@ -901,7 +901,7 @@ a cruise from. If you want to alter that you can pass it in this attribute.
 
 ### baseline
 
-> :shell: command line option equivalent: `--baseline-shrink-only`
+> :shell: command line option equivalent: `--baseline-mode`
 
 When you create or update a baseline (`--baseline` command line option or with
 `--outputType` _baseline_) it by default contains all violations from the current

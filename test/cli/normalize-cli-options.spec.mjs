@@ -472,16 +472,19 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
     );
   });
 
-  it("--baseline with --baseline-shrink-only sets shrink-only mode", async () => {
+  it("--baseline with --baseline-mode 'shrink-only' sets shrink-only mode", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     deepEqual(
-      await normalizeCliOptions({ baseline: true, baselineShrinkOnly: true }),
+      await normalizeCliOptions({
+        baseline: true,
+        baselineMode: "shrink-only",
+      }),
       {
         outputTo: ".dependency-cruiser-known-violations.json",
         outputType: "baseline",
         knownViolations: [],
         ignoreKnown: false,
-        baselineShrinkOnly: true,
+        baselineMode: "shrink-only",
         baseline: {
           mode: "shrink-only",
         },
@@ -491,16 +494,16 @@ describe("[I] cli/normalizeCliOptions - baseline", () => {
     );
   });
 
-  it("--baseline with --baseline-shrink-only false sets full mode", async () => {
+  it("--baseline with --baseline-mode 'full' sets full mode", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     deepEqual(
-      await normalizeCliOptions({ baseline: true, baselineShrinkOnly: false }),
+      await normalizeCliOptions({ baseline: true, baselineMode: "full" }),
       {
         outputTo: ".dependency-cruiser-known-violations.json",
         outputType: "baseline",
         knownViolations: [],
         ignoreKnown: false,
-        baselineShrinkOnly: false,
+        baselineMode: "full",
         baseline: {
           mode: "full",
         },
