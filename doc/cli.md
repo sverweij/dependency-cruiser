@@ -1527,7 +1527,12 @@ option instead. Today `depcruise-baseline` is an alias for that option.
 >
 > Two additional command line options exist in case you want these files to live in
 > different spots; `--config` to specify where the config file lives, `--output-to`
-> to write to an alternative output location.
+> to write to an alternative output location (in dependency-cruiser `--baseline` option you
+> can specify an alternative location directly after the option)
+> ```diff
+> - depcruise-baseline src test --output-to my-baseline.json
+> + dependency-cruiser src test --baseline my-baseline.json
+> ```
 
 ## depcruise-wrap-stream-in-html
 
