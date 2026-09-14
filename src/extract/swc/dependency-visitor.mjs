@@ -8,9 +8,6 @@ const lSwcVisitorModule = await tryImport(
   "@swc/core/Visitor.js",
   meta.supportedTranspilers.swc,
 );
-// Node hands over the CommonJS module.exports, which holds the Visitor. Bun
-// honours the __esModule flag @swc/core sets and hands over its default
-// export - the Visitor itself.
 const Visitor = lSwcVisitorModule.Visitor ?? lSwcVisitorModule;
 
 function pryStringsFromArguments(pArguments) {
