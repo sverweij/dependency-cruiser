@@ -4,10 +4,14 @@ import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
 /** @type {import('@swc/core/Visitor')} */
-const { Visitor } = await tryImport(
+const lSwcVisitorModule = await tryImport(
   "@swc/core/Visitor.js",
   meta.supportedTranspilers.swc,
 );
+// under bun lSwcVisitorModule resolves to something different
+// as under node.js - see https://github.com/sverweij/dependency-cruiser/issues/1092
+// for details. In order to enable running dependency-cruiser on both:
+const Visitor = lSwcVisitorModule.Visitor ?? lSwcVisitorModule;
 
 function pryStringsFromArguments(pArguments) {
   let lReturnValue = null;
