@@ -35,21 +35,21 @@ jobs:
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 10
         if: github.event_name == 'pull_request' && matrix.node-version == env.NODE_LATEST
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 1
         if: github.event_name != 'pull_request' || matrix.node-version != env.NODE_LATEST
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: node_modules
           key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package-lock.json')}}
           restore-keys: |
             ${{matrix.node-version}}@${{matrix.platform}}-build-
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{matrix.node-version}}
       - name: install & build
@@ -114,14 +114,14 @@ jobs:
       actions: read
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/cache@v5
+      - uses: actions/checkout@v7
+      - uses: actions/cache@v6
         with:
           path: node_modules
           key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
