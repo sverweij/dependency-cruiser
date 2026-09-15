@@ -55,10 +55,27 @@ function isTypeOnlyExport(pStatement) {
 }
 
 /*
- * Both extractImport* assume the imports/ exports can only occur at
- * top level. AFAIK this the only place they're allowed, so we should
- * be good. Otherwise we'll need to walk the tree.
+ * The extractImport* below take their statements from getStatements, because
+ * imports and exports are allowed in one place besides the top level: inside a
+ * module block, which is what `declare module "some-package" { ... }` and
+ * `declare namespace Thing { ... }` compile to.
  */
+
+/**
+ * Get the statements of the passed AST node, plus the statements of any module
+ * blocks nested in it
+ *
+ * @param {Node} pAST - an AST node with statements
+ * @returns {Node[]} - the node's statements, flattened over module blocks
+ */
+function getStatements(pAST) {
+  return (pAST.statements ?? []).flatMap((pStatement) =>
+    pStatement.kind === typescript.SyntaxKind.ModuleDeclaration &&
+    pStatement.body?.kind === typescript.SyntaxKind.ModuleBlock
+      ? [pStatement, ...getStatements(pStatement.body)]
+      : [pStatement],
+  );
+}
 
 /**
  * Get all import statements from the top level AST node
@@ -68,7 +85,7 @@ function isTypeOnlyExport(pStatement) {
  *                                  all import statements in the (top level) AST node
  */
 function extractImports(pAST) {
-  return pAST.statements
+  return getStatements(pAST)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportDeclaration &&
@@ -92,7 +109,7 @@ function extractImports(pAST) {
  *                                  all export statements in the (top level) AST node
  */
 function extractExports(pAST) {
-  return pAST.statements
+  return getStatements(pAST)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ExportDeclaration &&
@@ -120,7 +137,7 @@ function extractExports(pAST) {
  *                                  (top level) AST node
  */
 function extractImportEquals(pAST) {
-  return pAST.statements
+  return getStatements(pAST)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportEqualsDeclaration &&
