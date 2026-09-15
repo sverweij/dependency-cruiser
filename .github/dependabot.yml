@@ -8,7 +8,7 @@ updates:
       prefix: "ci"
       include: scope
     groups:
-      "all the things":
+      "all versions of actions":
         update-types:
           - major
           - minor
