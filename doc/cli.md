@@ -853,9 +853,14 @@ baseline  : 19 violations
 To ensure this difference (and future features that build on it) is accurate
 `--baseline` implies `--no-ignore-known` and `--no-cache`.
 
+> [!NOTE] 
+> In the violation comparison the _severity_ is disregarded, so raising or 
+> lowering the severity of a violation won't all of a sudden remove violations
+> from the baseline.
 
+> [!NOTE]
 > Previously the recommended way for creating a baseline was to run 
-> depcruise-baseline - a separate script distributed with dependency-cruiser. 
+> `depcruise-baseline` - a separate script distributed with dependency-cruiser. 
 > As of 18.3.0 `--baseline` is the recommended way. 
 
 ### `--baseline-mode`
