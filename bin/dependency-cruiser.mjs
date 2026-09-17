@@ -104,7 +104,7 @@ try {
       new Option(
         "--baseline-mode <mode>",
         '"shrink-only" - remove fixed violations but don\'t add new ones; "full" (default) - replace everything',
-      ).choices(["full", "shrink-only"]),
+      ).choices(["full", "shrink-only", "view"]),
     )
     .option(
       "--ignore-known [file]",

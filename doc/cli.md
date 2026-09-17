@@ -865,9 +865,10 @@ To ensure this difference (and future features that build on it) is accurate
 
 ### `--baseline-mode`
 
-Takes one of two values:
+Takes one of three values:
 - "full": makes --baseline replace the whole baseline
 - "shrink-only": makes --baseline only _remove_ existing violations, and not add any new ones.
+- "view": shows the existing baseline without making any updates.
 
 ### `--ignore-known`: ignore known violations
 

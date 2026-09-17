@@ -1250,8 +1250,8 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": ["shrink-only", "full"],
-              "description": "In 'shrink-only' mode the baseline output removes violations that aren't present in the current codebase, but it doesn't add any new ones. In 'full' mode it replaces the baseline with all current violations. Defaults to 'full'."
+              "enum": ["shrink-only", "full", "view"],
+              "description": "In 'shrink-only' mode the baseline output removes violations that aren't present in the current codebase, but it doesn't add any new ones. In 'full' mode it replaces the baseline with all current violations. In 'view' mode it doesn't update the baseline, but _only_ shows the stats.Defaults to 'full'."
             }
           }
         },

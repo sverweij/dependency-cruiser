@@ -913,6 +913,7 @@ With the `mode` option you can steer this:
 - `mode: 'full'` - the default behaviour.
 - `mode: 'shrink-only'` - keeps existing violations, removes fixed violations, 
    but does not add new ones.
+- `mode: 'view'` - shows the existing baseline without making any updates.
 
 ```javascript
 module.exports = {
