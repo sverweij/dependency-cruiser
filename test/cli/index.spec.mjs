@@ -1,4 +1,4 @@
-import { readFileSync, unlinkSync } from "node:fs";
+import { readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { doesNotThrow, equal, throws, match } from "node:assert/strict";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
@@ -177,6 +177,7 @@ function resetOutputDirectory() {
     path.join(OUT_DIR, "typescript-path-and-ehr-array-resolution.json"),
   );
   deleteDammit(path.join(OUT_DIR, "baseline.json"));
+  deleteDammit(path.join(OUT_DIR, "baseline-view.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -313,6 +314,33 @@ describe("[E] cli/index", () => {
 
       equal(lExitCode, 0);
       equal(readFileSync(lOutputTo, "utf8").endsWith("\n"), true);
+    });
+
+    it("does not overwrite baseline file in view mode", async () => {
+      const lOutputFileName = "baseline-view.json";
+      const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+      const lOriginalOutput = readFileSync(
+        "test/report/baseline/__fixtures__/baseline-result.json",
+        "utf8",
+      );
+      writeFileSync(lOutputTo, lOriginalOutput);
+      const lExitCode = await cli(
+        ["test/cli/__fixtures__/known-violations/src"],
+        {
+          baseline: lOutputTo,
+          baselineMode: "view",
+          validate: "test/cli/__fixtures__/known-violations/config.js",
+        },
+        {
+          stdout: new UnCalledWritableTestStream(),
+          stderr: new WritableTestStream(
+            /baseline.+\d+ violations.+new.+\d+.+same.+\d+.+removed.+/s,
+          ),
+        },
+      );
+
+      equal(lExitCode, 0);
+      equal(readFileSync(lOutputTo, "utf8"), lOriginalOutput);
     });
 
     it("dependency-cruise -i shows meta info about the current environment", async () => {

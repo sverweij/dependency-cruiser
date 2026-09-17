@@ -97,6 +97,13 @@ function setUpListener(pCruiseOptions) {
   }
 }
 
+function isBaselineViewMode(pCruiseOptions) {
+  return (
+    pCruiseOptions.outputType === "baseline" &&
+    pCruiseOptions?.baseline?.mode === "view"
+  );
+}
+
 async function runCruise(pFileDirectoryArray, pCruiseOptions, pErrorStream) {
   const lCruiseOptions = await addKnownViolations(
     await normalizeCliOptions(pCruiseOptions, pErrorStream),
@@ -126,9 +133,11 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions, pErrorStream) {
     { tsConfig, babelConfig },
   );
 
-  bus.progress("cli: writing results", { complete: 1 });
-  bus.emit("write-start");
-  write(lCruiseOptions.outputTo, lReportingResult.output);
+  if (!isBaselineViewMode(lCruiseOptions)) {
+    bus.progress("cli: writing results", { complete: 1 });
+    bus.emit("write-start");
+    write(lCruiseOptions.outputTo, lReportingResult.output);
+  }
   if (lReportingResult.meta) {
     pErrorStream.write(`${lReportingResult.meta}${EOL}`);
   }
