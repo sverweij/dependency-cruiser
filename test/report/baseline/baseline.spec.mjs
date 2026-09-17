@@ -63,6 +63,24 @@ describe("[I] report/baseline", () => {
     );
   });
 
+  it("views the existing baseline without updating it in view mode", () => {
+    const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
+    const lKnownViolations = lInput.summary.violations.slice(0, -1);
+    lInput.summary.optionsUsed.knownViolations = lKnownViolations;
+    lInput.summary.optionsUsed.baseline = { mode: "view" };
+
+    const lResult = baseline(lInput);
+
+    deepEqual(JSON.parse(lResult.output), lKnownViolations);
+    equal(
+      lResult.meta,
+      "\nbaseline  : 5 violations (running in 'view' mode so no updates made)\n\n" +
+        "  new     : 1\n" +
+        "  same    : 5\n" +
+        "  removed : 0\n",
+    );
+  });
+
   it("does not add mode details when there are no new violations", () => {
     const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
     lInput.summary.optionsUsed.knownViolations = lInput.summary.violations;

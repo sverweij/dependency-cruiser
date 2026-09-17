@@ -23,16 +23,22 @@ function getBaseline(pKnownViolations, pCurrentViolations, pMode) {
     pCurrentViolations,
   );
   let lViolationsToEmit = pCurrentViolations;
-  let lModeAddition = " (running in 'full' mode => added to the baseline)";
+  let lModeAdditionTotal = "";
+  let lModeAdditionNew = " (running in 'full' mode => added to the baseline)";
 
   if (pMode === "shrink-only") {
     lViolationsToEmit = lViolationArrayDiff.same;
-    lModeAddition =
+    lModeAdditionNew =
       " (running in 'shrink-only' mode => not added to the baseline)";
   }
+  if (pMode === "view") {
+    lViolationsToEmit = lKnownViolations;
+    lModeAdditionTotal = " (running in 'view' mode so no updates made)";
+    lModeAdditionNew = "";
+  }
   lReturnValue.meta =
-    `${EOL}baseline  : ${lViolationsToEmit.length} violations${EOL}${EOL}` +
-    `  new     : ${lViolationArrayDiff.new.length}${lViolationArrayDiff.new.length > 0 ? lModeAddition : ""}${EOL}` +
+    `${EOL}baseline  : ${lViolationsToEmit.length} violations${lModeAdditionTotal}${EOL}${EOL}` +
+    `  new     : ${lViolationArrayDiff.new.length}${lViolationArrayDiff.new.length > 0 ? lModeAdditionNew : ""}${EOL}` +
     `  same    : ${lViolationArrayDiff.same.length}${EOL}` +
     `  removed : ${lViolationArrayDiff.old.length}${EOL}`;
   lReturnValue.output =

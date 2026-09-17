@@ -103,8 +103,8 @@ try {
     .addOption(
       new Option(
         "--baseline-mode <mode>",
-        '"shrink-only" - remove fixed violations but don\'t add new ones; "full" (default) - replace everything',
-      ).choices(["full", "shrink-only"]),
+        '"shrink-only" - remove fixed violations but don\'t add new ones;  "view" - rewrite but add nor remove anyting; "full" (default) - replace everything',
+      ).choices(["full", "shrink-only", "view"]),
     )
     .option(
       "--ignore-known [file]",
