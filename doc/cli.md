@@ -868,7 +868,8 @@ To ensure this difference (and future features that build on it) is accurate
 Takes one of three values:
 - "full": makes --baseline replace the whole baseline
 - "shrink-only": makes --baseline only _remove_ existing violations, and not add any new ones.
-- "view": shows the existing baseline without making any updates.
+- "view": makes --baseline rewrite the baseline, but doesn't remove or add anything -
+   only showing the stats.
 
 ### `--ignore-known`: ignore known violations
 
