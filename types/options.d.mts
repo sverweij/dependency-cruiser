@@ -437,7 +437,7 @@ export interface ICruiseOptions {
      * 'full' - replaces all violations with the current set (the default behaviour)
      * 'shrink-only' - keeps existing violations, removes fixed violations, but
      *  does not add new ones.
-     * 'view' - rewrites the baseline, but doesn't remove or add anything - only 
+     * 'view' - rewrites the baseline, but doesn't remove or add anything - only
      *  showing the stats.
      */
     mode?: BaselineModeType;
