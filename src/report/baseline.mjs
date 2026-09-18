@@ -25,22 +25,27 @@ function getBaseline(pKnownViolations, pCurrentViolations, pMode) {
   let lViolationsToEmit = pCurrentViolations;
   let lModeAdditionTotal = "";
   let lModeAdditionNew = " (running in 'full' mode => added to the baseline)";
+  let lModeAdditionOld =
+    " (running in 'full' mode => removed from the baseline)";
 
   if (pMode === "shrink-only") {
     lViolationsToEmit = lViolationArrayDiff.same;
     lModeAdditionNew =
       " (running in 'shrink-only' mode => not added to the baseline)";
+    lModeAdditionOld =
+      " (running in 'shrink-only' mode => removed from the baseline)";
   }
   if (pMode === "format") {
     lViolationsToEmit = lKnownViolations;
     lModeAdditionTotal = " (running in 'format' mode so no updates made)";
     lModeAdditionNew = "";
+    lModeAdditionOld = "";
   }
   lReturnValue.meta =
     `${EOL}baseline  : ${lViolationsToEmit.length} violations${lModeAdditionTotal}${EOL}${EOL}` +
     `  new     : ${lViolationArrayDiff.new.length}${lViolationArrayDiff.new.length > 0 ? lModeAdditionNew : ""}${EOL}` +
     `  same    : ${lViolationArrayDiff.same.length}${EOL}` +
-    `  stale   : ${lViolationArrayDiff.old.length}${EOL}`;
+    `  stale   : ${lViolationArrayDiff.old.length}${lViolationArrayDiff.old.length > 0 ? lModeAdditionOld : ""}${EOL}`;
   lReturnValue.output =
     JSON.stringify(
       lViolationsToEmit.toSorted(compareViolations),

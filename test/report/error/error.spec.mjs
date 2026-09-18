@@ -25,6 +25,17 @@ describe("[I] report/error", () => {
     match(lResult.output, /no dependency violations found/);
     equal(lResult.exitCode, 0);
   });
+  it("warns about stale known violations when there are no violations", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: { ...okdeps.summary, baselineStale: 2 },
+    });
+
+    match(
+      lResult.output,
+      /2 stale known violations in the baseline\. Run with --baseline --baseline-mode shrink-only to remove them\./,
+    );
+  });
   it("renders a bunch of errors", () => {
     const lResult = render(dependencies);
 
@@ -35,6 +46,17 @@ describe("[I] report/error", () => {
     );
     doesNotMatch(lResult.output, / {4}comment to no-leesplank/);
     equal(lResult.exitCode, 2);
+  });
+  it("warns about stale known violations with regular violations", () => {
+    const lResult = render({
+      ...dependencies,
+      summary: { ...dependencies.summary, baselineStale: 1 },
+    });
+
+    match(
+      lResult.output,
+      /1 stale known violations in the baseline\. Run with --baseline --baseline-mode shrink-only to remove them\./,
+    );
   });
   it("renders a bunch of warnings", () => {
     const lResult = render(onlyWarningDependencies);

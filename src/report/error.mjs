@@ -147,6 +147,16 @@ function formatEnvironmentIssues(pEnvironmentIssues) {
   );
 }
 
+function formatStaleBaselineWarning(pBaselineStaleCount) {
+  if ((pBaselineStaleCount ?? 0) > 0) {
+    return styleText(
+      "yellow",
+      `‼ ${pBaselineStaleCount} stale known violations in the baseline. Run with --baseline --baseline-mode shrink-only to remove them.${EOL}`,
+    );
+  }
+  return "";
+}
+
 function report(pResults, pOptions) {
   const lOptions = {
     long: false,
@@ -163,9 +173,11 @@ function report(pResults, pOptions) {
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised
-    } dependencies cruised)${EOL}${formatIgnoreWarning(
-      pResults.summary.ignore,
-    )}${formatEnvironmentIssues(pResults.summary.environment?.issues)}${EOL}`;
+    } dependencies cruised)${EOL}`
+      .concat(formatIgnoreWarning(pResults.summary.ignore))
+      .concat(formatStaleBaselineWarning(pResults.summary.baselineStale))
+      .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
+      .concat(EOL);
   }
 
   return lNonIgnorableViolations
@@ -177,6 +189,7 @@ function report(pResults, pOptions) {
     )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
+    .concat(formatStaleBaselineWarning(pResults.summary.baselineStale))
     .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
     .concat(EOL);
 }
