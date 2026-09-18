@@ -117,4 +117,27 @@ describe("[I] report/baseline", () => {
         "  stale   : 1 (running in 'full' mode => removed from the baseline)\n",
     );
   });
+
+  it("reports stale violations in shrink-only mode", () => {
+    const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
+    lInput.summary.optionsUsed.baseline = { mode: "shrink-only" };
+    lInput.summary.optionsUsed.knownViolations = [
+      ...lInput.summary.violations,
+      {
+        ...lInput.summary.violations[0],
+        from: "stale",
+        to: "stale",
+      },
+    ];
+
+    const lResult = baseline(lInput);
+
+    equal(
+      lResult.meta,
+      "\nbaseline  : 6 violations\n\n" +
+        "  new     : 0\n" +
+        "  same    : 6\n" +
+        "  stale   : 1 (running in 'shrink-only' mode => removed from the baseline)\n",
+    );
+  });
 });
