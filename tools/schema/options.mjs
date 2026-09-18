@@ -499,12 +499,12 @@ export default {
           properties: {
             mode: {
               type: "string",
-              enum: ["shrink-only", "full", "view"],
+              enum: ["shrink-only", "full", "format"],
               description:
                 "In 'shrink-only' mode the baseline output removes violations that aren't " +
                 "present in the current codebase, but it doesn't add any new ones. " +
                 "In 'full' mode it replaces the baseline with all current violations. " +
-                "In 'view' mode it rewrites the baseline, but doesn't remove or add anything - only showing the stats. " +
+                "In 'format' mode it rewrites the baseline, but doesn't remove or add anything - only showing the stats. " +
                 "Defaults to 'full'.",
             },
           },

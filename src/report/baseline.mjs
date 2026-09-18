@@ -1,4 +1,4 @@
-import { diffViolationArrays } from "#graph-utl/compare.mjs";
+import { compareViolations, diffViolationArrays } from "#graph-utl/compare.mjs";
 /**
  * @import { ICruiseResult, IReporterOutput } from "../../types/dependency-cruiser.mjs";
  * @import { IViolation} from "../../types/violations.mjs"
@@ -31,18 +31,22 @@ function getBaseline(pKnownViolations, pCurrentViolations, pMode) {
     lModeAdditionNew =
       " (running in 'shrink-only' mode => not added to the baseline)";
   }
-  if (pMode === "view") {
+  if (pMode === "format") {
     lViolationsToEmit = lKnownViolations;
-    lModeAdditionTotal = " (running in 'view' mode so no updates made)";
+    lModeAdditionTotal = " (running in 'format' mode so no updates made)";
     lModeAdditionNew = "";
   }
   lReturnValue.meta =
     `${EOL}baseline  : ${lViolationsToEmit.length} violations${lModeAdditionTotal}${EOL}${EOL}` +
     `  new     : ${lViolationArrayDiff.new.length}${lViolationArrayDiff.new.length > 0 ? lModeAdditionNew : ""}${EOL}` +
     `  same    : ${lViolationArrayDiff.same.length}${EOL}` +
-    `  removed : ${lViolationArrayDiff.old.length}${EOL}`;
+    `  stale   : ${lViolationArrayDiff.old.length}${EOL}`;
   lReturnValue.output =
-    JSON.stringify(lViolationsToEmit, null, DEFAULT_JSON_INDENT) + EOL;
+    JSON.stringify(
+      lViolationsToEmit.toSorted(compareViolations),
+      null,
+      DEFAULT_JSON_INDENT,
+    ) + EOL;
 
   return lReturnValue;
 }

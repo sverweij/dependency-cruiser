@@ -41,7 +41,7 @@ describe("[I] report/baseline", () => {
       "\nbaseline  : 6 violations\n\n" +
         "  new     : 1 (running in 'full' mode => added to the baseline)\n" +
         "  same    : 5\n" +
-        "  removed : 0\n",
+        "  stale   : 0\n",
     );
   });
 
@@ -59,25 +59,25 @@ describe("[I] report/baseline", () => {
       "\nbaseline  : 5 violations\n\n" +
         "  new     : 1 (running in 'shrink-only' mode => not added to the baseline)\n" +
         "  same    : 5\n" +
-        "  removed : 0\n",
+        "  stale   : 0\n",
     );
   });
 
-  it("views the existing baseline without updating it in view mode", () => {
+  it("formats the existing baseline without updating it in format mode", () => {
     const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
     const lKnownViolations = lInput.summary.violations.slice(0, -1);
     lInput.summary.optionsUsed.knownViolations = lKnownViolations;
-    lInput.summary.optionsUsed.baseline = { mode: "view" };
+    lInput.summary.optionsUsed.baseline = { mode: "format" };
 
     const lResult = baseline(lInput);
 
     deepEqual(JSON.parse(lResult.output), lKnownViolations);
     equal(
       lResult.meta,
-      "\nbaseline  : 5 violations (running in 'view' mode so no updates made)\n\n" +
+      "\nbaseline  : 5 violations (running in 'format' mode so no updates made)\n\n" +
         "  new     : 1\n" +
         "  same    : 5\n" +
-        "  removed : 0\n",
+        "  stale   : 0\n",
     );
   });
 
@@ -92,7 +92,7 @@ describe("[I] report/baseline", () => {
       "\nbaseline  : 6 violations\n\n" +
         "  new     : 0\n" +
         "  same    : 6\n" +
-        "  removed : 0\n",
+        "  stale   : 0\n",
     );
   });
 });

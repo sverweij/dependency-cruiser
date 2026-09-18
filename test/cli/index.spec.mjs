@@ -306,7 +306,7 @@ describe("[E] cli/index", () => {
         {
           stdout: new UnCalledWritableTestStream(),
           stderr: new WritableTestStream(
-            /baseline.+\d+ violations.+new.+\d+.+same.+\d+.+removed.+/s,
+            /baseline.+\d+ violations.+new.+\d+.+same.+\d+.+stale.+/s,
           ),
         },
       );

@@ -16,7 +16,7 @@ export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =
   "cli-feedback" | "performance-log" | "ndjson" | "none";
 export type ParserType = "acorn" | "tsc" | "swc";
-export type BaselineModeType = "full" | "shrink-only" | "view";
+export type BaselineModeType = "full" | "shrink-only" | "format";
 
 export interface ITsConfig {
   fileName?: string;
@@ -437,7 +437,7 @@ export interface ICruiseOptions {
      * 'full' - replaces all violations with the current set (the default behaviour)
      * 'shrink-only' - keeps existing violations, removes fixed violations, but
      *  does not add new ones.
-     * 'view' - rewrites the baseline, but doesn't remove or add anything - only
+     * 'format' - rewrites the baseline, but doesn't remove or add anything - only
      *  showing the stats.
      */
     mode?: BaselineModeType;
