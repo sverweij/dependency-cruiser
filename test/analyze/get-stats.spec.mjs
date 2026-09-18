@@ -35,7 +35,6 @@ describe("[U] analyze/summarize/getBaselineDiffCounts", () => {
       ),
       {
         baselineSize: 2,
-        baselineMatched: 1,
         baselineStale: 1,
       },
     );

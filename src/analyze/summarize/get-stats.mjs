@@ -45,7 +45,7 @@ export function getDependenciesCruisedCount(pModules) {
 /**
  * @param {IViolation[]} pKnownViolations
  * @param {IViolation[]} pCurrentViolations
- * @returns {{baselineSize:number; baselineMatched: number; baselineStale:number; }}
+ * @returns {{baselineSize:number; baselineStale:number; }}
  */
 export function getBaselineDiffCounts(pKnownViolations, pCurrentViolations) {
   const lViolationArrayDiff = diffViolationArrays(
@@ -54,7 +54,7 @@ export function getBaselineDiffCounts(pKnownViolations, pCurrentViolations) {
   );
   return {
     baselineSize: pKnownViolations.length,
-    baselineMatched: lViolationArrayDiff.same.length,
     baselineStale: lViolationArrayDiff.old.length,
+    // lViolationArrayDiff.same.length is already present in the ignore attribute
   };
 }

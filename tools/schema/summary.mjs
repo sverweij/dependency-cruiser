@@ -44,11 +44,6 @@ export default {
           type: "number",
           description: "the number of violations in the baseline",
         },
-        baselineMatched: {
-          type: "number",
-          description:
-            "the number of violations in the baseline that matched violations from the current cruise",
-        },
         baselineStale: {
           type: "number",
           description:
