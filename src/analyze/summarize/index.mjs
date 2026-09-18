@@ -4,9 +4,10 @@ import summarizeModules from "./summarize-modules.mjs";
 import summarizeFolders from "./summarize-folders.mjs";
 import summarizeOptions from "./summarize-options.mjs";
 import {
-  getViolationStats,
-  getModulesCruised,
-  getDependenciesCruised,
+  getViolationCounts,
+  getModulesCruisedCount,
+  getDependenciesCruisedCount,
+  getBaselineDiffCounts,
 } from "./get-stats.mjs";
 import { compareViolations } from "#graph-utl/compare.mjs";
 import { getEnvironmentInfo } from "#environment.mjs";
@@ -151,9 +152,12 @@ export default function summarize(
   };
   return {
     violations: lViolations,
-    ...getViolationStats(lViolations),
-    totalCruised: getModulesCruised(pModules),
-    totalDependenciesCruised: getDependenciesCruised(pModules),
+    ...getViolationCounts(lViolations),
+    ...(pOptions.knownViolations
+      ? getBaselineDiffCounts(pOptions.knownViolations, lViolations)
+      : {}),
+    totalCruised: getModulesCruisedCount(pModules),
+    totalDependenciesCruised: getDependenciesCruisedCount(pModules),
     ...summarizeOptions(pFileDirectoryArray, pOptions),
     ...(pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}),
     environment: lEnvironmentWithIssues,

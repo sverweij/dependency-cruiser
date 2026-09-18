@@ -342,6 +342,14 @@ export interface ISummary {
    * the number of informational level notices in the dependencies
    */
   info: number;
+  /**
+   * the number of violations in the baseline
+   */
+  baselineSize?: number;
+  /**
+   * the number of violations in the baseline that matched violations from the current cruise
+   */
+  baselineStale?: number;
   optionsUsed: IOptions;
   /**
    * rules used in the cruise

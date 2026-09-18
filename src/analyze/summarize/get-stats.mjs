@@ -1,4 +1,14 @@
-export function getViolationStats(pViolations) {
+import { diffViolationArrays } from "#graph-utl/compare.mjs";
+/**
+ * @import { IViolation } from "../../../types/violations.mjs"
+ * @import { IModule } from "../../../types/cruise-result.d.mts"
+ */
+
+/**
+ * @param {IViolation[]} pViolations
+ * @returns {{error:number; warn: number; info: number; ignore:number; }}
+ */
+export function getViolationCounts(pViolations) {
   return pViolations.reduce(
     (pAll, pThis) => {
       pAll[pThis.rule.severity] += 1;
@@ -13,13 +23,38 @@ export function getViolationStats(pViolations) {
   );
 }
 
-export function getModulesCruised(pModules) {
+/**
+ * @param {IModule[]} pModules
+ * @returns {number} number of modules cruised
+ */
+export function getModulesCruisedCount(pModules) {
   return pModules.length;
 }
 
-export function getDependenciesCruised(pModules) {
+/**
+ * @param {IModule[]} pModules
+ * @returns {number} number of dependencies cruised
+ */
+export function getDependenciesCruisedCount(pModules) {
   return pModules.reduce(
     (pAll, pModule) => pAll + pModule.dependencies.length,
     0,
   );
+}
+
+/**
+ * @param {IViolation[]} pKnownViolations
+ * @param {IViolation[]} pCurrentViolations
+ * @returns {{baselineSize:number; baselineStale:number; }}
+ */
+export function getBaselineDiffCounts(pKnownViolations, pCurrentViolations) {
+  const lViolationArrayDiff = diffViolationArrays(
+    pKnownViolations,
+    pCurrentViolations,
+  );
+  return {
+    baselineSize: pKnownViolations.length,
+    baselineStale: lViolationArrayDiff.old.length,
+    // lViolationArrayDiff.same.length is already present in the ignore attribute
+  };
 }

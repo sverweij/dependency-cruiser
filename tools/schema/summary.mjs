@@ -40,6 +40,15 @@ export default {
           type: "number",
           description: "the number of modules cruised",
         },
+        baselineSize: {
+          type: "number",
+          description: "the number of violations in the baseline",
+        },
+        baselineStale: {
+          type: "number",
+          description:
+            "the number of violations in the baseline that did not match violations from the current cruise",
+        },
         totalDependenciesCruised: {
           type: "number",
           description: "the number of dependencies cruised",

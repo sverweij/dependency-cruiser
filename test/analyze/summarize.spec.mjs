@@ -317,6 +317,8 @@ describe("[I] analyze/summarize", () => {
         getFakeEnvironmentInfo,
       ),
       {
+        baselineSize: 2,
+        baselineStale: 2,
         error: 0,
         info: 0,
         ignore: 0,
@@ -337,6 +339,8 @@ describe("[I] analyze/summarize", () => {
     deepEqual(
       summarize([], { knownViolations: [] }, [], [], getFakeEnvironmentInfo),
       {
+        baselineSize: 0,
+        baselineStale: 0,
         error: 0,
         info: 0,
         ignore: 0,
