@@ -102,6 +102,27 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
     );
   });
 
+  it("extracts imports from inside a qualified namespace", () => {
+    // `declare namespace A.B {}` is a ModuleDeclaration whose body is another
+    // ModuleDeclaration, so only the innermost one carries the block.
+    deepEqual(
+      extractTypescript(
+        `declare namespace Outer.Inner {
+           import legacy = require("legacy-package");
+         }`,
+      ),
+      [
+        {
+          module: "legacy-package",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["import-equals"],
+        },
+      ],
+    );
+  });
+
   it("leaves a module declaration without a block alone", () => {
     deepEqual(extractTypescript(`declare module "some-package";`), []);
   });

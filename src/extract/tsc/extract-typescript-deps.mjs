@@ -68,13 +68,31 @@ function isTypeOnlyExport(pStatement) {
  * @param {Node} pAST - an AST node with statements
  * @returns {Node[]} - the node's statements, flattened over module blocks
  */
+function getModuleBlock(pStatement) {
+  if (pStatement.kind !== typescript.SyntaxKind.ModuleDeclaration) {
+    return null;
+  }
+
+  // A qualified name nests: `declare namespace A.B {}` is a ModuleDeclaration
+  // whose body is another ModuleDeclaration, and only the innermost one holds
+  // the block.
+  let lBody = pStatement.body;
+
+  while (lBody?.kind === typescript.SyntaxKind.ModuleDeclaration) {
+    lBody = lBody.body;
+  }
+
+  return lBody?.kind === typescript.SyntaxKind.ModuleBlock ? lBody : null;
+}
+
 function getStatements(pAST) {
-  return (pAST.statements ?? []).flatMap((pStatement) =>
-    pStatement.kind === typescript.SyntaxKind.ModuleDeclaration &&
-    pStatement.body?.kind === typescript.SyntaxKind.ModuleBlock
-      ? [pStatement, ...getStatements(pStatement.body)]
-      : [pStatement],
-  );
+  return (pAST.statements ?? []).flatMap((pStatement) => {
+    const lModuleBlock = getModuleBlock(pStatement);
+
+    return lModuleBlock
+      ? [pStatement, ...getStatements(lModuleBlock)]
+      : [pStatement];
+  });
 }
 
 /**
