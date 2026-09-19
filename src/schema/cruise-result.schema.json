@@ -488,6 +488,10 @@
           "type": "number",
           "description": "the number of violations in the baseline that did not match violations from the current cruise"
         },
+        "advisedExitCode": {
+          "type": "number",
+          "description": "for reporters that emit non-zero exit codes: the number of errors encountered OR, in case options.baseline.staleEntriesSeverity equals 'error' - the number of errors encounterd + the number of stale entries in the baseline."
+        },
         "totalDependenciesCruised": {
           "type": "number",
           "description": "the number of dependencies cruised"
@@ -1260,6 +1264,10 @@
               "type": "string",
               "enum": ["shrink-only", "full", "format"],
               "description": "In 'shrink-only' mode the baseline output removes violations that aren't present in the current codebase, but it doesn't add any new ones. In 'full' mode it replaces the baseline with all current violations. In 'format' mode it rewrites the baseline, but doesn't remove or add anything - only showing the stats. Defaults to 'full'."
+            },
+            "staleEntriesSeverity": {
+              "$ref": "#/definitions/SeverityType",
+              "description": "Severity to use when there's stale entries in the baseline. In reporters that can  emit non-zero exit codes (like err, err-long and null), when the value of this attribute equals 'error' and there's stale entries in the baseline, they'll exit with a non-zero exit code. Defaults to 'warn'"
             }
           }
         },

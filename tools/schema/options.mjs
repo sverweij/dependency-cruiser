@@ -11,6 +11,7 @@ import moduleSystemsType from "./module-systems-type.mjs";
 import reporterOptions from "./reporter-options.mjs";
 import violations from "./violations.mjs";
 import cacheOptions from "./cache-options.mjs";
+import severityType from "./severity-type.mjs";
 
 export default {
   definitions: {
@@ -507,6 +508,15 @@ export default {
                 "In 'format' mode it rewrites the baseline, but doesn't remove or add anything - only showing the stats. " +
                 "Defaults to 'full'.",
             },
+            staleEntriesSeverity: {
+              $ref: "#/definitions/SeverityType",
+              description:
+                "Severity to use when there's stale entries in the baseline. In reporters that can  " +
+                "emit non-zero exit codes (like err, err-long and null), when the value of this attribute " +
+                "equals 'error' and there's stale entries in the baseline, they'll exit with a non-zero " +
+                "exit code. " +
+                "Defaults to 'warn'",
+            },
           },
         },
       },
@@ -523,5 +533,6 @@ export default {
     ...REAsStringsType.definitions,
     ...violations.definitions,
     ...cacheOptions.definitions,
+    ...severityType.definitions,
   },
 };

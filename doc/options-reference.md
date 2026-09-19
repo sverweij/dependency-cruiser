@@ -913,8 +913,7 @@ With the `mode` option you can steer this:
 - `mode: 'full'` - the default behaviour.
 - `mode: 'shrink-only'` - keeps existing violations, removes fixed violations, 
    but does not add new ones.
-- `mode: 'format'` - rewrites the baseline, but doesn't remove or add anything -
-   only showing the stats.
+- `mode: 'format'` - rewrites the baseline, but doesn't remove or add anything.
 
 ```javascript
 module.exports = {
@@ -926,6 +925,12 @@ module.exports = {
   },
 };
 ```
+
+The `staleEntriesSeverity` steers how serious reporters that can emit non-zero
+exit codes should take stale entries in the baseline. When this is set to
+`error` and there's one or more stale entries in the baseline, these reporters
+will make dependency-cruiser exit with a non-zero exit code. Other values 
+(like the default; `warn`) make that only a warning message is emitted at best.
 
 ## reporterOptions
 

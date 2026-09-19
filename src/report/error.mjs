@@ -8,6 +8,12 @@ import {
 import { findRuleByName } from "#graph-utl/rule-set.mjs";
 import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 
+/**
+ * @import { ICruiseResult, IEnvironmentIssue } from "../../types/cruise-result.mjs"
+ * @import { IErrorReporterOptions } from "../../types/reporter-options.mjs"
+ * @import { IReporterOutput } from "../../types/dependency-cruiser.js"
+ */
+
 const SEVERITY2COLOR = new Map([
   ["error", "red"],
   ["warn", "yellow"],
@@ -114,6 +120,10 @@ function addExplanation(pRuleSet, pLong) {
     : (pViolation) => pViolation;
 }
 
+/**
+ * @param {number} pNumberOfIgnoredViolations
+ * @returns {string}
+ */
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return styleText(
@@ -123,8 +133,9 @@ function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   }
   return "";
 }
+
 /**
- * @param {import("../../types/cruise-result.mjs").IEnvironmentIssue} pEnvironmentIssue
+ * @param {IEnvironmentIssue} pEnvironmentIssue
  * @returns {string}
  */
 function formatEnvironmentIssue(pEnvironmentIssue) {
@@ -135,7 +146,7 @@ function formatEnvironmentIssue(pEnvironmentIssue) {
 }
 
 /**
- * @param {import("../../types/cruise-result.mjs").IEnvironmentIssue[]} pEnvironmentIssues
+ * @param {IEnvironmentIssue[]} pEnvironmentIssues
  * @returns {string}
  */
 function formatEnvironmentIssues(pEnvironmentIssues) {
@@ -147,6 +158,10 @@ function formatEnvironmentIssues(pEnvironmentIssues) {
   );
 }
 
+/**
+ * @param {number} pBaselineStaleCount
+ * @returns {string}
+ */
 function formatStaleBaselineWarning(pBaselineStaleCount) {
   if ((pBaselineStaleCount ?? 0) > 0) {
     return styleText(
@@ -157,6 +172,11 @@ function formatStaleBaselineWarning(pBaselineStaleCount) {
   return "";
 }
 
+/**
+ * @param {ICruiseResult} pResults
+ * @param {IErrorReporterOptions} pOptions
+ * @returns {string}
+ */
 function report(pResults, pOptions) {
   const lOptions = {
     long: false,
@@ -200,16 +220,16 @@ function report(pResults, pOptions) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total
  *   number of files cruised
- * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults -
- * @param {any} pOptions - An object with options;
- *                         {boolean} long - whether or not to include an explanation
- *                                          (/ comment) which each violation
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput} - output: the formatted text in a string
- *                              exitCode: the number of errors found
+ * @param {ICruiseResult} pResults
+ * @param {IErrorReporterOptions} pOptions
+ * @returns {IReporterOutput}
  */
 export default function error(pResults, pOptions) {
   return {
     output: report(pResults, pOptions || {}),
-    exitCode: pResults.summary.error,
+    // advisedExitCode is a mandatory attribute as of dependency-cruiser 18.4.0
+    // however, this reporter can still encounter dependency-cruiser results
+    // from before that, hence the fallback
+    exitCode: pResults.summary.advisedExitCode ?? pResults.summary.error,
   };
 }

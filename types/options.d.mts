@@ -10,7 +10,11 @@ import type {
 } from "./filter-types.mjs";
 import type { IReporterOptions } from "./reporter-options.mjs";
 import type { IFlattenedRuleSet } from "./rule-set.mjs";
-import type { ModuleSystemType, OutputType } from "./shared-types.mjs";
+import type {
+  ModuleSystemType,
+  OutputType,
+  SeverityType,
+} from "./shared-types.mjs";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =
@@ -441,6 +445,14 @@ export interface ICruiseOptions {
      *  showing the stats.
      */
     mode?: BaselineModeType;
+    /**
+     * Severity to use when there's stale entries in the baseline. In reporters that can
+     * emit non-zero exit codes (like err, err-long and null), when the value of this attribute
+     * equals 'error' and there's stale entries in the baseline, they'll exit with a non-zero
+     * exit code.
+     * Defaults to 'warn'
+     */
+    staleEntriesSeverity?: SeverityType;
   };
 }
 
