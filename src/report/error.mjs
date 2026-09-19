@@ -220,7 +220,12 @@ function report(pResults, pOptions) {
     )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
-    .concat(formatStaleBaselineMessage(pResults.summary.baselineStale))
+    .concat(
+      formatStaleBaselineMessage(
+        pResults.summary.baselineStale,
+        pResults.summary.optionsUsed?.baseline?.staleEntriesSeverity,
+      ),
+    )
     .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
     .concat(EOL);
 }

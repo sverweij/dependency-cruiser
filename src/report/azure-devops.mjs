@@ -154,7 +154,8 @@ function formatResultMessage(pSummary) {
  */
 function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
-    pSummary.error,
+    // see below on the why of the fallback
+    pSummary.advisedExitCode ?? pSummary.error,
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 

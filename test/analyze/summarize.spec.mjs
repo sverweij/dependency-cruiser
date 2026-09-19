@@ -443,7 +443,7 @@ describe("[I] analyze/summarize", () => {
     );
   });
 
-  it("keeps advised exit code at zero when there's stale baseline entries but there's no severity configured for tnem", () => {
+  it("keeps advised exit code at zero when there's stale baseline entries but there's no severity configured for them", () => {
     const lKnownViolations = [
       {
         from: "src/stale.js",
