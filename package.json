@@ -235,7 +235,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.29.7",
     "@babel/preset-typescript": "^7.29.7",
     "@swc/core": "1.16.2",
-    "@types/node": "26.5.1",
+    "@types/node": "^26.5.1",
     "@types/prompts": "2.4.9",
     "@vue/compiler-sfc": "3.5.42",
     "ajv": "8.20.0",
@@ -301,6 +301,11 @@
         "policy": "wanted",
         "because": "test/cli/index.spec.mjs:534:5 fails with test/cli/__fixtures__/babel/ts/src/something/some-page.tsx: Unexpected token, expected \"</>/<=/>=\" (11:27) after upgrading (and handling breaking changes)"
       },
+      {
+        "package": "@types/node",
+        "policy": "wanted",
+        "because": "occasionally older versions (e.g. ^20 or ^22) get published as 'latest', and we don't want to accidentally end up with an old version like that"
+      }, 
       {
         "package": "interpret",
         "policy": "wanted",
