@@ -352,7 +352,7 @@ export interface ISummary {
   baselineStale?: number;
   /**
    * for reporters that emit non-zero exit codes: the number of errors encountered OR, in case
-   * options.baseline.staleEntriesSeverity equals 'error' - the number of errors encountered
+   * options.baseline.staleEntriesSeverity equals 'error' - the number of errors encountered +
    * the number of stale entries in the baseline.
    */
   advisedExitCode: number;
