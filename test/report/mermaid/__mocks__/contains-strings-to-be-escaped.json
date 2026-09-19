@@ -48,6 +48,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [],
     "err": 481,
     "warn": 30,

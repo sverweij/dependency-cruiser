@@ -499,6 +499,7 @@ export default {
     ],
     baseline: {
       mode: "shrink-only",
+      staleEntriesSeverity: "error"
     },
     reporterOptions: {
       err: {

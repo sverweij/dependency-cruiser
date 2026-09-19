@@ -11140,6 +11140,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "src/cli/format.js",

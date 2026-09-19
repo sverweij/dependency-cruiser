@@ -147,4 +147,13 @@ describe("[I] report/teamcity", () => {
     );
     equal(lResult.exitCode, 0);
   });
+
+  it("returns advised exit code for stale baseline entries", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: { ...okdeps.summary, advisedExitCode: 2 },
+    });
+
+    equal(lResult.exitCode, 2);
+  });
 });

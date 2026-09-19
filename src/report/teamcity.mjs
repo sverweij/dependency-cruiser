@@ -273,6 +273,9 @@ export default function teamcity(pResults) {
       reportViolatedRules(lRuleSet, lViolations, lIgnoredCount, lFlowId)
         .concat(reportViolations(lViolations, lIgnoredCount, lFlowId))
         .reduce((pAll, pCurrent) => `${pAll}${pCurrent}${EOL}`, "") || EOL,
-    exitCode: pResults.summary.error,
+    // advisedExitCode is a mandatory attribute as of dependency-cruiser 18.4.0
+    // however, this reporter can still encounter dependency-cruiser results
+    // from before that, hence the fallback
+    exitCode: pResults.summary.advisedExitCode ?? pResults.summary.error,
   };
 }

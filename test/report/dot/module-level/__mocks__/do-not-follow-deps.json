@@ -25,6 +25,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [],
     "error": 481,
     "warn": 30,

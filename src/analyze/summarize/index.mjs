@@ -119,6 +119,17 @@ function determineEnvironmentIssues(pOptions, pAvailableTranspilers) {
   return lIssues.length > 0 ? { issues: lIssues } : {};
 }
 
+function getAdvisedExitCode(
+  pErrorCount,
+  pBaselineStaleCount,
+  pStaleEntriesSeverity,
+) {
+  if ((pStaleEntriesSeverity ?? "warn") === "error") {
+    return pErrorCount + (pBaselineStaleCount ?? 0);
+  }
+  return pErrorCount;
+}
+
 /**
  *
  * @param {IModule[]} pModules -
@@ -150,12 +161,21 @@ export default function summarize(
     ...lEnvironment,
     ...determineEnvironmentIssues(pOptions, lEnvironment.transpilersFound),
   };
+  const lViolationCounts = getViolationCounts(lViolations);
+  const lBaselineDiffCounts = pOptions.knownViolations
+    ? getBaselineDiffCounts(pOptions.knownViolations, lViolations)
+    : {};
+  const lAdvisedExitCode = getAdvisedExitCode(
+    lViolationCounts.error,
+    lBaselineDiffCounts?.baselineStale,
+    pOptions?.baseline?.staleEntriesSeverity,
+  );
+
   return {
     violations: lViolations,
-    ...getViolationCounts(lViolations),
-    ...(pOptions.knownViolations
-      ? getBaselineDiffCounts(pOptions.knownViolations, lViolations)
-      : {}),
+    ...lViolationCounts,
+    ...lBaselineDiffCounts,
+    advisedExitCode: lAdvisedExitCode,
     totalCruised: getModulesCruisedCount(pModules),
     totalDependenciesCruised: getDependenciesCruisedCount(pModules),
     ...summarizeOptions(pFileDirectoryArray, pOptions),

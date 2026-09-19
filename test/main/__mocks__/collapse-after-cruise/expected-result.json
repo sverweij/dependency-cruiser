@@ -166,6 +166,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [],
     "error": 0,
     "warn": 0,

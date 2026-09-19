@@ -360,6 +360,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "aap",

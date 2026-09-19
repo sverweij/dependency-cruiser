@@ -1945,6 +1945,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "src/cli/compile-config/index.js",

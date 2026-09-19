@@ -84,4 +84,16 @@ describe("[I] report/null", () => {
       exitCode: 3,
     });
   });
+
+  it("uses advised exit code for stale baseline entries", () => {
+    const lResult = nullReporter({
+      ...gSmallOKResult,
+      summary: { ...gSmallOKResult.summary, advisedExitCode: 2 },
+    });
+
+    deepEqual(lResult, {
+      output: "",
+      exitCode: 2,
+    });
+  });
 });

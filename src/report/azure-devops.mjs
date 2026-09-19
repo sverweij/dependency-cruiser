@@ -154,7 +154,8 @@ function formatResultMessage(pSummary) {
  */
 function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
-    pSummary.error,
+    // see below on the why of the fallback
+    pSummary.advisedExitCode ?? pSummary.error,
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 
@@ -180,6 +181,9 @@ export default function azureDevOps(pResults) {
       .map(formatViolation)
       .join("")
       .concat(formatSummary(pResults.summary)),
-    exitCode: pResults.summary.error,
+    // advisedExitCode is a mandatory attribute as of dependency-cruiser 18.4.0
+    // however, this reporter can still encounter dependency-cruiser results
+    // from before that, hence the fallback
+    exitCode: pResults.summary.advisedExitCode ?? pResults.summary.error,
   };
 }

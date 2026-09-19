@@ -32,6 +32,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "type": "dependency",

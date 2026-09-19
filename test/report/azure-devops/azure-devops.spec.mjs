@@ -1,4 +1,4 @@
-import { equal } from "node:assert/strict";
+import { equal, ok } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import normalizeNewline from "normalize-newline";
@@ -134,5 +134,30 @@ describe("[I] report/azure-devops", () => {
 
     equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     equal(lResult.exitCode, 1);
+  });
+
+  it("returns advised exit code for stale baseline entries", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: { ...okdeps.summary, advisedExitCode: 2 },
+    });
+
+    ok(lResult.output.includes("##vso[task.complete result=Failed;]"));
+    equal(lResult.exitCode, 2);
+  });
+
+  it("renders results without violations", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: { ...okdeps.summary, violations: undefined },
+    });
+
+    equal(
+      normalizeNewline(lResult.output),
+      normalizeNewline(
+        "##vso[task.complete result=Succeeded;]no dependency violations found (1 modules, 0 dependencies cruised)\n",
+      ),
+    );
+    equal(lResult.exitCode, 0);
   });
 });
