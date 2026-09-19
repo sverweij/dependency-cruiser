@@ -45,7 +45,7 @@ a `.dependency-cruiser.js` configuration file attuned to your project[^1][^2].
     If you don't want to use `npx`, but instead `pnpx` (from the `pnpm`
     package manager) or `yarn` - please refer to that tool's documentation.
     Particularly `pnpx` has semantics that differ from `npx` quite significantly
-    and that you want to be aware of before using it. In the mean time: `npx`
+    and that you want to be aware of before using it. In the meantime: `npx`
     _should_ work even when you installed the dependency with a package manager
     different from `npm`.
 
