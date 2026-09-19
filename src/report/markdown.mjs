@@ -54,7 +54,18 @@ function severity2Icon(pSeverity) {
 function formatStatsSummary(pSummary) {
   const lSpacerLength = 4;
   const lSpacer = "&nbsp;".repeat(lSpacerLength);
-  return `**${pSummary.totalCruised}** modules${lSpacer}**${pSummary.totalDependenciesCruised}** dependencies${lSpacer}**${pSummary.error}** errors${lSpacer}**${pSummary.warn}** warnings${lSpacer}**${pSummary.info}** informational${lSpacer}**${pSummary.ignore}** ignored\n`;
+  return `**${pSummary.totalCruised}** modules${lSpacer}`
+    .concat(`**${pSummary.totalDependenciesCruised}** dependencies${lSpacer}`)
+    .concat(`**${pSummary.error}** errors${lSpacer}`)
+    .concat(`**${pSummary.warn}** warnings${lSpacer}`)
+    .concat(`**${pSummary.info}** informational${lSpacer}`)
+    .concat(`**${pSummary.ignore}** ignored`)
+    .concat(
+      (pSummary.baselineStale ?? 0) > 0
+        ? `${lSpacer}**${pSummary.baselineStale}** stale entries in baseline`
+        : "",
+    )
+    .concat("\n");
 }
 
 /**
@@ -86,7 +97,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 /**
  *
  * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
- * @param {object} pOptions
+ * @param {import("../../types/reporter-options.mjs").IMarkdownReporterOptions} pOptions
  * @returns {string}
  */
 function formatViolations(pViolations, pOptions) {
@@ -108,19 +119,16 @@ function formatViolations(pViolations, pOptions) {
     }, lTableHead);
 }
 
-function details(pResults, pOptions) {
+function details(pViolations, pOptions) {
   let lReturnValue = "";
-  if (pResults.summary.violations.length > 0) {
+  if (pViolations.length > 0) {
     if (pOptions.showDetailsHeader) {
       lReturnValue += `${pOptions.detailsHeader}\n\n`;
     }
     if (pOptions.collapseDetails) {
       lReturnValue += `<details><summary>${pOptions.collapsedMessage}</summary>\n\n`;
     }
-    lReturnValue += `${formatViolations(
-      pResults.summary.violations,
-      pOptions,
-    )}\n\n`;
+    lReturnValue += `${formatViolations(pViolations, pOptions)}\n\n`;
     if (pOptions.collapseDetails) {
       lReturnValue += "</details>\n\n";
     }
@@ -165,7 +173,7 @@ function report(pResults, pOptions) {
   }
 
   if (lOptions.showDetails) {
-    lReturnValue += details(pResults, lOptions);
+    lReturnValue += details(pResults.summary.violations, lOptions);
   }
 
   if (lOptions.showFooter) {

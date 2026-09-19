@@ -147,6 +147,24 @@ describe("[I] report/markdown", () => {
     );
   });
 
+  it("reports stale baseline entries when present", () => {
+    const lResult = markdown({
+      ...orphansCyclesMetrics,
+      summary: {
+        ...orphansCyclesMetrics.summary,
+        baselineStale: 3,
+      },
+    });
+
+    match(lResult.output, /\*\*3\*\* stale entries in baseline/);
+  });
+
+  it("does not report stale baseline entries when absent", () => {
+    const lResult = markdown(orphansCyclesMetrics);
+
+    doesNotMatch(lResult.output, /stale entries in baseline/);
+  });
+
   it("renders resolved paths by default (showExternal/AliasedModulesUnresolved both false)", () => {
     const lResult = markdown(unresolvedViolations);
 
