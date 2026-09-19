@@ -212,7 +212,7 @@ function report(pResults, pOptions) {
   }
 
   return lNonIgnorableViolations
-    .reverse()
+    .toReversed()
     .map(addExplanation(pResults.summary.ruleSetUsed, lOptions.long))
     .reduce(
       (pAll, pThis) => `${pAll}  ${formatViolation(pThis, lOptions)}${EOL}`,
