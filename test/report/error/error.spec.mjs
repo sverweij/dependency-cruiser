@@ -36,6 +36,18 @@ describe("[I] report/error", () => {
       /2 stale known violations in the baseline\. Run with --baseline --baseline-mode shrink-only to remove them\./,
     );
   });
+  it("returns a non-zero exit code for stale baseline entries configured as errors", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: {
+        ...okdeps.summary,
+        advisedExitCode: 2,
+        baselineStale: 2,
+      },
+    });
+
+    equal(lResult.exitCode, 2);
+  });
   it("renders a bunch of errors", () => {
     const lResult = render(dependencies);
 

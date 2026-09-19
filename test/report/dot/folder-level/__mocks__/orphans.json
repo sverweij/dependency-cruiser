@@ -50,6 +50,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "tmp/orphan.js",

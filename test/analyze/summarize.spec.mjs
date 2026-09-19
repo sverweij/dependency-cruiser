@@ -94,6 +94,7 @@ describe("[I] analyze/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
     const lSummary = summarize([], {}, [], [], getFakeEnvironmentInfo);
     deepEqual(lSummary, {
+      advisedExitCode: 0,
       error: 0,
       info: 0,
       ignore: 0,
@@ -117,6 +118,7 @@ describe("[I] analyze/summarize", () => {
       getFakeEnvironmentInfo,
     );
     deepEqual(lSummary, {
+      advisedExitCode: 0,
       error: 0,
       info: 0,
       ignore: 0,
@@ -258,6 +260,7 @@ describe("[I] analyze/summarize", () => {
       warn: 3,
       info: 0,
       ignore: 0,
+      advisedExitCode: 0,
       totalCruised: 3,
       totalDependenciesCruised: 5,
       optionsUsed: {
@@ -319,6 +322,7 @@ describe("[I] analyze/summarize", () => {
       {
         baselineSize: 2,
         baselineStale: 2,
+        advisedExitCode: 0,
         error: 0,
         info: 0,
         ignore: 0,
@@ -341,6 +345,7 @@ describe("[I] analyze/summarize", () => {
       {
         baselineSize: 0,
         baselineStale: 0,
+        advisedExitCode: 0,
         error: 0,
         info: 0,
         ignore: 0,
@@ -354,6 +359,141 @@ describe("[I] analyze/summarize", () => {
         environment: DUMMY_ENVIRONMENT,
       },
     );
+  });
+
+  it("includes stale baseline entries in advised exit code when configured as errors", () => {
+    const lKnownViolations = [
+      {
+        from: "src/stale.js",
+        to: "src/stale.js",
+        rule: { severity: "error", name: "no-orphans" },
+      },
+    ];
+
+    deepEqual(
+      summarize(
+        [],
+        {
+          baseline: { staleEntriesSeverity: "error" },
+          knownViolations: lKnownViolations,
+        },
+        [],
+        [],
+        getFakeEnvironmentInfo,
+      ),
+      {
+        baselineSize: 1,
+        baselineStale: 1,
+        advisedExitCode: 1,
+        error: 0,
+        info: 0,
+        ignore: 0,
+        optionsUsed: {
+          args: "",
+          baseline: { staleEntriesSeverity: "error" },
+          knownViolations: lKnownViolations,
+        },
+        totalCruised: 0,
+        totalDependenciesCruised: 0,
+        violations: [],
+        warn: 0,
+        environment: DUMMY_ENVIRONMENT,
+      },
+    );
+  });
+
+  it("keeps advised exit code at zero when there's stale baseline entries but they weren't when configured to be warnings only", () => {
+    const lKnownViolations = [
+      {
+        from: "src/stale.js",
+        to: "src/stale.js",
+        rule: { severity: "error", name: "no-orphans" },
+      },
+    ];
+
+    deepEqual(
+      summarize(
+        [],
+        {
+          baseline: { staleEntriesSeverity: "warn" },
+          knownViolations: lKnownViolations,
+        },
+        [],
+        [],
+        getFakeEnvironmentInfo,
+      ),
+      {
+        baselineSize: 1,
+        baselineStale: 1,
+        advisedExitCode: 0,
+        error: 0,
+        info: 0,
+        ignore: 0,
+        optionsUsed: {
+          args: "",
+          baseline: { staleEntriesSeverity: "warn" },
+          knownViolations: lKnownViolations,
+        },
+        totalCruised: 0,
+        totalDependenciesCruised: 0,
+        violations: [],
+        warn: 0,
+        environment: DUMMY_ENVIRONMENT,
+      },
+    );
+  });
+
+  it("keeps advised exit code at zero when there's stale baseline entries but there's no severity configured for tnem", () => {
+    const lKnownViolations = [
+      {
+        from: "src/stale.js",
+        to: "src/stale.js",
+        rule: { severity: "error", name: "no-orphans" },
+      },
+    ];
+
+    deepEqual(
+      summarize(
+        [],
+        {
+          baseline: {},
+          knownViolations: lKnownViolations,
+        },
+        [],
+        [],
+        getFakeEnvironmentInfo,
+      ),
+      {
+        baselineSize: 1,
+        baselineStale: 1,
+        advisedExitCode: 0,
+        error: 0,
+        info: 0,
+        ignore: 0,
+        optionsUsed: {
+          args: "",
+          baseline: {},
+          knownViolations: lKnownViolations,
+        },
+        totalCruised: 0,
+        totalDependenciesCruised: 0,
+        violations: [],
+        warn: 0,
+        environment: DUMMY_ENVIRONMENT,
+      },
+    );
+  });
+
+  it("keeps advised exit code at zero when configured baseline has no stale entries", () => {
+    const lSummary = summarize(
+      [],
+      { baseline: { staleEntriesSeverity: "error" } },
+      [],
+      [],
+      getFakeEnvironmentInfo,
+    );
+
+    deepEqual(lSummary.advisedExitCode, 0);
   });
 
   it("violating something with moreUnstable & instabilities", () => {
@@ -411,6 +551,7 @@ describe("[I] analyze/summarize", () => {
           },
         },
       ],
+      advisedExitCode: 0,
       info: 0,
       warn: 1,
       error: 0,

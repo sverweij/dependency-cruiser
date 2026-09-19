@@ -135,4 +135,13 @@ describe("[I] report/azure-devops", () => {
     equal(normalizeNewline(lResult.output), normalizeNewline(lFixture));
     equal(lResult.exitCode, 1);
   });
+
+  it("returns advised exit code for stale baseline entries", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: { ...okdeps.summary, advisedExitCode: 2 },
+    });
+
+    equal(lResult.exitCode, 2);
+  });
 });

@@ -3536,6 +3536,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "src/cli/compileConfig/index.js",

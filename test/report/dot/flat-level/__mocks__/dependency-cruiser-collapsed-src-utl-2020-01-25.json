@@ -6924,6 +6924,7 @@
     }
   ],
   "summary": {
+    "advisedExitCode": 0,
     "violations": [
       {
         "from": "test/report/dot/customLevel/index.spec.js",
