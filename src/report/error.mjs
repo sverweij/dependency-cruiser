@@ -12,6 +12,7 @@ import wrapAndIndent from "#utl/wrap-and-indent.mjs";
  * @import { ICruiseResult, IEnvironmentIssue } from "../../types/cruise-result.mjs"
  * @import { IErrorReporterOptions } from "../../types/reporter-options.mjs"
  * @import { IReporterOutput } from "../../types/dependency-cruiser.js"
+ * @import { SeverityType } from "../../types/shared-types.mjs"
  */
 
 const SEVERITY2COLOR = new Map([
@@ -160,13 +161,18 @@ function formatEnvironmentIssues(pEnvironmentIssues) {
 
 /**
  * @param {number} pBaselineStaleCount
+ * @param {SeverityType} pStaleEntriesSeverity
  * @returns {string}
  */
-function formatStaleBaselineWarning(pBaselineStaleCount) {
+function formatStaleBaselineMessage(
+  pBaselineStaleCount,
+  pStaleEntriesSeverity,
+) {
   if ((pBaselineStaleCount ?? 0) > 0) {
+    const lStaleEntriesSeverity = pStaleEntriesSeverity ?? "warn";
     return styleText(
-      "yellow",
-      `‼ ${pBaselineStaleCount} stale known violations in the baseline. Run with --baseline --baseline-mode shrink-only to remove them.${EOL}`,
+      SEVERITY2COLOR.get(lStaleEntriesSeverity),
+      `${SEVERITY2ICON.get(lStaleEntriesSeverity)} ${pBaselineStaleCount} stale known violations in the baseline. Run with '--baseline --baseline-mode shrink-only' to remove them.${EOL}`,
     );
   }
   return "";
@@ -195,7 +201,12 @@ function report(pResults, pOptions) {
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)${EOL}`
       .concat(formatIgnoreWarning(pResults.summary.ignore))
-      .concat(formatStaleBaselineWarning(pResults.summary.baselineStale))
+      .concat(
+        formatStaleBaselineMessage(
+          pResults.summary.baselineStale,
+          pResults.summary.optionsUsed?.baseline?.staleEntriesSeverity,
+        ),
+      )
       .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
       .concat(EOL);
   }
@@ -209,7 +220,7 @@ function report(pResults, pOptions) {
     )
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
-    .concat(formatStaleBaselineWarning(pResults.summary.baselineStale))
+    .concat(formatStaleBaselineMessage(pResults.summary.baselineStale))
     .concat(formatEnvironmentIssues(pResults.summary.environment?.issues))
     .concat(EOL);
 }

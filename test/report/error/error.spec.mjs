@@ -33,7 +33,22 @@ describe("[I] report/error", () => {
 
     match(
       lResult.output,
-      /2 stale known violations in the baseline\. Run with --baseline --baseline-mode shrink-only to remove them\./,
+      /2 stale known violations in the baseline\. Run with '--baseline --baseline-mode shrink-only' to remove them\./,
+    );
+  });
+  it("uses configured severity for stale known violations", () => {
+    const lResult = render({
+      ...okdeps,
+      summary: {
+        ...okdeps.summary,
+        baselineStale: 1,
+        optionsUsed: { baseline: { staleEntriesSeverity: "error" } },
+      },
+    });
+
+    match(
+      lResult.output,
+      /x 1 stale known violations in the baseline\. Run with '--baseline --baseline-mode shrink-only' to remove them\./,
     );
   });
   it("returns a non-zero exit code for stale baseline entries configured as errors", () => {
@@ -67,7 +82,7 @@ describe("[I] report/error", () => {
 
     match(
       lResult.output,
-      /1 stale known violations in the baseline\. Run with --baseline --baseline-mode shrink-only to remove them\./,
+      /1 stale known violations in the baseline\. Run with '--baseline --baseline-mode shrink-only' to remove them\./,
     );
   });
   it("renders a bunch of warnings", () => {
