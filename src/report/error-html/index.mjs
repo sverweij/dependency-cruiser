@@ -85,8 +85,9 @@ function getViolationRowClass(pViolation) {
 }
 
 /**
- * @param {IViolation} pViolation
- * @returns {string}
+ * @param {string} pPrefix
+ * @param {IErrorReporterOptions} pOptions
+ * @returns {(pViolation: IViolation) => string}
  */
 function constructViolationRow(pPrefix, pOptions) {
   return (pViolation) => {
@@ -176,9 +177,10 @@ function constructStaleDiv(pBaselineStaleCount) {
 
 /**
  * @param {ICruiseResult} pResults
+ * @param {IErrorReporterOptions} pOptions
  * @returns {string}
  */
-function constructBaselineStaleTable(pResults) {
+function constructBaselineStaleTable(pResults, pOptions) {
   if ((pResults.summary.baselineStale ?? 0) > 0) {
     const { old } = diffViolationArrays(
       pResults.summary.optionsUsed.knownViolations,
@@ -189,7 +191,7 @@ function constructBaselineStaleTable(pResults) {
     </svg> Stale entries in the baseline</h2>
     <p>
       These violations are in the baseline (typically <tt>.dependency-cruiser-known-violations.json</tt>), 
-      but don't match any real violations anymore, e.g. because they were fixed in the mean time. You
+      but don't match any real violations anymore, e.g. because they were fixed in the meantime. You
       can remove them with dependency-cruiser's 
       <a href="https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline"><tt>--baseline --baseline-mode shrink-only</tt>
       command line options</a>.
@@ -207,7 +209,10 @@ function constructBaselineStaleTable(pResults) {
       <tbody>
       ${old
         .map(
-          constructViolationRow(pResults.summary.optionsUsed.prefix ?? "", {}),
+          constructViolationRow(
+            pResults.summary.optionsUsed.prefix ?? "",
+            pOptions,
+          ),
         )
         .join("\n")}
       </tbody>
@@ -241,7 +246,10 @@ function report(pResults, pOptions) {
     .replace("{{staleDiv}}", constructStaleDiv(pResults.summary.baselineStale))
     .replace("{{violatedRulesTable}}", constructViolatedRulesTable(pResults))
     .replace("{{violationsList}}", constructViolationsList(pResults, lOptions))
-    .replace("{{baselineStaleTable}}", constructBaselineStaleTable(pResults))
+    .replace(
+      "{{baselineStaleTable}}",
+      constructBaselineStaleTable(pResults, pOptions),
+    )
     .replace("{{depcruiseVersion}}", `dependency-cruiser@${meta.version}`)
     .replace("{{runDate}}", new Date().toISOString());
 }
