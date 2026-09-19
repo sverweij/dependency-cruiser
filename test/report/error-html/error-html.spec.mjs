@@ -15,6 +15,33 @@ describe("[I] report/error-html", () => {
 
     match(lResult.output, new RegExp(lOkeliDokelyKey));
     match(lResult.output, new RegExp(lOkeliDokelyHeader));
+    doesNotMatch(lResult.output, /stale entries in baseline/);
+    equal(lResult.exitCode, 0);
+  });
+
+  it("reports stale baseline entries", () => {
+    const lStaleViolation = {
+      from: "src/old.js",
+      to: "src/removed.js",
+      rule: { severity: "error", name: "no-old-dependencies" },
+    };
+    const lResult = errorHTML({
+      ...everythingFineResult,
+      summary: {
+        ...everythingFineResult.summary,
+        baselineStale: 1,
+        optionsUsed: {
+          ...everythingFineResult.summary.optionsUsed,
+          knownViolations: [lStaleViolation],
+        },
+      },
+    });
+
+    match(lResult.output, /<strong>1<\/strong> stale entries in baseline/);
+    match(lResult.output, /Stale entries in the baseline/);
+    match(lResult.output, /no-old-dependencies/);
+    match(lResult.output, /src\/old\.js/);
+    match(lResult.output, /src\/removed\.js/);
     equal(lResult.exitCode, 0);
   });
 

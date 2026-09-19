@@ -230,12 +230,14 @@ export default `<!DOCTYPE html>
     <div style="float:left;padding-right:20px" class="ignore">
       <strong>{{ignore}}</strong> ignored
     </div>
+    {{staleDiv}}
     &nbsp;
   </p>
   {{violatedRulesTable}}
   </span>
 
   {{violationsList}}
+  {{baselineStaleTable}}
   <footer>
     <p><a href="https://github.com/sverweij/dependency-cruiser">{{depcruiseVersion}}</a> /
       {{runDate}}</p>
