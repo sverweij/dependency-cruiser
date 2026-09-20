@@ -1,6 +1,6 @@
 /* generated - don't edit */
 module.exports = {
-  version: "18.3.1",
+  version: "18.4.0",
   engines: {
     node: "^22||^24||>=26",
   },
