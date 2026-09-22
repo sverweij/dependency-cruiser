@@ -148,15 +148,72 @@ describe("[I] report/markdown", () => {
   });
 
   it("reports stale baseline entries when present", () => {
+    const lStaleViolation = {
+      from: "src/stale.js",
+      to: "src/stale.js",
+      rule: {
+        severity: "error",
+        name: "stale-rule",
+      },
+    };
     const lResult = markdown({
       ...orphansCyclesMetrics,
       summary: {
         ...orphansCyclesMetrics.summary,
         baselineStale: 3,
+        optionsUsed: {
+          ...orphansCyclesMetrics.summary.optionsUsed,
+          knownViolations: [lStaleViolation],
+        },
       },
     });
 
     match(lResult.output, /\*\*3\*\* stale entries in baseline/);
+    match(lResult.output, /Stale entries in the baseline/);
+    match(lResult.output, /src\/stale\.js/);
+    match(lResult.output, /stale-rule/);
+  });
+
+  it("does not render stale baseline details when disabled", () => {
+    const lStaleViolation = {
+      from: "src/stale.js",
+      to: "src/stale.js",
+      rule: {
+        severity: "error",
+        name: "stale-rule",
+      },
+    };
+    const lResult = markdown(
+      {
+        ...orphansCyclesMetrics,
+        summary: {
+          ...orphansCyclesMetrics.summary,
+          optionsUsed: {
+            ...orphansCyclesMetrics.summary.optionsUsed,
+            knownViolations: [lStaleViolation],
+          },
+        },
+      },
+      { showStaleBaselineDetails: false },
+    );
+
+    doesNotMatch(lResult.output, /Stale entries in the baseline/);
+    doesNotMatch(lResult.output, /src\/stale\.js/);
+  });
+
+  it("does not report baseline entries that still match violations", () => {
+    const lResult = markdown({
+      ...orphansCyclesMetrics,
+      summary: {
+        ...orphansCyclesMetrics.summary,
+        optionsUsed: {
+          ...orphansCyclesMetrics.summary.optionsUsed,
+          knownViolations: [orphansCyclesMetrics.summary.violations[0]],
+        },
+      },
+    });
+
+    doesNotMatch(lResult.output, /Stale entries in the baseline/);
   });
 
   it("does not report stale baseline entries when absent", () => {

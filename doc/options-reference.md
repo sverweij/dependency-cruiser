@@ -1407,7 +1407,7 @@ and a footer. It might be you don't need that in your target situation (e.g. in 
 This is why it is configurable. The `markdown` section in the
 `options.reporterOptions` section of your dependency-cruiser lets you configure
 what parts to leave in or out - and even what titles and headers the report
-should show:
+should show. The values shown below are also the defaults.
 
 ```javascript
 module.exports = {
@@ -1449,12 +1449,16 @@ module.exports = {
         showExternalModulesUnresolved: false;
         // Show aliased modules unresolved e.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
         // defaults to false
-        showAliasedModulesUnresolved?: false;
+        showAliasedModulesUnresolved: false;
         // The text to in the <summary> section of the <details> block
         collapsedMessage: "Violations found - click to expand",
         // The text to show when no violations were found
         noViolationsMessage: "No violations found",
-
+        
+        // Whether or not to show a detailed list of stale violations in the
+        // baseline (in case there are any).
+        showStaleBaselineDetails: true,
+        
         // Whether or not to show a footer (with version & run date) at the bottom of the report
         showFooter: true,
       },

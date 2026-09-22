@@ -4,7 +4,16 @@ import {
   determineFromExtras,
 } from "./error-html/utl.mjs";
 import meta from "#meta.cjs";
+import { diffViolationArrays } from "#graph-utl/compare.mjs";
 
+/**
+ * @import { ICruiseResult, IViolation, ISummary } from "../../types/cruise-result.mjs"
+ * @import { IMarkdownReporterOptions } from "../../types/reporter-options.mjs"
+ * @import { IReporterOutput } from "../../types/dependency-cruiser.mjs"
+ * @import { SeverityType } from "../../types/shared-types.mjs"
+ */
+
+/** @type {IMarkdownReporterOptions} */
 const REPORT_DEFAULTS = {
   showTitle: true,
   title: "## Forbidden dependency check - results",
@@ -27,6 +36,8 @@ const REPORT_DEFAULTS = {
   noViolationsMessage:
     ":revolving_hearts: No violations found. Get gummy bears to celebrate.",
 
+  showStaleBaselineDetails: true,
+
   showFooter: true,
   footer: `---\n[dependency-cruiser@${
     meta.version
@@ -34,7 +45,7 @@ const REPORT_DEFAULTS = {
 };
 
 /**
- * @param {import("../../types/shared-types.js").SeverityType} pSeverity
+ * @param {SeverityType} pSeverity
  * @returns {string}
  */
 function severity2Icon(pSeverity) {
@@ -48,7 +59,7 @@ function severity2Icon(pSeverity) {
 }
 
 /**
- * @param {import("../../types/cruise-result.mjs").ISummary} pSummary
+ * @param {ISummary} pSummary
  * @returns {string}
  */
 function formatStatsSummary(pSummary) {
@@ -69,7 +80,7 @@ function formatStatsSummary(pSummary) {
 }
 
 /**
- * @param {import("../../types/cruise-result.mjs").ICruiseResult} pCruiseResult
+ * @param {ICruiseResult} pCruiseResult
  * @param {Boolean} pIncludeIgnoredInSummary
  * @returns {string}
  */
@@ -95,9 +106,8 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 }
 
 /**
- *
- * @param {import("../../types/cruise-result.mjs").IViolation[]} pViolations
- * @param {import("../../types/reporter-options.mjs").IMarkdownReporterOptions} pOptions
+ * @param {IViolation[]} pViolations
+ * @param {IMarkdownReporterOptions} pOptions
  * @returns {string}
  */
 function formatViolations(pViolations, pOptions) {
@@ -119,6 +129,43 @@ function formatViolations(pViolations, pOptions) {
     }, lTableHead);
 }
 
+/**
+ * @param {IViolation[]} pViolations
+ * @param {IViolation[]} pKnownViolations
+ * @param {IMarkdownReporterOptions} pOptions
+ */
+function staleBaselineDetails(pViolations, pKnownViolations, pOptions) {
+  let lReturnValue = "";
+
+  if (!pKnownViolations) {
+    return lReturnValue;
+  }
+
+  const { old } = diffViolationArrays(pKnownViolations, pViolations);
+
+  if (old.length > 0) {
+    lReturnValue = "### :ghost: Stale entries in the baseline\n\n";
+    lReturnValue +=
+      "<details><summary>Stale violations in found in the baseline - click to expand</summary>\n\n";
+    lReturnValue +=
+      "These violations are in the baseline (typically `.dependency-cruiser-known-violations.json`) ";
+    lReturnValue +=
+      "but don't match any real violations anymore, e.g. because they were fixed in the meantime. You ";
+    lReturnValue += "can remove them with dependency-cruiser's ";
+    lReturnValue +=
+      "[`--baseline --baseline-mode shrink-only`](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline) ";
+    lReturnValue += "command line options.\n\n";
+    lReturnValue += `${formatViolations(old, pOptions)}\n\n`;
+    lReturnValue += `</details>\n\n`;
+  }
+  return lReturnValue;
+}
+
+/**
+ * @param {IViolation[]} pViolations
+ * @param {IMarkdownReporterOptions} pOptions
+ * @returns {string}
+ */
 function details(pViolations, pOptions) {
   let lReturnValue = "";
   if (pViolations.length > 0) {
@@ -138,6 +185,11 @@ function details(pViolations, pOptions) {
   return lReturnValue;
 }
 
+/**
+ * @param {ICruiseResult} pResults
+ * @param {IMarkdownReporterOptions} pOptions
+ * @returns {string}
+ */
 function summary(pResults, pOptions) {
   let lReturnValue = "";
 
@@ -156,8 +208,8 @@ function summary(pResults, pOptions) {
 }
 
 /**
- * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
- * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
+ * @param {ICruiseResult} pResults
+ * @param {IMarkdownReporterOptions} pOptions
  * @returns {string}
  */
 function report(pResults, pOptions) {
@@ -176,6 +228,14 @@ function report(pResults, pOptions) {
     lReturnValue += details(pResults.summary.violations, lOptions);
   }
 
+  if (lOptions.showStaleBaselineDetails) {
+    lReturnValue += staleBaselineDetails(
+      pResults.summary.violations,
+      pResults.summary.optionsUsed?.knownViolations,
+      lOptions,
+    );
+  }
+
   if (lOptions.showFooter) {
     lReturnValue += `${lOptions.footer}\n\n`;
   }
@@ -186,9 +246,9 @@ function report(pResults, pOptions) {
 /**
  * Returns the violations from a cruise in markdown format
  *
- * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults
- * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
+ * @param {ICruiseResult} pResults
+ * @param {IMarkdownReporterOptions} pOptions
+ * @returns {IReporterOutput}
  */
 export default function markdown(pResults, pOptions) {
   return {

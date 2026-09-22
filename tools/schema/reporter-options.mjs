@@ -152,6 +152,11 @@ export default {
             "The text to show when no violations were found. E.g. 'No violations found'. " +
             "When left out shows a default value.",
         },
+        showStaleBaselineDetails: {
+          type: "boolean",
+          description:
+            "Whether or not to show a detailed list of stale violations in the baseline (if any). Defaults to true.",
+        },
         showFooter: {
           type: "boolean",
           description:

@@ -221,6 +221,11 @@ export interface IMarkdownReporterOptions {
    */
   collapseDetails?: boolean;
   /**
+   * The text to show in the <summary> section of the <details> block. E.g. 'click to see all violations'
+   * When left out shows a default value.
+   */
+  collapsedMessage?: string;
+  /**
    * For external modules (typically those in node_modules) show the unresolved module name instead
    * of the resolved one in the error overview.
    * E.g 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'.
@@ -236,15 +241,15 @@ export interface IMarkdownReporterOptions {
    */
   showAliasedModulesUnresolved?: boolean;
   /**
-   * The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'
-   * When left out shows a default value.
-   */
-  collapsedMessage?: string;
-  /**
    * The text to show when no violations were found. E.g. 'No violations found'.
    * When left out shows a default value.
    */
   noViolationsMessage?: string;
+  /**
+   * Whether or not to show a detailed list of stale violations in the baseline (if any).
+   * Defaults to true
+   */
+  showStaleBaselineDetails?: boolean;
   /**
    * Whether or not to show a footer (with version & run date) at the bottom of the report.
    * Defaults to true
