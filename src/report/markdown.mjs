@@ -146,7 +146,7 @@ function staleBaselineDetails(pViolations, pKnownViolations, pOptions) {
   if (old.length > 0) {
     lReturnValue = "### :ghost: Stale entries in the baseline\n\n";
     lReturnValue +=
-      "<details><summary>Stale violations found in the baseline - click to expand</summary>\n\n";
+      "<details><summary>Stale violations in the baseline - click to expand</summary>\n\n";
     lReturnValue +=
       "These violations are in the baseline (typically `.dependency-cruiser-known-violations.json`) ";
     lReturnValue +=
