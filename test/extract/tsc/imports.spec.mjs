@@ -14,6 +14,46 @@ describe("[U] ast-extractors/extract-typescript - regular imports", () => {
     ]);
   });
 
+  it("does not extract imports inside ambient module declarations by default", () => {
+    deepEqual(
+      extractTypescript('declare module "some-package" { import "./nested"; }'),
+      [],
+    );
+  });
+
+  it("extracts imports inside nested ambient namespaces when enabled", () => {
+    deepEqual(
+      extractTypescript(
+        'declare namespace Outer { namespace Inner { import "./nested"; } }',
+        [],
+        false,
+        false,
+        true,
+      ),
+      [
+        {
+          module: "./nested",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["import"],
+        },
+      ],
+    );
+  });
+
+  it("still extracts top-level imports when ambient module detection is disabled", () => {
+    deepEqual(extractTypescript('import "./top-level";'), [
+      {
+        module: "./top-level",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["import"],
+      },
+    ]);
+  });
+
   it("extracts 'import some stuff only'", () => {
     deepEqual(
       extractTypescript("import { SomeSingleExport } from './ts-thing';"),

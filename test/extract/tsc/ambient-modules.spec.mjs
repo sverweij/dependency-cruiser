@@ -1,4 +1,5 @@
 import { deepEqual } from "node:assert/strict";
+import extractTypeScriptDependencies from "#extract/tsc/extract-typescript-deps.mjs";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
 describe("[U] ast-extractors/extract-typescript - ambient module declarations", () => {
@@ -9,6 +10,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
            import { Thing } from "another-package";
            export { Thing };
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -28,6 +33,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
         `declare module "some-package" {
            export * from "reexported-package";
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -48,6 +57,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
            import legacy = require("legacy-package");
            export { legacy };
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -68,6 +81,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
            import type { Thing } from "another-package";
            export type { Thing };
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -89,6 +106,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
              import legacy = require("legacy-package");
            }
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -110,6 +131,10 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
         `declare namespace Outer.Inner {
            import legacy = require("legacy-package");
          }`,
+        [],
+        false,
+        false,
+        true,
       ),
       [
         {
@@ -124,6 +149,33 @@ describe("[U] ast-extractors/extract-typescript - ambient module declarations", 
   });
 
   it("leaves a module declaration without a block alone", () => {
-    deepEqual(extractTypescript(`declare module "some-package";`), []);
+    deepEqual(
+      extractTypescript(
+        `declare module "some-package";`,
+        [],
+        false,
+        false,
+        true,
+      ),
+      [],
+    );
+  });
+
+  it("handles ASTs without statements when ambient module detection is enabled", () => {
+    deepEqual(
+      extractTypeScriptDependencies(
+        {
+          statements: null,
+          referencedFiles: [],
+          typeReferenceDirectives: [],
+          amdDependencies: [],
+        },
+        [],
+        false,
+        false,
+        true,
+      ),
+      [],
+    );
   });
 });

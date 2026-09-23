@@ -105,6 +105,10 @@ export function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
   return pFolderNames.includes("packages");
 }
 
+/**
+ * @param {Record<string,any>} [pManifest]
+ * @returns
+ */
 function getPackageManager(pManifest) {
   let lReturnValue = "";
   try {
@@ -119,7 +123,7 @@ function getPackageManager(pManifest) {
 }
 
 /**
- * @param {Record<string,any>} pManifest
+ * @param {Record<string,any>} [pManifest]
  * @returns {boolean}
  */
 export function likelyUsesBun(pManifest) {

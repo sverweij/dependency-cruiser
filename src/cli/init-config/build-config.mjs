@@ -74,6 +74,16 @@ function buildDetectJSDocumentImportsAttribute(pInitOptions) {
 }
 
 /**
+ * @param {IInitConfig} pInitOptions
+ * @returns {string}
+ */
+function buildDetectImportsInAmbientModulesAttribute(pInitOptions) {
+  return pInitOptions.detectImportsInAmbientModules
+    ? "detectImportsInAmbientModules: true,"
+    : "// detectImportsInAmbientModules: true,";
+}
+
+/**
  *
  * @param {IInitConfig} pInitOptions
  * @returns {string}
@@ -223,6 +233,10 @@ export default function buildConfig(pInitOptions) {
     .replace(
       "{{detectJSDocImportsAttribute}}",
       buildDetectJSDocumentImportsAttribute(pInitOptions),
+    )
+    .replace(
+      "{{detectImportsInAmbientModulesAttribute}}",
+      buildDetectImportsInAmbientModulesAttribute(pInitOptions),
     )
     .replace(
       "{{detectProcessBuiltinModuleCalls}}",

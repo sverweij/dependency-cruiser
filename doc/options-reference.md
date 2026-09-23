@@ -16,6 +16,7 @@
   - [`babelConfig`: use a babel configuration file](#babelconfig-use-a-babel-configuration-file)
   - [`webpackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
   - [`detectJSDocImports`: detect dependencies in JSDoc comments](#detectjsdocimports-detect-dependencies-in-jsdoc-comments)
+  - [`detectImportsInAmbientModules`: detect dependencies in ambient declarations](#detectimportsinambientmodules-detect-dependencies-in-ambient-declarations)
   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
   - [`baseDir`: specify a directory to cruise from](#baseDir-specify-a-directory-to-cruise-from)
@@ -813,6 +814,40 @@ options: {
 - :bulb: If you want to take imports in JSDoc comments in consideration you
   will need the `typescript` compiler in your (dev-)dependencies as it's currently
   the only parser that supports these.
+
+### `detectImportsInAmbientModules`: detect dependencies in ambient declarations
+
+> :shell: there is no command line equivalent for this
+
+Set this option to `true` to detect imports, re-exports, and import-equals
+declarations nested in ambient `declare module` or namespace declarations.
+It defaults to `false` to preserve existing behavior. Enabling it selects the
+TypeScript (`tsc`) parser, so `typescript` must be available in the same spot as
+dependency-cruiser.
+
+```javascript
+options: {
+  detectImportsInAmbientModules: true; // implies `parser: "tsc"`
+}
+```
+
+With this on dependency-cruiser will also detect imports in blocks
+that declare modules or namespaces. Two examples:
+
+```typescript
+declare module "some-package" {
+  import type { Thing } from "another-package";
+  // ...
+}
+```
+
+```typescript
+declare namespace Outer {
+  namespace Inner {
+    import something = require("something");
+  }
+}
+```
 
 ### `detectProcessBuiltinModuleCalls`: detect core module imports done with process.getBuiltinModule
 

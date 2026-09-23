@@ -30,8 +30,8 @@ function gotCoffee() {
     tryImportAvailable(
       "coffeescript",
       meta.supportedTranspilers.coffeescript,
+      /* c8 ignore start */
     ) ||
-    /* c8 ignore start */
     // fallback for ancient versions of the coffeescript compilers
     tryImportAvailable(
       "coffee-script",
@@ -96,7 +96,7 @@ export const EXTENSION2AVAILABLE = new Map([
   [".d.mts", TRANSPILER2AVAILABLE.typescript],
   [
     ".vue",
-    TRANSPILER2AVAILABLE["vue-template-compiler"] ||
+    TRANSPILER2AVAILABLE["vue-template-compiler"] /* c8 ignore next */ ||
       TRANSPILER2AVAILABLE["@vue/compiler-sfc"],
   ],
   [".svelte", TRANSPILER2AVAILABLE.svelte],

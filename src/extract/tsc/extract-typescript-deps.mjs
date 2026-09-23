@@ -85,12 +85,19 @@ function getModuleBlock(pStatement) {
   return lBody?.kind === typescript.SyntaxKind.ModuleBlock ? lBody : null;
 }
 
-function getStatements(pAST) {
+function getStatements(pAST, pDetectImportsInAmbientModules) {
+  if (!pDetectImportsInAmbientModules) {
+    return pAST.statements ?? [];
+  }
+
   return (pAST.statements ?? []).flatMap((pStatement) => {
     const lModuleBlock = getModuleBlock(pStatement);
 
     return lModuleBlock
-      ? [pStatement, ...getStatements(lModuleBlock)]
+      ? [
+          pStatement,
+          ...getStatements(lModuleBlock, pDetectImportsInAmbientModules),
+        ]
       : [pStatement];
   });
 }
@@ -102,8 +109,8 @@ function getStatements(pAST) {
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all import statements in the (top level) AST node
  */
-function extractImports(pAST) {
-  return getStatements(pAST)
+function extractImports(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportDeclaration &&
@@ -126,8 +133,8 @@ function extractImports(pAST) {
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all export statements in the (top level) AST node
  */
-function extractExports(pAST) {
-  return getStatements(pAST)
+function extractExports(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ExportDeclaration &&
@@ -154,8 +161,8 @@ function extractExports(pAST) {
  * @returns {{module: string, moduleSystem: string;exoticallyRequired: boolean;}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
-function extractImportEquals(pAST) {
-  return getStatements(pAST)
+function extractImportEquals(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportEqualsDeclaration &&
@@ -597,11 +604,14 @@ export default function extractTypeScriptDependencies(
   pExoticRequireStrings,
   pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
+  pDetectImportsInAmbientModules,
 ) {
   return typescript
-    ? extractImports(pTypeScriptAST)
-        .concat(extractExports(pTypeScriptAST))
-        .concat(extractImportEquals(pTypeScriptAST))
+    ? extractImports(pTypeScriptAST, pDetectImportsInAmbientModules)
+        .concat(extractExports(pTypeScriptAST, pDetectImportsInAmbientModules))
+        .concat(
+          extractImportEquals(pTypeScriptAST, pDetectImportsInAmbientModules),
+        )
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
           extractNestedDependencies(
