@@ -1445,11 +1445,9 @@ module.exports = {
         // especially practical when the list of violations is still large.
         collapseDetails: true,
         // Show external modules unresolved e.g. 'snodash' instead of 'node_modules/snodash/dist/esm/bundle.mjs'
-        // defaults to false
-        showExternalModulesUnresolved: false;
+        showExternalModulesUnresolved: false,
         // Show aliased modules unresolved e.g. '#utils' instead of 'libs/shared/utils/lib/src/main.cjs'
-        // defaults to false
-        showAliasedModulesUnresolved: false;
+        showAliasedModulesUnresolved: false,
         // The text to in the <summary> section of the <details> block
         collapsedMessage: "Violations found - click to expand",
         // The text to show when no violations were found
@@ -1458,6 +1456,18 @@ module.exports = {
         // Whether or not to show a detailed list of stale violations in the
         // baseline (in case there are any).
         showStaleBaselineDetails: true,
+        // The text to show as a header above stale baseline violations.
+        staleBaselineHeader: "### :ghost: Stale entries in the baseline",
+        // Whether or not to collapse stale baseline violations in a <details> block.
+        collapseStaleBaseline: true,
+        // The text in the <summary> section of the stale baseline <details> block.
+        collapseStaleBaselineMessage: "Stale violations in the baseline - click to expand",
+        // The text shown before stale baseline violations.
+        staleBaselineIntro:
+          "These violations are in the baseline (typically `.dependency-cruiser-known-violations.json`) but " +
+          "don't match any real violations anymore, e.g. because they were fixed in the meantime. You can " +
+          "remove them with dependency-cruiser's [`--baseline --baseline-mode shrink-only`](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline) " +
+          "command line options.",
         
         // Whether or not to show a footer (with version & run date) at the bottom of the report
         showFooter: true,
