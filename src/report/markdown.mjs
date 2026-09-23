@@ -37,6 +37,12 @@ const REPORT_DEFAULTS = {
     ":revolving_hearts: No violations found. Get gummy bears to celebrate.",
 
   showStaleBaselineDetails: true,
+  staleBaselineHeader: "### :ghost: Stale entries in the baseline",
+  collapseStaleBaseline: true,
+  collapseStaleBaselineMessage:
+    "Stale violations in the baseline - click to expand",
+  staleBaselineIntro:
+    "These violations are in the baseline (typically `.dependency-cruiser-known-violations.json`) but don't match any real violations anymore, e.g. because they were fixed in the meantime. You can remove them with dependency-cruiser's [`--baseline --baseline-mode shrink-only`](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline) command line options.",
 
   showFooter: true,
   footer: `---\n[dependency-cruiser@${
@@ -144,19 +150,15 @@ function staleBaselineDetails(pViolations, pKnownViolations, pOptions) {
   const { old } = diffViolationArrays(pKnownViolations, pViolations);
 
   if (old.length > 0) {
-    lReturnValue = "### :ghost: Stale entries in the baseline\n\n";
-    lReturnValue +=
-      "<details><summary>Stale violations in the baseline - click to expand</summary>\n\n";
-    lReturnValue +=
-      "These violations are in the baseline (typically `.dependency-cruiser-known-violations.json`) ";
-    lReturnValue +=
-      "but don't match any real violations anymore, e.g. because they were fixed in the meantime. You ";
-    lReturnValue += "can remove them with dependency-cruiser's ";
-    lReturnValue +=
-      "[`--baseline --baseline-mode shrink-only`](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--baseline-create-or-update-a-known-violations-baseline) ";
-    lReturnValue += "command line options.\n\n";
+    lReturnValue = `${pOptions.staleBaselineHeader}\n\n`;
+    if (pOptions.collapseStaleBaseline) {
+      lReturnValue += `<details><summary>${pOptions.collapseStaleBaselineMessage}</summary>\n\n`;
+    }
+    lReturnValue += `${pOptions.staleBaselineIntro}\n\n`;
     lReturnValue += `${formatViolations(old, pOptions)}\n\n`;
-    lReturnValue += `</details>\n\n`;
+    if (pOptions.collapseStaleBaseline) {
+      lReturnValue += `</details>\n\n`;
+    }
   }
   return lReturnValue;
 }

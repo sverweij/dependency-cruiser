@@ -170,8 +170,87 @@ describe("[I] report/markdown", () => {
 
     match(lResult.output, /\*\*3\*\* stale entries in baseline/);
     match(lResult.output, /Stale entries in the baseline/);
+    match(
+      lResult.output,
+      /<details><summary>Stale violations in the baseline - click to expand<\/summary>/,
+    );
+    match(lResult.output, /<\/details>/);
     match(lResult.output, /src\/stale\.js/);
     match(lResult.output, /stale-rule/);
+  });
+
+  it("uses custom stale baseline details options", () => {
+    const lStaleViolation = {
+      from: "src/stale.js",
+      to: "src/stale.js",
+      rule: {
+        severity: "error",
+        name: "stale-rule",
+      },
+    };
+    const lResult = markdown(
+      {
+        ...orphansCyclesMetrics,
+        summary: {
+          ...orphansCyclesMetrics.summary,
+          optionsUsed: {
+            ...orphansCyclesMetrics.summary.optionsUsed,
+            knownViolations: [lStaleViolation],
+          },
+        },
+      },
+      {
+        staleBaselineHeader: "### Legacy violations",
+        collapseStaleBaselineMessage: "Expand archived findings",
+        staleBaselineIntro: "These findings no longer occur.",
+      },
+    );
+
+    match(lResult.output, /### Legacy violations/);
+    match(
+      lResult.output,
+      /<details><summary>Expand archived findings<\/summary>/,
+    );
+    match(lResult.output, /These findings no longer occur\./);
+    doesNotMatch(lResult.output, /Stale entries in the baseline/);
+    doesNotMatch(
+      lResult.output,
+      /Stale violations in the baseline - click to expand/,
+    );
+  });
+
+  it("renders stale baseline details expanded when collapsing is disabled", () => {
+    const lStaleViolation = {
+      from: "src/stale.js",
+      to: "src/stale.js",
+      rule: {
+        severity: "error",
+        name: "stale-rule",
+      },
+    };
+    const lResult = markdown(
+      {
+        ...orphansCyclesMetrics,
+        summary: {
+          ...orphansCyclesMetrics.summary,
+          optionsUsed: {
+            ...orphansCyclesMetrics.summary.optionsUsed,
+            knownViolations: [lStaleViolation],
+          },
+        },
+      },
+      {
+        showSummary: false,
+        showDetails: false,
+        showFooter: false,
+        collapseStaleBaseline: false,
+      },
+    );
+
+    match(lResult.output, /Stale entries in the baseline/);
+    match(lResult.output, /src\/stale\.js/);
+    doesNotMatch(lResult.output, /<details>/);
+    doesNotMatch(lResult.output, /<\/details>/);
   });
 
   it("does not render stale baseline details when disabled", () => {

@@ -251,6 +251,26 @@ export interface IMarkdownReporterOptions {
    */
   showStaleBaselineDetails?: boolean;
   /**
+   * Text shown as the heading above stale baseline violations. Defaults to the
+   * standard stale-baseline heading.
+   */
+  staleBaselineHeader?: string;
+  /**
+   * Whether or not to wrap stale baseline violations in a collapsible
+   * <details> block. Defaults to true.
+   */
+  collapseStaleBaseline?: boolean;
+  /**
+   * Text shown in the <summary> element when stale baseline details are
+   * collapsible. Defaults to 'Stale violations in the baseline - click to expand'.
+   */
+  collapseStaleBaselineMessage?: string;
+  /**
+   * Introductory text shown before stale baseline violations. Defaults to an
+   * explanation of why they are stale and how to remove them.
+   */
+  staleBaselineIntro?: string;
+  /**
    * Whether or not to show a footer (with version & run date) at the bottom of the report.
    * Defaults to true
    */

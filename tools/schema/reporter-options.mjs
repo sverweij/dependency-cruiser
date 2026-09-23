@@ -157,6 +157,26 @@ export default {
           description:
             "Whether or not to show a detailed list of stale violations in the baseline (if any). Defaults to true.",
         },
+        staleBaselineHeader: {
+          type: "string",
+          description:
+            "Text shown as the heading above stale baseline violations. Defaults to the standard stale-baseline heading.",
+        },
+        collapseStaleBaseline: {
+          type: "boolean",
+          description:
+            "Whether or not to wrap stale baseline violations in a collapsible <details> block. Defaults to true.",
+        },
+        collapseStaleBaselineMessage: {
+          type: "string",
+          description:
+            "Text shown in the <summary> element when stale baseline details are collapsible. Defaults to 'Stale violations in the baseline - click to expand'.",
+        },
+        staleBaselineIntro: {
+          type: "string",
+          description:
+            "Introductory text shown before stale baseline violations. Defaults to an explanation of why they are stale and how to remove them.",
+        },
         showFooter: {
           type: "boolean",
           description:
