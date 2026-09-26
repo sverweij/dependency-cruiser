@@ -827,7 +827,7 @@ dependency-cruiser.
 
 ```javascript
 options: {
-  detectImportsInAmbientModules: true; // implies `parser: "tsc"`
+  detectImportsInAmbientModules: true, // implies `parser: "tsc"`
 }
 ```
 
