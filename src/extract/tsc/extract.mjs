@@ -19,6 +19,7 @@ export function extract(
     moduleSystems,
     detectJSDocImports,
     detectProcessBuiltinModuleCalls,
+    detectImportsInAmbientModules,
   },
   pFileName,
   pTranspileOptions,
@@ -28,6 +29,7 @@ export function extract(
     exoticRequireStrings,
     detectJSDocImports,
     detectProcessBuiltinModuleCalls,
+    detectImportsInAmbientModules,
   ).filter(({ moduleSystem }) => moduleSystems.includes(moduleSystem));
 }
 

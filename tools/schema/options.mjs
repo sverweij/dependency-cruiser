@@ -127,6 +127,12 @@ export default {
             "When true, dependency-cruiser will detect dependencies in JSDoc-style " +
             'import statements. Implies `"parser": "tsc"`. Defaults to false.',
         },
+        detectImportsInAmbientModules: {
+          type: "boolean",
+          description:
+            "When true, dependency-cruiser will detect imports in ambient module " +
+            'and namespace declarations. Implies `"parser": "tsc"`. Defaults to false.',
+        },
         detectProcessBuiltinModuleCalls: {
           type: "boolean",
           description:

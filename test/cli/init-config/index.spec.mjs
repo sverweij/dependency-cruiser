@@ -115,6 +115,10 @@ describe("[I] cli/init-config/index", () => {
       deepEqual(lResult.default.options.tsConfig, {
         fileName: "tsconfig.json",
       });
+      equal(
+        Object.hasOwn(lResult.default.options, "detectImportsInAmbientModules"),
+        false,
+      );
     } finally {
       deleteDammit(RULES_FILE_JS);
     }

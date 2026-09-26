@@ -37,6 +37,10 @@ export interface IInitConfig {
    */
   detectJSDocImports?: boolean;
   /**
+   * Whether or not to detect imports in ambient module and namespace declarations
+   */
+  detectImportsInAmbientModules?: boolean;
+  /**
    * Whether or not to detect calls to `process.getBuiltinModule`/
    * `globalThis.process.getBuiltinModule` as imports
    */

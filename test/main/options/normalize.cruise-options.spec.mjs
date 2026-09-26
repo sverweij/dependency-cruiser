@@ -192,6 +192,15 @@ describe("[I] normalize cache options", () => {
   it("sets parser to tsc when detectJSDocImports is set to true", () => {
     equal(normalizeCruiseOptions({ detectJSDocImports: true }).parser, "tsc");
   });
+  it("sets parser to tsc when detectImportsInAmbientModules is true", () => {
+    equal(
+      normalizeCruiseOptions({ detectImportsInAmbientModules: true }).parser,
+      "tsc",
+    );
+  });
+  it("keeps ambient module import detection off by default", () => {
+    equal(normalizeCruiseOptions({}).detectImportsInAmbientModules, false);
+  });
 });
 
 /* eslint no-magic-numbers: 0*/

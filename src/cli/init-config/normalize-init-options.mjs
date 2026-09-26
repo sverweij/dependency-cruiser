@@ -20,7 +20,7 @@ function usesTypeScript(pInitOptions, pExtensions) {
   return Boolean(
     pInitOptions.tsConfig ||
     pInitOptions.tsPreCompilationDeps ||
-    (pExtensions || []).some((pExtension) =>
+    (pExtensions /* c8 ignore next */ || []).some((pExtension) =>
       [".ts", ".tsx", ".d.ts", ".mts", ".d.mts", ".cts", ".d.cts"].includes(
         pExtension,
       ),

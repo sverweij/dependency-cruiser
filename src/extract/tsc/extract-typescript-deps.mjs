@@ -55,10 +55,52 @@ function isTypeOnlyExport(pStatement) {
 }
 
 /*
- * Both extractImport* assume the imports/ exports can only occur at
- * top level. AFAIK this the only place they're allowed, so we should
- * be good. Otherwise we'll need to walk the tree.
+ * The extractImport* below take their statements from getStatements, because
+ * imports and exports are allowed in one place besides the top level: inside a
+ * module block, which is what `declare module "some-package" { ... }` and
+ * `declare namespace Thing { ... }` compile to.
  */
+
+/**
+ * Get the statements of the passed AST node, plus the statements of any module
+ * blocks nested in it
+ *
+ * @param {Node} pAST - an AST node with statements
+ * @returns {Node[]} - the node's statements, flattened over module blocks
+ */
+function getModuleBlock(pStatement) {
+  if (pStatement.kind !== typescript.SyntaxKind.ModuleDeclaration) {
+    return null;
+  }
+
+  // A qualified name nests: `declare namespace A.B {}` is a ModuleDeclaration
+  // whose body is another ModuleDeclaration, and only the innermost one holds
+  // the block.
+  let lBody = pStatement.body;
+
+  while (lBody?.kind === typescript.SyntaxKind.ModuleDeclaration) {
+    lBody = lBody.body;
+  }
+
+  return lBody?.kind === typescript.SyntaxKind.ModuleBlock ? lBody : null;
+}
+
+function getStatements(pAST, pDetectImportsInAmbientModules) {
+  if (!pDetectImportsInAmbientModules) {
+    return pAST.statements ?? [];
+  }
+
+  return (pAST.statements ?? []).flatMap((pStatement) => {
+    const lModuleBlock = getModuleBlock(pStatement);
+
+    return lModuleBlock
+      ? [
+          pStatement,
+          ...getStatements(lModuleBlock, pDetectImportsInAmbientModules),
+        ]
+      : [pStatement];
+  });
+}
 
 /**
  * Get all import statements from the top level AST node
@@ -67,8 +109,8 @@ function isTypeOnlyExport(pStatement) {
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all import statements in the (top level) AST node
  */
-function extractImports(pAST) {
-  return pAST.statements
+function extractImports(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportDeclaration &&
@@ -91,8 +133,8 @@ function extractImports(pAST) {
  * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all export statements in the (top level) AST node
  */
-function extractExports(pAST) {
-  return pAST.statements
+function extractExports(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ExportDeclaration &&
@@ -119,8 +161,8 @@ function extractExports(pAST) {
  * @returns {{module: string, moduleSystem: string;exoticallyRequired: boolean;}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
-function extractImportEquals(pAST) {
-  return pAST.statements
+function extractImportEquals(pAST, pDetectImportsInAmbientModules) {
+  return getStatements(pAST, pDetectImportsInAmbientModules)
     .filter(
       (pStatement) =>
         pStatement.kind === typescript.SyntaxKind.ImportEqualsDeclaration &&
@@ -562,11 +604,14 @@ export default function extractTypeScriptDependencies(
   pExoticRequireStrings,
   pDetectJSDocImports,
   pDetectProcessBuiltinModuleCalls,
+  pDetectImportsInAmbientModules,
 ) {
   return typescript
-    ? extractImports(pTypeScriptAST)
-        .concat(extractExports(pTypeScriptAST))
-        .concat(extractImportEquals(pTypeScriptAST))
+    ? extractImports(pTypeScriptAST, pDetectImportsInAmbientModules)
+        .concat(extractExports(pTypeScriptAST, pDetectImportsInAmbientModules))
+        .concat(
+          extractImportEquals(pTypeScriptAST, pDetectImportsInAmbientModules),
+        )
         .concat(extractTripleSlashDirectives(pTypeScriptAST))
         .concat(
           extractNestedDependencies(

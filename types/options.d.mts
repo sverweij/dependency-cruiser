@@ -157,6 +157,11 @@ export interface ICruiseOptions {
    */
   detectJSDocImports?: boolean;
   /**
+   * When true, dependency-cruiser will detect imports in ambient module and
+   * namespace declarations. Implies `"parser": "tsc"`. Defaults to false.
+   */
+  detectImportsInAmbientModules?: boolean;
+  /**
    * When true, dependency-cruiser will detect calls to `process.getBuiltinModule`/
    * `globalThis.process.getBuiltinModule` as imports.
    * Defaults to false.

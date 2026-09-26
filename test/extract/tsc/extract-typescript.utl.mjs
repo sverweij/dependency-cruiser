@@ -7,10 +7,12 @@ export default (
   pExoticRequireStrings = [],
   pDetectJSDocImports = false,
   pDetectProcessBuiltinModuleCalls = false,
+  pDetectImportsInAmbientModules = false,
 ) =>
   extractTypescriptDependencies(
     getASTFromSource({ source: pTypesScriptSource }),
     pExoticRequireStrings,
     pDetectJSDocImports,
     pDetectProcessBuiltinModuleCalls,
+    pDetectImportsInAmbientModules,
   );

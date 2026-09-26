@@ -4,6 +4,7 @@ export default {
   maxDepth: 0,
   moduleSystems: ["es6", "cjs", "tsd", "amd"],
   detectJSDocImports: false,
+  detectImportsInAmbientModules: false,
   detectProcessBuiltinModuleCalls: false,
   skipAnalysisNotInRules: false,
   tsPreCompilationDeps: false,
