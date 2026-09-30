@@ -48,6 +48,7 @@
     "optionsUsed": {
       "baseDir": "",
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": true,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

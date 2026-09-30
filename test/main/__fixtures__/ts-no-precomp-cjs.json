@@ -63,17 +63,18 @@
     }
   ],
   "summary": {
-    "advisedExitCode": 0,
     "violations": [],
     "error": 0,
     "warn": 0,
     "info": 0,
     "ignore": 0,
+    "advisedExitCode": 0,
     "totalCruised": 4,
     "totalDependenciesCruised": 2,
     "optionsUsed": {
       "baseDir": "",
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

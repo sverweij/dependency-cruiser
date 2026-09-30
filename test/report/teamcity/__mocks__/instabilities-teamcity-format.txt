@@ -1,2 +1,2 @@
-##teamcity[inspectionType id='sdp' name='sdp' description='sdp' category='dependency-cruiser']
-##teamcity[inspection typeId='sdp' message='src/more-stable.js -> src/less-stable.js (instability: 42% -> 100%)' file='src/more-stable.js' SEVERITY='WARNING']
+##teamcity[inspectionType id='sdp' name='sdp' description='sdp' category='dependency-cruiser' flowId='6064245028' timestamp='2026-09-26T19:11:55.369']
+##teamcity[inspection typeId='sdp' message='src/more-stable.js -> src/less-stable.js (instability: 42% -> 100%)' file='src/more-stable.js' SEVERITY='WARNING' flowId='6064245028' timestamp='2026-09-26T19:11:55.369']

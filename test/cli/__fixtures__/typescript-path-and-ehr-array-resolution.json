@@ -106,6 +106,7 @@
     "totalDependenciesCruised": 3,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "enhancedResolveOptions": {

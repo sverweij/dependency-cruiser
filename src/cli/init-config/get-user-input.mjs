@@ -21,6 +21,10 @@ import {
 import { validateLocation } from "./validators.mjs";
 import { isAvailable as tscIsAvailable } from "#extract/tsc/parse.mjs";
 
+/**
+ * @param {string} pString
+ * @returns {{title:string;value:string}}
+ */
 function toPromptChoice(pString) {
   return {
     title: pString,
@@ -114,6 +118,13 @@ const QUESTIONS = [
     name: "detectJSDocImports",
     type: () => (tscIsAvailable() ? "confirm" : false),
     message: "Do you want to detect JSDoc imports (slightly slower)?",
+    initial: false,
+  },
+  {
+    name: "detectImportsInAmbientModules",
+    type: () => (tscIsAvailable() ? "confirm" : false),
+    message:
+      "Do you want to detect imports inside ambient modules (slightly slower)?",
     initial: false,
   },
   {

@@ -166,18 +166,19 @@
     }
   ],
   "summary": {
-    "advisedExitCode": 0,
     "violations": [],
     "error": 0,
     "warn": 0,
     "info": 0,
     "ignore": 0,
+    "advisedExitCode": 0,
     "totalCruised": 7,
     "totalDependenciesCruised": 6,
     "optionsUsed": {
       "baseDir": "",
       "collapse": "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

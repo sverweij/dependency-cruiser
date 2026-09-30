@@ -11,6 +11,7 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "args": "whatever",
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "ignoreKnown": false,

@@ -312,6 +312,7 @@
     "totalDependenciesCruised": 14,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "externalModuleResolutionStrategy": "node_modules",

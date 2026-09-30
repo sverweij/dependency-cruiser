@@ -116,6 +116,14 @@ describe("[I] cli/init-config/build-config", () => {
     });
   });
 
+  it("generates detectImportsInAmbientModules when enabled", async () => {
+    const lResult = await createConfigNormalized({
+      detectImportsInAmbientModules: true,
+    });
+
+    equal(lResult.options.detectImportsInAmbientModules, true);
+  });
+
   it("generates a valid config - babelConfig", async () => {
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 

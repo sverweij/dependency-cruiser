@@ -104,7 +104,6 @@
     }
   ],
   "summary": {
-    "advisedExitCode": 0,
     "violations": [
       {
         "type": "dependency",
@@ -138,11 +137,13 @@
     "warn": 1,
     "info": 1,
     "ignore": 0,
+    "advisedExitCode": 0,
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
       "baseDir": "/test/main/__mocks__/dynamic-imports/es",
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

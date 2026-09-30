@@ -223,7 +223,10 @@ export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
   if (lReturnValue.cache) {
     lReturnValue.cache = normalizeCacheOptions(lReturnValue.cache);
   }
-  if (lReturnValue.detectJSDocImports) {
+  if (
+    lReturnValue.detectJSDocImports ||
+    lReturnValue.detectImportsInAmbientModules
+  ) {
     lReturnValue.parser = "tsc";
   }
 

@@ -19,6 +19,7 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "baseDir": "test/cli/__fixtures__/alternate-basedir",
+      "detectImportsInAmbientModules": false,
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,

@@ -227,6 +227,11 @@ module.exports = {
     // to be installed in the same spot you run dependency-cruiser from.
     {{detectJSDocImportsAttribute}}
 
+    // false: don't look at imports in ambient module declarations (the default)
+    // true: detect imports, re-exports and import-equals declarations inside
+    // ambient modules and namespaces. Implies parser: 'tsc'.
+    {{detectImportsInAmbientModulesAttribute}}
+
     // false: don't look at process.getBuiltinModule calls (the default)
     // true: dependency-cruiser will detect calls to process.getBuiltinModule/
     // globalThis.process.getBuiltinModule as imports.

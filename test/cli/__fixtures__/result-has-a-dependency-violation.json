@@ -9264,6 +9264,7 @@
     "totalDependenciesCruised": 298,
     "optionsUsed": {
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {

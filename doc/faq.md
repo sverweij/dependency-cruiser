@@ -594,6 +594,12 @@ As only the `tsc` TypeScript parser supports this, it will need `typescript`
 to be installed (dependency-cruiser will automatically use it). For more
 information see [detectJSDocImports in the options reference](./options-reference#detectjsdocimports-detect-dependencies-in-jsdoc-comments)
 
+### Q: How do I detect imports inside ambient module or namespace declarations?
+
+**A**: Set `detectImportsInAmbientModules` to `true` in your configuration. This
+uses the TypeScript parser, so `typescript` must be installed alongside
+dependency-cruiser.
+
 ### Q: Can I get code completion for .dependency-cruiser.js?
 
 **A**: Yes.

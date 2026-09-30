@@ -113,7 +113,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
         args: "src test tools",
       },
     },
-    revisionData: { cacheFormatVersion: 18.1, SHA1: "dummy-sha", changes: [] },
+    revisionData: { cacheFormatVersion: 18.5, SHA1: "dummy-sha", changes: [] },
   };
 
   /** @type import("../../types/cruise-result.mjs").ICruiseResult */

@@ -212,6 +212,7 @@
       "baseDir": ".",
       "cache": false,
       "combinedDependencies": true,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "doNotFollow": {

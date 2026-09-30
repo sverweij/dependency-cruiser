@@ -382,6 +382,7 @@
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputType": "json",
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

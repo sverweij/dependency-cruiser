@@ -463,6 +463,7 @@ export default {
 
     detectJSDocImports: true, // implies parser: "tsc"
     detectProcessBuiltinModuleCalls: true,
+    detectImportsInAmbientModules: true,
     experimentalStats: true,
     skipAnalysisNotInRules: true,
     metrics: true,

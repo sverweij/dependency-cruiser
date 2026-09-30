@@ -195,6 +195,7 @@
         "fileName": "test/cli/__fixtures__/babel/ts/babelrc.json"
       },
       "combinedDependencies": false,
+      "detectImportsInAmbientModules": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,
       "exoticRequireStrings": [],

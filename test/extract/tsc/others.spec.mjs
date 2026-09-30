@@ -26,4 +26,15 @@ describe("[U] ast-extractors/extract-typescript - others", () => {
       [],
     );
   });
+
+  it("returns no dependencies when statements are absent", () => {
+    deepEqual(
+      extractTypescriptFromAST({
+        referencedFiles: [],
+        typeReferenceDirectives: [],
+        amdDependencies: [],
+      }),
+      [],
+    );
+  });
 });

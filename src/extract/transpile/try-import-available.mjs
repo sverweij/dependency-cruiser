@@ -9,7 +9,7 @@ const SCOPED_PACKAGE_RE = "@[^/]+(?:/[^/]+)";
 const ROOT_MODULE_RE = new RegExp(`^(${SCOPED_PACKAGE_RE}|${PACKAGE_RE})`, "g");
 
 function extractRootModuleName(pModuleName) {
-  return (pModuleName.match(ROOT_MODULE_RE) || []).shift();
+  return (pModuleName.match(ROOT_MODULE_RE) || /* c8 ignore next */ []).shift();
 }
 
 function getVersion(pModuleName) {

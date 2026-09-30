@@ -52,6 +52,8 @@ export function optionsAreCompatible(pOldOptions, pNewOptions) {
     pOldOptions.preserveSymlinks === pNewOptions.preserveSymlinks &&
     pOldOptions.combinedDependencies === pNewOptions.combinedDependencies &&
     pOldOptions.experimentalStats === pNewOptions.experimentalStats &&
+    pOldOptions.detectImportsInAmbientModules ===
+      pNewOptions.detectImportsInAmbientModules &&
     pOldOptions.detectJSDocImports === pNewOptions.detectJSDocImports &&
     pOldOptions.detectProcessBuiltinModuleCalls ===
       pNewOptions.detectProcessBuiltinModuleCalls &&
