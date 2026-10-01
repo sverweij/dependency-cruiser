@@ -29,7 +29,7 @@ a [FAQ](../doc/faq.md) that might help you out.
 - Code quality
   - Dependency-cruiser has a bunch of automated checks (test coverage, depcruise,
     linting, code formatting). They also run on the CI, but you can save yourself
-    time by running them locally already: `npm run check:full` (or `yarn check:full`).
+    time by running them locally already: `node --run=check:full`.
   - Do add tests for new and updated code. It not only helps PR reviewers a lot,
     it'll prevent regressions in the future.
   - Code style (you know, petty things like indentations, where brackets go,
