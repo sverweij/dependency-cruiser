@@ -50,3 +50,8 @@
   - The contribution will be subject to [The MIT license](https://github.com/sverweij/dependency-cruiser/blob/main/LICENSE), and I'm OK with that.
   - The contribution is my own original work.
   - I am ok with the stuff in [**CONTRIBUTING.md**](https://github.com/sverweij/dependency-cruiser/blob/main/.github/CONTRIBUTING.md).
+
+
+## AI disclosure
+
+<!--- Disclose if- and how AI was used to create this PR -->
