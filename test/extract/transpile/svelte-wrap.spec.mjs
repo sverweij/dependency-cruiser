@@ -1,4 +1,4 @@
-import { equal } from "node:assert/strict";
+import { equal, match, throws } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeSource from "../normalize-source.utl.mjs";
 import svelteWrap from "#extract/transpile/svelte-wrap.mjs";
@@ -30,5 +30,19 @@ describe("[I] svelte transpiler", () => {
       );
       equal(lObserved, lExpected);
     });
+  });
+
+  it("transpiles svelte components that use top level await", () => {
+    const lSource = readFileSync(
+      "./test/extract/transpile/__mocks__/svelte-async.svelte",
+      "utf8",
+    );
+    const lObserved = wrap.transpile(lSource);
+    match(lObserved, /import ["']\.\/page\.css["']/);
+    match(lObserved, /import\(["']\.\/renderer\.svelte["']\)/);
+  });
+
+  it("rethrows svelte compiler errors", () => {
+    throws(() => wrap.transpile("<script>const =</script>"));
   });
 });
