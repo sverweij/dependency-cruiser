@@ -109,7 +109,19 @@ export const EXTENSION2AVAILABLE = new Map([
 ]);
 
 const EXTENSIONS_PER_PARSER = {
-  swc: new Set([".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"]),
+  swc: new Set([
+    ".js",
+    ".cjs",
+    ".mjs",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".d.ts",
+    ".cts",
+    ".d.cts",
+    ".mts",
+    ".d.mts",
+  ]),
   // tsc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
   // acorn: [".js", ".cjs", ".mjs", ".jsx"],
 };
