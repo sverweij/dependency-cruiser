@@ -46,4 +46,50 @@ describe("[U] extract/swc - re-exports", () => {
       },
     ]);
   });
+
+  it("extracts type-only re-exports (typescript 3.8+)", () => {
+    deepEqual(extractWithSwc("export type { SomeType } from './some-module'"), [
+      {
+        module: "./some-module",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["export", "type-only"],
+      },
+    ]);
+  });
+
+  it("extracts re-exports whose specifiers are all type-only (typescript 4.5+)", () => {
+    deepEqual(
+      extractWithSwc(
+        "export { type SomeType, type SomeOtherType } from './some-module'",
+      ),
+      [
+        {
+          module: "./some-module",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["export", "type-only"],
+        },
+      ],
+    );
+  });
+
+  it("extracts re-exports with mixed type-only and value specifiers as runtime exports (typescript 4.5+)", () => {
+    deepEqual(
+      extractWithSwc(
+        "export { type SomeType, SomeValue } from './some-module'",
+      ),
+      [
+        {
+          module: "./some-module",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["export"],
+        },
+      ],
+    );
+  });
 });
