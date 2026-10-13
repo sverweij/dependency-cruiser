@@ -123,7 +123,7 @@ function nodeIsTypeOnly(pNode) {
     return true;
   }
   return (
-    pNode?.specifiers.length > 0 &&
+    pNode?.specifiers?.length > 0 &&
     pNode.specifiers.every((pSpecifier) => pSpecifier.isTypeOnly)
   );
 }
@@ -144,7 +144,9 @@ export default Visitor
             module: pNode.source.value,
             moduleSystem: "es6",
             exoticallyRequired: false,
-            dependencyTypes: ["export"],
+            dependencyTypes: nodeIsTypeOnly(pNode)
+              ? ["export", "type-only"]
+              : ["export"],
           });
         }
       }
