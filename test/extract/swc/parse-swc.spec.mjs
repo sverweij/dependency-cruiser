@@ -21,12 +21,14 @@ describe("[U] extract/swc - parse ", () => {
     );
     equal(lAST.type, "Module");
   });
-  it("parses uninitialized const declarations in declaration files", () => {
+  it("preserves exports on uninitialized const declarations in declaration files", () => {
     const lAST = getASTCached(
       join(import.meta.dirname, "__mocks__", "ambient.d.ts"),
     );
     equal(lAST.type, "Module");
     equal(lAST.body.length, 1);
+    equal(lAST.body[0].type, "ExportDeclaration");
+    equal(lAST.body[0].declaration.declarations[0].id.value, "bla");
   });
   it("parses jsx", () => {
     const lAST = getASTCached(

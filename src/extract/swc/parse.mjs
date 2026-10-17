@@ -77,7 +77,7 @@ export function getASTCached(pFileName) {
         // from the AST).
         const lDoctoredSrc = readFileSync(pFileName, {
           encoding: "utf8",
-        }).replace(/(?:\s|^)const(?:\s|$)/g, "let");
+        }).replace(/(\s|;|^)const(?=\s)/g, "$1let");
         const lDoctoredAST = swc.parseSync(
           lDoctoredSrc,
           getOptionsFor(pFileName),
