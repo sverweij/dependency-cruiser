@@ -576,8 +576,10 @@ describe("[I] analyze/summarize", () => {
     });
     validateCruiseResult({ modules: [], summary: lSummary });
   });
+});
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig)", () => {
+describe("[I] analyze/summarize - report 'environment' issues", () => {
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig) - both tsc and swc missing", () => {
     const lSummary = summarize(
       [],
       { tsConfig: { fileName: "./tsconfig.json" } },
@@ -593,6 +595,17 @@ describe("[I] analyze/summarize", () => {
     );
   });
 
+  it("does not emit an issue into the 'environment' when tsc is missing, but swc is present (tsconfig)", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
   it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsPrecompilationDeps)", () => {
     const lSummary = summarize(
       [],
@@ -604,7 +617,7 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
@@ -620,7 +633,7 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
@@ -636,7 +649,7 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
