@@ -233,6 +233,49 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
     );
   });
 
+  it("does not classify peerDependenciesMeta entries as dependencies", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/left-pad/index.js",
+        },
+        "left-pad",
+        {
+          peerDependenciesMeta: {
+            "left-pad": {
+              optional: true,
+            },
+          },
+        },
+      ),
+      ["npm-no-pkg"],
+    );
+  });
+
+  it("does classify peerDependencies correctly even when peerDependenciesMeta entries are present", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/left-pad/index.js",
+        },
+        "left-pad",
+        {
+          peerDependencies: {
+            "left-pad": ">=1.2.3",
+          },
+          peerDependenciesMeta: {
+            "left-pad": {
+              optional: true,
+            },
+          },
+        },
+      ),
+      ["npm-peer"],
+    );
+  });
+
   it("classifies fixed subpath imports as aliased & aliased-subpath-import", () => {
     deepEqual(
       determineDependencyTypes(
