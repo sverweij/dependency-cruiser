@@ -1,6 +1,6 @@
+import { readFileSync } from "node:fs";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
-import { readFileSync } from "node:fs";
 
 /**
  * @import swcCore, { ParseOptions, ModuleItem } from "@swc/core";
@@ -56,7 +56,7 @@ export function getASTCached(pFileName) {
     CACHE.set(pFileName, lAST);
     return lAST;
   } catch (swcParseException) {
-    // swc doesn't handle const declarations without initalization in typescript
+    // swc doesn't handle const declarations without initialization in typescript
     // declaration files a.k.a. "ambient contexts", .d.ts etc. (Not sure
     // swc distinguishes ambient and non-ambient contexts at all).
     if (
@@ -67,17 +67,23 @@ export function getASTCached(pFileName) {
       if (lErrorMessage.includes("'const' declarations must be initialized")) {
         // we can go about this several ways
         // - just throw the thing - halting the cruise (for actually no good reason)
-        // - warn the user they could better switch to typescript
+        // - warn the user they could better switch to another compiler (tsc comes to mind...)
         // - make the error 'go away' with a workaround.
         //
         // We chose the last one. Swc doesn't complain about uninitialized
         // _variables_ in ambient contexts, so we globally replace each
-        // `const` keyword with a `let` one. Looks slightly cursed, but works and
-        // const -> let makes no difference for our context (plucking dependencies
-        // from the AST).
+        // `const` keyword with a `let` one. This works because const -> let
+        // makes no difference for our context (plucking dependencies
+        // from the AST), except in enum declarations; swc happily does compile
+        // `export const enum Direction { Up, Down }`
+        // The regex is more cursed than usual to allow for comments in const
+        // declarations (and yes, we _did_ check for a ReDoS vulno and found none)
         const lDoctoredSrc = readFileSync(pFileName, {
           encoding: "utf8",
-        }).replace(/(\s|;|^)const(?=\s)/g, "$1let");
+        }).replace(
+          /(\s|[/][*][^*]*[*][/]|^)const(\s|[/][*][^*]*[*][/])+(?!enum(?:\s|[/][*][^*]*[*][/]))/gm,
+          "$1let$2",
+        );
         const lDoctoredAST = swc.parseSync(
           lDoctoredSrc,
           getOptionsFor(pFileName),

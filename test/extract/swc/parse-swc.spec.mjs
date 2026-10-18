@@ -30,6 +30,17 @@ describe("[U] extract/swc - parse ", () => {
     equal(lAST.body[0].type, "ExportDeclaration");
     equal(lAST.body[0].declaration.declarations[0].id.value, "bla");
   });
+  it("handles comments in uninitialized const declarations without rewriting const enums", () => {
+    const lAST = getASTCached(
+      join(import.meta.dirname, "__mocks__", "ambient-with-comments.d.ts"),
+    );
+
+    equal(lAST.body.length, 2);
+    equal(lAST.body[0].declaration.kind, "let");
+    equal(lAST.body[0].declaration.declarations[0].id.value, "bla");
+    equal(lAST.body[1].declaration.type, "TsEnumDeclaration");
+    equal(lAST.body[1].declaration.isConst, true);
+  });
   it("parses jsx", () => {
     const lAST = getASTCached(
       join(import.meta.dirname, "__mocks__", "jsx.jsx"),
