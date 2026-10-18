@@ -41,7 +41,8 @@ function typeScriptIsConsistent(pOptions, pAvailableTranspilers) {
   return lTypeScriptNeeded
     ? pAvailableTranspilers.some(
         (pTranspiler) =>
-          (pTranspiler.name === "typescript" || pTranspiler.name === "swc") &&
+          (pTranspiler.name === "typescript" ||
+            (pTranspiler.name === "swc" && pOptions?.parser === "swc")) &&
           pTranspiler.available,
       )
     : true;

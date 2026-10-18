@@ -595,10 +595,37 @@ describe("[I] analyze/summarize - report 'environment' issues", () => {
     );
   });
 
-  it("does not emit an issue into the 'environment' when tsc is missing, but swc is present (tsconfig)", () => {
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig) - swc present, but not set as parser", () => {
     const lSummary = summarize(
       [],
       { tsConfig: { fileName: "./tsconfig.json" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("does not emit an issue into the 'environment' when tsc is missing, but swc is present and set as parser (tsconfig)", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" }, parser: "swc" },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
+  it("does not emit an issue into the 'environment' when tsc is missing, but swc is present and set as parser (tsconfig)", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" }, parser: "swc" },
       [],
       [],
       getFakeEnvironmentInfoWithSWCFound,
