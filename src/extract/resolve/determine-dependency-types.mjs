@@ -22,7 +22,9 @@ function dependencyKeyHasModuleName(
   pPrefix,
 ) {
   return (pKey) =>
-    pKey.includes("ependencies") &&
+    // dependencies, devDependencies, peerDependencies, optionalDependencies, bundleDependencies, bundledDependencies.
+    // But not peerDependenciesMeta. Or dependenciesIDoNotWantToTalkabout.
+    pKey.endsWith("ependencies") &&
     Object.hasOwn(pPackageDependencies[pKey], join(pPrefix, pModuleName));
 }
 
