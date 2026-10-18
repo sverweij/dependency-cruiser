@@ -3,14 +3,14 @@ import extractTypescriptDependencies from "#extract/tsc/extract-typescript-deps.
 import { getASTFromSource } from "#extract/tsc/parse.mjs";
 
 export default (
-  pTypesScriptSource,
+  pTypeScriptSource,
   pExoticRequireStrings = [],
   pDetectJSDocImports = false,
   pDetectProcessBuiltinModuleCalls = false,
   pDetectImportsInAmbientModules = false,
 ) =>
   extractTypescriptDependencies(
-    getASTFromSource({ source: pTypesScriptSource }),
+    getASTFromSource({ source: pTypeScriptSource }),
     pExoticRequireStrings,
     pDetectJSDocImports,
     pDetectProcessBuiltinModuleCalls,

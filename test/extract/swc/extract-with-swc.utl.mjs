@@ -21,8 +21,8 @@ export function getASTFromSource(pSource) {
   return swc.parseSync(pSource, SWC_PARSE_OPTIONS);
 }
 
-export default (pTypesScriptSource, pExoticRequireStrings = []) =>
+export default (pTypeScriptSource, pExoticRequireStrings = []) =>
   extractSwcDependencies(
-    getASTFromSource(pTypesScriptSource),
+    getASTFromSource(pTypeScriptSource),
     pExoticRequireStrings,
   );

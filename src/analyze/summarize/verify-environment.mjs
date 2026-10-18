@@ -97,7 +97,7 @@ export function determineEnvironmentIssues(pOptions, pAvailableTranspilers) {
       description:
         `dependency-cruiser detected an environment that needs a TypeScript compiler of some sort,${EOL}` +
         `    but did not find one of the supported ones (${tsTranspilersString}).${EOL}` +
-        `    This means it's likely to have missed TypesScript sources and dependencies.${EOL}${EOL}` +
+        `    This means it's likely to have missed TypeScript sources and dependencies.${EOL}${EOL}` +
         `    Install one of the above for better results.${EOL}${EOL}` +
         `    => if you choose to use swc don't forget to set the "parser" option to "swc"${EOL}` +
         `    => Support for typescript@>=7 will follow when its API is published and stable.${EOL}`,
