@@ -5,6 +5,7 @@ import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
 import { validate as validateCruiseResult } from "#schema/cruise-result.validate.mjs";
 import summarize from "#analyze/summarize/index.mjs";
+import { equal } from "node:assert";
 
 function getFakeEnvironmentInfo() {
   return DUMMY_ENVIRONMENT;
@@ -576,8 +577,10 @@ describe("[I] analyze/summarize", () => {
     });
     validateCruiseResult({ modules: [], summary: lSummary });
   });
+});
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig)", () => {
+describe("[I] analyze/summarize - report 'environment' issues", () => {
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig) - both tsc and swc missing", () => {
     const lSummary = summarize(
       [],
       { tsConfig: { fileName: "./tsconfig.json" } },
@@ -593,7 +596,34 @@ describe("[I] analyze/summarize", () => {
     );
   });
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsPrecompilationDeps)", () => {
+  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (tsconfig) - swc present, but not set as parser", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" } },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(lSummary.environment.issues);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+      ),
+    );
+  });
+
+  it("does not emit an issue into the 'environment' when tsc is missing, but swc is present and set as parser (tsconfig)", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" }, parser: "swc" },
+      [],
+      [],
+      getFakeEnvironmentInfoWithSWCFound,
+    );
+    ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
+  it("emits an issue into the 'environment' when the tsc transpiler is expected but missing (tsPrecompilationDeps)", () => {
     const lSummary = summarize(
       [],
       { tsPreCompilationDeps: true },
@@ -604,12 +634,12 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (detectJSDocImports)", () => {
+  it("emits an issue into the 'environment' when the tsc transpiler is expected but missing (detectJSDocImports)", () => {
     const lSummary = summarize(
       [],
       { detectJSDocImports: true },
@@ -620,12 +650,12 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (parser === 'tsc')", () => {
+  it("emits an issue into the 'environment' when the tsc transpiler is expected but missing (parser === 'tsc')", () => {
     const lSummary = summarize(
       [],
       { parser: "tsc" },
@@ -636,12 +666,12 @@ describe("[I] analyze/summarize", () => {
     ok(lSummary.environment.issues);
     ok(
       lSummary.environment.issues.some(
-        (pIssue) => pIssue.name === "missing-typescript-transpiler",
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
       ),
     );
   });
 
-  it("emits an issue into the 'environment' when a typescript transpiler is expected but missing (parser === 'swc')", () => {
+  it("emits an issue into the 'environment' when the swc transpiler is expected but missing (parser === 'swc')", () => {
     const lSummary = summarize(
       [],
       { parser: "swc" },
@@ -678,6 +708,23 @@ describe("[I] analyze/summarize", () => {
     );
 
     ok(!Object.hasOwn(lSummary.environment, "issues"));
+  });
+
+  it("emits only one issue into the 'environment' when there's both a tsconfig and detectJSDocImports is true", () => {
+    const lSummary = summarize(
+      [],
+      { tsConfig: { fileName: "./tsconfig.json" }, detectJSDocImports: true },
+      [],
+      [],
+      getFakeEnvironmentInfoWithTypeScriptNotFound,
+    );
+    ok(lSummary.environment.issues);
+    equal(lSummary.environment.issues.length, 1);
+    ok(
+      lSummary.environment.issues.some(
+        (pIssue) => pIssue.name === "missing-tsc-transpiler",
+      ),
+    );
   });
 
   it("emits an issue into the 'environment' when a babel transpiler is expected but missing", () => {
