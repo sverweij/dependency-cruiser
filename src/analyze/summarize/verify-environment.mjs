@@ -42,7 +42,7 @@ function typeScriptIsConsistent(pOptions, pAvailableTranspilers) {
     !(
       // these two options require tsc (covered in tscIsConsistent), so
       // to prevent typeScriptIsConsistent from also firing (and printing
-      // two messages) we exlucde them here
+      // two messages) we exclude them here
       Boolean(pOptions?.tsPreCompilationDeps) ||
       Boolean(pOptions?.detectJSDocImports)
     );
