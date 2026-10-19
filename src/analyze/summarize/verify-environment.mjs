@@ -37,7 +37,15 @@ function tscIsConsistent(pOptions, pAvailableTranspilers) {
 }
 
 function typeScriptIsConsistent(pOptions, pAvailableTranspilers) {
-  const lTypeScriptNeeded = Boolean(pOptions?.tsConfig);
+  const lTypeScriptNeeded =
+    Boolean(pOptions?.tsConfig) &&
+    !(
+      // these two options require tsc (covered in tscIsConsistent), so
+      // to prevent typeScriptIsConsistent from also firing (and printing
+      // two messages) we exlucde them here
+      Boolean(pOptions?.tsPreCompilationDeps) ||
+      Boolean(pOptions?.detectJSDocImports)
+    );
   return lTypeScriptNeeded
     ? pAvailableTranspilers.some(
         (pTranspiler) =>
