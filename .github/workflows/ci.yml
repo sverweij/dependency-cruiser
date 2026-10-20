@@ -104,6 +104,29 @@ jobs:
         if: matrix.node-version != env.NODE_LATEST
         run: npm test
 
+  check-typescript-native:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{env.NODE_LATEST}}
+      - name: install & build
+        run: |
+          sudo apt-get update
+          sudo apt-get install graphviz
+          npm clean-install --legacy-peer-deps --ignore-scripts
+          git restore .npmrc
+          npm run build
+      - name: swap the classic typescript compiler for the native one
+        run: npm install --no-save --legacy-peer-deps --ignore-scripts typescript@7.1.0-beta
+      - name: test with the native typescript compiler
+        run: npm test
+
   check-windows:
     env:
       PLATFORM: windows-latest

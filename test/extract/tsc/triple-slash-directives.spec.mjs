@@ -1,5 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import extractTypescript from "./extract-typescript.utl.mjs";
+import typescript from "#utl/typescript-facade.mjs";
 
 describe("[U] ast-extractors/extract-typescript - triple slash directives", () => {
   it("path", () => {
@@ -32,21 +33,23 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
     ]);
   });
 
-  it("amd-dependencies", () => {
+  it("amd-dependencies (not with the native compiler, as it dropped amd support)", () => {
     deepEqual(
       extractTypescript('/// <amd-dependency path="./ts-thing-types" />'),
-      [
-        {
-          module: "./ts-thing-types",
-          moduleSystem: "tsd",
-          dynamic: false,
-          exoticallyRequired: false,
-          dependencyTypes: [
-            "triple-slash-directive",
-            "triple-slash-amd-dependency",
+      typescript.isNative
+        ? []
+        : [
+            {
+              module: "./ts-thing-types",
+              moduleSystem: "tsd",
+              dynamic: false,
+              exoticallyRequired: false,
+              dependencyTypes: [
+                "triple-slash-directive",
+                "triple-slash-amd-dependency",
+              ],
+            },
           ],
-        },
-      ],
     );
   });
 });
