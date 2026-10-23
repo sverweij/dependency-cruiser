@@ -55,6 +55,9 @@ export default {
       to: {
         couldNotResolve: true,
         exoticallyRequired: false,
+        // the native typescript compiler's (>=7.1) API. Only resolvable when
+        // that's installed, while for development we use the classic one (<7)
+        pathNot: ["^typescript/(?:sync|ast)$"],
       },
     },
     {
