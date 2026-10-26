@@ -13,7 +13,7 @@ const coffeeVanillaWrap = coffeeWrap();
 const litCoffeeWrap = coffeeWrap(true);
 const svelteWrap = svelteDingus(typeScriptVanillaWrap);
 
-export const EXTENSION2WRAPPER = new Map([
+const EXTENSION2WRAPPER = new Map([
   [".js", javaScriptWrap],
   [".cjs", javaScriptWrap],
   [".mjs", javaScriptWrap],

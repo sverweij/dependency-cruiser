@@ -11,7 +11,7 @@ function validateResultAgainstSchema(pResult) {
     );
   }
 }
-/** @type {import("../../types/dependency-cruiser.js").format} */
+/** @type {import("../../types/dependency-cruiser.mjs").format} */
 export default async function format(pResult, pFormatOptions = {}) {
   const lFormatOptions = normalizeFormatOptions(pFormatOptions);
   assertFormatOptionsValid(lFormatOptions);

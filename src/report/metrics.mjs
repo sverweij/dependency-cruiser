@@ -266,9 +266,9 @@ function transformMetricsToTable(
  * Potential future features:
  * - additional output formats (csv?, html?)
  *
- * @param {import('../../types/dependency-cruiser.js').ICruiseResult} pCruiseResult -
- * @param {import("../../types/reporter-options.js").IMetricsReporterOptions} pReporterOptions
- * @returns {import('../../types/dependency-cruiser.js').IReporterOutput} -
+ * @param {import('../../types/dependency-cruiser.mjs').ICruiseResult} pCruiseResult -
+ * @param {import("../../types/reporter-options.mjs").IMetricsReporterOptions} pReporterOptions
+ * @returns {import('../../types/dependency-cruiser.mjs').IReporterOutput} -
  */
 export default function metrics(pCruiseResult, pReporterOptions) {
   const lReporterOptions = pReporterOptions || {};

@@ -7,7 +7,7 @@ import { clearRegExpCache } from "#utl/regex-util.mjs";
 
 const TOTAL_STEPS = 10;
 
-export function c(pComplete, pTotal = TOTAL_STEPS) {
+function c(pComplete, pTotal = TOTAL_STEPS) {
   return { complete: pComplete / pTotal };
 }
 

@@ -214,7 +214,7 @@ function normalizeDotReporterOptions(
  * @param {string} pGranularity - either "module" (for fine grained module
  *                                level) or "folder" (for a report consolidated
  *                                to folders)
- * @returns {(pResults, pDotReporterOptions) => import("../../../types/dependency-cruiser.js").IReporterOutput}
+ * @returns {(pResults, pDotReporterOptions) => import("../../../types/dependency-cruiser.mjs").IReporterOutput}
  */
 export default function produceDotReporter(pGranularity) {
   return function dot(pResults, pDotReporterOptions) {

@@ -31,7 +31,7 @@ const TYPE2MODULE = new Map([
  * Returns the reporter function associated with given output type,
  * or the identity reporter if that output type wasn't found
  *
- * @param {import("../../types/shared-types.js").OutputType} pOutputType -
+ * @param {import("../../types/shared-types.mjs").OutputType} pOutputType -
  * @returns {function} - a function that takes an ICruiseResult, optionally
  *                       an options object (specific to that function)
  *                       and returns an IReporterOutput
@@ -52,7 +52,7 @@ export async function getReporter(pOutputType) {
 /**
  * Returns a list of all currently available reporters
  *
- * @returns {import("../../types/shared-types.js").OutputType[]} -
+ * @returns {import("../../types/shared-types.mjs").OutputType[]} -
  */
 export function getAvailableReporters() {
   return Array.from(TYPE2MODULE.keys());

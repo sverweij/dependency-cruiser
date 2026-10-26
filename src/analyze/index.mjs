@@ -11,10 +11,10 @@ import { bus } from "#utl/bus.mjs";
  * used in the cruise, so consumers of the cruise result (reporters, depcruise-fmt,
  * caching) can use that.
  *
- * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
+ * @param {import("../../types/dependency-cruiser.mjs").IModule[]} pModules
  * @param {import("../../types/options.mjs").ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
- * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
+ * @returns {import("../../types/dependency-cruiser.mjs").ICruiseResult}
  */
 export default function analyze(pModules, pOptions, pFileAndDirectoryArray) {
   const lModules = analyzeModules(pModules, pOptions);

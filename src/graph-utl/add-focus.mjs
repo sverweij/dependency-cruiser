@@ -23,8 +23,8 @@ function scrub(pModuleNamesSet) {
 
 /**
  *
- * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
- * @param {import("../../types/strict-filter-types.js").IStrictFocusType} pFilter
+ * @param {import("../../types/dependency-cruiser.mjs").IModule[]} pModules
+ * @param {import("../../types/strict-filter-types.mjs").IStrictFocusType} pFilter
  * @returns
  */
 export default function addFocus(pModules, pFilter) {

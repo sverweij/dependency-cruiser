@@ -11,7 +11,7 @@ import wrapAndIndent from "#utl/wrap-and-indent.mjs";
 /**
  * @import { ICruiseResult, IEnvironmentIssue } from "../../types/cruise-result.mjs"
  * @import { IErrorReporterOptions } from "../../types/reporter-options.mjs"
- * @import { IReporterOutput } from "../../types/dependency-cruiser.js"
+ * @import { IReporterOutput } from "../../types/dependency-cruiser.mjs"
  * @import { SeverityType } from "../../types/shared-types.mjs"
  */
 

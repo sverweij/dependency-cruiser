@@ -27,7 +27,7 @@ function report(pModules) {
  *
  * @param {import("../../types/cruise-result.mjs").ICruiseResult} pResults -
  * the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
+ * @returns {import("../../types/dependency-cruiser.mjs").IReporterOutput}
  */
 export default function csv(pResults) {
   return {

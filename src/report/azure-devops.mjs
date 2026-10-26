@@ -13,7 +13,7 @@ const SEVERITY2VSO_TYPE = new Map([
 ]);
 
 /**
- * @param {import("../../types/shared-types.js").SeverityType} pSeverity
+ * @param {import("../../types/shared-types.mjs").SeverityType} pSeverity
  * @returns {string}
  */
 function formatSeverity(pSeverity) {
@@ -21,7 +21,7 @@ function formatSeverity(pSeverity) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatModuleViolation(pViolation) {
@@ -29,7 +29,7 @@ function formatModuleViolation(pViolation) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatDependencyViolation(pViolation) {
@@ -37,7 +37,7 @@ function formatDependencyViolation(pViolation) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatCycleViolation(pViolation) {
@@ -47,7 +47,7 @@ function formatCycleViolation(pViolation) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatReachabilityViolation(pViolation) {
@@ -57,7 +57,7 @@ function formatReachabilityViolation(pViolation) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatInstabilityViolation(pViolation) {
@@ -69,7 +69,7 @@ function formatInstabilityViolation(pViolation) {
 }
 
 /**
- * @param {import("../../types/violations.js").IViolation} pViolation
+ * @param {import("../../types/violations.mjs").IViolation} pViolation
  * @returns {string}
  */
 function formatViolation(pViolation) {
@@ -167,8 +167,8 @@ function formatSummary(pSummary) {
  * Background documentation:
  * https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
  *
- * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
- * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
+ * @param {import("../../types/dependency-cruiser.mjs").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser.mjs").IReporterOutput}
  */
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export default function azureDevOps(pResults) {

@@ -17,4 +17,3 @@ export const BABEL_CONFIG = ".babelrc";
 export const PACKAGE_MANIFEST = "package.json";
 export const OUTPUT_TYPE = "err";
 export const OUTPUT_TO = "-";
-export const CACHE_FOLDER = "node_modules/.cache/dependency-cruiser";

@@ -174,7 +174,7 @@ function sanitizeWordList(pWordList) {
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
- * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
+ * @returns {import("../../../types/dependency-cruiser.mjs").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
  *                              exitCode: 0
  */
 export default function reportAnonymous(pResults, pAnonymousReporterOptions) {

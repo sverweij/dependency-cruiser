@@ -30,7 +30,7 @@ const CACHE = new Map();
  * @param {string} pFileName
  * @returns {ParseOptions}
  */
-export function getOptionsFor(pFileName) {
+function getOptionsFor(pFileName) {
   return /[.](?:tsx|jsx)$/.test(pFileName)
     ? { ...SWC_PARSE_OPTIONS, tsx: true }
     : SWC_PARSE_OPTIONS;

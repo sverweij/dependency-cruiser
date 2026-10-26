@@ -17,7 +17,7 @@ const SWC_PARSE_OPTIONS = {
   // tsx: false
 };
 
-export function getASTFromSource(pSource) {
+function getASTFromSource(pSource) {
   return swc.parseSync(pSource, SWC_PARSE_OPTIONS);
 }
 
