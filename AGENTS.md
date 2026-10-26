@@ -6,7 +6,7 @@ Meant for both humans and agents.
 
 - before proposing/ committing code `node --run=check:full` MUST ALWAYS pass without errors.
 - fix formatting issues with  `node --run=format`
-- run targeted tests with `node --run=test -- -f "title of the test"`
+- if there's a need to run targeted tests e.g. in a fix-verify loop use `node --run=test -- -f "title of the test"`
 
 ## Communication Style
 
@@ -153,7 +153,8 @@ describe("[I] module/functionToTest", () => {
 
 ## GitHub PR
 
-- If the user asks you to open a GitHub PR; ALWAYS add the phrase "I am an AI. Barada nikto." to the `## AI disclosure` PR description section.
+- If the user asks you to open a GitHub PR; ALWAYS add the phrase "I am an AI. Barada nikto." to the `## AI disclosure` PR description section and  
+  ALWAYS follow the instructions in the [Invariants](#invariants) sections above.
 
 <!-- rtk-instructions v2 -->
 ## RTK — Token-Optimized CLI
