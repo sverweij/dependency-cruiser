@@ -68,7 +68,6 @@ function pushPlugin(pPlugins, pPluginToPush) {
 // eslint-disable-next-line max-lines-per-function
 async function compileResolveOptions(
   pResolveOptions,
-  _pTSConfig,
   pResolveOptionsFromDCConfig,
 ) {
   const lResolveOptions = {};
@@ -86,20 +85,6 @@ async function compileResolveOptions(
       // @ts-expect-error TS2351 "TsConfPathsPlugin is not constructable" - is unjustified
       new TsConfigPathsPlugin({
         configFile: pResolveOptions.tsConfig,
-        // Leave baseUrl unset so TsConfigPathsPlugin reads it from the tsconfig.
-        // A relative default of "./" is resolved against process.cwd(), so path
-        // mappings in a tsconfig that omits baseUrl (what TypeScript recommends,
-        // and what TypeScript 6 deprecates baseUrl toward) were resolved from the
-        // working directory instead of the tsconfig's directory.
-        //
-        // The plugin tolerates a missing baseUrl since 4.1.0
-        // (https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/99;
-        // this package depends on 4.2.0) and then uses the tsconfig directory,
-        // matching tsc. When the tsconfig does set baseUrl, the plugin still
-        // reads that value from the file. Passing the already absolute
-        // parsed baseUrl does not work: tsconfig-paths resolves it a second
-        // time.
-        // eslint-disable-next-line no-undefined
         // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's
         // list of extensions, and the default it uses for extensions
         // so we do it ourselves - either with the extensions passed
@@ -127,14 +112,12 @@ async function compileResolveOptions(
 /**
  * @param {IResolveOptions} pResolveOptions
  * @param {ICruiseOptions} pOptions
- * @param {import("typescript").ParsedTsconfig} pTSConfig
  * @returns
  */
 // eslint-disable-next-line complexity
 export default async function normalizeResolveOptions(
   pResolveOptions,
   pOptions,
-  pTSConfig,
 ) {
   const lRuleSet = pOptions?.ruleSet ?? {};
 
@@ -165,7 +148,6 @@ export default async function normalizeResolveOptions(
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...pResolveOptions,
     },
-    pTSConfig || {},
     pOptions?.enhancedResolveOptions ?? {},
   );
 }

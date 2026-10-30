@@ -36,7 +36,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -77,7 +76,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -118,7 +116,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -172,7 +169,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG_NO_PATHS,
     );
     const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_NO_PATHS };
 
@@ -216,7 +212,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG_RESOLUTIONS,
     );
     const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_RESOLUTIONS };
     deepEqual(
@@ -262,7 +257,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG_RESOLUTIONS,
         ),
         {
           tsConfig: PARSED_TSCONFIG_RESOLUTIONS,
@@ -311,7 +305,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
               bustTheCache: true,
             },
             {},
-            lParsedTSConfig,
           ),
           { tsConfig: lParsedTSConfig },
         ),
@@ -361,7 +354,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
               bustTheCache: true,
             },
             {},
-            lParsedTSConfig,
           ),
           { tsConfig: lParsedTSConfig },
         ),
