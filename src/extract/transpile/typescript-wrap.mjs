@@ -1,3 +1,4 @@
+import { resolve } from "node:path";
 import tryImport from "#utl/try-import.mjs";
 import meta from "#meta.cjs";
 
@@ -32,15 +33,23 @@ function getCompilerOptions(pFlavor, pTSConfig) {
   };
 }
 
+function getTranspilableFileName(pFileName) {
+  if (typeof pFileName !== "string") {
+    return undefined;
+  }
+  return resolve(pFileName).replace(/\.d(\.[^./\\]+)?(\.[cm]?ts)$/, "$1$2");
+}
+
 export default function typescriptWrap(pFlavor) {
   return {
     isAvailable: () => typescript !== false,
 
     version: () => `typescript@${typescript.version}`,
 
-    transpile: (pSource, _pFileName, pTranspileOptions = {}) =>
+    transpile: (pSource, pFileName, pTranspileOptions = {}) =>
       typescript.transpileModule(pSource, {
         ...(pTranspileOptions.tsConfig || {}),
+        fileName: getTranspilableFileName(pFileName),
         compilerOptions: getCompilerOptions(
           pFlavor,
           pTranspileOptions.tsConfig || {},
