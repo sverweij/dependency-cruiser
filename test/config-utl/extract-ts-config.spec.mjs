@@ -2,6 +2,7 @@ import { fileURLToPath } from "node:url";
 import { deepEqual, throws } from "node:assert/strict";
 import loadTSConfig from "#config-utl/extract-ts-config.mjs";
 import pathToPosix from "#utl/path-to-posix.mjs";
+import typescript from "#utl/typescript-facade.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));
@@ -129,6 +130,33 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
         getFullPath("./__mocks__/typescriptconfig/override from extends here"),
       )
     ] = 1;
+
+    if (typescript.isNative) {
+      // The native compiler returns fewer attributes. It also does take
+      // compileOnSave from the base (see the remark at the end of this test)
+      deepEqual(lParseResult, {
+        options: {
+          configFilePath: pathToPosix(
+            getFullPath(
+              "__mocks__/typescriptconfig/tsconfig.noncompileroptionsextends.json",
+            ),
+          ),
+        },
+        fileNames: [
+          pathToPosix(getFullPath("__mocks__/typescriptconfig/dummysrc.ts")),
+        ],
+        raw: {
+          extends: "./tsconfig.noncompileroptionsbase.json",
+          exclude: ["only in the extends"],
+          include: ["override from extends here"],
+          compileOnSave: true,
+          files: ["./dummysrc.ts"],
+        },
+        errors: [],
+        compileOnSave: true,
+      });
+      return;
+    }
 
     /* eslint no-undefined:0 */
     deepEqual(lParseResult, {
