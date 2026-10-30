@@ -100,7 +100,6 @@ async function compileResolveOptions(
         // parsed baseUrl does not work: tsconfig-paths resolves it a second
         // time.
         // eslint-disable-next-line no-undefined
-        baseUrl: undefined,
         // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's
         // list of extensions, and the default it uses for extensions
         // so we do it ourselves - either with the extensions passed
