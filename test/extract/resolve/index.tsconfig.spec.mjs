@@ -36,7 +36,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -77,7 +76,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -118,7 +116,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG,
     );
     const lTranspileOptions = {
       tsConfig: PARSED_TSCONFIG,
@@ -172,7 +169,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG_NO_PATHS,
     );
     const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_NO_PATHS };
 
@@ -216,7 +212,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         bustTheCache: true,
       },
       {},
-      PARSED_TSCONFIG_RESOLUTIONS,
     );
     const lTranspileOptions = { tsConfig: PARSED_TSCONFIG_RESOLUTIONS };
     deepEqual(
@@ -262,7 +257,6 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG_RESOLUTIONS,
         ),
         {
           tsConfig: PARSED_TSCONFIG_RESOLUTIONS,
@@ -282,6 +276,103 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js",
       },
     );
+  });
+
+  it("resolves paths without a baseUrl from the tsconfig directory when run from its parent", async () => {
+    const lOriginalWorkingDirectory = process.cwd();
+    const lParentDirectory = join(
+      __dirname,
+      "__mocks__",
+      "ts-config-paths-without-baseurl",
+    );
+    const lTSConfig = join(lParentDirectory, "repro", "tsconfig.json");
+
+    try {
+      process.chdir(lParentDirectory);
+      const lParsedTSConfig = extractTSConfig(lTSConfig);
+
+      deepEqual(
+        resolve(
+          {
+            module: "@/b",
+            moduleSystem: "es6",
+          },
+          lParentDirectory,
+          join(lParentDirectory, "repro", "src"),
+          await normalizeResolveOptions(
+            {
+              tsConfig: lTSConfig,
+              bustTheCache: true,
+            },
+            {},
+          ),
+          { tsConfig: lParsedTSConfig },
+        ),
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local",
+          ],
+          followable: true,
+          resolved: "repro/src/b.ts",
+        },
+      );
+    } finally {
+      process.chdir(lOriginalWorkingDirectory);
+    }
+  });
+
+  it("resolves paths without a baseUrl from the tsconfig directory when run inside it", async () => {
+    const lOriginalWorkingDirectory = process.cwd();
+    const lProjectDirectory = join(
+      __dirname,
+      "__mocks__",
+      "ts-config-paths-without-baseurl",
+      "repro",
+    );
+    const lTSConfig = join(lProjectDirectory, "tsconfig.json");
+
+    try {
+      process.chdir(lProjectDirectory);
+      const lParsedTSConfig = extractTSConfig(lTSConfig);
+
+      deepEqual(
+        resolve(
+          {
+            module: "@/b",
+            moduleSystem: "es6",
+          },
+          lProjectDirectory,
+          join(lProjectDirectory, "src"),
+          await normalizeResolveOptions(
+            {
+              tsConfig: lTSConfig,
+              bustTheCache: true,
+            },
+            {},
+          ),
+          { tsConfig: lParsedTSConfig },
+        ),
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: [
+            "aliased",
+            "aliased-tsconfig",
+            "aliased-tsconfig-paths",
+            "local",
+          ],
+          followable: true,
+          resolved: "src/b.ts",
+        },
+      );
+    } finally {
+      process.chdir(lOriginalWorkingDirectory);
+    }
   });
 
   it("gives a different result for the same input without a webpack config", async () => {

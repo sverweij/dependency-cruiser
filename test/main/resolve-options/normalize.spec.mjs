@@ -9,10 +9,6 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 describe("[I] main/resolve-options/normalize", () => {
   const lDefaultNoOfResolveOptions = 10;
   const TEST_TSCONFIG = join(__dirname, "__mocks__", "tsconfig.test.json");
-  const lTsconfigContents = {};
-  const lTsconfigContentsWithBaseURLAndPaths = {
-    options: { baseUrl: "", paths: { "*": ["lalala/*"] } },
-  };
 
   it("comes with a set of defaults when passed with no options at all", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
@@ -35,7 +31,6 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: {} },
       }),
-      lTsconfigContents,
     );
 
     equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
@@ -54,7 +49,6 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      lTsconfigContents,
     );
 
     equal(
@@ -76,7 +70,6 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      lTsconfigContentsWithBaseURLAndPaths,
     );
 
     equal(
