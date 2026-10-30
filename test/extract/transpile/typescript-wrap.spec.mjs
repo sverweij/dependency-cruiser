@@ -1,4 +1,4 @@
-import { equal } from "node:assert/strict";
+import { doesNotMatch, equal, match } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "#extract/transpile/typescript-wrap.mjs";
@@ -28,6 +28,42 @@ describe("[I] typescript transpiler", () => {
       ),
     );
     equal(lExpected, lFound);
+  });
+
+  it("transpiles a re-export from a sibling module named 'module'", () => {
+    const lFound = typeScriptRegularWrap.transpile(
+      "export { x as default } from './module';",
+      "src/index.ts",
+      {
+        tsConfig: {
+          options: { module: "esnext", moduleResolution: "bundler" },
+        },
+      },
+    );
+    match(lFound, /export \{ x as default \} from '\.\/module';/);
+  });
+
+  it("transpiles type assertions in .ts files when the tsconfig enables jsx", () => {
+    const lFound = typeScriptRegularWrap.transpile(
+      "const a = <string>b;\nexport default a;",
+      "src/index.ts",
+      { tsConfig: { options: { jsx: "react-jsx" } } },
+    );
+    doesNotMatch(lFound, /jsx-runtime/);
+    match(lFound, /export default a;/);
+  });
+
+  it("transpiles declaration files", () => {
+    for (const lFileName of [
+      "src/index.d.ts",
+      "src/index.d.cts",
+      "src/styles.d.css.ts",
+    ]) {
+      match(
+        typeScriptRegularWrap.transpile("export * from './types';", lFileName),
+        /["']\.\/types["']/,
+      );
+    }
   });
 });
 
@@ -64,5 +100,15 @@ describe("[I] typescript transpiler (esm)", () => {
       readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8"),
     );
     equal(lExpected, lFound);
+  });
+
+  it("transpiles mts declaration files", () => {
+    match(
+      typeScriptESMWrap.transpile(
+        "export * from './types.mjs';",
+        "src/index.d.mts",
+      ),
+      /export \* from '\.\/types\.mjs';/,
+    );
   });
 });

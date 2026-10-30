@@ -57,7 +57,7 @@ export default function extractTSConfig(pTSConfigFileName) {
       typescript.sys,
       dirname(resolve(pTSConfigFileName)),
       {},
-      pTSConfigFileName,
+      resolve(pTSConfigFileName),
     );
 
     if (lReturnValue.errors.length > 0) {
