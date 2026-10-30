@@ -68,7 +68,7 @@ function pushPlugin(pPlugins, pPluginToPush) {
 // eslint-disable-next-line max-lines-per-function
 async function compileResolveOptions(
   pResolveOptions,
-  pTSConfig,
+  _pTSConfig,
   pResolveOptionsFromDCConfig,
 ) {
   const lResolveOptions = {};
@@ -86,29 +86,21 @@ async function compileResolveOptions(
       // @ts-expect-error TS2351 "TsConfPathsPlugin is not constructable" - is unjustified
       new TsConfigPathsPlugin({
         configFile: pResolveOptions.tsConfig,
-        // TsConfigPathsPlugin requires a baseUrl to be present in the tsconfig,
-        // otherwise it prints scary messages that it didn't and read the tsConfig
-        // (potentially making users think it's dependency-cruiser disregarding the
-        // tsconfig). Hence up till version 13.0.4 dependency-cruiser only loaded
-        // TsConfigPathsPlugin when an options.baseUrl existed. However, this
-        // isn't necessary anymore:
-        // - [tsconfig#baseUrl documentation](https://www.typescriptlang.org/tsconfig#baseUrl)
-        //   UNrecommends the use of the baseUrl for non-AMD projects
-        // - [tsconfig-paths PR #207](https://github.com/dividab/tsconfig-paths/pull/208)
-        //   'tolerates' undefined baseUrls
+        // Leave baseUrl unset so TsConfigPathsPlugin reads it from the tsconfig.
+        // A relative default of "./" is resolved against process.cwd(), so path
+        // mappings in a tsconfig that omits baseUrl (what TypeScript recommends,
+        // and what TypeScript 6 deprecates baseUrl toward) were resolved from the
+        // working directory instead of the tsconfig's directory.
         //
-        // Hence, until
-        // [tpwp issue #99](https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/99)
-        // lands:
-        // - pass a default baseUrl to TsConfigPathsPlugin if the baseUrl isn't available
-        // - pass undefined in all other cases; TsConfigPathsPlugin will read
-        //   it from the tsconfig.json in that case. Passing the processed baseUrl
-        //   (pTSConfig?.options?.baseUrl) instead would've been more obvious, but
-        //   doesn't work, as that is an absolute path and tsconfig-paths(-wpp)
-        //   seems to process that again resulting in invalid paths and unresolved
-        //   or erroneous dependencies
+        // The plugin tolerates a missing baseUrl since 4.1.0
+        // (https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/99;
+        // this package depends on 4.2.0) and then uses the tsconfig directory,
+        // matching tsc. When the tsconfig does set baseUrl, the plugin still
+        // reads that value from the file. Passing the already absolute
+        // parsed baseUrl does not work: tsconfig-paths resolves it a second
+        // time.
         // eslint-disable-next-line no-undefined
-        baseUrl: pTSConfig?.options?.baseUrl ? undefined : "./",
+        baseUrl: undefined,
         // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's
         // list of extensions, and the default it uses for extensions
         // so we do it ourselves - either with the extensions passed
