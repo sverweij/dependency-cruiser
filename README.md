@@ -193,7 +193,6 @@ You've come to the right place :-) :
 ## Build status
 
 [![GitHub Workflow Status](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml)
-[![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2591999)](https://npmjs.com/package/dependency-cruiser)
 
 Made with :metal: in Holland.
