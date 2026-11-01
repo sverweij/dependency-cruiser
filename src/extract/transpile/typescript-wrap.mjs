@@ -7,6 +7,16 @@ const typescript = await tryImport(
   meta.supportedTranspilers.typescript,
 );
 
+// This RE matches
+// - filename.d.ts (, .cts, .mts), but also
+// - filename.d.something.ts (, .cts., .mts).
+// That second one seems a bit odd, but it _is_ possible; see for instance
+// https://www.typescriptlang.org/tsconfig/#allowArbitraryExtensions
+// (and I guess, but haven't seen this confirmed in the field or documentation
+// that it could be possible to have a declaration file variant of
+// https://www.typescriptlang.org/tsconfig/#moduleSuffixes)
+const DECLARATION_FILE_RE = /[.]d([.][^./\\]+)?([.][cm]?ts)$/;
+
 function getCompilerOptions(pFlavor, pTSConfig) {
   const lCompilerOptions = {};
 
@@ -37,7 +47,10 @@ function getTranspilableFileName(pFileName) {
   if (typeof pFileName !== "string") {
     return undefined;
   }
-  return resolve(pFileName).replace(/\.d(\.[^./\\]+)?(\.[cm]?ts)$/, "$1$2");
+  // Declaration files (.d.ts, .d.mts, .d.cts, .d.css.ts) get their
+  // non-declaration name, because TypeScript emits nothing for a declaration
+  // file and throws "Debug Failure. Output generation failed".
+  return resolve(pFileName).replace(DECLARATION_FILE_RE, "$1$2");
 }
 
 export default function typescriptWrap(pFlavor) {
