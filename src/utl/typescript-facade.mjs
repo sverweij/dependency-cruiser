@@ -88,7 +88,7 @@ function getClassicFacade(pTypeScript) {
         pTypeScript.sys,
         dirname(resolve(pFileName)),
         {},
-        pFileName,
+        resolve(pFileName),
       ),
     formatDiagnostics: (pDiagnostics) =>
       pTypeScript.formatDiagnostics(pDiagnostics, lFormatDiagnosticsHost),
