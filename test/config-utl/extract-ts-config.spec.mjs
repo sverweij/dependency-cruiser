@@ -40,6 +40,19 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
     );
   });
 
+  it("returns an absolute configFilePath when a relative config file name is passed", () => {
+    deepEqual(
+      loadTSConfig(
+        "test/config-utl/__mocks__/typescriptconfig/tsconfig.empty.json",
+      ).options,
+      {
+        configFilePath: pathToPosix(
+          getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
+        ),
+      },
+    );
+  });
+
   it("returns an empty object when an empty config file with comments is passed", () => {
     deepEqual(
       loadTSConfig(
