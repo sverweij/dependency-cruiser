@@ -542,4 +542,104 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
       ["local", "type-only"],
     );
   });
+
+  it("with bundledDependencies: true regular dependencies become bundled", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module",
+        {
+          bundledDependencies: true,
+          dependencies: {
+            "cool-module": "1.2.3",
+          },
+        },
+      ),
+      ["npm", "npm-bundled"],
+    );
+  });
+  it("with bundledDependencies: true and no dependencies it's still a npm-no-pkg", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module",
+        {
+          bundledDependencies: true,
+        },
+      ),
+      ["npm-no-pkg"],
+    );
+  });
+  it("with bundledDependencies: true, no dependencies but devDependencies it's still a npm-dev", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module",
+        {
+          bundledDependencies: true,
+          devDependencies: {
+            "cool-module": "1.2.3",
+          },
+        },
+      ),
+      ["npm-dev"],
+    );
+  });
+  it("with bundledDependencies: an array, it's npm-bundled", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module",
+        {
+          bundledDependencies: ["fresh-module", "cool-module", "hot-module"],
+        },
+      ),
+      ["npm-no-pkg", "npm-bundled"],
+    );
+  });
+
+  it("classifies package subpaths as bundled", () => {
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module/subpath",
+        {
+          bundledDependencies: ["cool-module"],
+        },
+      ),
+      ["npm-no-pkg", "npm-bundled"],
+    );
+
+    deepEqual(
+      determineDependencyTypes(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/cool-module/main/index.js",
+        },
+        "cool-module/subpath",
+        {
+          bundledDependencies: true,
+          dependencies: {
+            "cool-module": "1.2.3",
+          },
+        },
+      ),
+      ["npm", "npm-bundled"],
+    );
+  });
 });
