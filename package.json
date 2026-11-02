@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "18.7.1",
+  "version": "18.7.2",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -44,7 +44,7 @@
     "Jessica Kerr (https://jessitron.com)",
     "João Ribeiro (https://github.com/JonnyBGod)",
     "Jon Lauridsen (https://jonlauridsen.com)",
-    "Joshua T (https://github.com/radiantly)",  
+    "Joshua T (https://github.com/radiantly)",
     "KenjiroKubota (https://github.com/kubotak-is)",
     "Kentaro Suzuki (https://github.com/sushichan044)",
     "Klaus Meinhardt (https://github.com/ajafff)",
