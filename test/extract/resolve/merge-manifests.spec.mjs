@@ -116,4 +116,18 @@ describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => 
       },
     );
   });
+
+  it("normalizes bundledDependencies: true to empty array when there's no dependencies", () => {
+    deepEqual(
+      mergePackages(
+        {
+          bundledDependencies: true,
+        },
+        {},
+      ),
+      {
+        bundledDependencies: [],
+      },
+    );
+  });
 });
