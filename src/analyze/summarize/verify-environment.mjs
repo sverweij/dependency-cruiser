@@ -88,8 +88,8 @@ export function determineEnvironmentIssues(pOptions, pAvailableTranspilers) {
         `dependency-cruiser detected a TypeScript environment,${EOL}` +
         `    but not a compatible TypeScript compiler (${tsTranspiler.name}: ${tsTranspiler.version}). This means${EOL}` +
         `    it's likely to have missed TypeScript sources and dependencies.${EOL}${EOL}` +
-        `    Install typescript to get better results (e.g. npm i -D typescript@^6).${EOL}${EOL}` +
-        `    => Support for typescript@>=7 will follow when its API is published and stable.${EOL}`,
+        `    Install typescript to get better results (e.g. npm i -D typescript@^6 or typescript@^7.1).${EOL}${EOL}` +
+        `    => typescript@7.0 is not supported as its API lacks what dependency-cruiser needs.${EOL}`,
     });
   }
   if (!typeScriptIsConsistent(pOptions, pAvailableTranspilers)) {
@@ -109,7 +109,7 @@ export function determineEnvironmentIssues(pOptions, pAvailableTranspilers) {
         `    This means it's likely to have missed TypeScript sources and dependencies.${EOL}${EOL}` +
         `    Install one of the above for better results.${EOL}${EOL}` +
         `    => if you choose to use swc don't forget to set the "parser" option to "swc"${EOL}` +
-        `    => Support for typescript@>=7 will follow when its API is published and stable.${EOL}`,
+        `    => typescript@7.0 is not supported as its API lacks what dependency-cruiser needs.${EOL}`,
     });
   }
   if (!swcIsConsistent(pOptions, pAvailableTranspilers)) {

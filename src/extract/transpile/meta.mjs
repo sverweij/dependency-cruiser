@@ -55,10 +55,9 @@ const TRANSPILER2AVAILABLE = {
     meta.supportedTranspilers.svelte,
   ),
   swc: tryImportAvailable("@swc/core", meta.supportedTranspilers.swc),
-  typescript: tryImportAvailable(
-    "typescript",
-    meta.supportedTranspilers.typescript,
-  ),
+  // not tryImportAvailable as for typescript >=7 being installed isn't
+  // enough - the native compiler needs to be able to run as well
+  typescript: typescriptWrap.isAvailable(),
   "vue-template-compiler": tryImportAvailable(
     "vue-template-compiler",
     meta.supportedTranspilers["vue-template-compiler"],
