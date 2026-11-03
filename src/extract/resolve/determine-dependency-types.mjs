@@ -89,17 +89,22 @@ function determineManifestDependencyTypes(
  * an array, and not an object, hence needs different treatment
  */
 function dependencyIsBundled(pModule, pPackageDeps) {
-  let lReturnValue = false;
-
   if (pPackageDeps) {
     const lBundledDependencies =
       pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
+    // "bundledDependencies": true means: all production dependencies get
+    // bundled
+    if (lBundledDependencies === true) {
+      return Object.hasOwn(pPackageDeps.dependencies || {}, pModule);
+    }
 
     if (lBundledDependencies) {
-      lReturnValue = lBundledDependencies.includes(pModule);
+      return lBundledDependencies.includes(pModule);
     }
   }
-  return lReturnValue;
+  // false when there's no bundledDependencies or
+  // when bundledDependencies equals false
+  return false;
 }
 
 /**
@@ -116,9 +121,10 @@ function determineNodeModuleDependencyTypes(
   pFileDirectory,
   pResolveOptions,
 ) {
+  const lPackageRoot = getPackageRoot(pModuleName);
   /** @type { DependencyType[] } */
   const lReturnValue = determineManifestDependencyTypes(
-    getPackageRoot(pModuleName),
+    lPackageRoot,
     pPackageDeps,
     pResolveOptions.modules,
   );
@@ -128,7 +134,7 @@ function determineNodeModuleDependencyTypes(
   ) {
     lReturnValue.push("deprecated");
   }
-  if (dependencyIsBundled(pModuleName, pPackageDeps)) {
+  if (dependencyIsBundled(lPackageRoot, pPackageDeps)) {
     lReturnValue.push("npm-bundled");
   }
   return lReturnValue;

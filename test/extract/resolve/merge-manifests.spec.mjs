@@ -94,4 +94,26 @@ describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => 
       },
     );
   });
+
+  it("normalizes bundledDependencies: true to dependency names", () => {
+    deepEqual(
+      mergePackages(
+        {
+          dependencies: {
+            foo: "1.0.0",
+            bar: "2.0.0",
+          },
+          bundledDependencies: true,
+        },
+        {},
+      ),
+      {
+        dependencies: {
+          foo: "1.0.0",
+          bar: "2.0.0",
+        },
+        bundledDependencies: ["foo", "bar"],
+      },
+    );
+  });
 });

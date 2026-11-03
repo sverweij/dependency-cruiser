@@ -1,7 +1,7 @@
 import { uniq } from "#utl/array-util.mjs";
 
 /* eslint-disable security/detect-object-injection */
-function normalizeManifestKeys(pManifest) {
+function normalizeBundleManifestKeys(pManifest) {
   const lReturnValue = pManifest;
 
   if (pManifest.bundleDependencies) {
@@ -9,6 +9,9 @@ function normalizeManifestKeys(pManifest) {
       pManifest.bundleDependencies,
     );
     Reflect.deleteProperty(pManifest, "bundleDependencies");
+  }
+  if (pManifest.bundledDependencies === true) {
+    pManifest.bundledDependencies = Object.keys(pManifest.dependencies || {});
   }
   return lReturnValue;
 }
@@ -64,8 +67,8 @@ function isAnArrayKey(pKey) {
  */
 export default function mergeManifests(pClosestManifest, pFurtherManifest) {
   return getJointUniqueDependencyKeys(
-    normalizeManifestKeys(pClosestManifest),
-    normalizeManifestKeys(pFurtherManifest),
+    normalizeBundleManifestKeys(pClosestManifest),
+    normalizeBundleManifestKeys(pFurtherManifest),
   )
     .map((pKey) => ({
       key: pKey,
