@@ -1,4 +1,6 @@
 /* eslint-disable security/detect-object-injection */
+import findCycleComponents from "./find-cycle-components.mjs";
+
 /**
  * @import { IFolderDependency, IDependency, IFolder, IModule } from "../../types/cruise-result.mjs"
  * @import { DependencyType, IMiniDependency } from "../../types/shared-types.mjs"
@@ -10,6 +12,8 @@
 
 export default class IndexedModuleGraph {
   #indexedGraph;
+  /** @type {Map<string, number>|undefined} */
+  #cycleComponents;
   /**
    * @param {IModuleOrFolder} pModule
    * @returns {IVertex}
@@ -181,6 +185,24 @@ export default class IndexedModuleGraph {
   }
 
   /**
+   * Computed once per graph, on first use.
+   *
+   * @returns {Map<string, number>} module name => the strongly connected
+   *          component it's in. Only has entries for modules on a cycle.
+   */
+  #getCycleComponents() {
+    this.#cycleComponents ??= findCycleComponents(
+      new Map(
+        Array.from(this.#indexedGraph, ([pName, pVertex]) => [
+          pName,
+          pVertex.dependencies.map(({ name }) => name),
+        ]),
+      ),
+    );
+    return this.#cycleComponents;
+  }
+
+  /**
    * Returns the first non-zero length path from pInitialSource to pInitialSource
    * Returns the empty array if there is no such path
    *
@@ -191,10 +213,18 @@ export default class IndexedModuleGraph {
    */
   #getCycle(pInitialSource, pCurrentDependency, pVisited) {
     const lVisited = pVisited || new Set();
+    const lCycleComponents = this.#getCycleComponents();
+    const lCycleComponent = lCycleComponents.get(pInitialSource);
     /** @type {IVertex} */
     const lCurrentVertex = this.#indexedGraph.get(pCurrentDependency.name);
+    // A vertex outside pInitialSource's strongly connected component can't
+    // lead back to it, and neither can anything it leads to. Skipping those
+    // keeps the search from exploring the rest of the graph, while it visits
+    // the remaining vertices in the same order - so it finds the same cycle.
     const lEdges = lCurrentVertex.dependencies.filter(
-      (pDependency) => !lVisited.has(pDependency.name),
+      (pDependency) =>
+        !lVisited.has(pDependency.name) &&
+        lCycleComponents.get(pDependency.name) === lCycleComponent,
     );
     const lInitialAsDependency = lEdges.find(
       (pDependency) => pDependency.name === pInitialSource,
@@ -242,6 +272,17 @@ export default class IndexedModuleGraph {
    * @returns {Array<IMiniDependency>}   see description above
    */
   getCycle(pInitialSource, pCurrentSource) {
+    const lCycleComponents = this.#getCycleComponents();
+    const lCycleComponent = lCycleComponents.get(pInitialSource);
+
+    // no cycle can contain the dependency unless both ends are in the same
+    // strongly connected component
+    if (
+      lCycleComponent === undefined ||
+      lCycleComponent !== lCycleComponents.get(pCurrentSource)
+    ) {
+      return [];
+    }
     /** @type {IVertex} */
     const lInitialNode = this.#indexedGraph.get(pInitialSource);
     const lCurrentDependency = lInitialNode.dependencies.find(

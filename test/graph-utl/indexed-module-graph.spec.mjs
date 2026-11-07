@@ -594,3 +594,51 @@ describe("[U] graph-utl/indexed-module-graph - getCycle (verify the necessary at
     ]);
   });
 });
+
+/**
+ * @param {Record<string, string[]>} pAdjacency module => the modules it depends on
+ * @returns {import("../../types/cruise-result.mjs").IModule[]}
+ */
+function toModules(pAdjacency) {
+  return Object.entries(pAdjacency).map(([pSource, pDependencies]) => ({
+    source: pSource,
+    dependencies: pDependencies.map((pResolved) => ({ resolved: pResolved })),
+  }));
+}
+
+describe("[U] graph-utl/indexed-module-graph - getCycle (outside the strongly connected component)", () => {
+  it("finds the same cycle when a branch that can't lead back comes first (a -> b -> x -> y, b -> a)", () => {
+    const lGraph = toModules({ a: ["b"], b: ["x", "a"], x: ["y"], y: [] });
+
+    deepEqual(getCycle(lGraph, "a", "b"), ["b", "a"]);
+  });
+  it("finds the same cycle when a branch that can't lead back comes first (a -> b -> x -> y, b -> c -> a)", () => {
+    const lGraph = toModules({
+      a: ["b"],
+      b: ["x", "c"],
+      x: ["y"],
+      y: [],
+      c: ["a"],
+    });
+
+    deepEqual(getCycle(lGraph, "a", "b"), ["b", "c", "a"]);
+  });
+  it("returns [] for a dependency between two separate cycles (a <-> b, b -> c, c <-> d)", () => {
+    const lGraph = toModules({ a: ["b"], b: ["a", "c"], c: ["d"], d: ["c"] });
+
+    deepEqual(getCycle(lGraph, "b", "c"), []);
+    deepEqual(getCycle(lGraph, "a", "b"), ["b", "a"]);
+    deepEqual(getCycle(lGraph, "c", "d"), ["d", "c"]);
+  });
+  it("returns [] if 'to' is on a cycle with 'from', but isn't a dependency of it (q -> r -> s -> q)", () => {
+    deepEqual(getCycle(cycleInputGraphs.Q_R_S_Q, "q", "s"), []);
+  });
+  it("returns [] if the 'from' node is not in the graph", () => {
+    deepEqual(getCycle(cycleInputGraphs.D_E_D, "not-in-graph", "d"), []);
+  });
+  it("ignores dependencies on nodes that are not in the graph (a -> b -> not-in-graph, b -> c -> a)", () => {
+    const lGraph = toModules({ a: ["b"], b: ["not-in-graph", "c"], c: ["a"] });
+
+    deepEqual(getCycle(lGraph, "a", "b"), ["b", "c", "a"]);
+  });
+});
