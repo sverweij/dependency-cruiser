@@ -15,7 +15,7 @@ function splitLine(pLine, pMaxWidth) {
   let lCurrentWidth = 0;
 
   for (const lWord of lWords) {
-    if (lCurrentWidth + lWord.length > pMaxWidth) {
+    if (lCurrentLine && lCurrentWidth + lWord.length > pMaxWidth) {
       lWrappedLines.push(lCurrentLine.trimEnd());
       lCurrentLine = "";
       lCurrentWidth = 0;
