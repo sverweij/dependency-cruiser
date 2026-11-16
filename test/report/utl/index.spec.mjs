@@ -42,6 +42,25 @@ describe("[I] report/utl/index - getURLForModule", () => {
     deepEqual(getURLForModule(lModule), lExpectedURL);
   });
 
+  it("leaves replacement patterns in external package names alone", () => {
+    for (const lReplacementPattern of [
+      "$$",
+      "$&",
+      "$`",
+      "$'",
+      "$1",
+      "$<name>",
+    ]) {
+      const lModule = {
+        source: `node_modules/package-${lReplacementPattern}/index.js`,
+        dependencyTypes: ["npm"],
+      };
+      const lExpectedURL = `https://www.npmjs.com/package/package-${lReplacementPattern}`;
+
+      equal(getURLForModule(lModule), lExpectedURL);
+    }
+  });
+
   it("if it's not in node_modules it's not finding the package name, even though it might be an 'npm' dependencyType", () => {
     const lModule = {
       source: "claude_modules/beep/index.js",

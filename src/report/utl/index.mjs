@@ -86,14 +86,14 @@ export function getURLForModule(pModule, pPrefix, pSuffix) {
     // Default to Node.js API documentation
     return "https://nodejs.org/api/{{packageName}}.html".replace(
       "{{packageName}}",
-      lPackageName,
+      () => lPackageName,
     );
   } else if (
     pModule.dependencyTypes?.some((pType) => pType.startsWith("npm"))
   ) {
     return "https://www.npmjs.com/package/{{packageName}}".replace(
       "{{packageName}}",
-      deriveExternalPackageName(pModule.source),
+      () => deriveExternalPackageName(pModule.source),
     );
   } else if (pPrefix || pSuffix) {
     let lURL = pModule.source;
