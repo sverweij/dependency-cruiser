@@ -324,6 +324,26 @@ dependency-cruiser will 1:1 pass on to it.
 **A**: You don't. They work out of the box, as long as it has the
 necessary compilers at its disposal.
 
+### Q: Does dependency-cruiser work with TypeScript 7 (the native compiler)?
+
+**A**: Yes, from TypeScript 7.1 on. TypeScript 7.0's API doesn't have what
+dependency-cruiser needs, so with that version installed dependency-cruiser
+behaves as if there's no TypeScript compiler. Older versions (2 up to 6)
+keep working as they did.
+
+<details>
+<summary>Usage notes</summary>
+
+- TypeScript 7 runs the compiler as a separate, platform specific executable
+  that comes with one of its optional dependencies (e.g.
+  `@typescript/typescript-linux-x64`). If that one isn't installed (e.g.
+  because optional dependencies were omitted, or because the platform isn't
+  supported) dependency-cruiser can't use TypeScript 7.
+- TypeScript 7 dropped support for AMD, so dependency-cruiser won't detect
+  `/// <amd-dependency path="..." />` triple slash directives with it.
+
+</details>
+
 ### Q: I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
 
 **A**: jsx and its TypeScript and CoffeeScript variants work

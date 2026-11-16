@@ -2,18 +2,11 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable max-lines */
 /* eslint-disable no-inline-comments */
-import tryImport from "#utl/try-import.mjs";
-import meta from "#meta.cjs";
+import typescript from "#utl/typescript-facade.mjs";
 
 /**
- * @import typescript, {Node} from "typescript"
+ * @import {Node} from "typescript"
  */
-
-/** @type {typescript} */
-const typescript = await tryImport(
-  "typescript",
-  meta.supportedTranspilers.typescript,
-);
 
 const INTERESTING_NODE_KINDS = typescript
   ? new Set([
@@ -86,11 +79,17 @@ function getModuleBlock(pStatement) {
 }
 
 function getStatements(pAST, pDetectImportsInAmbientModules) {
+  // in javascript the native compiler adds statements it derived from jsdoc
+  // (e.g. from @import tags). Those are handled with the rest of the jsdoc.
+  const lStatements = (pAST.statements ?? []).filter(
+    (pStatement) => !typescript.isReparsed(pStatement),
+  );
+
   if (!pDetectImportsInAmbientModules) {
-    return pAST.statements ?? [];
+    return lStatements;
   }
 
-  return (pAST.statements ?? []).flatMap((pStatement) => {
+  return lStatements.flatMap((pStatement) => {
     const lModuleBlock = getModuleBlock(pStatement);
 
     return lModuleBlock
@@ -208,7 +207,9 @@ function extractTripleSlashDirectives(pAST) {
       })),
     )
     .concat(
-      pAST.amdDependencies.map((pReference) => ({
+      // the native compiler doesn't support amd anymore, so it doesn't
+      // deliver amdDependencies either
+      (pAST.amdDependencies ?? []).map((pReference) => ({
         module: pReference.path,
         moduleSystem: "tsd",
         exoticallyRequired: false,
@@ -237,19 +238,11 @@ function isRequireCallExpression(pASTNode) {
     pASTNode.kind === typescript.SyntaxKind.CallExpression &&
     pASTNode.expression
   ) {
-    /*
-     * from typescript 5.0.0 the `originalKeywordKind` attribute is deprecated
-     * and from 5.2.0 it will be gone. However, in typescript < 5.0.0 (still used
-     * heavily IRL) it's the only way to get it - hence this test for the
-     * existence of the * identifierToKeywordKind function
-     */
-    const lSyntaxKind = typescript.identifierToKeywordKind
-      ? typescript.SyntaxKind[
-          typescript.identifierToKeywordKind(pASTNode.expression)
-        ]
-      : /* c8 ignore next 1 */
-        typescript.SyntaxKind[pASTNode.expression.originalKeywordKind];
-    return lSyntaxKind === "RequireKeyword" && firstArgumentIsAString(pASTNode);
+    return (
+      pASTNode.expression.kind === typescript.SyntaxKind.Identifier &&
+      pASTNode.expression.text === "require" &&
+      firstArgumentIsAString(pASTNode)
+    );
   }
   return false;
 }
@@ -272,10 +265,10 @@ function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
       typescript.SyntaxKind.PropertyAccessExpression &&
     pASTNode.expression.expression &&
     pASTNode.expression.expression.kind === typescript.SyntaxKind.Identifier &&
-    pASTNode.expression.expression.escapedText === pObjectName &&
+    pASTNode.expression.expression.text === pObjectName &&
     pASTNode.expression.name &&
     pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
-    pASTNode.expression.name.escapedText === pPropertyName &&
+    pASTNode.expression.name.text === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
 }
@@ -298,15 +291,15 @@ function isTripleCursedCompositeExoticRequire(
     pASTNode.expression.expression.expression &&
     pASTNode.expression.expression.expression.kind ===
       typescript.SyntaxKind.Identifier &&
-    pASTNode.expression.expression.expression.escapedText === pObjectName1 &&
+    pASTNode.expression.expression.expression.text === pObjectName1 &&
     // process
     pASTNode.expression.expression.name.kind ===
       typescript.SyntaxKind.Identifier &&
-    pASTNode.expression.expression.name.escapedText === pObjectName2 &&
+    pASTNode.expression.expression.name.text === pObjectName2 &&
     // getBuiltinModule
     pASTNode.expression.name &&
     pASTNode.expression.name.kind === typescript.SyntaxKind.Identifier &&
-    pASTNode.expression.name.escapedText === pPropertyName &&
+    pASTNode.expression.name.text === pPropertyName &&
     firstArgumentIsAString(pASTNode)
   );
 }
@@ -344,7 +337,7 @@ function extractJSDocImportTags(pJSDocTags) {
   return pJSDocTags
     .filter(
       (pTag) =>
-        pTag.tagName.escapedText === "import" &&
+        pTag.tagName.text === "import" &&
         pTag.moduleSpecifier &&
         pTag.moduleSpecifier.kind === typescript.SyntaxKind.StringLiteral &&
         pTag.moduleSpecifier.text,
@@ -367,33 +360,13 @@ function isJSDocImport(pTypeNode) {
   );
 }
 
-const IGNORABLE_JSDOC_KEYS = new Set([
-  "parent",
-  "pos",
-  "end",
-  "flags",
-  "emitNode",
-  "modifierFlagsCache",
-  "transformFlags",
-  "id",
-  "flowNode",
-  "symbol",
-  "original",
-]);
-
-export function walkJSDoc(pObject, pCollection = new Set()) {
-  if (isJSDocImport(pObject)) {
-    pCollection.add(pObject.argument.literal.text);
-  } else if (Array.isArray(pObject)) {
-    for (const lValue of pObject) {
-      walkJSDoc(lValue, pCollection);
-    }
-  } else if (typeof pObject === "object") {
-    for (const lKey in pObject) {
-      if (!IGNORABLE_JSDOC_KEYS.has(lKey) && pObject[lKey]) {
-        walkJSDoc(pObject[lKey], pCollection);
-      }
-    }
+export function walkJSDoc(pNode, pCollection = new Set()) {
+  if (isJSDocImport(pNode)) {
+    pCollection.add(pNode.argument.literal.text);
+  } else {
+    typescript.forEachChild(pNode, (pChildNode) => {
+      walkJSDoc(pChildNode, pCollection);
+    });
   }
 }
 
@@ -408,7 +381,7 @@ function extractJSDocBracketImports(pJSDocTags) {
   return pJSDocTags
     .filter(
       (pTag) =>
-        pTag.tagName.escapedText !== "import" &&
+        pTag.tagName.text !== "import" &&
         pTag.typeExpression?.kind === typescript.SyntaxKind.FirstJSDocNode,
     )
     .flatMap((pTag) => getJSDocImports(pTag))
@@ -534,6 +507,14 @@ function walk(
   pDetectProcessBuiltinModuleCalls,
 ) {
   return (pASTNode) => {
+    // in javascript the native compiler adds nodes it derived from jsdoc
+    // (e.g. for types in @type tags). Those are handled with the rest of the
+    // jsdoc. As only the native compiler has these, the c8 ignore.
+    /* c8 ignore start */
+    if (typescript.isReparsed(pASTNode)) {
+      return;
+    }
+    /* c8 ignore stop */
     // /** @import thing from './module' */ etc
     // /** @type {import('module').thing}*/ etc
     if (pDetectJSDocImports && pASTNode.jsDoc) {

@@ -1,14 +1,8 @@
 import { readFileSync } from "node:fs";
 import transpile from "../transpile/index.mjs";
-import tryImport from "#utl/try-import.mjs";
-import meta from "#meta.cjs";
 import getExtension from "#utl/get-extension.mjs";
+import typescript from "#utl/typescript-facade.mjs";
 
-/** @type {import('typescript')} */
-const typescript = await tryImport(
-  "typescript",
-  meta.supportedTranspilers.typescript,
-);
 /** @type {Map<string, any>} */
 const CACHE = new Map();
 
@@ -29,8 +23,6 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
   return typescript.createSourceFile(
     pFileRecord.filename || "$internal-file-name",
     lSource,
-    typescript.ScriptTarget.Latest,
-    false,
   );
 }
 
