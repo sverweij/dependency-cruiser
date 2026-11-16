@@ -233,25 +233,32 @@ function report(pResults, pOptions) {
     showAliasedModulesUnresolved: false,
     ...pOptions,
   };
+  // replacer functions so '$&', "$'" and '$$' in rule comments or module names
+  // are inserted as is instead of being interpreted as replacement patterns
   return template
-    .replace("{{totalCruised}}", pResults.summary.totalCruised)
+    .replace("{{totalCruised}}", () => pResults.summary.totalCruised)
     .replace(
       "{{totalDependenciesCruised}}",
-      pResults.summary.totalDependenciesCruised,
+      () => pResults.summary.totalDependenciesCruised,
     )
-    .replace("{{error}}", pResults.summary.error)
-    .replace("{{warn}}", pResults.summary.warn)
-    .replace("{{info}}", pResults.summary.info)
-    .replace("{{ignore}}", pResults.summary.ignore ?? 0)
-    .replace("{{staleDiv}}", constructStaleDiv(pResults.summary.baselineStale))
-    .replace("{{violatedRulesTable}}", constructViolatedRulesTable(pResults))
-    .replace("{{violationsList}}", constructViolationsList(pResults, lOptions))
-    .replace(
-      "{{baselineStaleTable}}",
+    .replace("{{error}}", () => pResults.summary.error)
+    .replace("{{warn}}", () => pResults.summary.warn)
+    .replace("{{info}}", () => pResults.summary.info)
+    .replace("{{ignore}}", () => pResults.summary.ignore ?? 0)
+    .replace("{{staleDiv}}", () =>
+      constructStaleDiv(pResults.summary.baselineStale),
+    )
+    .replace("{{violatedRulesTable}}", () =>
+      constructViolatedRulesTable(pResults),
+    )
+    .replace("{{violationsList}}", () =>
+      constructViolationsList(pResults, lOptions),
+    )
+    .replace("{{baselineStaleTable}}", () =>
       constructBaselineStaleTable(pResults, pOptions),
     )
-    .replace("{{depcruiseVersion}}", `dependency-cruiser@${meta.version}`)
-    .replace("{{runDate}}", new Date().toISOString());
+    .replace("{{depcruiseVersion}}", () => `dependency-cruiser@${meta.version}`)
+    .replace("{{runDate}}", () => new Date().toISOString());
 }
 
 /**

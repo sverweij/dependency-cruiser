@@ -6,6 +6,10 @@ import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
 import viaDeps from "./__mocks__/via-deps.mjs";
 import errorHTML from "#report/error-html/index.mjs";
 
+function escapeRegExp(pString) {
+  return pString.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 describe("[I] report/error-html", () => {
   const lOkeliDokelyKey = "gummy bears";
   const lOkeliDokelyHeader = "No violations found";
@@ -124,5 +128,25 @@ describe("[I] report/error-html", () => {
     );
     // vias as vias in the 'to' column:
     // match(lResult.output, /via-one &rightarrow;<br\/>via-two/);
+  });
+
+  it("inserts rule comments with replacement patterns ($&, $', $$) as is", () => {
+    const lComment = "costs $$5 &amp; $& more $'";
+    const lResult = errorHTML({
+      ...validationMoreThanOnce,
+      summary: {
+        ...validationMoreThanOnce.summary,
+        ruleSetUsed: {
+          ...validationMoreThanOnce.summary.ruleSetUsed,
+          forbidden: validationMoreThanOnce.summary.ruleSetUsed.forbidden.map(
+            (pRule, pIndex) =>
+              pIndex === 0 ? { ...pRule, comment: lComment } : pRule,
+          ),
+        },
+      },
+    });
+
+    match(lResult.output, new RegExp(`<td>${escapeRegExp(lComment)}</td>`));
+    doesNotMatch(lResult.output, /\{\{[a-zA-Z]+\}\}/);
   });
 });
