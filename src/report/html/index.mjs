@@ -103,7 +103,7 @@ function report(pResults) {
   const lModules = dependencyToIncidenceTransformer(pResults.modules).map(
     addShowTitle,
   );
-  return templateText.replace("{{table-here}}", constructTable(lModules));
+  return templateText.replace("{{table-here}}", () => constructTable(lModules));
 }
 
 /**
