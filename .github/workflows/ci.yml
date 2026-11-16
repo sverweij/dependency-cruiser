@@ -61,7 +61,9 @@ jobs:
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
           # ignore-scripts because no need for them
-          npm clean-install --legacy-peer-deps --ignore-scripts
+          # 'npm install' in stead fo 'npm clean-install' because the package-locks between node 22
+          #  and 26 differ (in our case). If we generate them for one the other platform will fail ...
+          npm install --legacy-peer-deps --ignore-scripts
           
           # engine-strict disable 
           # better to have no stuff altered going forward
