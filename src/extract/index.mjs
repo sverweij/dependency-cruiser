@@ -6,7 +6,7 @@ import { bus } from "#utl/bus.mjs";
 
 /**
  * @import {IStrictCruiseOptions} from "../../types/options.mjs";
- * @import { IModule, IResolveOptions, ITranspileOptions } from "../../types/dependency-cruiser.mjs";
+ * @import { IDependency, IModule, IResolveOptions, ITranspileOptions } from "../../types/dependency-cruiser.mjs";
  */
 
 /* eslint max-params:0 , max-lines-per-function:0*/
@@ -106,18 +106,29 @@ function toDependencyAsModule(pToListItem) {
     dependencies: [],
   };
 }
-
+/**
+ *
+ * @param {IModule[]} pModules
+ * @param {IModule} pModule
+ * @returns {IModule[]}
+ */
 function complete(pModules, pModule) {
+  /** @type {IDependency} */
+  const lUncoveredDependencies = [];
+  for (const lDependency of pModule.dependencies) {
+    if (
+      !lDependency.followable &&
+      !pModules.some(({ source }) => source === lDependency.resolved) &&
+      !lUncoveredDependencies.some(
+        ({ resolved }) => resolved === lDependency.resolved,
+      )
+    ) {
+      lUncoveredDependencies.push(lDependency);
+    }
+  }
   return pModules
     .concat(pModule)
-    .concat(
-      pModule.dependencies
-        .filter(
-          ({ followable, resolved }) =>
-            !followable && !pModules.some(({ source }) => source === resolved),
-        )
-        .map(toDependencyAsModule),
-    );
+    .concat(lUncoveredDependencies.map(toDependencyAsModule));
 }
 
 function removeExcludedDynamicDependencies(pModule, pExclude) {
