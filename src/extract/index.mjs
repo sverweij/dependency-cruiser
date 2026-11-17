@@ -113,7 +113,7 @@ function toDependencyAsModule(pToListItem) {
  * @returns {IModule[]}
  */
 function complete(pModules, pModule) {
-  /** @type {IDependency} */
+  /** @type {IDependency[]} */
   const lUncoveredDependencies = [];
   for (const lDependency of pModule.dependencies) {
     if (
