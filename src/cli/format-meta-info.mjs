@@ -5,7 +5,7 @@ function bool2Symbol(pBool) {
   return pBool ? styleText("green", "✔") : styleText("red", "x");
 }
 
-const MAX_VERSION_RANGE_STRING_LENGTH = 19;
+const MAX_VERSION_RANGE_STRING_LENGTH = 30;
 const MAX_TRANSPILER_NAME_LENGTH = 22;
 const MAX_VERSION_STRING_LENGTH = 24;
 
