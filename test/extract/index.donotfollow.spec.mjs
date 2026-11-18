@@ -1,4 +1,4 @@
-import { deepEqual } from "node:assert/strict";
+import { deepEqual, equal, notDeepEqual } from "node:assert/strict";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import { normalizeCruiseOptions } from "#main/options/normalize.mjs";
 import normalizeResolveOptions from "#main/resolve-options/normalize.mjs";
@@ -50,6 +50,52 @@ describe("[I] extract/index - do not follow", () => {
       lResult,
       requireJSON("./__fixtures__/donotfollow-dependency-types.json"),
     );
+  });
+
+  it("does not add duplicate stubs for repeated imports of a non-followable module", async () => {
+    const lOptions = normalizeCruiseOptions({
+      parser: "tsc",
+      doNotFollow: {
+        path: "duplicate-stub",
+      },
+    });
+    const lResolveOptions = await normalizeResolveOptions(
+      {
+        bustTheCache: true,
+      },
+      lOptions,
+    );
+    const lResult = extract(
+      [
+        "./test/extract/__mocks__/donotfollow-duplicate-stubs/mixed-imports.ts",
+        "./test/extract/__mocks__/donotfollow-duplicate-stubs/same-kind-imports.ts",
+      ],
+      lOptions,
+      lResolveOptions,
+    );
+
+    const lStubModules = lResult.filter(({ source }) =>
+      source.includes("/node_modules/duplicate-stub/"),
+    );
+    const lMixedImportsModule = lResult.find(({ source }) =>
+      source.endsWith("/mixed-imports.ts"),
+    );
+    const lSameKindImportsModule = lResult.find(({ source }) =>
+      source.endsWith("/same-kind-imports.ts"),
+    );
+
+    equal(lStubModules.length, 1);
+    equal(lMixedImportsModule.dependencies.length, 2);
+    equal(
+      new Set(lMixedImportsModule.dependencies.map(({ resolved }) => resolved))
+        .size,
+      1,
+    );
+    notDeepEqual(
+      lMixedImportsModule.dependencies[0].dependencyTypes,
+      lMixedImportsModule.dependencies[1].dependencyTypes,
+    );
+    equal(lSameKindImportsModule.dependencies.length, 1);
   });
 });
 
