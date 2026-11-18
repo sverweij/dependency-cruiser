@@ -28,8 +28,8 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
 
 /**
  * Compiles the file identified by pFileName into a (typescript)
- * AST and returns it. Subsequent calls for the same file name will
- * return the result from a cache
+ * AST and returns it. A call for the same file name as the previous call
+ * returns the result from a cache
  *
  * @param {string} pFileName - the name of the file to compile
  * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
@@ -48,6 +48,9 @@ export function getASTCached(pFileName, pTranspileOptions) {
     },
     pTranspileOptions,
   );
+  // only keep the last AST: its one repeat reader (stats extraction) asks for
+  // it right after dependency extraction; older ones would only hold memory
+  CACHE.clear();
   CACHE.set(pFileName, lAST);
   return lAST;
 }
