@@ -1,6 +1,21 @@
 import { deepEqual, equal, notEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { clearCache, getASTCached } from "#extract/tsc/parse.mjs";
+import typescript from "#utl/typescript-facade.mjs";
+
+function getSyntaxTree(pNode) {
+  const lChildren = [];
+  typescript.forEachChild(pNode, (pChild) => {
+    lChildren.push(getSyntaxTree(pChild));
+  });
+  return {
+    kind: pNode.kind,
+    pos: pNode.pos,
+    end: pNode.end,
+    flags: pNode.flags,
+    children: lChildren,
+  };
+}
 
 describe("[U] extract/tsc/parse - getASTCached", () => {
   const lFileName = join(
@@ -34,6 +49,13 @@ describe("[U] extract/tsc/parse - getASTCached", () => {
     const lReparsedAST = getASTCached(lFileName);
 
     notEqual(lReparsedAST, lAST);
-    deepEqual(lReparsedAST, lAST);
+    if (typescript.isNative) {
+      // Native AST backing data contains per-parse node and lease IDs.
+      equal(lReparsedAST.fileName, lAST.fileName);
+      equal(lReparsedAST.text, lAST.text);
+      deepEqual(getSyntaxTree(lReparsedAST), getSyntaxTree(lAST));
+    } else {
+      deepEqual(lReparsedAST, lAST);
+    }
   });
 });
