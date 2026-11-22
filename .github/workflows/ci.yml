@@ -70,15 +70,15 @@ jobs:
           git restore .npmrc
 
           # finally what we're here for ...
-          npm run build
+          node --run build
       - name: lint (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
-        run: npm run lint
+        run: node --run lint
       - name: forbidden dependency check
-        run: npm run depcruise
+        run: node --run depcruise
       - name: test coverage (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
-        run: npm run test:cover
+        run: node --run test:cover
       - name: emit coverage results & depcruise result to step summary
         if: always() && matrix.node-version == env.NODE_LATEST
         run: |
@@ -104,30 +104,9 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
       - name: regular test (run on node != ${{env.NODE_LATEST}} only)
         if: matrix.node-version != env.NODE_LATEST
-        run: npm test
-
-  check-typescript-native:
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-node@v7
-        with:
-          node-version: ${{env.NODE_LATEST}}
-      - name: install & build
-        run: |
-          sudo apt-get update
-          sudo apt-get install graphviz
-          npm clean-install --legacy-peer-deps --ignore-scripts
-          git restore .npmrc
-          npm run build
-      - name: swap the classic typescript compiler for the native one
-        run: npm install --no-save --legacy-peer-deps --ignore-scripts typescript@7.1.0-beta
-      - name: test with the native typescript compiler
-        run: npm test
+        run: node --run test
+      - name: test against typescript native compiler
+        run: node --run test:typescript-native
 
   check-windows:
     env:
@@ -156,6 +135,6 @@ jobs:
           # as it can't find a suitable typescript compiler (we're on 6 now, 
           # ts-eslint isn't yet)
           npm clean-install --legacy-peer-deps --ignore-scripts
-          npm run build
-      - run: npm run depcruise
-      - run: npx mocha --invert --fgrep "#do-not-run-on-windows"
+          node --run build
+      - run: node --run depcruise
+      - run: node --run test -- --invert --fgrep "#do-not-run-on-windows"

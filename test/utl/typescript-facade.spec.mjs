@@ -1,4 +1,5 @@
 import { deepEqual, equal, match, ok } from "node:assert/strict";
+import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import typescript from "#utl/typescript-facade.mjs";
 
@@ -23,6 +24,15 @@ describe("[U] utl/typescript-facade", () => {
 
   it("uses the native compiler for typescript >=7 and the classic one for older versions", () => {
     equal(typescript.isNative, Number.parseInt(typescript.version, 10) >= 7);
+  });
+
+  it("uses the expected native compiler when requested", () => {
+    const lExpectedVersion = env.DEPENDENCY_CRUISER_EXPECT_TYPESCRIPT_NATIVE;
+    if (lExpectedVersion) {
+      ok(typescript, "Expected the native TypeScript compiler to be available");
+      equal(typescript.version, lExpectedVersion);
+      equal(typescript.isNative, true);
+    }
   });
 
   it("creates source files that can be walked", () => {
