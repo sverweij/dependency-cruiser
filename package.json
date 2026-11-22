@@ -237,9 +237,10 @@
     "watskeburt": "6.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.13",
-    "@babel/plugin-transform-modules-commonjs": "^7.29.14",
-    "@babel/preset-typescript": "^7.29.7",
+    "@babel/core": "8.1.3",
+    "@babel/plugin-syntax-jsx": "8.0.1",
+    "@babel/plugin-transform-modules-commonjs": "8.1.3",
+    "@babel/preset-typescript": "8.0.7",
     "@swc/core": "1.16.22",
     "@types/node": "^26.6.6",
     "@types/prompts": "2.4.9",
@@ -293,21 +294,6 @@
   "upem": {
     "policies": [
       {
-        "package": "@babel/core",
-        "policy": "wanted",
-        "because": "test/cli/index.spec.mjs:534:5 fails with test/cli/__fixtures__/babel/ts/src/something/some-page.tsx: Unexpected token, expected \"</>/<=/>=\" (11:27) after upgrading (and handling breaking changes)"
-      },
-      {
-        "package": "@babel/plugin-transform-modules-commonjs",
-        "policy": "wanted",
-        "because": "test/cli/index.spec.mjs:534:5 fails with test/cli/__fixtures__/babel/ts/src/something/some-page.tsx: Unexpected token, expected \"</>/<=/>=\" (11:27) after upgrading (and handling breaking changes)"
-      },
-      {
-        "package": "@babel/preset-typescript",
-        "policy": "wanted",
-        "because": "test/cli/index.spec.mjs:534:5 fails with test/cli/__fixtures__/babel/ts/src/something/some-page.tsx: Unexpected token, expected \"</>/<=/>=\" (11:27) after upgrading (and handling breaking changes)"
-      },
-      {
         "package": "@types/node",
         "policy": "wanted",
         "because": "occasionally older versions (e.g. ^20 or ^22) get published as 'latest', and we don't want to accidentally end up with an old version like that"
@@ -338,7 +324,7 @@
     "node": "^22||^24||>=26"
   },
   "supportedTranspilers": {
-    "babel": ">=7.0.0 <8.0.0",
+    "babel": ">=7.0.0 <9.0.0",
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
