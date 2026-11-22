@@ -20,19 +20,24 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   presets: [],
   assumptions: {},
   browserslistConfigFile: false,
-  targets: {
-    // this is different between babel 7 and 8. 8 expects this, apparently
-    // android: "148.0.0",
-    // chrome: "109.0.0",
-    // edge: "147.0.0",
-    // firefox: "140.0.0",
-    // ios: "18.5.0",
-    // opera: "127.0.0",
-    // opera_mobile: "80.0.0",
-    // safari: "26.3.0",
-    // samsung: "29.0.0",
-  },
 };
+
+/**
+ * Returns a copy of the passed babel config without the attributes that
+ * vary per environment:
+ * - filename: depends on where the tests run
+ * - targets: babel 7 leaves it empty, babel 8 fills it from browserslist's
+ *   'defaults' query, which changes with each browserslist data update
+ *
+ * @param {object} pBabelConfig
+ * @returns {object}
+ */
+function withoutVolatileAttributes(pBabelConfig) {
+  const lReturnValue = structuredClone(pBabelConfig);
+  delete lReturnValue.filename;
+  delete lReturnValue.targets;
+  return lReturnValue;
+}
 
 describe("[I] config-utl/extract-babel-config", () => {
   it("throws when no config file name is passed", async () => {
@@ -89,9 +94,11 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/babelrc.empty.json",
       ),
     );
-    const lBabelConfigWithoutFilename = structuredClone(lBabelConfig);
-    delete lBabelConfigWithoutFilename.filename;
-    deepEqual(lBabelConfigWithoutFilename, DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+    equal(typeof lBabelConfig.targets, "object");
+    deepEqual(
+      withoutVolatileAttributes(lBabelConfig),
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
+    );
   });
 
   it("reads the 'babel' key when a package.json is passed", async () => {
@@ -113,9 +120,11 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
       ),
     );
-    const lBabelConfigWithoutFilename = structuredClone(lBabelConfig);
-    delete lBabelConfigWithoutFilename.filename;
-    deepEqual(lBabelConfigWithoutFilename, DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+    equal(typeof lBabelConfig.targets, "object");
+    deepEqual(
+      withoutVolatileAttributes(lBabelConfig),
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
+    );
   });
 
   it("returns a babel config when a javascript file with a regular object export is passed", async () => {

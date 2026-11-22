@@ -1,5 +1,5 @@
-import { deepEqual } from "node:assert/strict";
-import { validRange } from "semver";
+import { deepEqual, ok } from "node:assert/strict";
+import { satisfies, validRange } from "semver";
 import {
   allExtensions,
   getAvailableTranspilers,
@@ -88,5 +88,14 @@ describe("[U] extract/transpile/meta", () => {
       // eslint-disable-next-line no-magic-numbers
       deepEqual(Object.keys(pTranspiler).length, 4);
     });
+  });
+
+  it("supports both babel 7 and babel 8", () => {
+    const lBabel = getAvailableTranspilers().find(
+      (pTranspiler) => pTranspiler.name === "babel",
+    );
+    ok(satisfies("7.0.0", lBabel.version));
+    ok(satisfies("8.0.0", lBabel.version));
+    ok(lBabel.available);
   });
 });
