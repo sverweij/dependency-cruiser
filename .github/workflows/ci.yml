@@ -137,4 +137,10 @@ jobs:
           npm clean-install --legacy-peer-deps --ignore-scripts
           node --run build
       - run: node --run depcruise
-      - run: node --run test -- --invert --fgrep "#do-not-run-on-windows"
+      # Test not run from package manifest 'test' script because windows seems to 
+      # be picky about the environment variables it uses to the tune it fails 
+      # the task.
+      # 
+      # A 'logical' option could be to run npx mocha, but that adds a level of
+      # insecurity
+      - run: ./node_modules/.bin/mocha --invert --fgrep "#do-not-run-on-windows"
