@@ -30,6 +30,12 @@ a [FAQ](../doc/faq.md) that might help you out.
   - Dependency-cruiser has a bunch of automated checks (test coverage, depcruise,
     linting, code formatting). They also run on the CI, but you can save yourself
     time by running them locally already: `node --run=check:full`.
+    This also runs the test suite with TypeScript 7.1 beta in a temporary copy
+    of the working tree, after checking that the normal checks use TypeScript 6.
+    It installs dependencies separately, requires access to the npm registry (or a warm
+    npm cache) and a supported native compiler platform, and takes extra time
+    and disk space. `node --run=check` runs only the normal checks; use
+    `node --run=test:typescript-native` to run the native suite separately.
   - Do add tests for new and updated code. It not only helps PR reviewers a lot,
     it'll prevent regressions in the future.
   - Code style (you know, petty things like indentations, where brackets go,
